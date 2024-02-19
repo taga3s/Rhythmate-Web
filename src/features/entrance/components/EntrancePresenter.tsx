@@ -1,12 +1,14 @@
+import { Link } from "@tanstack/react-router";
+
 export const EntrancePresenter = () => {
   return (
     <div>
       <div className="m-16 flex flex-col items-center">
-        <img className="w-48 my-4 inline object-center w-3/5" src="/logo-long.svg" alt="rhythmateのロゴ" />
+        <img className="w-48 my-4 inline object-center" src="/logo-long.svg" alt="rhythmateのロゴ" />
         <div>
           <div className="my-4 flex gap-2 align-center">
             <svg
-              className="w-[80px] h-[80px] fill-red-700 dark:text-white"
+              className="w-[80px] h-[80px] fill-red-700"
               aria-hidden="true"
               xmlns="http://www.w3.org/2000/svg"
               fill="currentColor"
@@ -22,7 +24,7 @@ export const EntrancePresenter = () => {
           </div>
           <div className="my-4 flex gap-2 align-center">
             <svg
-              className="w-[80px] h-[80px] fill-blue-700 dark:text-white"
+              className="w-[80px] h-[80px] fill-blue-700"
               aria-hidden="true"
               xmlns="http://www.w3.org/2000/svg"
               fill="currentColor"
@@ -39,7 +41,7 @@ export const EntrancePresenter = () => {
           </div>
           <div className="my-4 flex gap-2 align-center">
             <svg
-              className="w-[80px] h-[80px] fill-yellow-400 dark:text-white"
+              className="w-[80px] h-[80px] fill-yellow-400"
               aria-hidden="true"
               xmlns="http://www.w3.org/2000/svg"
               fill="currentColor"
@@ -58,9 +60,12 @@ export const EntrancePresenter = () => {
             </p>
           </div>
         </div>
-        <button className="my-4 text-center text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
+        <Link
+          to="/login"
+          className="my-4 text-center text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 focus:outline-none"
+        >
           今すぐ始める
-        </button>
+        </Link>
         <small className="my-10 text-gray-400">&copy; 167.25 All rights reserved.</small>
       </div>
     </div>
