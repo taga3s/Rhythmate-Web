@@ -1,7 +1,6 @@
-import { Link } from "@tanstack/react-router";
 import { useForm } from "react-hook-form";
 
-export const LoginPresenter = () => {
+export const SignupPresenter = () => {
   const {
     register,
     handleSubmit,
@@ -30,25 +29,26 @@ export const LoginPresenter = () => {
       </svg>
       <form className="gap-4 flex flex-col items-center" onSubmit={handleSubmit(onsubmit)}>
         <div className="flex flex-col gap-2">
+          <label htmlFor="name">ユーザー名</label>
+          <input type="text" id="name" className="rounded-full border-2 w-52 h-128 p-3" />
+        </div>
+        <div className="flex flex-col gap-2">
           <label htmlFor="email">メールアドレス</label>
           <input type="email" id="email" className="rounded-full border-2 w-52 h-128 p-3" />
         </div>
-
         <div className="flex flex-col gap-2">
           <label htmlFor="password">パスワード</label>
           <input type="password" id="password" className="rounded-full border-2 w-52 h-128 p-3" />
         </div>
-        <span>
-          新しく始めますか？
-          <Link to="/signup" className="text-blue-600 font-bold">
-            新規登録はこちら
-          </Link>
-        </span>
+        <div className="flex flex-col gap-2">
+          <label htmlFor="password">パスワード（再確認）</label>
+          <input type="password" id="password" className="rounded-full border-2 w-52 h-128 p-3" />
+        </div>
         <button
           type="submit"
           className="p-10 mt-4 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 focus:outline-none"
         >
-          ログイン
+          サインアップ
         </button>
       </form>
     </div>

@@ -17,6 +17,7 @@ import { Route as rootRoute } from "./routes/__root";
 // Create Virtual Routes
 
 const IndexLazyImport = createFileRoute("/")();
+const SignupIndexLazyImport = createFileRoute("/signup/")();
 const QuestsIndexLazyImport = createFileRoute("/quests/")();
 const LoginIndexLazyImport = createFileRoute("/login/")();
 const QuestsProfileIndexLazyImport = createFileRoute("/quests/profile/")();
@@ -29,6 +30,11 @@ const IndexLazyRoute = IndexLazyImport.update({
   path: "/",
   getParentRoute: () => rootRoute,
 } as any).lazy(() => import("./routes/index.lazy").then((d) => d.Route));
+
+const SignupIndexLazyRoute = SignupIndexLazyImport.update({
+  path: "/signup/",
+  getParentRoute: () => rootRoute,
+} as any).lazy(() => import("./routes/signup/index.lazy").then((d) => d.Route));
 
 const QuestsIndexLazyRoute = QuestsIndexLazyImport.update({
   path: "/quests/",
@@ -71,6 +77,10 @@ declare module "@tanstack/react-router" {
       preLoaderRoute: typeof QuestsIndexLazyImport;
       parentRoute: typeof rootRoute;
     };
+    "/signup/": {
+      preLoaderRoute: typeof SignupIndexLazyImport;
+      parentRoute: typeof rootRoute;
+    };
     "/quests/analytics/": {
       preLoaderRoute: typeof QuestsAnalyticsIndexLazyImport;
       parentRoute: typeof rootRoute;
@@ -92,6 +102,7 @@ export const routeTree = rootRoute.addChildren([
   IndexLazyRoute,
   LoginIndexLazyRoute,
   QuestsIndexLazyRoute,
+  SignupIndexLazyRoute,
   QuestsAnalyticsIndexLazyRoute,
   QuestsManageIndexLazyRoute,
   QuestsProfileIndexLazyRoute,
