@@ -1,18 +1,24 @@
 import { useForm } from "react-hook-form";
+import { TSignupValidationSchema, signupValidationSchema } from "../libs/validation";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { FormErrorMsg } from "../../common/components/utils/FormErrorMsg";
 
 export const SignupPresenter = () => {
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm();
+  } = useForm<TSignupValidationSchema>({
+    mode: "onBlur",
+    resolver: zodResolver(signupValidationSchema),
+  });
 
   const onsubmit = (data: any) => {
     console.log(data);
   };
 
   return (
-    <div className="m-16 text-sm mx-auto flex flex-col items-center gap-4 font-sans">
+    <div className="m-16 text-sm mx-auto flex flex-col items-center gap-4">
       <img className="w-48 my-4 inline object-center" src="/logo-long.svg" alt="rhythmateのロゴ" />
       <svg
         className="w-[120px] h-[120px] text-gray-800 dark:text-white mx-auto"
@@ -30,19 +36,33 @@ export const SignupPresenter = () => {
       <form className="gap-4 flex flex-col items-center" onSubmit={handleSubmit(onsubmit)}>
         <div className="flex flex-col gap-2">
           <label htmlFor="name">ユーザー名</label>
-          <input type="text" id="name" className="rounded-full border-2 w-52 h-128 p-3" />
+          <input type="text" id="name" className="rounded-full border-2 w-52 h-128 p-3" {...register("name")} />
+          {errors.name && <FormErrorMsg msg={errors.name.message ?? ""} />}
         </div>
         <div className="flex flex-col gap-2">
           <label htmlFor="email">メールアドレス</label>
-          <input type="email" id="email" className="rounded-full border-2 w-52 h-128 p-3" />
+          <input type="email" id="email" className="rounded-full border-2 w-52 h-128 p-3" {...register("email")} />
+          {errors.email && <FormErrorMsg msg={errors.email.message ?? ""} />}
         </div>
         <div className="flex flex-col gap-2">
           <label htmlFor="password">パスワード</label>
-          <input type="password" id="password" className="rounded-full border-2 w-52 h-128 p-3" />
+          <input
+            type="password"
+            id="password"
+            className="rounded-full border-2 w-52 h-128 p-3"
+            {...register("password")}
+          />
+          {errors.password && <FormErrorMsg msg={errors.password.message ?? ""} />}
         </div>
         <div className="flex flex-col gap-2">
           <label htmlFor="password">パスワード（再確認）</label>
-          <input type="password" id="password" className="rounded-full border-2 w-52 h-128 p-3" />
+          <input
+            type="password"
+            id="password"
+            className="rounded-full border-2 w-52 h-128 p-3"
+            {...register("passwordConfirmation")}
+          />
+          {errors.passwordConfirmation && <FormErrorMsg msg={errors.passwordConfirmation.message ?? ""} />}
         </div>
         <button
           type="submit"
