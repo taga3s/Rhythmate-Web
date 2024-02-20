@@ -9,7 +9,7 @@ export const signupValidationSchema = z
       .max(20, "ユーザー名は4文字以上20文字以下で入力します。"),
     email: z
       .string()
-      .regex(/^[a-zA-Z0-9]+$/, { message: "メールアドレスは半角英数字で入力します。" })
+      .regex(/^[\u0021-\u007e]+$/u, { message: "メールアドレスは半角英数字で入力します。" })
       .email("メールアドレスの値が正しくありません。"),
     password: z.string().min(8, "パスワードは8文字以上入力します。"),
     passwordConfirmation: z.string().min(8, "パスワードは8文字以上入力します。"),
