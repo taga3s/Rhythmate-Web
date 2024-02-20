@@ -2,7 +2,7 @@ export const AnalyticsLeftButton = () => {
   return (
     <button>
       <svg
-        className="w-6 h-6 text-gray-800 dark:text-white"
+        className="w-6 h-6 text-gray-800"
         aria-hidden="true"
         xmlns="http://www.w3.org/2000/svg"
         fill="none"
@@ -24,7 +24,7 @@ export const AnalyticsRightButton = () => {
   return (
     <button>
       <svg
-        className="w-6 h-6 text-gray-800 dark:text-white"
+        className="w-6 h-6 text-gray-800"
         aria-hidden="true"
         xmlns="http://www.w3.org/2000/svg"
         fill="none"
@@ -46,7 +46,7 @@ export const AnalyticsBottomButton = () => {
   return (
     <button>
       <svg
-        className="mt-2 w-4 h-4 text-gray-800 dark:text-white"
+        className="mt-2 w-4 h-4 text-gray-800"
         aria-hidden="true"
         xmlns="http://www.w3.org/2000/svg"
         fill="none"

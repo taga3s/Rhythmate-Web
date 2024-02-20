@@ -22,7 +22,7 @@ export const LoginPresenter = () => {
     <div className="m-16 text-sm mx-auto flex flex-col items-center gap-4">
       <img className="w-48 my-4 inline object-center" src="/logo-long.svg" alt="rhythmateのロゴ" />
       <svg
-        className="w-[120px] h-[120px] text-gray-800 dark:text-white mx-auto"
+        className="w-[120px] h-[120px] text-gray-800 mx-auto"
         aria-hidden="true"
         xmlns="http://www.w3.org/2000/svg"
         fill="currentColor"
