@@ -5,5 +5,5 @@ type Props = {
 };
 
 export const ContentLayout: FC<Props> = ({ children }) => {
-  return <div className="px-4">{children}</div>;
+  return <div className="px-4 mb-[100px]">{children}</div>;
 };

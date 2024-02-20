@@ -1,4 +1,5 @@
 import { AnalyticsLeftButton, AnalyticsRightButton } from "./AnalyticsArrowButton";
+import { AnalyticsBarChart } from "./AnalyticsBarChart";
 import { AnalyticsCard } from "./AnalyticsCard";
 
 export const AnalyticsPresenter = () => {
@@ -20,6 +21,7 @@ export const AnalyticsPresenter = () => {
       <div className="flex justify-start w-full">
         <h1 className="text-lg mt-8 font-bold">曜日別クエスト達成状況</h1>
       </div>
+      <AnalyticsBarChart />
     </div>
   );
 };
