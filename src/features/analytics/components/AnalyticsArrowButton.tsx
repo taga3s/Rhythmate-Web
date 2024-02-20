@@ -1,8 +1,8 @@
-export const LeftButton = () => {
+export const AnalyticsLeftButton = () => {
   return (
-    <a href="#">
+    <button>
       <svg
-        className="ml-4 w-6 h-6 text-gray-800 dark:text-white"
+        className="w-6 h-6 text-gray-800 dark:text-white"
         aria-hidden="true"
         xmlns="http://www.w3.org/2000/svg"
         fill="none"
@@ -16,15 +16,15 @@ export const LeftButton = () => {
           d="M7 1 1.3 6.326a.91.91 0 0 0 0 1.348L7 13"
         />
       </svg>
-    </a>
+    </button>
   );
 };
 
-export const RightButton = () => {
+export const AnalyticsRightButton = () => {
   return (
-    <a href="#">
+    <button>
       <svg
-        className="mr-4 w-6 h-6 text-gray-800 dark:text-white"
+        className="w-6 h-6 text-gray-800 dark:text-white"
         aria-hidden="true"
         xmlns="http://www.w3.org/2000/svg"
         fill="none"
@@ -38,13 +38,13 @@ export const RightButton = () => {
           d="m1 13 5.7-5.326a.909.909 0 0 0 0-1.348L1 1"
         />
       </svg>
-    </a>
+    </button>
   );
 };
 
-export const BottomButton = () => {
+export const AnalyticsBottomButton = () => {
   return (
-    <a href="#">
+    <button>
       <svg
         className="mt-2 w-4 h-4 text-gray-800 dark:text-white"
         aria-hidden="true"
@@ -60,6 +60,6 @@ export const BottomButton = () => {
           d="m1 1 5.326 5.7a.909.909 0 0 0 1.348 0L13 1"
         />
       </svg>
-    </a>
+    </button>
   );
 };
