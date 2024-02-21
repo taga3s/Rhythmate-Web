@@ -46,7 +46,7 @@ export const BottomButton = () => {
   return (
     <a href="#">
       <svg
-        className="mt-2 w-6 h-6 text-gray-800 dark:text-white"
+        className="mt-2 w-4 h-4 text-gray-800 dark:text-white"
         aria-hidden="true"
         xmlns="http://www.w3.org/2000/svg"
         fill="none"
