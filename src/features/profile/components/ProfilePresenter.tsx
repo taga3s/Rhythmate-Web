@@ -1,16 +1,25 @@
 import { useState } from "react";
 import { ProfileUserSettingsModalButton } from "./ProfileUserSettingsModalButton";
 import { ProfileUserSettingsModal } from "./ProfileUserSettingModal";
+import { ProfileLogoutModalButton } from "./ProfileLogoutModalButton";
+import { ProfileLogoutModal } from "./ProfileLogoutModal";
 
 export const ProfilePresenter = () => {
-  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  const [isSettingsModalOpen, setIsSettingsModalOpen] = useState<boolean>(false);
+  const [isLogoutModalOpen, setIsLogoutModalOpen] = useState<boolean>(false);
 
-  const toggleModal = () => {
-    setIsModalOpen(!isModalOpen);
+  const openSettingsModal = () => {
+    setIsSettingsModalOpen(!isSettingsModalOpen);
   };
 
-  const closeModal = () => {
-    setIsModalOpen(!isModalOpen);
+  const closeSettingsModal = () => {
+    setIsSettingsModalOpen(!isSettingsModalOpen);
+  };
+  const openLogoutModal = () => {
+    setIsLogoutModalOpen(!isLogoutModalOpen);
+  };
+  const closeLogoutModal = () => {
+    setIsLogoutModalOpen(!isLogoutModalOpen);
   };
 
   return (
@@ -18,7 +27,7 @@ export const ProfilePresenter = () => {
       <div className="my-5 flex flex-col items-center gap-5">
         <div className="w-[300px] p-5 bg-white border border-gray-200 rounded-lg shadow">
           <div className="flex justify-end">
-            <ProfileUserSettingsModalButton onClickFn={toggleModal} />
+            <ProfileUserSettingsModalButton onClickFn={openSettingsModal} />
           </div>
           <div className="flex justify-between gap-4">
             <div>
@@ -57,30 +66,14 @@ export const ProfilePresenter = () => {
           </div>
           <p className="text-xs text-right">あと〇〇Expでレベルアップ</p>
         </div>
-        <ul className="w-[300px] text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg">
-          <div className="px-4 py-2 flex gap-3 items-center border-b border-gray-200 rounded-t-lg">
-            <div>
-              <svg
-                className="w-[24px] h-[24px] text-red-600"
-                aria-hidden="true"
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  stroke="currentColor"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M16 12H4m12 0-4 4m4-4-4-4m3-4h2a3 3 0 0 1 3 3v10a3 3 0 0 1-3 3h-2"
-                />
-              </svg>
-            </div>
-            <p>ログアウト</p>
+        <div className="w-[300px] text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg">
+          <div className="border-b border-gray-200 rounded-t-lg">
+            <ProfileLogoutModalButton onClickFn={openLogoutModal} />
           </div>
-        </ul>
+        </div>
       </div>
-      {isModalOpen && <ProfileUserSettingsModal onClickFn={closeModal} />}
+      {isSettingsModalOpen && <ProfileUserSettingsModal onClickFn={closeSettingsModal} />}
+      {isLogoutModalOpen && <ProfileLogoutModal onClickFn={closeLogoutModal} />}
     </div>
   );
 };
