@@ -1,20 +1,19 @@
-import { Link } from "@tanstack/react-router";
 import { useForm } from "react-hook-form";
+import { TSignupValidationSchema, signupValidationSchema } from "../libs/validation";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { TLoginValidationSchema, loginValidationSchema } from "../libs/validation";
 import { FormErrorMsg } from "../../common/components/utils/FormErrorMsg";
 
-export const LoginPresenter = () => {
+export const SignupPresenter = () => {
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<TLoginValidationSchema>({
+  } = useForm<TSignupValidationSchema>({
     mode: "onBlur",
-    resolver: zodResolver(loginValidationSchema),
+    resolver: zodResolver(signupValidationSchema),
   });
 
-  const onSubmit = (data: any) => {
+  const onsubmit = (data: any) => {
     console.log(data);
   };
 
@@ -34,7 +33,12 @@ export const LoginPresenter = () => {
           clipRule="evenodd"
         />
       </svg>
-      <form className="gap-4 flex flex-col items-center" onSubmit={handleSubmit(onSubmit)}>
+      <form className="gap-4 flex flex-col items-center" onSubmit={handleSubmit(onsubmit)}>
+        <div className="flex flex-col gap-2">
+          <label htmlFor="name">ユーザー名</label>
+          <input type="text" id="name" className="rounded-full border-2 w-52 h-128 p-3" {...register("name")} />
+          {errors.name && <FormErrorMsg msg={errors.name.message ?? ""} />}
+        </div>
         <div className="flex flex-col gap-2">
           <label htmlFor="email">メールアドレス</label>
           <input type="email" id="email" className="rounded-full border-2 w-52 h-128 p-3" {...register("email")} />
@@ -50,17 +54,21 @@ export const LoginPresenter = () => {
           />
           {errors.password && <FormErrorMsg msg={errors.password.message ?? ""} />}
         </div>
-        <span>
-          新しく始めますか？
-          <Link to="/signup" className="text-blue-600 font-bold">
-            新規登録はこちら
-          </Link>
-        </span>
+        <div className="flex flex-col gap-2">
+          <label htmlFor="password">パスワード（再確認）</label>
+          <input
+            type="password"
+            id="password"
+            className="rounded-full border-2 w-52 h-128 p-3"
+            {...register("passwordConfirmation")}
+          />
+          {errors.passwordConfirmation && <FormErrorMsg msg={errors.passwordConfirmation.message ?? ""} />}
+        </div>
         <button
           type="submit"
           className="p-10 mt-4 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 focus:outline-none"
         >
-          ログイン
+          サインアップ
         </button>
       </form>
     </div>
