@@ -9,22 +9,22 @@ export const ProfilePresenter = () => {
   const [isLogoutModalOpen, setIsLogoutModalOpen] = useState<boolean>(false);
 
   const openSettingsModal = () => {
-    setIsSettingsModalOpen(!isSettingsModalOpen);
+    setIsSettingsModalOpen(true);
   };
 
   const closeSettingsModal = () => {
-    setIsSettingsModalOpen(!isSettingsModalOpen);
+    setIsSettingsModalOpen(false);
   };
   const openLogoutModal = () => {
-    setIsLogoutModalOpen(!isLogoutModalOpen);
+    setIsLogoutModalOpen(true);
   };
   const closeLogoutModal = () => {
-    setIsLogoutModalOpen(!isLogoutModalOpen);
+    setIsLogoutModalOpen(false);
   };
 
   return (
-    <div>
-      <div className="my-5 flex flex-col items-center gap-5">
+    <>
+      <div className="flex flex-col items-center gap-5">
         <div className="w-[300px] p-5 bg-white border border-gray-200 rounded-lg shadow">
           <div className="flex justify-end">
             <ProfileUserSettingsModalButton onClickFn={openSettingsModal} />
@@ -74,6 +74,6 @@ export const ProfilePresenter = () => {
       </div>
       {isSettingsModalOpen && <ProfileUserSettingsModal onClickFn={closeSettingsModal} />}
       {isLogoutModalOpen && <ProfileLogoutModal onClickFn={closeLogoutModal} />}
-    </div>
+    </>
   );
 };

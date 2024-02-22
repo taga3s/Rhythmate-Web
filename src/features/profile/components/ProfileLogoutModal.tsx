@@ -13,7 +13,7 @@ export const ProfileLogoutModal: FC<Props> = ({ onClickFn }) => {
         aria-hidden="true"
         className="overflow-y-auto overflow-x-hidden flex justify-center items-center z-50 w-full md:inset-0 h-[calc(100%-1rem)] max-h-full"
       >
-        <div className="relative p-2 w-full max-w-md max-h-full">
+        <div className="relative p-4 w-full max-w-md max-h-full">
           {/* <!-- Modal content --> */}
           <div className="order relative bg-white border rounded-lg shadow">
             {/* <!-- Modal body --> */}

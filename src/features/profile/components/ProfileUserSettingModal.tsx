@@ -11,7 +11,7 @@ export const ProfileUserSettingsModal: FC<Props> = ({ onClickFn }) => {
         aria-hidden="true"
         className="overflow-y-auto overflow-x-hidden flex justify-center items-center z-50 w-full md:inset-0 h-[calc(100%-1rem)] max-h-full"
       >
-        <div className="relative p-2 w-full max-w-md max-h-full">
+        <div className="relative p-4 w-full max-w-md max-h-full">
           {/* <!-- Modal content --> */}
           <div className="order relative bg-white rounded-lg shadow">
             {/* <!-- Modal header --> */}
@@ -32,9 +32,9 @@ export const ProfileUserSettingsModal: FC<Props> = ({ onClickFn }) => {
                 >
                   <path
                     stroke="currentColor"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
                     d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"
                   />
                 </svg>
