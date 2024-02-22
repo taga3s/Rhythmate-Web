@@ -4,7 +4,9 @@ import { createRootRoute, Outlet } from "@tanstack/react-router";
 export const Route = createRootRoute({
   component: () => (
     <>
-      <Outlet />
+      <div className="font-noto-sans-jp">
+        <Outlet />
+      </div>
       {/* <TanStackRouterDevtools /> */}
     </>
   ),
