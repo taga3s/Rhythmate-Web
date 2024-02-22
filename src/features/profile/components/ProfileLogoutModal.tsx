@@ -37,7 +37,7 @@ export const ProfileLogoutModal: FC<Props> = ({ onClickFn }) => {
             </div>
             <div className="p-4 md:p-4">
               <p className="text-center text-lg">本当にログアウトしますか？</p>
-              <form className="space-y-4 pt-4" action="#">
+              <div className="space-y-4 pt-4">
                 <button
                   type="submit"
                   onClick={onSubmit}
@@ -52,7 +52,7 @@ export const ProfileLogoutModal: FC<Props> = ({ onClickFn }) => {
                 >
                   キャンセルする
                 </button>
-              </form>
+              </div>
             </div>
           </div>
         </div>

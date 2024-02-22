@@ -5,8 +5,11 @@ import { FetchError } from "../../../../../pkg/api/util/fetchError";
 import { notify } from "../../../../../pkg/ui/toast";
 import { queryClient } from "../../../../../pkg/api/client/queryClient";
 import { User } from "../model";
+import { useNavigate } from "@tanstack/react-router";
 
 export const useMutateUser = () => {
+  const navigate = useNavigate();
+
   const updateUserMutation = useMutation({
     mutationFn: async (params: UpdateLoginUserParams) => {
       return await userFactory().updateLoginUser(params);
@@ -29,7 +32,9 @@ export const useMutateUser = () => {
   });
   const logoutMutation = useMutation({
     mutationFn: async () => await userFactory().logout(),
-    onSuccess: () => {},
+    onSuccess: () => {
+      navigate({ to: "/" });
+    },
     onError: (err: FetchError) => {
       notify("ログアウトに失敗しました。");
       console.log(err);
