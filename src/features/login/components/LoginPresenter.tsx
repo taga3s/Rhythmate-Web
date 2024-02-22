@@ -3,7 +3,12 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { TLoginValidationSchema, loginValidationSchema } from "../libs/validation";
 import { FormErrorMsg } from "../../common/components/utils/FormErrorMsg";
+import { useMutateUser } from "../api/hooks/useMutateUser";
 
+type LoginCredential = {
+  password: string;
+  email: string;
+};
 export const LoginPresenter = () => {
   const {
     register,
@@ -14,8 +19,12 @@ export const LoginPresenter = () => {
     resolver: zodResolver(loginValidationSchema),
   });
 
-  const onSubmit = (data: any) => {
-    console.log(data);
+  const { loginMutation } = useMutateUser();
+  const onSubmit = async (data: LoginCredential) => {
+    await loginMutation.mutateAsync({
+      email: data.email,
+      password: data.password,
+    });
   };
 
   return (
@@ -37,7 +46,13 @@ export const LoginPresenter = () => {
       <form className="gap-4 flex flex-col items-center" onSubmit={handleSubmit(onSubmit)}>
         <div className="flex flex-col gap-2">
           <label htmlFor="email">メールアドレス</label>
-          <input type="email" id="email" className="rounded-full border-2 w-52 h-128 p-3" {...register("email")} />
+          <input
+            type="email"
+            id="email"
+            className="rounded-full border-2 w-52 h-128 p-3"
+            autoComplete="email"
+            {...register("email")}
+          />
           {errors.email && <FormErrorMsg msg={errors.email.message ?? ""} />}
         </div>
         <div className="flex flex-col gap-2">
@@ -46,6 +61,7 @@ export const LoginPresenter = () => {
             type="password"
             id="password"
             className="rounded-full border-2 w-52 h-128 p-3"
+            autoComplete="current-password"
             {...register("password")}
           />
           {errors.password && <FormErrorMsg msg={errors.password.message ?? ""} />}
