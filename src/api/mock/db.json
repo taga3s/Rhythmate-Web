@@ -1,0 +1,10 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "name": "テストユーザー",
+      "email": "example@gmail.com",
+      "level": 1
+    }
+  ]
+}
