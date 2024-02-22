@@ -6,7 +6,7 @@ export const EntrancePresenter = () => {
       <div className="m-16 flex flex-col items-center">
         <img className="w-48 my-4 inline object-center" src="/logo-long.svg" alt="rhythmateのロゴ" />
         <div>
-          <div className="my-4 flex gap-2 align-center">
+          <div className="my-4 flex gap-2 items-center">
             <svg
               className="w-[80px] h-[80px] fill-red-700"
               aria-hidden="true"
@@ -16,13 +16,15 @@ export const EntrancePresenter = () => {
             >
               <path d="M8.6 3.2a1 1 0 0 0-1.6 1 3.5 3.5 0 0 1-.8 3.6c-.6.8-4 5.6-1 10.7A7.7 7.7 0 0 0 12 22a8 8 0 0 0 7-3.8 7.8 7.8 0 0 0 .6-6.5 8.7 8.7 0 0 0-2.6-4 1 1 0 0 0-1.6.7 10 10 0 0 1-.8 3.4 9.9 9.9 0 0 0-2.2-5.5A14.4 14.4 0 0 0 9 3.5l-.4-.3Z" />
             </svg>
-            <p className="flex items-center">
-              Rhythmateでルーティンを
+            <p className="text-sm">
+              Rhythmateで
+              <br />
+              ルーティンを
               <br />
               より楽しくしよう
             </p>
           </div>
-          <div className="my-4 flex gap-2 align-center">
+          <div className="my-4 flex gap-2 items-center">
             <svg
               className="w-[80px] h-[80px] fill-blue-700"
               aria-hidden="true"
@@ -33,13 +35,13 @@ export const EntrancePresenter = () => {
               <path d="M13.5 2a7 7 0 0 0-.5 0 1 1 0 0 0-1 1v8c0 .6.4 1 1 1h8c.5 0 1-.4 1-1v-.5A8.5 8.5 0 0 0 13.5 2Z" />
               <path d="M11 6a1 1 0 0 0-1-1 8.5 8.5 0 1 0 9 9 1 1 0 0 0-1-1h-7V6Z" />
             </svg>
-            <p className="flex items-center">
+            <p className="text-sm">
               習慣を可視化して
               <br />
               自分を振り返ろう
             </p>
           </div>
-          <div className="my-4 flex gap-2 align-center">
+          <div className="my-4 flex gap-2 items-center">
             <svg
               className="w-[80px] h-[80px] fill-yellow-400"
               aria-hidden="true"
@@ -53,7 +55,7 @@ export const EntrancePresenter = () => {
                 clipRule="evenodd"
               />
             </svg>
-            <p className="flex items-center">
+            <p className="text-sm">
               良い習慣を身に付けて
               <br />
               アクティブな毎日を
