@@ -5,7 +5,7 @@ import { AnalyticsCard } from "./AnalyticsCard";
 export const AnalyticsPresenter = () => {
   return (
     <div className="flex flex-col items-center w-fit mx-auto">
-      <div className="flex w-full justify-between items-center mt-5 mb-1">
+      <div className="flex w-full justify-between items-center">
         <AnalyticsLeftButton />
         <div className="flex">
           <p className="text-xl mx-2 block text-center font-bold">2/12 ～ 2/19の週</p>
