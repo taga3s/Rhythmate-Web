@@ -9,8 +9,7 @@
     "lint": "biome check --apply ./src",
     "format": "biome format --write ./src",
     "preview": "vite preview",
-    "prepare": "husky",
-    "mock": "npx json-server --watch ./src/api/mock/db.json --port 7000"
+    "prepare": "husky"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.3.4",
