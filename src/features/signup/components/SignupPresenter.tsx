@@ -50,12 +50,24 @@ export const SignupPresenter = () => {
       <form className="gap-4 flex flex-col items-center" onSubmit={handleSubmit(onSubmit)}>
         <div className="flex flex-col gap-2">
           <label htmlFor="name">ユーザー名</label>
-          <input type="text" id="name" className="rounded-full border-2 w-52 h-128 p-3" {...register("name")} />
+          <input
+            type="text"
+            id="name"
+            autoComplete="username"
+            className="rounded-full border-2 w-52 h-128 p-3"
+            {...register("name")}
+          />
           {errors.name && <FormErrorMsg msg={errors.name.message ?? ""} />}
         </div>
         <div className="flex flex-col gap-2">
           <label htmlFor="email">メールアドレス</label>
-          <input type="email" id="email" className="rounded-full border-2 w-52 h-128 p-3" {...register("email")} />
+          <input
+            type="email"
+            id="email"
+            autoComplete="email"
+            className="rounded-full border-2 w-52 h-128 p-3"
+            {...register("email")}
+          />
           {errors.email && <FormErrorMsg msg={errors.email.message ?? ""} />}
         </div>
         <div className="flex flex-col gap-2">
@@ -63,16 +75,18 @@ export const SignupPresenter = () => {
           <input
             type="password"
             id="password"
+            autoComplete="new-password"
             className="rounded-full border-2 w-52 h-128 p-3"
             {...register("password")}
           />
           {errors.password && <FormErrorMsg msg={errors.password.message ?? ""} />}
         </div>
         <div className="flex flex-col gap-2">
-          <label htmlFor="password">パスワード（再確認）</label>
+          <label htmlFor="password_confirmation">パスワード（再確認）</label>
           <input
             type="password"
-            id="password"
+            id="password_confirmation"
+            autoComplete="new-password"
             className="rounded-full border-2 w-52 h-128 p-3"
             {...register("passwordConfirmation")}
           />

@@ -46,7 +46,13 @@ export const LoginPresenter = () => {
       <form className="gap-4 flex flex-col items-center" onSubmit={handleSubmit(onSubmit)}>
         <div className="flex flex-col gap-2">
           <label htmlFor="email">メールアドレス</label>
-          <input type="email" id="email" className="rounded-full border-2 w-52 h-128 p-3" {...register("email")} />
+          <input
+            type="email"
+            id="email"
+            className="rounded-full border-2 w-52 h-128 p-3"
+            autoComplete="email"
+            {...register("email")}
+          />
           {errors.email && <FormErrorMsg msg={errors.email.message ?? ""} />}
         </div>
         <div className="flex flex-col gap-2">
@@ -55,6 +61,7 @@ export const LoginPresenter = () => {
             type="password"
             id="password"
             className="rounded-full border-2 w-52 h-128 p-3"
+            autoComplete="current-password"
             {...register("password")}
           />
           {errors.password && <FormErrorMsg msg={errors.password.message ?? ""} />}
