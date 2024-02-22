@@ -1,8 +1,9 @@
-import { ManageStar } from "./ManageStar";
+import { QuestCardBottom } from "./ManageQuestCardBottom";
+import { Star } from "./ManageStar";
 
 export const ManageQuestCard = () => {
   return (
-    <div className="w-80 h-56 max-w-sm bg-white border border-[#AAAAAA] border-soid rounded-lg shadow">
+    <div className="w-80 h-64 max-w-sm bg-white border border-[#AAAAAA] border-soid rounded-lg shadow">
       <div className="px-4 py-2">
         <button className="bg-[#D9D9D9] border border-[#AAAAAA] rounded w-28 h-7 block ml-auto border-1">
           <div className="flex items-center gap-2 justify-center">
@@ -42,13 +43,32 @@ export const ManageQuestCard = () => {
           <h1>月・水・土</h1>
         </div>
         <div className="flex items-center">
-          <ManageStar />
-          <ManageStar />
-          <ManageStar />
-          <div className="bg-[#0087EE] h-5 w-20 block ml-auto border  border-[#AAAAAA] rounded" />
+          <Star />
+          <Star />
+          <Star />
+          <div className="bg-[#0087EE] h-5 w-20 block ml-auto border  border-[#AAAAAA] rounded flex items-center justify-center">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth="1.5"
+              stroke="white"
+              className="w-3 h-3"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M9.568 3H5.25A2.25 2.25 0 0 0 3 5.25v4.318c0 .597.237 1.17.659 1.591l9.581 9.581c.699.699 1.78.872 2.607.33a18.095 18.095 0 0 0 5.223-5.223c.542-.827.369-1.908-.33-2.607L11.16 3.66A2.25 2.25 0 0 0 9.568 3Z"
+              />
+              <path strokeLinecap="round" strokeLinejoin="round" d="M6 6h.008v.008H6V6Z" />
+            </svg>
+            <p className="text-center text-xs text-white">英語</p>
+          </div>
         </div>
       </div>
-      <div className="bg-[#D9D9D9] border border-[#AAAAAA] shadow-md rounded h-11 mt-1 w-full" />
+      <div className="flex items-end">
+        <QuestCardBottom />
+      </div>
     </div>
   );
 };
