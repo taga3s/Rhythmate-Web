@@ -2,6 +2,14 @@ import { useForm } from "react-hook-form";
 import { TSignupValidationSchema, signupValidationSchema } from "../libs/validation";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { FormErrorMsg } from "../../common/components/utils/FormErrorMsg";
+import { useMutateUser } from "../api/hooks/useMutateUser";
+
+type signupCredential = {
+  name: string;
+  email: string;
+  password: string;
+  passwordConfirmation: string;
+};
 
 export const SignupPresenter = () => {
   const {
@@ -13,8 +21,14 @@ export const SignupPresenter = () => {
     resolver: zodResolver(signupValidationSchema),
   });
 
-  const onsubmit = (data: any) => {
-    console.log(data);
+  const { signupMutation } = useMutateUser();
+  const onSubmit = async (data: signupCredential) => {
+    signupMutation.mutateAsync({
+      name: data.name,
+      email: data.email,
+      password: data.password,
+      passwordConfirmation: data.passwordConfirmation,
+    });
   };
 
   return (
@@ -33,7 +47,7 @@ export const SignupPresenter = () => {
           clipRule="evenodd"
         />
       </svg>
-      <form className="gap-4 flex flex-col items-center" onSubmit={handleSubmit(onsubmit)}>
+      <form className="gap-4 flex flex-col items-center" onSubmit={handleSubmit(onSubmit)}>
         <div className="flex flex-col gap-2">
           <label htmlFor="name">ユーザー名</label>
           <input type="text" id="name" className="rounded-full border-2 w-52 h-128 p-3" {...register("name")} />

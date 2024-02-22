@@ -3,7 +3,12 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { TLoginValidationSchema, loginValidationSchema } from "../libs/validation";
 import { FormErrorMsg } from "../../common/components/utils/FormErrorMsg";
+import { useMutateUser } from "../api/hooks/useMutateUser";
 
+type LoginCredential = {
+  password: string;
+  email: string;
+};
 export const LoginPresenter = () => {
   const {
     register,
@@ -14,8 +19,12 @@ export const LoginPresenter = () => {
     resolver: zodResolver(loginValidationSchema),
   });
 
-  const onSubmit = (data: any) => {
-    console.log(data);
+  const { loginMutation } = useMutateUser();
+  const onSubmit = async (data: LoginCredential) => {
+    await loginMutation.mutateAsync({
+      email: data.email,
+      password: data.password,
+    });
   };
 
   return (

@@ -3,8 +3,11 @@ import { ProfileUserSettingsModalButton } from "./ProfileUserSettingsModalButton
 import { ProfileUserSettingsModal } from "./ProfileUserSettingModal";
 import { ProfileLogoutModalButton } from "./ProfileLogoutModalButton";
 import { ProfileLogoutModal } from "./ProfileLogoutModal";
+import { useQueryLoginUser } from "../api/user/hooks/useQueryUser";
 
 export const ProfilePresenter = () => {
+  const { data: loginUser } = useQueryLoginUser();
+
   const [isSettingsModalOpen, setIsSettingsModalOpen] = useState<boolean>(false);
   const [isLogoutModalOpen, setIsLogoutModalOpen] = useState<boolean>(false);
 
@@ -49,14 +52,14 @@ export const ProfilePresenter = () => {
             </div>
             <div className="flex flex-col justify-center text-right">
               <div>
-                <h1 className="text-xl">UserName</h1>
-                <p className="text-sm text-gray-400">167.25@rhythmate.com</p>
+                <h1 className="text-xl">{loginUser?.name}</h1>
+                <p className="text-sm text-gray-400">{loginUser?.email}</p>
               </div>
             </div>
           </div>
           <div className="flex justify-end">
             <div className="inline-block text-white bg-yellow-400 focus:outline-none focus:ring-4 focus:ring-yellow-300 font-medium rounded-full text-lg px-5 py-1 text-center mb-2">
-              Lv. 5
+              Lv. {loginUser?.level}
             </div>
           </div>
           <div>
@@ -72,7 +75,9 @@ export const ProfilePresenter = () => {
           </div>
         </div>
       </div>
-      {isSettingsModalOpen && <ProfileUserSettingsModal onClickFn={closeSettingsModal} />}
+      {isSettingsModalOpen && (
+        <ProfileUserSettingsModal username={loginUser?.name ?? ""} onClickFn={closeSettingsModal} />
+      )}
       {isLogoutModalOpen && <ProfileLogoutModal onClickFn={closeLogoutModal} />}
     </>
   );
