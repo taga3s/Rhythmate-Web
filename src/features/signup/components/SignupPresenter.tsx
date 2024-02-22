@@ -5,10 +5,12 @@ import { FormErrorMsg } from "../../common/components/utils/FormErrorMsg";
 import toast, { Toaster } from "react-hot-toast";
 
 const notify = () =>
-  toast.custom(() => (
+  toast.custom((t) => (
     <div
       id="toast-simple"
-      className="flex items-center w-full max-w-xs p-4 space-x-4 rtl:space-x-reverse text-gray-500 bg-white divide-x rtl:divide-x-reverse divide-gray-300 rounded-lg shadow  space-x"
+      className={`${
+        t.visible ? "animate-slide-in-top" : "animate-slide-out-top"
+      } flex items-center w-full max-w-xs p-4 space-x-4 rtl:space-x-reverse text-gray-500 bg-white divide-x rtl:divide-x-reverse divide-gray-300 rounded-lg shadow  space-x`}
       role="alert"
     >
       <svg
