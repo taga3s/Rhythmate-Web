@@ -18,12 +18,12 @@
     "@tanstack/react-router": "^1.16.6",
     "@tanstack/router-devtools": "^1.16.6",
     "chart.js": "^4.4.1",
-    "json-server": "^1.0.0-alpha.23",
     "lodash": "^4.17.21",
     "react": "^18.2.0",
     "react-chartjs-2": "^5.2.0",
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.50.1",
+    "react-hot-toast": "^2.4.1",
     "zod": "^3.22.4"
   },
   "devDependencies": {
