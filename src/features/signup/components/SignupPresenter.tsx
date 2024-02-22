@@ -2,6 +2,33 @@ import { useForm } from "react-hook-form";
 import { TSignupValidationSchema, signupValidationSchema } from "../libs/validation";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { FormErrorMsg } from "../../common/components/utils/FormErrorMsg";
+import toast, { Toaster } from "react-hot-toast";
+
+const notify = () =>
+  toast.custom(() => (
+    <div
+      id="toast-simple"
+      className="flex items-center w-full max-w-xs p-4 space-x-4 rtl:space-x-reverse text-gray-500 bg-white divide-x rtl:divide-x-reverse divide-gray-300 rounded-lg shadow  space-x"
+      role="alert"
+    >
+      <svg
+        className="w-6 h-6 text-green-600"
+        aria-hidden="true"
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+      >
+        <path
+          stroke="currentColor"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M8.5 11.5 11 14l4-4m6 2a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
+        />
+      </svg>
+      <div className="ps-4 text-sm font-normal">新規登録に成功しました</div>
+    </div>
+  ));
 
 export const SignupPresenter = () => {
   const {
@@ -67,10 +94,12 @@ export const SignupPresenter = () => {
         <button
           type="submit"
           className="p-10 mt-4 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 focus:outline-none"
+          onClick={notify}
         >
           サインアップ
         </button>
       </form>
+      <Toaster />
     </div>
   );
 };
