@@ -13,11 +13,11 @@ export const useMutateUser = () => {
       return await userFactory().login(params);
     },
     onSuccess: () => {
-      notify("サインアップに成功しました。");
+      notify("ログインに成功しました。");
       navigate({ to: "/quests" });
     },
     onError: (err: FetchError) => {
-      notify("サインアップに失敗しました。");
+      notify("ログインに失敗しました。");
       console.log(err);
     },
   });

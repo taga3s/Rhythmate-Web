@@ -1,6 +1,10 @@
-import { Link } from "@tanstack/react-router";
+import { useNavigate } from "@tanstack/react-router";
+import { useAuthenticate } from "../../common/hooks/useAuthenticate";
 
 export const EntrancePresenter = () => {
+  const { isAuthenticated } = useAuthenticate();
+  const navigation = useNavigate();
+
   return (
     <div>
       <div className="m-16 flex flex-col items-center">
@@ -62,12 +66,12 @@ export const EntrancePresenter = () => {
             </p>
           </div>
         </div>
-        <Link
-          to="/login"
+        <button
+          onClick={() => navigation({ to: isAuthenticated ? "/quests" : "/login" })}
           className="my-4 text-center text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 focus:outline-none"
         >
           今すぐ始める
-        </Link>
+        </button>
         <small className="my-10 text-gray-400">&copy; 167.25 All rights reserved.</small>
       </div>
     </div>
