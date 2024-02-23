@@ -2,10 +2,10 @@ import { useMutation } from "@tanstack/react-query";
 import { UpdateLoginUserParams } from "../types";
 import { userFactory } from "../factory";
 import { FetchError } from "../../../../../pkg/api/util/fetchError";
-import { notify } from "../../../../../pkg/ui/toast";
 import { queryClient } from "../../../../../pkg/api/client/queryClient";
 import { User } from "../model";
 import { useNavigate } from "@tanstack/react-router";
+import { notifyFailed, notifySuccess } from "../../../../../pkg/ui/toast";
 
 export const useMutateUser = () => {
   const navigate = useNavigate();
@@ -23,10 +23,10 @@ export const useMutateUser = () => {
           level: loginUser.level,
         });
       }
-      notify("正常に更新しました。");
+      notifySuccess("正常に更新しました。");
     },
     onError: (err: FetchError) => {
-      notify("処理に失敗しました。");
+      notifyFailed("処理に失敗しました。");
       console.log(err);
     },
   });
@@ -36,7 +36,7 @@ export const useMutateUser = () => {
       navigate({ to: "/" });
     },
     onError: (err: FetchError) => {
-      notify("ログアウトに失敗しました。");
+      notifyFailed("ログアウトに失敗しました。");
       console.log(err);
     },
   });

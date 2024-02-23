@@ -3,6 +3,7 @@ import { TSignupValidationSchema, signupValidationSchema } from "../libs/validat
 import { zodResolver } from "@hookform/resolvers/zod";
 import { FormErrorMsg } from "../../common/components/utils/FormErrorMsg";
 import { useMutateUser } from "../api/hooks/useMutateUser";
+import { Link } from "@tanstack/react-router";
 
 type signupCredential = {
   name: string;
@@ -47,14 +48,14 @@ export const SignupPresenter = () => {
           clipRule="evenodd"
         />
       </svg>
-      <form className="gap-4 flex flex-col items-center" onSubmit={handleSubmit(onSubmit)}>
+      <form className="gap-4 flex flex-col items-center w-52" onSubmit={handleSubmit(onSubmit)}>
         <div className="flex flex-col gap-2">
           <label htmlFor="name">ユーザー名</label>
           <input
             type="text"
             id="name"
             autoComplete="username"
-            className="rounded-full border-2 w-52 h-128 p-3"
+            className="rounded-full border-2 w-full h-128 p-3"
             {...register("name")}
           />
           {errors.name && <FormErrorMsg msg={errors.name.message ?? ""} />}
@@ -65,7 +66,7 @@ export const SignupPresenter = () => {
             type="email"
             id="email"
             autoComplete="email"
-            className="rounded-full border-2 w-52 h-128 p-3"
+            className="rounded-full border-2 w-full h-128 p-3"
             {...register("email")}
           />
           {errors.email && <FormErrorMsg msg={errors.email.message ?? ""} />}
@@ -76,7 +77,7 @@ export const SignupPresenter = () => {
             type="password"
             id="password"
             autoComplete="new-password"
-            className="rounded-full border-2 w-52 h-128 p-3"
+            className="rounded-full border-2 w-full h-128 p-3"
             {...register("password")}
           />
           {errors.password && <FormErrorMsg msg={errors.password.message ?? ""} />}
@@ -87,7 +88,7 @@ export const SignupPresenter = () => {
             type="password"
             id="password_confirmation"
             autoComplete="new-password"
-            className="rounded-full border-2 w-52 h-128 p-3"
+            className="rounded-full border-2 w-full h-128 p-3"
             {...register("passwordConfirmation")}
           />
           {errors.passwordConfirmation && <FormErrorMsg msg={errors.passwordConfirmation.message ?? ""} />}
@@ -99,6 +100,11 @@ export const SignupPresenter = () => {
           サインアップ
         </button>
       </form>
+      <span>
+        <Link to="/login" className="text-blue-600 font-bold">
+          既にアカウントがある場合はこちら
+        </Link>
+      </span>
     </div>
   );
 };
