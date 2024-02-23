@@ -1,5 +1,9 @@
-import { ChangeEvent, FC, useState } from "react";
+import { useForm } from "react-hook-form";
+import { TUserEditValidationSchema, userEditValidationSchema } from "../libs/validation";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { FC } from "react";
 import { useMutateUser } from "../api/user/hooks/useMutateUser";
+import { FormErrorMsg } from "../../common/components/utils/FormErrorMsg";
 
 type Props = {
   username: string;
@@ -8,14 +12,24 @@ type Props = {
 
 export const ProfileUserSettingsModal: FC<Props> = ({ username, onClickFn }) => {
   const { updateUserMutation } = useMutateUser();
-  const [editedUsername, setEditedUsername] = useState(username);
+  const beforeUserName: string = username;
 
-  const onSubmit = async () => {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<TUserEditValidationSchema>({
+    mode: "onBlur",
+    resolver: zodResolver(userEditValidationSchema),
+  });
+
+  const onSubmit = async (userdata: TUserEditValidationSchema) => {
     onClickFn();
     await updateUserMutation.mutateAsync({
-      name: editedUsername,
+      name: userdata.name,
     });
   };
+
   return (
     <div className="fixed top-0 left-0 w-full h-full bg-gray-500 bg-opacity-50 z-50">
       <div
@@ -54,21 +68,21 @@ export const ProfileUserSettingsModal: FC<Props> = ({ username, onClickFn }) => 
             </div>
             {/* <!-- Modal body --> */}
             <div className="p-4 md:p-4">
-              <form className="space-y-4" action="#">
+              <form className="space-y-4" action="#" onSubmit={handleSubmit(onSubmit)}>
                 <div>
                   <label className="block mb-2 text-sm font-medium text-gray-900 my-4">ユーザーネーム</label>
                   <input
                     type="text"
-                    value={editedUsername}
-                    onChange={(e: ChangeEvent<HTMLInputElement>) => setEditedUsername(e.target.value)}
+                    defaultValue={beforeUserName}
                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                     placeholder="username"
+                    {...register("name")}
                     required
                   />
+                  {errors.name && <FormErrorMsg msg={errors.name.message ?? ""} />}
                 </div>
                 <button
                   type="submit"
-                  onClick={onSubmit}
                   className="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
                 >
                   保存
