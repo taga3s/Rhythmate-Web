@@ -23,6 +23,8 @@ const LoginIndexLazyImport = createFileRoute("/login/")();
 const QuestsProfileIndexLazyImport = createFileRoute("/quests/profile/")();
 const QuestsManageIndexLazyImport = createFileRoute("/quests/manage/")();
 const QuestsAnalyticsIndexLazyImport = createFileRoute("/quests/analytics/")();
+const QuestsManageNewIndexLazyImport = createFileRoute("/quests/manage/new/")();
+const QuestsManageEditIndexLazyImport = createFileRoute("/quests/manage/edit/")();
 
 // Create/Update Routes
 
@@ -61,6 +63,16 @@ const QuestsAnalyticsIndexLazyRoute = QuestsAnalyticsIndexLazyImport.update({
   getParentRoute: () => rootRoute,
 } as any).lazy(() => import("./routes/quests/analytics/index.lazy").then((d) => d.Route));
 
+const QuestsManageNewIndexLazyRoute = QuestsManageNewIndexLazyImport.update({
+  path: "/quests/manage/new/",
+  getParentRoute: () => rootRoute,
+} as any).lazy(() => import("./routes/quests/manage/new/index.lazy").then((d) => d.Route));
+
+const QuestsManageEditIndexLazyRoute = QuestsManageEditIndexLazyImport.update({
+  path: "/quests/manage/edit/",
+  getParentRoute: () => rootRoute,
+} as any).lazy(() => import("./routes/quests/manage/edit/index.lazy").then((d) => d.Route));
+
 // Populate the FileRoutesByPath interface
 
 declare module "@tanstack/react-router" {
@@ -93,6 +105,14 @@ declare module "@tanstack/react-router" {
       preLoaderRoute: typeof QuestsProfileIndexLazyImport;
       parentRoute: typeof rootRoute;
     };
+    "/quests/manage/edit/": {
+      preLoaderRoute: typeof QuestsManageEditIndexLazyImport;
+      parentRoute: typeof rootRoute;
+    };
+    "/quests/manage/new/": {
+      preLoaderRoute: typeof QuestsManageNewIndexLazyImport;
+      parentRoute: typeof rootRoute;
+    };
   }
 }
 
@@ -106,6 +126,8 @@ export const routeTree = rootRoute.addChildren([
   QuestsAnalyticsIndexLazyRoute,
   QuestsManageIndexLazyRoute,
   QuestsProfileIndexLazyRoute,
+  QuestsManageEditIndexLazyRoute,
+  QuestsManageNewIndexLazyRoute,
 ]);
 
 /* prettier-ignore-end */
