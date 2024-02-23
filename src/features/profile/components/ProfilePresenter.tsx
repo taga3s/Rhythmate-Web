@@ -27,8 +27,8 @@ export const ProfilePresenter = () => {
 
   return (
     <>
-      <div className="flex flex-col items-center gap-5">
-        <div className="w-[300px] p-5 bg-white border border-gray-200 rounded-lg shadow">
+      <div className="flex flex-col items-center gap-5 max-w-[360px] mx-auto">
+        <div className="w-full p-5 bg-white border border-gray-200 rounded-lg shadow">
           <div className="flex justify-end">
             <ProfileUserSettingsModalButton onClickFn={openSettingsModal} />
           </div>
@@ -69,10 +69,8 @@ export const ProfilePresenter = () => {
           </div>
           <p className="text-xs text-right">あと〇〇Expでレベルアップ</p>
         </div>
-        <div className="w-[300px] text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg">
-          <div className="border-b border-gray-200 rounded-t-lg">
-            <ProfileLogoutModalButton onClickFn={openLogoutModal} />
-          </div>
+        <div className="w-full text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg">
+          <ProfileLogoutModalButton onClickFn={openLogoutModal} />
         </div>
       </div>
       {isSettingsModalOpen && (

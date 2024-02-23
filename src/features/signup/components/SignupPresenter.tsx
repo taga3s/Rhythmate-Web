@@ -3,6 +3,7 @@ import { TSignupValidationSchema, signupValidationSchema } from "../libs/validat
 import { zodResolver } from "@hookform/resolvers/zod";
 import { FormErrorMsg } from "../../common/components/utils/FormErrorMsg";
 import { useMutateUser } from "../api/hooks/useMutateUser";
+import { Link } from "@tanstack/react-router";
 
 type signupCredential = {
   name: string;
@@ -99,6 +100,11 @@ export const SignupPresenter = () => {
           サインアップ
         </button>
       </form>
+      <span>
+        <Link to="/login" className="text-blue-600 font-bold">
+          既にアカウントがある場合はこちら
+        </Link>
+      </span>
     </div>
   );
 };
