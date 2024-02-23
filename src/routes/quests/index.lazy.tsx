@@ -2,6 +2,7 @@ import { createLazyFileRoute } from "@tanstack/react-router";
 import { Menu } from "../../features/common/components/Menu";
 import { Header } from "../../features/common/components/Header";
 import { ContentLayout } from "../../features/common/components/layouts/ContentLayout";
+import { QuestsPresenter } from "../../features/quests/components/QuestsPresenter";
 
 export const Route = createLazyFileRoute("/quests/")({
   component: () => <Quests />,
@@ -12,7 +13,7 @@ const Quests = () => {
     <>
       <Header />
       <ContentLayout>
-        <div>クエスト一覧ページです。</div>
+        <QuestsPresenter />
       </ContentLayout>
       <Menu />
     </>
