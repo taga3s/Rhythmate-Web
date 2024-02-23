@@ -7,7 +7,11 @@ export const Route = createRootRoute({
     <>
       <div className="font-noto-sans-jp">
         <Outlet />
-        <Toaster />
+        <Toaster
+          containerStyle={{
+            top: "64px",
+          }}
+        />
       </div>
       {/* <TanStackRouterDevtools /> */}
     </>
