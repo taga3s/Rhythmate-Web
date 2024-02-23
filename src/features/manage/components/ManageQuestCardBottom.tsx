@@ -2,8 +2,8 @@ import { ProgressBar } from "./ManageProgressBar";
 
 export const QuestCardBottom = () => {
   return (
-    <div className="flex">
-      <div className="border border-solid border-[#AAAAAA] w-64 h-20 rounded-lg mt-auto p-2">
+    <>
+      <div className="border border-solid border-[#AAAAAA] w-full h-20 rounded-lg p-2">
         <div className="flex">
           <p className="mt-auto text-sm ml-1">クエストレベル</p>
           <div className="bg-[#FFAA00] w-20 h-7 rounded-2xl block ml-auto">
@@ -37,6 +37,6 @@ export const QuestCardBottom = () => {
           <p className="text-white text-xl font-semibold text-right mr-3">15</p>
         </div>
       </div>
-    </div>
+    </>
   );
 };

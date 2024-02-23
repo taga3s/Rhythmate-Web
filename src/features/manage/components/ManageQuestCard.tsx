@@ -1,11 +1,17 @@
+import { useNavigate } from "@tanstack/react-router";
 import { QuestCardBottom } from "./ManageQuestCardBottom";
 import { Star } from "./ManageStar";
 
 export const ManageQuestCard = () => {
+  const navigate = useNavigate();
+
   return (
-    <div className="w-80 h-64 max-w-sm bg-white border border-[#AAAAAA] border-soid rounded-lg shadow">
+    <div className="w-full h-64 max-w-sm bg-white border border-[#AAAAAA] border-soid rounded-lg shadow">
       <div className="px-4 py-2">
-        <button className="bg-[#D9D9D9] border border-[#AAAAAA] rounded w-28 h-7 block ml-auto border-1">
+        <button
+          className="bg-[#D9D9D9] border border-[#AAAAAA] rounded w-28 h-7 block ml-auto border-1"
+          onClick={() => navigate({ to: "/quests/manage/edit" })}
+        >
           <div className="flex items-center gap-2 justify-center">
             <svg
               xmlns="http://www.w3.org/2000/svg"
