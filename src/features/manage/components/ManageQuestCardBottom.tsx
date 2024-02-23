@@ -2,20 +2,21 @@ import { ProgressBar } from "./ManageProgressBar";
 
 export const QuestCardBottom = () => {
   return (
-    <>
-      <div className="border border-solid border-[#AAAAAA] w-full h-20 rounded-lg p-2">
+    <div className="flex items-en">
+      <div className=" w-full h-24 p-2">
         <div className="flex">
-          <p className="mt-auto text-sm ml-1">クエストレベル</p>
-          <div className="bg-[#FFAA00] w-20 h-7 rounded-2xl block ml-auto">
-            <p className="text-center text-[#FFFFFF] text-xl font-semibold">Lv. 6</p>
-          </div>
+          <p className="mt-auto ml-1">継続レベル</p>
         </div>
         <ProgressBar />
-        <p className="text-right text-xs">あと回達成でレベルアップ</p>
+        <div className="bg-[#FFAA00] w-28 h-7 rounded block ml-auto">
+          <p className="flex justify-center items-center text-[#FFFFFF] text-sm ">
+            獲得Exp &times; <span className="ml-1 font-semibold text-xl">1.5</span>
+          </p>
+        </div>
       </div>
-      <div className="bg-[#E0201B] w-16 h-20 rounded-lg mt-auto">
-        <p className="text-center text-[#FFFFFF] font-semibold text-sm mt-3">獲得Exp</p>
-        <div className="flex justify-between items-center mt-1">
+      <div className="bg-[#E0201B] w-16 h-24 rounded-lg flex flex-col justify-center items-center gap-2">
+        <p className="flex justify-center  text-[#FFFFFF] font-semibold text-sm">獲得Exp</p>
+        <div className="flex justify-between items-center">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
@@ -37,6 +38,6 @@ export const QuestCardBottom = () => {
           <p className="text-white text-xl font-semibold text-right mr-3">15</p>
         </div>
       </div>
-    </>
+    </div>
   );
 };
