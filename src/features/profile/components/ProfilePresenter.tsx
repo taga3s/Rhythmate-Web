@@ -27,7 +27,7 @@ export const ProfilePresenter = () => {
 
   return (
     <>
-      <div className="flex flex-col items-center gap-5 max-w-[360px] mx-auto">
+      <div className="flex flex-col items-center gap-5 mx-auto">
         <div className="w-full p-5 bg-white border border-gray-200 rounded-lg shadow">
           <div className="flex justify-end">
             <ProfileUserSettingsModalButton onClickFn={openSettingsModal} />
