@@ -6,14 +6,13 @@ import { useMutateUser } from "../api/user/hooks/useMutateUser";
 import { FormErrorMsg } from "../../common/components/utils/FormErrorMsg";
 
 type Props = {
-  name: string;
+  username: string;
   onClickFn: () => void;
 };
 
-export const ProfileUserSettingsModal: FC<Props> = ({ name, onClickFn }) => {
+export const ProfileUserSettingsModal: FC<Props> = ({ username, onClickFn }) => {
   const { updateUserMutation } = useMutateUser();
-  const beforeUserName: string = name;
-  // const [editedUsername, setEditedUsername] = useState<string>(user.username);
+  const beforeUserName: string = username;
 
   const {
     register,
@@ -74,8 +73,7 @@ export const ProfileUserSettingsModal: FC<Props> = ({ name, onClickFn }) => {
                   <label className="block mb-2 text-sm font-medium text-gray-900 my-4">ユーザーネーム</label>
                   <input
                     type="text"
-                    value={beforeUserName}
-                    // onChange={(e: ChangeEvent<HTMLInputElement>) => setEditedUsername(e.target.value)}
+                    defaultValue={beforeUserName}
                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                     placeholder="username"
                     {...register("name")}
