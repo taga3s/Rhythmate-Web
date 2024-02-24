@@ -1,11 +1,25 @@
 import { useNavigate } from "@tanstack/react-router";
+import { useState } from "react";
+import { PlusButton } from "./ManagePlusButton";
 import { ManageQuestCard } from "./ManageQuestCard";
+import { QuestSearchModal } from "./ManageQuestSearchModal,";
+import { QuestSearchModalButton } from "./ManageQuestSearchMordalButton";
 
 export const ManagePresenter = () => {
   const navigate = useNavigate();
+  const [isQuestSearchModalOpen, setIsQuestSearchModalOpen] = useState<boolean>(false);
+
+  const openQuestSearchModal = () => {
+    setIsQuestSearchModalOpen(true);
+  };
+
+  const closeQuestSearchModal = () => {
+    setIsQuestSearchModalOpen(false);
+  };
 
   return (
-    <div className="gap-4 flex flex-col items-center justify-center  mx-auto">
+    <div className="w-full gap-4 flex flex-col items-center justify-center mx-auto">
+      <QuestSearchModalButton onClickFn={openQuestSearchModal} />
       <ManageQuestCard />
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -42,6 +56,8 @@ export const ManagePresenter = () => {
         </svg>
         <span>クエストを作成</span>
       </button>
+      <PlusButton />
+      {isQuestSearchModalOpen && <QuestSearchModal onClickFn={closeQuestSearchModal} />}
     </div>
   );
 };
