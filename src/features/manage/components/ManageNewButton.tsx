@@ -1,6 +1,13 @@
-export const PlusButton = () => {
+import { useNavigate } from "@tanstack/react-router";
+
+export const ManageNewButton = () => {
+  const navigate = useNavigate();
+
   return (
-    <button className="flex justify-center items-center bg-[#0087EE] h-16 w-16 rounded-full absolute right-12 bottom-24">
+    <button
+      onClick={() => navigate({ to: "/quests/manage/new" })}
+      className="flex justify-center items-center bg-[#0087EE] h-16 w-16 rounded-full fixed right-12 bottom-24"
+    >
       <svg
         xmlns="http://www.w3.org/2000/svg"
         fill="none"
