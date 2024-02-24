@@ -4,51 +4,51 @@ export const ProgressBar = () => {
       <div
         className="w-full h-3 flex flex-col justify-center overflow-hidden bg-[#28AC00] text-xs text-white text-center whitespace-nowrap transition duration-500"
         role="progressbar"
-        aria-valuenow="25"
-        aria-valuemin="0"
-        aria-valuemax="100"
+        aria-valuenow={25}
+        aria-valuemin={0}
+        aria-valuemax={100}
       ></div>
       <div
         className="w-full h-3 flex flex-col justify-center overflow-hidden bg-[#28AC00] text-xs text-white text-center whitespace-nowrap transition duration-500"
         role="progressbar"
-        aria-valuenow="25"
-        aria-valuemin="0"
-        aria-valuemax="100"
+        aria-valuenow={25}
+        aria-valuemin={0}
+        aria-valuemax={100}
       ></div>
       <div
         className="w-full h-3 flex flex-col justify-center overflow-hidden bg-[#28AC00] text-xs text-white text-center whitespace-nowrap transition duration-500"
         role="progressbar"
-        aria-valuenow="25"
-        aria-valuemin="0"
-        aria-valuemax="100"
+        aria-valuenow={25}
+        aria-valuemin={0}
+        aria-valuemax={100}
       ></div>
       <div
         className="w-full h-3 flex flex-col justify-center overflow-hidden bg-[#28AC00] text-xs text-white text-center whitespace-nowrap transition duration-500"
         role="progressbar"
-        aria-valuenow="25"
-        aria-valuemin="0"
-        aria-valuemax="100"
+        aria-valuenow={25}
+        aria-valuemin={0}
+        aria-valuemax={100}
       ></div>
       <div
         className="w-full h-3 flex flex-col justify-center overflow-hidden bg-[#D9D9D9] text-xs text-white text-center whitespace-nowrap transition duration-500"
         role="progressbar"
-        aria-valuenow="25"
-        aria-valuemin="0"
-        aria-valuemax="100"
+        aria-valuenow={25}
+        aria-valuemin={0}
+        aria-valuemax={100}
       ></div>
       <div
         className="w-full h-3 flex flex-col justify-center overflow-hidden bg-[#D9D9D9] text-xs text-white text-center whitespace-nowrap transition duration-500"
         role="progressbar"
-        aria-valuenow="25"
-        aria-valuemin="0"
-        aria-valuemax="100"
+        aria-valuenow={25}
+        aria-valuemin={0}
+        aria-valuemax={100}
       ></div>
       <div
         className="w-full h-3 flex flex-col justify-center overflow-hidden bg-[#D9D9D9] text-xs text-white text-center whitespace-nowrap transition duration-500"
         role="progressbar"
-        aria-valuenow="25"
-        aria-valuemin="0"
-        aria-valuemax="100"
+        aria-valuenow={25}
+        aria-valuemin={0}
+        aria-valuemax={100}
       ></div>
     </div>
   );
