@@ -1,29 +1,33 @@
+import { FC } from "react";
 import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend } from "chart.js";
 import { Bar } from "react-chartjs-2";
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
-const labels = ["月", "火", "水", "木", "金", "土", "日"];
-const data1 = [6, 9, 8, 5, 4, 4, 7];
-
-const data = {
-  labels,
-  datasets: [
-    {
-      label: "クエスト達成数",
-      data: data1,
-      backgroundColor: "rgba(242, 72, 33)",
-      borderRadius: 2,
-      borderSkipped: false,
-    },
-  ],
+type Props = {
+  data: number[];
 };
 
-export const AnalyticsBarChart = () => {
+const labels = ["月", "火", "水", "木", "金", "土", "日"];
+
+export const AnalyticsBarChart: FC<Props> = ({ data }) => {
+  const currentData = {
+    labels,
+    datasets: [
+      {
+        label: "クエスト達成数",
+        data: data,
+        backgroundColor: "rgba(242, 72, 33)",
+        borderRadius: 2,
+        borderSkipped: false,
+      },
+    ],
+  };
+
   return (
     <div className="w-full mt-4">
       <Bar
-        data={data}
+        data={currentData}
         options={{
           responsive: true,
           plugins: {

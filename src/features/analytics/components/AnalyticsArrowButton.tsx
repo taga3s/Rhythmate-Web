@@ -1,6 +1,12 @@
-export const AnalyticsLeftButton = () => {
+import { FC } from "react";
+
+type Props = {
+  onClickFn: () => void;
+};
+
+export const AnalyticsLeftButton: FC<Props> = ({ onClickFn }) => {
   return (
-    <button>
+    <button onClick={onClickFn}>
       <svg
         className="w-6 h-6 text-gray-800"
         aria-hidden="true"
@@ -20,9 +26,9 @@ export const AnalyticsLeftButton = () => {
   );
 };
 
-export const AnalyticsRightButton = () => {
+export const AnalyticsRightButton: FC<Props> = ({ onClickFn }) => {
   return (
-    <button>
+    <button onClick={onClickFn}>
       <svg
         className="w-6 h-6 text-gray-800"
         aria-hidden="true"
