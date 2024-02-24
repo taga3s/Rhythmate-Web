@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { useNavigate } from "@tanstack/react-router";
 import { ProfileUserSettingsModalButton } from "./ProfileUserSettingsModalButton";
 import { ProfileUserSettingsModal } from "./ProfileUserSettingModal";
 import { ProfileLogoutModalButton } from "./ProfileLogoutModalButton";
@@ -9,7 +8,6 @@ import { useQueryLoginUser } from "../api/user/hooks/useQueryUser";
 
 export const ProfilePresenter = () => {
   const { data: loginUser } = useQueryLoginUser();
-  const navigation = useNavigate();
   const [isSettingsModalOpen, setIsSettingsModalOpen] = useState<boolean>(false);
   const [isLogoutModalOpen, setIsLogoutModalOpen] = useState<boolean>(false);
 
@@ -25,9 +23,6 @@ export const ProfilePresenter = () => {
   };
   const closeLogoutModal = () => {
     setIsLogoutModalOpen(false);
-  };
-  const navigationToBadges = () => {
-    navigation({ to: "/quests/profile/badges" });
   };
 
   return (
@@ -78,7 +73,7 @@ export const ProfilePresenter = () => {
           <ProfileLogoutModalButton onClickFn={openLogoutModal} />
         </div>
         <div className="w-full text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg">
-          <ProfileBadgesButton onClickFn={navigationToBadges} />
+          <ProfileBadgesButton />
         </div>
       </div>
       {isSettingsModalOpen && (

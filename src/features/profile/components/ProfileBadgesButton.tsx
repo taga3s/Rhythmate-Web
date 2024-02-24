@@ -1,12 +1,11 @@
 import { FC } from "react";
+import { useNavigate } from "@tanstack/react-router";
 
-type Props = {
-  onClickFn: () => void;
-};
+export const ProfileBadgesButton: FC = () => {
+  const navigation = useNavigate();
 
-export const ProfileBadgesButton: FC<Props> = ({ onClickFn }) => {
   return (
-    <button onClick={onClickFn} className="block w-full h-hull">
+    <button onClick={() => navigation({ to: "/quests/profile/badges" })} className="block w-full h-hull">
       <div className="px-4 py-3 flex gap-3 items-center">
         <div>
           <svg
