@@ -5,6 +5,7 @@ import { QuestBoardTimer } from "./QuestBoardTimer";
 import useInterval from "../../common/hooks/useInterval";
 import { getBaseTime, getDiff } from "../funcs/calcTimer";
 import { Quest } from "../api/model";
+import { useMutateQuest } from "../api/hooks/useMutateQuest";
 
 type Props = {
   currentQuest: Quest;
@@ -59,6 +60,20 @@ export const QuestBoard: FC<Props> = (props) => {
       setQuestStatus("DONE");
     }
   }, 1000);
+
+  const { startQuestMutation, finishQuestMutation } = useMutateQuest();
+
+  const onClickStartQuest = async () => {
+    await startQuestMutation.mutateAsync({
+      id: currentQuest.id,
+    });
+  };
+
+  const onClickFinishQuest = async () => {
+    await finishQuestMutation.mutateAsync({
+      id: currentQuest.id,
+    });
+  };
 
   return (
     <div className="w-full min-h-[230px] mt-3 p-3 border-2 shadow rounded-lg">
@@ -121,7 +136,10 @@ export const QuestBoard: FC<Props> = (props) => {
         {questStatus === "CLOSED" ? (
           <div className="text-black bg-gray-200 rounded-lg text-lg font-bold p-3 mt-4 text-center">クエスト未開放</div>
         ) : questStatus === "OPENED" ? (
-          <button className="text-white bg-green-400 hover:bg-green-500 focus:ring-4 focus:ring-blue-300 rounded-lg text-lg font-bold p-3 mt-4 focus:outline-none">
+          <button
+            onClick={onClickStartQuest}
+            className="text-white bg-green-400 hover:bg-green-500 focus:ring-4 focus:ring-blue-300 rounded-lg text-lg font-bold p-3 mt-4 focus:outline-none"
+          >
             クエストを開始する
           </button>
         ) : questStatus === "ENGAGED" ? (
@@ -129,7 +147,10 @@ export const QuestBoard: FC<Props> = (props) => {
             クエストに集中しましょう
           </div>
         ) : (
-          <button className="text-white bg-blue-400 hover:bg-blue-500 focus:ring-4 focus:ring-blue-300 rounded-lg text-lg font-bold p-3 mt-4 focus:outline-none">
+          <button
+            onClick={onClickFinishQuest}
+            className="text-white bg-blue-400 hover:bg-blue-500 focus:ring-4 focus:ring-blue-300 rounded-lg text-lg font-bold p-3 mt-4 focus:outline-none"
+          >
             クエストを完了する
           </button>
         )}
