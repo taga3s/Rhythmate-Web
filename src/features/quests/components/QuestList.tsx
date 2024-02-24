@@ -56,7 +56,7 @@ export const QuestList: FC<Props> = (props) => {
                 統計レポートで確認しましょう！
               </p>
               <svg
-                className="w-24 h-24 text-yellow-400 dark:text-white"
+                className="w-24 h-24 text-yellow-400"
                 aria-hidden="true"
                 xmlns="http://www.w3.org/2000/svg"
                 fill="currentColor"
