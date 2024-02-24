@@ -6,7 +6,7 @@ export const ManageQuestCard = () => {
   const navigate = useNavigate();
 
   return (
-    <div className="w-full h-64 max-w-sm bg-white border border-[#AAAAAA] border-soid rounded-lg shadow">
+    <div className="w-full h-auto max-w-sm bg-white border border-[#AAAAAA] border-soid rounded-lg shadow">
       <div className="px-4 py-2">
         <button
           className="bg-[#D9D9D9] border border-[#AAAAAA] rounded w-28 h-7 block ml-auto border-1"
@@ -52,7 +52,8 @@ export const ManageQuestCard = () => {
           <Star />
           <Star />
           <Star />
-          <div className="bg-[#0087EE] h-5 w-20 block ml-auto border  border-[#AAAAAA] rounded flex items-center justify-center">
+          <div className="bg-[#0087EE] px-3 py-1 ml-auto border  border-[#AAAAAA] rounded flex items-center justify-center gap-2">
+            {" "}
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -72,9 +73,8 @@ export const ManageQuestCard = () => {
           </div>
         </div>
       </div>
-      <div className="flex items-end">
-        <QuestCardBottom />
-      </div>
+      <hr className="h-0.5 bg-[#AAAAAA]" />
+      <QuestCardBottom />
     </div>
   );
 };
