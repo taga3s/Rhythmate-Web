@@ -6,7 +6,7 @@ type Props = {
 
 export const QuestStatusTag: FC<Props> = ({ status }) => {
   return status === "CLOSED" ? (
-    <div className="w-[70px] bg-white font-bold border-2 border-gray-400 px-2 py-1 rounded-md text-center">未開放</div>
+    <div className="w-[70px] bg-white font-bold border-2 border-gray-400 py-1 px-2 rounded-md text-center">未開放</div>
   ) : status === "SUCCESS" ? (
     <div className="w-[70px] bg-white font-bold border-2 border-green-400 px-2 py-1 rounded-md text-center">成功</div>
   ) : (
