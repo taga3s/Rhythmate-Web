@@ -41,7 +41,7 @@ export const QuestBoard: FC<Props> = (props) => {
   }
 
   useInterval(() => {
-    const { baseTime } = getBaseTime(
+    const { baseTime, status } = getBaseTime(
       currentQuest.startsAt,
       getIsStarted(currentQuest.startedAt),
       currentQuest.minutes,
@@ -50,8 +50,7 @@ export const QuestBoard: FC<Props> = (props) => {
 
     const { diffHH, diffMM, diffSS } = getDiff(baseTime);
 
-    // TODOL クエスト時間切れの場合
-    if (questStatus === "FORCE_STOP") {
+    if (status === "FORCE_STOP") {
       forceFinishQuestMutation.mutateAsync({
         id: currentQuest.id,
       });
@@ -59,17 +58,17 @@ export const QuestBoard: FC<Props> = (props) => {
     }
 
     // クエスト解放へ切り替える
-    if (diffHH === diffMM && diffSS === 1 && questStatus === "CLOSED") {
+    if (diffHH === diffMM && diffMM === diffSS && questStatus === "CLOSED") {
       setQuestStatus("OPENED");
     }
 
     // クエスト集中へ切り替える
-    if (diffHH === diffMM && diffSS === 1 && questStatus === "OPENED") {
+    if (diffHH === diffMM && diffMM === diffSS && questStatus === "OPENED") {
       setQuestStatus("ENGAGED");
     }
 
     // クエスト終了へ切り替える
-    if (diffHH === diffMM && diffSS === 1 && questStatus === "ENGAGED") {
+    if (diffHH === diffMM && diffMM === diffSS && questStatus === "ENGAGED") {
       setQuestStatus("DONE");
     }
   }, 1000);
@@ -143,7 +142,6 @@ export const QuestBoard: FC<Props> = (props) => {
             isStarted={getIsStarted(currentQuest.startedAt)}
             minutes={currentQuest.minutes}
             startedAt={currentQuest.startedAt}
-            isDone={currentQuest.state === "ACTIVE"}
           />
         </div>
         {questStatus === "CLOSED" ? (
