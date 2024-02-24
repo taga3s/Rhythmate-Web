@@ -18,7 +18,7 @@ export const ManagePresenter = () => {
   };
 
   return (
-    <div className="gap-4 flex flex-col items-center justify-center relative mx-auto">
+    <div className="w-full gap-4 flex flex-col items-center justify-center mx-auto">
       <QuestSearchModalButton onClickFn={openQuestSearchModal} />
       <ManageQuestCard />
       <svg
