@@ -6,10 +6,7 @@ import useInterval from "../../common/hooks/useInterval";
 import { getBaseTime, getDiff } from "../funcs/calcTimer";
 import { Quest } from "../api/model";
 import { useMutateQuest } from "../api/hooks/useMutateQuest";
-
-type Props = {
-  currentQuest: Quest;
-};
+import { ConfirmModal } from "../../common/components/ConfirmModal";
 
 export type QuestStatus = "CLOSED" | "OPENED" | "ENGAGED" | "DONE" | "FORCE_STOP";
 
@@ -17,6 +14,9 @@ export const getIsStarted = (startedAt: string) => {
   return startedAt !== "NOT_STARTED_YET";
 };
 
+type Props = {
+  currentQuest: Quest;
+};
 export const QuestBoard: FC<Props> = (props) => {
   const { currentQuest } = props;
 
@@ -61,18 +61,22 @@ export const QuestBoard: FC<Props> = (props) => {
     }
   }, 1000);
 
+  const [startConfirmModalOpen, setStartConfirmModalOpen] = useState(false);
+  const [finishConfirmModalOpen, setFinishConfirmModalOpen] = useState(false);
   const { startQuestMutation, finishQuestMutation } = useMutateQuest();
 
   const onClickStartQuest = async () => {
     await startQuestMutation.mutateAsync({
       id: currentQuest.id,
     });
+    setQuestStatus("ENGAGED");
   };
 
   const onClickFinishQuest = async () => {
     await finishQuestMutation.mutateAsync({
       id: currentQuest.id,
     });
+    setQuestStatus("CLOSED");
   };
 
   return (
@@ -155,6 +159,24 @@ export const QuestBoard: FC<Props> = (props) => {
           </button>
         )}
       </div>
+      {startConfirmModalOpen && (
+        <ConfirmModal
+          text={"クエストを開始しますか?"}
+          confirmBtnText={"開始する"}
+          cancelBtnText={"キャンセル"}
+          actionFn={onClickStartQuest}
+          closeModal={() => setStartConfirmModalOpen(false)}
+        />
+      )}
+      {finishConfirmModalOpen && (
+        <ConfirmModal
+          text={"クエストを完了しますか?"}
+          confirmBtnText={"完了する"}
+          cancelBtnText={"キャンセル"}
+          actionFn={onClickFinishQuest}
+          closeModal={() => setFinishConfirmModalOpen(false)}
+        />
+      )}
     </div>
   );
 };
