@@ -1,6 +1,6 @@
 import { Quest, toQuest } from "./model";
 import { questRepository } from "./repository";
-import { FinishParams, StartParams } from "./types";
+import { FinishParams, ForceFinishParams, StartParams } from "./types";
 
 export const questFactory = () => {
   const repository = questRepository;
@@ -21,6 +21,10 @@ export const questFactory = () => {
     },
     finishQuest: async (params: FinishParams) => {
       const response = await repository.finish(params);
+      return toQuest(response);
+    },
+    forceFinishQuest: async (params: ForceFinishParams) => {
+      const response = await repository.forceFinish(params);
       return toQuest(response);
     },
   };

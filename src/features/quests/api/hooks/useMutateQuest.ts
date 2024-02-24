@@ -47,8 +47,29 @@ export const useMutateQuest = () => {
     },
   });
 
+  const forceFinishQuestMutation = useMutation({
+    mutationFn: async (params: FinishParams) => {
+      return await questFactory().forceFinishQuest(params);
+    },
+    onSuccess: (data) => {
+      const questList = queryClient.getQueryData<Quest[]>(["quests"]);
+      if (questList) {
+        queryClient.setQueryData<Quest[]>(
+          ["quests"],
+          questList.map((quest) => (quest.id === data.id ? data : quest)),
+        );
+      }
+      notifySuccess("クエストを強制終了しました。");
+    },
+    onError: (err: FetchError) => {
+      notifyFailed("処理に失敗しました。");
+      console.log(err);
+    },
+  });
+
   return {
     startQuestMutation,
     finishQuestMutation,
+    forceFinishQuestMutation,
   };
 };

@@ -19,18 +19,25 @@ type Props = {
 };
 export const QuestBoard: FC<Props> = (props) => {
   const { currentQuest } = props;
+  const [startConfirmModalOpen, setStartConfirmModalOpen] = useState(false);
+  const [finishConfirmModalOpen, setFinishConfirmModalOpen] = useState(false);
+  const { startQuestMutation, finishQuestMutation, forceFinishQuestMutation } = useMutateQuest();
 
   const { status } = getBaseTime(
     currentQuest.startsAt,
     getIsStarted(currentQuest.startedAt),
     currentQuest.minutes,
     currentQuest.startedAt,
-    currentQuest.state === "ACTIVE",
   );
 
   const [questStatus, setQuestStatus] = useState<QuestStatus>(status);
 
-  if (questStatus === "FORCE_STOP") {
+  // レンダリング時、時間切れの場合、即時終了
+  if (questStatus === "FORCE_STOP" && currentQuest.state === "INACTIVE") {
+    forceFinishQuestMutation.mutateAsync({
+      id: currentQuest.id,
+    });
+    setQuestStatus("CLOSED");
   }
 
   useInterval(() => {
@@ -39,11 +46,17 @@ export const QuestBoard: FC<Props> = (props) => {
       getIsStarted(currentQuest.startedAt),
       currentQuest.minutes,
       currentQuest.startedAt,
-      // TODO
-      currentQuest.state === "ACTIVE",
     );
 
     const { diffHH, diffMM, diffSS } = getDiff(baseTime);
+
+    // TODOL クエスト時間切れの場合
+    if (questStatus === "FORCE_STOP") {
+      forceFinishQuestMutation.mutateAsync({
+        id: currentQuest.id,
+      });
+      setQuestStatus("CLOSED");
+    }
 
     // クエスト解放へ切り替える
     if (diffHH === diffMM && diffSS === 1 && questStatus === "CLOSED") {
@@ -60,10 +73,6 @@ export const QuestBoard: FC<Props> = (props) => {
       setQuestStatus("DONE");
     }
   }, 1000);
-
-  const [startConfirmModalOpen, setStartConfirmModalOpen] = useState(false);
-  const [finishConfirmModalOpen, setFinishConfirmModalOpen] = useState(false);
-  const { startQuestMutation, finishQuestMutation } = useMutateQuest();
 
   const onClickStartQuest = async () => {
     await startQuestMutation.mutateAsync({
@@ -141,7 +150,7 @@ export const QuestBoard: FC<Props> = (props) => {
           <div className="text-black bg-gray-200 rounded-lg text-lg font-bold p-3 mt-4 text-center">クエスト未開放</div>
         ) : questStatus === "OPENED" ? (
           <button
-            onClick={onClickStartQuest}
+            onClick={() => setStartConfirmModalOpen(true)}
             className="text-white bg-green-400 hover:bg-green-500 focus:ring-4 focus:ring-blue-300 rounded-lg text-lg font-bold p-3 mt-4 focus:outline-none"
           >
             クエストを開始する
@@ -152,7 +161,7 @@ export const QuestBoard: FC<Props> = (props) => {
           </div>
         ) : (
           <button
-            onClick={onClickFinishQuest}
+            onClick={() => setFinishConfirmModalOpen(true)}
             className="text-white bg-blue-400 hover:bg-blue-500 focus:ring-4 focus:ring-blue-300 rounded-lg text-lg font-bold p-3 mt-4 focus:outline-none"
           >
             クエストを完了する
@@ -164,6 +173,7 @@ export const QuestBoard: FC<Props> = (props) => {
           text={"クエストを開始しますか?"}
           confirmBtnText={"開始する"}
           cancelBtnText={"キャンセル"}
+          btnColor={"green"}
           actionFn={onClickStartQuest}
           closeModal={() => setStartConfirmModalOpen(false)}
         />
@@ -173,6 +183,7 @@ export const QuestBoard: FC<Props> = (props) => {
           text={"クエストを完了しますか?"}
           confirmBtnText={"完了する"}
           cancelBtnText={"キャンセル"}
+          btnColor={"blue"}
           actionFn={onClickFinishQuest}
           closeModal={() => setFinishConfirmModalOpen(false)}
         />

@@ -4,12 +4,17 @@ type Props = {
   text: string;
   confirmBtnText: string;
   cancelBtnText: string;
+  btnColor: "green" | "blue";
   actionFn: () => void;
   closeModal: () => void;
 };
 
 export const ConfirmModal: FC<Props> = (props) => {
-  const { text, confirmBtnText, cancelBtnText, actionFn, closeModal } = props;
+  const handleConfirm = () => {
+    actionFn();
+    closeModal();
+  };
+  const { text, confirmBtnText, cancelBtnText, btnColor, actionFn, closeModal } = props;
   return (
     <div className="fixed top-0 left-0 w-full h-full bg-gray-500 bg-opacity-50 z-50">
       <div
@@ -40,8 +45,10 @@ export const ConfirmModal: FC<Props> = (props) => {
               <div className="space-y-4 pt-4">
                 <button
                   type="submit"
-                  onClick={actionFn}
-                  className="w-full text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+                  onClick={handleConfirm}
+                  className={`w-full text-white focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center
+                  ${btnColor === "green" ? `bg-green-400 hover:bg-green-500` : `bg-blue-400 hover:bg-blue-500`}
+                  `}
                 >
                   {confirmBtnText}
                 </button>
