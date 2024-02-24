@@ -3,12 +3,10 @@ import { ClockIcon } from "../../common/components/icons/ClockIcon";
 import { formatDateToTime } from "../../../pkg/util/dayjs";
 import { QuestBoardTimer } from "./QuestBoardTimer";
 import useInterval from "../../common/hooks/useInterval";
-import { Quest } from "../api/model/quest";
 import { getBaseTime, getDiff } from "../funcs/calcTimer";
-
-type Props = {
-  currentQuest: Quest | undefined;
-};
+import { Quest } from "../api/model";
+import { useMutateQuest } from "../api/hooks/useMutateQuest";
+import { ConfirmModal } from "../../common/components/ConfirmModal";
 
 export type QuestStatus = "CLOSED" | "OPENED" | "ENGAGED" | "DONE" | "FORCE_STOP";
 
@@ -16,74 +14,78 @@ export const getIsStarted = (startedAt: string) => {
   return startedAt !== "NOT_STARTED_YET";
 };
 
+type Props = {
+  currentQuest: Quest;
+};
 export const QuestBoard: FC<Props> = (props) => {
   const { currentQuest } = props;
-
-  // 今日のクエストがない場合は早期リターン
-  if (!currentQuest) {
-    return (
-      <div className="w-full min-h-[230px] mt-3 p-3 border-2 shadow rounded-lg flex flex-col items-center bg-white">
-        <p className="font-bold text-center p-4">
-          今日のクエストは終了しました
-          <br />
-          お疲れでした!
-        </p>
-        <svg
-          className="w-24 h-24 text-green-600"
-          aria-hidden="true"
-          xmlns="http://www.w3.org/2000/svg"
-          fill="currentColor"
-          viewBox="0 0 24 24"
-        >
-          <path
-            fillRule="evenodd"
-            d="M15 9.7h4a2 2 0 0 1 1.6.9 2 2 0 0 1 .3 1.8l-2.4 7.2c-.3.9-.5 1.4-1.9 1.4-2 0-4.2-.7-6.1-1.3L9 19.3V9.5A32 32 0 0 0 13.2 4c.1-.4.5-.7.9-.9h1.2c.4.1.7.4 1 .7l.2 1.3L15 9.7ZM4.2 10H7v8a2 2 0 1 1-4 0v-6.8c0-.7.5-1.2 1.2-1.2Z"
-            clipRule="evenodd"
-          />
-        </svg>
-      </div>
-    );
-  }
+  const [startConfirmModalOpen, setStartConfirmModalOpen] = useState(false);
+  const [finishConfirmModalOpen, setFinishConfirmModalOpen] = useState(false);
+  const { startQuestMutation, finishQuestMutation, forceFinishQuestMutation } = useMutateQuest();
 
   const { status } = getBaseTime(
     currentQuest.startsAt,
     getIsStarted(currentQuest.startedAt),
     currentQuest.minutes,
     currentQuest.startedAt,
-    currentQuest.isDone,
   );
 
   const [questStatus, setQuestStatus] = useState<QuestStatus>(status);
 
-  if (questStatus === "FORCE_STOP") {
+  // レンダリング時、時間切れの場合、即時終了
+  if (questStatus === "FORCE_STOP" && currentQuest.state === "INACTIVE") {
+    forceFinishQuestMutation.mutateAsync({
+      id: currentQuest.id,
+    });
+    setQuestStatus("CLOSED");
   }
 
   useInterval(() => {
-    const { baseTime } = getBaseTime(
+    const { baseTime, status } = getBaseTime(
       currentQuest.startsAt,
       getIsStarted(currentQuest.startedAt),
       currentQuest.minutes,
       currentQuest.startedAt,
-      currentQuest.isDone,
     );
 
     const { diffHH, diffMM, diffSS } = getDiff(baseTime);
 
+    if (status === "FORCE_STOP") {
+      forceFinishQuestMutation.mutateAsync({
+        id: currentQuest.id,
+      });
+      setQuestStatus("CLOSED");
+    }
+
     // クエスト解放へ切り替える
-    if (diffHH === diffMM && diffSS === 1 && questStatus === "CLOSED") {
+    if (diffHH === diffMM && diffMM === diffSS && questStatus === "CLOSED") {
       setQuestStatus("OPENED");
     }
 
     // クエスト集中へ切り替える
-    if (diffHH === diffMM && diffSS === 1 && questStatus === "OPENED") {
+    if (diffHH === diffMM && diffMM === diffSS && questStatus === "OPENED") {
       setQuestStatus("ENGAGED");
     }
 
     // クエスト終了へ切り替える
-    if (diffHH === diffMM && diffSS === 1 && questStatus === "ENGAGED") {
+    if (diffHH === diffMM && diffMM === diffSS && questStatus === "ENGAGED") {
       setQuestStatus("DONE");
     }
   }, 1000);
+
+  const onClickStartQuest = async () => {
+    await startQuestMutation.mutateAsync({
+      id: currentQuest.id,
+    });
+    setQuestStatus("ENGAGED");
+  };
+
+  const onClickFinishQuest = async () => {
+    await finishQuestMutation.mutateAsync({
+      id: currentQuest.id,
+    });
+    setQuestStatus("CLOSED");
+  };
 
   return (
     <div className="w-full min-h-[230px] mt-3 p-3 border-2 shadow rounded-lg">
@@ -140,13 +142,15 @@ export const QuestBoard: FC<Props> = (props) => {
             isStarted={getIsStarted(currentQuest.startedAt)}
             minutes={currentQuest.minutes}
             startedAt={currentQuest.startedAt}
-            isDone={currentQuest.isDone}
           />
         </div>
         {questStatus === "CLOSED" ? (
           <div className="text-black bg-gray-200 rounded-lg text-lg font-bold p-3 mt-4 text-center">クエスト未開放</div>
         ) : questStatus === "OPENED" ? (
-          <button className="text-white bg-green-400 hover:bg-green-500 focus:ring-4 focus:ring-blue-300 rounded-lg text-lg font-bold p-3 mt-4 focus:outline-none">
+          <button
+            onClick={() => setStartConfirmModalOpen(true)}
+            className="text-white bg-green-400 hover:bg-green-500 focus:ring-4 focus:ring-blue-300 rounded-lg text-lg font-bold p-3 mt-4 focus:outline-none"
+          >
             クエストを開始する
           </button>
         ) : questStatus === "ENGAGED" ? (
@@ -154,11 +158,34 @@ export const QuestBoard: FC<Props> = (props) => {
             クエストに集中しましょう
           </div>
         ) : (
-          <button className="text-white bg-blue-400 hover:bg-blue-500 focus:ring-4 focus:ring-blue-300 rounded-lg text-lg font-bold p-3 mt-4 focus:outline-none">
+          <button
+            onClick={() => setFinishConfirmModalOpen(true)}
+            className="text-white bg-blue-400 hover:bg-blue-500 focus:ring-4 focus:ring-blue-300 rounded-lg text-lg font-bold p-3 mt-4 focus:outline-none"
+          >
             クエストを完了する
           </button>
         )}
       </div>
+      {startConfirmModalOpen && (
+        <ConfirmModal
+          text={"クエストを開始しますか?"}
+          confirmBtnText={"開始する"}
+          cancelBtnText={"キャンセル"}
+          btnColor={"green"}
+          actionFn={onClickStartQuest}
+          closeModal={() => setStartConfirmModalOpen(false)}
+        />
+      )}
+      {finishConfirmModalOpen && (
+        <ConfirmModal
+          text={"クエストを完了しますか?"}
+          confirmBtnText={"完了する"}
+          cancelBtnText={"キャンセル"}
+          btnColor={"blue"}
+          actionFn={onClickFinishQuest}
+          closeModal={() => setFinishConfirmModalOpen(false)}
+        />
+      )}
     </div>
   );
 };

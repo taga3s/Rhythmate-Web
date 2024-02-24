@@ -1,7 +1,7 @@
 import { FC, useState } from "react";
 import { QuestListItem } from "./QuestListItem";
 import { formatDateToTime } from "../../../pkg/util/dayjs";
-import { Quest } from "../api/model/quest";
+import { Quest } from "../api/model";
 
 type Props = {
   nextQuestList: Quest[];
@@ -41,8 +41,8 @@ export const QuestList: FC<Props> = (props) => {
                   <QuestListItem
                     title={value.title}
                     startsAt={formatDateToTime(value.startsAt)}
-                    isDone={value.isDone}
-                    isSuccess={value.isSuccess}
+                    isDone={value.state === "ACTIVE"}
+                    isSuccess={value.isSucceeded}
                     minutes={value.minutes}
                   />
                 </div>
@@ -77,8 +77,8 @@ export const QuestList: FC<Props> = (props) => {
                 <QuestListItem
                   title={value.title}
                   startsAt={formatDateToTime(value.startsAt)}
-                  isDone={value.isDone}
-                  isSuccess={value.isSuccess}
+                  isDone={value.state === "ACTIVE"}
+                  isSuccess={value.isSucceeded}
                   minutes={value.minutes}
                 />
               </div>
