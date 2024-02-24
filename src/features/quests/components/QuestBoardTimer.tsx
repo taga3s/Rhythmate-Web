@@ -8,11 +8,10 @@ type Props = {
   isStarted: boolean;
   minutes: number;
   startedAt: string;
-  isDone: boolean;
 };
 
-export const QuestBoardTimer: FC<Props> = ({ startsAt, isStarted, minutes, startedAt, isDone }) => {
-  const { baseTime } = getBaseTime(startsAt, isStarted, minutes, startedAt, isDone);
+export const QuestBoardTimer: FC<Props> = ({ startsAt, isStarted, minutes, startedAt }) => {
+  const { baseTime } = getBaseTime(startsAt, isStarted, minutes, startedAt);
 
   const { diffHH, diffMM, diffSS } = getDiff(baseTime);
 
@@ -21,11 +20,18 @@ export const QuestBoardTimer: FC<Props> = ({ startsAt, isStarted, minutes, start
   const [ss, setSS] = useState(diffSS);
 
   useInterval(() => {
-    const { baseTime } = getBaseTime(startsAt, getIsStarted(startedAt), minutes, startedAt, isDone);
-    const { diffHH, diffMM, diffSS } = getDiff(baseTime);
-    setHH(diffHH);
-    setMM(diffMM);
-    setSS(diffSS);
+    const { baseTime, status } = getBaseTime(startsAt, getIsStarted(startedAt), minutes, startedAt);
+
+    if (status !== "FORCE_STOP") {
+      const { diffHH, diffMM, diffSS } = getDiff(baseTime);
+      setHH(diffHH);
+      setMM(diffMM);
+      setSS(diffSS);
+    } else {
+      setHH(0);
+      setMM(0);
+      setSS(0);
+    }
   }, 1000);
 
   return (

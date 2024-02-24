@@ -26,3 +26,7 @@ export const formatDateToTime = (date: string) => {
 export const formatDateJP = (date: string) => {
   return dayjs(date).format("YYYY年MM月DD日");
 };
+
+export const getTodayDate = () => {
+  return dayjs().format("ddd");
+};

@@ -6,12 +6,11 @@ export const getBaseTime = (
   isStarted: boolean,
   minutes: number,
   startedAt: string,
-  isDone: boolean,
 ): { baseTime: string; status: QuestStatus } => {
   const { diffMM: beforeDiffMM } = getDiff(formatDateWithSubtract(startsAt, 15));
 
   // クエスト解放前
-  if ((!isStarted && 0 <= beforeDiffMM) || isDone) {
+  if (!isStarted && 0 <= beforeDiffMM) {
     return {
       baseTime: formatDateWithSubtract(startsAt, 15),
       status: "CLOSED",

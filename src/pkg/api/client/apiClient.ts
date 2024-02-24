@@ -26,9 +26,8 @@ const http = async (path: string, method: TMethod, body?: any) => {
   });
 
   if (!res.ok) {
-    const data = await res.json();
-    // TODO
-    throw new FetchError(data.error, res.status);
+    const data: { status: string; message: string } = await res.json();
+    throw new FetchError(data.message, res.status);
   }
 
   // 204 no contentの時、空のオブジェクトを返す
@@ -47,7 +46,7 @@ const post = async (path: string, body?: any) => {
   return data;
 };
 
-const patch = async (path: string, body: any) => {
+const patch = async (path: string, body?: any) => {
   const data = await http(path, "PATCH", body);
   return data;
 };
