@@ -1,6 +1,6 @@
 import { QuestBoard } from "./QuestBoard";
 import { QuestList } from "./QuestList";
-import { formatDateJP, now } from "../../../pkg/util/dayjs";
+import { formatDateJP, getTodayDate, now } from "../../../pkg/util/dayjs";
 import { useQueryQuestList } from "../api/hooks/useQueryQuest";
 import { Quest } from "../api/model";
 
@@ -20,7 +20,10 @@ export const QuestsPresenter = () => {
 
   return (
     <>
-      <h1 className="text-xl font-bold">{formatDateJP(now())}のクエスト</h1>
+      <h1 className="text-xl font-bold">
+        {formatDateJP(now())}
+        {`(${getTodayDate()})`}のクエスト
+      </h1>
 
       {nextQuestList[0] ? (
         <QuestBoard currentQuest={nextQuestList[0]} />
