@@ -4,13 +4,13 @@ import { formatDateToTime } from "../../../pkg/util/dayjs";
 import { QuestBoardTimer } from "./QuestBoardTimer";
 import useInterval from "../../common/hooks/useInterval";
 import { Quest } from "../api/model/quest";
-import { getBaseTime, getDiff } from "../funcs/caclTimer";
+import { getBaseTime, getDiff } from "../funcs/calcTimer";
 
 type Props = {
   currentQuest: Quest | undefined;
 };
 
-export type QuestStatus = "CLOSED" | "OPENED" | "ENGAGED" | "DONE";
+export type QuestStatus = "CLOSED" | "OPENED" | "ENGAGED" | "DONE" | "FORCE_STOP";
 
 export const getIsStarted = (startedAt: string) => {
   return startedAt !== "NOT_STARTED_YET";
@@ -53,7 +53,10 @@ export const QuestBoard: FC<Props> = (props) => {
     currentQuest.isDone,
   );
 
-  const [questState, setQuestState] = useState<QuestStatus>(status);
+  const [questStatus, setQuestStatus] = useState<QuestStatus>(status);
+
+  if (questStatus === "FORCE_STOP") {
+  }
 
   useInterval(() => {
     const { baseTime } = getBaseTime(
@@ -67,18 +70,18 @@ export const QuestBoard: FC<Props> = (props) => {
     const { diffHH, diffMM, diffSS } = getDiff(baseTime);
 
     // クエスト解放へ切り替える
-    if (diffHH === diffMM && diffSS === 1 && questState === "CLOSED") {
-      setQuestState("OPENED");
+    if (diffHH === diffMM && diffSS === 1 && questStatus === "CLOSED") {
+      setQuestStatus("OPENED");
     }
 
     // クエスト集中へ切り替える
-    if (diffHH === diffMM && diffSS === 1 && questState === "OPENED") {
-      setQuestState("ENGAGED");
+    if (diffHH === diffMM && diffSS === 1 && questStatus === "OPENED") {
+      setQuestStatus("ENGAGED");
     }
 
     // クエスト終了へ切り替える
-    if (diffHH === diffMM && diffSS === 1 && questState === "ENGAGED") {
-      setQuestState("DONE");
+    if (diffHH === diffMM && diffSS === 1 && questStatus === "ENGAGED") {
+      setQuestStatus("DONE");
     }
   }, 1000);
 
@@ -101,11 +104,11 @@ export const QuestBoard: FC<Props> = (props) => {
         <span className="text-base">{currentQuest.description}</span>
         <div className="text-center font-bold mt-2 flex items-center justify-center gap-1">
           <span>
-            {questState === "CLOSED" ? (
+            {questStatus === "CLOSED" ? (
               <span>クエスト解放まで</span>
-            ) : questState === "OPENED" ? (
+            ) : questStatus === "OPENED" ? (
               <span>クエスト解放中</span>
-            ) : questState === "ENGAGED" ? (
+            ) : questStatus === "ENGAGED" ? (
               <span>残り時間</span>
             ) : (
               <span>クエスト終了</span>
@@ -119,13 +122,13 @@ export const QuestBoard: FC<Props> = (props) => {
             isDone={currentQuest.isDone}
           />
         </div>
-        {questState === "CLOSED" ? (
+        {questStatus === "CLOSED" ? (
           <div className="text-black bg-gray-200 rounded-lg text-lg font-bold p-3 mt-4 text-center">クエスト未開放</div>
-        ) : questState === "OPENED" ? (
+        ) : questStatus === "OPENED" ? (
           <button className="text-white bg-green-400 hover:bg-green-500 focus:ring-4 focus:ring-blue-300 rounded-lg text-lg font-bold p-3 mt-4 focus:outline-none">
             クエストを開始する
           </button>
-        ) : questState === "ENGAGED" ? (
+        ) : questStatus === "ENGAGED" ? (
           <div className="text-white bg-yellow-500 rounded-lg text-lg font-bold p-3 mt-4 text-center">
             クエストに集中しましょう
           </div>

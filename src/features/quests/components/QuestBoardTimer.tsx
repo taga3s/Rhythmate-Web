@@ -1,7 +1,7 @@
 import { FC, useState } from "react";
 import { getIsStarted } from "./QuestBoard";
 import useInterval from "../../common/hooks/useInterval";
-import { getBaseTime, getDiff } from "../funcs/caclTimer";
+import { getBaseTime, getDiff } from "../funcs/calcTimer";
 
 type Props = {
   startsAt: string;

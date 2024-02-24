@@ -8,33 +8,36 @@ export const getBaseTime = (
   startedAt: string,
   isDone: boolean,
 ): { baseTime: string; status: QuestStatus } => {
-  const { diffSS: beforeDiffSS } = getDiff(formatDateWithSubtract(startsAt, 15));
+  const { diffMM: beforeDiffMM } = getDiff(formatDateWithSubtract(startsAt, 15));
 
   // クエスト解放前
-  if ((!isStarted && 0 < beforeDiffSS) || isDone) {
+  if ((!isStarted && 0 <= beforeDiffMM) || isDone) {
     return {
       baseTime: formatDateWithSubtract(startsAt, 15),
       status: "CLOSED",
     };
   }
 
+  // クエスト開始が押せなかった場合
+  if (!isStarted && beforeDiffMM <= -31) {
+    return {
+      baseTime: "",
+      status: "FORCE_STOP",
+    };
+  }
+
   // クエスト解放中前後30分
-  if (!isStarted && beforeDiffSS <= 0) {
+  if (!isStarted && beforeDiffMM < 0) {
     return {
       baseTime: formatDateWithAddMinutes(startsAt, 15),
       status: "OPENED",
     };
   }
 
-  // クエスト開始が押せなかった場合
-  if (isStarted && beforeDiffSS <= 0 && beforeDiffSS === -30) {
-    console.log("失敗に更新のAPIを叩く");
-  }
-
-  const { diffMM: afterDiffMM, diffSS: afterDiffSS } = getDiff(formatDateWithAddMinutes(startedAt, minutes));
+  const { diffMM: afterDiffMM } = getDiff(formatDateWithAddMinutes(startedAt, minutes));
 
   // クエスト開始・集中
-  if (isStarted && 0 < afterDiffSS) {
+  if (isStarted && 0 <= afterDiffMM) {
     return {
       baseTime: formatDateWithAddMinutes(startedAt, minutes),
       status: "ENGAGED",
@@ -42,8 +45,11 @@ export const getBaseTime = (
   }
 
   // クエスト終了が押せなかった場合
-  if (isStarted && afterDiffMM === -16 && afterDiffSS === 0) {
-    console.log("失敗に更新のAPIを叩く");
+  if (isStarted && afterDiffMM <= -16) {
+    return {
+      baseTime: "",
+      status: "FORCE_STOP",
+    };
   }
 
   // クエスト終了後
@@ -53,12 +59,12 @@ export const getBaseTime = (
   };
 };
 
-// TODO
 export const getDiff = (target: string) => {
-  const diff = new Date(target).getTime() - Date.now();
-  const hours = Math.floor(diff / 1000 / 60 / 60) % 24;
-  const minutes = Math.floor((diff / 1000 / 60) % 60);
-  const seconds = Math.floor(diff / 1000) % 60;
+  const timeDifference = new Date(target).getTime() - Date.now();
+  const hours = Math.floor(timeDifference / (1000 * 60 * 60)) % 24;
+  const minutes = Math.floor((timeDifference / (1000 * 60)) % 60);
+  const seconds = Math.floor((timeDifference / 1000) % 60);
+
   return {
     diffHH: hours,
     diffMM: minutes,
