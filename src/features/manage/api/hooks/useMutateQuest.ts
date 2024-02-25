@@ -1,5 +1,5 @@
 import { useMutation } from "@tanstack/react-query";
-import { CreateRequest, UpdateQuestParams } from "../types";
+import { CreateRequest, DeleteQuestParams, UpdateQuestParams } from "../types";
 import { createFactory } from "../factory";
 import { queryClient } from "../../../../pkg/api/client/queryClient";
 import { Quest } from "../model";
@@ -36,7 +36,26 @@ export const useMutateQuest = () => {
           questList.map((quest) => (quest.id === data.id ? data : quest)),
         );
       }
-      notifySuccess("クエストを終了しました。");
+      notifySuccess("クエストを更新しました。");
+    },
+    onError: (err: FetchError) => {
+      notifyFailed("処理に失敗しました。");
+      console.log(err);
+    },
+  });
+  const deleteQuestMutation = useMutation({
+    mutationFn: async (params: DeleteQuestParams) => {
+      return await createFactory().deleteQuest(params);
+    },
+    onSuccess: (_, variables) => {
+      const questList = queryClient.getQueryData<Quest[]>(["quests"]);
+      if (questList) {
+        queryClient.setQueryData<Quest[]>(
+          ["quests"],
+          questList.filter((quest) => quest.id !== variables.id),
+        );
+      }
+      notifySuccess("クエストを削除しました。");
     },
     onError: (err: FetchError) => {
       notifyFailed("処理に失敗しました。");
@@ -47,5 +66,6 @@ export const useMutateQuest = () => {
   return {
     createQuestMutation,
     updateQuestMutation,
+    deleteQuestMutation,
   };
 };

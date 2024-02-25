@@ -1,7 +1,7 @@
 import { FC } from "react";
 
 type Props = {
-  msg: string;
+  msg: any;
 };
 
 export const FormErrorMsg: FC<Props> = (props) => {

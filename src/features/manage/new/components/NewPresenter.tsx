@@ -2,12 +2,12 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { NewStar } from "./NewStar";
 import { NewDayOfTheWeek } from "./NewDayOfTheWeek";
-import { TManageValidationSchema, manageValidationSchema } from "../libs/validation";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { FormErrorMsg } from "../../../common/components/utils/FormErrorMsg";
 import { useMutateQuest } from "../../api/hooks/useMutateQuest";
 import { fromNumberToWeek } from "../../funcs/fromNumberToWeek";
 import { useNavigate } from "@tanstack/react-router";
+import { TManageValidationSchema, manageValidationSchema } from "../../common/libs/validation";
 
 export type Difficulty = "EASY" | "NORMAL" | "HARD";
 export type Date = "MON" | "TUE" | "WED" | "THU" | "FRI" | "SAT" | "SUN";
