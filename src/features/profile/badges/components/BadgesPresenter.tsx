@@ -25,7 +25,7 @@ export const BadgesPresenter = () => {
         <table className="mt-6 border mx-auto">
           <tbody>
             {badges.map((badge, index) => (
-              <tr className="grid grid-flow-row-dense grid-cols-3 gap-3" key={index}>
+              <tr className="grid grid-flow-row-dense grid-cols-3 gap-3 p-4" key={index}>
                 <td className="col-span-1">
                   <img src={achievementData[index].isAchieved === true ? badge.image : badgeFrame} alt={badge.text} />
                 </td>
