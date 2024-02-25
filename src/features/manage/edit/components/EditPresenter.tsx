@@ -69,6 +69,7 @@ export const EditPresenter: FC<Props> = (props) => {
       difficulty: difficulty,
       dates: modifiedDates,
     });
+    navigate({ to: "/quests/manage" });
   };
 
   const [openModal, setOpenModal] = useState(false);
