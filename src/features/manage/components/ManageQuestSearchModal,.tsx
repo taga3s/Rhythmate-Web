@@ -1,11 +1,33 @@
-import { FC } from "react";
+import { ChangeEvent, FC, useState } from "react";
 import { Star } from "./ManageStar";
+import { ManageDayOfTheWeek } from "./ManageDayOfTheWeek";
 
 type Props = {
   onClickFn: () => void;
 };
 
 export const QuestSearchModal: FC<Props> = ({ onClickFn }) => {
+  const [dates, setDates] = useState<number[]>([]);
+  const [difficulty, setDifficulty] = useState<string>();
+
+  const handleDates = (date: number) => {
+    if (dates.some((v) => v === date)) {
+      const newDates = dates.filter((v) => v !== date);
+      setDates(newDates);
+    } else {
+      setDates([date, ...dates]);
+    }
+  };
+
+  const handleDifficulty = (difficulty: string) => {
+    setDifficulty(difficulty);
+  };
+
+  // const onSubmit = (difficulty: string) => {
+  //   // onClickDate(dates);
+  //   // onClickDifficulty(difficulty);
+  // }
+
   return (
     <div className="fixed top-0 left-0 w-full h-full bg-gray-500 bg-opacity-50 z-50">
       <div
@@ -57,72 +79,12 @@ export const QuestSearchModal: FC<Props> = ({ onClickFn }) => {
                     d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
                   />
                 </svg>
-                <p>実施頻度</p>
+                <p>実施曜日</p>
               </div>
               <div className="flex ml-auto">
-                <div className="ml-auto">
-                  <input type="checkbox" className="hidden peer" id="1" />
-                  <label
-                    htmlFor="1"
-                    className="ml-auto peer-checked:bg-[#0087EE] peer-checked:text-white px-2 py-1 rounded border border-black"
-                  >
-                    月
-                  </label>
-                </div>
-                <div>
-                  <input type="checkbox" className="hidden peer" id="2" />
-                  <label
-                    htmlFor="2"
-                    className="ml-auto peer-checked:bg-[#0087EE] peer-checked:text-white px-2 py-1 rounded border border-black"
-                  >
-                    火
-                  </label>
-                </div>
-                <div>
-                  <input type="checkbox" className="hidden peer" id="3" />
-                  <label
-                    htmlFor="3"
-                    className="ml-auto peer-checked:bg-[#0087EE] peer-checked:text-white px-2 py-1 rounded border border-black"
-                  >
-                    水
-                  </label>
-                </div>
-                <div>
-                  <input type="checkbox" className="hidden peer" id="4" />
-                  <label
-                    htmlFor="4"
-                    className="ml-auto peer-checked:bg-[#0087EE] peer-checked:text-white px-2 py-1 rounded border border-black"
-                  >
-                    木
-                  </label>
-                </div>
-                <div>
-                  <input type="checkbox" className="hidden peer" id="5" />
-                  <label
-                    htmlFor="5"
-                    className="ml-auto peer-checked:bg-[#0087EE] peer-checked:text-white px-2 py-1 rounded border border-black"
-                  >
-                    金
-                  </label>
-                </div>
-                <div>
-                  <input type="checkbox" className="hidden peer" id="6" />
-                  <label
-                    htmlFor="6"
-                    className="ml-auto peer-checked:bg-[#0087EE] peer-checked:text-white px-2 py-1 rounded border border-black"
-                  >
-                    土
-                  </label>
-                </div>
-                <div>
-                  <input type="checkbox" className="hidden peer" id="7" />
-                  <label
-                    htmlFor="7"
-                    className="ml-auto peer-checked:bg-[#0087EE] peer-checked:text-white px-2 py-1 rounded border border-black"
-                  >
-                    日
-                  </label>
-                </div>
+                {["月", "火", "水", "木", "金", "土", "日"].map((v, i) => {
+                  return <ManageDayOfTheWeek key={i} handleDates={handleDates} date={v} dates={dates} value={i + 1} />;
+                })}
               </div>
               <div className="flex items-center">
                 {/* <p>タグ</p>
@@ -163,7 +125,13 @@ export const QuestSearchModal: FC<Props> = ({ onClickFn }) => {
                 <p>難易度</p>
                 <div className="flex ml-auto">
                   <div>
-                    <input type="checkbox" className="hidden peer" id="easy" />
+                    <input
+                      type="checkbox"
+                      className="hidden peer"
+                      id="easy"
+                      value="easy"
+                      onChange={(e: ChangeEvent<HTMLInputElement>) => handleDifficulty(e.target.value)}
+                    />
                     <label
                       htmlFor="easy"
                       className="flex ml-auto peer-checked:bg-[#0087EE] px-2 py-1 rounded border border-black"
@@ -172,7 +140,13 @@ export const QuestSearchModal: FC<Props> = ({ onClickFn }) => {
                     </label>
                   </div>
                   <div>
-                    <input type="checkbox" className="hidden peer" id="medium" />
+                    <input
+                      type="checkbox"
+                      className="hidden peer"
+                      id="medium"
+                      value="medium"
+                      onChange={(e: ChangeEvent<HTMLInputElement>) => handleDifficulty(e.target.value)}
+                    />
                     <label
                       htmlFor="medium"
                       className="flex ml-auto peer-checked:bg-[#0087EE] px-2 py-1 rounded border border-black"
@@ -182,7 +156,13 @@ export const QuestSearchModal: FC<Props> = ({ onClickFn }) => {
                     </label>
                   </div>
                   <div>
-                    <input type="checkbox" className="hidden peer" id="hard" />
+                    <input
+                      type="checkbox"
+                      className="hidden peer"
+                      id="hard"
+                      value="hard"
+                      onChange={(e: ChangeEvent<HTMLInputElement>) => handleDifficulty(e.target.value)}
+                    />
                     <label
                       htmlFor="hard"
                       className="flex ml-auto peer-checked:bg-[#0087EE] px-2 py-1 rounded border border-black"
@@ -197,6 +177,7 @@ export const QuestSearchModal: FC<Props> = ({ onClickFn }) => {
 
               <button
                 type="submit"
+                // onClick={() => { onSubmit(difficulty) } }
                 className="border-2 border-black w-full text-white bg-[#0087EE] hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
               >
                 保存

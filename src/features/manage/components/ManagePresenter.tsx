@@ -5,20 +5,31 @@ import { ManageQuestCard } from "./ManageQuestCard";
 import { QuestSearchModal } from "./ManageQuestSearchModal,";
 import { QuestSearchModalButton } from "./ManageQuestSearchMordalButton";
 import { useQueryQuestList } from "../../quests/api/hooks/useQueryQuest";
+import { Quest } from "../api/model";
 
 export const ManagePresenter = () => {
   const navigate = useNavigate();
   const [isQuestSearchModalOpen, setIsQuestSearchModalOpen] = useState<boolean>(false);
+  const [filterDates, setFilterDates] = useState<number[]>();
+  const [filterDifficulty, setFilterDifficulty] = useState<string>();
 
   const openQuestSearchModal = () => {
     setIsQuestSearchModalOpen(true);
   };
-
   const closeQuestSearchModal = () => {
     setIsQuestSearchModalOpen(false);
   };
 
   const { data } = useQueryQuestList();
+  const [userQuest, setUserQuest] = useState<Quest[]>(data ?? []);
+
+  // const handleDates = (date: number) => {
+  //   const newDates: number[] = ;
+  //   setFilterDates([...newDates, date]);
+  // }
+  const handleDifficulty = (difficulty: string) => {
+    setFilterDifficulty(difficulty);
+  };
 
   return (
     <div className="w-full">
