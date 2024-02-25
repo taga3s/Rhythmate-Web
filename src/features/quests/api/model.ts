@@ -18,6 +18,8 @@ export type Quest = {
   dates: string[];
   weeklyFrequency: number;
   weeklyCompletionCount: number;
+  continuationLevel?: number;
+  totalCompletionCount?: number;
 };
 
 export const toQuest = (obj: {
@@ -34,8 +36,10 @@ export const toQuest = (obj: {
   start_date: Date;
   end_date: Date;
   dates: string[];
+  continuation_level?: number;
   weekly_frequency: number;
-  weekly_completion_count: number;
+  weekly_completion_count?: number;
+  total_completion_count?: number;
 }): Quest => {
   return {
     id: obj.id,
@@ -51,7 +55,9 @@ export const toQuest = (obj: {
     startDate: obj.start_date,
     endDate: obj.end_date,
     dates: obj.dates,
+    continuationLevel: obj.continuation_level ?? 0,
     weeklyFrequency: obj.weekly_frequency,
-    weeklyCompletionCount: obj.weekly_completion_count,
+    weeklyCompletionCount: obj.weekly_completion_count ?? 0,
+    totalCompletionCount: obj.total_completion_count ?? 0,
   };
 };

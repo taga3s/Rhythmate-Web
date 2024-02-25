@@ -5,6 +5,7 @@ import { FC } from "react";
 import { formatDateToTime } from "../../../pkg/util/dayjs";
 import { ClockIcon } from "../../common/components/icons/ClockIcon";
 import { toWeek } from "../funcs/toWeek";
+import { calcExp } from "../funcs/calcExp";
 
 type Props = {
   id: string;
@@ -14,9 +15,10 @@ type Props = {
   minutes: number;
   difficulty: string;
   dates: string[];
+  continuousLevel: number;
 };
 export const ManageQuestCard: FC<Props> = (props) => {
-  const { id, title, description, startsAt, minutes, dates, difficulty } = props;
+  const { id, title, description, startsAt, minutes, dates, difficulty, continuousLevel } = props;
   const navigate = useNavigate();
 
   return (
@@ -56,9 +58,22 @@ export const ManageQuestCard: FC<Props> = (props) => {
           <h3>{toWeek(dates)}</h3>
         </div>
         <div className="flex items-center">
-          <Star />
-          <Star />
-          <Star />
+          {difficulty === "EASY" ? (
+            <>
+              <Star />
+            </>
+          ) : difficulty === "NORMAL" ? (
+            <>
+              <Star />
+              <Star />
+            </>
+          ) : (
+            <>
+              <Star />
+              <Star />
+              <Star />
+            </>
+          )}
         </div>
       </div>
       <hr className="h-0.5 bg-[#AAAAAA]" />
@@ -67,10 +82,10 @@ export const ManageQuestCard: FC<Props> = (props) => {
           <div className="flex">
             <p className="mt-auto ml-1">継続レベル</p>
           </div>
-          <ProgressBar />
+          <ProgressBar level={continuousLevel} />
           <div className="bg-[#FFAA00] w-28 h-7 rounded block ml-auto">
             <p className="flex justify-center items-center text-[#FFFFFF] text-sm ">
-              獲得Exp &times; <span className="ml-1 font-semibold text-xl">1.5</span>
+              獲得Exp &times; <span className="ml-1 font-semibold text-xl">{continuousLevel}.0</span>
             </p>
           </div>
         </div>
@@ -95,7 +110,7 @@ export const ManageQuestCard: FC<Props> = (props) => {
                 d="M12 18a3.75 3.75 0 0 0 .495-7.468 5.99 5.99 0 0 0-1.925 3.547 5.975 5.975 0 0 1-2.133-1.001A3.75 3.75 0 0 0 12 18Z"
               />
             </svg>
-            <p className="text-white text-xl font-semibold text-right mr-3">15</p>
+            <p className="text-white text-xl font-semibold text-right mr-3">{calcExp(difficulty, continuousLevel)}</p>
           </div>
         </div>
       </div>
