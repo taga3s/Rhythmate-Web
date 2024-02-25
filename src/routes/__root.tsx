@@ -1,11 +1,11 @@
-import { createRootRoute, Outlet } from "@tanstack/react-router";
+import { createRootRoute, Outlet, ScrollRestoration } from "@tanstack/react-router";
 import { Toaster } from "react-hot-toast";
-// import { TanStackRouterDevtools } from "@tanstack/router-devtools";
 
 export const Route = createRootRoute({
   component: () => (
     <>
       <div className="font-noto-sans-jp">
+        <ScrollRestoration />
         <Outlet />
         <Toaster
           containerStyle={{
@@ -13,7 +13,6 @@ export const Route = createRootRoute({
           }}
         />
       </div>
-      {/* <TanStackRouterDevtools /> */}
     </>
   ),
 });

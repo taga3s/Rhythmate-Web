@@ -1,6 +1,6 @@
 import { toQuest } from "./model";
 import { questRepository } from "./repository";
-import { CreateQuestParams, UpdateQuestParams } from "./types";
+import { CreateQuestParams, DeleteQuestParams, UpdateQuestParams } from "./types";
 
 export const createFactory = () => {
   const repository = questRepository;
@@ -13,6 +13,9 @@ export const createFactory = () => {
     updateQuest: async (updateQuestParams: UpdateQuestParams) => {
       const response = await repository.update(updateQuestParams);
       return toQuest(response);
+    },
+    deleteQuest: async (deleteQuestParams: DeleteQuestParams) => {
+      await repository.destroy(deleteQuestParams);
     },
   };
 };

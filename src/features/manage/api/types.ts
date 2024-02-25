@@ -41,6 +41,7 @@ export type CreateResponse = {
 };
 
 export type UpdateQuestParams = {
+  id: string;
   title: string;
   description: string;
   startsAt: string;
@@ -52,6 +53,7 @@ export type UpdateQuestParams = {
 };
 
 export type UpdateRequest = {
+  id: string;
   title: string;
   description: string;
   startsAt: string;
@@ -78,4 +80,12 @@ export type UpdateResponse = {
   end_date: Date;
   dates: string[];
   weekly_frequency: number;
+};
+
+export type DeleteQuestParams = {
+  id: string;
+};
+
+export type DeleteRequest = {
+  id: string;
 };
