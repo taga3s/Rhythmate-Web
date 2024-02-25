@@ -1,32 +1,82 @@
 import { useState } from "react";
-import { SubmitHandler, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { NewStar } from "./NewStar";
 import { NewDayOfTheWeek } from "./NewDayOfTheWeek";
+import { TManageValidationSchema, manageValidationSchema } from "../libs/validation";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { FormErrorMsg } from "../../../common/components/utils/FormErrorMsg";
+import { useMutateQuest } from "../../api/hooks/useMutateQuest";
+import { fromNumberToWeek } from "../../funcs/fromNumberToWeek";
+import { useNavigate } from "@tanstack/react-router";
 
-type Difficulty = "EASY" | "NORMAL" | "DIFFICULT";
-type Week = "MON" | "TUE" | "WED" | "THU" | "FRI" | "SAT" | "SUN";
+export type Difficulty = "EASY" | "NORMAL" | "HARD";
+export type Date = "MON" | "TUE" | "WED" | "THU" | "FRI" | "SAT" | "SUN";
 
-type CreateQuest = {
+type NewValues = {
   title: string;
+  startsAt: string;
+  minutes: string;
   description: string;
-  starts_at: string;
-  minutes: number;
-  tag_id: string;
-  difficulty: Difficulty;
-  dates: Week[];
 };
 
 export const NewPresenter = () => {
+  const navigate = useNavigate();
   const [difficulty, setDifficulty] = useState<Difficulty>("EASY");
+  const [dates, setDates] = useState<number[]>([1]);
+  // const [dateValidation, setDateValidation] = useState(false)
+  const { createQuestMutation } = useMutateQuest();
 
-  const { register, handleSubmit, setValue } = useForm<CreateQuest>();
-  const onSubmit: SubmitHandler<CreateQuest> = (data) => console.log(data);
+  const handleDates = (date: number) => {
+    if (dates.some((v) => v === date)) {
+      const newDates = dates.filter((v) => v !== date);
+      setDates(newDates);
+    } else {
+      setDates([date, ...dates]);
+    }
+  };
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset,
+  } = useForm<TManageValidationSchema>({
+    mode: "onBlur",
+    resolver: zodResolver(manageValidationSchema),
+  });
+  const onSubmit = async (data: NewValues) => {
+    const modifiedDates = dates.sort().map((v) => fromNumberToWeek(v));
+    await createQuestMutation.mutateAsync({
+      title: data.title,
+      description: data.description,
+      startsAt: data.startsAt,
+      tagId: "",
+      minutes: Number(data.minutes),
+      difficulty: difficulty,
+      dates: modifiedDates,
+    });
+
+    // リセット処理
+    reset();
+    setDates([]);
+    setDifficulty("EASY");
+  };
 
   return (
     <>
+      <button onClick={() => navigate({ to: "/quests/manage" })} className="block">
+        <div className="px-4 py-3 flex gap-3 items-center bg-gray-200 font-bold text-black text-sm rounded-md">
+          一覧へ戻る
+        </div>
+      </button>
+      <h1 className="text-2xl font-bold mt-8">クエスト作成</h1>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <input type="text" className="w-full h-10 pb-2 border-b-4 mb-2" {...register("title")} />
-        <div className="grid grid-cols-6">
+        <div className="mt-6 flex flex-col gap-4">
+          <label className="text-base">タイトル</label>
+          <input type="text" className="w-full p-2 border-2 rounded-md" {...register("title")} />
+        </div>
+        {errors.title && <FormErrorMsg msg={errors.title.message ?? ""} />}
+        <div className="grid grid-cols-6 mt-4">
           <div className="my-4">
             <svg
               className="w-6 h-6 text-gray-600"
@@ -36,9 +86,9 @@ export const NewPresenter = () => {
               viewBox="0 0 24 24"
             >
               <path
-                fill-rule="evenodd"
+                fillRule="evenodd"
                 d="M2 12a10 10 0 1 1 20 0 10 10 0 0 1-20 0Zm11-4a1 1 0 1 0-2 0v4c0 .3.1.5.3.7l3 3a1 1 0 0 0 1.4-1.4L13 11.6V8Z"
-                clip-rule="evenodd"
+                clipRule="evenodd"
               />
             </svg>
           </div>
@@ -46,49 +96,32 @@ export const NewPresenter = () => {
             <div className="grid grid-cols-5 my-2">
               <p className="col-span-2">実施時刻</p>
               <div className="col-span-3 flex justify-end">
-                <input type="time" {...register("starts_at")} />
-                <p>から</p>
+                <input type="time" className="border-2 rounded p-1 mr-2" {...register("startsAt")} />
+                <span>から</span>
               </div>
             </div>
+            {errors.startsAt && <FormErrorMsg msg={errors.startsAt.message ?? ""} />}
             <div className="grid grid-cols-5 my-2">
               <p className="col-span-2">取り組み時間</p>
               <div className="col-span-3 flex justify-end">
-                <input type="text" className="w-10 border-2 rounded" {...register("minutes")} />
+                <input type="number" className="w-10 border-2 rounded p-1 mr-2" {...register("minutes")} />
                 <p>分間</p>
               </div>
             </div>
+            {errors.minutes && <FormErrorMsg msg={errors.minutes.message ?? ""} />}
             <div className="my-2">
               <p className="block my-2">実施頻度</p>
-              <div className="flex my-4">
-                <NewDayOfTheWeek date="MON" setValue={setValue} />
-                <NewDayOfTheWeek date="TUE" />
-                <NewDayOfTheWeek date="WED" />
-                <NewDayOfTheWeek date="THU" />
+              <div className="flex mt-4 gap-1">
+                {["月", "火", "水", "木", "金", "土", "日"].map((v, i) => {
+                  return <NewDayOfTheWeek key={i} handleDates={handleDates} date={v} dates={dates} value={i + 1} />;
+                })}
               </div>
+              {/* {dateValidation && (<FormErrorMsg msg={"少なくとも1つの曜日を選択します。"} />)} */}
             </div>
           </div>
         </div>
-
-        <div className="grid grid-cols-6 my-2">
-          <div>
-            <svg
-              className="w-6 h-6 text-gray-600"
-              aria-hidden="true"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path d="M18 3h-5.7a2 2 0 0 0-1.4.6L3.6 11a2 2 0 0 0 0 2.8l6.6 6.6a2 2 0 0 0 2.8 0l7.4-7.5a2 2 0 0 0 .6-1.4V6a3 3 0 0 0-3-3Zm-2.4 6.4a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z" />
-            </svg>
-          </div>
-          <div className="col-span-5 flex justify-between">
-            <p>タグ</p>
-            <input type="text" className="border-2 rounded" {...register("tag_id")} />
-          </div>
-        </div>
-
-        <div className="grid grid-cols-6">
-          <div className="my-4">
+        <div className="mt-4">
+          <div className="flex items-center gap-2">
             <svg
               className="w-6 h-6 text-gray-600"
               aria-hidden="true"
@@ -98,44 +131,49 @@ export const NewPresenter = () => {
             >
               <path d="M4 6a2 2 0 0 0-2 2v8c0 1.1.9 2 2 2h11.6c.5 0 1-.2 1.4-.5l4.4-4a2 2 0 0 0 0-3l-4.4-4a2 2 0 0 0-1.4-.5H4Z" />
             </svg>
+            <p>難易度</p>
           </div>
-          <div className="col-span-5 my-4">
-            <p className="block">難易度</p>
-            <div className="grid grid-cols-3 gap-6 my-2">
-              <button
-                className="border-2 flex justify-center items-center gap-1 p-2 rounded"
-                onClick={() => {
-                  setDifficulty("EASY");
-                }}
-                {...register("difficulty")}
-              >
-                <NewStar />
-              </button>
-              <button
-                className="border-2 flex justify-center items-center gap-1 p-2 rounded"
-                onClick={() => {
-                  setDifficulty("NORMAL");
-                }}
-              >
-                <NewStar />
-                <NewStar />
-              </button>
-              <button
-                className="border-2 flex justify-center items-center gap-1 p-2 rounded"
-                onClick={() => {
-                  setDifficulty("DIFFICULT");
-                }}
-              >
-                <NewStar />
-                <NewStar />
-                <NewStar />
-              </button>
-            </div>
+          <div className="flex justify-center gap-4 mt-4">
+            <button
+              type="button"
+              className={`border-2 flex justify-center items-center gap-1 p-2 rounded ${
+                difficulty === "EASY" ? "bg-blue-600" : "bg-white"
+              }`}
+              onClick={() => {
+                setDifficulty("EASY");
+              }}
+            >
+              <NewStar />
+            </button>
+            <button
+              type="button"
+              className={`border-2 flex justify-center items-center gap-1 p-2 rounded ${
+                difficulty === "NORMAL" ? "bg-blue-600" : "bg-white"
+              }`}
+              onClick={() => {
+                setDifficulty("NORMAL");
+              }}
+            >
+              <NewStar />
+              <NewStar />
+            </button>
+            <button
+              type="button"
+              className={`border-2 flex justify-center items-center gap-1 p-2 rounded ${
+                difficulty === "HARD" ? "bg-blue-600" : "bg-white"
+              }`}
+              onClick={() => {
+                setDifficulty("HARD");
+              }}
+            >
+              <NewStar />
+              <NewStar />
+              <NewStar />
+            </button>
           </div>
         </div>
-
-        <div className="grid grid-cols-6">
-          <div className="my-2">
+        <div className="w-full flex justify-between items-center gap-2 mt-6">
+          <div className="flex items-center gap-2 w-24">
             <svg
               className="w-6 h-6 text-gray-600"
               aria-hidden="true"
@@ -145,17 +183,16 @@ export const NewPresenter = () => {
             >
               <path stroke="currentColor" strokeLinecap="round" strokeWidth="2" d="M5 7h14M5 12h14M5 17h10" />
             </svg>
-          </div>
-          <div className="col-span-5 my-2">
-            <label htmlFor="" className="my-2">
-              ひとこと
+            <label htmlFor="" className="my-2 text-base">
+              説明
             </label>
-            <input type="text" className="border-2 rounded my-2" {...register("description")} />
           </div>
+          <input type="text" className="w-full border-2 p-2 rounded-md" {...register("description")} />
         </div>
+        {errors.description && <FormErrorMsg msg={errors.description.message ?? ""} />}
         <button
           type="submit"
-          className="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm my-4 px-5 py-2.5 focus:outline-none"
+          className="w-full mt-14 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-base my-4 p-3 focus:outline-none"
         >
           クエストを作成する
         </button>
