@@ -19,7 +19,7 @@ export const NewDayOfTheWeek: FC<Props> = ({ handleDates, date, dates, value }) 
       />
       <label
         className={`px-2 py-1 rounded border-2 ${
-          dates.some((v) => v === value) ? "bg-blue-600 text-white" : "bg-white text-black"
+          dates.some((v) => v === value) ? "bg-blue-400 text-white" : "bg-white text-black"
         }`}
         htmlFor={`${value}`}
       >

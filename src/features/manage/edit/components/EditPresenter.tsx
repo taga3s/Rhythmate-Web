@@ -172,7 +172,7 @@ export const EditPresenter: FC<Props> = (props) => {
             <button
               type="button"
               className={`border-2 flex justify-center items-center gap-1 p-2 rounded ${
-                difficulty === "EASY" ? "bg-blue-600" : "bg-white"
+                difficulty === "EASY" ? "bg-blue-400" : "bg-white"
               }`}
               onClick={() => {
                 setDifficulty("EASY");
@@ -183,7 +183,7 @@ export const EditPresenter: FC<Props> = (props) => {
             <button
               type="button"
               className={`border-2 flex justify-center items-center gap-1 p-2 rounded ${
-                difficulty === "NORMAL" ? "bg-blue-600" : "bg-white"
+                difficulty === "NORMAL" ? "bg-blue-400" : "bg-white"
               }`}
               onClick={() => {
                 setDifficulty("NORMAL");
@@ -195,7 +195,7 @@ export const EditPresenter: FC<Props> = (props) => {
             <button
               type="button"
               className={`border-2 flex justify-center items-center gap-1 p-2 rounded ${
-                difficulty === "HARD" ? "bg-blue-600" : "bg-white"
+                difficulty === "HARD" ? "bg-blue-400" : "bg-white"
               }`}
               onClick={() => {
                 setDifficulty("HARD");
@@ -233,14 +233,14 @@ export const EditPresenter: FC<Props> = (props) => {
         <div className="flex flex-col mt-14 gap-10">
           <button
             type="submit"
-            className="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-base p-3 focus:outline-none"
+            className="w-full text-white bg-blue-400 hover:bg-blue-500 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-base p-3 focus:outline-none"
           >
-            クエストを編集する
+            クエストを更新する
           </button>
           <button
             onClick={() => setOpenModal(true)}
             type="button"
-            className="w-full text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-base p-3 focus:outline-none"
+            className="w-full text-white bg-red-400 hover:bg-red-500 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-base p-3 focus:outline-none"
           >
             クエストを削除する
           </button>
