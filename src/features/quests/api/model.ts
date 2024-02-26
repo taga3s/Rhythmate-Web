@@ -18,7 +18,7 @@ export type Quest = {
   dates: string[];
   weeklyFrequency: number;
   weeklyCompletionCount: number;
-  continuationLevel?: number;
+  continuationLevel: number;
   totalCompletionCount?: number;
 };
 
@@ -36,10 +36,10 @@ export const toQuest = (obj: {
   start_date: Date;
   end_date: Date;
   dates: string[];
-  continuation_level?: number;
+  continuation_level: number;
   weekly_frequency: number;
-  weekly_completion_count?: number;
-  total_completion_count?: number;
+  weekly_completion_count: number;
+  total_completion_count: number;
 }): Quest => {
   return {
     id: obj.id,
