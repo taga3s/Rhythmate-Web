@@ -1,6 +1,7 @@
 import { FC } from "react";
 import { ClockIcon } from "../../common/components/icons/ClockIcon";
 import { QuestStatusTag } from "./QuestStatusTag";
+import { calcExp } from "../../common/funcs/calcExp";
 
 const getStatus = (isDone: boolean, isSuccess: boolean) => {
   if (!isDone) return "CLOSED";
@@ -14,9 +15,11 @@ type Props = {
   minutes: number;
   isDone: boolean;
   isSuccess: boolean;
+  difficulty: string;
+  continuationLevel: number;
 };
 export const QuestListItem: FC<Props> = (props) => {
-  const { title, startsAt, minutes, isDone, isSuccess } = props;
+  const { title, startsAt, minutes, isDone, isSuccess, difficulty, continuationLevel } = props;
   const status = getStatus(isDone, isSuccess);
 
   return (
@@ -41,7 +44,7 @@ export const QuestListItem: FC<Props> = (props) => {
               d="M12 18a3.75 3.75 0 0 0 .495-7.468 5.99 5.99 0 0 0-1.925 3.547 5.975 5.975 0 0 1-2.133-1.001A3.75 3.75 0 0 0 12 18Z"
             />
           </svg>
-          <span className="text-red-500 text-lg">15</span>
+          <span className="text-red-500 text-lg">{calcExp(difficulty, continuationLevel)}</span>
         </div>
         <QuestStatusTag status={status} />
       </div>

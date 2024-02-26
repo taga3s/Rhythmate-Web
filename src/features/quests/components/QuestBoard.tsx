@@ -7,6 +7,7 @@ import { getBaseTime, getDiff } from "../funcs/calcTimer";
 import { Quest } from "../api/model";
 import { useMutateQuest } from "../api/hooks/useMutateQuest";
 import { ConfirmModal } from "../../common/components/ConfirmModal";
+import { calcExp } from "../../common/funcs/calcExp";
 
 export type QuestStatus = "CLOSED" | "OPENED" | "ENGAGED" | "DONE" | "FORCE_STOP";
 
@@ -115,7 +116,9 @@ export const QuestBoard: FC<Props> = (props) => {
                   d="M12 18a3.75 3.75 0 0 0 .495-7.468 5.99 5.99 0 0 0-1.925 3.547 5.975 5.975 0 0 1-2.133-1.001A3.75 3.75 0 0 0 12 18Z"
                 />
               </svg>
-              <span className="text-red-500 text-lg">15</span>
+              <span className="text-red-500 text-lg">
+                {calcExp(currentQuest.difficulty, currentQuest.continuationLevel)}
+              </span>
             </div>
           </div>
           {currentQuest.startedAt !== "NOT_STARTED_YET" && (
