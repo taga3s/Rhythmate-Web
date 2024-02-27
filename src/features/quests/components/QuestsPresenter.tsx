@@ -58,8 +58,14 @@ export const QuestsPresenter = () => {
         </div>
         {isLoading ? (
           <div>Loading...</div>
-        ) : data?.length ? (
-          <QuestList view={view} nextQuestList={nextQuestList.slice(1)} finishedQuestList={finishedQuestList} />
+        ) : view === "NEXT" ? (
+          nextQuestList.slice(1)?.length ? (
+            <QuestList questList={nextQuestList.slice(1)} />
+          ) : (
+            <QuestListNoData view={view} />
+          )
+        ) : finishedQuestList?.length ? (
+          <QuestList questList={finishedQuestList} />
         ) : (
           <QuestListNoData view={view} />
         )}
