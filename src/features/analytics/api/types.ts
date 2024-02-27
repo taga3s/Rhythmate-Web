@@ -1,4 +1,4 @@
-export type GetResponse = {
+export type ListResponse = {
   status: string;
   weeklyReports: {
     id: string;

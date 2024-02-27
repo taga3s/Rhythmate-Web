@@ -1,6 +1,6 @@
 export type QuestState = "INACTIVE" | "ACTIVE";
 
-export type GetResponse = {
+export type ListResponse = {
   status: string;
   quests: {
     id: string;
