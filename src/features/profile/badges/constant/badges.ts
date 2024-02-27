@@ -1,39 +1,39 @@
 export const badges = [
   {
     text: "ユーザーレベルが10になった",
-    image: "../../../public/badges/crown1.png",
+    image: "/badges/crown1.png",
   },
   {
     text: "ユーザーレベルが100になった",
-    image: "../../../public/badges/crown2.png",
+    image: "/badges/crown2.png",
   },
   {
     text: "ユーザーレベルが999になった",
-    image: "../../../public/badges/crown3.png",
+    image: "/badges/crown3.png",
   },
   {
     text: "クエストを100回完了した",
-    image: "../../../public/badges/gem1.png",
+    image: "/badges/gem1.png",
   },
   {
     text: "クエストを1000回完了した",
-    image: "../../../public/badges/gem2.png",
+    image: "/badges/gem2.png",
   },
   {
     text: "クエストを3000回完了した",
-    image: "../../../public/badges/gem3.png",
+    image: "/badges/gem3.png",
   },
   {
     text: "10日間連続でコンプリートした",
-    image: "../../../public/badges/shield1.png",
+    image: "/badges/shield1.png",
   },
   {
     text: "100日間連続でコンプリートした",
-    image: "../../../public/badges/shield2.png",
+    image: "/badges/shield2.png",
   },
   {
     text: "1000日間連続でコンプリートした",
-    image: "../../../public/badges/shield3.png",
+    image: "/badges/shield3.png",
   },
 ];
 

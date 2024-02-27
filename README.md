@@ -25,3 +25,9 @@ cp .env.example .env
 ```
 $ npm run dev
 ```
+
+### formatterをかける。
+
+```
+$ npm run format
+```

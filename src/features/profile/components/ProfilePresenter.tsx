@@ -70,10 +70,10 @@ export const ProfilePresenter = () => {
           <p className="text-xs text-right">あと〇〇Expでレベルアップ</p>
         </div>
         <div className="w-full text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg">
-          <ProfileLogoutModalButton onClickFn={openLogoutModal} />
+          <ProfileBadgesButton />
         </div>
         <div className="w-full text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg">
-          <ProfileBadgesButton />
+          <ProfileLogoutModalButton onClickFn={openLogoutModal} />
         </div>
       </div>
       {isSettingsModalOpen && (

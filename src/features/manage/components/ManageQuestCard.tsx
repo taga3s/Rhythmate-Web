@@ -5,7 +5,7 @@ import { FC } from "react";
 import { formatDateToTime } from "../../../pkg/util/dayjs";
 import { ClockIcon } from "../../common/components/icons/ClockIcon";
 import { toWeek } from "../funcs/toWeek";
-import { calcExp } from "../funcs/calcExp";
+import { calcExp } from "../../common/funcs/calcExp";
 
 type Props = {
   id: string;
