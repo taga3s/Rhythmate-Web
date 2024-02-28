@@ -7,16 +7,11 @@ type Props = {
 };
 
 export const QuestSearchModal: FC<Props> = ({ onClickFn }) => {
-  const [dates, setDates] = useState<number[]>([]);
+  const [date, setDate] = useState<number>(0);
   const [difficulty, setDifficulty] = useState<string>();
 
-  const handleDates = (date: number) => {
-    if (dates.some((v) => v === date)) {
-      const newDates = dates.filter((v) => v !== date);
-      setDates(newDates);
-    } else {
-      setDates([date, ...dates]);
-    }
+  const handleDate = (date: number) => {
+    setDate(date);
   };
 
   const handleDifficulty = (difficulty: string) => {
@@ -83,7 +78,9 @@ export const QuestSearchModal: FC<Props> = ({ onClickFn }) => {
               </div>
               <div className="flex ml-auto">
                 {["月", "火", "水", "木", "金", "土", "日"].map((v, i) => {
-                  return <ManageDayOfTheWeek key={i} handleDates={handleDates} date={v} dates={dates} value={i + 1} />;
+                  return (
+                    <ManageDayOfTheWeek key={i} handleDate={handleDate} date={date} dayOfTheWeek={v} index={i + 1} />
+                  );
                 })}
               </div>
               <div className="flex items-center">
