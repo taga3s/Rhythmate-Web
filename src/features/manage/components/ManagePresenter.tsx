@@ -10,7 +10,7 @@ import { Quest } from "../api/model";
 export const ManagePresenter = () => {
   const navigate = useNavigate();
   const [isQuestSearchModalOpen, setIsQuestSearchModalOpen] = useState<boolean>(false);
-  const [filterDate, setFilterDate] = useState<number>();
+  const [filterDate, setFilterDate] = useState<string>();
   const [filterDifficulty, setFilterDifficulty] = useState<string>();
 
   const openQuestSearchModal = () => {
@@ -23,10 +23,20 @@ export const ManagePresenter = () => {
   const { data } = useQueryQuestList();
   const [userQuest, setUserQuest] = useState<Quest[]>(data ?? []);
 
-  // console.log(data);
+  const filteredData = data?.filter((quest) => {
+    if (filterDate && filterDifficulty) {
+      return quest.dates.includes(filterDate) && quest.difficulty === filterDifficulty;
+    } else if (filterDate) {
+      return quest.dates.includes(filterDate);
+    } else if (filterDifficulty) {
+      return quest.difficulty === filterDifficulty;
+    } else {
+      return true;
+    }
+  });
+  console.log(filteredData);
   console.log(filterDate);
   console.log(filterDifficulty);
-
   // const handleDates = (date: number) => {
   //   const newDates: number[] = ;
   //   setFilterDates([...newDates, date]);
@@ -41,11 +51,11 @@ export const ManagePresenter = () => {
 
   return (
     <div className="w-full">
-      {data?.length ? (
+      {filteredData?.length ? (
         <div className="w-full">
           <QuestSearchModalButton onClickFn={openQuestSearchModal} />
           <ul className="mt-4 flex flex-col items-center gap-6">
-            {data?.map((value) => {
+            {filteredData?.map((value) => {
               return (
                 <ManageQuestCard
                   key={value.id}

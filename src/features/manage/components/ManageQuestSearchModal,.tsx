@@ -4,15 +4,15 @@ import { ManageDayOfTheWeek } from "./ManageDayOfTheWeek";
 
 type Props = {
   onClickFn: () => void;
-  setFilterDate: (date: number | undefined) => void;
+  setFilterDate: (date: string | undefined) => void;
   setFilterDifficulty: (difficulty: string | undefined) => void;
 };
 
 export const QuestSearchModal: FC<Props> = ({ onClickFn, setFilterDate, setFilterDifficulty }) => {
-  const [date, setDate] = useState<number>();
+  const [date, setDate] = useState<string>();
   const [difficulty, setDifficulty] = useState<string>();
 
-  const handleDate = (date: number) => {
+  const handleDate = (date: string) => {
     setDate(date);
   };
 
@@ -20,7 +20,7 @@ export const QuestSearchModal: FC<Props> = ({ onClickFn, setFilterDate, setFilte
     setDifficulty(difficulty);
   };
 
-  const handleFilterDate = (date: number | undefined) => {
+  const handleFilterDate = (date: string | undefined) => {
     setFilterDate(date);
   };
 
