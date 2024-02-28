@@ -2,7 +2,7 @@ import { ChangeEvent, FC } from "react";
 
 type Props = {
   handleDate: (date: number) => void;
-  date: number;
+  date: number | undefined;
   dayOfTheWeek: string;
   index: number;
 };

@@ -10,7 +10,7 @@ import { Quest } from "../api/model";
 export const ManagePresenter = () => {
   const navigate = useNavigate();
   const [isQuestSearchModalOpen, setIsQuestSearchModalOpen] = useState<boolean>(false);
-  const [filterDates, setFilterDates] = useState<number[]>();
+  const [filterDate, setFilterDate] = useState<number>();
   const [filterDifficulty, setFilterDifficulty] = useState<string>();
 
   const openQuestSearchModal = () => {
@@ -23,15 +23,21 @@ export const ManagePresenter = () => {
   const { data } = useQueryQuestList();
   const [userQuest, setUserQuest] = useState<Quest[]>(data ?? []);
 
-  console.log(data);
+  // console.log(data);
+  console.log(filterDate);
+  console.log(filterDifficulty);
 
   // const handleDates = (date: number) => {
   //   const newDates: number[] = ;
   //   setFilterDates([...newDates, date]);
   // }
-  const handleDifficulty = (difficulty: string) => {
-    setFilterDifficulty(difficulty);
-  };
+  // const handleFilterDifficulty = (difficulty: string) => {
+  //   setFilterDifficulty(difficulty);
+  // };
+
+  // const handleFilterDate = (date: number) => {
+  //   setFilterDate(date);
+  // }
 
   return (
     <div className="w-full">
@@ -95,7 +101,13 @@ export const ManagePresenter = () => {
         </div>
       )}
       <ManageNewButton />
-      {isQuestSearchModalOpen && <QuestSearchModal onClickFn={closeQuestSearchModal} />}
+      {isQuestSearchModalOpen && (
+        <QuestSearchModal
+          onClickFn={closeQuestSearchModal}
+          setFilterDate={setFilterDate}
+          setFilterDifficulty={setFilterDifficulty}
+        />
+      )}
     </div>
   );
 };
