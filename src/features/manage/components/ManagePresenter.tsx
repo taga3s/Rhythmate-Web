@@ -38,44 +38,13 @@ export const ManagePresenter = () => {
 
   return (
     <div className="w-full">
+      <QuestSearchModalButton onClickFn={openQuestSearchModal} />
       {isLoading ? (
         <div>Loading...</div>
       ) : filterActivation ? (
         filteredData?.length ? (
-          <div className="w-full">
-            <QuestSearchModalButton onClickFn={openQuestSearchModal} />
-            <ul className="mt-4 flex flex-col items-center gap-6">
-              {filteredData?.map((value) => {
-                return (
-                  <ManageQuestCard
-                    key={value.id}
-                    id={value.id}
-                    title={value.title}
-                    description={value.description}
-                    startsAt={value.startsAt}
-                    minutes={value.minutes}
-                    difficulty={value.difficulty}
-                    dates={value.dates}
-                    continuousLevel={value.continuationLevel}
-                  />
-                );
-              })}
-            </ul>
-          </div>
-        ) : (
-          <div>
-            <QuestSearchModalButton onClickFn={openQuestSearchModal} />
-            <div className="w-full gap-4 flex flex-col items-center mx-auto mt-24 text-xl">
-              <div>検索結果無し</div>
-              <div>条件を変えて再検索してください</div>
-            </div>
-          </div>
-        )
-      ) : data?.length ? (
-        <div className="w-full">
-          <QuestSearchModalButton onClickFn={openQuestSearchModal} />
           <ul className="mt-4 flex flex-col items-center gap-6">
-            {data?.map((value) => {
+            {filteredData?.map((value) => {
               return (
                 <ManageQuestCard
                   key={value.id}
@@ -86,12 +55,35 @@ export const ManagePresenter = () => {
                   minutes={value.minutes}
                   difficulty={value.difficulty}
                   dates={value.dates}
-                  continuousLevel={value.continuationLevel ?? 0}
+                  continuousLevel={value.continuationLevel}
                 />
               );
             })}
           </ul>
-        </div>
+        ) : (
+          <div className="w-full gap-4 flex flex-col items-center mx-auto mt-24 text-xl">
+            <div>検索結果無し</div>
+            <div>条件を変えて再検索してください</div>
+          </div>
+        )
+      ) : data?.length ? (
+        <ul className="mt-4 flex flex-col items-center gap-6">
+          {data?.map((value) => {
+            return (
+              <ManageQuestCard
+                key={value.id}
+                id={value.id}
+                title={value.title}
+                description={value.description}
+                startsAt={value.startsAt}
+                minutes={value.minutes}
+                difficulty={value.difficulty}
+                dates={value.dates}
+                continuousLevel={value.continuationLevel ?? 0}
+              />
+            );
+          })}
+        </ul>
       ) : (
         <div className="w-full gap-4 flex flex-col items-center mx-auto mt-24">
           <svg
