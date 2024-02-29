@@ -76,7 +76,10 @@ export const ManagePresenter = () => {
         ) : (
           <div>
             <QuestSearchModalButton onClickFn={openQuestSearchModal} />
-            検索結果無し
+            <div className="w-full gap-4 flex flex-col items-center mx-auto mt-24 text-xl">
+              <div>検索結果無し</div>
+              <div>条件を変えて再検索してください</div>
+            </div>
           </div>
         )
       ) : data?.length ? (

@@ -196,6 +196,18 @@ export const QuestSearchModal: FC<Props> = ({
               >
                 保存
               </button>
+              <button
+                type="submit"
+                onClick={() => {
+                  setFilterDate("");
+                  setFilterDifficulties([]);
+                  setFilterActivation(false);
+                  onClickFn();
+                }}
+                className="border-2 border-black w-full text-white bg-red-500 hover:bg-red-700 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+              >
+                条件をリセット
+              </button>
             </div>
           </div>
         </div>
