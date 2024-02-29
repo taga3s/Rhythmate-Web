@@ -38,7 +38,9 @@ export const ManagePresenter = () => {
 
   return (
     <div className="w-full">
-      {filterActivation ? (
+      {isLoading ? (
+        <div>Loading...</div>
+      ) : filterActivation ? (
         filteredData?.length ? (
           <div className="w-full">
             <QuestSearchModalButton onClickFn={openQuestSearchModal} />
