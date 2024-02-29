@@ -37,18 +37,6 @@ export const ManagePresenter = () => {
       return true;
     }
   });
-  // const handleDates = (date: number) => {
-  //   const newDates: number[] = ;
-  //   setFilterDates([...newDates, date]);
-  // }
-  // const handleFilterDifficulty = (difficulty: string) => {
-  //   setFilterDifficulty(difficulty);
-  // };
-
-  // const handleFilterDate = (date: number) => {
-  //   setFilterDate(date);
-  // }
-  console.log(filterDate, filterDifficulties, filterActivation);
 
   return (
     <div className="w-full">
