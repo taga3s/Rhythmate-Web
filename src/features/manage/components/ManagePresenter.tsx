@@ -55,7 +55,7 @@ export const ManagePresenter = () => {
                   minutes={value.minutes}
                   difficulty={value.difficulty}
                   dates={value.dates}
-                  continuousLevel={value.continuationLevel}
+                  continuationLevel={value.continuationLevel}
                 />
               );
             })}
@@ -79,7 +79,7 @@ export const ManagePresenter = () => {
                 minutes={value.minutes}
                 difficulty={value.difficulty}
                 dates={value.dates}
-                continuousLevel={value.continuationLevel ?? 0}
+                continuationLevel={value.continuationLevel ?? 0}
               />
             );
           })}

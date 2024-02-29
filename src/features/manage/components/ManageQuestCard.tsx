@@ -15,10 +15,10 @@ type Props = {
   minutes: number;
   difficulty: string;
   dates: string[];
-  continuousLevel: number;
+  continuationLevel: number;
 };
 export const ManageQuestCard: FC<Props> = (props) => {
-  const { id, title, description, startsAt, minutes, dates, difficulty, continuousLevel } = props;
+  const { id, title, description, startsAt, minutes, dates, difficulty, continuationLevel } = props;
   const navigate = useNavigate();
 
   return (
@@ -82,10 +82,10 @@ export const ManageQuestCard: FC<Props> = (props) => {
           <div className="flex">
             <p className="mt-auto ml-1">継続レベル</p>
           </div>
-          <ProgressBar level={continuousLevel} />
+          <ProgressBar level={continuationLevel} />
           <div className="bg-[#FFAA00] w-28 h-7 rounded block ml-auto">
             <p className="flex justify-center items-center text-[#FFFFFF] text-sm ">
-              獲得Exp &times; <span className="ml-1 font-semibold text-xl">{continuousLevel}.0</span>
+              獲得Exp &times; <span className="ml-1 font-semibold text-xl">{continuationLevel}.0</span>
             </p>
           </div>
         </div>
@@ -110,7 +110,7 @@ export const ManageQuestCard: FC<Props> = (props) => {
                 d="M12 18a3.75 3.75 0 0 0 .495-7.468 5.99 5.99 0 0 0-1.925 3.547 5.975 5.975 0 0 1-2.133-1.001A3.75 3.75 0 0 0 12 18Z"
               />
             </svg>
-            <p className="text-white text-xl font-semibold text-right mr-3">{calcExp(difficulty, continuousLevel)}</p>
+            <p className="text-white text-xl font-semibold text-right mr-3">{calcExp(difficulty, continuationLevel)}</p>
           </div>
         </div>
       </div>
