@@ -1,6 +1,6 @@
 import { ChangeEvent, FC, useState } from "react";
-import { Star } from "./ManageStar";
 import { DayOfTheWeekCheckBox } from "./DayOfTheWeekCheckBox";
+import { DifficultyCheckBox } from "./DifficultyCheckBox";
 
 type Props = {
   onClickFn: () => void;
@@ -133,54 +133,9 @@ export const QuestSearchModal: FC<Props> = ({
                 </svg>
                 <p>難易度</p>
                 <div className="flex ml-auto">
-                  <div>
-                    <input
-                      type="checkbox"
-                      className="hidden peer"
-                      id="easy"
-                      value="easy"
-                      onChange={(e: ChangeEvent<HTMLInputElement>) => handleDifficulty(e.target.value)}
-                    />
-                    <label
-                      htmlFor="easy"
-                      className="flex ml-auto peer-checked:bg-[#0087EE] px-2 py-1 rounded border border-black"
-                    >
-                      <Star />
-                    </label>
-                  </div>
-                  <div>
-                    <input
-                      type="checkbox"
-                      className="hidden peer"
-                      id="medium"
-                      value="medium"
-                      onChange={(e: ChangeEvent<HTMLInputElement>) => handleDifficulty(e.target.value)}
-                    />
-                    <label
-                      htmlFor="medium"
-                      className="flex ml-auto peer-checked:bg-[#0087EE] px-2 py-1 rounded border border-black"
-                    >
-                      <Star />
-                      <Star />
-                    </label>
-                  </div>
-                  <div>
-                    <input
-                      type="checkbox"
-                      className="hidden peer"
-                      id="hard"
-                      value="hard"
-                      onChange={(e: ChangeEvent<HTMLInputElement>) => handleDifficulty(e.target.value)}
-                    />
-                    <label
-                      htmlFor="hard"
-                      className="flex ml-auto peer-checked:bg-[#0087EE] px-2 py-1 rounded border border-black"
-                    >
-                      <Star />
-                      <Star />
-                      <Star />
-                    </label>
-                  </div>
+                  {["easy", "medium", "hard"].map((v, i) => {
+                    return <DifficultyCheckBox key={i} handleDifficulties={handleDifficulty} difficulty={v} />;
+                  })}
                 </div>
               </div>
 
