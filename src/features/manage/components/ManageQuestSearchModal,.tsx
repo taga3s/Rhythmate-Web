@@ -1,6 +1,6 @@
 import { ChangeEvent, FC, useState } from "react";
 import { Star } from "./ManageStar";
-import { ManageDayOfTheWeek } from "./ManageDayOfTheWeek";
+import { DayOfTheWeekCheckBox } from "./DayOfTheWeekCheckBox";
 
 type Props = {
   onClickFn: () => void;
@@ -91,7 +91,7 @@ export const QuestSearchModal: FC<Props> = ({
               <div className="flex ml-auto">
                 {["月", "火", "水", "木", "金", "土", "日"].map((v, i) => {
                   return (
-                    <ManageDayOfTheWeek key={i} handleDate={handleDate} date={date} dayOfTheWeek={v} index={i + 1} />
+                    <DayOfTheWeekCheckBox key={i} handleDate={handleDate} date={date} dayOfTheWeek={v} index={i + 1} />
                   );
                 })}
               </div>
