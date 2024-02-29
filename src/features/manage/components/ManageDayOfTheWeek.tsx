@@ -29,7 +29,6 @@ const convertToEnglish = (dayOfTheWeek: string): string => {
 };
 
 export const ManageDayOfTheWeek: FC<Props> = ({ handleDate, date, dayOfTheWeek, index }) => {
-  console.log(date, convertToEnglish(dayOfTheWeek));
   return (
     <div className="ml-auto">
       <input

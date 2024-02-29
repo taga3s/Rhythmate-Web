@@ -4,34 +4,36 @@ import { ManageDayOfTheWeek } from "./ManageDayOfTheWeek";
 
 type Props = {
   onClickFn: () => void;
-  setFilterDate: (date: string | undefined) => void;
-  setFilterDifficulty: (difficulty: string | undefined) => void;
+  setFilterDate: (date: string) => void;
+  setFilterDifficulties: (difficulty: string[]) => void;
+  setFilterActivation: (activation: boolean) => void;
 };
 
-export const QuestSearchModal: FC<Props> = ({ onClickFn, setFilterDate, setFilterDifficulty }) => {
-  const [date, setDate] = useState<string>();
-  const [difficulty, setDifficulty] = useState<string>();
+export const QuestSearchModal: FC<Props> = ({
+  onClickFn,
+  setFilterDate,
+  setFilterDifficulties,
+  setFilterActivation,
+}) => {
+  const [date, setDate] = useState<string>("");
+  const [difficulties, setDifficulties] = useState<string[]>([]);
 
-  const handleDate = (date: string) => {
-    setDate(date);
+  const handleDate = (newDate: string) => {
+    if (newDate === date) {
+      setDate("");
+    } else {
+      setDate(newDate);
+    }
   };
 
   const handleDifficulty = (difficulty: string) => {
-    setDifficulty(difficulty);
+    if (difficulties.includes(difficulty)) {
+      const newDifficulties = difficulties.filter((value) => value !== difficulty);
+      setDifficulties(newDifficulties);
+    } else {
+      setDifficulties([...difficulties, difficulty]);
+    }
   };
-
-  const handleFilterDate = (date: string | undefined) => {
-    setFilterDate(date);
-  };
-
-  const handleFilterDifficulty = (difficulty: string | undefined) => {
-    setFilterDifficulty(difficulty);
-  };
-
-  // const onSubmit = (difficulty: string) => {
-  //   // onClickDate(dates);
-  //   // onClickDifficulty(difficulty);
-  // }
 
   return (
     <div className="fixed top-0 left-0 w-full h-full bg-gray-500 bg-opacity-50 z-50">
@@ -185,8 +187,9 @@ export const QuestSearchModal: FC<Props> = ({ onClickFn, setFilterDate, setFilte
               <button
                 type="submit"
                 onClick={() => {
-                  handleFilterDate(date);
-                  handleFilterDifficulty(difficulty);
+                  setFilterDate(date);
+                  setFilterDifficulties(difficulties);
+                  setFilterActivation(true);
                   onClickFn();
                 }}
                 className="border-2 border-black w-full text-white bg-[#0087EE] hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
