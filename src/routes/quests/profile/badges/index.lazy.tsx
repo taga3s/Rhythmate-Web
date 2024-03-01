@@ -1,18 +1,18 @@
 import { createLazyFileRoute } from "@tanstack/react-router";
 import { Header, Menu } from "../../../../features/common/components";
 import { ContentLayout } from "../../../../features/common/components/layouts/ContentLayout";
-import { NewPresenter } from "../../../../features/manage/new/components/NewPresenter";
+import { BadgesPresenter } from "../../../../features/profile/badges/components/BadgesPresenter";
 
-export const Route = createLazyFileRoute("/quests/manage/new/")({
-  component: () => <New />,
+export const Route = createLazyFileRoute("/quests/profile/badges/")({
+  component: () => <Profile />,
 });
 
-const New = () => {
+const Profile = () => {
   return (
     <>
       <Header />
       <ContentLayout>
-        <NewPresenter />
+        <BadgesPresenter />
       </ContentLayout>
       <Menu />
     </>

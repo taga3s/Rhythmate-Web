@@ -35,17 +35,18 @@ export const QuestList: FC<Props> = (props) => {
       <div className="mt-3 flex flex-col gap-2 ">
         {view === "NEXT" ? (
           nextQuestList.length ? (
-            nextQuestList.map((value) => {
+            nextQuestList.map((quest) => {
               return (
-                <div key={value.id}>
-                  <QuestListItem
-                    title={value.title}
-                    startsAt={formatDateToTime(value.startsAt)}
-                    isDone={value.state === "ACTIVE"}
-                    isSuccess={value.isSucceeded}
-                    minutes={value.minutes}
-                  />
-                </div>
+                <QuestListItem
+                  key={quest.id}
+                  title={quest.title}
+                  startsAt={formatDateToTime(quest.startsAt)}
+                  isDone={quest.state === "ACTIVE"}
+                  isSuccess={quest.isSucceeded}
+                  minutes={quest.minutes}
+                  difficulty={quest.difficulty}
+                  continuationLevel={quest.continuationLevel}
+                />
               );
             })
           ) : (
@@ -71,17 +72,18 @@ export const QuestList: FC<Props> = (props) => {
             </div>
           )
         ) : finishedQuestList.length ? (
-          finishedQuestList.map((value) => {
+          finishedQuestList.map((quest) => {
             return (
-              <div key={value.id}>
-                <QuestListItem
-                  title={value.title}
-                  startsAt={formatDateToTime(value.startsAt)}
-                  isDone={value.state === "ACTIVE"}
-                  isSuccess={value.isSucceeded}
-                  minutes={value.minutes}
-                />
-              </div>
+              <QuestListItem
+                key={quest.id}
+                title={quest.title}
+                startsAt={formatDateToTime(quest.startsAt)}
+                isDone={quest.state === "ACTIVE"}
+                isSuccess={quest.isSucceeded}
+                minutes={quest.minutes}
+                difficulty={quest.difficulty}
+                continuationLevel={quest.continuationLevel}
+              />
             );
           })
         ) : (
