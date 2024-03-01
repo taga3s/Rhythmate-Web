@@ -8,11 +8,11 @@ type Props = {
 
 const difficultyToNumber = (difficulty: string): number => {
   switch (difficulty) {
-    case "easy":
+    case "EASY":
       return 1;
-    case "medium":
+    case "NORMAL":
       return 2;
-    case "hard":
+    case "HARD":
       return 3;
     default:
       return 0;
