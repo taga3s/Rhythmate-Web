@@ -139,7 +139,7 @@ export const QuestSearchModal: FC<Props> = ({
                 </svg>
                 <p>難易度</p>
                 <div className="flex ml-auto">
-                  {["easy", "medium", "hard"].map((v, i) => {
+                  {["EASY", "NORMAL", "HARD"].map((v, i) => {
                     return <ManageDifficultyCheckBox key={i} handleDifficulties={handleDifficulty} difficulty={v} />;
                   })}
                 </div>
