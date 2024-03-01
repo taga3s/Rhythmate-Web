@@ -28,7 +28,7 @@ const convertToEnglish = (dayOfTheWeek: string): string => {
   }
 };
 
-export const DayOfTheWeekCheckBox: FC<Props> = ({ handleDate, date, dayOfTheWeek, index }) => {
+export const ManageDayOfTheWeekCheckBox: FC<Props> = ({ handleDate, date, dayOfTheWeek, index }) => {
   return (
     <div className="ml-auto">
       <input

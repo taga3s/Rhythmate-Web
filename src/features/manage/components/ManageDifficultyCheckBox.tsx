@@ -19,7 +19,7 @@ const difficultyToNumber = (difficulty: string): number => {
   }
 };
 
-export const DifficultyCheckBox: FC<Props> = ({ handleDifficulties, difficulty }) => {
+export const ManageDifficultyCheckBox: FC<Props> = ({ handleDifficulties, difficulty }) => {
   return (
     <div>
       <input

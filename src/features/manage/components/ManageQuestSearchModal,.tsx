@@ -1,6 +1,6 @@
 import { FC, useState } from "react";
-import { DayOfTheWeekCheckBox } from "./DayOfTheWeekCheckBox";
-import { DifficultyCheckBox } from "./DifficultyCheckBox";
+import { ManageDayOfTheWeekCheckBox } from "./ManageDayOfTheWeekCheckBox";
+import { ManageDifficultyCheckBox } from "./ManageDifficultyCheckBox";
 
 type Props = {
   onClickFn: () => void;
@@ -91,7 +91,13 @@ export const QuestSearchModal: FC<Props> = ({
               <div className="flex ml-auto">
                 {["月", "火", "水", "木", "金", "土", "日"].map((v, i) => {
                   return (
-                    <DayOfTheWeekCheckBox key={i} handleDate={handleDate} date={date} dayOfTheWeek={v} index={i + 1} />
+                    <ManageDayOfTheWeekCheckBox
+                      key={i}
+                      handleDate={handleDate}
+                      date={date}
+                      dayOfTheWeek={v}
+                      index={i + 1}
+                    />
                   );
                 })}
               </div>
@@ -134,7 +140,7 @@ export const QuestSearchModal: FC<Props> = ({
                 <p>難易度</p>
                 <div className="flex ml-auto">
                   {["easy", "medium", "hard"].map((v, i) => {
-                    return <DifficultyCheckBox key={i} handleDifficulties={handleDifficulty} difficulty={v} />;
+                    return <ManageDifficultyCheckBox key={i} handleDifficulties={handleDifficulty} difficulty={v} />;
                   })}
                 </div>
               </div>
