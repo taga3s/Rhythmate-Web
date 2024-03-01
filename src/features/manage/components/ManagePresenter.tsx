@@ -23,7 +23,7 @@ export const ManagePresenter = () => {
   const { data } = useQueryQuestList();
 
   const filteredData = data?.filter((quest) => {
-    if (filterDate && filterDifficulties) {
+    if (filterDate && filterDifficulties.length) {
       return (
         quest.dates.includes(filterDate) && filterDifficulties.some((difficulty) => quest.difficulty === difficulty)
       );
