@@ -1,4 +1,4 @@
-import { ChangeEvent, FC, useState } from "react";
+import { FC, useState } from "react";
 import { DayOfTheWeekCheckBox } from "./DayOfTheWeekCheckBox";
 import { DifficultyCheckBox } from "./DifficultyCheckBox";
 

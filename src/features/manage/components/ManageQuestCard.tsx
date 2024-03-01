@@ -16,7 +16,7 @@ type Props = {
   dates: string[];
 };
 export const ManageQuestCard: FC<Props> = (props) => {
-  const { id, title, description, startsAt, minutes, dates, difficulty } = props;
+  const { id, title, description, startsAt, minutes, dates } = props;
   const navigate = useNavigate();
 
   return (

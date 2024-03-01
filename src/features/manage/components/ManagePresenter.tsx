@@ -5,7 +5,6 @@ import { ManageQuestCard } from "./ManageQuestCard";
 import { QuestSearchModal } from "./ManageQuestSearchModal,";
 import { QuestSearchModalButton } from "./ManageQuestSearchMordalButton";
 import { useQueryQuestList } from "../../quests/api/hooks/useQueryQuest";
-import { Quest } from "../api/model";
 
 export const ManagePresenter = () => {
   const navigate = useNavigate();
@@ -22,7 +21,6 @@ export const ManagePresenter = () => {
   };
 
   const { data } = useQueryQuestList();
-  const [userQuest, setUserQuest] = useState<Quest[]>(data ?? []);
 
   const filteredData = data?.filter((quest) => {
     if (filterDate && filterDifficulties) {
