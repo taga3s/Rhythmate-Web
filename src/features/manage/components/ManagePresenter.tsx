@@ -10,7 +10,7 @@ export const ManagePresenter = () => {
   const navigate = useNavigate();
   const [isQuestSearchModalOpen, setIsQuestSearchModalOpen] = useState<boolean>(false);
   const [filterDate, setFilterDate] = useState<string>("");
-  const [filterDifficulties, setFilterDifficulties] = useState<string[]>([""]);
+  const [filterDifficulties, setFilterDifficulties] = useState<string[]>([]);
   const [filterActivation, setFilterActivation] = useState<boolean>(false);
 
   const openQuestSearchModal = () => {
@@ -29,7 +29,7 @@ export const ManagePresenter = () => {
       );
     } else if (filterDate) {
       return quest.dates.includes(filterDate);
-    } else if (filterDifficulties) {
+    } else if (filterDifficulties.length) {
       return filterDifficulties.some((difficulty) => quest.difficulty === difficulty);
     } else {
       return true;
@@ -127,7 +127,9 @@ export const ManagePresenter = () => {
       {isQuestSearchModalOpen && (
         <QuestSearchModal
           onClickFn={closeQuestSearchModal}
+          filterDate={filterDate}
           setFilterDate={setFilterDate}
+          filterDifficulties={filterDifficulties}
           setFilterDifficulties={setFilterDifficulties}
           setFilterActivation={setFilterActivation}
         />

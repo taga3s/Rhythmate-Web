@@ -4,19 +4,23 @@ import { ManageDifficultyCheckBox } from "./ManageDifficultyCheckBox";
 
 type Props = {
   onClickFn: () => void;
+  filterDate: string;
   setFilterDate: (date: string) => void;
+  filterDifficulties: string[];
   setFilterDifficulties: (difficulty: string[]) => void;
   setFilterActivation: (activation: boolean) => void;
 };
 
 export const QuestSearchModal: FC<Props> = ({
   onClickFn,
+  filterDate,
   setFilterDate,
+  filterDifficulties,
   setFilterDifficulties,
   setFilterActivation,
 }) => {
-  const [date, setDate] = useState<string>("");
-  const [difficulties, setDifficulties] = useState<string[]>([]);
+  const [date, setDate] = useState<string>(filterDate);
+  const [difficulties, setDifficulties] = useState<string[]>(filterDifficulties);
 
   const handleDate = (newDate: string) => {
     if (newDate === date) {
@@ -120,7 +124,14 @@ export const QuestSearchModal: FC<Props> = ({
                 <p>難易度</p>
                 <div className="flex ml-auto">
                   {["EASY", "NORMAL", "HARD"].map((v, i) => {
-                    return <ManageDifficultyCheckBox key={i} handleDifficulties={handleDifficulty} difficulty={v} />;
+                    return (
+                      <ManageDifficultyCheckBox
+                        key={i}
+                        handleDifficulties={handleDifficulty}
+                        difficulty={v}
+                        filterDifficulties={filterDifficulties}
+                      />
+                    );
                   })}
                 </div>
               </div>

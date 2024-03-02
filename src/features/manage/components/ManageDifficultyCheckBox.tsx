@@ -4,6 +4,7 @@ import { Star } from "./ManageStar";
 type Props = {
   handleDifficulties: (difficulty: string) => void;
   difficulty: string;
+  filterDifficulties: string[];
 };
 
 const difficultyToNumber = (difficulty: string): number => {
@@ -19,7 +20,7 @@ const difficultyToNumber = (difficulty: string): number => {
   }
 };
 
-export const ManageDifficultyCheckBox: FC<Props> = ({ handleDifficulties, difficulty }) => {
+export const ManageDifficultyCheckBox: FC<Props> = ({ handleDifficulties, difficulty, filterDifficulties }) => {
   return (
     <div>
       <input
@@ -27,6 +28,7 @@ export const ManageDifficultyCheckBox: FC<Props> = ({ handleDifficulties, diffic
         className="hidden peer"
         id={difficulty}
         value={difficulty}
+        defaultChecked={filterDifficulties.includes(difficulty)}
         onChange={(e: ChangeEvent<HTMLInputElement>) => handleDifficulties(e.target.value)}
       />
       <label
