@@ -2,8 +2,8 @@ import { useNavigate } from "@tanstack/react-router";
 import { useState } from "react";
 import { ManageNewButton } from "./ManageNewButton";
 import { ManageQuestCard } from "./ManageQuestCard";
-import { QuestSearchModal } from "./ManageQuestSearchModal,";
-import { QuestSearchModalButton } from "./ManageQuestSearchModalButton";
+import { ManageQuestSearchModal } from "./ManageQuestSearchModal,";
+import { ManageQuestSearchModalButton } from "./ManageQuestSearchModalButton";
 import { useQueryQuestList } from "../../quests/api/hooks/useQueryQuest";
 import { Difficulty } from "../api/types";
 
@@ -39,7 +39,7 @@ export const ManagePresenter = () => {
 
   return (
     <div className="w-full">
-      <QuestSearchModalButton onClickFn={openQuestSearchModal} />
+      <ManageQuestSearchModalButton onClickFn={openQuestSearchModal} />
       {isLoading ? (
         <div>Loading...</div>
       ) : filterActivation ? (
@@ -126,7 +126,7 @@ export const ManagePresenter = () => {
       )}
       <ManageNewButton />
       {isQuestSearchModalOpen && (
-        <QuestSearchModal
+        <ManageQuestSearchModal
           onClickFn={closeQuestSearchModal}
           filterDate={filterDate}
           setFilterDate={setFilterDate}

@@ -4,7 +4,7 @@ type Props = {
   onClickFn: () => void;
 };
 
-export const QuestSearchModalButton: FC<Props> = ({ onClickFn }) => {
+export const ManageQuestSearchModalButton: FC<Props> = ({ onClickFn }) => {
   return (
     <button onClick={onClickFn} className="block ml-auto rounded-full border-2 border-[#AAAAAA]">
       <div className="w-32 h-10 flex gap-3 items-center">

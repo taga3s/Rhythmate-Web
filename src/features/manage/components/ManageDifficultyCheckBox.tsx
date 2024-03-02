@@ -1,19 +1,7 @@
 import { ChangeEvent, FC } from "react";
 import { Star } from "./ManageStar";
 import { Difficulty } from "../api/types";
-
-const difficultyToNumber = (difficulty: Difficulty): number => {
-  switch (difficulty) {
-    case "EASY":
-      return 1;
-    case "NORMAL":
-      return 2;
-    case "HARD":
-      return 3;
-    default:
-      return 0;
-  }
-};
+import { convertDifficultyToNumber } from "../common/funcs";
 
 type Props = {
   handleDifficulties: (difficulty: Difficulty) => void;
@@ -36,7 +24,7 @@ export const ManageDifficultyCheckBox: FC<Props> = ({ handleDifficulties, diffic
         htmlFor={difficulty}
         className="flex ml-auto peer-checked:bg-blue-400 px-2 py-1 rounded border-2 border-gray-200 cursor-pointer"
       >
-        {Array.from({ length: difficultyToNumber(difficulty) }).map((_, index) => (
+        {Array.from({ length: convertDifficultyToNumber(difficulty) }).map((_, index) => (
           <Star key={index} />
         ))}
       </label>

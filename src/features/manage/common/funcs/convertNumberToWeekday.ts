@@ -1,4 +1,4 @@
-export const fromNumberToWeek = (number: number): string => {
+export const convertNumberToWeekday = (number: number): string => {
   switch (number) {
     case 1:
       return "MON";

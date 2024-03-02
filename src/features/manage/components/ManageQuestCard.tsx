@@ -1,12 +1,17 @@
 import { useNavigate } from "@tanstack/react-router";
 import { Star } from "./ManageStar";
-import { ProgressBar } from "./ManageProgressBar";
+import { ManageProgressBar } from "./ManageProgressBar";
 import { FC } from "react";
 import { formatDateToTime } from "../../../pkg/util/dayjs";
 import { ClockIcon } from "../../common/components/icons/ClockIcon";
-import { toWeek } from "../funcs/toWeek";
 import { calcExp } from "../../common/funcs/calcExp";
 import { Difficulty } from "../api/types";
+import { convertEnToJpWeekday } from "../common/funcs";
+
+const convertENToJPWeekdayString = (week: string[]) => {
+  const result = week.map((day) => convertEnToJpWeekday(day)).join("・");
+  return result;
+};
 
 type Props = {
   id: string;
@@ -18,6 +23,7 @@ type Props = {
   dates: string[];
   continuationLevel: number;
 };
+
 export const ManageQuestCard: FC<Props> = (props) => {
   const { id, title, description, startsAt, minutes, dates, difficulty, continuationLevel } = props;
   const navigate = useNavigate();
@@ -56,7 +62,7 @@ export const ManageQuestCard: FC<Props> = (props) => {
             <span>{formatDateToTime(startsAt)} -</span>
             <span>{minutes}m</span>
           </div>
-          <h3>{toWeek(dates)}</h3>
+          <h3>{convertENToJPWeekdayString(dates)}</h3>
         </div>
         <div className="flex items-center">
           {difficulty === "EASY" ? (
@@ -83,7 +89,7 @@ export const ManageQuestCard: FC<Props> = (props) => {
           <div className="flex">
             <p className="mt-auto ml-1">継続レベル</p>
           </div>
-          <ProgressBar level={continuationLevel} />
+          <ManageProgressBar level={continuationLevel} />
           <div className="bg-[#FFAA00] w-28 h-7 rounded block ml-auto">
             <p className="flex justify-center items-center text-[#FFFFFF] text-sm ">
               獲得Exp &times; <span className="ml-1 font-semibold text-xl">{continuationLevel}.0</span>

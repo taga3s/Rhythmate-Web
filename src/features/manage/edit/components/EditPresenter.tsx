@@ -3,17 +3,16 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { FormErrorMsg } from "../../../common/components/utils/FormErrorMsg";
 import { useMutateQuest } from "../../api/hooks/useMutateQuest";
-import { fromNumberToWeek } from "../../funcs/fromNumberToWeek";
 import { useNavigate } from "@tanstack/react-router";
 import { useQueryQuestList } from "../../../quests/api/hooks/useQueryQuest";
 import { NewStar } from "../../new/components/NewStar";
 import { NewDayOfTheWeek } from "../../new/components/NewDayOfTheWeek";
 import { TManageValidationSchema, manageValidationSchema } from "../../common/libs/validation";
 import { formatDateToTime } from "../../../../pkg/util/dayjs";
-import { fromWeekToNumber } from "../../funcs/fromWeekToNumber";
 import { ConfirmModal } from "../../../common/components/ConfirmModal";
 import { Difficulty } from "../../api/types";
-import { DATES } from "../../constant/constant";
+import { DATES } from "../../common/constant/constant";
+import { convertNumberToWeekday, convertWeekdayToNumber } from "../../common/funcs";
 
 type NewValues = {
   title: string;
@@ -37,7 +36,7 @@ export const EditPresenter: FC<Props> = (props) => {
   const [dates, setDates] = useState<number[]>([]);
 
   useEffect(() => {
-    setDates(targetQuest?.dates.map((v) => fromWeekToNumber(v)) ?? []);
+    setDates(targetQuest?.dates.map((v) => convertWeekdayToNumber(v)) ?? []);
     setDifficulty(targetQuest?.difficulty ?? "EASY");
   }, [isLoading]);
 
@@ -59,7 +58,7 @@ export const EditPresenter: FC<Props> = (props) => {
     resolver: zodResolver(manageValidationSchema),
   });
   const onSubmit = async (data: NewValues) => {
-    const modifiedDates = dates.sort().map((v) => fromNumberToWeek(v));
+    const modifiedDates = dates.sort().map((v) => convertNumberToWeekday(v));
     await updateQuestMutation.mutateAsync({
       id: quest_id,
       title: data.title,

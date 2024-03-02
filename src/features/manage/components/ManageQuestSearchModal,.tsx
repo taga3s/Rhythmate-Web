@@ -1,7 +1,7 @@
 import { FC, useState } from "react";
 import { ManageDayOfTheWeekCheckBox } from "./ManageDayOfTheWeekCheckBox";
 import { ManageDifficultyCheckBox } from "./ManageDifficultyCheckBox";
-import { DATES, DIFFICULTIES } from "../constant/constant";
+import { DATES, DIFFICULTIES } from "../common/constant/constant";
 import { Difficulty } from "../api/types";
 
 type Props = {
@@ -13,7 +13,7 @@ type Props = {
   setFilterActivation: (activation: boolean) => void;
 };
 
-export const QuestSearchModal: FC<Props> = ({
+export const ManageQuestSearchModal: FC<Props> = ({
   onClickFn,
   filterDate,
   setFilterDate,

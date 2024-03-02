@@ -5,11 +5,11 @@ import { NewDayOfTheWeek } from "./NewDayOfTheWeek";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { FormErrorMsg } from "../../../common/components/utils/FormErrorMsg";
 import { useMutateQuest } from "../../api/hooks/useMutateQuest";
-import { fromNumberToWeek } from "../../funcs/fromNumberToWeek";
 import { useNavigate } from "@tanstack/react-router";
 import { TManageValidationSchema, manageValidationSchema } from "../../common/libs/validation";
 import { Difficulty } from "../../api/types";
-import { DATES } from "../../constant/constant";
+import { DATES } from "../../common/constant/constant";
+import { convertNumberToWeekday } from "../../common/funcs";
 
 type NewValues = {
   title: string;
@@ -44,7 +44,7 @@ export const NewPresenter = () => {
     resolver: zodResolver(manageValidationSchema),
   });
   const onSubmit = async (data: NewValues) => {
-    const modifiedDates = dates.sort().map((v) => fromNumberToWeek(v));
+    const modifiedDates = dates.sort().map((v) => convertNumberToWeekday(v));
     await createQuestMutation.mutateAsync({
       title: data.title,
       description: data.description,
