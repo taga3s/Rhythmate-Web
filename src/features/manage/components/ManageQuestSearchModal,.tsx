@@ -124,7 +124,6 @@ export const QuestSearchModal: FC<Props> = ({
                   })}
                 </div>
               </div>
-
               <button
                 type="submit"
                 onClick={() => {
@@ -133,7 +132,7 @@ export const QuestSearchModal: FC<Props> = ({
                   setFilterActivation(true);
                   onClickFn();
                 }}
-                className="border-2 border-black w-full text-white bg-[#0087EE] hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+                className="w-full text-white bg-[#0087EE] hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
               >
                 保存
               </button>
@@ -145,7 +144,7 @@ export const QuestSearchModal: FC<Props> = ({
                   setFilterActivation(false);
                   onClickFn();
                 }}
-                className="border-2 border-black w-full text-white bg-red-500 hover:bg-red-700 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+                className="w-full text-white bg-red-500 hover:bg-red-700 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
               >
                 条件をリセット
               </button>

@@ -3,7 +3,7 @@ import { useState } from "react";
 import { ManageNewButton } from "./ManageNewButton";
 import { ManageQuestCard } from "./ManageQuestCard";
 import { QuestSearchModal } from "./ManageQuestSearchModal,";
-import { QuestSearchModalButton } from "./ManageQuestSearchMordalButton";
+import { QuestSearchModalButton } from "./ManageQuestSearchModalButton";
 import { useQueryQuestList } from "../../quests/api/hooks/useQueryQuest";
 
 export const ManagePresenter = () => {

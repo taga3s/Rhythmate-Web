@@ -40,10 +40,9 @@ export const ManageDayOfTheWeekCheckBox: FC<Props> = ({ handleDate, date, dayOfT
       />
       <label
         htmlFor={`${index}`}
-        className={`px-2 py-1 rounded border-2 ${
-          date === convertToEnglish(dayOfTheWeek) ? "bg-blue-600 text-white" : "bg-white text-black"
+        className={`px-2 py-1 rounded border-2 cursor-pointer ${
+          date === convertToEnglish(dayOfTheWeek) ? "bg-blue-400 text-white" : "bg-white text-black"
         }`}
-        // "ml-auto peer-checked:bg-[#0087EE] peer-checked:text-white px-2 py-1 rounded border border-black"
       >
         {dayOfTheWeek}
       </label>

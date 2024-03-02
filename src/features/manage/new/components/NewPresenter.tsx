@@ -138,7 +138,7 @@ export const NewPresenter = () => {
             <button
               type="button"
               className={`border-2 flex justify-center items-center gap-1 p-2 rounded ${
-                difficulty === "EASY" ? "bg-blue-600" : "bg-white"
+                difficulty === "EASY" ? "bg-blue-400" : "bg-white"
               }`}
               onClick={() => {
                 setDifficulty("EASY");
@@ -149,7 +149,7 @@ export const NewPresenter = () => {
             <button
               type="button"
               className={`border-2 flex justify-center items-center gap-1 p-2 rounded ${
-                difficulty === "NORMAL" ? "bg-blue-600" : "bg-white"
+                difficulty === "NORMAL" ? "bg-blue-400" : "bg-white"
               }`}
               onClick={() => {
                 setDifficulty("NORMAL");
@@ -161,7 +161,7 @@ export const NewPresenter = () => {
             <button
               type="button"
               className={`border-2 flex justify-center items-center gap-1 p-2 rounded ${
-                difficulty === "HARD" ? "bg-blue-600" : "bg-white"
+                difficulty === "HARD" ? "bg-blue-400" : "bg-white"
               }`}
               onClick={() => {
                 setDifficulty("HARD");
@@ -193,7 +193,7 @@ export const NewPresenter = () => {
         {errors.description && <FormErrorMsg msg={errors.description.message ?? ""} />}
         <button
           type="submit"
-          className="w-full mt-14 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-base my-4 p-3 focus:outline-none"
+          className="w-full mt-14 text-white bg-blue-400 hover:bg-blue-500 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-base my-4 p-3 focus:outline-none"
         >
           クエストを作成する
         </button>

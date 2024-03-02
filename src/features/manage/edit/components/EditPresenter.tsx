@@ -230,7 +230,7 @@ export const EditPresenter: FC<Props> = (props) => {
           />
         </div>
         {errors.description && <FormErrorMsg msg={errors.description.message ?? ""} />}
-        <div className="flex flex-col mt-14 gap-10">
+        <div className="flex flex-col mt-14 gap-6">
           <button
             type="submit"
             className="w-full text-white bg-blue-400 hover:bg-blue-500 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-base p-3 focus:outline-none"
