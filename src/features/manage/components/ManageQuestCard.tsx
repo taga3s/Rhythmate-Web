@@ -6,10 +6,10 @@ import { formatDateToTime } from "../../../pkg/util/dayjs";
 import { ClockIcon } from "../../common/components/icons/ClockIcon";
 import { calcExp } from "../../common/funcs/calcExp";
 import { Difficulty } from "../api/types";
-import { convertEnToJpWeekday } from "../common/funcs";
+import { convertEnToJPWeekday } from "../common/funcs";
 
 const convertENToJPWeekdayString = (week: string[]) => {
-  const result = week.map((day) => convertEnToJpWeekday(day)).join("・");
+  const result = week.map((day) => convertEnToJPWeekday(day)).join("・");
   return result;
 };
 

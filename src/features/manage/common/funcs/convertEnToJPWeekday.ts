@@ -1,4 +1,4 @@
-export const convertEnToJpWeekday = (dayOfTheWeek: string): string => {
+export const convertEnToJPWeekday = (dayOfTheWeek: string): string => {
   switch (dayOfTheWeek) {
     case "MON":
       return "月";
