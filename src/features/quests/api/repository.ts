@@ -4,19 +4,19 @@ import {
   FinishResponse,
   ForceFinishRequest,
   ForceFinishResponse,
-  GetResponse,
+  ListResponse,
   StartRequest,
   StartResponse,
 } from "./types";
 
 export interface QuestRepository {
-  get: () => Promise<GetResponse>;
+  list: () => Promise<ListResponse>;
   start: (params: StartRequest) => Promise<StartResponse>;
   finish: (params: FinishRequest) => Promise<FinishResponse>;
   forceFinish: (params: ForceFinishRequest) => Promise<ForceFinishResponse>;
 }
 
-const get: QuestRepository["get"] = async () => {
+const list: QuestRepository["list"] = async () => {
   const response = await apiClient.get("/quests");
   return response;
 };
@@ -37,7 +37,7 @@ const forceFinish: QuestRepository["finish"] = async (params: ForceFinishRequest
 };
 
 export const questRepository: QuestRepository = {
-  get,
+  list,
   start,
   finish,
   forceFinish,

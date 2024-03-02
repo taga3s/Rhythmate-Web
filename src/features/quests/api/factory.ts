@@ -6,14 +6,12 @@ export const questFactory = () => {
   const repository = questRepository;
 
   return {
-    getQuestsList: async () => {
-      const response = await repository.get();
-      const questList: Quest[] = [];
-      response.quests.forEach((value) => {
-        const quest = toQuest(value);
-        questList.push(quest);
+    listQuests: async () => {
+      const response = await repository.list();
+      const quests: Quest[] = response.quests.map((quest) => {
+        return toQuest(quest);
       });
-      return questList;
+      return quests;
     },
     startQuest: async (params: StartParams) => {
       const response = await repository.start(params);

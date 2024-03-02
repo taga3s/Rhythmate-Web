@@ -60,6 +60,7 @@ export const NewPresenter = () => {
     reset();
     setDates([]);
     setDifficulty("EASY");
+    navigate({ to: "/quests/manage" });
   };
 
   return (

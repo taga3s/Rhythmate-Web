@@ -5,14 +5,12 @@ export const createFactory = () => {
   const repository = weeklyReportsRepository;
 
   return {
-    getWeeklyReports: async () => {
-      const response = await repository.get();
-      const weeklyReportList: WeeklyReport[] = [];
-      response.weeklyReports.forEach((value) => {
-        const weeklyReport = toWeeklyReport(value);
-        weeklyReportList.push(weeklyReport);
+    listWeeklyReports: async () => {
+      const response = await repository.list();
+      const weeklyReports: WeeklyReport[] = response.weeklyReports.map((weeklyReport) => {
+        return toWeeklyReport(weeklyReport);
       });
-      return weeklyReportList;
+      return weeklyReports;
     },
   };
 };

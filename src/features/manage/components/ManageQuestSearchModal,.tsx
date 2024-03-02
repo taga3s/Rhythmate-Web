@@ -48,7 +48,7 @@ export const QuestSearchModal: FC<Props> = ({
             <button
               type="button"
               onClick={onClickFn}
-              className=" text-red-600 bg-transparent hover:text-gray-200 hover:bg-red-600 rounded-lg  w-8 h-8  block ml-auto flex items-center justify-center"
+              className=" text-red-600 bg-transparent hover:text-gray-200 hover:bg-red-600 rounded-lg  w-8 h-8 ml-auto flex items-center justify-center"
               data-modal-hide="authentication-modal"
             >
               <svg
@@ -102,26 +102,6 @@ export const QuestSearchModal: FC<Props> = ({
                 })}
               </div>
               <div className="flex items-center">
-                {/* <p>タグ</p>
-                <select id="tag" className="ml-auto w-32 h-8 border border-black rounded-lg">
-                  <option value="">選択</option>
-                </select>
-              </div>
-              <div className="flex items-center">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth="1.5"
-                  stroke="#888888"
-                  className="mr-2 w-6 h-6"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M3 3v1.5M3 21v-6m0 0 2.77-.693a9 9 0 0 1 6.208.682l.108.054a9 9 0 0 0 6.086.71l3.114-.732a48.524 48.524 0 0 1-.005-10.499l-3.11.732a9 9 0 0 1-6.085-.711l-.108-.054a9 9 0 0 0-6.208-.682L3 4.5M3 15V4.5"
-                  />
-                </svg> */}
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
