@@ -1,13 +1,8 @@
 import { ChangeEvent, FC } from "react";
 import { Star } from "./ManageStar";
+import { Difficulty } from "../api/types";
 
-type Props = {
-  handleDifficulties: (difficulty: string) => void;
-  difficulty: string;
-  filterDifficulties: string[];
-};
-
-const difficultyToNumber = (difficulty: string): number => {
+const difficultyToNumber = (difficulty: Difficulty): number => {
   switch (difficulty) {
     case "EASY":
       return 1;
@@ -20,6 +15,12 @@ const difficultyToNumber = (difficulty: string): number => {
   }
 };
 
+type Props = {
+  handleDifficulties: (difficulty: Difficulty) => void;
+  difficulty: Difficulty;
+  filterDifficulties: Difficulty[];
+};
+
 export const ManageDifficultyCheckBox: FC<Props> = ({ handleDifficulties, difficulty, filterDifficulties }) => {
   return (
     <div>
@@ -29,7 +30,7 @@ export const ManageDifficultyCheckBox: FC<Props> = ({ handleDifficulties, diffic
         id={difficulty}
         value={difficulty}
         defaultChecked={filterDifficulties.includes(difficulty)}
-        onChange={(e: ChangeEvent<HTMLInputElement>) => handleDifficulties(e.target.value)}
+        onChange={(e: ChangeEvent<HTMLInputElement>) => handleDifficulties(e.target.value as Difficulty)}
       />
       <label
         htmlFor={difficulty}

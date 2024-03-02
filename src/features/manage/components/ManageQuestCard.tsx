@@ -6,6 +6,7 @@ import { formatDateToTime } from "../../../pkg/util/dayjs";
 import { ClockIcon } from "../../common/components/icons/ClockIcon";
 import { toWeek } from "../funcs/toWeek";
 import { calcExp } from "../../common/funcs/calcExp";
+import { Difficulty } from "../api/types";
 
 type Props = {
   id: string;
@@ -13,7 +14,7 @@ type Props = {
   description: string;
   startsAt: string;
   minutes: number;
-  difficulty: string;
+  difficulty: Difficulty;
   dates: string[];
   continuationLevel: number;
 };

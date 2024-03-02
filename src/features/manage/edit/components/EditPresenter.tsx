@@ -12,9 +12,8 @@ import { TManageValidationSchema, manageValidationSchema } from "../../common/li
 import { formatDateToTime } from "../../../../pkg/util/dayjs";
 import { fromWeekToNumber } from "../../funcs/fromWeekToNumber";
 import { ConfirmModal } from "../../../common/components/ConfirmModal";
-
-export type Difficulty = "EASY" | "NORMAL" | "HARD";
-export type Date = "MON" | "TUE" | "WED" | "THU" | "FRI" | "SAT" | "SUN";
+import { Difficulty } from "../../api/types";
+import { DATES } from "../../constant/constant";
 
 type NewValues = {
   title: string;
@@ -152,7 +151,7 @@ export const EditPresenter: FC<Props> = (props) => {
               <div className="my-2">
                 <p className="block my-2">実施頻度</p>
                 <div className="flex mt-4 gap-1">
-                  {["月", "火", "水", "木", "金", "土", "日"].map((v, i) => {
+                  {DATES.map((v, i) => {
                     return <NewDayOfTheWeek key={i} handleDates={handleDates} date={v} dates={dates} value={i + 1} />;
                   })}
                 </div>

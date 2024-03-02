@@ -5,12 +5,13 @@ import { ManageQuestCard } from "./ManageQuestCard";
 import { QuestSearchModal } from "./ManageQuestSearchModal,";
 import { QuestSearchModalButton } from "./ManageQuestSearchModalButton";
 import { useQueryQuestList } from "../../quests/api/hooks/useQueryQuest";
+import { Difficulty } from "../api/types";
 
 export const ManagePresenter = () => {
   const navigate = useNavigate();
   const [isQuestSearchModalOpen, setIsQuestSearchModalOpen] = useState<boolean>(false);
   const [filterDate, setFilterDate] = useState<string>("");
-  const [filterDifficulties, setFilterDifficulties] = useState<string[]>([]);
+  const [filterDifficulties, setFilterDifficulties] = useState<Difficulty[]>([]);
   const [filterActivation, setFilterActivation] = useState<boolean>(false);
 
   const openQuestSearchModal = () => {
