@@ -96,7 +96,7 @@ export const NewPresenter = () => {
             <div className="grid grid-cols-5 my-2">
               <p className="col-span-2">実施時刻</p>
               <div className="col-span-3 flex justify-end">
-                <input type="time" className="border-2 rounded p-1 mr-2" {...register("startsAt")} />
+                <input type="time" className="w-[85px] border-2 rounded p-1 mr-2" {...register("startsAt")} />
                 <span>から</span>
               </div>
             </div>
@@ -104,7 +104,7 @@ export const NewPresenter = () => {
             <div className="grid grid-cols-5 my-2">
               <p className="col-span-2">取り組み時間</p>
               <div className="col-span-3 flex justify-end">
-                <input type="number" className="w-10 border-2 rounded p-1 mr-2" {...register("minutes")} />
+                <input type="number" className="w-[85px] border-2 rounded p-1 mr-2" min={1} {...register("minutes")} />
                 <p>分間</p>
               </div>
             </div>
