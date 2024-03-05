@@ -3,7 +3,7 @@ import { FC } from "react";
 type Props = {
   level: number;
 };
-export const ProgressBar: FC<Props> = (props) => {
+export const ManageProgressBar: FC<Props> = (props) => {
   const { level } = props;
   const max = 7;
   return (

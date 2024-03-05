@@ -1,22 +1,28 @@
 import { FC, useState } from "react";
 import { ManageDayOfTheWeekCheckBox } from "./ManageDayOfTheWeekCheckBox";
 import { ManageDifficultyCheckBox } from "./ManageDifficultyCheckBox";
+import { DATES, DIFFICULTIES } from "../common/constant/constant";
+import { Difficulty } from "../api/types";
 
 type Props = {
   onClickFn: () => void;
+  filterDate: string;
   setFilterDate: (date: string) => void;
-  setFilterDifficulties: (difficulty: string[]) => void;
+  filterDifficulties: Difficulty[];
+  setFilterDifficulties: (difficulty: Difficulty[]) => void;
   setFilterActivation: (activation: boolean) => void;
 };
 
-export const QuestSearchModal: FC<Props> = ({
+export const ManageQuestSearchModal: FC<Props> = ({
   onClickFn,
+  filterDate,
   setFilterDate,
+  filterDifficulties,
   setFilterDifficulties,
   setFilterActivation,
 }) => {
-  const [date, setDate] = useState<string>("");
-  const [difficulties, setDifficulties] = useState<string[]>([]);
+  const [date, setDate] = useState<string>(filterDate);
+  const [difficulties, setDifficulties] = useState<Difficulty[]>(filterDifficulties);
 
   const handleDate = (newDate: string) => {
     if (newDate === date) {
@@ -26,7 +32,7 @@ export const QuestSearchModal: FC<Props> = ({
     }
   };
 
-  const handleDifficulty = (difficulty: string) => {
+  const handleDifficulty = (difficulty: Difficulty) => {
     if (difficulties.includes(difficulty)) {
       const newDifficulties = difficulties.filter((value) => value !== difficulty);
       setDifficulties(newDifficulties);
@@ -89,7 +95,7 @@ export const QuestSearchModal: FC<Props> = ({
                 <p>実施曜日</p>
               </div>
               <div className="flex ml-auto">
-                {["月", "火", "水", "木", "金", "土", "日"].map((v, i) => {
+                {DATES.map((v, i) => {
                   return (
                     <ManageDayOfTheWeekCheckBox
                       key={i}
@@ -119,12 +125,18 @@ export const QuestSearchModal: FC<Props> = ({
                 </svg>
                 <p>難易度</p>
                 <div className="flex ml-auto">
-                  {["EASY", "NORMAL", "HARD"].map((v, i) => {
-                    return <ManageDifficultyCheckBox key={i} handleDifficulties={handleDifficulty} difficulty={v} />;
+                  {DIFFICULTIES.map((v, i) => {
+                    return (
+                      <ManageDifficultyCheckBox
+                        key={i}
+                        handleDifficulties={handleDifficulty}
+                        difficulty={v}
+                        filterDifficulties={filterDifficulties}
+                      />
+                    );
                   })}
                 </div>
               </div>
-
               <button
                 type="submit"
                 onClick={() => {
@@ -133,7 +145,7 @@ export const QuestSearchModal: FC<Props> = ({
                   setFilterActivation(true);
                   onClickFn();
                 }}
-                className="border-2 border-black w-full text-white bg-[#0087EE] hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+                className="w-full text-white bg-[#0087EE] hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
               >
                 保存
               </button>
@@ -145,7 +157,7 @@ export const QuestSearchModal: FC<Props> = ({
                   setFilterActivation(false);
                   onClickFn();
                 }}
-                className="border-2 border-black w-full text-white bg-red-500 hover:bg-red-700 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+                className="w-full text-white bg-red-500 hover:bg-red-700 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
               >
                 条件をリセット
               </button>

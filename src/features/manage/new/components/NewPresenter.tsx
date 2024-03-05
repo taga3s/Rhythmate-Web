@@ -5,12 +5,11 @@ import { NewDayOfTheWeek } from "./NewDayOfTheWeek";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { FormErrorMsg } from "../../../common/components/utils/FormErrorMsg";
 import { useMutateQuest } from "../../api/hooks/useMutateQuest";
-import { fromNumberToWeek } from "../../funcs/fromNumberToWeek";
 import { useNavigate } from "@tanstack/react-router";
 import { TManageValidationSchema, manageValidationSchema } from "../../common/libs/validation";
-
-export type Difficulty = "EASY" | "NORMAL" | "HARD";
-export type Date = "MON" | "TUE" | "WED" | "THU" | "FRI" | "SAT" | "SUN";
+import { Difficulty } from "../../api/types";
+import { DATES } from "../../common/constant/constant";
+import { convertNumberToWeekday } from "../../common/funcs";
 
 type NewValues = {
   title: string;
@@ -45,7 +44,7 @@ export const NewPresenter = () => {
     resolver: zodResolver(manageValidationSchema),
   });
   const onSubmit = async (data: NewValues) => {
-    const modifiedDates = dates.sort().map((v) => fromNumberToWeek(v));
+    const modifiedDates = dates.sort().map((v) => convertNumberToWeekday(v));
     await createQuestMutation.mutateAsync({
       title: data.title,
       description: data.description,
@@ -97,7 +96,7 @@ export const NewPresenter = () => {
             <div className="grid grid-cols-5 my-2">
               <p className="col-span-2">実施時刻</p>
               <div className="col-span-3 flex justify-end">
-                <input type="time" className="border-2 rounded p-1 mr-2" {...register("startsAt")} />
+                <input type="time" className="w-[85px] border-2 rounded p-1 mr-2" {...register("startsAt")} />
                 <span>から</span>
               </div>
             </div>
@@ -105,7 +104,7 @@ export const NewPresenter = () => {
             <div className="grid grid-cols-5 my-2">
               <p className="col-span-2">取り組み時間</p>
               <div className="col-span-3 flex justify-end">
-                <input type="number" className="w-10 border-2 rounded p-1 mr-2" {...register("minutes")} />
+                <input type="number" className="w-[85px] border-2 rounded p-1 mr-2" min={1} {...register("minutes")} />
                 <p>分間</p>
               </div>
             </div>
@@ -113,7 +112,7 @@ export const NewPresenter = () => {
             <div className="my-2">
               <p className="block my-2">実施頻度</p>
               <div className="flex mt-4 gap-1">
-                {["月", "火", "水", "木", "金", "土", "日"].map((v, i) => {
+                {DATES.map((v, i) => {
                   return <NewDayOfTheWeek key={i} handleDates={handleDates} date={v} dates={dates} value={i + 1} />;
                 })}
               </div>
@@ -138,7 +137,7 @@ export const NewPresenter = () => {
             <button
               type="button"
               className={`border-2 flex justify-center items-center gap-1 p-2 rounded ${
-                difficulty === "EASY" ? "bg-blue-600" : "bg-white"
+                difficulty === "EASY" ? "bg-blue-400" : "bg-white"
               }`}
               onClick={() => {
                 setDifficulty("EASY");
@@ -149,7 +148,7 @@ export const NewPresenter = () => {
             <button
               type="button"
               className={`border-2 flex justify-center items-center gap-1 p-2 rounded ${
-                difficulty === "NORMAL" ? "bg-blue-600" : "bg-white"
+                difficulty === "NORMAL" ? "bg-blue-400" : "bg-white"
               }`}
               onClick={() => {
                 setDifficulty("NORMAL");
@@ -161,7 +160,7 @@ export const NewPresenter = () => {
             <button
               type="button"
               className={`border-2 flex justify-center items-center gap-1 p-2 rounded ${
-                difficulty === "HARD" ? "bg-blue-600" : "bg-white"
+                difficulty === "HARD" ? "bg-blue-400" : "bg-white"
               }`}
               onClick={() => {
                 setDifficulty("HARD");
@@ -193,7 +192,7 @@ export const NewPresenter = () => {
         {errors.description && <FormErrorMsg msg={errors.description.message ?? ""} />}
         <button
           type="submit"
-          className="w-full mt-14 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-base my-4 p-3 focus:outline-none"
+          className="w-full mt-14 text-white bg-blue-400 hover:bg-blue-500 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-base my-4 p-3 focus:outline-none"
         >
           クエストを作成する
         </button>
