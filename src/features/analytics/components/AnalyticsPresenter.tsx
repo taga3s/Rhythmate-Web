@@ -59,10 +59,14 @@ export const AnalyticsPresenter = () => {
     setGraphDataIndex((prevIndex) => (prevIndex === (DataItem ? DataItem.length - 1 : 0) ? 0 : prevIndex + 1));
   };
 
-  if (DataItem) {
-    const date = new Date(DataItem[0].start_date);
-    console.log(date.getMonth() + 1, date.getDate());
-  }
+  // 日付の配列の作成
+  const dateArray = DataItem?.length
+    ? DataItem.map((item) => ({
+        start: new Date(item.start_date).getMonth() + 1 + "/" + new Date(item.start_date).getDate(),
+        end: new Date(item.end_date).getMonth() + 1 + "/" + new Date(item.end_date).getDate(),
+      }))
+    : [];
+
   return (
     <>
       {isLoading ? (
@@ -72,7 +76,9 @@ export const AnalyticsPresenter = () => {
           <div className="flex w-full justify-between items-center">
             <AnalyticsLeftButton onClickFn={handleClickPrev} />
             <div className="flex">
-              <p className="text-xl mx-2 block text-center font-bold">2/12 ～ 2/19の週</p>
+              <p className="text-xl mx-2 block text-center font-bold">
+                {dateArray[currentIndex].start} ～ {dateArray[currentIndex].end}の週
+              </p>
             </div>
             <AnalyticsRightButton onClickFn={handleClickNext} />
           </div>
