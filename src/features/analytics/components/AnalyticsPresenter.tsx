@@ -4,12 +4,12 @@ import { AnalyticsBarChart } from "./AnalyticsBarChart";
 import { AnalyticsCard } from "./AnalyticsCard";
 import { useQueryWeeklyReports } from "../api/hooks/useQueryWeeklyReport";
 
-type Report = {
-  achievedQuests: number;
-  failedQuests: number;
-  achievementRate: number;
-  completeTotal: number;
-};
+// type Report = {
+//   achievedQuests: number;
+//   failedQuests: number;
+//   achievementRate: number;
+//   completeTotal: number;
+// };
 
 // const DataItem: Report[] = [
 //   {
