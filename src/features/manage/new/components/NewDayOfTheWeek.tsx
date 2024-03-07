@@ -1,13 +1,13 @@
 import { ChangeEvent, FC } from "react";
 
 type Props = {
-  handleDates: (date: number) => void;
-  date: string;
-  dates: number[];
+  handleDays: (day: number) => void;
+  day: string;
+  days: number[];
   value: number;
 };
 
-export const NewDayOfTheWeek: FC<Props> = ({ handleDates, date, dates, value }) => {
+export const NewDayOfTheWeek: FC<Props> = ({ handleDays, day, days, value }) => {
   return (
     <>
       <input
@@ -15,15 +15,15 @@ export const NewDayOfTheWeek: FC<Props> = ({ handleDates, date, dates, value }) 
         className="hidden peer"
         value={value}
         id={`${value}`}
-        onChange={(e: ChangeEvent<HTMLInputElement>) => handleDates(Number(e.target.value))}
+        onChange={(e: ChangeEvent<HTMLInputElement>) => handleDays(Number(e.target.value))}
       />
       <label
         className={`px-2 py-1 rounded border-2 cursor-pointer ${
-          dates.some((v) => v === value) ? "bg-blue-400 text-white" : "bg-white text-black"
+          days.some((v) => v === value) ? "bg-blue-400 text-white" : "bg-white text-black"
         }`}
         htmlFor={`${value}`}
       >
-        {date}
+        {day}
       </label>
     </>
   );

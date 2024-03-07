@@ -15,7 +15,7 @@ export type Quest = {
   isSucceeded: boolean;
   startDate: Date;
   endDate: Date;
-  dates: string[];
+  days: string[];
   weeklyFrequency: number;
   weeklyCompletionCount: number;
   continuationLevel: number;
@@ -54,7 +54,7 @@ export const toQuest = (obj: {
     isSucceeded: obj.is_succeeded,
     startDate: obj.start_date,
     endDate: obj.end_date,
-    dates: obj.dates,
+    days: obj.dates,
     continuationLevel: obj.continuation_level ?? 0,
     weeklyFrequency: obj.weekly_frequency,
     weeklyCompletionCount: obj.weekly_completion_count ?? 0,
