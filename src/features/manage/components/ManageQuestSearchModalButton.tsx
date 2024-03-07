@@ -4,12 +4,12 @@ type Props = {
   onClickFn: () => void;
 };
 
-export const QuestSearchModalButton: FC<Props> = ({ onClickFn }) => {
+export const ManageQuestSearchModalButton: FC<Props> = ({ onClickFn }) => {
   return (
     <button onClick={onClickFn} className="block ml-auto rounded-full border-2 border-[#AAAAAA]">
       <div className="w-32 h-10 flex gap-3 items-center">
         <div></div>
-        <p className="">条件検索</p>
+        <p>条件検索</p>
         <svg xmlns="http://www.w3.org/2000/svg" fill="black" viewBox="0 0 24 24" className="w-7 h-7">
           <path
             strokeLinecap="round"

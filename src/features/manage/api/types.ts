@@ -1,3 +1,4 @@
+export type Difficulty = "EASY" | "NORMAL" | "HARD";
 export type QuestState = "INACTIVE" | "ACTIVE";
 
 export type CreateQuestParams = {
@@ -6,7 +7,7 @@ export type CreateQuestParams = {
   startsAt: string;
   minutes: number;
   tagId: string;
-  difficulty: "EASY" | "NORMAL" | "HARD";
+  difficulty: Difficulty;
   // TODO
   dates: string[];
 };
@@ -17,7 +18,7 @@ export type CreateRequest = {
   startsAt: string;
   minutes: number;
   tagId: string;
-  difficulty: "EASY" | "NORMAL" | "HARD";
+  difficulty: Difficulty;
   // TODO
   dates: string[];
 };
@@ -31,7 +32,7 @@ export type CreateResponse = {
   started_at: string;
   minutes: number;
   tag_id: string;
-  difficulty: string;
+  difficulty: Difficulty;
   state: QuestState;
   is_succeeded: boolean;
   start_date: Date;
@@ -47,7 +48,7 @@ export type UpdateQuestParams = {
   startsAt: string;
   minutes: number;
   tagId: string;
-  difficulty: "EASY" | "NORMAL" | "HARD";
+  difficulty: Difficulty;
   // TODO
   dates: string[];
 };
@@ -59,7 +60,7 @@ export type UpdateRequest = {
   startsAt: string;
   minutes: number;
   tagId: string;
-  difficulty: "EASY" | "NORMAL" | "HARD";
+  difficulty: Difficulty;
   // TODO
   dates: string[];
 };
@@ -73,7 +74,7 @@ export type UpdateResponse = {
   started_at: string;
   minutes: number;
   tag_id: string;
-  difficulty: string;
+  difficulty: Difficulty;
   state: QuestState;
   is_succeeded: boolean;
   start_date: Date;

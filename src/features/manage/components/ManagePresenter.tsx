@@ -2,31 +2,50 @@ import { useNavigate } from "@tanstack/react-router";
 import { useState } from "react";
 import { ManageNewButton } from "./ManageNewButton";
 import { ManageQuestCard } from "./ManageQuestCard";
-import { QuestSearchModal } from "./ManageQuestSearchModal,";
-import { QuestSearchModalButton } from "./ManageQuestSearchMordalButton";
+import { ManageQuestSearchModal } from "./ManageQuestSearchModal,";
+import { ManageQuestSearchModalButton } from "./ManageQuestSearchModalButton";
 import { useQueryQuestList } from "../../quests/api/hooks/useQueryQuest";
+import { Difficulty } from "../api/types";
 
 export const ManagePresenter = () => {
   const navigate = useNavigate();
   const [isQuestSearchModalOpen, setIsQuestSearchModalOpen] = useState<boolean>(false);
+  const [filterDate, setFilterDate] = useState<string>("");
+  const [filterDifficulties, setFilterDifficulties] = useState<Difficulty[]>([]);
+  const [filterActivation, setFilterActivation] = useState<boolean>(false);
 
   const openQuestSearchModal = () => {
     setIsQuestSearchModalOpen(true);
   };
-
   const closeQuestSearchModal = () => {
     setIsQuestSearchModalOpen(false);
   };
 
-  const { data } = useQueryQuestList();
+  const { data, isLoading } = useQueryQuestList();
+
+  const filteredData = data?.filter((quest) => {
+    if (filterDate && filterDifficulties.length) {
+      return (
+        quest.dates.includes(filterDate) && filterDifficulties.some((difficulty) => quest.difficulty === difficulty)
+      );
+    } else if (filterDate) {
+      return quest.dates.includes(filterDate);
+    } else if (filterDifficulties.length) {
+      return filterDifficulties.some((difficulty) => quest.difficulty === difficulty);
+    } else {
+      return true;
+    }
+  });
 
   return (
     <div className="w-full">
-      {data?.length ? (
-        <div className="w-full">
-          <QuestSearchModalButton onClickFn={openQuestSearchModal} />
+      <ManageQuestSearchModalButton onClickFn={openQuestSearchModal} />
+      {isLoading ? (
+        <div>Loading...</div>
+      ) : filterActivation ? (
+        filteredData?.length ? (
           <ul className="mt-4 flex flex-col items-center gap-6">
-            {data?.map((value) => {
+            {filteredData?.map((value) => {
               return (
                 <ManageQuestCard
                   key={value.id}
@@ -37,12 +56,35 @@ export const ManagePresenter = () => {
                   minutes={value.minutes}
                   difficulty={value.difficulty}
                   dates={value.dates}
-                  continuousLevel={value.continuationLevel ?? 0}
+                  continuationLevel={value.continuationLevel}
                 />
               );
             })}
           </ul>
-        </div>
+        ) : (
+          <div className="w-full gap-4 flex flex-col items-center mx-auto mt-24 text-xl">
+            <div>検索結果無し</div>
+            <div>条件を変えて再検索してください</div>
+          </div>
+        )
+      ) : data?.length ? (
+        <ul className="mt-4 flex flex-col items-center gap-6">
+          {data?.map((value) => {
+            return (
+              <ManageQuestCard
+                key={value.id}
+                id={value.id}
+                title={value.title}
+                description={value.description}
+                startsAt={value.startsAt}
+                minutes={value.minutes}
+                difficulty={value.difficulty}
+                dates={value.dates}
+                continuationLevel={value.continuationLevel ?? 0}
+              />
+            );
+          })}
+        </ul>
       ) : (
         <div className="w-full gap-4 flex flex-col items-center mx-auto mt-24">
           <svg
@@ -83,7 +125,16 @@ export const ManagePresenter = () => {
         </div>
       )}
       <ManageNewButton />
-      {isQuestSearchModalOpen && <QuestSearchModal onClickFn={closeQuestSearchModal} />}
+      {isQuestSearchModalOpen && (
+        <ManageQuestSearchModal
+          onClickFn={closeQuestSearchModal}
+          filterDate={filterDate}
+          setFilterDate={setFilterDate}
+          filterDifficulties={filterDifficulties}
+          setFilterDifficulties={setFilterDifficulties}
+          setFilterActivation={setFilterActivation}
+        />
+      )}
     </div>
   );
 };

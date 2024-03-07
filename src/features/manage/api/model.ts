@@ -1,5 +1,5 @@
 import { formatDate, now } from "../../../pkg/util/dayjs";
-import { QuestState } from "./types";
+import { Difficulty, QuestState } from "./types";
 
 export type Quest = {
   id: string;
@@ -10,7 +10,7 @@ export type Quest = {
   minutes: number;
   // TODO
   tag_id: string;
-  difficulty: string;
+  difficulty: Difficulty;
   state: QuestState;
   isSucceeded: boolean;
   startDate: Date;
@@ -30,7 +30,7 @@ export const toQuest = (obj: {
   started_at: string;
   minutes: number;
   tag_id: string;
-  difficulty: string;
+  difficulty: Difficulty;
   state: QuestState;
   is_succeeded: boolean;
   start_date: Date;

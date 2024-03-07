@@ -17,6 +17,7 @@ export const SignupPresenter = () => {
     register,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm<TSignupValidationSchema>({
     mode: "onBlur",
     resolver: zodResolver(signupValidationSchema),
@@ -30,6 +31,7 @@ export const SignupPresenter = () => {
       password: data.password,
       passwordConfirmation: data.passwordConfirmation,
     });
+    reset();
   };
 
   return (

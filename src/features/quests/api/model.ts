@@ -1,5 +1,5 @@
 import { formatDate, now } from "../../../pkg/util/dayjs";
-import { QuestState } from "./types";
+import { Difficulty, QuestState } from "./types";
 
 export type Quest = {
   id: string;
@@ -10,7 +10,7 @@ export type Quest = {
   minutes: number;
   // TODO
   tag_id: string;
-  difficulty: string;
+  difficulty: Difficulty;
   state: QuestState;
   isSucceeded: boolean;
   startDate: Date;
@@ -18,7 +18,7 @@ export type Quest = {
   dates: string[];
   weeklyFrequency: number;
   weeklyCompletionCount: number;
-  continuationLevel?: number;
+  continuationLevel: number;
   totalCompletionCount?: number;
 };
 
@@ -30,16 +30,16 @@ export const toQuest = (obj: {
   started_at: string;
   minutes: number;
   tag_id: string;
-  difficulty: string;
+  difficulty: Difficulty;
   state: QuestState;
   is_succeeded: boolean;
   start_date: Date;
   end_date: Date;
   dates: string[];
-  continuation_level?: number;
+  continuation_level: number;
   weekly_frequency: number;
-  weekly_completion_count?: number;
-  total_completion_count?: number;
+  weekly_completion_count: number;
+  total_completion_count: number;
 }): Quest => {
   return {
     id: obj.id,

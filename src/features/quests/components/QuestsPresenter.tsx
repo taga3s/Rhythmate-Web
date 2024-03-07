@@ -3,6 +3,9 @@ import { QuestList } from "./QuestList";
 import { formatDateJP, getTodayDate, now } from "../../../pkg/util/dayjs";
 import { useQueryQuestList } from "../api/hooks/useQueryQuest";
 import { Quest } from "../api/model";
+import { QuestBoardNoData } from "./QuestBoardNoData";
+import { useState } from "react";
+import { QuestListNoData } from "./QuestListNoData";
 
 const sortQuestsByTime = (questList: Quest[]) => {
   return questList.sort((a, b) => {
@@ -11,12 +14,15 @@ const sortQuestsByTime = (questList: Quest[]) => {
 };
 
 export const QuestsPresenter = () => {
-  const { data } = useQueryQuestList();
+  const { data, isLoading } = useQueryQuestList();
   // 時間順でソートする
   const sortedQuestsData = sortQuestsByTime(data ?? []);
 
   const nextQuestList = sortedQuestsData.filter((value) => value.state === "INACTIVE");
   const finishedQuestList = sortedQuestsData.filter((value) => value.state === "ACTIVE");
+  const currentQuest = nextQuestList[0];
+
+  const [view, setView] = useState<"NEXT" | "FINISHED">("NEXT");
 
   return (
     <>
@@ -24,32 +30,46 @@ export const QuestsPresenter = () => {
         {formatDateJP(now())}
         {`(${getTodayDate()})`}のクエスト
       </h1>
-
-      {nextQuestList[0] ? (
-        <QuestBoard currentQuest={nextQuestList[0]} />
+      {isLoading ? (
+        <div>Loading...</div>
+      ) : currentQuest ? (
+        <QuestBoard currentQuest={currentQuest} />
       ) : (
-        <div className="w-full min-h-[230px] mt-3 p-3 border-2 shadow rounded-lg flex flex-col items-center bg-white">
-          <p className="font-bold text-center p-4">
-            今日のクエストは終了しました
-            <br />
-            お疲れでした!
-          </p>
-          <svg
-            className="w-24 h-24 text-green-600"
-            aria-hidden="true"
-            xmlns="http://www.w3.org/2000/svg"
-            fill="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path
-              fillRule="evenodd"
-              d="M15 9.7h4a2 2 0 0 1 1.6.9 2 2 0 0 1 .3 1.8l-2.4 7.2c-.3.9-.5 1.4-1.9 1.4-2 0-4.2-.7-6.1-1.3L9 19.3V9.5A32 32 0 0 0 13.2 4c.1-.4.5-.7.9-.9h1.2c.4.1.7.4 1 .7l.2 1.3L15 9.7ZM4.2 10H7v8a2 2 0 1 1-4 0v-6.8c0-.7.5-1.2 1.2-1.2Z"
-              clipRule="evenodd"
-            />
-          </svg>
-        </div>
+        <QuestBoardNoData />
       )}
-      <QuestList nextQuestList={nextQuestList.slice(1)} finishedQuestList={finishedQuestList} />
+      <div className={`flex flex-col gap-2 w-full p-3 mt-4 bg-gray-100 rounded-md `}>
+        <div className="flex items-center gap-2">
+          <button
+            className={`px-4 py-2 text-base font-bold rounded-lg ${
+              view === "NEXT" ? "text-white bg-blue-400" : "bg-gray-300 text-black "
+            }`}
+            onClick={() => setView("NEXT")}
+          >
+            次のクエスト
+          </button>
+          <button
+            className={`px-4 py-2 text-base font-bold rounded-lg ${
+              view === "FINISHED" ? "text-white bg-blue-400" : "bg-gray-300 text-black "
+            }`}
+            onClick={() => setView("FINISHED")}
+          >
+            終了クエスト
+          </button>
+        </div>
+        {isLoading ? (
+          <div>Loading...</div>
+        ) : view === "NEXT" ? (
+          nextQuestList.slice(1)?.length ? (
+            <QuestList questList={nextQuestList.slice(1)} />
+          ) : (
+            <QuestListNoData view={view} />
+          )
+        ) : finishedQuestList?.length ? (
+          <QuestList questList={finishedQuestList} />
+        ) : (
+          <QuestListNoData view={view} />
+        )}
+      </div>
     </>
   );
 };

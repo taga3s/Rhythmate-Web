@@ -1,6 +1,7 @@
+export type Difficulty = "EASY" | "NORMAL" | "HARD";
 export type QuestState = "INACTIVE" | "ACTIVE";
 
-export type GetResponse = {
+export type ListResponse = {
   status: string;
   quests: {
     id: string;
@@ -10,7 +11,7 @@ export type GetResponse = {
     started_at: string;
     minutes: number;
     tag_id: string;
-    difficulty: string;
+    difficulty: Difficulty;
     state: QuestState;
     is_succeeded: boolean;
     continuation_level: number;
@@ -39,7 +40,7 @@ export type StartResponse = {
   started_at: string;
   minutes: number;
   tag_id: string;
-  difficulty: string;
+  difficulty: Difficulty;
   state: QuestState;
   is_succeeded: boolean;
   continuation_level: number;
@@ -67,7 +68,7 @@ export type FinishResponse = {
   started_at: string;
   minutes: number;
   tag_id: string;
-  difficulty: string;
+  difficulty: Difficulty;
   state: QuestState;
   is_succeeded: boolean;
   continuation_level: number;
@@ -95,7 +96,7 @@ export type ForceFinishResponse = {
   started_at: string;
   minutes: number;
   tag_id: string;
-  difficulty: string;
+  difficulty: Difficulty;
   state: QuestState;
   is_succeeded: boolean;
   continuation_level: number;

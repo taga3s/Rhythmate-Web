@@ -1,7 +1,8 @@
 import { FC, useState } from "react";
 import { getIsStarted } from "./QuestBoard";
 import useInterval from "../../common/hooks/useInterval";
-import { getBaseTime, getDiff } from "../funcs/calcTimer";
+import { getBaseTime, getDiffTime } from "../funcs/calcTimer";
+import { FORCE_STOP } from "../constant/constant";
 
 type Props = {
   startsAt: string;
@@ -13,7 +14,7 @@ type Props = {
 export const QuestBoardTimer: FC<Props> = ({ startsAt, isStarted, minutes, startedAt }) => {
   const { baseTime } = getBaseTime(startsAt, isStarted, minutes, startedAt);
 
-  const { diffHH, diffMM, diffSS } = getDiff(baseTime);
+  const { diffHH, diffMM, diffSS } = getDiffTime(baseTime);
 
   const [hh, setHH] = useState(diffHH);
   const [mm, setMM] = useState(diffMM);
@@ -22,8 +23,8 @@ export const QuestBoardTimer: FC<Props> = ({ startsAt, isStarted, minutes, start
   useInterval(() => {
     const { baseTime, status } = getBaseTime(startsAt, getIsStarted(startedAt), minutes, startedAt);
 
-    if (status !== "FORCE_STOP") {
-      const { diffHH, diffMM, diffSS } = getDiff(baseTime);
+    if (status !== FORCE_STOP) {
+      const { diffHH, diffMM, diffSS } = getDiffTime(baseTime);
       setHH(diffHH);
       setMM(diffMM);
       setSS(diffSS);

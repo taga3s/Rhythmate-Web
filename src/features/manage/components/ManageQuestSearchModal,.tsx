@@ -1,11 +1,46 @@
-import { FC } from "react";
-import { Star } from "./ManageStar";
+import { FC, useState } from "react";
+import { ManageDayOfTheWeekCheckBox } from "./ManageDayOfTheWeekCheckBox";
+import { ManageDifficultyCheckBox } from "./ManageDifficultyCheckBox";
+import { DATES, DIFFICULTIES } from "../common/constant/constant";
+import { Difficulty } from "../api/types";
 
 type Props = {
   onClickFn: () => void;
+  filterDate: string;
+  setFilterDate: (date: string) => void;
+  filterDifficulties: Difficulty[];
+  setFilterDifficulties: (difficulty: Difficulty[]) => void;
+  setFilterActivation: (activation: boolean) => void;
 };
 
-export const QuestSearchModal: FC<Props> = ({ onClickFn }) => {
+export const ManageQuestSearchModal: FC<Props> = ({
+  onClickFn,
+  filterDate,
+  setFilterDate,
+  filterDifficulties,
+  setFilterDifficulties,
+  setFilterActivation,
+}) => {
+  const [date, setDate] = useState<string>(filterDate);
+  const [difficulties, setDifficulties] = useState<Difficulty[]>(filterDifficulties);
+
+  const handleDate = (newDate: string) => {
+    if (newDate === date) {
+      setDate("");
+    } else {
+      setDate(newDate);
+    }
+  };
+
+  const handleDifficulty = (difficulty: Difficulty) => {
+    if (difficulties.includes(difficulty)) {
+      const newDifficulties = difficulties.filter((value) => value !== difficulty);
+      setDifficulties(newDifficulties);
+    } else {
+      setDifficulties([...difficulties, difficulty]);
+    }
+  };
+
   return (
     <div className="fixed top-0 left-0 w-full h-full bg-gray-500 bg-opacity-50 z-50">
       <div
@@ -19,7 +54,7 @@ export const QuestSearchModal: FC<Props> = ({ onClickFn }) => {
             <button
               type="button"
               onClick={onClickFn}
-              className=" text-red-600 bg-transparent hover:text-gray-200 hover:bg-red-600 rounded-lg  w-8 h-8  block ml-auto flex items-center justify-center"
+              className=" text-red-600 bg-transparent hover:text-gray-200 hover:bg-red-600 rounded-lg  w-8 h-8 ml-auto flex items-center justify-center"
               data-modal-hide="authentication-modal"
             >
               <svg
@@ -57,94 +92,22 @@ export const QuestSearchModal: FC<Props> = ({ onClickFn }) => {
                     d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
                   />
                 </svg>
-                <p>実施頻度</p>
+                <p>実施曜日</p>
               </div>
               <div className="flex ml-auto">
-                <div className="ml-auto">
-                  <input type="checkbox" className="hidden peer" id="1" />
-                  <label
-                    htmlFor="1"
-                    className="ml-auto peer-checked:bg-[#0087EE] peer-checked:text-white px-2 py-1 rounded border border-black"
-                  >
-                    月
-                  </label>
-                </div>
-                <div>
-                  <input type="checkbox" className="hidden peer" id="2" />
-                  <label
-                    htmlFor="2"
-                    className="ml-auto peer-checked:bg-[#0087EE] peer-checked:text-white px-2 py-1 rounded border border-black"
-                  >
-                    火
-                  </label>
-                </div>
-                <div>
-                  <input type="checkbox" className="hidden peer" id="3" />
-                  <label
-                    htmlFor="3"
-                    className="ml-auto peer-checked:bg-[#0087EE] peer-checked:text-white px-2 py-1 rounded border border-black"
-                  >
-                    水
-                  </label>
-                </div>
-                <div>
-                  <input type="checkbox" className="hidden peer" id="4" />
-                  <label
-                    htmlFor="4"
-                    className="ml-auto peer-checked:bg-[#0087EE] peer-checked:text-white px-2 py-1 rounded border border-black"
-                  >
-                    木
-                  </label>
-                </div>
-                <div>
-                  <input type="checkbox" className="hidden peer" id="5" />
-                  <label
-                    htmlFor="5"
-                    className="ml-auto peer-checked:bg-[#0087EE] peer-checked:text-white px-2 py-1 rounded border border-black"
-                  >
-                    金
-                  </label>
-                </div>
-                <div>
-                  <input type="checkbox" className="hidden peer" id="6" />
-                  <label
-                    htmlFor="6"
-                    className="ml-auto peer-checked:bg-[#0087EE] peer-checked:text-white px-2 py-1 rounded border border-black"
-                  >
-                    土
-                  </label>
-                </div>
-                <div>
-                  <input type="checkbox" className="hidden peer" id="7" />
-                  <label
-                    htmlFor="7"
-                    className="ml-auto peer-checked:bg-[#0087EE] peer-checked:text-white px-2 py-1 rounded border border-black"
-                  >
-                    日
-                  </label>
-                </div>
+                {DATES.map((v, i) => {
+                  return (
+                    <ManageDayOfTheWeekCheckBox
+                      key={i}
+                      handleDate={handleDate}
+                      date={date}
+                      dayOfTheWeek={v}
+                      index={i + 1}
+                    />
+                  );
+                })}
               </div>
               <div className="flex items-center">
-                {/* <p>タグ</p>
-                <select id="tag" className="ml-auto w-32 h-8 border border-black rounded-lg">
-                  <option value="">選択</option>
-                </select>
-              </div>
-              <div className="flex items-center">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth="1.5"
-                  stroke="#888888"
-                  className="mr-2 w-6 h-6"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M3 3v1.5M3 21v-6m0 0 2.77-.693a9 9 0 0 1 6.208.682l.108.054a9 9 0 0 0 6.086.71l3.114-.732a48.524 48.524 0 0 1-.005-10.499l-3.11.732a9 9 0 0 1-6.085-.711l-.108-.054a9 9 0 0 0-6.208-.682L3 4.5M3 15V4.5"
-                  />
-                </svg> */}
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
@@ -162,44 +125,41 @@ export const QuestSearchModal: FC<Props> = ({ onClickFn }) => {
                 </svg>
                 <p>難易度</p>
                 <div className="flex ml-auto">
-                  <div>
-                    <input type="checkbox" className="hidden peer" id="easy" />
-                    <label
-                      htmlFor="easy"
-                      className="flex ml-auto peer-checked:bg-[#0087EE] px-2 py-1 rounded border border-black"
-                    >
-                      <Star />
-                    </label>
-                  </div>
-                  <div>
-                    <input type="checkbox" className="hidden peer" id="medium" />
-                    <label
-                      htmlFor="medium"
-                      className="flex ml-auto peer-checked:bg-[#0087EE] px-2 py-1 rounded border border-black"
-                    >
-                      <Star />
-                      <Star />
-                    </label>
-                  </div>
-                  <div>
-                    <input type="checkbox" className="hidden peer" id="hard" />
-                    <label
-                      htmlFor="hard"
-                      className="flex ml-auto peer-checked:bg-[#0087EE] px-2 py-1 rounded border border-black"
-                    >
-                      <Star />
-                      <Star />
-                      <Star />
-                    </label>
-                  </div>
+                  {DIFFICULTIES.map((v, i) => {
+                    return (
+                      <ManageDifficultyCheckBox
+                        key={i}
+                        handleDifficulties={handleDifficulty}
+                        difficulty={v}
+                        filterDifficulties={filterDifficulties}
+                      />
+                    );
+                  })}
                 </div>
               </div>
-
               <button
                 type="submit"
-                className="border-2 border-black w-full text-white bg-[#0087EE] hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+                onClick={() => {
+                  setFilterDate(date);
+                  setFilterDifficulties(difficulties);
+                  setFilterActivation(true);
+                  onClickFn();
+                }}
+                className="w-full text-white bg-[#0087EE] hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
               >
                 保存
+              </button>
+              <button
+                type="submit"
+                onClick={() => {
+                  setFilterDate("");
+                  setFilterDifficulties([]);
+                  setFilterActivation(false);
+                  onClickFn();
+                }}
+                className="w-full text-white bg-red-500 hover:bg-red-700 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+              >
+                条件をリセット
               </button>
             </div>
           </div>

@@ -7,7 +7,7 @@ export const useQueryQuestList = () => {
   return useQuery<Quest[], FetchError>({
     queryKey: ["quests"],
     queryFn: async () => {
-      const quests = await questFactory().getQuestsList();
+      const quests = await questFactory().listQuests();
       return quests;
     },
     staleTime: Infinity,
