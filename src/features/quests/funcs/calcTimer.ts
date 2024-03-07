@@ -44,7 +44,7 @@ export const getBaseTime = (
   }
 
   // クエスト終了が押せなかった場合（後15分を過ぎているまたは、1時間を過ぎている場合）
-  if (isStarted && (afterDiffMM <= -16 || afterDiffHH < -1)) {
+  if (isStarted && (afterDiffMM < -15 || afterDiffHH < -1)) {
     return {
       baseTime: formatDate(now()),
       status: FORCE_STOP,
