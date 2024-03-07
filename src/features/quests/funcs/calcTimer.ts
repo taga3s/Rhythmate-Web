@@ -17,8 +17,8 @@ export const getBaseTime = (
     };
   }
 
-  // クエスト開始が押せなかった場合（前後30分を過ぎているまたは、1時間を既に過ぎている）
-  if (!isStarted && (beforeDiffMM <= -31 || beforeDiffHH < -1)) {
+  // クエスト開始が押せなかった場合（前後30分を過ぎているまたは、1時間を過ぎている場合）
+  if (!isStarted && (beforeDiffMM < -30 || beforeDiffHH < -1)) {
     return {
       baseTime: formatDate(now()),
       status: FORCE_STOP,
@@ -35,7 +35,7 @@ export const getBaseTime = (
 
   const { diffHH: afterDiffHH, diffMM: afterDiffMM } = getDiffTime(formatDateWithAddMinutes(startedAt, minutes));
 
-  // クエスト開始・集中
+  // クエスト集中
   if (isStarted && 0 <= afterDiffMM) {
     return {
       baseTime: formatDateWithAddMinutes(startedAt, minutes),
@@ -43,7 +43,7 @@ export const getBaseTime = (
     };
   }
 
-  // クエスト終了が押せなかった場合（後15分を過ぎているまたは、1時間を既に過ぎている）
+  // クエスト終了が押せなかった場合（後15分を過ぎているまたは、1時間を過ぎている場合）
   if (isStarted && (afterDiffMM <= -16 || afterDiffHH < -1)) {
     return {
       baseTime: formatDate(now()),
@@ -59,10 +59,10 @@ export const getBaseTime = (
 };
 
 export const getDiffTime = (target: string) => {
-  const timeDifference = new Date(target).getTime() - Date.now();
-  const hours = Math.floor(timeDifference / (1000 * 60 * 60)) % 24;
-  const minutes = Math.floor((timeDifference / (1000 * 60)) % 60);
-  const seconds = Math.floor((timeDifference / 1000) % 60);
+  const timeDiff = new Date(target).getTime() - Date.now();
+  const hours = Math.floor(timeDiff / (1000 * 60 * 60)) % 24;
+  const minutes = Math.floor((timeDiff / (1000 * 60)) % 60);
+  const seconds = Math.floor((timeDiff / 1000) % 60);
 
   return {
     diffHH: hours,
