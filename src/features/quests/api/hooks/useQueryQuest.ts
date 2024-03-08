@@ -1,13 +1,14 @@
 import { useQuery } from "@tanstack/react-query";
-import { Quest } from "../model";
 import { FetchError } from "../../../../pkg/api/util/fetchError";
-import { questFactory } from "../factory";
+import { createFactory } from "../../../../api/quest/factory";
+import { Quest } from "../../../../api/quest/model";
 
 export const useQueryQuestList = () => {
+  const questFactory = createFactory();
   return useQuery<Quest[], FetchError>({
     queryKey: ["quests"],
     queryFn: async () => {
-      const quests = await questFactory().listQuests();
+      const quests = await questFactory.listQuests();
       return quests;
     },
     staleTime: Infinity,
