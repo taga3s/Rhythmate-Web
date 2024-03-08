@@ -4,11 +4,11 @@ import { formatDateToTime } from "../../../pkg/util/dayjs";
 import { QuestBoardTimer } from "./QuestBoardTimer";
 import useInterval from "../../common/hooks/useInterval";
 import { CLOSED, DONE, ENGAGED, FORCE_STOP, INACTIVE, NOT_STARTED_YET, OPEN, QuestStatus } from "../constant/constant";
-import { Quest } from "../api/model";
 import { useMutateQuest } from "../api/hooks/useMutateQuest";
 import { ConfirmModal } from "../../common/components/ConfirmModal";
 import { calcExp } from "../../common/funcs/calcExp";
 import { getBaseTime, getDiffTime } from "../funcs/calcTimer";
+import { Quest } from "../../../api/quest/model";
 
 export const getIsStarted = (startedAt: string) => {
   return startedAt !== NOT_STARTED_YET;

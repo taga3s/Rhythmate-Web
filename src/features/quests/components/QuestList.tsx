@@ -1,7 +1,7 @@
 import { FC } from "react";
 import { QuestListItem } from "./QuestListItem";
 import { formatDateToTime } from "../../../pkg/util/dayjs";
-import { Quest } from "../api/model";
+import { Quest } from "../../../api/quest/model";
 
 type Props = {
   questList: Quest[];

@@ -2,7 +2,7 @@ import { FC, useState } from "react";
 import { ManageDayOfTheWeekCheckBox } from "./ManageDayOfTheWeekCheckBox";
 import { ManageDifficultyCheckBox } from "./ManageDifficultyCheckBox";
 import { DAYS, DIFFICULTIES } from "../common/constant/constant";
-import { Difficulty } from "../api/types";
+import { Difficulty } from "../../../api/quest/types";
 
 type Props = {
   onClickFn: () => void;

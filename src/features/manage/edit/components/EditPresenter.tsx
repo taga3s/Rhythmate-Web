@@ -10,9 +10,9 @@ import { NewDayOfTheWeek } from "../../new/components/NewDayOfTheWeek";
 import { TManageValidationSchema, manageValidationSchema } from "../../common/libs/validation";
 import { formatDateToTime } from "../../../../pkg/util/dayjs";
 import { ConfirmModal } from "../../../common/components/ConfirmModal";
-import { Difficulty } from "../../api/types";
 import { DAYS } from "../../common/constant/constant";
 import { convertNumberToWeekday, convertWeekdayToNumber } from "../../common/funcs";
+import { Difficulty } from "../../../../api/quest/types";
 
 type NewValues = {
   title: string;

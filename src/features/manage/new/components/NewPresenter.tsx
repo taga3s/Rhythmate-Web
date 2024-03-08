@@ -7,9 +7,9 @@ import { FormErrorMsg } from "../../../common/components/utils/FormErrorMsg";
 import { useMutateQuest } from "../../api/hooks/useMutateQuest";
 import { useNavigate } from "@tanstack/react-router";
 import { TManageValidationSchema, manageValidationSchema } from "../../common/libs/validation";
-import { Difficulty } from "../../api/types";
 import { DAYS } from "../../common/constant/constant";
 import { convertNumberToWeekday } from "../../common/funcs";
+import { Difficulty } from "../../../../api/quest/types";
 
 type NewValues = {
   title: string;

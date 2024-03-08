@@ -5,8 +5,8 @@ import { FC } from "react";
 import { formatDateToTime } from "../../../pkg/util/dayjs";
 import { ClockIcon } from "../../common/components/icons/ClockIcon";
 import { calcExp } from "../../common/funcs/calcExp";
-import { Difficulty } from "../api/types";
 import { convertEnToJPWeekday } from "../common/funcs";
+import { Difficulty } from "../../../api/quest/types";
 
 const convertENToJPWeekdayString = (week: string[]) => {
   const result = week.map((day) => convertEnToJPWeekday(day)).join("・");
