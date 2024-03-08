@@ -2,7 +2,7 @@ import { useState } from "react";
 import { AnalyticsLeftButton, AnalyticsRightButton } from "./AnalyticsArrowButton";
 import { AnalyticsBarChart } from "./AnalyticsBarChart";
 import { AnalyticsCard } from "./AnalyticsCard";
-import { useQueryWeeklyReports } from "../api/hooks/useQueryWeeklyReport";
+import { useQueryWeeklyReports } from "../api/weeklyReport/hooks/useQueryWeeklyReport";
 
 export const AnalyticsPresenter = () => {
   const [currentIndex, setCurrentIndex] = useState<number>(0);

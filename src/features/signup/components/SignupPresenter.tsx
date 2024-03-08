@@ -2,7 +2,7 @@ import { useForm } from "react-hook-form";
 import { TSignupValidationSchema, signupValidationSchema } from "../libs/validation";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { FormErrorMsg } from "../../common/components/utils/FormErrorMsg";
-import { useMutateUser } from "../api/hooks/useMutateUser";
+import { useMutateUser } from "../api/user/hooks/useMutateUser";
 import { Link } from "@tanstack/react-router";
 
 type signupCredential = {

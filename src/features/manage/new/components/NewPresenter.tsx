@@ -4,7 +4,7 @@ import { NewStar } from "./NewStar";
 import { NewDayOfTheWeek } from "./NewDayOfTheWeek";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { FormErrorMsg } from "../../../common/components/utils/FormErrorMsg";
-import { useMutateQuest } from "../../api/hooks/useMutateQuest";
+import { useMutateQuest } from "../../api/quest/hooks/useMutateQuest";
 import { useNavigate } from "@tanstack/react-router";
 import { TManageValidationSchema, manageValidationSchema } from "../../common/libs/validation";
 import { DAYS } from "../../common/constant/constant";

@@ -1,7 +1,7 @@
 import { QuestBoard } from "./QuestBoard";
 import { QuestList } from "./QuestList";
 import { formatDateJP, getTodayDate, now } from "../../../pkg/util/dayjs";
-import { useQueryQuestList } from "../api/hooks/useQueryQuest";
+import { useQueryQuestList } from "../api/quest/hooks/useQueryQuest";
 import { QuestBoardNoData } from "./QuestBoardNoData";
 import { useState } from "react";
 import { QuestListNoData } from "./QuestListNoData";

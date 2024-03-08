@@ -4,8 +4,8 @@ import { ManageNewButton } from "./ManageNewButton";
 import { ManageQuestCard } from "./ManageQuestCard";
 import { ManageQuestSearchModal } from "./ManageQuestSearchModal,";
 import { ManageQuestSearchModalButton } from "./ManageQuestSearchModalButton";
-import { useQueryQuestList } from "../../quests/api/hooks/useQueryQuest";
 import { Difficulty } from "../../../api/quest/types";
+import { useQueryQuestList } from "../api/quest/hooks/useQueryQuest";
 
 export const ManagePresenter = () => {
   const navigate = useNavigate();
