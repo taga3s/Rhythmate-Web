@@ -11,7 +11,7 @@ import { TManageValidationSchema, manageValidationSchema } from "../../common/li
 import { formatDateToTime } from "../../../../pkg/util/dayjs";
 import { ConfirmModal } from "../../../common/components/ConfirmModal";
 import { Difficulty } from "../../api/types";
-import { DATES } from "../../common/constant/constant";
+import { DAYS } from "../../common/constant/constant";
 import { convertNumberToWeekday, convertWeekdayToNumber } from "../../common/funcs";
 
 type NewValues = {
@@ -33,19 +33,19 @@ export const EditPresenter: FC<Props> = (props) => {
   const targetQuest = data?.find((v) => v.id === quest_id);
 
   const [difficulty, setDifficulty] = useState<Difficulty>("EASY");
-  const [dates, setDates] = useState<number[]>([]);
+  const [days, setDays] = useState<number[]>([]);
 
   useEffect(() => {
-    setDates(targetQuest?.dates.map((v) => convertWeekdayToNumber(v)) ?? []);
+    setDays(targetQuest?.days.map((v) => convertWeekdayToNumber(v)) ?? []);
     setDifficulty(targetQuest?.difficulty ?? "EASY");
   }, [isLoading]);
 
-  const handleDates = (date: number) => {
-    if (dates.some((v) => v === date)) {
-      const newDates = dates.filter((v) => v !== date);
-      setDates(newDates);
+  const handleDays = (date: number) => {
+    if (days.some((v) => v === date)) {
+      const newDays = days.filter((v) => v !== date);
+      setDays(newDays);
     } else {
-      setDates([date, ...dates]);
+      setDays([date, ...days]);
     }
   };
 
@@ -58,7 +58,7 @@ export const EditPresenter: FC<Props> = (props) => {
     resolver: zodResolver(manageValidationSchema),
   });
   const onSubmit = async (data: NewValues) => {
-    const modifiedDates = dates.sort().map((v) => convertNumberToWeekday(v));
+    const modifiedDays = days.sort().map((v) => convertNumberToWeekday(v));
     await updateQuestMutation.mutateAsync({
       id: quest_id,
       title: data.title,
@@ -67,7 +67,7 @@ export const EditPresenter: FC<Props> = (props) => {
       tagId: "",
       minutes: Number(data.minutes),
       difficulty: difficulty,
-      dates: modifiedDates,
+      dates: modifiedDays,
     });
     navigate({ to: "/quests/manage" });
   };
@@ -151,8 +151,8 @@ export const EditPresenter: FC<Props> = (props) => {
               <div className="my-2">
                 <p className="block my-2">実施頻度</p>
                 <div className="flex mt-4 gap-1">
-                  {DATES.map((v, i) => {
-                    return <NewDayOfTheWeek key={i} handleDates={handleDates} date={v} dates={dates} value={i + 1} />;
+                  {DAYS.map((v, i) => {
+                    return <NewDayOfTheWeek key={i} handleDays={handleDays} days={days} day={v} value={i + 1} />;
                   })}
                 </div>
                 {/* {dateValidation && (<FormErrorMsg msg={"少なくとも1つの曜日を選択します。"} />)} */}

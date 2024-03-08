@@ -20,12 +20,12 @@ type Props = {
   startsAt: string;
   minutes: number;
   difficulty: Difficulty;
-  dates: string[];
+  days: string[];
   continuationLevel: number;
 };
 
 export const ManageQuestCard: FC<Props> = (props) => {
-  const { id, title, description, startsAt, minutes, dates, difficulty, continuationLevel } = props;
+  const { id, title, description, startsAt, minutes, days, difficulty, continuationLevel } = props;
   const navigate = useNavigate();
 
   return (
@@ -62,7 +62,7 @@ export const ManageQuestCard: FC<Props> = (props) => {
             <span>{formatDateToTime(startsAt)} -</span>
             <span>{minutes}m</span>
           </div>
-          <h3>{convertENToJPWeekdayString(dates)}</h3>
+          <h3>{convertENToJPWeekdayString(days)}</h3>
         </div>
         <div className="flex items-center">
           {difficulty === "EASY" ? (

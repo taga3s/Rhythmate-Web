@@ -8,7 +8,7 @@ import { useMutateQuest } from "../../api/hooks/useMutateQuest";
 import { useNavigate } from "@tanstack/react-router";
 import { TManageValidationSchema, manageValidationSchema } from "../../common/libs/validation";
 import { Difficulty } from "../../api/types";
-import { DATES } from "../../common/constant/constant";
+import { DAYS } from "../../common/constant/constant";
 import { convertNumberToWeekday } from "../../common/funcs";
 
 type NewValues = {
@@ -21,16 +21,16 @@ type NewValues = {
 export const NewPresenter = () => {
   const navigate = useNavigate();
   const [difficulty, setDifficulty] = useState<Difficulty>("EASY");
-  const [dates, setDates] = useState<number[]>([1]);
+  const [days, setDays] = useState<number[]>([1]);
   // const [dateValidation, setDateValidation] = useState(false)
   const { createQuestMutation } = useMutateQuest();
 
-  const handleDates = (date: number) => {
-    if (dates.some((v) => v === date)) {
-      const newDates = dates.filter((v) => v !== date);
-      setDates(newDates);
+  const handleDays = (date: number) => {
+    if (days.some((v) => v === date)) {
+      const newDays = days.filter((v) => v !== date);
+      setDays(newDays);
     } else {
-      setDates([date, ...dates]);
+      setDays([date, ...days]);
     }
   };
 
@@ -44,7 +44,7 @@ export const NewPresenter = () => {
     resolver: zodResolver(manageValidationSchema),
   });
   const onSubmit = async (data: NewValues) => {
-    const modifiedDates = dates.sort().map((v) => convertNumberToWeekday(v));
+    const modifiedDays = days.sort().map((v) => convertNumberToWeekday(v));
     await createQuestMutation.mutateAsync({
       title: data.title,
       description: data.description,
@@ -52,12 +52,12 @@ export const NewPresenter = () => {
       tagId: "",
       minutes: Number(data.minutes),
       difficulty: difficulty,
-      dates: modifiedDates,
+      dates: modifiedDays,
     });
 
     // リセット処理
     reset();
-    setDates([]);
+    setDays([]);
     setDifficulty("EASY");
     navigate({ to: "/quests/manage" });
   };
@@ -112,8 +112,8 @@ export const NewPresenter = () => {
             <div className="my-2">
               <p className="block my-2">実施頻度</p>
               <div className="flex mt-4 gap-1">
-                {DATES.map((v, i) => {
-                  return <NewDayOfTheWeek key={i} handleDates={handleDates} date={v} dates={dates} value={i + 1} />;
+                {DAYS.map((v, i) => {
+                  return <NewDayOfTheWeek key={i} handleDays={handleDays} day={v} days={days} value={i + 1} />;
                 })}
               </div>
               {/* {dateValidation && (<FormErrorMsg msg={"少なくとも1つの曜日を選択します。"} />)} */}

@@ -10,7 +10,7 @@ import { Difficulty } from "../api/types";
 export const ManagePresenter = () => {
   const navigate = useNavigate();
   const [isQuestSearchModalOpen, setIsQuestSearchModalOpen] = useState<boolean>(false);
-  const [filterDate, setFilterDate] = useState<string>("");
+  const [filterDay, setFilterDay] = useState<string>("");
   const [filterDifficulties, setFilterDifficulties] = useState<Difficulty[]>([]);
   const [filterActivation, setFilterActivation] = useState<boolean>(false);
 
@@ -21,15 +21,13 @@ export const ManagePresenter = () => {
     setIsQuestSearchModalOpen(false);
   };
 
-  const { data, isLoading } = useQueryQuestList();
+  const { data: quests, isLoading } = useQueryQuestList();
 
-  const filteredData = data?.filter((quest) => {
-    if (filterDate && filterDifficulties.length) {
-      return (
-        quest.dates.includes(filterDate) && filterDifficulties.some((difficulty) => quest.difficulty === difficulty)
-      );
-    } else if (filterDate) {
-      return quest.dates.includes(filterDate);
+  const filteredData = quests?.filter((quest) => {
+    if (filterDay && filterDifficulties.length) {
+      return quest.days.includes(filterDay) && filterDifficulties.some((difficulty) => quest.difficulty === difficulty);
+    } else if (filterDay) {
+      return quest.days.includes(filterDay);
     } else if (filterDifficulties.length) {
       return filterDifficulties.some((difficulty) => quest.difficulty === difficulty);
     } else {
@@ -45,18 +43,18 @@ export const ManagePresenter = () => {
       ) : filterActivation ? (
         filteredData?.length ? (
           <ul className="mt-4 flex flex-col items-center gap-6">
-            {filteredData?.map((value) => {
+            {filteredData?.map((quest) => {
               return (
                 <ManageQuestCard
-                  key={value.id}
-                  id={value.id}
-                  title={value.title}
-                  description={value.description}
-                  startsAt={value.startsAt}
-                  minutes={value.minutes}
-                  difficulty={value.difficulty}
-                  dates={value.dates}
-                  continuationLevel={value.continuationLevel}
+                  key={quest.id}
+                  id={quest.id}
+                  title={quest.title}
+                  description={quest.description}
+                  startsAt={quest.startsAt}
+                  minutes={quest.minutes}
+                  difficulty={quest.difficulty}
+                  days={quest.days}
+                  continuationLevel={quest.continuationLevel}
                 />
               );
             })}
@@ -67,20 +65,20 @@ export const ManagePresenter = () => {
             <div>条件を変えて再検索してください</div>
           </div>
         )
-      ) : data?.length ? (
+      ) : quests?.length ? (
         <ul className="mt-4 flex flex-col items-center gap-6">
-          {data?.map((value) => {
+          {quests?.map((quest) => {
             return (
               <ManageQuestCard
-                key={value.id}
-                id={value.id}
-                title={value.title}
-                description={value.description}
-                startsAt={value.startsAt}
-                minutes={value.minutes}
-                difficulty={value.difficulty}
-                dates={value.dates}
-                continuationLevel={value.continuationLevel ?? 0}
+                key={quest.id}
+                id={quest.id}
+                title={quest.title}
+                description={quest.description}
+                startsAt={quest.startsAt}
+                minutes={quest.minutes}
+                difficulty={quest.difficulty}
+                days={quest.days}
+                continuationLevel={quest.continuationLevel ?? 0}
               />
             );
           })}
@@ -128,8 +126,8 @@ export const ManagePresenter = () => {
       {isQuestSearchModalOpen && (
         <ManageQuestSearchModal
           onClickFn={closeQuestSearchModal}
-          filterDate={filterDate}
-          setFilterDate={setFilterDate}
+          filterDay={filterDay}
+          setFilterDay={setFilterDay}
           filterDifficulties={filterDifficulties}
           setFilterDifficulties={setFilterDifficulties}
           setFilterActivation={setFilterActivation}
