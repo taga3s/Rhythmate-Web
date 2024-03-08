@@ -1,18 +1,19 @@
 import { useMutation } from "@tanstack/react-query";
-import { UpdateLoginUserParams } from "../types";
-import { userFactory } from "../factory";
 import { FetchError } from "../../../../../pkg/api/util/fetchError";
 import { queryClient } from "../../../../../pkg/api/client/queryClient";
-import { User } from "../model";
 import { useNavigate } from "@tanstack/react-router";
 import { notifyFailed, notifySuccess } from "../../../../../pkg/ui/toast";
+import { createFactory } from "../../../../../api/user/factory";
+import { UpdateLoginUserParams } from "../../../../../api/user/types";
+import { User } from "../../../../../api/user/model";
 
 export const useMutateUser = () => {
+  const userFactory = createFactory();
   const navigate = useNavigate();
 
   const updateUserMutation = useMutation({
     mutationFn: async (params: UpdateLoginUserParams) => {
-      return await userFactory().updateLoginUser(params);
+      return await userFactory.updateLoginUser(params);
     },
     onSuccess: (data) => {
       const loginUser = queryClient.getQueryData<User>(["user"]);
@@ -31,7 +32,7 @@ export const useMutateUser = () => {
     },
   });
   const logoutMutation = useMutation({
-    mutationFn: async () => await userFactory().logout(),
+    mutationFn: async () => await userFactory.logout(),
     onSuccess: () => {
       navigate({ to: "/" });
     },
