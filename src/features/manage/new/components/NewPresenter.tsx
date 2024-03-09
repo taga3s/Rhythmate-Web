@@ -22,15 +22,14 @@ export const NewPresenter = () => {
   const navigate = useNavigate();
   const [difficulty, setDifficulty] = useState<Difficulty>("EASY");
   const [days, setDays] = useState<number[]>([1]);
-  // const [dateValidation, setDateValidation] = useState(false)
   const { createQuestMutation } = useMutateQuest();
 
-  const handleDays = (date: number) => {
-    if (days.some((v) => v === date)) {
-      const newDays = days.filter((v) => v !== date);
+  const handleDays = (day: number) => {
+    if (days.some((v) => v === day)) {
+      const newDays = days.filter((v) => v !== day);
       setDays(newDays);
     } else {
-      setDays([date, ...days]);
+      setDays([day, ...days]);
     }
   };
 
@@ -116,7 +115,6 @@ export const NewPresenter = () => {
                   return <NewDayOfTheWeek key={i} handleDays={handleDays} day={v} days={days} value={i + 1} />;
                 })}
               </div>
-              {/* {dateValidation && (<FormErrorMsg msg={"少なくとも1つの曜日を選択します。"} />)} */}
             </div>
           </div>
         </div>
