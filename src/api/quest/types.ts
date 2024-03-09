@@ -8,8 +8,7 @@ export type CreateQuestParams = {
   minutes: number;
   tagId: string;
   difficulty: Difficulty;
-  // TODO
-  dates: string[];
+  days: string[];
 };
 
 export type CreateRequest = {
@@ -19,8 +18,7 @@ export type CreateRequest = {
   minutes: number;
   tagId: string;
   difficulty: Difficulty;
-  // TODO
-  dates: string[];
+  days: string[];
 };
 
 export type CreateResponse = {
@@ -37,7 +35,7 @@ export type CreateResponse = {
   is_succeeded: boolean;
   start_date: Date;
   end_date: Date;
-  dates: string[];
+  days: string[];
   weekly_frequency: number;
 };
 
@@ -49,8 +47,7 @@ export type UpdateQuestParams = {
   minutes: number;
   tagId: string;
   difficulty: Difficulty;
-  // TODO
-  dates: string[];
+  days: string[];
 };
 
 export type UpdateRequest = {
@@ -61,8 +58,7 @@ export type UpdateRequest = {
   minutes: number;
   tagId: string;
   difficulty: Difficulty;
-  // TODO
-  dates: string[];
+  days: string[];
 };
 
 export type UpdateResponse = {
@@ -79,7 +75,7 @@ export type UpdateResponse = {
   is_succeeded: boolean;
   start_date: Date;
   end_date: Date;
-  dates: string[];
+  days: string[];
   weekly_frequency: number;
 };
 
@@ -107,7 +103,7 @@ export type ListResponse = {
     continuation_level: number;
     start_date: Date;
     end_date: Date;
-    dates: string[];
+    days: string[];
     weekly_frequency: number;
     weekly_completion_count: number;
     total_completion_count: number;
@@ -136,7 +132,7 @@ export type StartResponse = {
   continuation_level: number;
   start_date: Date;
   end_date: Date;
-  dates: string[];
+  days: string[];
   weekly_frequency: number;
   weekly_completion_count: number;
   total_completion_count: number;
@@ -164,7 +160,7 @@ export type FinishResponse = {
   continuation_level: number;
   start_date: Date;
   end_date: Date;
-  dates: string[];
+  days: string[];
   weekly_frequency: number;
   weekly_completion_count: number;
   total_completion_count: number;
@@ -192,7 +188,7 @@ export type ForceFinishResponse = {
   continuation_level: number;
   start_date: Date;
   end_date: Date;
-  dates: string[];
+  days: string[];
   weekly_frequency: number;
   weekly_completion_count: number;
   total_completion_count: number;

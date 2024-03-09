@@ -67,7 +67,7 @@ export const EditPresenter: FC<Props> = (props) => {
       tagId: "",
       minutes: Number(data.minutes),
       difficulty: difficulty,
-      dates: modifiedDays,
+      days: modifiedDays,
     });
     navigate({ to: "/quests/manage" });
   };

@@ -52,7 +52,7 @@ export const NewPresenter = () => {
       tagId: "",
       minutes: Number(data.minutes),
       difficulty: difficulty,
-      dates: modifiedDays,
+      days: modifiedDays,
     });
 
     // リセット処理
