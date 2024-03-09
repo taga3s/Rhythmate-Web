@@ -1,4 +1,6 @@
-export const convertNumberToWeekday = (number: number): string => {
+import { Day } from "../../../../api/quest/types";
+
+export const convertNumberToWeekday = (number: number): Day => {
   switch (number) {
     case 1:
       return "MON";

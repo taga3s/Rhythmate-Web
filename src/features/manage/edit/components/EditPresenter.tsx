@@ -40,12 +40,12 @@ export const EditPresenter: FC<Props> = (props) => {
     setDifficulty(targetQuest?.difficulty ?? "EASY");
   }, [isLoading]);
 
-  const handleDays = (date: number) => {
-    if (days.some((v) => v === date)) {
-      const newDays = days.filter((v) => v !== date);
+  const handleDays = (day: number) => {
+    if (days.some((v) => v === day)) {
+      const newDays = days.filter((v) => v !== day);
       setDays(newDays);
     } else {
-      setDays([date, ...days]);
+      setDays([day, ...days]);
     }
   };
 
@@ -67,7 +67,7 @@ export const EditPresenter: FC<Props> = (props) => {
       tagId: "",
       minutes: Number(data.minutes),
       difficulty: difficulty,
-      dates: modifiedDays,
+      days: modifiedDays,
     });
     navigate({ to: "/quests/manage" });
   };

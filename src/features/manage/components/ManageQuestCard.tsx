@@ -6,10 +6,10 @@ import { formatDateToTime } from "../../../pkg/util/dayjs";
 import { ClockIcon } from "../../common/components/icons/ClockIcon";
 import { calcExp } from "../../common/funcs/calcExp";
 import { convertEnToJPWeekday } from "../common/funcs";
-import { Difficulty } from "../../../api/quest/types";
+import { Day, Difficulty } from "../../../api/quest/types";
 
-const convertENToJPWeekdayString = (week: string[]) => {
-  const result = week.map((day) => convertEnToJPWeekday(day)).join("・");
+const convertENToJPWeekdayString = (weekDays: Day[]) => {
+  const result = weekDays.map((day) => convertEnToJPWeekday(day)).join("・");
   return result;
 };
 
@@ -20,7 +20,7 @@ type Props = {
   startsAt: string;
   minutes: number;
   difficulty: Difficulty;
-  days: string[];
+  days: Day[];
   continuationLevel: number;
 };
 

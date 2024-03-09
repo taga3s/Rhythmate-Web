@@ -4,13 +4,13 @@ import { ManageNewButton } from "./ManageNewButton";
 import { ManageQuestCard } from "./ManageQuestCard";
 import { ManageQuestSearchModal } from "./ManageQuestSearchModal,";
 import { ManageQuestSearchModalButton } from "./ManageQuestSearchModalButton";
-import { Difficulty } from "../../../api/quest/types";
+import { Day, Difficulty } from "../../../api/quest/types";
 import { useQueryQuestList } from "../api/quest/hooks/useQueryQuest";
 
 export const ManagePresenter = () => {
   const navigate = useNavigate();
   const [isQuestSearchModalOpen, setIsQuestSearchModalOpen] = useState<boolean>(false);
-  const [filterDay, setFilterDay] = useState<string>("");
+  const [filterDay, setFilterDay] = useState<Day | "">("");
   const [filterDifficulties, setFilterDifficulties] = useState<Difficulty[]>([]);
   const [filterActivation, setFilterActivation] = useState<boolean>(false);
 

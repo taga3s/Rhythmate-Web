@@ -1,9 +1,10 @@
 import { ChangeEvent, FC } from "react";
 import { convertJPToENWeekday } from "../common/funcs";
+import { Day } from "../../../api/quest/types";
 
 type Props = {
-  handleDay: (day: string) => void;
-  day: string | undefined;
+  handleDay: (day: Day | "") => void;
+  day: Day | "";
   dayOfTheWeek: string;
   index: number;
 };
@@ -16,7 +17,7 @@ export const ManageDayOfTheWeekCheckBox: FC<Props> = ({ handleDay, day, dayOfThe
         className="hidden peer"
         value={convertJPToENWeekday(dayOfTheWeek)}
         id={`${index}`}
-        onChange={(e: ChangeEvent<HTMLInputElement>) => handleDay(e.target.value)}
+        onChange={(e: ChangeEvent<HTMLInputElement>) => handleDay(e.target.value as Day | "")}
       />
       <label
         htmlFor={`${index}`}

@@ -1,5 +1,5 @@
 import { formatDate, now } from "../../pkg/util/dayjs";
-import { Difficulty, QuestState } from "./types";
+import { Day, Difficulty, QuestState } from "./types";
 
 export type Quest = {
   id: string;
@@ -15,7 +15,7 @@ export type Quest = {
   isSucceeded: boolean;
   startDate: Date;
   endDate: Date;
-  days: string[];
+  days: Day[];
   continuationLevel: number;
   weeklyFrequency: number;
   weeklyCompletionCount: number;
@@ -35,7 +35,7 @@ export const toQuest = (obj: {
   is_succeeded: boolean;
   start_date: Date;
   end_date: Date;
-  dates: string[];
+  days: Day[];
   continuation_level?: number;
   weekly_frequency: number;
   weekly_completion_count?: number;
@@ -54,7 +54,7 @@ export const toQuest = (obj: {
     isSucceeded: obj.is_succeeded,
     startDate: obj.start_date,
     endDate: obj.end_date,
-    days: obj.dates,
+    days: obj.days,
     continuationLevel: obj.continuation_level ?? 0,
     weeklyFrequency: obj.weekly_frequency,
     weeklyCompletionCount: obj.weekly_completion_count ?? 0,
