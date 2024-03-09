@@ -1,11 +1,11 @@
 import { QuestBoard } from "./QuestBoard";
 import { QuestList } from "./QuestList";
 import { formatDateJP, getTodayDate, now } from "../../../pkg/util/dayjs";
-import { useQueryQuestList } from "../api/hooks/useQueryQuest";
-import { Quest } from "../api/model";
+import { useQueryQuestList } from "../api/quest/hooks/useQueryQuest";
 import { QuestBoardNoData } from "./QuestBoardNoData";
 import { useState } from "react";
 import { QuestListNoData } from "./QuestListNoData";
+import { Quest } from "../../../api/quest/model";
 
 const sortQuestsByTime = (questList: Quest[]) => {
   return questList.sort((a, b) => {

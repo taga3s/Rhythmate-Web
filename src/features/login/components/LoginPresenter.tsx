@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { TLoginValidationSchema, loginValidationSchema } from "../libs/validation";
 import { FormErrorMsg } from "../../common/components/utils/FormErrorMsg";
-import { useMutateUser } from "../api/hooks/useMutateUser";
+import { useMutateUser } from "../api/user/hooks/useMutateUser";
 
 type LoginCredential = {
   password: string;

@@ -2,17 +2,17 @@ import { FC, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { FormErrorMsg } from "../../../common/components/utils/FormErrorMsg";
-import { useMutateQuest } from "../../api/hooks/useMutateQuest";
+import { useMutateQuest } from "../../api/quest/hooks/useMutateQuest";
 import { useNavigate } from "@tanstack/react-router";
-import { useQueryQuestList } from "../../../quests/api/hooks/useQueryQuest";
+import { useQueryQuestList } from "../../../quests/api/quest/hooks/useQueryQuest";
 import { NewStar } from "../../new/components/NewStar";
 import { NewDayOfTheWeek } from "../../new/components/NewDayOfTheWeek";
 import { TManageValidationSchema, manageValidationSchema } from "../../common/libs/validation";
 import { formatDateToTime } from "../../../../pkg/util/dayjs";
 import { ConfirmModal } from "../../../common/components/ConfirmModal";
-import { Difficulty } from "../../api/types";
 import { DAYS } from "../../common/constant/constant";
 import { convertNumberToWeekday, convertWeekdayToNumber } from "../../common/funcs";
+import { Difficulty } from "../../../../api/quest/types";
 
 type NewValues = {
   title: string;
