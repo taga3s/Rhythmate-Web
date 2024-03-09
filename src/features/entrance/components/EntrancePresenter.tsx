@@ -12,7 +12,7 @@ export const EntrancePresenter = () => {
         <div>
           <div className="my-4 flex gap-2 items-center">
             <svg
-              className="w-[80px] h-[80px] fill-red-700"
+              className="w-[80px] h-[80px] fill-rhyth-red"
               aria-hidden="true"
               xmlns="http://www.w3.org/2000/svg"
               fill="currentColor"
@@ -30,7 +30,7 @@ export const EntrancePresenter = () => {
           </div>
           <div className="my-4 flex gap-2 items-center">
             <svg
-              className="w-[80px] h-[80px] fill-blue-700"
+              className="w-[80px] h-[80px] fill-rhyth-blue"
               aria-hidden="true"
               xmlns="http://www.w3.org/2000/svg"
               fill="currentColor"
@@ -47,7 +47,7 @@ export const EntrancePresenter = () => {
           </div>
           <div className="my-4 flex gap-2 items-center">
             <svg
-              className="w-[80px] h-[80px] fill-yellow-400"
+              className="w-[80px] h-[80px] fill-rhyth-yellow"
               aria-hidden="true"
               xmlns="http://www.w3.org/2000/svg"
               fill="currentColor"
@@ -68,7 +68,7 @@ export const EntrancePresenter = () => {
         </div>
         <button
           onClick={() => navigation({ to: isAuthenticated ? "/quests" : "/login" })}
-          className="my-4 text-center text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 focus:outline-none"
+          className="my-4 text-center text-white bg-rhyth-blue focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 focus:outline-none"
         >
           今すぐ始める
         </button>
