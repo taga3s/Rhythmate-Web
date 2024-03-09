@@ -2,12 +2,12 @@ import { FC, useState } from "react";
 import { ManageDayOfTheWeekCheckBox } from "./ManageDayOfTheWeekCheckBox";
 import { ManageDifficultyCheckBox } from "./ManageDifficultyCheckBox";
 import { DAYS, DIFFICULTIES } from "../common/constant/constant";
-import { Difficulty } from "../../../api/quest/types";
+import { Day, Difficulty } from "../../../api/quest/types";
 
 type Props = {
   onClickFn: () => void;
-  filterDay: string;
-  setFilterDay: (day: string) => void;
+  filterDay: Day | "";
+  setFilterDay: (day: Day | "") => void;
   filterDifficulties: Difficulty[];
   setFilterDifficulties: (difficulty: Difficulty[]) => void;
   setFilterActivation: (activation: boolean) => void;
@@ -21,10 +21,10 @@ export const ManageQuestSearchModal: FC<Props> = ({
   setFilterDifficulties,
   setFilterActivation,
 }) => {
-  const [day, setDay] = useState<string>(filterDay);
+  const [day, setDay] = useState<Day | "">(filterDay);
   const [difficulties, setDifficulties] = useState<Difficulty[]>(filterDifficulties);
 
-  const handleDay = (newDay: string) => {
+  const handleDay = (newDay: Day | "") => {
     if (newDay === day) {
       setDay("");
     } else {

@@ -1,8 +1,9 @@
 import { ChangeEvent, FC } from "react";
+import { Day } from "../../../../api/quest/types";
 
 type Props = {
   handleDays: (day: number) => void;
-  day: string;
+  day: Day;
   days: number[];
   value: number;
 };

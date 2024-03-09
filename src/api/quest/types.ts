@@ -1,5 +1,6 @@
 export type Difficulty = "EASY" | "NORMAL" | "HARD";
 export type QuestState = "INACTIVE" | "ACTIVE";
+export type Day = "MON" | "TUE" | "WED" | "THU" | "FRI" | "SAT" | "SUN";
 
 export type CreateQuestParams = {
   title: string;
@@ -8,7 +9,7 @@ export type CreateQuestParams = {
   minutes: number;
   tagId: string;
   difficulty: Difficulty;
-  days: string[];
+  days: Day[];
 };
 
 export type CreateRequest = {
@@ -18,7 +19,7 @@ export type CreateRequest = {
   minutes: number;
   tagId: string;
   difficulty: Difficulty;
-  days: string[];
+  days: Day[];
 };
 
 export type CreateResponse = {
@@ -35,7 +36,7 @@ export type CreateResponse = {
   is_succeeded: boolean;
   start_date: Date;
   end_date: Date;
-  days: string[];
+  days: Day[];
   weekly_frequency: number;
 };
 
@@ -47,7 +48,7 @@ export type UpdateQuestParams = {
   minutes: number;
   tagId: string;
   difficulty: Difficulty;
-  days: string[];
+  days: Day[];
 };
 
 export type UpdateRequest = {
@@ -58,7 +59,7 @@ export type UpdateRequest = {
   minutes: number;
   tagId: string;
   difficulty: Difficulty;
-  days: string[];
+  days: Day[];
 };
 
 export type UpdateResponse = {
@@ -75,7 +76,7 @@ export type UpdateResponse = {
   is_succeeded: boolean;
   start_date: Date;
   end_date: Date;
-  days: string[];
+  days: Day[];
   weekly_frequency: number;
 };
 
@@ -103,7 +104,7 @@ export type ListResponse = {
     continuation_level: number;
     start_date: Date;
     end_date: Date;
-    days: string[];
+    days: Day[];
     weekly_frequency: number;
     weekly_completion_count: number;
     total_completion_count: number;
@@ -132,7 +133,7 @@ export type StartResponse = {
   continuation_level: number;
   start_date: Date;
   end_date: Date;
-  days: string[];
+  days: Day[];
   weekly_frequency: number;
   weekly_completion_count: number;
   total_completion_count: number;
@@ -160,7 +161,7 @@ export type FinishResponse = {
   continuation_level: number;
   start_date: Date;
   end_date: Date;
-  days: string[];
+  days: Day[];
   weekly_frequency: number;
   weekly_completion_count: number;
   total_completion_count: number;
@@ -188,7 +189,7 @@ export type ForceFinishResponse = {
   continuation_level: number;
   start_date: Date;
   end_date: Date;
-  days: string[];
+  days: Day[];
   weekly_frequency: number;
   weekly_completion_count: number;
   total_completion_count: number;
