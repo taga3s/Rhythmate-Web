@@ -95,10 +95,13 @@ export const EditPresenter: FC<Props> = (props) => {
       ) : (
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="mt-6 flex flex-col gap-4">
-            <label className="text-base">タイトル</label>
+            <label htmlFor="edit-quest-title" className="text-base">
+              タイトル
+            </label>
             <input
               type="text"
               className="w-full p-2 border-2 rounded-md"
+              id="edit-quest-title"
               defaultValue={targetQuest?.title}
               {...register("title")}
             />
@@ -222,13 +225,14 @@ export const EditPresenter: FC<Props> = (props) => {
               >
                 <path stroke="currentColor" strokeLinecap="round" strokeWidth="2" d="M5 7h14M5 12h14M5 17h10" />
               </svg>
-              <label htmlFor="" className="my-2 text-base">
+              <label htmlFor="edit-quest-description" className="my-2 text-base">
                 説明
               </label>
             </div>
             <input
               type="text"
               className="w-full border-2 p-2 rounded-md"
+              id="edit-quest-description"
               defaultValue={targetQuest?.description}
               {...register("description")}
             />
