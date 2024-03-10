@@ -71,8 +71,10 @@ export const NewPresenter = () => {
       <h1 className="text-2xl font-bold mt-8">クエスト作成</h1>
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="mt-6 flex flex-col gap-4">
-          <label className="text-base">タイトル</label>
-          <input type="text" className="w-full p-2 border-2 rounded-md" {...register("title")} />
+          <label htmlFor="new-quest-title" className="text-base">
+            タイトル
+          </label>
+          <input type="text" id="new-quest-title" className="w-full p-2 border-2 rounded-md" {...register("title")} />
         </div>
         {errors.title && <FormErrorMsg msg={errors.title.message ?? ""} />}
         <div className="grid grid-cols-6 mt-4">
@@ -181,11 +183,16 @@ export const NewPresenter = () => {
             >
               <path stroke="currentColor" strokeLinecap="round" strokeWidth="2" d="M5 7h14M5 12h14M5 17h10" />
             </svg>
-            <label htmlFor="" className="my-2 text-base">
+            <label htmlFor="new-quest-description" className="my-2 text-base">
               説明
             </label>
           </div>
-          <input type="text" className="w-full border-2 p-2 rounded-md" {...register("description")} />
+          <input
+            type="text"
+            id="new-quest-description"
+            className="w-full border-2 p-2 rounded-md"
+            {...register("description")}
+          />
         </div>
         {errors.description && <FormErrorMsg msg={errors.description.message ?? ""} />}
         <button
