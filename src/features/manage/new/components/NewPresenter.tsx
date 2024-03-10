@@ -37,6 +37,7 @@ export const NewPresenter = () => {
   const {
     register,
     watch,
+    setValue,
     handleSubmit,
     formState: { errors },
     reset,
@@ -63,6 +64,7 @@ export const NewPresenter = () => {
     // リセット処理
     reset();
     // setDays([]);
+    setValue("days", []);
     setDifficulty("EASY");
     navigate({ to: "/quests/manage" });
   };

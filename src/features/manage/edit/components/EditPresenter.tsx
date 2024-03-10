@@ -61,9 +61,6 @@ export const EditPresenter: FC<Props> = (props) => {
   } = useForm<TManageValidationSchema>({
     mode: "onBlur",
     resolver: zodResolver(manageValidationSchema),
-    defaultValues: {
-      days: [],
-    },
   });
   const onSubmit = async (data: NewValues) => {
     const days = data.days.map(Number);
@@ -88,7 +85,7 @@ export const EditPresenter: FC<Props> = (props) => {
     });
     navigate({ to: "/quests/manage" });
   };
-
+  console.log(watch("days"));
   return (
     <>
       <div>
