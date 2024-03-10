@@ -119,8 +119,8 @@ export const NewPresenter = () => {
                 {DAYS.map((v, i) => {
                   return <NewDayOfTheWeek key={i} day={v} value={i + 1} register={register} watch={watch} />;
                 })}
-                {errors.days && <FormErrorMsg msg={errors.days.message ?? ""} />}
               </div>
+              {errors.days && <FormErrorMsg msg={errors.days.message ?? ""} />}
             </div>
           </div>
         </div>

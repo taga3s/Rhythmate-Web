@@ -37,7 +37,9 @@ export const EditPresenter: FC<Props> = (props) => {
   // const [days, setDays] = useState<number[]>([]);
 
   useEffect(() => {
-    // setDays(targetQuest?.days.map((v) => convertWeekdayToNumber(v)) ?? []);
+    // console.log(targetQuest?.days.map((v) => convertWeekdayToNumber(v)))
+    const modifiedDays = targetQuest?.days.map((v) => convertWeekdayToNumber(v).toString()) ?? [];
+    setValue("days", modifiedDays);
     setDifficulty(targetQuest?.difficulty ?? "EASY");
   }, [isLoading]);
 
@@ -53,6 +55,7 @@ export const EditPresenter: FC<Props> = (props) => {
   const {
     register,
     watch,
+    setValue,
     handleSubmit,
     formState: { errors },
   } = useForm<TManageValidationSchema>({

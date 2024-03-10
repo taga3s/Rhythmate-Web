@@ -10,7 +10,7 @@ type Props = {
     title: string;
     minutes: string;
     startsAt: string;
-    days: [string, ...string[]];
+    days: string[];
     description: string;
   }>;
   watch: UseFormWatch<{
@@ -18,7 +18,7 @@ type Props = {
     description: string;
     startsAt: string;
     minutes: string;
-    days: [string, ...string[]];
+    days: string[];
   }>;
 };
 
