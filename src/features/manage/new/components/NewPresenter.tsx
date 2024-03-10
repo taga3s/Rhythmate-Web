@@ -43,6 +43,9 @@ export const NewPresenter = () => {
   } = useForm<TManageValidationSchema>({
     mode: "onBlur",
     resolver: zodResolver(manageValidationSchema),
+    defaultValues: {
+      days: [],
+    },
   });
   const onSubmit = async (data: NewValues) => {
     const days = data.days.map(Number);
@@ -63,8 +66,6 @@ export const NewPresenter = () => {
     setDifficulty("EASY");
     navigate({ to: "/quests/manage" });
   };
-  console.log(watch());
-  console.log(errors);
   return (
     <>
       <button onClick={() => navigate({ to: "/quests/manage" })} className="block">

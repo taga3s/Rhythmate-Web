@@ -1,4 +1,4 @@
-import { ChangeEvent, FC } from "react";
+import { FC } from "react";
 import { UseFormRegister, UseFormWatch } from "react-hook-form";
 
 type Props = {
@@ -20,12 +20,10 @@ type Props = {
     minutes: string;
     days: [string, ...string[]];
   }>;
-  // getValues: UseFormGetValues<any>;
 };
 
 export const NewDayOfTheWeek: FC<Props> = ({ day, value, register, watch }) => {
   const days = watch("days");
-  console.log(days);
   return (
     <>
       <input
@@ -34,7 +32,6 @@ export const NewDayOfTheWeek: FC<Props> = ({ day, value, register, watch }) => {
         value={value}
         id={`${value}`}
         {...register("days", { valueAsNumber: true })}
-        // onChange={(e: ChangeEvent<HTMLInputElement>) => handleDays(Number(e.target.value))}
       />
       <label
         className={`px-2 py-1 rounded border-2 cursor-pointer ${
