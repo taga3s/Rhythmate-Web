@@ -37,7 +37,6 @@ export const EditPresenter: FC<Props> = (props) => {
   // const [days, setDays] = useState<number[]>([]);
 
   useEffect(() => {
-    // console.log(targetQuest?.days.map((v) => convertWeekdayToNumber(v)))
     const modifiedDays = targetQuest?.days.map((v) => convertWeekdayToNumber(v).toString()) ?? [];
     setValue("days", modifiedDays);
     setDifficulty(targetQuest?.difficulty ?? "EASY");
@@ -85,7 +84,6 @@ export const EditPresenter: FC<Props> = (props) => {
     });
     navigate({ to: "/quests/manage" });
   };
-  console.log(watch("days"));
   return (
     <>
       <div>
