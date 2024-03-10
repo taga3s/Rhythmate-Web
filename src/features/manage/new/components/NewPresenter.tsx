@@ -15,26 +15,28 @@ type NewValues = {
   title: string;
   startsAt: string;
   minutes: string;
+  days: string[];
   description: string;
 };
 
 export const NewPresenter = () => {
   const navigate = useNavigate();
   const [difficulty, setDifficulty] = useState<Difficulty>("EASY");
-  const [days, setDays] = useState<number[]>([1]);
+  // const [days, setDays] = useState<number[]>([1]);
   const { createQuestMutation } = useMutateQuest();
 
-  const handleDays = (day: number) => {
-    if (days.some((v) => v === day)) {
-      const newDays = days.filter((v) => v !== day);
-      setDays(newDays);
-    } else {
-      setDays([day, ...days]);
-    }
-  };
+  // const handleDays = (day: number) => {
+  //   if (days.some((v) => v === day)) {
+  //     const newDays = days.filter((v) => v !== day);
+  //     setDays(newDays);
+  //   } else {
+  //     setDays([day, ...days]);
+  //   }
+  // };
 
   const {
     register,
+    watch,
     handleSubmit,
     formState: { errors },
     reset,
@@ -43,6 +45,7 @@ export const NewPresenter = () => {
     resolver: zodResolver(manageValidationSchema),
   });
   const onSubmit = async (data: NewValues) => {
+    const days = data.days.map(Number);
     const modifiedDays = days.sort().map((v) => convertNumberToWeekday(v));
     await createQuestMutation.mutateAsync({
       title: data.title,
@@ -56,11 +59,12 @@ export const NewPresenter = () => {
 
     // リセット処理
     reset();
-    setDays([]);
+    // setDays([]);
     setDifficulty("EASY");
     navigate({ to: "/quests/manage" });
   };
-
+  console.log(watch());
+  console.log(errors);
   return (
     <>
       <button onClick={() => navigate({ to: "/quests/manage" })} className="block">
@@ -112,8 +116,9 @@ export const NewPresenter = () => {
               <p className="block my-2">実施頻度</p>
               <div className="flex mt-4 gap-1">
                 {DAYS.map((v, i) => {
-                  return <NewDayOfTheWeek key={i} handleDays={handleDays} day={v} days={days} value={i + 1} />;
+                  return <NewDayOfTheWeek key={i} day={v} value={i + 1} register={register} />;
                 })}
+                {errors.days && <FormErrorMsg msg={errors.days.message ?? ""} />}
               </div>
             </div>
           </div>
