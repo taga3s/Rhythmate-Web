@@ -1,5 +1,5 @@
 import { ChangeEvent, FC } from "react";
-import { UseFormRegister } from "react-hook-form";
+import { UseFormRegister, UseFormWatch } from "react-hook-form";
 
 type Props = {
   // handleDays: (day: number) => void;
@@ -13,10 +13,19 @@ type Props = {
     days: [string, ...string[]];
     description: string;
   }>;
+  watch: UseFormWatch<{
+    title: string;
+    description: string;
+    startsAt: string;
+    minutes: string;
+    days: [string, ...string[]];
+  }>;
   // getValues: UseFormGetValues<any>;
 };
 
-export const NewDayOfTheWeek: FC<Props> = ({ day, value, register }) => {
+export const NewDayOfTheWeek: FC<Props> = ({ day, value, register, watch }) => {
+  const days = watch("days");
+  console.log(days);
   return (
     <>
       <input
@@ -28,9 +37,9 @@ export const NewDayOfTheWeek: FC<Props> = ({ day, value, register }) => {
         // onChange={(e: ChangeEvent<HTMLInputElement>) => handleDays(Number(e.target.value))}
       />
       <label
-        // className={`px-2 py-1 rounded border-2 cursor-pointer ${
-        //   days.some((v: number) => v === value) ? "bg-blue-400 text-white" : "bg-white text-black"
-        // }`}
+        className={`px-2 py-1 rounded border-2 cursor-pointer ${
+          days.some((v: string) => Number(v) === value) ? "bg-blue-400 text-white" : "bg-white text-black"
+        }`}
         htmlFor={`${value}`}
       >
         {day}

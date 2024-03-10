@@ -116,7 +116,7 @@ export const NewPresenter = () => {
               <p className="block my-2">実施頻度</p>
               <div className="flex mt-4 gap-1">
                 {DAYS.map((v, i) => {
-                  return <NewDayOfTheWeek key={i} day={v} value={i + 1} register={register} />;
+                  return <NewDayOfTheWeek key={i} day={v} value={i + 1} register={register} watch={watch} />;
                 })}
                 {errors.days && <FormErrorMsg msg={errors.days.message ?? ""} />}
               </div>
