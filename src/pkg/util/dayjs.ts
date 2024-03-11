@@ -27,6 +27,10 @@ export const formatDateJP = (date: string) => {
   return dayjs(date).format("YYYY年MM月DD日");
 };
 
-export const getTodayDate = () => {
+export const getToday = () => {
   return dayjs().format("ddd");
+};
+
+export const getTodayEng = () => {
+  return dayjs().locale("en").format("ddd");
 };
