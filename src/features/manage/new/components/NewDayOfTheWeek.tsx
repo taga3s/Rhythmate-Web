@@ -1,25 +1,14 @@
 import { FC } from "react";
 import { UseFormRegister, UseFormWatch } from "react-hook-form";
+import { TManageValidationSchema } from "../../common/libs/validation";
 
 type Props = {
   // handleDays: (day: number) => void;
   day: string;
   // days: number[];
   value: number;
-  register: UseFormRegister<{
-    title: string;
-    minutes: string;
-    startsAt: string;
-    days: string[];
-    description: string;
-  }>;
-  watch: UseFormWatch<{
-    title: string;
-    description: string;
-    startsAt: string;
-    minutes: string;
-    days: string[];
-  }>;
+  register: UseFormRegister<TManageValidationSchema>;
+  watch: UseFormWatch<TManageValidationSchema>;
 };
 
 export const NewDayOfTheWeek: FC<Props> = ({ day, value, register, watch }) => {

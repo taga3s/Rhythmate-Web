@@ -22,17 +22,7 @@ type NewValues = {
 export const NewPresenter = () => {
   const navigate = useNavigate();
   const [difficulty, setDifficulty] = useState<Difficulty>("EASY");
-  // const [days, setDays] = useState<number[]>([1]);
   const { createQuestMutation } = useMutateQuest();
-
-  // const handleDays = (day: number) => {
-  //   if (days.some((v) => v === day)) {
-  //     const newDays = days.filter((v) => v !== day);
-  //     setDays(newDays);
-  //   } else {
-  //     setDays([day, ...days]);
-  //   }
-  // };
 
   const {
     register,
@@ -63,7 +53,6 @@ export const NewPresenter = () => {
 
     // リセット処理
     reset();
-    // setDays([]);
     setValue("days", []);
     setDifficulty("EASY");
     navigate({ to: "/quests/manage" });
