@@ -8,8 +8,8 @@ import { useMutateQuest } from "../../api/quest/hooks/useMutateQuest";
 import { useNavigate } from "@tanstack/react-router";
 import { TManageValidationSchema, manageValidationSchema } from "../../common/libs/validation";
 import { DAYS } from "../../common/constant/constant";
-import { convertNumberToWeekday } from "../../common/funcs";
-import { Difficulty } from "../../../../api/quest/types";
+import { convertEnToJPWeekday } from "../../common/funcs";
+import { Day, Difficulty } from "../../../../api/quest/types";
 
 type NewValues = {
   title: string;
@@ -39,8 +39,6 @@ export const NewPresenter = () => {
     },
   });
   const onSubmit = async (data: NewValues) => {
-    const days = data.days.map(Number);
-    const modifiedDays = days.sort().map((v) => convertNumberToWeekday(v));
     await createQuestMutation.mutateAsync({
       title: data.title,
       description: data.description,
@@ -48,7 +46,7 @@ export const NewPresenter = () => {
       tagId: "",
       minutes: Number(data.minutes),
       difficulty: difficulty,
-      days: modifiedDays,
+      days: data.days as Day[],
     });
 
     // リセット処理
@@ -109,8 +107,16 @@ export const NewPresenter = () => {
             <div className="my-2">
               <p className="block my-2">実施頻度</p>
               <div className="flex mt-4 gap-1">
-                {DAYS.map((v, i) => {
-                  return <NewDayOfTheWeek key={i} day={v} value={i + 1} register={register} watch={watch} />;
+                {DAYS.map((day, i) => {
+                  return (
+                    <NewDayOfTheWeek
+                      key={i}
+                      day={convertEnToJPWeekday(day)}
+                      value={day}
+                      register={register}
+                      watch={watch}
+                    />
+                  );
                 })}
               </div>
               {errors.days && <FormErrorMsg msg={errors.days.message ?? ""} />}

@@ -1,19 +1,19 @@
 import { FC } from "react";
 import { UseFormRegister, UseFormWatch } from "react-hook-form";
 import { TManageValidationSchema } from "../../common/libs/validation";
+import { Day } from "../../../../api/quest/types";
 
 type Props = {
-  // handleDays: (day: number) => void;
   day: string;
-  // days: number[];
-  value: number;
+  value: Day;
   register: UseFormRegister<TManageValidationSchema>;
   watch: UseFormWatch<TManageValidationSchema>;
 };
 
 export const NewDayOfTheWeek: FC<Props> = ({ day, value, register, watch }) => {
   const days = watch("days");
-  const isChecked = Array.isArray(days) && days.some((v: string) => v === value.toString());
+  const isChecked = Array.isArray(days) && days.some((v: string) => v === value);
+
   return (
     <>
       <input type="checkbox" className="hidden peer" value={value} id={`${value}`} {...register("days")} />
