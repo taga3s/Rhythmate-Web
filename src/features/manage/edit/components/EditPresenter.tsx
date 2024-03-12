@@ -18,6 +18,7 @@ type NewValues = {
   title: string;
   startsAt: string;
   minutes: string;
+  days: string[];
   description: string;
 };
 
@@ -33,24 +34,27 @@ export const EditPresenter: FC<Props> = (props) => {
   const targetQuest = data?.find((v) => v.id === quest_id);
 
   const [difficulty, setDifficulty] = useState<Difficulty>("EASY");
-  const [days, setDays] = useState<number[]>([]);
+  // const [days, setDays] = useState<number[]>([]);
 
   useEffect(() => {
-    setDays(targetQuest?.days.map((v) => convertWeekdayToNumber(v)) ?? []);
+    const modifiedDays = targetQuest?.days.map((v) => convertWeekdayToNumber(v).toString()) ?? [];
+    setValue("days", modifiedDays);
     setDifficulty(targetQuest?.difficulty ?? "EASY");
   }, [isLoading]);
 
-  const handleDays = (day: number) => {
-    if (days.some((v) => v === day)) {
-      const newDays = days.filter((v) => v !== day);
-      setDays(newDays);
-    } else {
-      setDays([day, ...days]);
-    }
-  };
+  // const handleDays = (day: number) => {
+  //   if (days.some((v) => v === day)) {
+  //     const newDays = days.filter((v) => v !== day);
+  //     setDays(newDays);
+  //   } else {
+  //     setDays([day, ...days]);
+  //   }
+  // };
 
   const {
     register,
+    watch,
+    setValue,
     handleSubmit,
     formState: { errors },
   } = useForm<TManageValidationSchema>({
@@ -58,6 +62,7 @@ export const EditPresenter: FC<Props> = (props) => {
     resolver: zodResolver(manageValidationSchema),
   });
   const onSubmit = async (data: NewValues) => {
+    const days = data.days.map(Number);
     const modifiedDays = days.sort().map((v) => convertNumberToWeekday(v));
     await updateQuestMutation.mutateAsync({
       id: quest_id,
@@ -79,7 +84,6 @@ export const EditPresenter: FC<Props> = (props) => {
     });
     navigate({ to: "/quests/manage" });
   };
-
   return (
     <>
       <div>
@@ -155,10 +159,10 @@ export const EditPresenter: FC<Props> = (props) => {
                 <p className="block my-2">実施頻度</p>
                 <div className="flex mt-4 gap-1">
                   {DAYS.map((v, i) => {
-                    return <NewDayOfTheWeek key={i} handleDays={handleDays} days={days} day={v} value={i + 1} />;
+                    return <NewDayOfTheWeek key={i} day={v} value={i + 1} register={register} watch={watch} />;
                   })}
                 </div>
-                {/* {dateValidation && (<FormErrorMsg msg={"少なくとも1つの曜日を選択します。"} />)} */}
+                {errors.days && <FormErrorMsg msg={errors.days.message ?? ""} />}
               </div>
             </div>
           </div>
