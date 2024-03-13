@@ -59,7 +59,7 @@ export const EntrancePresenter = () => {
                 clipRule="evenodd"
               />
             </svg>
-            <p className="text-sm">
+            <p className="text-sm font-cp-font">
               良い習慣を身に付けて
               <br />
               アクティブな毎日を
@@ -72,6 +72,23 @@ export const EntrancePresenter = () => {
         >
           今すぐ始める
         </button>
+
+        {/* バッジの作り方 */}
+        <div className="relative">
+          <svg className="w-40">
+            <use
+              xlinkHref="badge/badge-flame.svg#flame"
+              className="transition-all shadow-lg shadow-rhyth-orange shine"
+            />
+          </svg>
+          <svg className="w-[9.5rem] absolute top-0 left-1">
+            <use xlinkHref="badge/badge-sparkling.svg#sparkling" />
+          </svg>
+          <div className="w-14 absolute top-11 left-0 right-0 m-auto">
+            <img src="badge/items/crown.svg" />
+          </div>
+        </div>
+
         <small className="my-10 text-gray-400">&copy; 167.25 All rights reserved.</small>
       </div>
     </div>
