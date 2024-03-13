@@ -1,11 +1,20 @@
 import { QuestBoard } from "./QuestBoard";
 import { QuestList } from "./QuestList";
-import { formatDateJP, getTodayDate, now } from "../../../pkg/util/dayjs";
-import { useQueryQuestList } from "../api/hooks/useQueryQuest";
-import { Quest } from "../api/model";
+import { formatDateJP, getToday, getTodayEng, now } from "../../../pkg/util/dayjs";
+import { useQueryQuestList } from "../api/quest/hooks/useQueryQuest";
 import { QuestBoardNoData } from "./QuestBoardNoData";
 import { useState } from "react";
 import { QuestListNoData } from "./QuestListNoData";
+import { Quest } from "../../../api/quest/model";
+
+const filterQuestsByDayOfTheWeek = (questList: Quest[]) => {
+  const todaysDayOfTheWeek = getTodayEng().toUpperCase();
+
+  return questList.filter((quest) => {
+    const isToday: boolean = quest.days.some((day) => day === todaysDayOfTheWeek);
+    return isToday ? quest : null;
+  });
+};
 
 const sortQuestsByTime = (questList: Quest[]) => {
   return questList.sort((a, b) => {
@@ -15,8 +24,12 @@ const sortQuestsByTime = (questList: Quest[]) => {
 
 export const QuestsPresenter = () => {
   const { data, isLoading } = useQueryQuestList();
+
+  // 曜日でフィルターする
+  const filteredQuestsData = filterQuestsByDayOfTheWeek(data ?? []);
+
   // 時間順でソートする
-  const sortedQuestsData = sortQuestsByTime(data ?? []);
+  const sortedQuestsData = sortQuestsByTime(filteredQuestsData);
 
   const nextQuestList = sortedQuestsData.filter((value) => value.state === "INACTIVE");
   const finishedQuestList = sortedQuestsData.filter((value) => value.state === "ACTIVE");
@@ -28,7 +41,7 @@ export const QuestsPresenter = () => {
     <>
       <h1 className="text-xl font-bold">
         {formatDateJP(now())}
-        {`(${getTodayDate()})`}のクエスト
+        {`(${getToday()})`}のクエスト
       </h1>
       {isLoading ? (
         <div>Loading...</div>

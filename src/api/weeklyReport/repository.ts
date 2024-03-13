@@ -1,4 +1,4 @@
-import { apiClient } from "../../../pkg/api/client/apiClient";
+import { apiClient } from "../../pkg/api/client/apiClient";
 import { ListResponse } from "./types";
 
 export interface WeeklyReportsRepository {

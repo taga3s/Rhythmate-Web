@@ -1,4 +1,6 @@
-export const convertEnToJPWeekday = (dayOfTheWeek: string): string => {
+import { Day } from "../../../../api/quest/types";
+
+export const convertEnToJPWeekday = (dayOfTheWeek: Day): string => {
   switch (dayOfTheWeek) {
     case "MON":
       return "月";

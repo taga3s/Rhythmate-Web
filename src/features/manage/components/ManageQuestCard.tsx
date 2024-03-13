@@ -5,11 +5,11 @@ import { FC } from "react";
 import { formatDateToTime } from "../../../pkg/util/dayjs";
 import { ClockIcon } from "../../common/components/icons/ClockIcon";
 import { calcExp } from "../../common/funcs/calcExp";
-import { Difficulty } from "../api/types";
 import { convertEnToJPWeekday } from "../common/funcs";
+import { Day, Difficulty } from "../../../api/quest/types";
 
-const convertENToJPWeekdayString = (week: string[]) => {
-  const result = week.map((day) => convertEnToJPWeekday(day)).join("・");
+const convertENToJPWeekdayString = (weekDays: Day[]) => {
+  const result = weekDays.map((day) => convertEnToJPWeekday(day)).join("・");
   return result;
 };
 
@@ -20,12 +20,12 @@ type Props = {
   startsAt: string;
   minutes: number;
   difficulty: Difficulty;
-  dates: string[];
+  days: Day[];
   continuationLevel: number;
 };
 
 export const ManageQuestCard: FC<Props> = (props) => {
-  const { id, title, description, startsAt, minutes, dates, difficulty, continuationLevel } = props;
+  const { id, title, description, startsAt, minutes, days, difficulty, continuationLevel } = props;
   const navigate = useNavigate();
 
   return (
@@ -62,7 +62,7 @@ export const ManageQuestCard: FC<Props> = (props) => {
             <span>{formatDateToTime(startsAt)} -</span>
             <span>{minutes}m</span>
           </div>
-          <h3>{convertENToJPWeekdayString(dates)}</h3>
+          <h3>{convertENToJPWeekdayString(days)}</h3>
         </div>
         <div className="flex items-center">
           {difficulty === "EASY" ? (

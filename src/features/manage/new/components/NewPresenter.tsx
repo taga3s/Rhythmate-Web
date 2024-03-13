@@ -4,47 +4,41 @@ import { NewStar } from "./NewStar";
 import { NewDayOfTheWeek } from "./NewDayOfTheWeek";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { FormErrorMsg } from "../../../common/components/utils/FormErrorMsg";
-import { useMutateQuest } from "../../api/hooks/useMutateQuest";
+import { useMutateQuest } from "../../api/quest/hooks/useMutateQuest";
 import { useNavigate } from "@tanstack/react-router";
 import { TManageValidationSchema, manageValidationSchema } from "../../common/libs/validation";
-import { Difficulty } from "../../api/types";
-import { DATES } from "../../common/constant/constant";
-import { convertNumberToWeekday } from "../../common/funcs";
+import { DAYS } from "../../common/constant/constant";
+import { convertEnToJPWeekday } from "../../common/funcs";
+import { Day, Difficulty } from "../../../../api/quest/types";
 
 type NewValues = {
   title: string;
   startsAt: string;
   minutes: string;
+  days: string[];
   description: string;
 };
 
 export const NewPresenter = () => {
   const navigate = useNavigate();
   const [difficulty, setDifficulty] = useState<Difficulty>("EASY");
-  const [dates, setDates] = useState<number[]>([1]);
-  // const [dateValidation, setDateValidation] = useState(false)
   const { createQuestMutation } = useMutateQuest();
-
-  const handleDates = (date: number) => {
-    if (dates.some((v) => v === date)) {
-      const newDates = dates.filter((v) => v !== date);
-      setDates(newDates);
-    } else {
-      setDates([date, ...dates]);
-    }
-  };
 
   const {
     register,
+    watch,
+    setValue,
     handleSubmit,
     formState: { errors },
     reset,
   } = useForm<TManageValidationSchema>({
     mode: "onBlur",
     resolver: zodResolver(manageValidationSchema),
+    defaultValues: {
+      days: [],
+    },
   });
   const onSubmit = async (data: NewValues) => {
-    const modifiedDates = dates.sort().map((v) => convertNumberToWeekday(v));
     await createQuestMutation.mutateAsync({
       title: data.title,
       description: data.description,
@@ -52,16 +46,15 @@ export const NewPresenter = () => {
       tagId: "",
       minutes: Number(data.minutes),
       difficulty: difficulty,
-      dates: modifiedDates,
+      days: data.days as Day[],
     });
 
     // リセット処理
     reset();
-    setDates([]);
+    setValue("days", []);
     setDifficulty("EASY");
     navigate({ to: "/quests/manage" });
   };
-
   return (
     <>
       <button onClick={() => navigate({ to: "/quests/manage" })} className="block">
@@ -72,8 +65,10 @@ export const NewPresenter = () => {
       <h1 className="text-2xl font-bold mt-8">クエスト作成</h1>
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="mt-6 flex flex-col gap-4">
-          <label className="text-base">タイトル</label>
-          <input type="text" className="w-full p-2 border-2 rounded-md" {...register("title")} />
+          <label htmlFor="new-quest-title" className="text-base">
+            タイトル
+          </label>
+          <input type="text" id="new-quest-title" className="w-full p-2 border-2 rounded-md" {...register("title")} />
         </div>
         {errors.title && <FormErrorMsg msg={errors.title.message ?? ""} />}
         <div className="grid grid-cols-6 mt-4">
@@ -112,11 +107,19 @@ export const NewPresenter = () => {
             <div className="my-2">
               <p className="block my-2">実施頻度</p>
               <div className="flex mt-4 gap-1">
-                {DATES.map((v, i) => {
-                  return <NewDayOfTheWeek key={i} handleDates={handleDates} date={v} dates={dates} value={i + 1} />;
+                {DAYS.map((day, i) => {
+                  return (
+                    <NewDayOfTheWeek
+                      key={i}
+                      day={convertEnToJPWeekday(day)}
+                      value={day}
+                      register={register}
+                      watch={watch}
+                    />
+                  );
                 })}
               </div>
-              {/* {dateValidation && (<FormErrorMsg msg={"少なくとも1つの曜日を選択します。"} />)} */}
+              {errors.days && <FormErrorMsg msg={errors.days.message ?? ""} />}
             </div>
           </div>
         </div>
@@ -183,11 +186,16 @@ export const NewPresenter = () => {
             >
               <path stroke="currentColor" strokeLinecap="round" strokeWidth="2" d="M5 7h14M5 12h14M5 17h10" />
             </svg>
-            <label htmlFor="" className="my-2 text-base">
+            <label htmlFor="new-quest-description" className="my-2 text-base">
               説明
             </label>
           </div>
-          <input type="text" className="w-full border-2 p-2 rounded-md" {...register("description")} />
+          <input
+            type="text"
+            id="new-quest-description"
+            className="w-full border-2 p-2 rounded-md"
+            {...register("description")}
+          />
         </div>
         {errors.description && <FormErrorMsg msg={errors.description.message ?? ""} />}
         <button

@@ -2,28 +2,30 @@ import { FC, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { FormErrorMsg } from "../../../common/components/utils/FormErrorMsg";
-import { useMutateQuest } from "../../api/hooks/useMutateQuest";
+import { useMutateQuest } from "../../api/quest/hooks/useMutateQuest";
 import { useNavigate } from "@tanstack/react-router";
-import { useQueryQuestList } from "../../../quests/api/hooks/useQueryQuest";
+import { useQueryQuestList } from "../../../quests/api/quest/hooks/useQueryQuest";
 import { NewStar } from "../../new/components/NewStar";
 import { NewDayOfTheWeek } from "../../new/components/NewDayOfTheWeek";
 import { TManageValidationSchema, manageValidationSchema } from "../../common/libs/validation";
 import { formatDateToTime } from "../../../../pkg/util/dayjs";
 import { ConfirmModal } from "../../../common/components/ConfirmModal";
-import { Difficulty } from "../../api/types";
-import { DATES } from "../../common/constant/constant";
-import { convertNumberToWeekday, convertWeekdayToNumber } from "../../common/funcs";
+import { DAYS } from "../../common/constant/constant";
+import { convertEnToJPWeekday } from "../../common/funcs";
+import { Day, Difficulty } from "../../../../api/quest/types";
 
 type NewValues = {
   title: string;
   startsAt: string;
   minutes: string;
+  days: string[];
   description: string;
 };
 
 type Props = {
   quest_id: string;
 };
+
 export const EditPresenter: FC<Props> = (props) => {
   const { quest_id } = props;
   const navigate = useNavigate();
@@ -33,24 +35,17 @@ export const EditPresenter: FC<Props> = (props) => {
   const targetQuest = data?.find((v) => v.id === quest_id);
 
   const [difficulty, setDifficulty] = useState<Difficulty>("EASY");
-  const [dates, setDates] = useState<number[]>([]);
 
   useEffect(() => {
-    setDates(targetQuest?.dates.map((v) => convertWeekdayToNumber(v)) ?? []);
+    const modifiedDays = targetQuest?.days ?? [];
+    setValue("days", modifiedDays);
     setDifficulty(targetQuest?.difficulty ?? "EASY");
   }, [isLoading]);
 
-  const handleDates = (date: number) => {
-    if (dates.some((v) => v === date)) {
-      const newDates = dates.filter((v) => v !== date);
-      setDates(newDates);
-    } else {
-      setDates([date, ...dates]);
-    }
-  };
-
   const {
     register,
+    watch,
+    setValue,
     handleSubmit,
     formState: { errors },
   } = useForm<TManageValidationSchema>({
@@ -58,7 +53,6 @@ export const EditPresenter: FC<Props> = (props) => {
     resolver: zodResolver(manageValidationSchema),
   });
   const onSubmit = async (data: NewValues) => {
-    const modifiedDates = dates.sort().map((v) => convertNumberToWeekday(v));
     await updateQuestMutation.mutateAsync({
       id: quest_id,
       title: data.title,
@@ -67,7 +61,7 @@ export const EditPresenter: FC<Props> = (props) => {
       tagId: "",
       minutes: Number(data.minutes),
       difficulty: difficulty,
-      dates: modifiedDates,
+      days: data.days as Day[],
     });
     navigate({ to: "/quests/manage" });
   };
@@ -79,7 +73,6 @@ export const EditPresenter: FC<Props> = (props) => {
     });
     navigate({ to: "/quests/manage" });
   };
-
   return (
     <>
       <div>
@@ -95,10 +88,13 @@ export const EditPresenter: FC<Props> = (props) => {
       ) : (
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="mt-6 flex flex-col gap-4">
-            <label className="text-base">タイトル</label>
+            <label htmlFor="edit-quest-title" className="text-base">
+              タイトル
+            </label>
             <input
               type="text"
               className="w-full p-2 border-2 rounded-md"
+              id="edit-quest-title"
               defaultValue={targetQuest?.title}
               {...register("title")}
             />
@@ -151,11 +147,19 @@ export const EditPresenter: FC<Props> = (props) => {
               <div className="my-2">
                 <p className="block my-2">実施頻度</p>
                 <div className="flex mt-4 gap-1">
-                  {DATES.map((v, i) => {
-                    return <NewDayOfTheWeek key={i} handleDates={handleDates} date={v} dates={dates} value={i + 1} />;
+                  {DAYS.map((day, i) => {
+                    return (
+                      <NewDayOfTheWeek
+                        key={i}
+                        day={convertEnToJPWeekday(day)}
+                        value={day}
+                        register={register}
+                        watch={watch}
+                      />
+                    );
                   })}
                 </div>
-                {/* {dateValidation && (<FormErrorMsg msg={"少なくとも1つの曜日を選択します。"} />)} */}
+                {errors.days && <FormErrorMsg msg={errors.days.message ?? ""} />}
               </div>
             </div>
           </div>
@@ -222,13 +226,14 @@ export const EditPresenter: FC<Props> = (props) => {
               >
                 <path stroke="currentColor" strokeLinecap="round" strokeWidth="2" d="M5 7h14M5 12h14M5 17h10" />
               </svg>
-              <label htmlFor="" className="my-2 text-base">
+              <label htmlFor="edit-quest-description" className="my-2 text-base">
                 説明
               </label>
             </div>
             <input
               type="text"
               className="w-full border-2 p-2 rounded-md"
+              id="edit-quest-description"
               defaultValue={targetQuest?.description}
               {...register("description")}
             />

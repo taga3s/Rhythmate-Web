@@ -1,29 +1,29 @@
-import { ChangeEvent, FC } from "react";
+import { FC } from "react";
+import { UseFormRegister, UseFormWatch } from "react-hook-form";
+import { TManageValidationSchema } from "../../common/libs/validation";
+import { Day } from "../../../../api/quest/types";
 
 type Props = {
-  handleDates: (date: number) => void;
-  date: string;
-  dates: number[];
-  value: number;
+  day: string;
+  value: Day;
+  register: UseFormRegister<TManageValidationSchema>;
+  watch: UseFormWatch<TManageValidationSchema>;
 };
 
-export const NewDayOfTheWeek: FC<Props> = ({ handleDates, date, dates, value }) => {
+export const NewDayOfTheWeek: FC<Props> = ({ day, value, register, watch }) => {
+  const days = watch("days");
+  const isChecked = Array.isArray(days) && days.some((v: string) => v === value);
+
   return (
     <>
-      <input
-        type="checkbox"
-        className="hidden peer"
-        value={value}
-        id={`${value}`}
-        onChange={(e: ChangeEvent<HTMLInputElement>) => handleDates(Number(e.target.value))}
-      />
+      <input type="checkbox" className="hidden peer" value={value} id={`${value}`} {...register("days")} />
       <label
         className={`px-2 py-1 rounded border-2 cursor-pointer ${
-          dates.some((v) => v === value) ? "bg-blue-400 text-white" : "bg-white text-black"
+          isChecked ? "bg-blue-400 text-white" : "bg-white text-black"
         }`}
         htmlFor={`${value}`}
       >
-        {date}
+        {day}
       </label>
     </>
   );

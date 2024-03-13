@@ -1,13 +1,13 @@
 import { FC, useState } from "react";
 import { ManageDayOfTheWeekCheckBox } from "./ManageDayOfTheWeekCheckBox";
 import { ManageDifficultyCheckBox } from "./ManageDifficultyCheckBox";
-import { DATES, DIFFICULTIES } from "../common/constant/constant";
-import { Difficulty } from "../api/types";
+import { DAYS, DIFFICULTIES } from "../common/constant/constant";
+import { Day, Difficulty } from "../../../api/quest/types";
 
 type Props = {
   onClickFn: () => void;
-  filterDate: string;
-  setFilterDate: (date: string) => void;
+  filterDay: Day | "";
+  setFilterDay: (day: Day | "") => void;
   filterDifficulties: Difficulty[];
   setFilterDifficulties: (difficulty: Difficulty[]) => void;
   setFilterActivation: (activation: boolean) => void;
@@ -15,20 +15,20 @@ type Props = {
 
 export const ManageQuestSearchModal: FC<Props> = ({
   onClickFn,
-  filterDate,
-  setFilterDate,
+  filterDay,
+  setFilterDay,
   filterDifficulties,
   setFilterDifficulties,
   setFilterActivation,
 }) => {
-  const [date, setDate] = useState<string>(filterDate);
+  const [day, setDay] = useState<Day | "">(filterDay);
   const [difficulties, setDifficulties] = useState<Difficulty[]>(filterDifficulties);
 
-  const handleDate = (newDate: string) => {
-    if (newDate === date) {
-      setDate("");
+  const handleDay = (newDay: Day | "") => {
+    if (newDay === day) {
+      setDay("");
     } else {
-      setDate(newDate);
+      setDay(newDay);
     }
   };
 
@@ -95,12 +95,12 @@ export const ManageQuestSearchModal: FC<Props> = ({
                 <p>実施曜日</p>
               </div>
               <div className="flex ml-auto">
-                {DATES.map((v, i) => {
+                {DAYS.map((v, i) => {
                   return (
                     <ManageDayOfTheWeekCheckBox
                       key={i}
-                      handleDate={handleDate}
-                      date={date}
+                      handleDay={handleDay}
+                      day={day}
                       dayOfTheWeek={v}
                       index={i + 1}
                     />
@@ -140,7 +140,7 @@ export const ManageQuestSearchModal: FC<Props> = ({
               <button
                 type="submit"
                 onClick={() => {
-                  setFilterDate(date);
+                  setFilterDay(day);
                   setFilterDifficulties(difficulties);
                   setFilterActivation(true);
                   onClickFn();
@@ -152,7 +152,7 @@ export const ManageQuestSearchModal: FC<Props> = ({
               <button
                 type="submit"
                 onClick={() => {
-                  setFilterDate("");
+                  setFilterDay("");
                   setFilterDifficulties([]);
                   setFilterActivation(false);
                   onClickFn();

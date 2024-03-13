@@ -1,15 +1,16 @@
 import { useMutation } from "@tanstack/react-query";
-import { questFactory } from "../factory";
-import { queryClient } from "../../../../pkg/api/client/queryClient";
-import { Quest } from "../model";
-import { notifyFailed, notifySuccess } from "../../../../pkg/ui/toast";
-import { FetchError } from "../../../../pkg/api/util/fetchError";
-import { FinishParams, StartParams } from "../types";
+import { createFactory } from "../../../../../api/quest/factory";
+import { queryClient } from "../../../../../pkg/api/client/queryClient";
+import { Quest } from "../../../../../api/quest/model";
+import { notifyFailed, notifySuccess } from "../../../../../pkg/ui/toast";
+import { FetchError } from "../../../../../pkg/api/util/fetchError";
+import { FinishQuestParams, ForceFinishQuestParams, StartQuestParams } from "../../../../../api/quest/types";
 
 export const useMutateQuest = () => {
+  const questFactory = createFactory();
   const startQuestMutation = useMutation({
-    mutationFn: async (params: StartParams) => {
-      return await questFactory().startQuest(params);
+    mutationFn: async (params: StartQuestParams) => {
+      return await questFactory.startQuest(params);
     },
     onSuccess: (data) => {
       const questList = queryClient.getQueryData<Quest[]>(["quests"]);
@@ -28,8 +29,8 @@ export const useMutateQuest = () => {
   });
 
   const finishQuestMutation = useMutation({
-    mutationFn: async (params: FinishParams) => {
-      return await questFactory().finishQuest(params);
+    mutationFn: async (params: FinishQuestParams) => {
+      return await questFactory.finishQuest(params);
     },
     onSuccess: (data) => {
       const questList = queryClient.getQueryData<Quest[]>(["quests"]);
@@ -48,8 +49,8 @@ export const useMutateQuest = () => {
   });
 
   const forceFinishQuestMutation = useMutation({
-    mutationFn: async (params: FinishParams) => {
-      return await questFactory().forceFinishQuest(params);
+    mutationFn: async (params: ForceFinishQuestParams) => {
+      return await questFactory.forceFinishQuest(params);
     },
     onSuccess: (data) => {
       const questList = queryClient.getQueryData<Quest[]>(["quests"]);

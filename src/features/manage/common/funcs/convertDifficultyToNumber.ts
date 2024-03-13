@@ -1,4 +1,4 @@
-import { Difficulty } from "../../api/types";
+import { Difficulty } from "../../../../api/quest/types";
 
 export const convertDifficultyToNumber = (difficulty: Difficulty): number => {
   switch (difficulty) {
