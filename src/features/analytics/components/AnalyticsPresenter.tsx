@@ -2,13 +2,13 @@ import { useState } from "react";
 import { AnalyticsLeftButton, AnalyticsRightButton } from "./AnalyticsArrowButton";
 import { AnalyticsBarChart } from "./AnalyticsBarChart";
 import { AnalyticsCard } from "./AnalyticsCard";
-import { useQueryWeeklyReports } from "../api/weeklyReport/hooks/useQueryWeeklyReport";
+import { useQueryListWeeklyReports } from "../api/weeklyReport/hooks/useQueryWeeklyReport";
 
 export const AnalyticsPresenter = () => {
   const [currentIndex, setCurrentIndex] = useState<number>(0);
   // const [graphDataIndex, setGraphDataIndex] = useState<number>(0);
 
-  const { data: dataItem, isLoading } = useQueryWeeklyReports();
+  const { data: dataItem, isLoading } = useQueryListWeeklyReports();
 
   // 日付の配列の作成
   const dateArray = dataItem?.length

@@ -12,5 +12,9 @@ export const createFactory = () => {
       });
       return weeklyReports;
     },
+    getWeeklyReportSummary: async () => {
+      const response = await repository.getSummary();
+      return response.summary;
+    },
   };
 };

@@ -12,3 +12,7 @@ export type ListResponse = {
     user_id: string;
   }[];
 };
+export type SummaryResponse = {
+  status: string;
+  summary: string;
+};
