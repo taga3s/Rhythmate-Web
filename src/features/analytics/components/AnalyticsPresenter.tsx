@@ -2,14 +2,14 @@ import { useState } from "react";
 import { AnalyticsLeftButton, AnalyticsRightButton } from "./AnalyticsArrowButton";
 import { AnalyticsBarChart } from "./AnalyticsBarChart";
 import { AnalyticsCard } from "./AnalyticsCard";
-import { useQueryListWeeklyReports } from "../api/weeklyReport/hooks/useQueryWeeklyReport";
+import { useQueryListWeeklyReports, useQueryWeeklyReportSummary } from "../api/weeklyReport/hooks/useQueryWeeklyReport";
 
 export const AnalyticsPresenter = () => {
   const [currentIndex, setCurrentIndex] = useState<number>(0);
   // const [graphDataIndex, setGraphDataIndex] = useState<number>(0);
 
   const { data: dataItem, isLoading } = useQueryListWeeklyReports();
-
+  const { data: summary, isLoading: isLoadingSummary } = useQueryWeeklyReportSummary();
   // 日付の配列の作成
   const dateArray = dataItem?.length
     ? dataItem.map((item) => ({
@@ -72,6 +72,11 @@ export const AnalyticsPresenter = () => {
             <h1 className="text-lg mt-8 font-bold">曜日別クエスト達成状況</h1>
           </div>
           <AnalyticsBarChart data={dataItem[currentIndex].completed_quests_each_day} />
+          {summary && (
+            <div className="mt-3 text-lg border-2 max-w-sm w-full px-3 py-4 bg-white rounded-lg shadow font-bold">
+              {summary}
+            </div>
+          )}
         </div>
       ) : (
         <div className="w-full gap-4 flex flex-col items-center mx-auto mt-24 text-xl">
