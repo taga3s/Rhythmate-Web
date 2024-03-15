@@ -80,7 +80,7 @@ export const AnalyticsPresenter = () => {
         </div>
       ) : (
         <div className="w-full gap-4 flex flex-col items-center mx-auto mt-24 text-xl">
-          <div>週刊レポートがまだありません</div>
+          <div>週間レポートがまだありません</div>
           <div>日曜日が終わるとレポートが作成されます</div>
         </div>
       )}
