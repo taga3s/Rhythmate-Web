@@ -1,5 +1,6 @@
 import { useNavigate } from "@tanstack/react-router";
 import { useAuthenticate } from "../../common/hooks/useAuthenticate";
+import { Badge } from "../../profile/badges/components/badge/Badge";
 
 export const EntrancePresenter = () => {
   const { isAuthenticated } = useAuthenticate();
@@ -74,20 +75,12 @@ export const EntrancePresenter = () => {
         </button>
 
         {/* バッジの作り方 */}
-        <div className="relative">
-          <svg className="w-40">
-            <use
-              xlinkHref="badge/badge-flame.svg#flame"
-              className="transition-all shadow-lg shadow-rhyth-orange shine"
-            />
-          </svg>
-          <svg className="w-[9.5rem] absolute top-0 left-1">
-            <use xlinkHref="badge/badge-sparkling.svg#sparkling" />
-          </svg>
-          <div className="w-14 absolute top-11 left-0 right-0 m-auto">
-            <img src="badge/items/crown.svg" />
-          </div>
-        </div>
+        <Badge
+          imageType="Crown"
+          flameClassName="w-40"
+          sparklingClassName="w-40 top-0 left-0"
+          itemClassName="w-[60px] top-12 left-0 right-0 m-auto"
+        />
 
         <small className="my-10 text-gray-400">&copy; 167.25 All rights reserved.</small>
       </div>
