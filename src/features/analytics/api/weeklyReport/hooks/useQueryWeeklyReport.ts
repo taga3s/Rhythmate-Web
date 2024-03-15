@@ -15,12 +15,12 @@ export const useQueryListWeeklyReports = () => {
   });
 };
 
-export const useQueryWeeklyReportSummary = () => {
+export const useQueryWeeklyReportSummary = (weeklyReportIndex: number) => {
   const weeklyReportFactory = createFactory();
   return useQuery<string, FetchError>({
     queryKey: ["weeklyReportSummary"],
     queryFn: async () => {
-      const summary = await weeklyReportFactory.getWeeklyReportSummary();
+      const summary = await weeklyReportFactory.getWeeklyReportSummary({ weeklyReportIndex: weeklyReportIndex });
       return summary;
     },
     staleTime: Infinity,

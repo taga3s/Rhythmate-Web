@@ -12,7 +12,13 @@ export type ListResponse = {
     user_id: string;
   }[];
 };
-export type SummaryResponse = {
+export type GetSummaryParams = {
+  weeklyReportIndex: number;
+};
+export type GetSummaryRequest = {
+  weeklyReportIndex: number;
+};
+export type GetSummaryResponse = {
   status: string;
   summary: string;
 };

@@ -1,5 +1,6 @@
 import { WeeklyReport, toWeeklyReport } from "./model";
 import { weeklyReportsRepository } from "./repository";
+import { GetSummaryParams } from "./types";
 
 export const createFactory = () => {
   const repository = weeklyReportsRepository;
@@ -12,8 +13,8 @@ export const createFactory = () => {
       });
       return weeklyReports;
     },
-    getWeeklyReportSummary: async () => {
-      const response = await repository.getSummary();
+    getWeeklyReportSummary: async (getSummaryParams: GetSummaryParams) => {
+      const response = await repository.getSummary(getSummaryParams);
       return response.summary;
     },
   };

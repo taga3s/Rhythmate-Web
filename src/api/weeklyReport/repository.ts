@@ -1,9 +1,9 @@
 import { apiClient } from "../../pkg/api/client/apiClient";
-import { ListResponse, SummaryResponse } from "./types";
+import { ListResponse, GetSummaryRequest, GetSummaryResponse } from "./types";
 
 export interface WeeklyReportsRepository {
   list: () => Promise<ListResponse>;
-  getSummary: () => Promise<SummaryResponse>;
+  getSummary: (params: GetSummaryRequest) => Promise<GetSummaryResponse>;
 }
 
 const list: WeeklyReportsRepository["list"] = async () => {
@@ -11,8 +11,8 @@ const list: WeeklyReportsRepository["list"] = async () => {
   return response;
 };
 
-const getSummary: WeeklyReportsRepository["getSummary"] = async () => {
-  const response = await apiClient.get("/weekly-reports/summarize");
+const getSummary: WeeklyReportsRepository["getSummary"] = async (params: GetSummaryRequest) => {
+  const response = await apiClient.get(`/weekly-reports/summarize/${params.weeklyReportIndex}`);
   return response;
 };
 
