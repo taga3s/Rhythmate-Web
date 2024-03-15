@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import { FC } from "react";
 import { Bow } from "./badgeItems/Bow";
 import { Cat } from "./badgeItems/Cat";
 import { Crown } from "./badgeItems/Crown";
