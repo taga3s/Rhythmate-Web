@@ -1,5 +1,6 @@
 import { useNavigate } from "@tanstack/react-router";
 import { useAuthenticate } from "../../common/hooks/useAuthenticate";
+import { Badge } from "../../profile/badges/components/badge/Badge";
 
 export const EntrancePresenter = () => {
   const { isAuthenticated } = useAuthenticate();
@@ -59,7 +60,7 @@ export const EntrancePresenter = () => {
                 clipRule="evenodd"
               />
             </svg>
-            <p className="text-sm">
+            <p className="text-sm font-cp-font">
               良い習慣を身に付けて
               <br />
               アクティブな毎日を
@@ -72,6 +73,15 @@ export const EntrancePresenter = () => {
         >
           今すぐ始める
         </button>
+
+        {/* バッジの作り方 */}
+        <Badge
+          imageType="Crown"
+          flameClassName="w-40"
+          sparklingClassName="w-40 top-0 left-0"
+          itemClassName="w-[60px] top-12 left-0 right-0 m-auto"
+        />
+
         <small className="my-10 text-gray-400">&copy; 167.25 All rights reserved.</small>
       </div>
     </div>
