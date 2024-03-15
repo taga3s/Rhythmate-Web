@@ -5,5 +5,5 @@ type Props = {
 };
 
 export const ContentLayout: FC<Props> = ({ children }) => {
-  return <div className="p-6 mb-[100px] mt-[60px] bg-rhyth-bg-dark-gray">{children}</div>;
+  return <div className="px-6 pb-28 pt-20 bg-rhyth-bg-dark-gray">{children}</div>;
 };
