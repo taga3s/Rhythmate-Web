@@ -2,17 +2,14 @@ import "../../../config/firebase";
 import { GoogleAuthProvider, getAuth, signInWithPopup } from "firebase/auth";
 import { notifyFailed } from "../../../pkg/ui/toast";
 import { useMutateUser } from "../api/user/hooks/useMutateUser";
-import { useState } from "react";
+import { FirebaseError } from "firebase/app";
 
 export const LoginForm = () => {
   const { authMutation } = useMutateUser();
   const provider = new GoogleAuthProvider();
   const auth = getAuth();
 
-  const [isLoading, setIsLoading] = useState(false);
-
   const signInWithGoogle = async () => {
-    setIsLoading(true);
     try {
       const result = await signInWithPopup(auth, provider);
       const user = result.user;
@@ -26,11 +23,11 @@ export const LoginForm = () => {
         idToken: idToken,
       });
     } catch (error) {
-      notifyFailed("エラーが発生しました。\n時間をおいて再度お試しください。");
-      // const errorCode = error.code;
-      // const errorMessage = error.message;
-      // const email = error.customData.email;
-      // const credential = GoogleAuthProvider.credentialFromError(error);
+      if (error instanceof FirebaseError) {
+        if (error.code !== "auth/popup-closed-by-user") {
+          notifyFailed("エラーが発生しました。\n時間をおいて再度お試しください。");
+        }
+      }
     }
   };
 
@@ -49,14 +46,14 @@ export const LoginForm = () => {
           clipRule="evenodd"
         />
       </svg>
+      <h1 className="text-lg font-bold text-center">Rhythmateにサインイン</h1>
       <button
-        className="w-[240px] p-4 mt-6 bg-white font-bold text-black rounded-md shadow-md cursor-pointer flex justify-center items-center gap-4"
+        className="p-4 mt-6 bg-white font-bold text-black rounded-md shadow-md cursor-pointer flex justify-center items-center gap-4"
         onClick={signInWithGoogle}
       >
         <img src="/icons/google.png" width={20} height={20} alt="googleのアイコン" />
-        Googleでサインインする
+        Googleでサインイン
       </button>
-      {isLoading && <p>認証中...</p>}
     </div>
   );
 };
