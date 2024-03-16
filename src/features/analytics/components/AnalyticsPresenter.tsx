@@ -1,15 +1,28 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { AnalyticsLeftButton, AnalyticsRightButton } from "./AnalyticsArrowButton";
 import { AnalyticsBarChart } from "./AnalyticsBarChart";
 import { AnalyticsCard } from "./AnalyticsCard";
-import { useQueryListWeeklyReports, useQueryWeeklyReportSummary } from "../api/weeklyReport/hooks/useQueryWeeklyReport";
+import { useQueryListWeeklyReports } from "../api/weeklyReport/hooks/useQueryWeeklyReport";
+import { apiClient } from "../../../pkg/api/client/apiClient";
 
 export const AnalyticsPresenter = () => {
   const [currentIndex, setCurrentIndex] = useState<number>(0);
   // const [graphDataIndex, setGraphDataIndex] = useState<number>(0);
 
-  const { data: dataItem, isLoading } = useQueryListWeeklyReports();
-  const { data: summary, isLoading: isLoadingSummary } = useQueryWeeklyReportSummary();
+  const { data: dataItem, isLoading: isLoadingList } = useQueryListWeeklyReports();
+  const [summary, setSummary] = useState<string>();
+
+  useEffect(() => {
+    if (currentIndex !== (dataItem?.length ?? 0) - 1) {
+      apiClient.get(`/weekly-reports/summarize/${currentIndex}`).then((res): void => {
+        setSummary(res.summary);
+        return;
+      });
+    } else {
+      setSummary("来週以降、結果に応じてアドバイスが表示されます！");
+    }
+  }, [currentIndex]);
+
   // 日付の配列の作成
   const dateArray = dataItem?.length
     ? dataItem.map((item) => ({
@@ -26,10 +39,9 @@ export const AnalyticsPresenter = () => {
     setCurrentIndex((prevIndex) => (prevIndex === (dataItem ? dataItem.length - 1 : 0) ? 0 : prevIndex + 1));
     // setGraphDataIndex((prevIndex) => (prevIndex === (graphData ? graphData.length - 1 : 0) ? 0 : prevIndex + 1));
   };
-
   return (
     <>
-      {isLoading ? (
+      {isLoadingList ? (
         <div>Loading...</div>
       ) : dataItem?.length ? (
         <div className="flex flex-col items-center w-fit mx-auto">
