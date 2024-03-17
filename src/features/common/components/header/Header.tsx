@@ -12,7 +12,7 @@ export const Header = () => {
       case "/quests/":
         return "今日の一覧";
       case "/quests/manage":
-        return "クエスト編集";
+        return "クエスト管理";
       case "/quests/analytics":
         return "達成分析";
       case "/quests/profile":

@@ -25,7 +25,7 @@ export const Menu = () => {
       <div className="grid h-full max-w-lg grid-cols-4 mx-auto font-medium">
         <MenuButton name="今日の一覧" path="/quests/" icon={<QuestsIcon color={getMenuIconColor("/quests/")} />} />
         <MenuButton
-          name="クエスト編集"
+          name="クエスト管理"
           path="/quests/manage"
           icon={<ManageIcon color={getMenuIconColor("/quests/manage")} />}
         />
