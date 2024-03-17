@@ -4,10 +4,10 @@
 
 @font-face {
   font-family: "CP Font";
-  src: url(assets/fonts/CP\ Font.otf);
+  src: url(assets/fonts/CP\ Font.otf) format(otf);
 }
 
 @font-face {
   font-family: "Append CP Font";
-  src: url(assets/fonts/Append\ CP\ Font.otf);
+  src: url(assets/fonts/Append\ CP\ Font.otf) format(otf);
 }
