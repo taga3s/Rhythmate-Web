@@ -1,3 +1,13 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@font-face {
+  font-family: "CP Font";
+  src: url(assets/fonts/CP_Font.otf) format("otf");
+}
+
+@font-face {
+  font-family: "Append CP Font";
+  src: url(assets/fonts/Append_CP_Font.otf) format("otf");
+}

@@ -34,6 +34,7 @@ export const useMutateUser = () => {
   const logoutMutation = useMutation({
     mutationFn: async () => await userFactory.logout(),
     onSuccess: () => {
+      queryClient.clear();
       navigate({ to: "/" });
     },
     onError: (err: FetchError) => {

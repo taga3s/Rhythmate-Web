@@ -1,7 +1,8 @@
 import { apiClient } from "../../pkg/api/client/apiClient";
 import {
+  AuthRequest,
+  AuthResponse,
   GetResponse,
-  LoginResponse,
   SignupRequest,
   SignupResponse,
   UpdateLoginUserRequest,
@@ -9,17 +10,16 @@ import {
 } from "./types";
 
 export interface UserRepository {
-  login: (params: { email: string; password: string }) => Promise<LoginResponse>;
+  auth: (params: AuthRequest) => Promise<AuthResponse>;
   signup: (params: SignupRequest) => Promise<SignupResponse>;
   logout: () => Promise<void>;
   get: () => Promise<GetResponse>;
   update: (params: UpdateLoginUserRequest) => Promise<UpdateLoginUserResponse>;
 }
 
-const login: UserRepository["login"] = async (params: { email: string; password: string }) => {
-  const response = await apiClient.post("/users/login", {
-    email: params.email,
-    password: params.password,
+const auth: UserRepository["auth"] = async (params: AuthRequest) => {
+  const response = await apiClient.post("/users/auth", {
+    idToken: params.idToken,
   });
   return response;
 };
@@ -49,7 +49,7 @@ const update: UserRepository["update"] = async (params: UpdateLoginUserRequest) 
 };
 
 export const userRepository: UserRepository = {
-  login,
+  auth,
   signup,
   logout,
   get,

@@ -2,16 +2,16 @@ import { useMutation } from "@tanstack/react-query";
 import { FetchError } from "../../../../../pkg/api/util/fetchError";
 import { notifyFailed, notifySuccess } from "../../../../../pkg/ui/toast";
 import { useNavigate } from "@tanstack/react-router";
-import { LoginParams } from "../../../../../api/user/types";
 import { createFactory } from "../../../../../api/user/factory";
+import { AuthParams } from "../../../../../api/user/types";
 
 export const useMutateUser = () => {
   const userFactory = createFactory();
   const navigate = useNavigate();
 
-  const loginMutation = useMutation({
-    mutationFn: async (params: LoginParams) => {
-      return await userFactory.login(params);
+  const authMutation = useMutation({
+    mutationFn: async (params: AuthParams) => {
+      return await userFactory.auth(params);
     },
     onSuccess: () => {
       notifySuccess("ログインに成功しました。");
@@ -24,6 +24,6 @@ export const useMutateUser = () => {
   });
 
   return {
-    loginMutation,
+    authMutation,
   };
 };

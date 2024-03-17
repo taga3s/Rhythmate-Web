@@ -6,6 +6,7 @@ import { ManageQuestSearchModal } from "./ManageQuestSearchModal,";
 import { ManageQuestSearchModalButton } from "./ManageQuestSearchModalButton";
 import { Day, Difficulty } from "../../../api/quest/types";
 import { useQueryQuestList } from "../api/quest/hooks/useQueryQuest";
+import { Loading } from "../../common/components/Loading";
 
 export const ManagePresenter = () => {
   const navigate = useNavigate();
@@ -39,7 +40,7 @@ export const ManagePresenter = () => {
     <div className="w-full">
       <ManageQuestSearchModalButton onClickFn={openQuestSearchModal} />
       {isLoading ? (
-        <div>Loading...</div>
+        <Loading />
       ) : filterActivation ? (
         filteredData?.length ? (
           <ul className="mt-4 flex flex-col items-center gap-6">

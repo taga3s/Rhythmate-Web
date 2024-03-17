@@ -13,11 +13,11 @@ export const MenuButton: FC<Props> = (props) => {
   return (
     <button
       type="button"
-      className="inline-flex flex-col items-center justify-center px-5 hover:bg-gray-50 group"
+      className="inline-flex flex-col items-center justify-center px-2 hover:bg-gray-50 group"
       onClick={() => navigate({ to: path })}
     >
       {icon}
-      <span className="text-sm text-blue-600 group-hover:text-blue-600">{name}</span>
+      <span className="text-xs tracking-wider text-rhyth-black mt-1">{name}</span>
     </button>
   );
 };

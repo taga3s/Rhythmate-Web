@@ -1,14 +1,22 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { AnalyticsLeftButton, AnalyticsRightButton } from "./AnalyticsArrowButton";
 import { AnalyticsBarChart } from "./AnalyticsBarChart";
 import { AnalyticsCard } from "./AnalyticsCard";
-import { useQueryWeeklyReports } from "../api/weeklyReport/hooks/useQueryWeeklyReport";
+import { useQueryWeeklyReports, useQueryWeeklyReportSummary } from "../api/weeklyReport/hooks/useQueryWeeklyReport";
 
 export const AnalyticsPresenter = () => {
   const [currentIndex, setCurrentIndex] = useState<number>(0);
   // const [graphDataIndex, setGraphDataIndex] = useState<number>(0);
 
-  const { data: dataItem, isLoading } = useQueryWeeklyReports();
+  const { data: dataItem, isLoading: isLoadingList } = useQueryWeeklyReports();
+  const {
+    data: summaryData,
+    refetch: refetchSummary,
+    isFetching: isFetchingSummary,
+  } = useQueryWeeklyReportSummary(currentIndex);
+  useEffect(() => {
+    refetchSummary();
+  }, [currentIndex]);
 
   // 日付の配列の作成
   const dateArray = dataItem?.length
@@ -26,10 +34,9 @@ export const AnalyticsPresenter = () => {
     setCurrentIndex((prevIndex) => (prevIndex === (dataItem ? dataItem.length - 1 : 0) ? 0 : prevIndex + 1));
     // setGraphDataIndex((prevIndex) => (prevIndex === (graphData ? graphData.length - 1 : 0) ? 0 : prevIndex + 1));
   };
-
   return (
     <>
-      {isLoading ? (
+      {isLoadingList ? (
         <div>Loading...</div>
       ) : dataItem?.length ? (
         <div className="flex flex-col items-center w-fit mx-auto">
@@ -72,10 +79,19 @@ export const AnalyticsPresenter = () => {
             <h1 className="text-lg mt-8 font-bold">曜日別クエスト達成状況</h1>
           </div>
           <AnalyticsBarChart data={dataItem[currentIndex].completed_quests_each_day} />
+          {isFetchingSummary ? (
+            <div>Generating summary...</div>
+          ) : (
+            summaryData && (
+              <div className="mt-3 text-lg border-2 max-w-sm w-full px-3 py-4 bg-white rounded-lg shadow font-bold">
+                {summaryData}
+              </div>
+            )
+          )}
         </div>
       ) : (
         <div className="w-full gap-4 flex flex-col items-center mx-auto mt-24 text-xl">
-          <div>週刊レポートがまだありません</div>
+          <div>週間レポートがまだありません</div>
           <div>日曜日が終わるとレポートが作成されます</div>
         </div>
       )}
