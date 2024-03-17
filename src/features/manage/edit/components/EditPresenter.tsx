@@ -13,6 +13,7 @@ import { ConfirmModal } from "../../../common/components/ConfirmModal";
 import { DAYS } from "../../common/constant/constant";
 import { convertEnToJPWeekday } from "../../common/funcs";
 import { Day, Difficulty } from "../../../../api/quest/types";
+import { Loading } from "../../../common/components/Loading";
 
 type NewValues = {
   title: string;
@@ -84,7 +85,7 @@ export const EditPresenter: FC<Props> = (props) => {
       </div>
       <h1 className="text-2xl font-bold mt-8">クエスト編集</h1>
       {isLoading ? (
-        <div>Loading...</div>
+        <Loading />
       ) : (
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="mt-6 flex flex-col gap-4">

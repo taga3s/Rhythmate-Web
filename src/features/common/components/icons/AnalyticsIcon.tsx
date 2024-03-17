@@ -1,7 +1,13 @@
-export const AnalyticsIcon = () => {
+import { FC } from "react";
+
+type Props = {
+  color: string;
+};
+
+export const AnalyticsIcon: FC<Props> = ({ color }) => {
   return (
     <svg
-      className="w-6 h-6 text-blue-600"
+      className={`w-6 h-6 ${color}`}
       aria-hidden="true"
       xmlns="http://www.w3.org/2000/svg"
       fill="none"
