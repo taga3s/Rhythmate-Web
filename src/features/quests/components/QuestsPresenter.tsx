@@ -44,7 +44,15 @@ export const QuestsPresenter = () => {
         {formatDateJP(now())}
         {`(${getToday()})`}のクエスト
       </h1>
-      {isLoading ? <Loading /> : currentQuest ? <QuestBoard currentQuest={currentQuest} /> : <QuestBoardNoData />}
+      {isLoading ? (
+        <div className="h-screen">
+          <Loading />
+        </div>
+      ) : currentQuest ? (
+        <QuestBoard currentQuest={currentQuest} />
+      ) : (
+        <QuestBoardNoData />
+      )}
       <div className={`flex flex-col gap-2 w-full p-3 mt-4 bg-gray-100 rounded-md `}>
         <div className="flex items-center gap-2">
           <button

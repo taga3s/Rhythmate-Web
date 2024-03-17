@@ -3,6 +3,7 @@ import { AnalyticsLeftButton, AnalyticsRightButton } from "./AnalyticsArrowButto
 import { AnalyticsBarChart } from "./AnalyticsBarChart";
 import { AnalyticsCard } from "./AnalyticsCard";
 import { useQueryWeeklyReports, useQueryWeeklyReportSummary } from "../api/weeklyReport/hooks/useQueryWeeklyReport";
+import { Loading } from "../../common/components/Loading";
 
 export const AnalyticsPresenter = () => {
   const [currentIndex, setCurrentIndex] = useState<number>(0);
@@ -37,17 +38,19 @@ export const AnalyticsPresenter = () => {
   return (
     <>
       {isLoadingList ? (
-        <div>Loading...</div>
+        <div className="h-screen">
+          <Loading />
+        </div>
       ) : dataItem?.length ? (
         <div className="flex flex-col items-center w-fit mx-auto">
-          <div className="flex w-full justify-between items-center">
-            <AnalyticsLeftButton onClickFn={handleClickPrev} />
+          <div className="flex w-full justify-center items-center">
+            {currentIndex !== dataItem.length - 1 && <AnalyticsLeftButton onClickFn={handleClickPrev} />}
             <div className="flex">
-              <p className="text-xl mx-2 block text-center font-bold">
+              <p className="text-xl px-10 mx-2 block text-center font-bold">
                 {dateArray[currentIndex].start} ～ {dateArray[currentIndex].end}の週
               </p>
             </div>
-            <AnalyticsRightButton onClickFn={handleClickNext} />
+            {currentIndex !== 0 && <AnalyticsRightButton onClickFn={handleClickNext} />}
           </div>
           <div className="grid grid-cols-2 gap-6 mt-6">
             <AnalyticsCard
@@ -80,7 +83,9 @@ export const AnalyticsPresenter = () => {
           </div>
           <AnalyticsBarChart data={dataItem[currentIndex].completed_quests_each_day} />
           {isFetchingSummary ? (
-            <div>Generating summary...</div>
+            <div className="p-10">
+              <Loading />
+            </div>
           ) : (
             summaryData && (
               <div className="mt-3 text-lg border-2 max-w-sm w-full px-3 py-4 bg-white rounded-lg shadow font-bold">

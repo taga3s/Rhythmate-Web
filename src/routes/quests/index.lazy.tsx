@@ -3,8 +3,6 @@ import { Menu } from "../../features/common/components/Menu";
 import { Header } from "../../features/common/components/header/Header";
 import { ContentLayout } from "../../features/common/components/layouts/ContentLayout";
 import { QuestsPresenter } from "../../features/quests/components/QuestsPresenter";
-import { Suspense } from "react";
-import { Loading } from "../../features/common/components/Loading";
 
 export const Route = createLazyFileRoute("/quests/")({
   component: () => <Quests />,
@@ -15,9 +13,7 @@ const Quests = () => {
     <>
       <Header />
       <ContentLayout>
-        <Suspense fallback={<Loading />}>
-          <QuestsPresenter />
-        </Suspense>
+        <QuestsPresenter />
       </ContentLayout>
       <Menu />
     </>
