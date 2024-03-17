@@ -5,8 +5,10 @@ import { SearchIcon } from "../icons/header/SearchIcon";
 import { BadgeIcon } from "../icons/header/BadgeIcon";
 import { RankingIcon } from "../icons/header/RankingIcon";
 
+type Icon = "Bell" | "Tag" | "Search" | "Badge" | "Ranking";
+
 type Props = {
-  icon: string;
+  icon: Icon;
 };
 
 export const HeaderButton: FC<Props> = ({ icon }) => {

@@ -7,49 +7,11 @@ export const Menu = () => {
   const router = useRouterState();
   const pathname = router.location.pathname;
 
-  const isCurrent = (path: any) => {
-    switch (path) {
-      case "/quests":
-        return true;
-      case "/quests/manage":
-        return true;
-      case "/quests/analytics":
-        return true;
-      case "/quests/profile":
-        return true;
-      default:
-        return false;
-    }
+  const isCurrent = (path: string) => {
+    return path === pathname;
   };
 
-  const getQuestsIconColor = (path: any) => {
-    const isCurrentPath = isCurrent(path);
-    if (isCurrentPath) {
-      return "text-rhyth-orange";
-    } else {
-      return "text-rhyth-gray";
-    }
-  };
-
-  const getManageIconColor = (path: any) => {
-    const isCurrentPath = isCurrent(path);
-    if (isCurrentPath) {
-      return "text-rhyth-orange";
-    } else {
-      return "text-rhyth-gray";
-    }
-  };
-
-  const getAnalyticsIconColor = (path: any) => {
-    const isCurrentPath = isCurrent(path);
-    if (isCurrentPath) {
-      return "text-rhyth-orange";
-    } else {
-      return "text-rhyth-gray";
-    }
-  };
-
-  const getProfileIconColor = (path: any) => {
+  const getMenuIconColor = (path: string) => {
     const isCurrentPath = isCurrent(path);
     if (isCurrentPath) {
       return "text-rhyth-orange";
@@ -61,21 +23,21 @@ export const Menu = () => {
   return (
     <ul className="fixed bottom-0 left-0 z-25 w-full h-16 bg-rhyth-bg-gray border-t-2 border-light-gray">
       <div className="grid h-full max-w-lg grid-cols-4 mx-auto font-medium">
-        <MenuButton name="今日の一覧" path="/quests/" icon={<QuestsIcon color={getQuestsIconColor(pathname)} />} />
+        <MenuButton name="今日の一覧" path="/quests/" icon={<QuestsIcon color={getMenuIconColor("/quests/")} />} />
         <MenuButton
           name="クエスト編集"
           path="/quests/manage"
-          icon={<ManageIcon color={getManageIconColor(pathname)} />}
+          icon={<ManageIcon color={getMenuIconColor("/quests/manage")} />}
         />
         <MenuButton
           name="達成分析"
           path="/quests/analytics"
-          icon={<AnalyticsIcon color={getAnalyticsIconColor(pathname)} />}
+          icon={<AnalyticsIcon color={getMenuIconColor("/quests/analytics")} />}
         />
         <MenuButton
           name="プロフィール"
           path="/quests/profile"
-          icon={<ProfileIcon color={getProfileIconColor(pathname)} />}
+          icon={<ProfileIcon color={getMenuIconColor("/quests/profile")} />}
         />
       </div>
     </ul>
