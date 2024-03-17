@@ -1,23 +1,13 @@
-// import { FC, useState } from "react";
+import { FC } from "react";
 
-// type Props = {
-//   isCurrent: boolean;
-// }
+type Props = {
+  color: string;
+};
 
-export const QuestsIcon = () => {
-  // const [color, setColor] = useState("text-rhyth-gray");
-  // const handleIconColor = (isCurrent: boolean) => {
-  //   if (isCurrent) {
-  //     setColor("text-rhyth-orange");
-  //   } else {
-  //     setColor("text-rhyth-gray");
-  //   }
-  //   return color;
-  // }
-
+export const QuestsIcon: FC<Props> = ({ color }) => {
   return (
     <svg
-      className={`w-6 h-6 text-rhyth-gray`}
+      className={`w-6 h-6 ${color}`}
       aria-hidden="true"
       xmlns="http://www.w3.org/2000/svg"
       fill="none"

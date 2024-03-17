@@ -6,26 +6,77 @@ import { AnalyticsIcon, ManageIcon, ProfileIcon, QuestsIcon } from "./icons";
 export const Menu = () => {
   const router = useRouterState();
   const pathname = router.location.pathname;
-  // const [currentPath, setCurrentPath] = useState("/quest");
 
-  // const isCurrent = (menuPath: string) => {
-  //   setCurrentPath(pathname);
-  //   if (currentPath === menuPath) {
-  //     return true;
-  //   } else {
-  //     return false;
-  //   }
-  // }
-  // console.log(currentPath);
-  // console.log(isCurrent("/quests/"));
+  const isCurrent = (path: any) => {
+    switch (path) {
+      case "/quests":
+        return true;
+      case "/quests/manage":
+        return true;
+      case "/quests/analytics":
+        return true;
+      case "/quests/profile":
+        return true;
+      default:
+        return false;
+    }
+  };
+
+  const getQuestsIconColor = (path: any) => {
+    const isCurrentPath = isCurrent(path);
+    if (isCurrentPath) {
+      return "text-rhyth-orange";
+    } else {
+      return "text-rhyth-gray";
+    }
+  };
+
+  const getManageIconColor = (path: any) => {
+    const isCurrentPath = isCurrent(path);
+    if (isCurrentPath) {
+      return "text-rhyth-orange";
+    } else {
+      return "text-rhyth-gray";
+    }
+  };
+
+  const getAnalyticsIconColor = (path: any) => {
+    const isCurrentPath = isCurrent(path);
+    if (isCurrentPath) {
+      return "text-rhyth-orange";
+    } else {
+      return "text-rhyth-gray";
+    }
+  };
+
+  const getProfileIconColor = (path: any) => {
+    const isCurrentPath = isCurrent(path);
+    if (isCurrentPath) {
+      return "text-rhyth-orange";
+    } else {
+      return "text-rhyth-gray";
+    }
+  };
 
   return (
     <ul className="fixed bottom-0 left-0 z-25 w-full h-16 bg-rhyth-bg-gray border-t-2 border-light-gray">
       <div className="grid h-full max-w-lg grid-cols-4 mx-auto font-medium">
-        <MenuButton name="今日の一覧" path="/quests/" icon={<QuestsIcon />} />
-        <MenuButton name="クエスト編集" path="/quests/manage" icon={<ManageIcon />} />
-        <MenuButton name="達成分析" path="/quests/analytics" icon={<AnalyticsIcon />} />
-        <MenuButton name="プロフィール" path="/quests/profile" icon={<ProfileIcon />} />
+        <MenuButton name="今日の一覧" path="/quests/" icon={<QuestsIcon color={getQuestsIconColor(pathname)} />} />
+        <MenuButton
+          name="クエスト編集"
+          path="/quests/manage"
+          icon={<ManageIcon color={getManageIconColor(pathname)} />}
+        />
+        <MenuButton
+          name="達成分析"
+          path="/quests/analytics"
+          icon={<AnalyticsIcon color={getAnalyticsIconColor(pathname)} />}
+        />
+        <MenuButton
+          name="プロフィール"
+          path="/quests/profile"
+          icon={<ProfileIcon color={getProfileIconColor(pathname)} />}
+        />
       </div>
     </ul>
   );
