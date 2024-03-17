@@ -14,7 +14,7 @@ export const createFactory = () => {
       return weeklyReports;
     },
     getWeeklyReportSummary: async (getSummaryParams: GetSummaryParams) => {
-      const response = await repository.getSummary(getSummaryParams);
+      const response = await repository.summarize(getSummaryParams);
       return response.summary;
     },
   };

@@ -3,7 +3,7 @@ import { FetchError } from "../../../../../pkg/api/util/fetchError";
 import { WeeklyReport } from "../../../../../api/weeklyReport/model";
 import { createFactory } from "../../../../../api/weeklyReport/factory";
 
-export const useQueryListWeeklyReports = () => {
+export const useQueryWeeklyReports = () => {
   const weeklyReportFactory = createFactory();
   return useQuery<WeeklyReport[], FetchError>({
     queryKey: ["listWeeklyReports"],

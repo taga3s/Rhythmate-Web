@@ -2,25 +2,20 @@ import { useEffect, useState } from "react";
 import { AnalyticsLeftButton, AnalyticsRightButton } from "./AnalyticsArrowButton";
 import { AnalyticsBarChart } from "./AnalyticsBarChart";
 import { AnalyticsCard } from "./AnalyticsCard";
-import { useQueryListWeeklyReports } from "../api/weeklyReport/hooks/useQueryWeeklyReport";
-import { apiClient } from "../../../pkg/api/client/apiClient";
+import { useQueryWeeklyReports, useQueryWeeklyReportSummary } from "../api/weeklyReport/hooks/useQueryWeeklyReport";
 
 export const AnalyticsPresenter = () => {
   const [currentIndex, setCurrentIndex] = useState<number>(0);
   // const [graphDataIndex, setGraphDataIndex] = useState<number>(0);
 
-  const { data: dataItem, isLoading: isLoadingList } = useQueryListWeeklyReports();
-  const [summary, setSummary] = useState<string>();
-
+  const { data: dataItem, isLoading: isLoadingList } = useQueryWeeklyReports();
+  const {
+    data: summaryData,
+    refetch: refetchSummary,
+    isFetching: isFetchingSummary,
+  } = useQueryWeeklyReportSummary(currentIndex);
   useEffect(() => {
-    if (currentIndex !== (dataItem?.length ?? 0) - 1) {
-      apiClient.get(`/weekly-reports/summarize/${currentIndex}`).then((res): void => {
-        setSummary(res.summary);
-        return;
-      });
-    } else {
-      setSummary("来週以降、結果に応じてアドバイスが表示されます！");
-    }
+    refetchSummary();
   }, [currentIndex]);
 
   // 日付の配列の作成
@@ -84,10 +79,14 @@ export const AnalyticsPresenter = () => {
             <h1 className="text-lg mt-8 font-bold">曜日別クエスト達成状況</h1>
           </div>
           <AnalyticsBarChart data={dataItem[currentIndex].completed_quests_each_day} />
-          {summary && (
-            <div className="mt-3 text-lg border-2 max-w-sm w-full px-3 py-4 bg-white rounded-lg shadow font-bold">
-              {summary}
-            </div>
+          {isFetchingSummary ? (
+            <div>Generating summary...</div>
+          ) : (
+            summaryData && (
+              <div className="mt-3 text-lg border-2 max-w-sm w-full px-3 py-4 bg-white rounded-lg shadow font-bold">
+                {summaryData}
+              </div>
+            )
           )}
         </div>
       ) : (
