@@ -1,5 +1,7 @@
 import { useRouterState } from "@tanstack/react-router";
-import { HeaderButton } from "./HeaderButton";
+import { HeaderQuestsButton } from "./HeaderQuestsButton";
+import { HeaderManageButton } from "./HeaderManageButton";
+import { HeaderProfileButton } from "./HeaderProfileButton";
 
 export const Header = () => {
   const router = useRouterState();
@@ -16,7 +18,22 @@ export const Header = () => {
       case "/quests/profile":
         return "プロフィール";
       default:
-        break;
+        return "今日の一覧";
+    }
+  };
+
+  const handleHeader = (pathname: string) => {
+    switch (pathname) {
+      case "/quests/":
+        return <HeaderQuestsButton />;
+      case "/quests/manage":
+        return <HeaderManageButton />;
+      case "/quests/Analytics":
+        return null;
+      case "/quests/profile":
+        return <HeaderProfileButton />;
+      default:
+        return <HeaderQuestsButton />;
     }
   };
 
@@ -31,10 +48,7 @@ export const Header = () => {
           </div>
           <h1 className="font-cp-font text-xl text-rhyth-dark-blue tracking-wider">{handlePageTitle(pathname)}</h1>
         </div>
-        <div className="flex items-center justify-end">
-          {/* ここにボタンごとにまとめられたURL対応のコンポーネント実装 */}
-          <HeaderButton icon="Bell" />
-        </div>
+        <div className="flex items-center justify-end">{handleHeader(pathname)}</div>
       </div>
     </header>
   );
