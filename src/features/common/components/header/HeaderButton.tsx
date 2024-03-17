@@ -1,9 +1,9 @@
 import { FC } from "react";
-import { BellIcon } from "./icons/header/BellIcon";
-import { TagIcon } from "./icons/header/TagIcon";
-import { SearchIcon } from "./icons/header/SearchIcon";
-import { BadgeIcon } from "./icons/header/BadgeIcon";
-import { RankingIcon } from "./icons/header/RankingIcon";
+import { BellIcon } from "../icons/header/BellIcon";
+import { TagIcon } from "../icons/header/TagIcon";
+import { SearchIcon } from "../icons/header/SearchIcon";
+import { BadgeIcon } from "../icons/header/BadgeIcon";
+import { RankingIcon } from "../icons/header/RankingIcon";
 
 type Props = {
   icon: string;
