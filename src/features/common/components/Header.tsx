@@ -28,7 +28,7 @@ export const Header = () => {
         return <HeaderQuestsButton />;
       case "/quests/manage":
         return <HeaderManageButton />;
-      case "/quests/Analytics":
+      case "/quests/analytics":
         return null;
       case "/quests/profile":
         return <HeaderProfileButton />;
@@ -36,8 +36,6 @@ export const Header = () => {
         return <HeaderQuestsButton />;
     }
   };
-
-  // urlごとにコンポーネントも変えるのはボタンの実装のみ
 
   return (
     <header className="w-full shadow-md bg-rhyth-bg-gray fixed top-0 left-0 right-0 border-b-2 border-rhyth-light-gray">

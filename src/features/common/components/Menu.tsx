@@ -1,8 +1,24 @@
 // import { MenuButton } from "./MenuButton"
+import { useRouterState } from "@tanstack/react-router";
 import { MenuButton } from "./MenuButton";
 import { AnalyticsIcon, ManageIcon, ProfileIcon, QuestsIcon } from "./icons";
 
 export const Menu = () => {
+  const router = useRouterState();
+  const pathname = router.location.pathname;
+  // const [currentPath, setCurrentPath] = useState("/quest");
+
+  // const isCurrent = (menuPath: string) => {
+  //   setCurrentPath(pathname);
+  //   if (currentPath === menuPath) {
+  //     return true;
+  //   } else {
+  //     return false;
+  //   }
+  // }
+  // console.log(currentPath);
+  // console.log(isCurrent("/quests/"));
+
   return (
     <ul className="fixed bottom-0 left-0 z-25 w-full h-16 bg-rhyth-bg-gray border-t-2 border-light-gray">
       <div className="grid h-full max-w-lg grid-cols-4 mx-auto font-medium">

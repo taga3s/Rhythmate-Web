@@ -6,6 +6,7 @@ import { QuestBoardNoData } from "./QuestBoardNoData";
 import { useState } from "react";
 import { QuestListNoData } from "./QuestListNoData";
 import { Quest } from "../../../api/quest/model";
+import { Loading } from "../../common/components/Loading";
 
 const filterQuestsByDayOfTheWeek = (questList: Quest[]) => {
   const todaysDayOfTheWeek = getTodayEng().toUpperCase();
@@ -43,13 +44,7 @@ export const QuestsPresenter = () => {
         {formatDateJP(now())}
         {`(${getToday()})`}のクエスト
       </h1>
-      {isLoading ? (
-        <div>Loading...</div>
-      ) : currentQuest ? (
-        <QuestBoard currentQuest={currentQuest} />
-      ) : (
-        <QuestBoardNoData />
-      )}
+      {isLoading ? <Loading /> : currentQuest ? <QuestBoard currentQuest={currentQuest} /> : <QuestBoardNoData />}
       <div className={`flex flex-col gap-2 w-full p-3 mt-4 bg-gray-100 rounded-md `}>
         <div className="flex items-center gap-2">
           <button
