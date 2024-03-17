@@ -40,7 +40,9 @@ export const ManagePresenter = () => {
     <div className="w-full">
       <ManageQuestSearchModalButton onClickFn={openQuestSearchModal} />
       {isLoading ? (
-        <Loading />
+        <div className="h-screen">
+          <Loading />
+        </div>
       ) : filterActivation ? (
         filteredData?.length ? (
           <ul className="mt-4 flex flex-col items-center gap-6">
