@@ -85,7 +85,9 @@ export const EditPresenter: FC<Props> = (props) => {
       </div>
       <h1 className="text-2xl font-bold mt-8">クエスト編集</h1>
       {isLoading ? (
-        <Loading />
+        <div className="h-screen">
+          <Loading />
+        </div>
       ) : (
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="mt-6 flex flex-col gap-4">

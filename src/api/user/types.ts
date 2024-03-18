@@ -1,21 +1,3 @@
-export type SignupParams = {
-  name: string;
-  email: string;
-  password: string;
-  passwordConfirmation: string;
-};
-
-export type SignupRequest = {
-  name: string;
-  email: string;
-  password: string;
-  passwordConfirmation: string;
-};
-
-export type SignupResponse = {
-  status: string;
-};
-
 export type AuthParams = {
   idToken: string;
 };
@@ -26,6 +8,11 @@ export type AuthRequest = {
 
 export type AuthResponse = {
   status: string;
+};
+
+export type IsAuthenticatedResponse = {
+  status: boolean;
+  message: string;
 };
 
 export type LoginParams = {

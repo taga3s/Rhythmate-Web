@@ -6,7 +6,7 @@ export default {
     extend: {
       fontFamily: {
         "noto-sans-jp": ["Noto Sans JP", "cursive"],
-        "cp-font": ["CP Font", "Append CP Font"]
+        "cp-font": ["CP Font", "Append CP Font"],
       },
       colors: {
         'rhyth-light-blue': '#1EA1FF',
