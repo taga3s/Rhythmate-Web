@@ -23,6 +23,7 @@ const QuestsProfileIndexLazyImport = createFileRoute("/quests/profile/")();
 const QuestsManageIndexLazyImport = createFileRoute("/quests/manage/")();
 const QuestsAnalyticsIndexLazyImport = createFileRoute("/quests/analytics/")();
 const QuestsProfileBadgesIndexLazyImport = createFileRoute("/quests/profile/badges/")();
+const QuestsManageTagsIndexLazyImport = createFileRoute("/quests/manage/tags/")();
 const QuestsManageNewIndexLazyImport = createFileRoute("/quests/manage/new/")();
 const QuestsManageEditIndexLazyImport = createFileRoute("/quests/manage/edit/")();
 
@@ -62,6 +63,11 @@ const QuestsProfileBadgesIndexLazyRoute = QuestsProfileBadgesIndexLazyImport.upd
   path: "/quests/profile/badges/",
   getParentRoute: () => rootRoute,
 } as any).lazy(() => import("./routes/quests/profile/badges/index.lazy").then((d) => d.Route));
+
+const QuestsManageTagsIndexLazyRoute = QuestsManageTagsIndexLazyImport.update({
+  path: "/quests/manage/tags/",
+  getParentRoute: () => rootRoute,
+} as any).lazy(() => import("./routes/quests/manage/tags/index.lazy").then((d) => d.Route));
 
 const QuestsManageNewIndexLazyRoute = QuestsManageNewIndexLazyImport.update({
   path: "/quests/manage/new/",
@@ -109,6 +115,10 @@ declare module "@tanstack/react-router" {
       preLoaderRoute: typeof QuestsManageNewIndexLazyImport;
       parentRoute: typeof rootRoute;
     };
+    "/quests/manage/tags/": {
+      preLoaderRoute: typeof QuestsManageTagsIndexLazyImport;
+      parentRoute: typeof rootRoute;
+    };
     "/quests/profile/badges/": {
       preLoaderRoute: typeof QuestsProfileBadgesIndexLazyImport;
       parentRoute: typeof rootRoute;
@@ -127,6 +137,7 @@ export const routeTree = rootRoute.addChildren([
   QuestsProfileIndexLazyRoute,
   QuestsManageEditIndexLazyRoute,
   QuestsManageNewIndexLazyRoute,
+  QuestsManageTagsIndexLazyRoute,
   QuestsProfileBadgesIndexLazyRoute,
 ]);
 
