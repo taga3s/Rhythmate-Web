@@ -10,6 +10,11 @@ export type AuthResponse = {
   status: string;
 };
 
+export type IsAuthenticatedResponse = {
+  status: boolean;
+  message: string;
+};
+
 export type LoginParams = {
   email: string;
   password: string;

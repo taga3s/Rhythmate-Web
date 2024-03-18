@@ -1,9 +1,17 @@
-import { useCookies } from "react-cookie";
+import { useSuspenseQuery } from "@tanstack/react-query";
+import { createFactory } from "../../../api/user/factory";
 
 export const useAuthenticate = () => {
-  const [cookies] = useCookies(["access_token"]);
-  const accessToken: string = cookies.access_token ?? "";
+  const userFactory = createFactory();
+  const { data } = useSuspenseQuery({
+    queryKey: ["isAuthenticated"],
+    queryFn: async () => {
+      const isAuthenticated = await userFactory.isAuthenticated();
+      return isAuthenticated;
+    },
+    staleTime: Infinity,
+  });
   return {
-    isAuthenticated: accessToken.length !== 0,
+    isAuthenticated: data.status,
   };
 };
