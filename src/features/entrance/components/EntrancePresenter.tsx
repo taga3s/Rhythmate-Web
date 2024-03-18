@@ -1,8 +1,6 @@
 import { useNavigate } from "@tanstack/react-router";
-import { useAuthenticate } from "../../common/hooks/useAuthenticate";
 
 export const EntrancePresenter = () => {
-  const { isAuthenticated } = useAuthenticate();
   const navigation = useNavigate();
 
   return (
@@ -67,7 +65,7 @@ export const EntrancePresenter = () => {
           </div>
         </div>
         <button
-          onClick={() => navigation({ to: isAuthenticated ? "/quests" : "/login" })}
+          onClick={() => navigation({ to: "/login" })}
           className="my-4  text-center text-white bg-rhyth-blue font-medium rounded-lg px-10 py-4 me-2 mb-2 shadow-lg"
         >
           今すぐ始める

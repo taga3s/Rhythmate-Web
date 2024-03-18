@@ -1,8 +1,16 @@
 import { apiClient } from "../../pkg/api/client/apiClient";
-import { AuthRequest, AuthResponse, GetResponse, UpdateLoginUserRequest, UpdateLoginUserResponse } from "./types";
+import {
+  AuthRequest,
+  AuthResponse,
+  GetResponse,
+  IsAuthenticatedResponse,
+  UpdateLoginUserRequest,
+  UpdateLoginUserResponse,
+} from "./types";
 
 export interface UserRepository {
   auth: (params: AuthRequest) => Promise<AuthResponse>;
+  isAuthenticated: () => Promise<IsAuthenticatedResponse>;
   logout: () => Promise<void>;
   get: () => Promise<GetResponse>;
   update: (params: UpdateLoginUserRequest) => Promise<UpdateLoginUserResponse>;
@@ -12,6 +20,11 @@ const auth: UserRepository["auth"] = async (params: AuthRequest) => {
   const response = await apiClient.post("/users/auth", {
     idToken: params.idToken,
   });
+  return response;
+};
+
+const isAuthenticated: UserRepository["isAuthenticated"] = async () => {
+  const response = await apiClient.get("/users/is-authenticated");
   return response;
 };
 
@@ -31,6 +44,7 @@ const update: UserRepository["update"] = async (params: UpdateLoginUserRequest) 
 
 export const userRepository: UserRepository = {
   auth,
+  isAuthenticated,
   logout,
   get,
   update,
