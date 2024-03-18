@@ -34,7 +34,7 @@ export const LoginForm = () => {
   return (
     <div>
       <svg
-        className="w-[120px] h-[120px] text-gray-800 mx-auto"
+        className="w-[120px] h-[120px] text-rhyth-black mx-auto"
         aria-hidden="true"
         xmlns="http://www.w3.org/2000/svg"
         fill="currentColor"
@@ -46,9 +46,9 @@ export const LoginForm = () => {
           clipRule="evenodd"
         />
       </svg>
-      <h1 className="text-lg font-bold text-center">Rhythmateにサインイン</h1>
+      <h1 className="text-md font-bold text-rhyth-black text-center">Rhythmateを始めましょう</h1>
       <button
-        className="p-4 mt-6 bg-white font-bold text-black rounded-md shadow-md cursor-pointer flex justify-center items-center gap-4"
+        className="p-4 mt-10 font-bold text-rhyth-black rounded-md shadow-md border-2 border-rhyth-bg-light-gray cursor-pointer flex justify-center items-center gap-4"
         onClick={signInWithGoogle}
       >
         <img src="/icons/google.png" width={20} height={20} alt="googleのアイコン" />

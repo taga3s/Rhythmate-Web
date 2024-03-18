@@ -68,7 +68,7 @@ export const EntrancePresenter = () => {
         </div>
         <button
           onClick={() => navigation({ to: isAuthenticated ? "/quests" : "/login" })}
-          className="my-4  text-center text-white bg-rhyth-blue font-medium rounded-lg px-10 py-4 me-2 mb-2 shadow-xl"
+          className="my-4  text-center text-white bg-rhyth-blue font-medium rounded-lg px-10 py-4 me-2 mb-2 shadow-lg"
         >
           今すぐ始める
         </button>
