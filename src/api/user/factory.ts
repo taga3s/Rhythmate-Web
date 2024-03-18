@@ -1,15 +1,12 @@
 import { toUser } from "./model";
 import { userRepository } from "./repository";
-import { AuthParams, SignupParams, UpdateLoginUserParams } from "./types";
+import { AuthParams, UpdateLoginUserParams } from "./types";
 
 export const createFactory = () => {
   const repository = userRepository;
   return {
     auth: async (params: AuthParams) => {
       await repository.auth(params);
-    },
-    signup: async (params: SignupParams) => {
-      await repository.signup(params);
     },
     logout: async () => await repository.logout(),
     getLoginUser: async () => {
