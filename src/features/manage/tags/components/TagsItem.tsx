@@ -1,7 +1,12 @@
+import { FC } from "react";
 import { TagsDeleteButton } from "./TagsDeleteButton";
 import { TagsEditButton } from "./TagsEditButton";
 
-export const TagsItem = () => {
+type Props = {
+  onDeleteFn: () => void;
+};
+
+export const TagsItem: FC<Props> = ({ onDeleteFn }) => {
   return (
     <li className="h-12 flex items-center justify-between w-full border-b-2 border-rhyth-light-gray last:border-none px-4 py-2 rounded-t-lg">
       <div className="flex items-center">
@@ -10,7 +15,7 @@ export const TagsItem = () => {
       </div>
       <div className="flex items-center gap-2">
         <TagsEditButton />
-        <TagsDeleteButton />
+        <TagsDeleteButton onClickFn={onDeleteFn} />
       </div>
     </li>
   );
