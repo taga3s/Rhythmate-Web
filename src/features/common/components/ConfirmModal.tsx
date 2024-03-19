@@ -16,18 +16,18 @@ export const ConfirmModal: FC<Props> = (props) => {
   };
   const { text, confirmBtnText, cancelBtnText, btnColor, actionFn, closeModal } = props;
   return (
-    <div className="fixed top-0 left-0 w-full h-full bg-gray-500 bg-opacity-50 z-50">
+    <div className="fixed top-0 left-0 w-full h-full bg-rhyth-black bg-opacity-50 z-50">
       <div
         aria-hidden="true"
         className="overflow-y-auto overflow-x-hidden flex justify-center items-center z-50 w-full md:inset-0 h-[calc(100%-1rem)] max-h-full"
       >
         <div className="relative p-4 w-full max-w-md max-h-full">
           {/* <!-- Modal content --> */}
-          <div className="order relative bg-white border rounded-lg shadow">
+          <div className="order relative bg-rhyth-bg-gray border rounded-lg shadow">
             {/* <!-- Modal body --> */}
             <div className="flex justify-center pt-4">
               <svg
-                className="w-[64px] h-[64px] text-orange-400"
+                className="w-[64px] h-[64px] text-rhyth-orange"
                 aria-hidden="true"
                 xmlns="http://www.w3.org/2000/svg"
                 fill="currentColor"
@@ -49,10 +49,10 @@ export const ConfirmModal: FC<Props> = (props) => {
                   className={`w-full text-white focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center
                   ${
                     btnColor === "green"
-                      ? `bg-green-400 hover:bg-green-500`
+                      ? `bg-rhyth-green hover:bg-green-500`
                       : btnColor === "blue"
-                        ? `bg-blue-400 hover:bg-blue-500`
-                        : "bg-red-400 hover:bg-red-500"
+                        ? `bg-rhyth-blue hover:bg-blue-500`
+                        : "bg-rhyth-red hover:bg-red-500"
                   }
                   `}
                 >
@@ -61,7 +61,7 @@ export const ConfirmModal: FC<Props> = (props) => {
                 <button
                   type="submit"
                   onClick={closeModal}
-                  className="w-full text-white bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+                  className="w-full text-white bg-rhyth-black hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
                 >
                   {cancelBtnText}
                 </button>
