@@ -44,7 +44,8 @@ export const Header = () => {
           <div>
             <img src="/brand-logo.svg" alt="rhythmateのロゴ" className="w-12" />
           </div>
-          <h1 className="font-cp-font text-xl text-rhyth-dark-blue tracking-wider">{handlePageTitle(pathname)}</h1>
+          {/* TODO: フォント検討 */}
+          <h1 className="font-bold text-xl text-rhyth-dark-blue tracking-wider">{handlePageTitle(pathname)}</h1>
         </div>
         <div className="flex items-center justify-end">{handleHeader(pathname)}</div>
       </div>
