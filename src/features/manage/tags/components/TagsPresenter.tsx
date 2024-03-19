@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { TagsItem } from "./TagsItem";
 import { ConfirmModal } from "../../../common/components/ConfirmModal";
+import { TagsEditModal } from "./TagsEditModal";
 
 export const TagsPresenter = () => {
   const [isTagsEditModalOpen, setIsTagsEditModalOpen] = useState<boolean>(false);
@@ -47,13 +48,13 @@ export const TagsPresenter = () => {
         </div>
       </div>
       {isTagsEditModalOpen && (
-        <ConfirmModal
-          text="本当にこのタグを削除しますか？"
-          confirmBtnText="タグを削除する"
-          cancelBtnText="キャンセルする"
-          btnColor="red"
-          // actionFnは後ほど修正
-          actionFn={closeTagsEditModal}
+        <TagsEditModal
+          // text="本当にこのタグを削除しますか？"
+          // confirmBtnText="タグを削除する"
+          // cancelBtnText="キャンセルする"
+          // btnColor="red"
+          // // actionFnは後ほど修正
+          // actionFn={closeTagsEditModal}
           closeModal={closeTagsEditModal}
         />
       )}
