@@ -1,15 +1,18 @@
 import { useState } from "react";
-import { ProfileUserSettingsModalButton } from "./ProfileUserSettingsModalButton";
-import { ProfileUserSettingsModal } from "./ProfileUserSettingModal";
-import { ProfileLogoutModalButton } from "./ProfileLogoutModalButton";
+import { useQueryLoginUser } from "../api/user/hooks/useQueryUser";
 import { ProfileBadgesButton } from "./ProfileBadgesButton";
 import { ProfileLogoutModal } from "./ProfileLogoutModal";
-import { useQueryLoginUser } from "../api/user/hooks/useQueryUser";
+import { ProfileLogoutModalButton } from "./ProfileLogoutModalButton";
+import { ProfileUserSettingsModal } from "./ProfileUserSettingModal";
+import { ProfileUserSettingsModalButton } from "./ProfileUserSettingsModalButton";
+import profilecat from "./profilecat.jpg";
 
 export const ProfilePresenter = () => {
   const { data: loginUser } = useQueryLoginUser();
   const [isSettingsModalOpen, setIsSettingsModalOpen] = useState<boolean>(false);
   const [isLogoutModalOpen, setIsLogoutModalOpen] = useState<boolean>(false);
+  // プロフィール画像を保管する変数、デフォルトはprofilecat
+  const [image, setImage] = useState<string>(profilecat);
 
   const openSettingsModal = () => {
     setIsSettingsModalOpen(true);
@@ -33,23 +36,8 @@ export const ProfilePresenter = () => {
             <ProfileUserSettingsModalButton onClickFn={openSettingsModal} />
           </div>
           <div className="flex justify-between gap-4">
-            <div>
-              <svg
-                className="w-[96px] h-[96px] text-gray-800"
-                aria-hidden="true"
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  stroke="currentColor"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18Zm0 0a9 9 0 0 0 5-1.5 4 4 0 0 0-4-3.5h-2a4 4 0 0 0-4 3.5 9 9 0 0 0 5 1.5Zm3-11a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
-                />
-              </svg>
-            </div>
+            <img src={image} alt="プロフィール画像" className="w-28 h-28 rounded-full" />
+
             <div className="flex flex-col justify-center text-right">
               <div>
                 <h1 className="text-xl">{loginUser?.name}</h1>
