@@ -5,14 +5,12 @@ import { ProfileLogoutModal } from "./ProfileLogoutModal";
 import { ProfileLogoutModalButton } from "./ProfileLogoutModalButton";
 import { ProfileUserSettingsModal } from "./ProfileUserSettingModal";
 import { ProfileUserSettingsModalButton } from "./ProfileUserSettingsModalButton";
-import profilecat from "./profilecat.jpg";
 
 export const ProfilePresenter = () => {
   const { data: loginUser } = useQueryLoginUser();
   const [isSettingsModalOpen, setIsSettingsModalOpen] = useState<boolean>(false);
   const [isLogoutModalOpen, setIsLogoutModalOpen] = useState<boolean>(false);
-  // プロフィール画像を保管する変数、デフォルトはprofilecat
-  const [image, setImage] = useState<string>(profilecat);
+  const profileDefaultImage = "/assets/profile/profilecat.jpg";
 
   const openSettingsModal = () => {
     setIsSettingsModalOpen(true);
@@ -36,7 +34,7 @@ export const ProfilePresenter = () => {
             <ProfileUserSettingsModalButton onClickFn={openSettingsModal} />
           </div>
           <div className="flex justify-between gap-4">
-            <img src={image} alt="プロフィール画像" className="w-28 h-28 rounded-full" />
+            <img src={profileDefaultImage} alt="プロフィール画像" className="w-28 h-28 rounded-full" />
 
             <div className="flex flex-col justify-center text-right">
               <div>
