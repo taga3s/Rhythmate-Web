@@ -1,6 +1,12 @@
-export const TagsEditButton = () => {
+import { FC } from "react";
+
+type Props = {
+  onClickFn: () => void;
+};
+
+export const TagsEditButton: FC<Props> = ({ onClickFn }) => {
   return (
-    <button>
+    <button onClick={onClickFn}>
       <svg
         className="w-6 h-6 text-rhyth-gray"
         aria-hidden="true"
