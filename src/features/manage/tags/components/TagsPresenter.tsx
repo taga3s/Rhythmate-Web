@@ -25,8 +25,24 @@ export const TagsPresenter = () => {
         <h1 className="font-black text-lg text-rhyth-gray mb-2">タグ管理</h1>
         <div>
           <ul className="text-md font-bold text-rhyth-dark-blue bg-white border-2 border-rhyth-light-gray rounded-lg">
-            <TagsItem onEditFn={openTagsEditModal} onDeleteFn={openTagsDeleteModal} />
-            <TagsItem onEditFn={openTagsEditModal} onDeleteFn={openTagsDeleteModal} />
+            <TagsItem
+              tagName="勉強・スキルアップ"
+              tagColor="Green"
+              onEditFn={openTagsEditModal}
+              onDeleteFn={openTagsDeleteModal}
+            />
+            <TagsItem
+              tagName="健康的な習慣"
+              tagColor="Purple"
+              onEditFn={openTagsEditModal}
+              onDeleteFn={openTagsDeleteModal}
+            />
+            <TagsItem
+              tagName="生活・ライフスタイル"
+              tagColor="Blue"
+              onEditFn={openTagsEditModal}
+              onDeleteFn={openTagsDeleteModal}
+            />
           </ul>
         </div>
       </div>
