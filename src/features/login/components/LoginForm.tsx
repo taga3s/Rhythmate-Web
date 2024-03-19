@@ -3,11 +3,13 @@ import { GoogleAuthProvider, getAuth, signInWithPopup } from "firebase/auth";
 import { notifyFailed } from "../../../pkg/ui/toast";
 import { useMutateUser } from "../api/user/hooks/useMutateUser";
 import { FirebaseError } from "firebase/app";
+import { useNavigate } from "@tanstack/react-router";
 
 export const LoginForm = () => {
   const { authMutation } = useMutateUser();
   const provider = new GoogleAuthProvider();
   const auth = getAuth();
+  const navigation = useNavigate();
 
   const signInWithGoogle = async () => {
     try {
@@ -22,6 +24,8 @@ export const LoginForm = () => {
       authMutation.mutateAsync({
         idToken: idToken,
       });
+
+      navigation({ to: "/quests" });
     } catch (error) {
       if (error instanceof FirebaseError) {
         if (error.code !== "auth/popup-closed-by-user") {

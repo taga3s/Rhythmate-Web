@@ -8,11 +8,12 @@ export type AuthRequest = {
 
 export type AuthResponse = {
   status: string;
+  isAuthenticated: boolean;
 };
 
 export type IsAuthenticatedResponse = {
   status: boolean;
-  message: string;
+  isAuthenticated: boolean;
 };
 
 export type LoginParams = {

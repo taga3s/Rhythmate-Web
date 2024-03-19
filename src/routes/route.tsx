@@ -1,7 +1,7 @@
-import { createLazyFileRoute } from "@tanstack/react-router";
+import { createFileRoute } from "@tanstack/react-router";
 import { EntrancePresenter } from "../features/entrance/components/EntrancePresenter";
 
-export const Route = createLazyFileRoute("/")({
+export const Route = createFileRoute("/")({
   component: () => <Entrance />,
 });
 

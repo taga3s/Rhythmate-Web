@@ -1,7 +1,8 @@
-import { createRootRoute, Outlet, ScrollRestoration } from "@tanstack/react-router";
+import { createRootRouteWithContext, Outlet, ScrollRestoration } from "@tanstack/react-router";
 import { Toaster } from "react-hot-toast";
+import { AuthContext } from "../features/common/hooks/useAuthenticate";
 
-export const Route = createRootRoute({
+export const Route = createRootRouteWithContext<AuthContext>()({
   component: () => (
     <>
       <div className="font-noto-sans-jp">

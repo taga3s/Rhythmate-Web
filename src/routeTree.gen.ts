@@ -13,104 +13,104 @@ import { createFileRoute } from "@tanstack/react-router";
 // Import Routes
 
 import { Route as rootRoute } from "./routes/__root";
+import { Route as RouteImport } from "./routes/route";
+import { Route as QuestsIndexImport } from "./routes/quests/index";
+import { Route as QuestsProfileIndexImport } from "./routes/quests/profile/index";
+import { Route as QuestsManageIndexImport } from "./routes/quests/manage/index";
+import { Route as QuestsAnalyticsIndexImport } from "./routes/quests/analytics/index";
+import { Route as QuestsProfileBadgesIndexImport } from "./routes/quests/profile/badges/index";
+import { Route as QuestsManageNewIndexImport } from "./routes/quests/manage/new/index";
+import { Route as QuestsManageEditIndexImport } from "./routes/quests/manage/edit/index";
 
 // Create Virtual Routes
 
-const IndexLazyImport = createFileRoute("/")();
-const QuestsIndexLazyImport = createFileRoute("/quests/")();
 const LoginIndexLazyImport = createFileRoute("/login/")();
-const QuestsProfileIndexLazyImport = createFileRoute("/quests/profile/")();
-const QuestsManageIndexLazyImport = createFileRoute("/quests/manage/")();
-const QuestsAnalyticsIndexLazyImport = createFileRoute("/quests/analytics/")();
-const QuestsProfileBadgesIndexLazyImport = createFileRoute("/quests/profile/badges/")();
-const QuestsManageNewIndexLazyImport = createFileRoute("/quests/manage/new/")();
-const QuestsManageEditIndexLazyImport = createFileRoute("/quests/manage/edit/")();
 
 // Create/Update Routes
 
-const IndexLazyRoute = IndexLazyImport.update({
+const RouteRoute = RouteImport.update({
   path: "/",
   getParentRoute: () => rootRoute,
-} as any).lazy(() => import("./routes/index.lazy").then((d) => d.Route));
-
-const QuestsIndexLazyRoute = QuestsIndexLazyImport.update({
-  path: "/quests/",
-  getParentRoute: () => rootRoute,
-} as any).lazy(() => import("./routes/quests/index.lazy").then((d) => d.Route));
+} as any);
 
 const LoginIndexLazyRoute = LoginIndexLazyImport.update({
   path: "/login/",
   getParentRoute: () => rootRoute,
 } as any).lazy(() => import("./routes/login/index.lazy").then((d) => d.Route));
 
-const QuestsProfileIndexLazyRoute = QuestsProfileIndexLazyImport.update({
+const QuestsIndexRoute = QuestsIndexImport.update({
+  path: "/quests/",
+  getParentRoute: () => rootRoute,
+} as any).lazy(() => import("./routes/quests/index.lazy").then((d) => d.Route));
+
+const QuestsProfileIndexRoute = QuestsProfileIndexImport.update({
   path: "/quests/profile/",
   getParentRoute: () => rootRoute,
 } as any).lazy(() => import("./routes/quests/profile/index.lazy").then((d) => d.Route));
 
-const QuestsManageIndexLazyRoute = QuestsManageIndexLazyImport.update({
+const QuestsManageIndexRoute = QuestsManageIndexImport.update({
   path: "/quests/manage/",
   getParentRoute: () => rootRoute,
 } as any).lazy(() => import("./routes/quests/manage/index.lazy").then((d) => d.Route));
 
-const QuestsAnalyticsIndexLazyRoute = QuestsAnalyticsIndexLazyImport.update({
+const QuestsAnalyticsIndexRoute = QuestsAnalyticsIndexImport.update({
   path: "/quests/analytics/",
   getParentRoute: () => rootRoute,
 } as any).lazy(() => import("./routes/quests/analytics/index.lazy").then((d) => d.Route));
 
-const QuestsProfileBadgesIndexLazyRoute = QuestsProfileBadgesIndexLazyImport.update({
+const QuestsProfileBadgesIndexRoute = QuestsProfileBadgesIndexImport.update({
   path: "/quests/profile/badges/",
   getParentRoute: () => rootRoute,
 } as any).lazy(() => import("./routes/quests/profile/badges/index.lazy").then((d) => d.Route));
 
-const QuestsManageNewIndexLazyRoute = QuestsManageNewIndexLazyImport.update({
+const QuestsManageNewIndexRoute = QuestsManageNewIndexImport.update({
   path: "/quests/manage/new/",
   getParentRoute: () => rootRoute,
 } as any).lazy(() => import("./routes/quests/manage/new/index.lazy").then((d) => d.Route));
 
-const QuestsManageEditIndexLazyRoute = QuestsManageEditIndexLazyImport.update({
+const QuestsManageEditIndexRoute = QuestsManageEditIndexImport.update({
   path: "/quests/manage/edit/",
   getParentRoute: () => rootRoute,
-} as any).lazy(() => import("./routes/quests/manage/edit/index.lazy").then((d) => d.Route));
+} as any);
 
 // Populate the FileRoutesByPath interface
 
 declare module "@tanstack/react-router" {
   interface FileRoutesByPath {
     "/": {
-      preLoaderRoute: typeof IndexLazyImport;
+      preLoaderRoute: typeof RouteImport;
+      parentRoute: typeof rootRoute;
+    };
+    "/quests/": {
+      preLoaderRoute: typeof QuestsIndexImport;
       parentRoute: typeof rootRoute;
     };
     "/login/": {
       preLoaderRoute: typeof LoginIndexLazyImport;
       parentRoute: typeof rootRoute;
     };
-    "/quests/": {
-      preLoaderRoute: typeof QuestsIndexLazyImport;
-      parentRoute: typeof rootRoute;
-    };
     "/quests/analytics/": {
-      preLoaderRoute: typeof QuestsAnalyticsIndexLazyImport;
+      preLoaderRoute: typeof QuestsAnalyticsIndexImport;
       parentRoute: typeof rootRoute;
     };
     "/quests/manage/": {
-      preLoaderRoute: typeof QuestsManageIndexLazyImport;
+      preLoaderRoute: typeof QuestsManageIndexImport;
       parentRoute: typeof rootRoute;
     };
     "/quests/profile/": {
-      preLoaderRoute: typeof QuestsProfileIndexLazyImport;
+      preLoaderRoute: typeof QuestsProfileIndexImport;
       parentRoute: typeof rootRoute;
     };
     "/quests/manage/edit/": {
-      preLoaderRoute: typeof QuestsManageEditIndexLazyImport;
+      preLoaderRoute: typeof QuestsManageEditIndexImport;
       parentRoute: typeof rootRoute;
     };
     "/quests/manage/new/": {
-      preLoaderRoute: typeof QuestsManageNewIndexLazyImport;
+      preLoaderRoute: typeof QuestsManageNewIndexImport;
       parentRoute: typeof rootRoute;
     };
     "/quests/profile/badges/": {
-      preLoaderRoute: typeof QuestsProfileBadgesIndexLazyImport;
+      preLoaderRoute: typeof QuestsProfileBadgesIndexImport;
       parentRoute: typeof rootRoute;
     };
   }
@@ -119,15 +119,15 @@ declare module "@tanstack/react-router" {
 // Create and export the route tree
 
 export const routeTree = rootRoute.addChildren([
-  IndexLazyRoute,
+  RouteRoute,
+  QuestsIndexRoute,
   LoginIndexLazyRoute,
-  QuestsIndexLazyRoute,
-  QuestsAnalyticsIndexLazyRoute,
-  QuestsManageIndexLazyRoute,
-  QuestsProfileIndexLazyRoute,
-  QuestsManageEditIndexLazyRoute,
-  QuestsManageNewIndexLazyRoute,
-  QuestsProfileBadgesIndexLazyRoute,
+  QuestsAnalyticsIndexRoute,
+  QuestsManageIndexRoute,
+  QuestsProfileIndexRoute,
+  QuestsManageEditIndexRoute,
+  QuestsManageNewIndexRoute,
+  QuestsProfileBadgesIndexRoute,
 ]);
 
 /* prettier-ignore-end */

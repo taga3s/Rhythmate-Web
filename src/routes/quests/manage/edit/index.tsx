@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, redirect } from "@tanstack/react-router";
 import { Header, Menu } from "../../../../features/common/components";
 import { ContentLayout } from "../../../../features/common/components/layouts/ContentLayout";
 import { EditPresenter } from "../../../../features/manage/edit/components/EditPresenter";
@@ -9,6 +9,13 @@ const manageSearchSchema = z.object({
 });
 
 export const Route = createFileRoute("/quests/manage/edit/")({
+  beforeLoad: ({ context }) => {
+    if (!context.isAuthenticated) {
+      throw redirect({
+        to: "/login",
+      });
+    }
+  },
   validateSearch: manageSearchSchema,
   component: () => <Edit />,
 });
