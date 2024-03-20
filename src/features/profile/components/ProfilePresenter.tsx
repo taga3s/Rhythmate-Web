@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { useQueryLoginUser } from "../api/user/hooks/useQueryUser";
-import { ProfileBadgesButton } from "./ProfileBadgesButton";
 import { ProfileLogoutModal } from "./ProfileLogoutModal";
 import { ProfileLogoutModalButton } from "./ProfileLogoutModalButton";
 import { ProfileUserSettingsModal } from "./ProfileUserSettingModal";
@@ -54,9 +53,6 @@ export const ProfilePresenter = () => {
             </div>
           </div>
           <p className="text-xs text-right">あと〇〇Expでレベルアップ</p>
-        </div>
-        <div className="w-full text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg">
-          <ProfileBadgesButton />
         </div>
         <div className="w-full text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg">
           <ProfileLogoutModalButton onClickFn={openLogoutModal} />
