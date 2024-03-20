@@ -12,12 +12,12 @@ const labels = ["月", "火", "水", "木", "金", "土", "日"];
 
 export const AnalyticsBarChart: FC<Props> = ({ data }) => {
   const currentData = {
-    labels,
+    labels: labels,
     datasets: [
       {
         label: "クエスト達成数",
         data: data,
-        backgroundColor: "rgba(242, 72, 33)",
+        backgroundColor: ["rgba(0, 181, 238, 1)"],
         borderRadius: 2,
         borderSkipped: false,
       },
@@ -29,6 +29,20 @@ export const AnalyticsBarChart: FC<Props> = ({ data }) => {
       <Bar
         data={currentData}
         options={{
+          scales: {
+            x: {
+              ticks: {
+                color: "rgba(0, 68, 121, 1)",
+              },
+            },
+            y: {
+              ticks: {
+                color: "rgba(0, 68, 121, 1)",
+                stepSize: 1,
+              },
+            },
+          },
+          backgroundColor: "rgba(250, 250, 250, 1)",
           maintainAspectRatio: false,
           responsive: true,
           plugins: {
