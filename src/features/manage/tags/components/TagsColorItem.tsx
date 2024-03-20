@@ -2,42 +2,36 @@ import { FC } from "react";
 
 type Props = {
   color: string;
-  onCloseFn: () => void;
-  selectFn: (color: string) => void;
 };
 
-export const TagsColorItem: FC<Props> = ({ color, onCloseFn, selectFn }) => {
+export const TagsColorItem: FC<Props> = ({ color }) => {
   const selectColorLabel = (color: string) => {
     switch (color) {
       case "Blue":
-        return "bg-rhyth-blue";
+        return "text-rhyth-blue";
       case "Green":
-        return "bg-rhyth-green";
+        return "text-rhyth-green";
       case "Red":
-        return "bg-rhyth-red";
+        return "text-rhyth-red";
       case "Purple":
-        return "bg-rhyth-purple";
+        return "text-rhyth-purple";
       case "Orange":
-        return "bg-rhyth-orange";
+        return "text-rhyth-orange";
       case "Yellow":
-        return "bg-rhyth-yellow";
+        return "text-rhyth-yellow";
       case "LightBlue":
-        return "bg-rhyth-light-blue";
+        return "text-rhyth-light-blue";
     }
   };
 
   return (
-    <li className="border-b border-rhyth-light-gray">
-      <button
-        className="w-full h-hull flex items-center px-4 py-2 rounded-t-lg"
-        onClick={() => {
-          selectFn(color);
-          onCloseFn;
-        }}
-      >
-        <span className={`flex w-3 h-3 me-3 ${selectColorLabel(color)} rounded-full`}></span>
-        <p>{color}</p>
-      </button>
-    </li>
+    <option
+      className={`border-b border-rhyth-light-gray w-full h-hull font-bold flex items-center px-4 py-2 rounded-t-lg ${selectColorLabel(
+        color,
+      )}`}
+      value={color}
+    >
+      {color}
+    </option>
   );
 };

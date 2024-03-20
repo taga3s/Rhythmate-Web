@@ -1,26 +1,57 @@
-import { FC } from "react";
+import { SetStateAction, useState } from "react";
 import { TagsColorItem } from "./TagsColorItem";
 
-type Props = {
-  onCloseFn: () => void;
-  selectFn: (color: string) => void;
-};
+export const TagsColorDropdown = () => {
+  const [colorValue, setColorValue] = useState<string>("");
 
-export const TagsColorDropdown: FC<Props> = ({ onCloseFn, selectFn }) => {
+  const handleColorValue = (event: { target: { value: SetStateAction<string> } }) => {
+    setColorValue(event.target.value);
+  };
+
+  const selectColorLabel = (color: string) => {
+    switch (color) {
+      case "Blue":
+        return "text-rhyth-blue";
+      case "Green":
+        return "text-rhyth-green";
+      case "Red":
+        return "text-rhyth-red";
+      case "Purple":
+        return "text-rhyth-purple";
+      case "Orange":
+        return "text-rhyth-orange";
+      case "Yellow":
+        return "text-rhyth-yellow";
+      case "LightBlue":
+        return "text-rhyth-light-blue";
+      default:
+        return "";
+    }
+  };
+
   return (
-    <div
-      id="dropdownDivider"
-      className="z-[100] bg-white divide-y border-b border-rhyth-light-gray rounded-lg shadow w-full"
+    <select
+      name="tag-color"
+      id="tag-color"
+      className={`bg-white border border-rhyth-light-gray text-rhyth-dark-blue text-sm font-bold rounded-lg w-1/2 p-2 ${selectColorLabel(
+        colorValue,
+      )}`}
+      value={colorValue}
+      onChange={handleColorValue}
     >
-      <ul className="text-sm text-gray-700" aria-labelledby="dropdownDividerButton">
-        <TagsColorItem color="Blue" onCloseFn={onCloseFn} selectFn={selectFn} />
-        <TagsColorItem color="Green" onCloseFn={onCloseFn} selectFn={selectFn} />
-        <TagsColorItem color="Red" onCloseFn={onCloseFn} selectFn={selectFn} />
-        <TagsColorItem color="Purple" onCloseFn={onCloseFn} selectFn={selectFn} />
-        <TagsColorItem color="Orange" onCloseFn={onCloseFn} selectFn={selectFn} />
-        <TagsColorItem color="Yellow" onCloseFn={onCloseFn} selectFn={selectFn} />
-        <TagsColorItem color="LightBlue" onCloseFn={onCloseFn} selectFn={selectFn} />
-      </ul>
-    </div>
+      <option
+        value=""
+        className={`w-full bg-white text-rhyth-dark-blue border border-rhyth-light-gray font-medium rounded-lg text-sm px-5 py-2.5 inline-flex`}
+      >
+        色を選択
+      </option>
+      <TagsColorItem color="Blue" />
+      <TagsColorItem color="Green" />
+      <TagsColorItem color="Red" />
+      <TagsColorItem color="Purple" />
+      <TagsColorItem color="Orange" />
+      <TagsColorItem color="Yellow" />
+      <TagsColorItem color="LightBlue" />
+    </select>
   );
 };

@@ -1,4 +1,4 @@
-import { FC, useState } from "react";
+import { FC } from "react";
 import { TagsColorDropdown } from "./TagsColorDropdown";
 
 type Props = {
@@ -6,38 +6,6 @@ type Props = {
 };
 
 export const TagsEditModal: FC<Props> = ({ closeModal }) => {
-  const [isColorSelectOpen, setIsColorSelectOpen] = useState<boolean>(false);
-  const [selectColor, setSelectColor] = useState<string>("");
-
-  const openColorSelect = () => {
-    setIsColorSelectOpen(true);
-  };
-  const closeColorSelect = () => {
-    setIsColorSelectOpen(false);
-  };
-
-  const handleSelectColor = (color: string) => {
-    setSelectColor(color);
-  };
-  const selectColorLabel = (color: string) => {
-    switch (color) {
-      case "Blue":
-        return "bg-rhyth-blue";
-      case "Green":
-        return "bg-rhyth-green";
-      case "Red":
-        return "bg-rhyth-red";
-      case "Purple":
-        return "bg-rhyth-purple";
-      case "Orange":
-        return "bg-rhyth-orange";
-      case "Yellow":
-        return "bg-rhyth-yellow";
-      case "LightBlue":
-        return "bg-rhyth-light-blue";
-    }
-  };
-
   return (
     <div className="fixed top-0 left-0 w-full h-full bg-gray-500 bg-opacity-50 z-50">
       <div
@@ -122,53 +90,8 @@ export const TagsEditModal: FC<Props> = ({ closeModal }) => {
                     </svg>
                     <span>色ラベル</span>
                   </label>
-                  <div className="w-1/2">
-                    <button
-                      id="tag-color"
-                      data-dropdown-toggle="dropdownDivider"
-                      className={`w-full bg-white text-rhyth-dark-blue border border-rhyth-light-gray font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center justify-center`}
-                      onClick={openColorSelect}
-                      type="button"
-                    >
-                      {selectColor === "" ? (
-                        <div className="w-full h-full flex items-center justify-between bg-white text-rhyth-dark-blue">
-                          <p>色を選択</p>
-                          <svg
-                            className="w-2.5 h-2.5 ms-3"
-                            aria-hidden="true"
-                            xmlns="http://www.w3.org/2000/svg"
-                            fill="none"
-                            viewBox="0 0 10 6"
-                          >
-                            <path
-                              stroke="currentColor"
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              strokeWidth="2"
-                              d="m1 1 4 4 4-4"
-                            />
-                          </svg>
-                        </div>
-                      ) : (
-                        <div className="w-full flex items-center px-4 py-2 rounded-t-lg">
-                          <span className={`flex w-3 h-3 me-3 ${selectColorLabel(selectColor)} rounded-full`}></span>
-                          <p>{selectColor}</p>
-                        </div>
-                      )}
-                    </button>
-                    {isColorSelectOpen && (
-                      <TagsColorDropdown onCloseFn={closeColorSelect} selectFn={handleSelectColor} />
-                    )}
-                  </div>
-                  {/* <input
-                    type="text"
-                    // defaultValue={beforeUserName}
-                    className="bg-white border border-rhyth-light-gray text-rhyth-dark-blue text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-1/2 p-2"
-                    placeholder="username"
-                    // {...register("name")}
-                    required
-                  /> */}
-                  {/* {errors.name && <FormErrorMsg msg={errors.name.message ?? ""} />} */}
+                  {/* FIXME: ここから */}
+                  <TagsColorDropdown />
                 </div>
                 <button
                   type="submit"
