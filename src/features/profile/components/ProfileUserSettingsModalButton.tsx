@@ -13,7 +13,7 @@ export const ProfileUserSettingsModalButton: FC<Props> = ({ onClickFn }) => {
           aria-hidden="true"
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
-          stroke="#AAAAAA"
+          stroke="currentcolor"
           strokeWidth="2"
           viewBox="0 0 24 24"
         >
@@ -23,7 +23,7 @@ export const ProfileUserSettingsModalButton: FC<Props> = ({ onClickFn }) => {
             clipRule="evenodd"
           />
         </svg>
-        <p className="text-lg text-[#AAAAAA] font-bold">ユーザー情報編集</p>
+        <p className="text-lg font-bold">ユーザー情報編集</p>
       </div>
     </button>
   );
