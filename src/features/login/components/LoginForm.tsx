@@ -1,4 +1,4 @@
-import "../../../config/firebase";
+import "../../../firebase/config";
 import { GoogleAuthProvider, getAuth, signInWithPopup } from "firebase/auth";
 import { notifyFailed } from "../../../pkg/ui/toast";
 import { useMutateUser } from "../api/user/hooks/useMutateUser";
