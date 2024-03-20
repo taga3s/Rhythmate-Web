@@ -1,6 +1,6 @@
 import { QuestBoard } from "./QuestBoard";
 import { QuestList } from "./QuestList";
-import { formatDateJP, getToday, getTodayEng, now } from "../../../pkg/util/dayjs";
+import { formatDateJP, getToday, getTodayEn, now } from "../../../pkg/util/dayjs";
 import { useQueryQuestList } from "../api/quest/hooks/useQueryQuest";
 import { QuestBoardNoData } from "./QuestBoardNoData";
 import { useState } from "react";
@@ -9,7 +9,7 @@ import { Quest } from "../../../api/quest/model";
 import { Loading, LoadingContainer } from "../../common/components";
 
 const filterQuestsByDayOfTheWeek = (questList: Quest[]) => {
-  const todaysDayOfTheWeek = getTodayEng().toUpperCase();
+  const todaysDayOfTheWeek = getTodayEn().toUpperCase();
 
   return questList.filter((quest) => {
     const isToday: boolean = quest.days.some((day) => day === todaysDayOfTheWeek);
