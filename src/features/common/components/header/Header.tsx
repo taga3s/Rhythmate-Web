@@ -8,18 +8,25 @@ export const Header = () => {
   const pathname = router.location.pathname;
 
   const handlePageTitle = (pathname: string) => {
-    switch (pathname) {
-      case "/quests/":
-        return "今日の一覧";
-      case "/quests/manage":
-        return "クエスト管理";
-      case "/quests/analytics":
-        return "達成分析";
-      case "/quests/profile":
-        return "プロフィール";
-      default:
-        return "今日の一覧";
+    if (pathname === "/quests/") {
+      return "今日の一覧";
+    } else if (
+      pathname === "/quests/manage" ||
+      pathname === "/quests/manage/new" ||
+      pathname === "/quests/manage/edit" ||
+      pathname === "/quests/manage/tags"
+    ) {
+      return "クエスト管理";
+    } else if (pathname === "/quests/analytics") {
+      return "達成分析";
+    } else if (
+      pathname === "/quests/profile" ||
+      pathname === "/quests/profile/badges" ||
+      pathname === "/quests/profile/ranking"
+    ) {
+      return "プロフィール";
     }
+    return "";
   };
 
   const handleHeader = (pathname: string) => {
@@ -28,12 +35,10 @@ export const Header = () => {
         return <HeaderQuestsButton />;
       case "/quests/manage":
         return <HeaderManageButton />;
-      case "/quests/analytics":
-        return null;
       case "/quests/profile":
         return <HeaderProfileButton />;
       default:
-        return <HeaderQuestsButton />;
+        return <></>;
     }
   };
 
@@ -44,7 +49,8 @@ export const Header = () => {
           <div>
             <img src="/brand-logo.svg" alt="rhythmateのロゴ" className="w-12" />
           </div>
-          <h1 className="font-cp-font text-xl text-rhyth-dark-blue tracking-wider">{handlePageTitle(pathname)}</h1>
+          {/* TODO: フォント適用検討 */}
+          <h1 className="font-bold text-xl text-rhyth-dark-blue tracking-wider">{handlePageTitle(pathname)}</h1>
         </div>
         <div className="flex items-center justify-end">{handleHeader(pathname)}</div>
       </div>

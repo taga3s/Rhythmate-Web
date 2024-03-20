@@ -1,5 +1,5 @@
+import { BarElement, CategoryScale, Chart as ChartJS, Legend, LinearScale, Title, Tooltip } from "chart.js";
 import { FC } from "react";
-import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend } from "chart.js";
 import { Bar } from "react-chartjs-2";
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
@@ -29,6 +29,7 @@ export const AnalyticsBarChart: FC<Props> = ({ data }) => {
       <Bar
         data={currentData}
         options={{
+          maintainAspectRatio: false,
           responsive: true,
           plugins: {
             legend: {

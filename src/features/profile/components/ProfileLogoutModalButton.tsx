@@ -7,10 +7,10 @@ type Props = {
 export const ProfileLogoutModalButton: FC<Props> = ({ onClickFn }) => {
   return (
     <button onClick={onClickFn} className="block w-full h-hull">
-      <div className="px-4 py-3 flex gap-3 items-center">
+      <div className="px-4 py-4 flex gap-6 items-center">
         <div>
           <svg
-            className="w-[24px] h-[24px] text-red-600"
+            className="w-[32px] h-[32px] text-red-600"
             aria-hidden="true"
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
@@ -25,7 +25,7 @@ export const ProfileLogoutModalButton: FC<Props> = ({ onClickFn }) => {
             />
           </svg>
         </div>
-        <p className="text-base">ログアウト</p>
+        <p className="text-lg text-red-600 font-bold">ログアウト</p>
       </div>
     </button>
   );
