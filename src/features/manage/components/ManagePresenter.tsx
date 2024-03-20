@@ -5,18 +5,19 @@ import { ManageQuestCard } from "./ManageQuestCard";
 import { ManageQuestSearchModal } from "./ManageQuestSearchModal,";
 import { Day, Difficulty } from "../../../api/quest/types";
 import { useQueryQuestList } from "../api/quest/hooks/useQueryQuest";
-import { Loading } from "../../common/components/Loading";
-import { LoadingContainer } from "../../common/components/LoadingContainer";
+import { Loading, LoadingContainer } from "../../common/components";
+import { useSearchModalIsOpen, useSetSearchModalIsOpen } from "../../common/contexts/searchModalIsOpenContext";
 
 export const ManagePresenter = () => {
   const navigate = useNavigate();
-  const [isQuestSearchModalOpen, setIsQuestSearchModalOpen] = useState<boolean>(false);
+  const setSearchModalIsOpen = useSetSearchModalIsOpen();
+  const searchModalIsOpen = useSearchModalIsOpen();
   const [filterDay, setFilterDay] = useState<Day | "">("");
   const [filterDifficulties, setFilterDifficulties] = useState<Difficulty[]>([]);
   const [filterActivation, setFilterActivation] = useState<boolean>(false);
 
   const closeQuestSearchModal = () => {
-    setIsQuestSearchModalOpen(false);
+    setSearchModalIsOpen(false);
   };
 
   const { data: quests, isLoading } = useQueryQuestList();
@@ -122,7 +123,7 @@ export const ManagePresenter = () => {
         </div>
       )}
       <ManageNewButton />
-      {isQuestSearchModalOpen && (
+      {searchModalIsOpen && (
         <ManageQuestSearchModal
           onClickFn={closeQuestSearchModal}
           filterDay={filterDay}
