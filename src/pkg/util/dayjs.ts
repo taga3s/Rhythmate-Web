@@ -9,7 +9,7 @@ dayjs.extend(timezone);
 dayjs.tz.setDefault("Asia/Tokyo");
 
 export const now = () => {
-  return dayjs().format();
+  return dayjs.tz().format();
 };
 
 // UTCをJSTに変換する
