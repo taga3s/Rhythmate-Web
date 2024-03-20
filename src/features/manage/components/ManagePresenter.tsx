@@ -3,10 +3,10 @@ import { useState } from "react";
 import { ManageNewButton } from "./ManageNewButton";
 import { ManageQuestCard } from "./ManageQuestCard";
 import { ManageQuestSearchModal } from "./ManageQuestSearchModal,";
-import { ManageQuestSearchModalButton } from "./ManageQuestSearchModalButton";
 import { Day, Difficulty } from "../../../api/quest/types";
 import { useQueryQuestList } from "../api/quest/hooks/useQueryQuest";
 import { Loading } from "../../common/components/Loading";
+import { LoadingContainer } from "../../common/components/LoadingContainer";
 
 export const ManagePresenter = () => {
   const navigate = useNavigate();
@@ -38,11 +38,10 @@ export const ManagePresenter = () => {
 
   return (
     <div className="w-full">
-      <ManageQuestSearchModalButton onClickFn={openQuestSearchModal} />
       {isLoading ? (
-        <div className="h-screen">
+        <LoadingContainer>
           <Loading />
-        </div>
+        </LoadingContainer>
       ) : filterActivation ? (
         filteredData?.length ? (
           <ul className="mt-4 flex flex-col items-center gap-6">

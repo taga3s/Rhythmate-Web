@@ -1,9 +1,11 @@
 import { FC } from "react";
+import { Loading } from "../../common/components/Loading";
 
 type Props = {
   summaryData: string;
+  isLoading: boolean;
 };
-export const AnalyticsAIFeedback: FC<Props> = ({ summaryData }) => {
+export const AnalyticsAIFeedback: FC<Props> = ({ summaryData, isLoading }) => {
   return (
     <div className="mt-3 text-sm border-2 max-w-sm w-full min-h-36 p-4 bg-white rounded-lg shadow">
       <div className="flex gap-2 items-center mb-1">
@@ -23,7 +25,13 @@ export const AnalyticsAIFeedback: FC<Props> = ({ summaryData }) => {
         </svg>
         <p className="text-base font-bold">AIによるフィードバック</p>
       </div>
-      <p className="mt-2">{summaryData}</p>
+      {isLoading ? (
+        <div className="p-8">
+          <Loading />
+        </div>
+      ) : (
+        <p className="mt-2">{summaryData}</p>
+      )}
     </div>
   );
 };
