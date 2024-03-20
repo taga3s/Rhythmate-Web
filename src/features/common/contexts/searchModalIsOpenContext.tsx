@@ -6,7 +6,7 @@ const setSearchModalIsOpenContext = createContext<Dispatch<SetStateAction<boolea
 type Props = {
   children: React.ReactNode;
 };
-export const ModalIsOpenProvider: FC<Props> = ({ children }) => {
+export const SearchModalIsOpenProvider: FC<Props> = ({ children }) => {
   const [searchModalIsOpen, setSearchModalIsOpen] = useState<boolean>(false);
 
   return (
