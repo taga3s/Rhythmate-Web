@@ -1,7 +1,6 @@
 import { FC, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { FormErrorMsg } from "../../../common/components/utils/FormErrorMsg";
 import { useMutateQuest } from "../../api/quest/hooks/useMutateQuest";
 import { useNavigate } from "@tanstack/react-router";
 import { useQueryQuestList } from "../../../quests/api/quest/hooks/useQueryQuest";
@@ -9,11 +8,10 @@ import { NewStar } from "../../new/components/NewStar";
 import { NewDayOfTheWeek } from "../../new/components/NewDayOfTheWeek";
 import { TManageValidationSchema, manageValidationSchema } from "../../common/libs/validation";
 import { formatDateToTime } from "../../../../pkg/util/dayjs";
-import { ConfirmModal } from "../../../common/components/ConfirmModal";
 import { DAYS } from "../../common/constant/constant";
 import { convertEnToJPWeekday } from "../../common/funcs";
 import { Day, Difficulty } from "../../../../api/quest/types";
-import { Loading } from "../../../common/components/Loading";
+import { ConfirmModal, Loading, LoadingContainer, FormErrorMsg } from "../../../common/components";
 
 type NewValues = {
   title: string;
@@ -85,9 +83,9 @@ export const EditPresenter: FC<Props> = (props) => {
       </div>
       <h1 className="text-2xl font-bold mt-8">クエスト編集</h1>
       {isLoading ? (
-        <div className="h-screen">
+        <LoadingContainer>
           <Loading />
-        </div>
+        </LoadingContainer>
       ) : (
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="mt-6 flex flex-col gap-4">

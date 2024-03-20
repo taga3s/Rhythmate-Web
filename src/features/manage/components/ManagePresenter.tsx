@@ -3,23 +3,21 @@ import { useState } from "react";
 import { ManageNewButton } from "./ManageNewButton";
 import { ManageQuestCard } from "./ManageQuestCard";
 import { ManageQuestSearchModal } from "./ManageQuestSearchModal,";
-import { ManageQuestSearchModalButton } from "./ManageQuestSearchModalButton";
 import { Day, Difficulty } from "../../../api/quest/types";
 import { useQueryQuestList } from "../api/quest/hooks/useQueryQuest";
-import { Loading } from "../../common/components/Loading";
+import { Loading, LoadingContainer } from "../../common/components";
+import { useSearchModalIsOpen, useSetSearchModalIsOpen } from "../../common/contexts/searchModalIsOpenContext";
 
 export const ManagePresenter = () => {
   const navigate = useNavigate();
-  const [isQuestSearchModalOpen, setIsQuestSearchModalOpen] = useState<boolean>(false);
+  const setSearchModalIsOpen = useSetSearchModalIsOpen();
+  const searchModalIsOpen = useSearchModalIsOpen();
   const [filterDay, setFilterDay] = useState<Day | "">("");
   const [filterDifficulties, setFilterDifficulties] = useState<Difficulty[]>([]);
   const [filterActivation, setFilterActivation] = useState<boolean>(false);
 
-  const openQuestSearchModal = () => {
-    setIsQuestSearchModalOpen(true);
-  };
   const closeQuestSearchModal = () => {
-    setIsQuestSearchModalOpen(false);
+    setSearchModalIsOpen(false);
   };
 
   const { data: quests, isLoading } = useQueryQuestList();
@@ -38,11 +36,10 @@ export const ManagePresenter = () => {
 
   return (
     <div className="w-full">
-      <ManageQuestSearchModalButton onClickFn={openQuestSearchModal} />
       {isLoading ? (
-        <div className="h-screen">
+        <LoadingContainer>
           <Loading />
-        </div>
+        </LoadingContainer>
       ) : filterActivation ? (
         filteredData?.length ? (
           <ul className="mt-4 flex flex-col items-center gap-6">
@@ -126,7 +123,7 @@ export const ManagePresenter = () => {
         </div>
       )}
       <ManageNewButton />
-      {isQuestSearchModalOpen && (
+      {searchModalIsOpen && (
         <ManageQuestSearchModal
           onClickFn={closeQuestSearchModal}
           filterDay={filterDay}
