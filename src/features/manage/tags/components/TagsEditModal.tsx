@@ -46,7 +46,6 @@ export const TagsEditModal: FC<Props> = ({ closeModal }) => {
             <div className="p-4 md:p-4">
               <form
                 className="space-y-4"
-                action="#"
                 // onSubmit={handleSubmit(onSubmit)}
               >
                 <div className="flex items-center justify-between">
@@ -90,7 +89,6 @@ export const TagsEditModal: FC<Props> = ({ closeModal }) => {
                     </svg>
                     <span>色ラベル</span>
                   </label>
-                  {/* FIXME: ここから */}
                   <TagsColorDropdown />
                 </div>
                 <button
