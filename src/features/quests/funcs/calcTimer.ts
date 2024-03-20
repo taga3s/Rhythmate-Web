@@ -1,3 +1,4 @@
+import dayjs from "dayjs";
 import { formatDate, formatDateWithAddMinutes, formatDateWithSubtract, now } from "../../../pkg/util/dayjs";
 import { CLOSED, DONE, ENGAGED, FORCE_STOP, OPEN, QuestStatus } from "../constant/constant";
 
@@ -59,7 +60,7 @@ export const getBaseTime = (
 };
 
 export const getDiffTime = (target: string) => {
-  const timeDiff = new Date(target).getTime() - Date.now();
+  const timeDiff = dayjs(target).diff(now());
   const hours = Math.floor(timeDiff / (1000 * 60 * 60)) % 24;
   const minutes = Math.floor((timeDiff / (1000 * 60)) % 60);
   const seconds = Math.floor((timeDiff / 1000) % 60);
