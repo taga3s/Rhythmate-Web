@@ -9,9 +9,10 @@ type Icon = "Bell" | "Tag" | "Search" | "Badge" | "Ranking";
 
 type Props = {
   icon: Icon;
+  onClickFn: () => void;
 };
 
-export const HeaderButton: FC<Props> = ({ icon }) => {
+export const HeaderButton: FC<Props> = ({ icon, onClickFn }) => {
   const selectIcon = (icon: string) => {
     switch (icon) {
       case "Bell":
@@ -28,7 +29,11 @@ export const HeaderButton: FC<Props> = ({ icon }) => {
   };
 
   return (
-    <button type="button" className="w-16 h-full flex justify-center items-center border-l-2 border-rhyth-light-gray">
+    <button
+      type="button"
+      className="w-16 h-full flex justify-center items-center border-l-2 border-rhyth-light-gray"
+      onClick={onClickFn}
+    >
       {selectIcon(icon)}
     </button>
   );

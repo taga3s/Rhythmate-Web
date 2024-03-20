@@ -15,9 +15,6 @@ export const ManagePresenter = () => {
   const [filterDifficulties, setFilterDifficulties] = useState<Difficulty[]>([]);
   const [filterActivation, setFilterActivation] = useState<boolean>(false);
 
-  const openQuestSearchModal = () => {
-    setIsQuestSearchModalOpen(true);
-  };
   const closeQuestSearchModal = () => {
     setIsQuestSearchModalOpen(false);
   };
