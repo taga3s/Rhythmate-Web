@@ -1,6 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Header, Menu } from "../../../../features/common/components";
-import { ContentLayout } from "../../../../features/common/components/layouts/ContentLayout";
+import { Header, Menu, ContentLayout } from "../../../../features/common/components";
 import { EditPresenter } from "../../../../features/manage/edit/components/EditPresenter";
 import { z } from "zod";
 

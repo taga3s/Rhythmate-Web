@@ -6,8 +6,7 @@ import { QuestBoardNoData } from "./QuestBoardNoData";
 import { useState } from "react";
 import { QuestListNoData } from "./QuestListNoData";
 import { Quest } from "../../../api/quest/model";
-import { Loading } from "../../common/components/Loading";
-import { LoadingContainer } from "../../common/components/LoadingContainer";
+import { Loading, LoadingContainer } from "../../common/components";
 
 const filterQuestsByDayOfTheWeek = (questList: Quest[]) => {
   const todaysDayOfTheWeek = getTodayEng().toUpperCase();

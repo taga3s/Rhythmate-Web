@@ -1,11 +1,10 @@
 import { FC, useState } from "react";
-import { ClockIcon } from "../../common/components/icons/ClockIcon";
 import { formatDateToTime } from "../../../pkg/util/dayjs";
 import { QuestBoardTimer } from "./QuestBoardTimer";
 import useInterval from "../../common/hooks/useInterval";
 import { CLOSED, DONE, ENGAGED, FORCE_STOP, INACTIVE, NOT_STARTED_YET, OPEN, QuestStatus } from "../constant/constant";
 import { useMutateQuest } from "../api/quest/hooks/useMutateQuest";
-import { ConfirmModal } from "../../common/components/ConfirmModal";
+import { ConfirmModal, ClockIcon } from "../../common/components";
 import { calcExp } from "../../common/funcs/calcExp";
 import { getBaseTime, getDiffTime } from "../funcs/calcTimer";
 import { Quest } from "../../../api/quest/model";

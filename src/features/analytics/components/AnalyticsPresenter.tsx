@@ -1,11 +1,10 @@
 import { useEffect, useState } from "react";
-import { Loading } from "../../common/components/Loading";
+import { Loading, LoadingContainer } from "../../common/components";
 import { useQueryWeeklyReportSummary, useQueryWeeklyReports } from "../api/weeklyReport/hooks/useQueryWeeklyReport";
 import { AnalyticsLeftButton, AnalyticsRightButton } from "./AnalyticsArrowButton";
 import { AnalyticsBarChart } from "./AnalyticsBarChart";
 import { AnalyticsCard } from "./AnalyticsCard";
 import { AnalyticsAIFeedback } from "./AnalyticsAIFeedback";
-import { LoadingContainer } from "../../common/components/LoadingContainer";
 
 export const AnalyticsPresenter = () => {
   const [currentIndex, setCurrentIndex] = useState<number>(0);

@@ -4,8 +4,7 @@ import { ProfileLogoutModal } from "./ProfileLogoutModal";
 import { ProfileLogoutModalButton } from "./ProfileLogoutModalButton";
 import { ProfileUserSettingsModal } from "./ProfileUserSettingModal";
 import { ProfileUserSettingsModalButton } from "./ProfileUserSettingsModalButton";
-import { LoadingContainer } from "../../common/components/LoadingContainer";
-import { Loading } from "../../common/components/Loading";
+import { Loading, LoadingContainer } from "../../common/components";
 
 export const ProfilePresenter = () => {
   const { data: loginUser, isLoading } = useQueryLoginUser();

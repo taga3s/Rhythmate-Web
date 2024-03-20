@@ -5,8 +5,7 @@ import { ManageQuestCard } from "./ManageQuestCard";
 import { ManageQuestSearchModal } from "./ManageQuestSearchModal,";
 import { Day, Difficulty } from "../../../api/quest/types";
 import { useQueryQuestList } from "../api/quest/hooks/useQueryQuest";
-import { Loading } from "../../common/components/Loading";
-import { LoadingContainer } from "../../common/components/LoadingContainer";
+import { Loading, LoadingContainer } from "../../common/components";
 import { useSearchModalIsOpen, useSetSearchModalIsOpen } from "../../common/contexts/searchModalIsOpenContext";
 
 export const ManagePresenter = () => {
