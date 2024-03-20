@@ -101,7 +101,7 @@ export const TagsEditModal: FC<Props> = ({ closeModal }) => {
                     type="text"
                     // defaultValue={beforeUserName}
                     className="bg-white border border-rhyth-light-gray text-rhyth-dark-blue text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-1/2 p-2"
-                    placeholder="username"
+                    placeholder="tagname"
                     // {...register("name")}
                     required
                   />
