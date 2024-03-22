@@ -1,6 +1,6 @@
 import { FC } from "react";
 import { QuestListItem } from "./QuestListItem";
-import { formatDateToTime } from "../../../pkg/util/dayjs";
+import { formatDateTimeOnlyTime } from "../../../pkg/util/dayjs";
 import { Quest } from "../../../api/quest/model";
 
 type Props = {
@@ -16,7 +16,7 @@ export const QuestList: FC<Props> = (props) => {
           <QuestListItem
             key={quest.id}
             title={quest.title}
-            startsAt={formatDateToTime(quest.startsAt)}
+            startsAt={formatDateTimeOnlyTime(quest.startsAt)}
             isDone={quest.state === "ACTIVE"}
             isSuccess={quest.isSucceeded}
             minutes={quest.minutes}

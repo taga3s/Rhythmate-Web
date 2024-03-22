@@ -8,7 +8,7 @@ export const Header = () => {
   const pathname = router.location.pathname;
 
   const handlePageTitle = (pathname: string) => {
-    if (pathname === "/quests/") {
+    if (pathname === "/quests") {
       return "今日の一覧";
     } else if (
       pathname === "/quests/manage" ||
@@ -31,7 +31,7 @@ export const Header = () => {
 
   const handleHeader = (pathname: string) => {
     switch (pathname) {
-      case "/quests/":
+      case "/quests":
         return <HeaderQuestsButton />;
       case "/quests/manage":
         return <HeaderManageButton />;

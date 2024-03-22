@@ -8,6 +8,7 @@ import { notifyFailed, notifySuccess } from "../../../../../pkg/ui/toast";
 
 export const useMutateQuest = () => {
   const questFactory = createFactory();
+
   const createQuestMutation = useMutation({
     mutationFn: async (params: CreateQuestParams) => {
       return await questFactory.createQuest(params);
@@ -44,6 +45,7 @@ export const useMutateQuest = () => {
       console.log(err);
     },
   });
+
   const deleteQuestMutation = useMutation({
     mutationFn: async (params: DeleteQuestParams) => {
       return await createFactory().deleteQuest(params);
