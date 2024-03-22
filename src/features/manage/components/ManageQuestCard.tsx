@@ -2,7 +2,7 @@ import { useNavigate } from "@tanstack/react-router";
 import { Star } from "./ManageStar";
 import { ManageProgressBar } from "./ManageProgressBar";
 import { FC } from "react";
-import { formatDateToTime } from "../../../pkg/util/dayjs";
+import { formatDateTimeOnlyTime } from "../../../pkg/util/dayjs";
 import { ClockIcon } from "../../common/components/icons/ClockIcon";
 import { calcExp } from "../../common/funcs/calcExp";
 import { convertEnToJPWeekday } from "../common/funcs";
@@ -59,7 +59,7 @@ export const ManageQuestCard: FC<Props> = (props) => {
         <div className="flex gap-4 items-center py-1 font-semibold text-lg">
           <div className="flex gap-2 items-center">
             <ClockIcon />
-            <span>{formatDateToTime(startsAt)} -</span>
+            <span>{formatDateTimeOnlyTime(startsAt)} -</span>
             <span>{minutes}m</span>
           </div>
           <h3>{convertENToJPWeekdayString(days)}</h3>

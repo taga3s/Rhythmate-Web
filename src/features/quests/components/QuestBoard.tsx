@@ -1,5 +1,5 @@
 import { FC, useState } from "react";
-import { formatDateToTime } from "../../../pkg/util/dayjs";
+import { formatDateTimeOnlyTime } from "../../../pkg/util/dayjs";
 import { QuestBoardTimer } from "./QuestBoardTimer";
 import useInterval from "../../common/hooks/useInterval";
 import { CLOSED, DONE, ENGAGED, FORCE_STOP, INACTIVE, NOT_STARTED_YET, OPEN, QuestStatus } from "../constant/constant";
@@ -91,7 +91,7 @@ export const QuestBoard: FC<Props> = (props) => {
           <div className="flex items-center gap-2">
             <ClockIcon />
             <span>
-              {formatDateToTime(currentQuest.startsAt)} - {currentQuest.minutes}m
+              {formatDateTimeOnlyTime(currentQuest.startsAt)} - {currentQuest.minutes}m
             </span>
             <div className="flex items-center gap-1 font-bold">
               <svg
@@ -117,7 +117,7 @@ export const QuestBoard: FC<Props> = (props) => {
               </span>
             </div>
           </div>
-          {getIsStarted(currentQuest.startedAt) && <span>開始: {formatDateToTime(currentQuest.startedAt)}</span>}
+          {getIsStarted(currentQuest.startedAt) && <span>開始: {formatDateTimeOnlyTime(currentQuest.startedAt)}</span>}
         </div>
         <h2 className="text-lg">{currentQuest.title}</h2>
         <div className="w-full h-[2px] bg-gray-200 rounded-md" />

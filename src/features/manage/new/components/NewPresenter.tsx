@@ -10,6 +10,7 @@ import { TManageValidationSchema, manageValidationSchema } from "../../common/li
 import { DAYS } from "../../common/constant/constant";
 import { convertEnToJPWeekday } from "../../common/funcs";
 import { Day, Difficulty } from "../../../../api/quest/types";
+import { formatDateTimeOnlyDate, formatDateTimeWithAddMinutes, isBefore, now } from "../../../../pkg/util/dayjs";
 
 type NewValues = {
   title: string;
@@ -17,6 +18,11 @@ type NewValues = {
   minutes: string;
   days: string[];
   description: string;
+};
+
+export const getCurrentQuestState = (now: string, startsAt: string) => {
+  const targetDateTime = formatDateTimeWithAddMinutes(`${formatDateTimeOnlyDate(now)} ${startsAt}`, 15);
+  return isBefore(targetDateTime) ? "INACTIVE" : "ACTIVE";
 };
 
 export const NewPresenter = () => {
@@ -45,8 +51,9 @@ export const NewPresenter = () => {
       startsAt: data.startsAt,
       tagId: "",
       minutes: Number(data.minutes),
-      difficulty: difficulty,
       days: data.days as Day[],
+      difficulty: difficulty,
+      state: getCurrentQuestState(now(), data.startsAt),
     });
 
     // リセット処理

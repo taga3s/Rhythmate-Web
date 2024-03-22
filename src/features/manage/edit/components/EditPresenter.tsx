@@ -7,7 +7,7 @@ import { useQueryQuestList } from "../../../quests/api/quest/hooks/useQueryQuest
 import { NewStar } from "../../new/components/NewStar";
 import { NewDayOfTheWeek } from "../../new/components/NewDayOfTheWeek";
 import { TManageValidationSchema, manageValidationSchema } from "../../common/libs/validation";
-import { formatDateToTime } from "../../../../pkg/util/dayjs";
+import { formatDateTimeOnlyTime } from "../../../../pkg/util/dayjs";
 import { DAYS } from "../../common/constant/constant";
 import { convertEnToJPWeekday } from "../../common/funcs";
 import { Day, Difficulty } from "../../../../api/quest/types";
@@ -124,7 +124,7 @@ export const EditPresenter: FC<Props> = (props) => {
                   <input
                     type="time"
                     className="w-[85px] border-2 rounded p-1 mr-2"
-                    defaultValue={formatDateToTime(targetQuest?.startsAt ?? "")}
+                    defaultValue={targetQuest?.startsAt ? formatDateTimeOnlyTime(targetQuest.startsAt) : "00:00"}
                     {...register("startsAt")}
                   />
                   <span>から</span>
