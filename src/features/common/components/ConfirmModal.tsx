@@ -16,10 +16,11 @@ export const ConfirmModal: FC<Props> = (props) => {
   };
   const { text, confirmBtnText, cancelBtnText, btnColor, actionFn, closeModal } = props;
   return (
-    <div className="fixed top-0 left-0 w-full h-full bg-rhyth-black bg-opacity-50 z-50">
+    <>
+      <div className="fixed top-0 left-0 w-full h-full bg-gray-500 bg-opacity-50 z-50" onClick={closeModal} />
       <div
         aria-hidden="true"
-        className="overflow-y-auto overflow-x-hidden flex justify-center items-center z-50 w-full md:inset-0 h-[calc(100%-1rem)] max-h-full"
+        className="overflow-y-auto overflow-x-hidden flex justify-center items-center z-[100] max-h-full fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full"
       >
         <div className="relative p-4 w-full max-w-md max-h-full">
           {/* <!-- Modal content --> */}
@@ -70,6 +71,6 @@ export const ConfirmModal: FC<Props> = (props) => {
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };

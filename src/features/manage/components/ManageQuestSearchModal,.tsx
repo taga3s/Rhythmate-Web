@@ -1,8 +1,8 @@
 import { FC, useState } from "react";
+import { Day, Difficulty } from "../../../api/quest/types";
+import { DAYS, DIFFICULTIES } from "../common/constant/constant";
 import { ManageDayOfTheWeekCheckBox } from "./ManageDayOfTheWeekCheckBox";
 import { ManageDifficultyCheckBox } from "./ManageDifficultyCheckBox";
-import { DAYS, DIFFICULTIES } from "../common/constant/constant";
-import { Day, Difficulty } from "../../../api/quest/types";
 
 type Props = {
   onClickFn: () => void;
@@ -42,10 +42,11 @@ export const ManageQuestSearchModal: FC<Props> = ({
   };
 
   return (
-    <div className="fixed top-0 left-0 w-full h-full bg-gray-500 bg-opacity-50 z-50">
+    <>
+      <div className="fixed top-0 left-0 w-full h-full bg-gray-500 bg-opacity-50 z-50" onClick={onClickFn} />
       <div
         aria-hidden="true"
-        className="overflow-y-auto overflow-x-hidden flex justify-center items-center z-50 w-full md:inset-0 h-[calc(100%-1rem)] max-h-full"
+        className="overflow-y-auto overflow-x-hidden flex justify-center items-center z-[100] max-h-full fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full"
       >
         <div className="relative p-4 w-full max-w-md max-h-full">
           {/* <!-- Modal content --> */}
@@ -165,6 +166,6 @@ export const ManageQuestSearchModal: FC<Props> = ({
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };

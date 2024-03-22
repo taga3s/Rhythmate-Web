@@ -1,4 +1,5 @@
-import { formatDate, now } from "../../pkg/util/dayjs";
+import { NOT_STARTED_YET } from "../../features/quests/constant/constant";
+import { convertUTCtoJST, formatDate, formatDateTime, now } from "../../pkg/util/dayjs";
 import { Day, Difficulty, QuestState } from "./types";
 
 export type Quest = {
@@ -46,7 +47,8 @@ export const toQuest = (obj: {
     title: obj.title,
     description: obj.description,
     startsAt: `${formatDate(now())} ${obj.starts_at}`,
-    startedAt: obj.started_at,
+    startedAt:
+      obj.started_at === NOT_STARTED_YET ? obj.started_at : `${formatDateTime(convertUTCtoJST(obj.started_at))}`,
     minutes: obj.minutes,
     tag_id: obj.tag_id,
     difficulty: obj.difficulty,
