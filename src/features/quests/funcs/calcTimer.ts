@@ -1,5 +1,5 @@
 import dayjs from "dayjs";
-import { formatDate, formatDateWithAddMinutes, formatDateWithSubtract, now } from "../../../pkg/util/dayjs";
+import { formatDate, formatDateTimeWithAddMinutes, formatDateTimeWithSubtract, now } from "../../../pkg/util/dayjs";
 import { CLOSED, DONE, ENGAGED, FORCE_STOP, OPEN, QuestStatus } from "../constant/constant";
 
 export const getBaseTime = (
@@ -8,12 +8,12 @@ export const getBaseTime = (
   minutes: number,
   startedAt: string,
 ): { baseTime: string; status: QuestStatus } => {
-  const { diffHH: beforeDiffHH, diffMM: beforeDiffMM } = getDiffTime(formatDateWithSubtract(startsAt, 15));
+  const { diffHH: beforeDiffHH, diffMM: beforeDiffMM } = getDiffTime(formatDateTimeWithSubtract(startsAt, 15));
 
   // クエスト解放前
   if (!isStarted && 0 <= beforeDiffMM) {
     return {
-      baseTime: formatDateWithSubtract(startsAt, 15),
+      baseTime: formatDateTimeWithSubtract(startsAt, 15),
       status: CLOSED,
     };
   }
@@ -29,17 +29,17 @@ export const getBaseTime = (
   // クエスト解放中前後30分
   if (!isStarted && beforeDiffMM < 0) {
     return {
-      baseTime: formatDateWithAddMinutes(startsAt, 15),
+      baseTime: formatDateTimeWithAddMinutes(startsAt, 15),
       status: OPEN,
     };
   }
 
-  const { diffHH: afterDiffHH, diffMM: afterDiffMM } = getDiffTime(formatDateWithAddMinutes(startedAt, minutes));
+  const { diffHH: afterDiffHH, diffMM: afterDiffMM } = getDiffTime(formatDateTimeWithAddMinutes(startedAt, minutes));
 
   // クエスト集中
   if (isStarted && 0 <= afterDiffMM) {
     return {
-      baseTime: formatDateWithAddMinutes(startedAt, minutes),
+      baseTime: formatDateTimeWithAddMinutes(startedAt, minutes),
       status: ENGAGED,
     };
   }
@@ -54,7 +54,7 @@ export const getBaseTime = (
 
   // クエスト終了後
   return {
-    baseTime: formatDateWithAddMinutes(startedAt, minutes + 15),
+    baseTime: formatDateTimeWithAddMinutes(startedAt, minutes + 15),
     status: DONE,
   };
 };

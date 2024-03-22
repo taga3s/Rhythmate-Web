@@ -8,8 +8,9 @@ export type CreateQuestParams = {
   startsAt: string;
   minutes: number;
   tagId: string;
-  difficulty: Difficulty;
   days: Day[];
+  difficulty: Difficulty;
+  state: QuestState;
 };
 
 export type CreateRequest = {
@@ -18,8 +19,9 @@ export type CreateRequest = {
   startsAt: string;
   minutes: number;
   tagId: string;
-  difficulty: Difficulty;
   days: Day[];
+  difficulty: Difficulty;
+  state: QuestState;
 };
 
 export type CreateResponse = {
