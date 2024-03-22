@@ -1,5 +1,7 @@
 import { FC } from "react";
 import { TagsColorDropdown } from "./TagsColorDropdown";
+import { ModalBase } from "../../../common/components/modal/ModalBase";
+import { ModalHeaderCloseButton } from "../../../common/components/modal/ModalHeaderCloseButton";
 
 type Props = {
   closeModal: () => void;
@@ -7,102 +9,71 @@ type Props = {
 
 export const TagsEditModal: FC<Props> = ({ closeModal }) => {
   return (
-    <>
-      <div className="fixed top-0 left-0 w-full h-full bg-gray-500 bg-opacity-50 z-50" onClick={closeModal}></div>
-      <div
-        aria-hidden="true"
-        className="overflow-y-auto overflow-x-hidden flex justify-center items-center z-[100] w-full max-h-full fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
-      >
-        <div className="order relative p-4 w-full max-w-md max-h-full">
-          {/* <!-- Modal content --> */}
-          <div className="order relative bg-white rounded-lg shadow">
-            {/* <!-- Modal header --> */}
-            <div className="flex items-center justify-between p-4 md:p-4 border-b rounded-t">
-              <h3 className="text-xl font-bold text-rhyth-dark-blue">タグ編集</h3>
-              <button
-                type="button"
-                onClick={closeModal}
-                className="end-2.5 text-red-600 bg-transparent hover:text-gray-200 hover:bg-red-600 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center"
-                data-modal-hide="authentication-modal"
-              >
+    <ModalBase onClickClose={closeModal}>
+      <div className="order relative bg-white rounded-lg shadow">
+        {/* <!-- Modal header --> */}
+        <div className="flex items-center justify-between p-4 md:p-4 border-b rounded-t">
+          <h3 className="text-xl font-bold text-rhyth-dark-blue">タグ編集</h3>
+          <ModalHeaderCloseButton onClickClose={closeModal} />
+        </div>
+        {/* <!-- Modal body --> */}
+        <div className="p-4 md:p-4">
+          <form
+            className="space-y-4"
+            // onSubmit={handleSubmit(onSubmit)}
+          >
+            <div className="flex items-center justify-between">
+              <label className="flex gap-2 mb-2 text-sm font-bold text-rhyth-dark-blue my-2" htmlFor="tag-name">
                 <svg
-                  className="w-3 h-3"
+                  className="w-6 h-6 text-rhyth-gray"
                   aria-hidden="true"
                   xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
                   fill="none"
-                  viewBox="0 0 14 14"
+                  viewBox="0 0 24 24"
                 >
-                  <path
-                    stroke="currentColor"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"
-                  />
+                  <path stroke="currentColor" strokeLinecap="round" strokeWidth="2" d="M5 7h14M5 12h14M5 17h10" />
                 </svg>
-                <span className="sr-only">モーダルを閉じる</span>
-              </button>
+                <span>タグ名</span>
+              </label>
+              <input
+                id="tag-name"
+                type="text"
+                // defaultValue={beforeUserName}
+                className="bg-white border border-rhyth-light-gray text-rhyth-dark-blue text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-1/2 p-2"
+                placeholder="tagname"
+                // {...register("name")}
+                required
+              />
+              {/* {errors.name && <FormErrorMsg msg={errors.name.message ?? ""} />} */}
             </div>
-            {/* <!-- Modal body --> */}
-            <div className="p-4 md:p-4">
-              <form
-                className="space-y-4"
-                // onSubmit={handleSubmit(onSubmit)}
-              >
-                <div className="flex items-center justify-between">
-                  <label className="flex gap-2 mb-2 text-sm font-bold text-rhyth-dark-blue my-2" htmlFor="tag-name">
-                    <svg
-                      className="w-6 h-6 text-rhyth-gray"
-                      aria-hidden="true"
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="24"
-                      height="24"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                    >
-                      <path stroke="currentColor" strokeLinecap="round" strokeWidth="2" d="M5 7h14M5 12h14M5 17h10" />
-                    </svg>
-                    <span>タグ名</span>
-                  </label>
-                  <input
-                    id="tag-name"
-                    type="text"
-                    // defaultValue={beforeUserName}
-                    className="bg-white border border-rhyth-light-gray text-rhyth-dark-blue text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-1/2 p-2"
-                    placeholder="tagname"
-                    // {...register("name")}
-                    required
-                  />
-                  {/* {errors.name && <FormErrorMsg msg={errors.name.message ?? ""} />} */}
-                </div>
-                <div className="flex items-start justify-between">
-                  <label className="flex gap-2 mb-2 text-sm font-bold text-rhyth-dark-blue my-2" htmlFor="tag-color">
-                    <svg
-                      className="w-6 h-6 text-rhyth-gray"
-                      aria-hidden="true"
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="24"
-                      height="24"
-                      fill="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path d="M4 6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h11.613a2 2 0 0 0 1.346-.52l4.4-4a2 2 0 0 0 0-2.96l-4.4-4A2 2 0 0 0 15.613 6H4Z" />
-                    </svg>
-                    <span>色ラベル</span>
-                  </label>
-                  <TagsColorDropdown />
-                </div>
-                <button
-                  type="submit"
-                  className="w-full text-white bg-rhyth-blue hover:bg-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center shadow-md"
+            <div className="flex items-start justify-between">
+              <label className="flex gap-2 mb-2 text-sm font-bold text-rhyth-dark-blue my-2" htmlFor="tag-color">
+                <svg
+                  className="w-6 h-6 text-rhyth-gray"
+                  aria-hidden="true"
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  fill="currentColor"
+                  viewBox="0 0 24 24"
                 >
-                  決定する
-                </button>
-              </form>
+                  <path d="M4 6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h11.613a2 2 0 0 0 1.346-.52l4.4-4a2 2 0 0 0 0-2.96l-4.4-4A2 2 0 0 0 15.613 6H4Z" />
+                </svg>
+                <span>色ラベル</span>
+              </label>
+              <TagsColorDropdown />
             </div>
-          </div>
+            <button
+              type="submit"
+              className="w-full text-white bg-rhyth-blue hover:bg-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center shadow-md"
+            >
+              決定する
+            </button>
+          </form>
         </div>
       </div>
-    </>
+    </ModalBase>
   );
 };

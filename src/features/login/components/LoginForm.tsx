@@ -3,13 +3,18 @@ import { GoogleAuthProvider, getAuth, signInWithPopup } from "firebase/auth";
 import { notifyFailed } from "../../../pkg/ui/toast";
 import { useMutateUser } from "../api/user/hooks/useMutateUser";
 import { FirebaseError } from "firebase/app";
+import { useState } from "react";
+import { Loading } from "../../common/components";
 
 export const LoginForm = () => {
   const { authMutation } = useMutateUser();
   const provider = new GoogleAuthProvider();
   const auth = getAuth();
 
+  const [isLoading, setIsLoading] = useState(false);
+
   const signInWithGoogle = async () => {
+    setIsLoading(true);
     try {
       const result = await signInWithPopup(auth, provider);
       const user = result.user;
@@ -19,15 +24,17 @@ export const LoginForm = () => {
       }
 
       const idToken = await user.getIdToken();
-      authMutation.mutateAsync({
+      await authMutation.mutateAsync({
         idToken: idToken,
       });
+      setIsLoading(false);
     } catch (error) {
       if (error instanceof FirebaseError) {
         if (error.code !== "auth/popup-closed-by-user") {
           notifyFailed("エラーが発生しました。\n時間をおいて再度お試しください。");
         }
       }
+      setIsLoading(false);
     }
   };
 
@@ -54,6 +61,11 @@ export const LoginForm = () => {
         <img src="/icons/google.png" width={20} height={20} alt="googleのアイコン" />
         Googleでサインイン
       </button>
+      {isLoading && (
+        <div className="mt-6">
+          <Loading />
+        </div>
+      )}
     </div>
   );
 };
