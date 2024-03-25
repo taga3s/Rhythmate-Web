@@ -1,6 +1,6 @@
 import { useNavigate } from "@tanstack/react-router";
 
-export const ManageNewButton = () => {
+export const TagsNewButton = () => {
   const navigate = useNavigate();
 
   return (

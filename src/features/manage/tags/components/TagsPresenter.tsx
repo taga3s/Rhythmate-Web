@@ -2,6 +2,7 @@ import { useState } from "react";
 import { TagsItem } from "./TagsItem";
 import { ConfirmModal } from "../../../common/components/ConfirmModal";
 import { TagsEditModal } from "./TagsEditModal";
+import { TagsNewButton } from "./TagsNewButton";
 
 export const TagsPresenter = () => {
   const [isTagsEditModalOpen, setIsTagsEditModalOpen] = useState<boolean>(false);
@@ -46,6 +47,7 @@ export const TagsPresenter = () => {
             />
           </ul>
         </div>
+        <TagsNewButton />
       </div>
       {isTagsEditModalOpen && (
         <TagsEditModal
