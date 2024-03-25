@@ -23,9 +23,9 @@ export const TagsPresenter = () => {
   return (
     <>
       <div>
-        <h1 className="font-black text-lg text-rhyth-gray mb-2">タグ管理</h1>
+        <h1 className="font-cp-font font-black text-lg text-rhyth-gray tracking-widest mb-2">タグ管理</h1>
         <div>
-          <ul className="text-md font-bold text-rhyth-dark-blue bg-white border-2 border-rhyth-light-gray rounded-lg">
+          <ul className="text-md font-bold text-rhyth-dark-blue bg-white border-2 border-rhyth-light-gray rounded-lg shadow-md">
             <TagsItem
               tagName="勉強・スキルアップ"
               tagColor="Green"
