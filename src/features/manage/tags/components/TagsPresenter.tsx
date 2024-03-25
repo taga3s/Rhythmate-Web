@@ -7,6 +7,8 @@ import { TagsNewButton } from "./TagsNewButton";
 export const TagsPresenter = () => {
   const [isTagsEditModalOpen, setIsTagsEditModalOpen] = useState<boolean>(false);
   const [isTagsDeleteModalOpen, setIsTagsDeleteModalOpen] = useState<boolean>(false);
+  const [tagsName, setTagsName] = useState<string[]>(["勉強・スキルアップ", "健康的な習慣", "生活・ライフスタイル"]);
+  const [tagsColor, setTagsColor] = useState<string[]>(["Green", "Purple", "Blue"]);
 
   const openTagsEditModal = () => {
     setIsTagsEditModalOpen(true);
@@ -21,30 +23,33 @@ export const TagsPresenter = () => {
     setIsTagsDeleteModalOpen(false);
   };
 
+  const currentTagsItem = () => {
+    tagsName.map((tagName, index) => (
+      <TagsItem
+        key={index}
+        tagName={tagName}
+        tagColor={tagsColor[index]}
+        onEditFn={openTagsEditModal}
+        onDeleteFn={openTagsDeleteModal}
+      />
+    ));
+  };
+
   return (
     <>
       <div>
         <h1 className="font-cp-font font-black text-lg text-rhyth-gray tracking-widest mb-2">タグ管理</h1>
         <div>
           <ul className="text-md font-bold text-rhyth-dark-blue bg-white border-2 border-rhyth-light-gray rounded-lg shadow-md">
-            <TagsItem
-              tagName="勉強・スキルアップ"
-              tagColor="Green"
-              onEditFn={openTagsEditModal}
-              onDeleteFn={openTagsDeleteModal}
-            />
-            <TagsItem
-              tagName="健康的な習慣"
-              tagColor="Purple"
-              onEditFn={openTagsEditModal}
-              onDeleteFn={openTagsDeleteModal}
-            />
-            <TagsItem
-              tagName="生活・ライフスタイル"
-              tagColor="Blue"
-              onEditFn={openTagsEditModal}
-              onDeleteFn={openTagsDeleteModal}
-            />
+            {tagsName.map((tagName, index) => (
+              <TagsItem
+                key={index}
+                tagName={tagName}
+                tagColor={tagsColor[index]}
+                onEditFn={openTagsEditModal}
+                onDeleteFn={openTagsDeleteModal}
+              />
+            ))}
           </ul>
         </div>
         <TagsNewButton />
