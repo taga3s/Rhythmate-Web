@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
 import { Loading, LoadingContainer } from "../../common/components";
 import { useQueryWeeklyReportSummary, useQueryWeeklyReports } from "../api/weeklyReport/hooks/useQueryWeeklyReport";
-import { AnalyticsLeftButton, AnalyticsRightButton } from "./AnalyticsArrowButton";
 import { AnalyticsBarChart } from "./AnalyticsBarChart";
 import { AnalyticsCard } from "./AnalyticsCard";
 import { AnalyticsAIFeedback } from "./AnalyticsAIFeedback";
+import { AnalyticsSwitchButton } from "./AnalyticsSwitchButton";
+import { formatDateTimeJP } from "../../../pkg/util/dayjs";
 
 export const AnalyticsPresenter = () => {
   const [currentIndex, setCurrentIndex] = useState<number>(0);
@@ -19,17 +20,18 @@ export const AnalyticsPresenter = () => {
     refetchSummary();
   }, [currentIndex]);
 
-  // 日付の配列の作成
+  // TODO: 日付の配列の作成
   const dateArray = weeklyReports?.length
     ? weeklyReports.map((item) => ({
-        start: new Date(item.start_date).getMonth() + 1 + "/" + new Date(item.start_date).getDate(),
-        end: new Date(item.end_date).getMonth() + 1 + "/" + new Date(item.end_date).getDate(),
+        start: formatDateTimeJP(item.start_date),
+        end: formatDateTimeJP(item.end_date),
       }))
     : [];
 
   const handleClickPrev = () => {
     setCurrentIndex((prevIndex) => (prevIndex === 0 ? (weeklyReports ? weeklyReports.length - 1 : 0) : prevIndex - 1));
   };
+
   const handleClickNext = () => {
     setCurrentIndex((prevIndex) => (prevIndex === (weeklyReports ? weeklyReports.length - 1 : 0) ? 0 : prevIndex + 1));
   };
@@ -41,17 +43,20 @@ export const AnalyticsPresenter = () => {
         </LoadingContainer>
       ) : weeklyReports?.length ? (
         <div className="flex flex-col items-center w-fit mx-auto">
-          <div className="flex w-full justify-center items-center">
-            {currentIndex !== weeklyReports.length - 1 && <AnalyticsLeftButton onClickFn={handleClickPrev} />}
-            <div className="flex">
-              <p className="text-xl px-10 mx-2 block text-center font-bold">
-                {dateArray[currentIndex].start} ～ {dateArray[currentIndex].end}
-                の週
-              </p>
-            </div>
-            {currentIndex !== 0 && <AnalyticsRightButton onClickFn={handleClickNext} />}
+          <div className="flex justify-between  w-full">
+            {
+              <AnalyticsSwitchButton
+                onClickFn={handleClickPrev}
+                direction="left"
+                isEdgy={currentIndex === dateArray.length - 1}
+              />
+            }
+            <p className="text-xl mx-2 block font-cp-font text-center font-bold text-rhyth-gray">
+              {dateArray[currentIndex].start} ～ {dateArray[currentIndex].end}
+            </p>
+            {<AnalyticsSwitchButton onClickFn={handleClickNext} direction="right" isEdgy={currentIndex === 0} />}
           </div>
-          <div className="grid grid-cols-2 gap-6 mt-6">
+          <div className="grid grid-cols-2 gap-6 w-full mt-6">
             <AnalyticsCard
               title={"達成したクエストの数"}
               data={weeklyReports[currentIndex].completed_quests}
@@ -78,15 +83,18 @@ export const AnalyticsPresenter = () => {
             />
           </div>
           <div className="flex justify-start w-full">
-            <h1 className="text-lg mt-8 font-bold">曜日別クエスト達成状況</h1>
+            <h1 className="mt-8 font-cp-font text-rhyth-gray text-lg font-bold ">曜日別クエスト達成状況</h1>
           </div>
           <AnalyticsBarChart data={weeklyReports[currentIndex].completed_quests_each_day} />
           <AnalyticsAIFeedback summaryData={summaryData ?? ""} isLoading={isFetchingSummary} />
         </div>
       ) : (
-        <div className="w-full gap-4 flex flex-col items-center mx-auto mt-24 text-xl">
-          <div>週間レポートがまだありません</div>
-          <div>日曜日が終わるとレポートが作成されます</div>
+        <div className="w-full gap-4 flex flex-col items-center mx-auto mt-24 text-lg text-center">
+          <span>
+            週間レポートがまだありません。
+            <br />
+            日曜日が終わるとレポートが作成されます。
+          </span>
         </div>
       )}
     </>
