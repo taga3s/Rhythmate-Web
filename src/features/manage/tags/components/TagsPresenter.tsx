@@ -4,11 +4,17 @@ import { ConfirmModal } from "../../../common/components/ConfirmModal";
 import { TagsEditModal } from "./TagsEditModal";
 import { TagsNewButton } from "./TagsNewButton";
 
+type Tag = {
+  tagName: string;
+  tagColor: string;
+};
+
 export const TagsPresenter = () => {
   const [isTagsEditModalOpen, setIsTagsEditModalOpen] = useState<boolean>(false);
   const [isTagsDeleteModalOpen, setIsTagsDeleteModalOpen] = useState<boolean>(false);
   const [tagsName, setTagsName] = useState<string[]>(["勉強・スキルアップ", "健康的な習慣", "生活・ライフスタイル"]);
   const [tagsColor, setTagsColor] = useState<string[]>(["Green", "Purple", "Blue"]);
+  const [editTag, setEditTag] = useState<Tag>({ tagName: "", tagColor: "" });
 
   const openTagsEditModal = () => {
     setIsTagsEditModalOpen(true);
@@ -23,16 +29,23 @@ export const TagsPresenter = () => {
     setIsTagsDeleteModalOpen(false);
   };
 
-  const currentTagsItem = () => {
-    tagsName.map((tagName, index) => (
-      <TagsItem
-        key={index}
-        tagName={tagName}
-        tagColor={tagsColor[index]}
-        onEditFn={openTagsEditModal}
-        onDeleteFn={openTagsDeleteModal}
-      />
-    ));
+  const editTagItem = (key: number, tag: Tag) => {
+    const nextTagsName = tagsName.map((tagNameItem, index) => {
+      if (key === index) {
+        return tag.tagName;
+      } else {
+        return tagNameItem;
+      }
+    });
+    const nextTagsColor = tagsColor.map((tagColorItem, index) => {
+      if (key === index) {
+        return tag.tagColor;
+      } else {
+        return tagColorItem;
+      }
+    });
+    setTagsName(nextTagsName);
+    setTagsColor(nextTagsColor);
   };
 
   return (
@@ -61,7 +74,7 @@ export const TagsPresenter = () => {
           // cancelBtnText="キャンセルする"
           // btnColor="red"
           // // actionFnは後ほど修正
-          // actionFn={closeTagsEditModal}
+          editActionFn={editTagItem}
           closeModal={closeTagsEditModal}
         />
       )}

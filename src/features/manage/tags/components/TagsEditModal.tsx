@@ -3,11 +3,17 @@ import { TagsColorDropdown } from "./TagsColorDropdown";
 import { ModalBase } from "../../../common/components/modal/ModalBase";
 import { ModalHeaderCloseButton } from "../../../common/components/modal/ModalHeaderCloseButton";
 
+type Tag = {
+  tagName: string;
+  tagColor: string;
+};
+
 type Props = {
+  editActionFn: (key: number, tag: Tag) => void;
   closeModal: () => void;
 };
 
-export const TagsEditModal: FC<Props> = ({ closeModal }) => {
+export const TagsEditModal: FC<Props> = ({ editActionFn, closeModal }) => {
   return (
     <ModalBase onClickClose={closeModal}>
       <div className="order relative bg-white rounded-lg shadow">
@@ -20,7 +26,7 @@ export const TagsEditModal: FC<Props> = ({ closeModal }) => {
         <div className="p-4 md:p-4">
           <form
             className="space-y-4"
-            // onSubmit={handleSubmit(onSubmit)}
+            // onSubmit={editActionFn()}
           >
             <div className="flex items-center justify-between">
               <label className="flex gap-2 mb-2 text-sm font-bold text-rhyth-dark-blue my-2" htmlFor="tag-name">
