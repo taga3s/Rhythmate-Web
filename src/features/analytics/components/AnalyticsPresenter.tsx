@@ -51,7 +51,7 @@ export const AnalyticsPresenter = () => {
                 isEdgy={currentIndex === dateArray.length - 1}
               />
             }
-            <p className="text-xl mx-2 block font-cp-font text-center font-bold text-rhyth-gray">
+            <p className="text-xl tracking-wider mx-2 block font-cp-font text-center font-bold text-rhyth-gray">
               {dateArray[currentIndex].start} ～ {dateArray[currentIndex].end}
             </p>
             {<AnalyticsSwitchButton onClickFn={handleClickNext} direction="right" isEdgy={currentIndex === 0} />}
@@ -83,7 +83,9 @@ export const AnalyticsPresenter = () => {
             />
           </div>
           <div className="flex justify-start w-full">
-            <h1 className="mt-8 font-cp-font text-rhyth-gray text-lg font-bold ">曜日別クエスト達成状況</h1>
+            <h1 className="mt-8 font-cp-font tracking-widest text-rhyth-gray text-lg font-bold ">
+              曜日別クエスト達成状況
+            </h1>
           </div>
           <AnalyticsBarChart data={weeklyReports[currentIndex].completed_quests_each_day} />
           <AnalyticsAIFeedback summaryData={summaryData ?? ""} isLoading={isFetchingSummary} />
