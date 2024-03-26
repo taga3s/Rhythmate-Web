@@ -38,6 +38,10 @@ export const formatDateJP = (date: string) => {
   return dayjs(date).tz().format("YYYY年MM月DD日");
 };
 
+export const formatDateTimeJP = (date: string) => {
+  return dayjs(date).tz().format("MM月DD日");
+};
+
 // 演算込みのフォーマット系
 export const formatDateTimeWithAddMinutes = (date: string, minutes: number) => {
   return dayjs(date).tz().add(minutes, "m").format("YYYY-MM-DD HH:mm:ss");

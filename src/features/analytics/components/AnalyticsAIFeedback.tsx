@@ -10,17 +10,16 @@ export const AnalyticsAIFeedback: FC<Props> = ({ summaryData, isLoading }) => {
     <div className="mt-3 text-sm border-2 max-w-sm w-full min-h-36 p-4 bg-white rounded-lg shadow">
       <div className="flex gap-2 items-center mb-1">
         <svg
+          className="w-6 h-6 text-gray-800"
+          aria-hidden="true"
           xmlns="http://www.w3.org/2000/svg"
-          fill="none"
+          fill="currentColor"
           viewBox="0 0 24 24"
-          strokeWidth="1.5"
-          stroke="currentColor"
-          className="w-6 h-6"
         >
           <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L6.832 19.82a4.5 4.5 0 0 1-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 0 1 1.13-1.897L16.863 4.487Zm0 0L19.5 7.125"
+            fillRule="evenodd"
+            d="M3.559 4.544c.355-.35.834-.544 1.33-.544H19.11c.496 0 .975.194 1.33.544.356.35.559.829.559 1.331v9.25c0 .502-.203.981-.559 1.331-.355.35-.834.544-1.33.544H15.5l-2.7 3.6a1 1 0 0 1-1.6 0L8.5 17H4.889c-.496 0-.975-.194-1.33-.544A1.868 1.868 0 0 1 3 15.125v-9.25c0-.502.203-.981.559-1.331ZM7.556 7.5a1 1 0 1 0 0 2h8a1 1 0 0 0 0-2h-8Zm0 3.5a1 1 0 1 0 0 2H12a1 1 0 1 0 0-2H7.556Z"
+            clipRule="evenodd"
           />
         </svg>
         <p className="text-base font-bold">AIによるフィードバック</p>

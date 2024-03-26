@@ -1,3 +1,5 @@
+import { convertUTCtoJST } from "../../pkg/util/dayjs";
+
 export type WeeklyReport = {
   id: string;
   completed_quests: number;
@@ -5,8 +7,8 @@ export type WeeklyReport = {
   completed_percentage: number;
   completed_days: number;
   completed_quests_each_day: number[];
-  start_date: Date;
-  end_date: Date;
+  start_date: string;
+  end_date: string;
 };
 
 export const toWeeklyReport = (obj: {
@@ -16,8 +18,8 @@ export const toWeeklyReport = (obj: {
   completed_percentage: number;
   completed_days: number;
   completed_quests_each_day: number[];
-  start_date: Date;
-  end_date: Date;
+  start_date: string;
+  end_date: string;
 }): WeeklyReport => {
   return {
     id: obj.id,
@@ -26,7 +28,7 @@ export const toWeeklyReport = (obj: {
     completed_percentage: obj.completed_percentage,
     completed_days: obj.completed_days,
     completed_quests_each_day: obj.completed_quests_each_day,
-    start_date: obj.start_date,
-    end_date: obj.end_date,
+    start_date: convertUTCtoJST(obj.start_date),
+    end_date: convertUTCtoJST(obj.end_date),
   };
 };
