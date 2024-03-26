@@ -12,8 +12,13 @@ type Tag = {
 export const TagsPresenter = () => {
   const [isTagsEditModalOpen, setIsTagsEditModalOpen] = useState<boolean>(false);
   const [isTagsDeleteModalOpen, setIsTagsDeleteModalOpen] = useState<boolean>(false);
-  const [tagsName, setTagsName] = useState<string[]>(["勉強・スキルアップ", "健康的な習慣", "生活・ライフスタイル"]);
-  const [tagsColor, setTagsColor] = useState<string[]>(["Green", "Purple", "Blue"]);
+  const [tagItems, setTagItems] = useState<Tag[]>([
+    { tagName: "勉強・スキルアップ", tagColor: "Green" },
+    { tagName: "健康的な習慣", tagColor: "Purple" },
+    { tagName: "生活・ライフスタイル", tagColor: "Blue" },
+  ]);
+  // const [tagsName, setTagsName] = useState<string[]>(["勉強・スキルアップ", "健康的な習慣", "生活・ライフスタイル"]);
+  // const [tagsColor, setTagsColor] = useState<string[]>(["Green", "Purple", "Blue"]);
   const [editTag, setEditTag] = useState<Tag>({ tagName: "", tagColor: "" });
 
   const openTagsEditModal = () => {
@@ -29,23 +34,15 @@ export const TagsPresenter = () => {
     setIsTagsDeleteModalOpen(false);
   };
 
-  const editTagItem = (key: number, tag: Tag) => {
-    const nextTagsName = tagsName.map((tagNameItem, index) => {
+  const changeTagItem = (key: number, tag: Tag) => {
+    const nextTagsName = tagItems.map((tagItem, index) => {
       if (key === index) {
-        return tag.tagName;
+        return { tagName: tag.tagName, tagColor: tag.tagColor };
       } else {
-        return tagNameItem;
+        return tagItem;
       }
     });
-    const nextTagsColor = tagsColor.map((tagColorItem, index) => {
-      if (key === index) {
-        return tag.tagColor;
-      } else {
-        return tagColorItem;
-      }
-    });
-    setTagsName(nextTagsName);
-    setTagsColor(nextTagsColor);
+    setTagItems(nextTagsName);
   };
 
   return (
@@ -54,11 +51,11 @@ export const TagsPresenter = () => {
         <h1 className="font-cp-font font-black text-lg text-rhyth-gray tracking-widest mb-2">タグ管理</h1>
         <div>
           <ul className="text-md font-bold text-rhyth-dark-blue bg-white border-2 border-rhyth-light-gray rounded-lg shadow-md">
-            {tagsName.map((tagName, index) => (
+            {tagItems.map((item, index) => (
               <TagsItem
                 key={index}
-                tagName={tagName}
-                tagColor={tagsColor[index]}
+                tagName={item.tagName}
+                tagColor={item.tagColor}
                 onEditFn={openTagsEditModal}
                 onDeleteFn={openTagsDeleteModal}
               />
@@ -74,7 +71,7 @@ export const TagsPresenter = () => {
           // cancelBtnText="キャンセルする"
           // btnColor="red"
           // // actionFnは後ほど修正
-          editActionFn={editTagItem}
+          editActionFn={changeTagItem}
           closeModal={closeTagsEditModal}
         />
       )}

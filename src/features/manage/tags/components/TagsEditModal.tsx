@@ -1,7 +1,8 @@
-import { FC } from "react";
+import { FC, useState } from "react";
 import { TagsColorDropdown } from "./TagsColorDropdown";
 import { ModalBase } from "../../../common/components/modal/ModalBase";
 import { ModalHeaderCloseButton } from "../../../common/components/modal/ModalHeaderCloseButton";
+import { useForm } from "react-hook-form";
 
 type Tag = {
   tagName: string;
@@ -14,6 +15,21 @@ type Props = {
 };
 
 export const TagsEditModal: FC<Props> = ({ editActionFn, closeModal }) => {
+  const [tagColor, setTagColor] = useState<string>("");
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+
+  const handleTagColor = (color: string) => {
+    setTagColor(color);
+  };
+
+  const onSubmit = () => {
+    closeModal();
+  };
+
   return (
     <ModalBase onClickClose={closeModal}>
       <div className="order relative bg-white rounded-lg shadow">
@@ -24,10 +40,7 @@ export const TagsEditModal: FC<Props> = ({ editActionFn, closeModal }) => {
         </div>
         {/* <!-- Modal body --> */}
         <div className="p-4 md:p-4">
-          <form
-            className="space-y-4"
-            // onSubmit={editActionFn()}
-          >
+          <form className="space-y-4" onSubmit={handleSubmit(onSubmit)}>
             <div className="flex items-center justify-between">
               <label className="flex gap-2 mb-2 text-sm font-bold text-rhyth-dark-blue my-2" htmlFor="tag-name">
                 <svg
@@ -49,7 +62,7 @@ export const TagsEditModal: FC<Props> = ({ editActionFn, closeModal }) => {
                 // defaultValue={beforeUserName}
                 className="bg-white border border-rhyth-light-gray text-rhyth-dark-blue text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-1/2 p-2"
                 placeholder="tagname"
-                // {...register("name")}
+                {...register("tagName")}
                 required
               />
               {/* {errors.name && <FormErrorMsg msg={errors.name.message ?? ""} />} */}
@@ -69,7 +82,7 @@ export const TagsEditModal: FC<Props> = ({ editActionFn, closeModal }) => {
                 </svg>
                 <span>色ラベル</span>
               </label>
-              <TagsColorDropdown />
+              <TagsColorDropdown onSelectFn={handleTagColor} {...register("tagColor")} />
             </div>
             <button
               type="submit"
