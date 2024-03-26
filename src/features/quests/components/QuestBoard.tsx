@@ -6,7 +6,7 @@ import { CLOSED, DONE, ENGAGED, FORCE_STOP, NOT_STARTED_YET, OPEN, QuestStatus }
 import { useMutateQuest } from "../api/quest/hooks/useMutateQuest";
 import { ConfirmModal, ClockIcon } from "../../common/components";
 import { calcExp } from "../../common/funcs/calcExp";
-import { getBaseTime, getDiffTime } from "../funcs/calcTimer";
+import { getBaseTime, getDiffTime } from "../funcs/time";
 import { Quest } from "../../../api/quest/model";
 
 export const getIsStarted = (startedAt: string) => {
