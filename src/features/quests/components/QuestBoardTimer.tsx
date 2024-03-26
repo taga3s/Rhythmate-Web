@@ -16,9 +16,9 @@ export const QuestBoardTimer: FC<Props> = ({ startsAt, isStarted, minutes, start
 
   const { diffHH, diffMM, diffSS } = getDiffTime(baseTime);
 
-  const [hh, setHH] = useState(diffHH);
-  const [mm, setMM] = useState(diffMM);
-  const [ss, setSS] = useState(diffSS);
+  const [hh, setHH] = useState(0 < diffHH ? diffHH : 0);
+  const [mm, setMM] = useState(0 < diffMM ? diffMM : 0);
+  const [ss, setSS] = useState(0 < diffSS ? diffSS : 0);
 
   useInterval(() => {
     const { baseTime, status } = getBaseTime(startsAt, getIsStarted(startedAt), minutes, startedAt);

@@ -2,7 +2,7 @@ import { FC, useState } from "react";
 import { formatDateTimeOnlyTime } from "../../../pkg/util/dayjs";
 import { QuestBoardTimer } from "./QuestBoardTimer";
 import useInterval from "../../common/hooks/useInterval";
-import { CLOSED, DONE, ENGAGED, FORCE_STOP, INACTIVE, NOT_STARTED_YET, OPEN, QuestStatus } from "../constant/constant";
+import { CLOSED, DONE, ENGAGED, FORCE_STOP, NOT_STARTED_YET, OPEN, QuestStatus } from "../constant/constant";
 import { useMutateQuest } from "../api/quest/hooks/useMutateQuest";
 import { ConfirmModal, ClockIcon } from "../../common/components";
 import { calcExp } from "../../common/funcs/calcExp";
@@ -32,14 +32,6 @@ export const QuestBoard: FC<Props> = (props) => {
 
   const [questStatus, setQuestStatus] = useState<QuestStatus>(status);
 
-  // レンダリング時、時間切れの場合、即時終了
-  if (questStatus === FORCE_STOP && currentQuest.state === INACTIVE) {
-    forceFinishQuestMutation.mutateAsync({
-      id: currentQuest.id,
-    });
-    setQuestStatus(CLOSED);
-  }
-
   useInterval(() => {
     const { baseTime, status } = getBaseTime(
       currentQuest.startsAt,
@@ -50,11 +42,8 @@ export const QuestBoard: FC<Props> = (props) => {
 
     const { diffHH, diffMM, diffSS } = getDiffTime(baseTime);
 
-    if (status === FORCE_STOP) {
-      forceFinishQuestMutation.mutateAsync({
-        id: currentQuest.id,
-      });
-      setQuestStatus(CLOSED);
+    if (status === FORCE_STOP && questStatus !== FORCE_STOP) {
+      setQuestStatus(FORCE_STOP);
     }
     // クエスト解放へ切り替える
     if (diffHH === diffMM && diffMM === diffSS && questStatus === CLOSED) {
@@ -79,6 +68,13 @@ export const QuestBoard: FC<Props> = (props) => {
 
   const onClickFinishQuest = async () => {
     await finishQuestMutation.mutateAsync({
+      id: currentQuest.id,
+    });
+    setQuestStatus(CLOSED);
+  };
+
+  const onClickForceFinishQuest = async () => {
+    await forceFinishQuestMutation.mutateAsync({
       id: currentQuest.id,
     });
     setQuestStatus(CLOSED);
@@ -154,12 +150,19 @@ export const QuestBoard: FC<Props> = (props) => {
           <div className="text-white bg-yellow-500 rounded-lg text-lg font-bold p-3 mt-4 text-center">
             クエストに集中しましょう
           </div>
-        ) : (
+        ) : questStatus === DONE ? (
           <button
             onClick={() => setFinishConfirmModalOpen(true)}
             className="text-white bg-blue-400 hover:bg-blue-500 focus:ring-4 focus:ring-blue-300 rounded-lg text-lg font-bold p-3 mt-4 focus:outline-none"
           >
             クエストを完了する
+          </button>
+        ) : (
+          <button
+            onClick={onClickForceFinishQuest}
+            className="text-white bg-red-400 hover:bg-red-500 focus:ring-4 focus:ring-blue-300 rounded-lg text-lg font-bold p-3 mt-4 focus:outline-none"
+          >
+            クエストを強制終了する
           </button>
         )}
       </div>
