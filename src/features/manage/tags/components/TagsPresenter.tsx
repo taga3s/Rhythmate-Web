@@ -53,7 +53,10 @@ export const TagsPresenter = () => {
   return (
     <>
       <div>
-        <h1 className="font-cp-font font-black text-lg text-rhyth-gray tracking-widest mb-2">タグ管理</h1>
+        <div className="flex justify-between items-center mb-2">
+          <h1 className="font-cp-font font-black text-lg text-rhyth-gray tracking-widest">タグ管理</h1>
+          <TagsNewButton onClickFn={openTagsNewModal} />
+        </div>
         <div>
           <ul className="text-md font-bold text-rhyth-dark-blue bg-white border-2 border-rhyth-light-gray rounded-lg shadow-md">
             {tagItems.map((item, index) => (
@@ -67,7 +70,6 @@ export const TagsPresenter = () => {
             ))}
           </ul>
         </div>
-        <TagsNewButton onClickFn={openTagsNewModal} />
       </div>
       {isTagsEditModalOpen && (
         <TagsEditModal

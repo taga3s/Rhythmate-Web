@@ -8,7 +8,7 @@ export const TagsNewButton: FC<Props> = ({ onClickFn }) => {
   return (
     <button
       onClick={onClickFn}
-      className="flex justify-center items-center bg-rhyth-blue h-16 w-16 rounded-full fixed right-12 bottom-24 shadow-lg"
+      className="flex justify-center items-center bg-rhyth-light-blue h-8 w-8 p-1 rounded-sm right-12 bottom-24 shadow-sm"
     >
       <svg
         xmlns="http://www.w3.org/2000/svg"
