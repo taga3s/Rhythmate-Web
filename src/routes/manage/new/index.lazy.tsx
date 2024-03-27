@@ -1,17 +1,17 @@
 import { createLazyFileRoute } from "@tanstack/react-router";
-import { AnalyticsPresenter } from "../../../features/analytics/components/AnalyticsPresenter";
 import { Header, Menu, ContentLayout } from "../../../features/common/components";
+import { NewPresenter } from "../../../features/manage/new/components/NewPresenter";
 
-export const Route = createLazyFileRoute("/quests/analytics/")({
-  component: () => <Analytics />,
+export const Route = createLazyFileRoute("/manage/new/")({
+  component: () => <New />,
 });
 
-const Analytics = () => {
+const New = () => {
   return (
     <>
       <Header />
       <ContentLayout>
-        <AnalyticsPresenter />
+        <NewPresenter />
       </ContentLayout>
       <Menu />
     </>

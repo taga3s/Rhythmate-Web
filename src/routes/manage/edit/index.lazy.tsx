@@ -1,13 +1,13 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Header, Menu, ContentLayout } from "../../../../features/common/components";
-import { EditPresenter } from "../../../../features/manage/edit/components/EditPresenter";
 import { z } from "zod";
+import { ContentLayout, Header, Menu } from "../../../features/common/components";
+import { EditPresenter } from "../../../features/manage/edit/components/EditPresenter";
 
 const manageSearchSchema = z.object({
   quest_id: z.string().catch(""),
 });
 
-export const Route = createFileRoute("/quests/manage/edit/")({
+export const Route = createFileRoute("/manage/edit/")({
   validateSearch: manageSearchSchema,
   component: () => <Edit />,
 });
