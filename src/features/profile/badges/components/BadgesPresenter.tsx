@@ -1,7 +1,7 @@
 import { BadgesBackButton } from "./BadgesBackButton";
 import { useNavigate } from "@tanstack/react-router";
 
-const badgeFrame: string = "../../../public/badges/frame.png";
+const badgeFrame: string = "/badges/frame.png";
 
 // 仮のデータ
 import { achievementData } from "../constant/badges";
@@ -10,7 +10,7 @@ import { badges } from "../constant/badges";
 export const BadgesPresenter = () => {
   const navigation = useNavigate();
   const navigationToProfile = () => {
-    navigation({ to: "/quests/profile" });
+    navigation({ to: "/profile" });
   };
 
   return (

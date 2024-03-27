@@ -33,7 +33,7 @@ export const ManageQuestCard: FC<Props> = (props) => {
       <div className="px-4 py-2">
         <button
           className="bg-gray-200 p-1 rounded block ml-auto shadow"
-          onClick={() => navigate({ to: `/quests/manage/edit`, search: { quest_id: id } })}
+          onClick={() => navigate({ to: `/manage/edit`, search: { quest_id: id } })}
         >
           <div className="flex items-center gap-2 justify-center">
             <svg
