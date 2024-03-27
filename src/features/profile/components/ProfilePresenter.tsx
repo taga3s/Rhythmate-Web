@@ -50,12 +50,8 @@ export const ProfilePresenter = () => {
             </div>
           </div>
           <ProfileExpCard />
-          <div className="w-full text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg shadow">
-            <ProfileUserSettingsModalButton onClickFn={openSettingsModal} />
-          </div>
-          <div className="w-full text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg shadow">
-            <ProfileLogoutModalButton onClickFn={openLogoutModal} />
-          </div>
+          <ProfileUserSettingsModalButton onClickFn={openSettingsModal} />
+          <ProfileLogoutModalButton onClickFn={openLogoutModal} />
         </div>
       )}
       {isSettingsModalOpen && (
