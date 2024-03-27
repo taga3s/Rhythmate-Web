@@ -1,10 +1,11 @@
 import { useState } from "react";
+import { Loading, LoadingContainer } from "../../common/components";
 import { useQueryLoginUser } from "../api/user/hooks/useQueryUser";
+import { ProfileExpCard } from "./ProfileExpCard";
 import { ProfileLogoutModal } from "./ProfileLogoutModal";
 import { ProfileLogoutModalButton } from "./ProfileLogoutModalButton";
 import { ProfileUserSettingsModal } from "./ProfileUserSettingModal";
 import { ProfileUserSettingsModalButton } from "./ProfileUserSettingsModalButton";
-import { Loading, LoadingContainer } from "../../common/components";
 
 export const ProfilePresenter = () => {
   const { data: loginUser, isLoading } = useQueryLoginUser();
@@ -34,7 +35,7 @@ export const ProfilePresenter = () => {
         </LoadingContainer>
       ) : (
         <div className="flex flex-col items-center mx-auto">
-          <div className="w-full mb-5 p-5 bg-white border border-gray-200 rounded-lg shadow">
+          <div className="w-full p-5 bg-white border border-gray-200 rounded-lg shadow">
             <div className="flex justify-between gap-4 box-border mb-4">
               <img src={profileDefaultImage} alt="プロフィール画像" className="w-1/4 h-1/4 rounded-full" />
               <div className="flex flex-col justify-center text-right break-all font-extrabold text-[#004479]">
@@ -48,12 +49,9 @@ export const ProfilePresenter = () => {
               </div>
             </div>
           </div>
-          <div className="w-full text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg shadow">
-            <ProfileUserSettingsModalButton onClickFn={openSettingsModal} />
-          </div>
-          <div className="w-full text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg shadow">
-            <ProfileLogoutModalButton onClickFn={openLogoutModal} />
-          </div>
+          <ProfileExpCard />
+          <ProfileUserSettingsModalButton onClickFn={openSettingsModal} />
+          <ProfileLogoutModalButton onClickFn={openLogoutModal} />
         </div>
       )}
       {isSettingsModalOpen && (
