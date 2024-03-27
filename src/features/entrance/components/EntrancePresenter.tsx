@@ -4,7 +4,7 @@ export const EntrancePresenter = () => {
   const navigation = useNavigate();
 
   return (
-    <div className="my-16 flex flex-col items-center">
+    <div className="py-16 flex flex-col items-center">
       <img className="w-56 my-4 inline object-center" src="/logo-long.svg" alt="rhythmateのロゴ" />
       <div>
         <div className="my-4 flex gap-2 items-center">
@@ -69,7 +69,6 @@ export const EntrancePresenter = () => {
       >
         今すぐ始める
       </button>
-      <small className="my-10 text-gray-400">&copy; 167.25 All rights reserved.</small>
     </div>
   );
 };
