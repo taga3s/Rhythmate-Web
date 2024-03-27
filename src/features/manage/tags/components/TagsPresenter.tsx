@@ -13,7 +13,7 @@ export const TagsPresenter = () => {
   const [isTagsEditModalOpen, setIsTagsEditModalOpen] = useState<boolean>(false);
   const [isTagsDeleteModalOpen, setIsTagsDeleteModalOpen] = useState<boolean>(false);
   const [isTagsNewModalOpen, setIsTagsNewModalOpen] = useState<boolean>(false);
-  const [tagItems, setTagItems] = useState<Tag[]>([
+  const [tagItems] = useState<Tag[]>([
     { tagName: "勉強・スキルアップ", tagColor: "Green" },
     { tagName: "健康的な習慣", tagColor: "Purple" },
     { tagName: "生活・ライフスタイル", tagColor: "Blue" },
@@ -39,16 +39,16 @@ export const TagsPresenter = () => {
     setIsTagsNewModalOpen(false);
   };
 
-  const changeTagItem = (key: number, tag: Tag) => {
-    const nextTagsName = tagItems.map((tagItem, index) => {
-      if (key === index) {
-        return { tagName: tag.tagName, tagColor: tag.tagColor };
-      } else {
-        return tagItem;
-      }
-    });
-    setTagItems(nextTagsName);
-  };
+  // const changeTagItem = (key: number, tag: Tag) => {
+  //   const nextTagsName = tagItems.map((tagItem, index) => {
+  //     if (key === index) {
+  //       return { tagName: tag.tagName, tagColor: tag.tagColor };
+  //     } else {
+  //       return tagItem;
+  //     }
+  //   });
+  //   setTagItems(nextTagsName);
+  // };
 
   return (
     <>
@@ -76,7 +76,6 @@ export const TagsPresenter = () => {
           // cancelBtnText="キャンセルする"
           // btnColor="red"
           // // actionFnは後ほど修正
-          editActionFn={changeTagItem}
           closeModal={closeTagsEditModal}
         />
       )}
@@ -91,9 +90,7 @@ export const TagsPresenter = () => {
           closeModal={closeTagsDeleteModal}
         />
       )}
-      {isTagsNewModalOpen && (
-        <TagsEditModal modalType="タグ作成" editActionFn={changeTagItem} closeModal={closeTagsNewModal} />
-      )}
+      {isTagsNewModalOpen && <TagsEditModal modalType="タグ作成" closeModal={closeTagsNewModal} />}
     </>
   );
 };
