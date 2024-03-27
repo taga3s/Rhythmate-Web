@@ -54,7 +54,7 @@ export const TagsPresenter = () => {
     <>
       <div>
         <div className="flex justify-between items-center mb-2">
-          <h1 className="font-cp-font font-black text-lg text-rhyth-gray tracking-widest">タグ管理</h1>
+          <h1 className="font-cp-font font-black text-xl text-[#666666] tracking-widest">タグ管理</h1>
           <TagsNewButton onClickFn={openTagsNewModal} />
         </div>
         <div>
