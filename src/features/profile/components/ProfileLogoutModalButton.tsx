@@ -7,7 +7,7 @@ type Props = {
 export const ProfileLogoutModalButton: FC<Props> = ({ onClickFn }) => {
   return (
     <button onClick={onClickFn} className="block w-full h-hull">
-      <div className="px-4 py-4 flex gap-6 items-center">
+      <div className="px-4 py-3 flex gap-6 items-center">
         <div>
           <svg
             className="w-[32px] h-[32px] text-red-600"
