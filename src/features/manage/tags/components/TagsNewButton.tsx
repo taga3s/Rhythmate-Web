@@ -1,11 +1,13 @@
-import { useNavigate } from "@tanstack/react-router";
+import { FC } from "react";
 
-export const TagsNewButton = () => {
-  const navigate = useNavigate();
+type Props = {
+  onClickFn: () => void;
+};
 
+export const TagsNewButton: FC<Props> = ({ onClickFn }) => {
   return (
     <button
-      onClick={() => navigate({ to: "/quests/manage/new" })}
+      onClick={onClickFn}
       className="flex justify-center items-center bg-rhyth-blue h-16 w-16 rounded-full fixed right-12 bottom-24 shadow-lg"
     >
       <svg

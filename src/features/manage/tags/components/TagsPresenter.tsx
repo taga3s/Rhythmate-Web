@@ -12,14 +12,13 @@ type Tag = {
 export const TagsPresenter = () => {
   const [isTagsEditModalOpen, setIsTagsEditModalOpen] = useState<boolean>(false);
   const [isTagsDeleteModalOpen, setIsTagsDeleteModalOpen] = useState<boolean>(false);
+  const [isTagsNewModalOpen, setIsTagsNewModalOpen] = useState<boolean>(false);
   const [tagItems, setTagItems] = useState<Tag[]>([
     { tagName: "勉強・スキルアップ", tagColor: "Green" },
     { tagName: "健康的な習慣", tagColor: "Purple" },
     { tagName: "生活・ライフスタイル", tagColor: "Blue" },
   ]);
-  // const [tagsName, setTagsName] = useState<string[]>(["勉強・スキルアップ", "健康的な習慣", "生活・ライフスタイル"]);
-  // const [tagsColor, setTagsColor] = useState<string[]>(["Green", "Purple", "Blue"]);
-  const [editTag, setEditTag] = useState<Tag>({ tagName: "", tagColor: "" });
+  // const [editTag, setEditTag] = useState<Tag>({ tagName: "", tagColor: "" });
 
   const openTagsEditModal = () => {
     setIsTagsEditModalOpen(true);
@@ -32,6 +31,12 @@ export const TagsPresenter = () => {
   };
   const closeTagsDeleteModal = () => {
     setIsTagsDeleteModalOpen(false);
+  };
+  const openTagsNewModal = () => {
+    setIsTagsNewModalOpen(true);
+  };
+  const closeTagsNewModal = () => {
+    setIsTagsNewModalOpen(false);
   };
 
   const changeTagItem = (key: number, tag: Tag) => {
@@ -62,11 +67,11 @@ export const TagsPresenter = () => {
             ))}
           </ul>
         </div>
-        <TagsNewButton />
+        <TagsNewButton onClickFn={openTagsNewModal} />
       </div>
       {isTagsEditModalOpen && (
         <TagsEditModal
-          // text="本当にこのタグを削除しますか？"
+          modalType="タグ編集"
           // confirmBtnText="タグを削除する"
           // cancelBtnText="キャンセルする"
           // btnColor="red"
@@ -85,6 +90,9 @@ export const TagsPresenter = () => {
           actionFn={closeTagsDeleteModal}
           closeModal={closeTagsDeleteModal}
         />
+      )}
+      {isTagsNewModalOpen && (
+        <TagsEditModal modalType="タグ作成" editActionFn={changeTagItem} closeModal={closeTagsNewModal} />
       )}
     </>
   );

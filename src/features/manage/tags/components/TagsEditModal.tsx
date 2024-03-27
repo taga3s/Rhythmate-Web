@@ -10,11 +10,12 @@ type Tag = {
 };
 
 type Props = {
+  modalType: string;
   editActionFn: (key: number, tag: Tag) => void;
   closeModal: () => void;
 };
 
-export const TagsEditModal: FC<Props> = ({ editActionFn, closeModal }) => {
+export const TagsEditModal: FC<Props> = ({ modalType, editActionFn, closeModal }) => {
   const [tagColor, setTagColor] = useState<string>("");
   const {
     register,
@@ -34,8 +35,8 @@ export const TagsEditModal: FC<Props> = ({ editActionFn, closeModal }) => {
     <ModalBase onClickClose={closeModal}>
       <div className="order relative bg-white rounded-lg shadow">
         {/* <!-- Modal header --> */}
-        <div className="flex items-center justify-between p-4 md:p-4 border-b rounded-t">
-          <h3 className="text-xl font-bold text-rhyth-dark-blue">タグ編集</h3>
+        <div className="flex items-center justify-between p-4 md:p-4 rounded-t border-b">
+          <h3 className="font-cp-font text-xl font-bold text-rhyth-dark-blue">{modalType}</h3>
           <ModalHeaderCloseButton onClickClose={closeModal} />
         </div>
         {/* <!-- Modal body --> */}
