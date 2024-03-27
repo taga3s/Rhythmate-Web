@@ -1,4 +1,3 @@
-// import { MenuButton } from "./MenuButton"
 import { useRouterState } from "@tanstack/react-router";
 import { MenuButton } from "./MenuButton";
 import { AnalyticsIcon, ManageIcon, ProfileIcon, QuestsIcon } from "./icons";
@@ -26,31 +25,18 @@ export const Menu = () => {
         <MenuButton name="今日の一覧" path="/quests" icon={<QuestsIcon color={getMenuIconColor(["/quests"])} />} />
         <MenuButton
           name="クエスト管理"
-          path="/quests/manage"
-          icon={
-            <ManageIcon
-              color={getMenuIconColor([
-                "/quests/manage",
-                "/quests/manage/new",
-                "/quests/manage/edit",
-                "/quests/manage/tags",
-              ])}
-            />
-          }
+          path="/manage"
+          icon={<ManageIcon color={getMenuIconColor(["/manage", "/manage/new", "/manage/edit", "/manage/tags"])} />}
         />
         <MenuButton
           name="達成分析"
-          path="/quests/analytics"
-          icon={<AnalyticsIcon color={getMenuIconColor(["/quests/analytics"])} />}
+          path="/analytics"
+          icon={<AnalyticsIcon color={getMenuIconColor(["/analytics"])} />}
         />
         <MenuButton
           name="プロフィール"
-          path="/quests/profile"
-          icon={
-            <ProfileIcon
-              color={getMenuIconColor(["/quests/profile", "/quests/profile/badges", "/quests/profile/ranking"])}
-            />
-          }
+          path="/profile"
+          icon={<ProfileIcon color={getMenuIconColor(["/profile", "/profile/badges", "/profile/ranking"])} />}
         />
       </div>
     </ul>

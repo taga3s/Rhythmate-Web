@@ -5,7 +5,7 @@ export const ManageNewButton = () => {
 
   return (
     <button
-      onClick={() => navigate({ to: "/quests/manage/new" })}
+      onClick={() => navigate({ to: "/manage/new" })}
       className="flex justify-center items-center bg-rhyth-blue h-16 w-16 rounded-full fixed right-12 bottom-24 shadow-lg"
     >
       <svg
