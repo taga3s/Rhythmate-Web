@@ -6,7 +6,7 @@ export const ManageNewButton = () => {
   return (
     <button
       onClick={() => navigate({ to: "/quests/manage/new" })}
-      className="flex justify-center items-center bg-[#0087EE] h-16 w-16 rounded-full fixed right-12 bottom-24"
+      className="flex justify-center items-center bg-rhyth-blue h-16 w-16 rounded-full fixed right-12 bottom-24 shadow-lg"
     >
       <svg
         xmlns="http://www.w3.org/2000/svg"

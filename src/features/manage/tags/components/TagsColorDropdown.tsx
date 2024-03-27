@@ -1,11 +1,16 @@
-import { SetStateAction, useState } from "react";
+import { FC, SetStateAction, useState } from "react";
 import { TagsColorItem } from "./TagsColorItem";
 
-export const TagsColorDropdown = () => {
+type Props = {
+  onSelectFn: (color: string) => void;
+};
+
+export const TagsColorDropdown: FC<Props> = ({ onSelectFn }) => {
   const [colorValue, setColorValue] = useState<string>("");
 
   const handleColorValue = (event: { target: { value: SetStateAction<string> } }) => {
     setColorValue(event.target.value);
+    onSelectFn(colorValue);
   };
 
   const selectColorLabel = (color: string) => {
