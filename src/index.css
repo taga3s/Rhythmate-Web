@@ -4,5 +4,5 @@
 
 @font-face {
   font-family: "CP Font";
-  src: url(../public/assets/fonts/CP_Font.woff) format("woff");
+  src: url(/assets/fonts/CP_Font.woff) format("woff");
 }

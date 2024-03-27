@@ -1,27 +1,37 @@
-import { FC } from "react";
+import { FC, useState } from "react";
 import { TagsColorDropdown } from "./TagsColorDropdown";
 import { ModalBase } from "../../../common/components/modal/ModalBase";
 import { ModalHeaderCloseButton } from "../../../common/components/modal/ModalHeaderCloseButton";
 
 type Props = {
+  modalType: string;
   closeModal: () => void;
 };
 
-export const TagsEditModal: FC<Props> = ({ closeModal }) => {
+export const TagsEditModal: FC<Props> = ({ modalType, closeModal }) => {
+  const [tagColor, setTagColor] = useState<string>("");
+
+  const handleTagColor = (color: string) => {
+    setTagColor(color);
+  };
+
+  const onSubmit = () => {
+    closeModal();
+    // 一時的に追加しておきます
+    console.log(tagColor);
+  };
+
   return (
     <ModalBase onClickClose={closeModal}>
       <div className="order relative bg-white rounded-lg shadow">
         {/* <!-- Modal header --> */}
-        <div className="flex items-center justify-between p-4 md:p-4 border-b rounded-t">
-          <h3 className="text-xl font-bold text-rhyth-dark-blue">タグ編集</h3>
+        <div className="flex items-center justify-between p-4 md:p-4 rounded-t border-b">
+          <h3 className="font-cp-font text-xl font-bold text-rhyth-dark-blue">{modalType}</h3>
           <ModalHeaderCloseButton onClickClose={closeModal} />
         </div>
         {/* <!-- Modal body --> */}
         <div className="p-4 md:p-4">
-          <form
-            className="space-y-4"
-            // onSubmit={handleSubmit(onSubmit)}
-          >
+          <form className="space-y-4" onSubmit={onSubmit}>
             <div className="flex items-center justify-between">
               <label className="flex gap-2 mb-2 text-sm font-bold text-rhyth-dark-blue my-2" htmlFor="tag-name">
                 <svg
@@ -43,7 +53,7 @@ export const TagsEditModal: FC<Props> = ({ closeModal }) => {
                 // defaultValue={beforeUserName}
                 className="bg-white border border-rhyth-light-gray text-rhyth-dark-blue text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-1/2 p-2"
                 placeholder="tagname"
-                // {...register("name")}
+                // {...register("tagName")}
                 required
               />
               {/* {errors.name && <FormErrorMsg msg={errors.name.message ?? ""} />} */}
@@ -63,7 +73,7 @@ export const TagsEditModal: FC<Props> = ({ closeModal }) => {
                 </svg>
                 <span>色ラベル</span>
               </label>
-              <TagsColorDropdown />
+              <TagsColorDropdown onSelectFn={handleTagColor} />
             </div>
             <button
               type="submit"

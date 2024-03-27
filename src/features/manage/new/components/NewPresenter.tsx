@@ -60,11 +60,11 @@ export const NewPresenter = () => {
     reset();
     setValue("days", []);
     setDifficulty("EASY");
-    navigate({ to: "/quests/manage" });
+    navigate({ to: "/manage" });
   };
   return (
     <>
-      <button onClick={() => navigate({ to: "/quests/manage" })} className="block">
+      <button onClick={() => navigate({ to: "/manage" })} className="block">
         <div className="px-4 py-3 flex gap-3 items-center bg-gray-200 font-bold text-black text-sm rounded-md">
           一覧へ戻る
         </div>

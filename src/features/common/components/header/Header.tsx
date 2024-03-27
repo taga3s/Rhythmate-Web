@@ -11,19 +11,15 @@ export const Header = () => {
     if (pathname === "/quests") {
       return "今日の一覧";
     } else if (
-      pathname === "/quests/manage" ||
-      pathname === "/quests/manage/new" ||
-      pathname === "/quests/manage/edit" ||
-      pathname === "/quests/manage/tags"
+      pathname === "/manage" ||
+      pathname === "/manage/new" ||
+      pathname === "/manage/edit" ||
+      pathname === "/manage/tags"
     ) {
       return "クエスト管理";
-    } else if (pathname === "/quests/analytics") {
+    } else if (pathname === "/analytics") {
       return "達成分析";
-    } else if (
-      pathname === "/quests/profile" ||
-      pathname === "/quests/profile/badges" ||
-      pathname === "/quests/profile/ranking"
-    ) {
+    } else if (pathname === "/profile" || pathname === "/profile/badges" || pathname === "/profile/ranking") {
       return "プロフィール";
     }
     return "";
@@ -33,9 +29,9 @@ export const Header = () => {
     switch (pathname) {
       case "/quests":
         return <HeaderQuestsButton />;
-      case "/quests/manage":
+      case "/manage":
         return <HeaderManageButton />;
-      case "/quests/profile":
+      case "/profile":
         return <HeaderProfileButton />;
       default:
         return <></>;
@@ -49,7 +45,6 @@ export const Header = () => {
           <div>
             <img src="/brand-logo.svg" alt="rhythmateのロゴ" className="w-12" />
           </div>
-          {/* TODO: フォント適用検討 */}
           <h1 className="font-cp-font font-bold text-xl text-rhyth-dark-blue tracking-wider">
             {handlePageTitle(pathname)}
           </h1>
