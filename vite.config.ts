@@ -16,7 +16,9 @@ export default defineConfig({
         name: "Rhythmate",
         short_name: "Rhythmate",
         description: "ゲーム感覚で習慣化を達成できるRhtymateというWebアプリです。",
-        theme_color: "#D9D9D9",
+        start_url: "/",
+        theme_color: "#FFFFFF",
+        background_color: "#D9D9D9",
         lang: "ja",
         icons: [
           {
