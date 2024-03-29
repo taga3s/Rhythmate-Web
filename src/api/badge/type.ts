@@ -8,6 +8,10 @@ export type ListResponse = {
   }[];
 };
 
+export type PinBadgeParams = {
+  id: string;
+};
+
 export type PinBadgeRequest = {
   id: string;
 };
@@ -18,6 +22,10 @@ export type PinBadgeResponse = {
   badge_id: string;
   obtained_at: string;
   is_pinned: boolean;
+};
+
+export type UnpinBadgeParams = {
+  id: string;
 };
 
 export type UnpinBadgeRequest = {

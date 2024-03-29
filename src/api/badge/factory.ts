@@ -1,5 +1,6 @@
 import { Badge, toBadge } from "./model";
 import { badgeRepository } from "./repository";
+import { PinBadgeParams, UnpinBadgeParams } from "./type";
 
 export const createFactory = () => {
   const repository = badgeRepository;
@@ -12,12 +13,12 @@ export const createFactory = () => {
       });
       return badges;
     },
-    pinBadge: async (id: string) => {
-      const response = await repository.pin({ id });
+    pinBadge: async (params: PinBadgeParams) => {
+      const response = await repository.pin(params);
       return toBadge(response);
     },
-    unpinBadge: async (id: string) => {
-      const response = await repository.unpin({ id });
+    unpinBadge: async (params: UnpinBadgeParams) => {
+      const response = await repository.unpin(params);
       return toBadge(response);
     },
   };
