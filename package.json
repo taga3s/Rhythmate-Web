@@ -42,7 +42,8 @@
     "postcss": "^8.4.35",
     "tailwindcss": "^3.4.1",
     "typescript": "^5.2.2",
-    "vite": "^5.1.0"
+    "vite": "^5.1.0",
+    "vite-plugin-pwa": "^0.19.7"
   },
   "lint-staged": {
     "*.{ts,tsx}": "biome format --write src"
