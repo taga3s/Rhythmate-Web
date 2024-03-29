@@ -4,14 +4,21 @@ import { useNavigate } from "@tanstack/react-router";
 const badgeFrame: string = "/badges/frame.png";
 
 // 仮のデータ
-import { achievementData } from "../constant/badges";
+// import { achievementData } from "../constant/badges";
 import { badges } from "../constant/badges";
+
+import { useQueryBadgeList } from "../api/badge/hooks/useQueryBadge";
+import { BadgeCard } from "./BadgeCard";
+// import { useMutateBadge } from "../api/badge/hooks/useMutateBadge";
 
 export const BadgesPresenter = () => {
   const navigation = useNavigate();
   const navigationToProfile = () => {
     navigation({ to: "/profile" });
   };
+
+  const { data: badgeList, isLoading } = useQueryBadgeList();
+  // const { pinBadgeMutation, unpinBadgeMutation } = useMutateBadge();
 
   return (
     <>
@@ -22,9 +29,9 @@ export const BadgesPresenter = () => {
           </div>
           <p className="flex text-2xl justify-center font-bold">獲得バッジ一覧</p>
         </div>
-        <table className="mt-6 border mx-auto">
+        {/* <table className="mt-6 border mx-auto">
           <tbody>
-            {badges.map((badge, index) => (
+            {badgeList?.map((badge, index) => (
               <tr className="grid grid-flow-row-dense grid-cols-3 gap-3 p-4" key={index}>
                 <td className="col-span-1">
                   <img src={achievementData[index].isAchieved === true ? badge.image : badgeFrame} alt={badge.text} />
@@ -39,7 +46,20 @@ export const BadgesPresenter = () => {
               </tr>
             ))}
           </tbody>
-        </table>
+        </table> */}
+        <ul className="mt-4 flex flex-col items-center gap-6">
+          {badgeList?.map((badge) => {
+            return (
+              <BadgeCard
+                key={badge.id}
+                id={badge.id}
+                badgeId={badge.badgeId}
+                isPinned={badge.isPinned}
+                obtainedAt={badge.obtainedAt}
+              />
+            );
+          })}
+        </ul>
       </div>
     </>
   );
