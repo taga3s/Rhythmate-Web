@@ -10,7 +10,7 @@ export default defineConfig({
     TanStackRouterVite(),
     VitePWA({
       registerType: "autoUpdate",
-      includeAssets: ["favicon.ico", "apple-touch-icon.png"],
+      includeAssets: ["favicon.ico", "apple-touch-icon.png", "/icons/*.png"],
       injectRegister: "auto",
       manifest: {
         name: "Rhythmate",
@@ -18,12 +18,12 @@ export default defineConfig({
         theme_color: "#D9D9D9",
         icons: [
           {
-            src: "icons/rhyth-192.png",
+            src: "/icons/rhyth-192.png",
             sizes: "192x192",
             type: "image/png",
           },
           {
-            src: "icons/rhyth-512.png",
+            src: "/icons/rhyth-512.png",
             sizes: "512x512",
             type: "image/png",
           },
