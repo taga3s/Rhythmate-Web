@@ -111,7 +111,7 @@ export const EditPresenter: FC<Props> = (props) => {
             </label>
             <input
               type="text"
-              className="w-full px-2 border-2 border-rhyth-light-gray rounded-lg"
+              className="w-full p-2 border-2 border-rhyth-light-gray rounded-lg"
               id="edit-quest-title"
               defaultValue={targetQuest?.title}
               {...register("title")}
