@@ -39,7 +39,7 @@ export const ManageSearchTagsDropdown: FC<Props> = ({ onSelectFn }) => {
     <select
       name="tag-color"
       id="tag-color"
-      className={`bg-white border-2 border-rhyth-light-gray text-rhyth-dark-blue text-sm font-bold rounded-lg w-full p-2 ${selectColorLabel(
+      className={`bg-white border-2 border-rhyth-light-gray text-rhyth-dark-blue text-sm font-bold rounded-lg w-full p-2 shadow-sm ${selectColorLabel(
         colorValue,
       )}`}
       value={colorValue}
