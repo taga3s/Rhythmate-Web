@@ -10,12 +10,14 @@ export default defineConfig({
     TanStackRouterVite(),
     VitePWA({
       registerType: "autoUpdate",
-      includeAssets: ["favicon.ico", "apple-touch-icon.png", "/icons/*.png"],
+      includeAssets: ["favicon.ico", "apple-touch-icon.png"],
       injectRegister: "auto",
       manifest: {
         name: "Rhythmate",
         short_name: "Rhythmate",
+        description: "ゲーム感覚で習慣化を達成できるRhtymateというWebアプリです。",
         theme_color: "#D9D9D9",
+        lang: "ja",
         icons: [
           {
             src: "/icons/rhyth-192.png",
@@ -26,6 +28,12 @@ export default defineConfig({
             src: "/icons/rhyth-512.png",
             sizes: "512x512",
             type: "image/png",
+          },
+          {
+            src: "pwa-512x512.png",
+            sizes: "512x512",
+            type: "image/png",
+            purpose: "any maskable",
           },
         ],
       },
