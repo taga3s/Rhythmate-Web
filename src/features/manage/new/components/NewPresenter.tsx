@@ -96,7 +96,7 @@ export const NewPresenter = () => {
             type="text"
             id="new-quest-title"
             placeholder="タイトルを入力"
-            className="w-full px-2 pb-2 border-2 border-rhyth-light-gray rounded-lg"
+            className="w-full px-2 border-2 border-rhyth-light-gray rounded-lg"
             {...register("title")}
           />
         </div>
@@ -122,7 +122,7 @@ export const NewPresenter = () => {
               <p className="col-span-2 font-bold text-rhyth-gray">実施時刻</p>
               <div className="col-span-3 flex justify-end items-center">
                 <input type="time" className="w-[85px] border-2 rounded p-1 mr-2 shadow-sm" {...register("startsAt")} />
-                <span className="font-bold text-rhyth-dark-blue">から</span>
+                <span className="font-bold text-rhyth-gray">から</span>
               </div>
             </div>
             {errors.startsAt && <FormErrorMsg msg={errors.startsAt.message ?? ""} />}
@@ -135,7 +135,7 @@ export const NewPresenter = () => {
                   min={1}
                   {...register("minutes")}
                 />
-                <p className="font-bold text-rhyth-dark-blue">分間</p>
+                <p className="font-bold text-rhyth-gray">分間</p>
               </div>
             </div>
             {errors.minutes && <FormErrorMsg msg={errors.minutes.message ?? ""} />}

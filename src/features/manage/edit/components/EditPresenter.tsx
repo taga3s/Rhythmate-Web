@@ -111,7 +111,7 @@ export const EditPresenter: FC<Props> = (props) => {
             </label>
             <input
               type="text"
-              className="w-full px-2 pb-2 border-2 border-rhyth-light-gray rounded-lg"
+              className="w-full px-2 border-2 border-rhyth-light-gray rounded-lg"
               id="edit-quest-title"
               defaultValue={targetQuest?.title}
               {...register("title")}
@@ -144,12 +144,12 @@ export const EditPresenter: FC<Props> = (props) => {
                     defaultValue={targetQuest?.startsAt ? formatDateTimeOnlyTime(targetQuest.startsAt) : "00:00"}
                     {...register("startsAt")}
                   />
-                  <span>から</span>
+                  <span className="font-bold text-rhyth-gray">から</span>
                 </div>
               </div>
               {errors.startsAt && <FormErrorMsg msg={errors.startsAt.message ?? ""} />}
-              <div className="grid grid-cols-5 my-2">
-                <p className="col-span-2">取り組み時間</p>
+              <div className="grid grid-cols-5 my-2 items-center">
+                <p className="col-span-2 font-bold text-rhyth-gray">取り組み時間</p>
                 <div className="col-span-3 flex justify-end items-center">
                   <input
                     type="number"
@@ -158,7 +158,7 @@ export const EditPresenter: FC<Props> = (props) => {
                     defaultValue={targetQuest?.minutes}
                     {...register("minutes")}
                   />
-                  <p className="font-bold text-rhyth-dark-blue">分間</p>
+                  <p className="font-bold text-rhyth-gray">分間</p>
                 </div>
               </div>
               {errors.minutes && <FormErrorMsg msg={errors.minutes.message ?? ""} />}
