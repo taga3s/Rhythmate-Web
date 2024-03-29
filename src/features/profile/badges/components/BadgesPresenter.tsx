@@ -9,6 +9,7 @@ import { badges } from "../constant/badges";
 
 import { useQueryBadgeList } from "../api/badge/hooks/useQueryBadge";
 import { BadgeCard } from "./BadgeCard";
+import { Loading, LoadingContainer } from "../../../common/components";
 // import { useMutateBadge } from "../api/badge/hooks/useMutateBadge";
 
 export const BadgesPresenter = () => {
@@ -47,19 +48,25 @@ export const BadgesPresenter = () => {
             ))}
           </tbody>
         </table> */}
-        <ul className="mt-4 flex flex-col items-center gap-6">
-          {badgeList?.map((badge) => {
-            return (
-              <BadgeCard
-                key={badge.id}
-                id={badge.id}
-                badgeId={badge.badgeId}
-                isPinned={badge.isPinned}
-                obtainedAt={badge.obtainedAt}
-              />
-            );
-          })}
-        </ul>
+        {isLoading ? (
+          <LoadingContainer>
+            <Loading />
+          </LoadingContainer>
+        ) : (
+          <ul className="mt-4 flex flex-col items-center gap-6">
+            {badgeList?.map((badge) => {
+              return (
+                <BadgeCard
+                  key={badge.id}
+                  id={badge.id}
+                  badgeId={badge.badgeId}
+                  isPinned={badge.isPinned}
+                  obtainedAt={badge.obtainedAt}
+                />
+              );
+            })}
+          </ul>
+        )}
       </div>
     </>
   );

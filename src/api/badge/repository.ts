@@ -8,17 +8,17 @@ export interface BadgeRepository {
 }
 
 const list: BadgeRepository["list"] = async () => {
-  const response = await apiClient.get("/badges");
+  const response = await apiClient.get("/badge");
   return response;
 };
 
 const pin: BadgeRepository["pin"] = async (params: PinBadgeRequest) => {
-  const response = await apiClient.patch(`/badges/pin/${params.id}`);
+  const response = await apiClient.patch(`/badge/pin/${params.id}`);
   return response;
 };
 
 const unpin: BadgeRepository["unpin"] = async (params: UnpinBadgeRequest) => {
-  const response = await apiClient.patch(`/badges/unpin/${params.id}`);
+  const response = await apiClient.patch(`/badge/unpin/${params.id}`);
   return response;
 };
 
