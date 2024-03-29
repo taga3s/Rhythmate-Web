@@ -1,5 +1,4 @@
 import { useNavigate } from "@tanstack/react-router";
-import { Star } from "./ManageStar";
 import { ManageProgressBar } from "./ManageProgressBar";
 import { FC } from "react";
 import { formatDateTimeOnlyTime } from "../../../pkg/util/dayjs";
@@ -29,82 +28,82 @@ export const ManageQuestCard: FC<Props> = (props) => {
   const navigate = useNavigate();
 
   return (
-    <div className="w-full h-auto  bg-white border border-[#AAAAAA] border-solid rounded-lg shadow">
+    <div className="w-full h-auto  bg-white border-2 border-rhyth-light-gray border-solid rounded-lg shadow-lg">
       <div className="px-4 py-2">
-        <button
-          className="bg-gray-200 p-1 rounded block ml-auto shadow"
-          onClick={() => navigate({ to: `/manage/edit`, search: { quest_id: id } })}
-        >
-          <div className="flex items-center gap-2 justify-center">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="#000000"
-              viewBox="0 0 24 24"
-              strokeWidth="1.5"
-              stroke="#D9D9D9"
-              className="w-6 h-6"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10"
-              />
-            </svg>
-            <p className="text-base">編集する</p>
-          </div>
-        </button>
-        <h1 className="mt-1 mb-1 text-lg font-semibold">{title}</h1>
-        <hr className="h-0.5 bg-[#AAAAAA]" />
-        <h3 className="text-sm mt-1">{description}</h3>
-        <div className="flex gap-4 items-center py-1 font-semibold text-lg">
-          <div className="flex gap-2 items-center">
-            <ClockIcon />
-            <span>{formatDateTimeOnlyTime(startsAt)} -</span>
-            <span>{minutes}m</span>
-          </div>
-          <h3>{convertENToJPWeekdayString(days)}</h3>
+        <div className="flex items-center py-2">
+          <h1 className="font-bold text-lg text-rhyth-dark-blue">{title}</h1>
+          <button className="p-1 ml-auto" onClick={() => navigate({ to: `/manage/edit`, search: { quest_id: id } })}>
+            <div className="flex items-center gap-2 justify-center">
+              <svg
+                className="w-6 h-6 text-rhyth-blue"
+                aria-hidden="true"
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                fill="none"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke="currentColor"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M21 13v-2a1 1 0 0 0-1-1h-.757l-.707-1.707.535-.536a1 1 0 0 0 0-1.414l-1.414-1.414a1 1 0 0 0-1.414 0l-.536.535L14 4.757V4a1 1 0 0 0-1-1h-2a1 1 0 0 0-1 1v.757l-1.707.707-.536-.535a1 1 0 0 0-1.414 0L4.929 6.343a1 1 0 0 0 0 1.414l.536.536L4.757 10H4a1 1 0 0 0-1 1v2a1 1 0 0 0 1 1h.757l.707 1.707-.535.536a1 1 0 0 0 0 1.414l1.414 1.414a1 1 0 0 0 1.414 0l.536-.535 1.707.707V20a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1v-.757l1.707-.708.536.536a1 1 0 0 0 1.414 0l1.414-1.414a1 1 0 0 0 0-1.414l-.535-.536.707-1.707H20a1 1 0 0 0 1-1Z"
+                />
+                <path
+                  stroke="currentColor"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z"
+                />
+              </svg>
+            </div>
+          </button>
         </div>
-        <div className="flex items-center">
-          {difficulty === "EASY" ? (
-            <>
-              <Star />
-            </>
-          ) : difficulty === "NORMAL" ? (
-            <>
-              <Star />
-              <Star />
-            </>
-          ) : (
-            <>
-              <Star />
-              <Star />
-              <Star />
-            </>
-          )}
+        <hr className="h-1.5 bg-rhyth-blue" />
+        <div className="flex items-center gap-2 text-sm mt-2">
+          <div className="font-cp-font text-white bg-rhyth-gray py-1 px-3 rounded-full tracking-wider">
+            <p>ひとこと</p>
+          </div>
+          <h3 className="font-bold text-rhyth-dark-blue">{description}</h3>
+        </div>
+        <div className="my-2 text-sm">
+          <div className="w-[200px] flex justify-center items-center gap-2 text-white bg-rhyth-blue py-1 px-3 rounded-full">
+            <ClockIcon />
+            <p className="text-sm font-cp-font tracking-widest">クエスト実行タイム</p>
+          </div>
+          <h3 className="ml-2 my-2 text-lg font-bold text-rhyth-light-blue">{convertENToJPWeekdayString(days)}</h3>
+          <div className="ml-2 flex items-center gap-4 font-bold">
+            <span className="text-2xl text-rhyth-light-blue">{formatDateTimeOnlyTime(startsAt)}</span>
+            <span className="text-lg text-rhyth-dark-blue">から</span>
+            <span className="text-2xl text-rhyth-light-blue">{minutes}分間</span>
+            <span className="text-lg text-rhyth-dark-blue">集中！</span>
+          </div>
         </div>
       </div>
-      <hr className="h-0.5 bg-[#AAAAAA]" />
-      <div className="flex items-en">
-        <div className=" w-full h-24 p-2">
+      <hr className="h-0.5 bg-rhyth-light-gray" />
+      <div className="flex items-center h-24">
+        <div className=" w-full h-full p-2">
           <div className="flex">
-            <p className="mt-auto ml-1">継続レベル</p>
+            <p className="font-cp-font text-rhyth-green mt-auto ml-1">継続レベル</p>
           </div>
           <ManageProgressBar level={continuationLevel} />
-          <div className="bg-[#FFAA00] w-28 h-7 rounded block ml-auto">
-            <p className="flex justify-center items-center text-[#FFFFFF] text-sm ">
-              獲得Exp &times; <span className="ml-1 font-semibold text-xl">{continuationLevel}.0</span>
-            </p>
+          <div className="flex justify-end items-center text-sm">
+            <p className="font-cp-font tracking-[0.2em] text-white bg-rhyth-orange px-2 py-1 rounded-full">BONUS</p>
+            <span className="ml-1 font-medium text-md text-rhyth-orange tracking-wider">&times;</span>
+            <span className="ml-1 font-bold text-lg text-rhyth-orange tracking-wider">{continuationLevel}.0</span>
           </div>
         </div>
-        <div className="bg-[#E0201B] w-16 h-24 flex flex-col justify-center items-center gap-2">
-          <p className="flex justify-center  text-[#FFFFFF] font-semibold text-sm">獲得Exp</p>
+        <div className="bg-rhyth-red h-full flex flex-col justify-center items-center gap-2 font-cp-font text-[12px] tracking-wider rounded-br-md">
+          <p className="text-white font-semibold">獲得Exp</p>
           <div className="flex justify-between items-center">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
               viewBox="0 0 24 24"
               strokeWidth="1.5"
-              className="w-6 h-6 fill-white ml-2"
+              className="w-6 h-6 fill-rhyth-orange ml-2"
             >
               <path
                 strokeLinecap="round"
