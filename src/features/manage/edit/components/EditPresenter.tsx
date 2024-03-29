@@ -98,13 +98,13 @@ export const EditPresenter: FC<Props> = (props) => {
           </div>
         </button>
       </div>
-      <h1 className="text-xl font-cp-font text-rhyth-gray mt-4">クエスト編集</h1>
+      <h1 className="text-xl font-cp-font text-rhyth-gray mt-4 mb-2">クエスト編集</h1>
       {isLoading ? (
         <LoadingContainer>
           <Loading />
         </LoadingContainer>
       ) : (
-        <form className="bg-white p-2 rounded-md" onSubmit={handleSubmit(onSubmit)}>
+        <form className="bg-white p-2 rounded-lg shadow-lg" onSubmit={handleSubmit(onSubmit)}>
           <div className="mt-2 flex flex-col gap-2">
             <label htmlFor="edit-quest-title" className="text-base font-bold text-rhyth-gray">
               タイトル

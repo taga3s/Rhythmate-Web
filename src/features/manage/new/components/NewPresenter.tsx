@@ -86,8 +86,8 @@ export const NewPresenter = () => {
           <p className="text-rhyth-gray">ひとつ前へ戻る</p>
         </div>
       </button>
-      <h1 className="text-xl font-cp-font text-rhyth-gray mt-4">クエスト作成</h1>
-      <form className="bg-white p-2 rounded-md" onSubmit={handleSubmit(onSubmit)}>
+      <h1 className="text-xl font-cp-font text-rhyth-gray mt-4 mb-2">クエスト作成</h1>
+      <form className="bg-white p-2 rounded-lg shadow-lg" onSubmit={handleSubmit(onSubmit)}>
         <div className="mt-2 flex flex-col gap-2">
           <label htmlFor="new-quest-title" className="text-base font-bold text-rhyth-gray">
             タイトル
