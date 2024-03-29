@@ -40,9 +40,9 @@ export const QuestsPresenter = () => {
 
   return (
     <>
-      <h1 className="text-xl font-bold">
+      <h1 className="font-cp-font text-rhyth-light-blue text-2xl tracking-widest">
         {formatDateJP(now())}
-        {`(${getToday()})`}のクエスト
+        {`(${getToday()})`}
       </h1>
       {isLoading ? (
         <LoadingContainer>
