@@ -87,9 +87,9 @@ export const NewPresenter = () => {
         </div>
       </button>
       <h1 className="text-xl font-cp-font text-rhyth-gray mt-4">クエスト作成</h1>
-      <form className="bg-white px-2 rounded-md" onSubmit={handleSubmit(onSubmit)}>
-        <div className="mt-2 flex flex-col gap-3">
-          <label htmlFor="new-quest-title" className="text-base font-bold text-rhyth-gray mt-4">
+      <form className="bg-white p-2 rounded-md" onSubmit={handleSubmit(onSubmit)}>
+        <div className="mt-2 flex flex-col gap-2">
+          <label htmlFor="new-quest-title" className="text-base font-bold text-rhyth-gray">
             タイトル
           </label>
           <input
@@ -174,7 +174,7 @@ export const NewPresenter = () => {
           <div className="flex justify-center gap-4 mt-4">
             <button
               type="button"
-              className={`border-2 flex justify-center items-center gap-1 p-2 rounded-md shadow-sm ${
+              className={`w-1/4 border-2 flex justify-center items-center gap-1 p-2 rounded-md shadow-sm ${
                 difficulty === "EASY" ? "bg-rhyth-blue" : "bg-white"
               }`}
               onClick={() => {
@@ -185,7 +185,7 @@ export const NewPresenter = () => {
             </button>
             <button
               type="button"
-              className={`border-2 flex justify-center items-center gap-1 p-2 rounded-md shadow-sm ${
+              className={`w-1/4 border-2 flex justify-center items-center gap-1 p-2 rounded-md shadow-sm ${
                 difficulty === "NORMAL" ? "bg-rhyth-blue" : "bg-white"
               }`}
               onClick={() => {
@@ -197,7 +197,7 @@ export const NewPresenter = () => {
             </button>
             <button
               type="button"
-              className={`border-2 flex justify-center items-center gap-1 p-2 rounded-md shadow-sm ${
+              className={`w-1/4 border-2 flex justify-center items-center gap-1 p-2 rounded-md shadow-sm ${
                 difficulty === "HARD" ? "bg-rhyth-blue" : "bg-white"
               }`}
               onClick={() => {
