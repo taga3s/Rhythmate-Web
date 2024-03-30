@@ -69,7 +69,7 @@ export const ManageQuestCard: FC<Props> = (props) => {
             <ClockIcon />
             <p className="text-sm font-cp-font tracking-widest">クエスト実行タイム</p>
           </div>
-          <h3 className="ml-2 my-2 text-lg font-bold text-rhyth-light-blue">{convertENToJPWeekdayString(days)}</h3>
+          <h3 className="ml-2 my-2 text-lg font-bold text-rhyth-dark-blue">{convertENToJPWeekdayString(days)}</h3>
           <div className="ml-2 flex items-center gap-4 font-bold">
             <span className="text-2xl text-rhyth-light-blue">{formatDateTimeOnlyTime(startsAt)}</span>
             <span className="text-lg text-rhyth-dark-blue">から</span>
