@@ -66,7 +66,7 @@ export const ManageQuestCard: FC<Props> = (props) => {
         </div>
         <div className="my-2 text-sm">
           <div className="w-[200px] flex justify-center items-center gap-2 text-white bg-rhyth-blue py-1 px-3 rounded-full">
-            <ClockIcon />
+            <ClockIcon color="text-white" />
             <p className="text-sm font-cp-font tracking-widest">クエスト実行タイム</p>
           </div>
           <h3 className="ml-2 my-2 text-lg font-bold text-rhyth-light-blue">{convertENToJPWeekdayString(days)}</h3>
