@@ -104,7 +104,7 @@ export const EditPresenter: FC<Props> = (props) => {
           <Loading />
         </LoadingContainer>
       ) : (
-        <form className="bg-white p-2 rounded-lg shadow-lg" onSubmit={handleSubmit(onSubmit)}>
+        <form className="bg-white px-3 py-2 rounded-lg shadow-lg" onSubmit={handleSubmit(onSubmit)}>
           <div className="mt-2 flex flex-col gap-2">
             <label htmlFor="edit-quest-title" className="text-base font-bold text-rhyth-gray">
               タイトル
