@@ -1,7 +1,6 @@
-import { useQueryLoginUser } from "../api/user/hooks/useQueryUser";
+import { User } from "../../../api/user/model";
 
-export const expCalculation = () => {
-  const { data: loginUser } = useQueryLoginUser();
+export const expCalculation = (loginUser: User | undefined) => {
   let level: number;
 
   if (loginUser?.level === undefined) {

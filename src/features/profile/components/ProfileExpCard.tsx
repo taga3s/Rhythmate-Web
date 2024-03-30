@@ -1,7 +1,9 @@
-import { expCalculation } from "./ProfileExpCalculation";
+import { useQueryLoginUser } from "../api/user/hooks/useQueryUser";
+import { expCalculation } from "../funcs/ProfileExpCalculation";
 
 export const ProfileExpCard = () => {
-  let { expBarProportion, remainingExp, toNextLevel, level } = expCalculation();
+  const { data: loginUser } = useQueryLoginUser();
+  const { expBarProportion, remainingExp, toNextLevel, level } = expCalculation(loginUser);
   return (
     <div className="my-4 w-full px-4 py-3 bg-white border border-gray-200 rounded-lg shadow flex flex-col gap-1.5">
       <p className="font-bold">経験値</p>
