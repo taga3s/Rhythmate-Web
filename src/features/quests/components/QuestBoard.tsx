@@ -1,12 +1,12 @@
 import { FC, useState } from "react";
 // import { formatDateTimeOnlyTime } from "../../../pkg/util/dayjs";
-import { QuestBoardTimer } from "./QuestBoardTimer";
-import useInterval from "../../common/hooks/useInterval";
-import { CLOSED, DONE, ENGAGED, FORCE_STOP, NOT_STARTED_YET, OPEN, QuestStatus } from "../constant/constant";
-import { useMutateQuest } from "../api/quest/hooks/useMutateQuest";
-import { ConfirmModal, ClockIcon } from "../../common/components";
-import { getBaseTime, getDiffTime } from "../funcs/time";
 import { Quest } from "../../../api/quest/model";
+import { ClockIcon, ConfirmModal } from "../../common/components";
+import useInterval from "../../common/hooks/useInterval";
+import { useMutateQuest } from "../api/quest/hooks/useMutateQuest";
+import { CLOSED, DONE, ENGAGED, FORCE_STOP, NOT_STARTED_YET, OPEN, QuestStatus } from "../constant/constant";
+import { getBaseTime, getDiffTime } from "../funcs/time";
+import { QuestBoardTimer } from "./QuestBoardTimer";
 
 export const getIsStarted = (startedAt: string) => {
   return startedAt !== NOT_STARTED_YET;
@@ -120,7 +120,7 @@ export const QuestBoard: FC<Props> = (props) => {
       <hr className="h-0.2 bg-rhyth-light-gray mb-2" />
       <div className="flex items-center gap-1 px-3 mt-2">
         {questStatus === CLOSED ? (
-          <div className="text-rhyth-gray bg-[#D9D9D9] rounded-lg text-lg font-bold p-3 text-center w-full shadow-lg mt-1">
+          <div className="text-rhyth-gray bg-rhyth-light-gray rounded-lg text-lg font-bold p-3 text-center w-full shadow-lg mt-1">
             クエスト未開放
           </div>
         ) : questStatus === OPEN ? (

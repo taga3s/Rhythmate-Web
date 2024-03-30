@@ -6,7 +6,7 @@ type Props = {
 
 export const ManageQuestSearchModalButton: FC<Props> = ({ onClickFn }) => {
   return (
-    <button onClick={onClickFn} className="block ml-auto rounded-full border-2 border-[#AAAAAA]">
+    <button onClick={onClickFn} className="block ml-auto rounded-full border-2 border-rhyth-light-gray">
       <div className="w-32 h-10 flex gap-3 items-center">
         <div></div>
         <p>条件検索</p>
