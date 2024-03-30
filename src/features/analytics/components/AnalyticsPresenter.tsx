@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
+import { formatDateTimeJP } from "../../../pkg/util/dayjs";
 import { Loading, LoadingContainer } from "../../common/components";
 import { useQueryWeeklyReportSummary, useQueryWeeklyReports } from "../api/weeklyReport/hooks/useQueryWeeklyReport";
+import { AnalyticsAIFeedback } from "./AnalyticsAIFeedback";
 import { AnalyticsBarChart } from "./AnalyticsBarChart";
 import { AnalyticsCard } from "./AnalyticsCard";
-import { AnalyticsAIFeedback } from "./AnalyticsAIFeedback";
 import { AnalyticsSwitchButton } from "./AnalyticsSwitchButton";
-import { formatDateTimeJP } from "../../../pkg/util/dayjs";
 
 export const AnalyticsPresenter = () => {
   const [currentIndex, setCurrentIndex] = useState<number>(0);
@@ -60,25 +60,25 @@ export const AnalyticsPresenter = () => {
             <AnalyticsCard
               title={"達成したクエスト数"}
               data={weeklyReports[currentIndex].completed_quests}
-              color={"#E0201B"}
+              color={"rhyth-red"}
               isRate={false}
             />
             <AnalyticsCard
               title={"失敗したクエスト数"}
               data={weeklyReports[currentIndex].failed_quests}
-              color={"#0087EE"}
+              color={"rhyth-blue"}
               isRate={false}
             />
             <AnalyticsCard
               title={"達成率"}
               data={weeklyReports[currentIndex].completed_percentage}
-              color={"#FFAA00"}
+              color={"rhyth-orange"}
               isRate={true}
             />
             <AnalyticsCard
               title={"コンプリート日数"}
               data={weeklyReports[currentIndex].completed_days}
-              color={"#28AC00"}
+              color={"rhyth-green"}
               isRate={false}
             />
           </div>
