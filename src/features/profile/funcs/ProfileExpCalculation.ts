@@ -1,6 +1,6 @@
 import { User } from "../../../api/user/model";
 
-export const expCalculation = (loginUser: User | undefined) => {
+export const profileExpCalculation = (loginUser: User | undefined) => {
   let level: number;
 
   if (loginUser?.level === undefined) {
@@ -19,8 +19,10 @@ export const expCalculation = (loginUser: User | undefined) => {
     remainingExp = loginUser.exp;
   }
 
-  while (remainingExp >= toNextLevel * (level - 1)) {
-    remainingExp -= toNextLevel * (level - 1);
+  if (!(remainingExp == 0 && level == 1)) {
+    while (remainingExp >= toNextLevel * (level - 1)) {
+      remainingExp -= toNextLevel * (level - 1);
+    }
   }
 
   let expBarProportion = remainingExp / level;
