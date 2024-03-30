@@ -73,19 +73,19 @@ export const QuestsPresenter = () => {
           <div className="bg-white">
             {currentQuest ? <QuestBoard currentQuest={currentQuest} /> : <QuestBoardNoData />}
           </div>
-          <div className={`flex flex-col gap-2 w-full p-3 mt-4 bg-gray-100 rounded-md `}>
-            <div className="flex items-center gap-2">
+          <div className={`flex flex-col w-full p-3 mt-4 bg-gray-100 rounded-md`}>
+            <div className="flex items-center">
               <button
-                className={`px-4 py-2 text-base font-bold rounded-lg ${
-                  view === "NEXT" ? "text-white bg-blue-400" : "bg-gray-300 text-black "
+                className={`px-4 py-2 text-base font-cp-font tracking-widest font-bold rounded-t-lg ${
+                  view === "NEXT" ? "text-white bg-rhyth-light-blue" : "bg-white text-rhyth-dark-blue "
                 }`}
                 onClick={() => setView("NEXT")}
               >
                 次のクエスト
               </button>
               <button
-                className={`px-4 py-2 text-base font-bold rounded-lg ${
-                  view === "FINISHED" ? "text-white bg-blue-400" : "bg-gray-300 text-black "
+                className={`px-4 py-2 text-base font-cp-font tracking-widest font-bold rounded-t-lg shadow-l-lg ${
+                  view === "FINISHED" ? "text-white bg-rhyth-light-blue" : "bg-white text-rhyth-dark-blue"
                 }`}
                 onClick={() => setView("FINISHED")}
               >
