@@ -87,7 +87,7 @@ export const NewPresenter = () => {
         </div>
       </button>
       <h1 className="text-xl font-cp-font text-rhyth-gray mt-4 mb-2">クエスト作成</h1>
-      <form className="bg-white px-4 py-2 rounded-lg shadow-lg" onSubmit={handleSubmit(onSubmit)}>
+      <form className="bg-white px-3 py-2 rounded-lg shadow-lg" onSubmit={handleSubmit(onSubmit)}>
         <div className="mt-2 flex flex-col gap-2">
           <label htmlFor="new-quest-title" className="text-base font-bold text-rhyth-gray">
             タイトル

@@ -91,7 +91,7 @@ export const ManageQuestCard: FC<Props> = (props) => {
             <span className="ml-1 font-bold text-lg text-rhyth-orange tracking-wider">{continuationLevel}.0</span>
           </div>
         </div>
-        <div className="bg-rhyth-red h-full flex flex-col justify-center items-center gap-2 font-cp-font text-[12px] tracking-wider rounded-br-md">
+        <div className="bg-rhyth-red min-w-20 h-full flex flex-col justify-center items-center gap-2 font-cp-font text-[12px] tracking-wider rounded-br-md">
           <p className="text-white font-semibold">獲得Exp</p>
           <div className="flex justify-between items-center">
             <svg
@@ -112,7 +112,7 @@ export const ManageQuestCard: FC<Props> = (props) => {
                 d="M12 18a3.75 3.75 0 0 0 .495-7.468 5.99 5.99 0 0 0-1.925 3.547 5.975 5.975 0 0 1-2.133-1.001A3.75 3.75 0 0 0 12 18Z"
               />
             </svg>
-            <p className="text-white text-xl font-semibold text-right mr-3">{calcExp(difficulty, continuationLevel)}</p>
+            <p className="text-white text-lg font-semibold text-right mr-3">{calcExp(difficulty, continuationLevel)}</p>
           </div>
         </div>
       </div>
