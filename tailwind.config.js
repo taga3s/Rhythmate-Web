@@ -19,7 +19,7 @@ export default {
         'rhyth-purple': '#DA06AC',
         'rhyth-yellow': '#F7CE00',
         'rhyth-light-gray': '#D9D9D9',
-        'rhyth-gray': '#AAAAAA',
+        'rhyth-gray': '#777777',
         'rhyth-black': '#333333',
         'rhyth-bg-gray': '#FAFAFA',
         'rhyth-bg-dark-gray': '#F5F5F5',

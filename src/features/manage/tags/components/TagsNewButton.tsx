@@ -1,14 +1,16 @@
-import { useNavigate } from "@tanstack/react-router";
+import { FC } from "react";
 
-export const ManageNewButton = () => {
-  const navigate = useNavigate();
+type Props = {
+  onClickFn: () => void;
+};
 
+export const TagsNewButton: FC<Props> = ({ onClickFn }) => {
   return (
     <button
-      onClick={() => navigate({ to: "/manage/new" })}
+      onClick={onClickFn}
       className="flex justify-between items-center gap-2 bg-rhyth-blue h-14 w-auto rounded-full fixed right-8 bottom-24 shadow-lg p-4"
     >
-      <span className="font-noto-sans font-medium text-white tracking-wider">クエスト新規作成</span>
+      <span className="flex items-center text-white tracking-wider">タグ新規作成</span>
       <svg
         xmlns="http://www.w3.org/2000/svg"
         fill="none"

@@ -1,6 +1,12 @@
 export const Star = () => {
   return (
-    <svg xmlns="http://www.w3.org/2000/svg" fill="#FFAA00" viewBox="0 0 24 24" stroke="none" className="w-5 h-5">
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      fill="#FFAA00"
+      viewBox="0 0 24 24"
+      stroke="none"
+      className="w-5 h-5 fill-rhyth-yellow"
+    >
       <path
         strokeLinecap="round"
         strokeLinejoin="round"

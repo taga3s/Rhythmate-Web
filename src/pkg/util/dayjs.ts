@@ -39,7 +39,7 @@ export const formatDateJP = (date: string) => {
 };
 
 export const formatDateTimeJP = (date: string) => {
-  return dayjs(date).tz().format("MM月DD日");
+  return dayjs(date).tz().format("MM/DD");
 };
 
 // 演算込みのフォーマット系
