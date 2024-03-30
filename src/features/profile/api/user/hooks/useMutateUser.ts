@@ -1,11 +1,11 @@
 import { useMutation } from "@tanstack/react-query";
-import { FetchError } from "../../../../../pkg/api/util/fetchError";
-import { queryClient } from "../../../../../pkg/api/client/queryClient";
 import { useNavigate } from "@tanstack/react-router";
-import { notifyFailed, notifySuccess } from "../../../../../pkg/ui/toast";
 import { createFactory } from "../../../../../api/user/factory";
-import { UpdateLoginUserParams } from "../../../../../api/user/types";
 import { User } from "../../../../../api/user/model";
+import { UpdateLoginUserParams } from "../../../../../api/user/types";
+import { queryClient } from "../../../../../pkg/api/client/queryClient";
+import { FetchError } from "../../../../../pkg/api/util/fetchError";
+import { notifyFailed, notifySuccess } from "../../../../../pkg/ui/toast";
 
 export const useMutateUser = () => {
   const userFactory = createFactory();
@@ -22,6 +22,7 @@ export const useMutateUser = () => {
           name: data.name,
           email: loginUser.email,
           level: loginUser.level,
+          exp: loginUser.exp,
         });
       }
       notifySuccess("正常に更新しました。");
