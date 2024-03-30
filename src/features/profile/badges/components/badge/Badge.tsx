@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { BadgeFlame } from "./BadgeFlame";
+import { BadgeFrame } from "./BadgeFrame";
 import { BadgeSparkling } from "./BadgeSparkling";
 import { BadgeItem } from "./BadgeItem";
 
@@ -13,7 +13,7 @@ type Props = {
 export const Badge: FC<Props> = ({ imageType, flameClassName, sparklingClassName, itemClassName }) => {
   return (
     <div className="relative">
-      <BadgeFlame className={flameClassName} />
+      <BadgeFrame className={flameClassName} />
       <BadgeSparkling className={`absolute ${sparklingClassName}`} />
       <BadgeItem imageType={imageType} className={`absolute ${itemClassName}`} />
     </div>
