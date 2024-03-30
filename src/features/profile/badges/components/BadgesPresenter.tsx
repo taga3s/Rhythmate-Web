@@ -1,16 +1,8 @@
 import { BadgesBackButton } from "./BadgesBackButton";
 import { useNavigate } from "@tanstack/react-router";
-
-// const badgeFrame: string = "/badges/frame.png";
-
-// 仮のデータ
-// import { achievementData } from "../constant/badges";
-// import { badges } from "../constant/badges";
-
 import { useQueryBadgeList } from "../api/badge/hooks/useQueryBadge";
 import { BadgeCard } from "./BadgeCard";
 import { Loading, LoadingContainer } from "../../../common/components";
-// import { useMutateBadge } from "../api/badge/hooks/useMutateBadge";
 
 export const BadgesPresenter = () => {
   const navigation = useNavigate();
@@ -19,7 +11,6 @@ export const BadgesPresenter = () => {
   };
 
   const { data: badgeList, isLoading } = useQueryBadgeList();
-  // const { pinBadgeMutation, unpinBadgeMutation } = useMutateBadge();
 
   return (
     <>
