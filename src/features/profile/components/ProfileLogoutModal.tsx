@@ -1,6 +1,6 @@
 import { FC } from "react";
-import { useMutateUser } from "../api/user/hooks/useMutateUser";
 import { ConfirmModal } from "../../common/components";
+import { useMutateUser } from "../api/user/hooks/useMutateUser";
 
 type Props = {
   onClickFn: () => void;
