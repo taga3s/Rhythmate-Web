@@ -2,10 +2,25 @@ import { useState } from "react";
 import { TagsItem } from "./TagsItem";
 import { ConfirmModal } from "../../../common/components/ConfirmModal";
 import { TagsEditModal } from "./TagsEditModal";
+import { TagsNewButton } from "./TagsNewButton";
+import { useNavigate } from "@tanstack/react-router";
+
+type Tag = {
+  tagName: string;
+  tagColor: string;
+};
 
 export const TagsPresenter = () => {
+  const navigate = useNavigate();
   const [isTagsEditModalOpen, setIsTagsEditModalOpen] = useState<boolean>(false);
   const [isTagsDeleteModalOpen, setIsTagsDeleteModalOpen] = useState<boolean>(false);
+  const [isTagsNewModalOpen, setIsTagsNewModalOpen] = useState<boolean>(false);
+  const [tagItems] = useState<Tag[]>([
+    { tagName: "勉強・スキルアップ", tagColor: "Green" },
+    { tagName: "健康的な習慣", tagColor: "Purple" },
+    { tagName: "生活・ライフスタイル", tagColor: "Blue" },
+  ]);
+  // const [editTag, setEditTag] = useState<Tag>({ tagName: "", tagColor: "" });
 
   const openTagsEditModal = () => {
     setIsTagsEditModalOpen(true);
@@ -19,42 +34,74 @@ export const TagsPresenter = () => {
   const closeTagsDeleteModal = () => {
     setIsTagsDeleteModalOpen(false);
   };
+  const openTagsNewModal = () => {
+    setIsTagsNewModalOpen(true);
+  };
+  const closeTagsNewModal = () => {
+    setIsTagsNewModalOpen(false);
+  };
+
+  // const changeTagItem = (key: number, tag: Tag) => {
+  //   const nextTagsName = tagItems.map((tagItem, index) => {
+  //     if (key === index) {
+  //       return { tagName: tag.tagName, tagColor: tag.tagColor };
+  //     } else {
+  //       return tagItem;
+  //     }
+  //   });
+  //   setTagItems(nextTagsName);
+  // };
 
   return (
     <>
-      <div>
-        <h1 className="font-black text-lg text-rhyth-gray mb-2">タグ管理</h1>
+      <button onClick={() => navigate({ to: "/manage" })} className="block">
+        <div className="px-2 py-2 flex gap-2 items-center bg-white font-bold text-sm rounded-md border-2 border-rhyth-light-gray shadow-sm">
+          <svg
+            className="w-6 h-6 text-rhyth-gray"
+            aria-hidden="true"
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            fill="none"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke="currentColor"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
+              d="M5 12h14M5 12l4-4m-4 4 4 4"
+            />
+          </svg>
+          <p className="text-rhyth-gray">ひとつ前へ戻る</p>
+        </div>
+      </button>
+      <div className="mt-4">
+        <div className="flex justify-between items-center mb-2">
+          <h1 className="font-cp-font font-black text-xl text-rhyth-gray tracking-widest">タグ管理</h1>
+          <TagsNewButton onClickFn={openTagsNewModal} />
+        </div>
         <div>
-          <ul className="text-md font-bold text-rhyth-dark-blue bg-white border-2 border-rhyth-light-gray rounded-lg">
-            <TagsItem
-              tagName="勉強・スキルアップ"
-              tagColor="Green"
-              onEditFn={openTagsEditModal}
-              onDeleteFn={openTagsDeleteModal}
-            />
-            <TagsItem
-              tagName="健康的な習慣"
-              tagColor="Purple"
-              onEditFn={openTagsEditModal}
-              onDeleteFn={openTagsDeleteModal}
-            />
-            <TagsItem
-              tagName="生活・ライフスタイル"
-              tagColor="Blue"
-              onEditFn={openTagsEditModal}
-              onDeleteFn={openTagsDeleteModal}
-            />
+          <ul className="text-md font-bold text-rhyth-dark-blue bg-white border-2 border-rhyth-light-gray rounded-lg shadow-md">
+            {tagItems.map((item, index) => (
+              <TagsItem
+                key={index}
+                tagName={item.tagName}
+                tagColor={item.tagColor}
+                onEditFn={openTagsEditModal}
+                onDeleteFn={openTagsDeleteModal}
+              />
+            ))}
           </ul>
         </div>
       </div>
       {isTagsEditModalOpen && (
         <TagsEditModal
-          // text="本当にこのタグを削除しますか？"
+          modalType="タグ編集"
           // confirmBtnText="タグを削除する"
           // cancelBtnText="キャンセルする"
           // btnColor="red"
           // // actionFnは後ほど修正
-          // actionFn={closeTagsEditModal}
           closeModal={closeTagsEditModal}
         />
       )}
@@ -69,6 +116,7 @@ export const TagsPresenter = () => {
           closeModal={closeTagsDeleteModal}
         />
       )}
+      {isTagsNewModalOpen && <TagsEditModal modalType="タグ作成" closeModal={closeTagsNewModal} />}
     </>
   );
 };

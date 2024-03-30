@@ -8,7 +8,7 @@ export const HeaderManageButton = () => {
 
   return (
     <>
-      <HeaderButton icon="Tag" onClickFn={() => navigation({ to: "/quests/manage/tags" })} />
+      <HeaderButton icon="Tag" onClickFn={() => navigation({ to: "/manage/tags" })} />
       <HeaderButton
         icon="Search"
         onClickFn={() => {

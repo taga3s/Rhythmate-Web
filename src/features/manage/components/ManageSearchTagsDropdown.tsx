@@ -1,15 +1,16 @@
 import { FC, SetStateAction, useState } from "react";
-import { TagsColorItem } from "./TagsColorItem";
+import { ManageSearchTagItem } from "./ManageSearchTagItem";
 
 type Props = {
   onSelectFn: (color: string) => void;
 };
 
-export const TagsColorDropdown: FC<Props> = ({ onSelectFn }) => {
+export const ManageSearchTagsDropdown: FC<Props> = ({ onSelectFn }) => {
   const [colorValue, setColorValue] = useState<string>("");
 
   const handleColorValue = (event: { target: { value: SetStateAction<string> } }) => {
     setColorValue(event.target.value);
+    console.log(colorValue);
     onSelectFn(colorValue);
   };
 
@@ -38,7 +39,7 @@ export const TagsColorDropdown: FC<Props> = ({ onSelectFn }) => {
     <select
       name="tag-color"
       id="tag-color"
-      className={`bg-white border border-rhyth-light-gray text-rhyth-dark-blue text-sm font-bold rounded-lg w-1/2 p-2 ${selectColorLabel(
+      className={`bg-white border-2 border-rhyth-light-gray text-rhyth-dark-blue text-sm font-bold rounded-lg w-full p-2 shadow-sm ${selectColorLabel(
         colorValue,
       )}`}
       value={colorValue}
@@ -50,13 +51,13 @@ export const TagsColorDropdown: FC<Props> = ({ onSelectFn }) => {
       >
         色を選択
       </option>
-      <TagsColorItem color="Blue" />
-      <TagsColorItem color="Green" />
-      <TagsColorItem color="Red" />
-      <TagsColorItem color="Purple" />
-      <TagsColorItem color="Orange" />
-      <TagsColorItem color="Yellow" />
-      <TagsColorItem color="LightBlue" />
+      <ManageSearchTagItem tagName="aaa" color="Blue" />
+      <ManageSearchTagItem tagName="bbb" color="Green" />
+      <ManageSearchTagItem tagName="ccc" color="Red" />
+      <ManageSearchTagItem tagName="ddd" color="Purple" />
+      <ManageSearchTagItem tagName="aaa" color="Orange" />
+      <ManageSearchTagItem tagName="aaa" color="Yellow" />
+      <ManageSearchTagItem tagName="aaa" color="LightBlue" />
     </select>
   );
 };
