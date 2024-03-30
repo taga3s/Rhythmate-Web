@@ -26,7 +26,6 @@ export const ProfilePresenter = () => {
   const closeLogoutModal = () => {
     setIsLogoutModalOpen(false);
   };
-
   return (
     <>
       {isLoading ? (

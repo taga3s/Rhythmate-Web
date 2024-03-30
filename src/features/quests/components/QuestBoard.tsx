@@ -1,11 +1,10 @@
 import { FC, useState } from "react";
-import { formatDateTimeOnlyTime } from "../../../pkg/util/dayjs";
+// import { formatDateTimeOnlyTime } from "../../../pkg/util/dayjs";
 import { QuestBoardTimer } from "./QuestBoardTimer";
 import useInterval from "../../common/hooks/useInterval";
 import { CLOSED, DONE, ENGAGED, FORCE_STOP, NOT_STARTED_YET, OPEN, QuestStatus } from "../constant/constant";
 import { useMutateQuest } from "../api/quest/hooks/useMutateQuest";
 import { ConfirmModal, ClockIcon } from "../../common/components";
-import { calcExp } from "../../common/funcs/calcExp";
 import { getBaseTime, getDiffTime } from "../funcs/time";
 import { Quest } from "../../../api/quest/model";
 
@@ -81,86 +80,71 @@ export const QuestBoard: FC<Props> = (props) => {
   };
 
   return (
-    <div className="w-full min-h-[230px] mt-3 p-3 border-2 shadow rounded-lg">
-      <div className="flex flex-col gap-1">
-        <div className="flex justify-between gap-2">
-          <div className="flex items-center gap-2">
-            <ClockIcon />
-            <span>
-              {formatDateTimeOnlyTime(currentQuest.startsAt)} - {currentQuest.minutes}m
-            </span>
-            <div className="flex items-center gap-1 font-bold">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth="1.5"
-                className="w-6 h-6 fill-red-500"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M15.362 5.214A8.252 8.252 0 0 1 12 21 8.25 8.25 0 0 1 6.038 7.047 8.287 8.287 0 0 0 9 9.601a8.983 8.983 0 0 1 3.361-6.867 8.21 8.21 0 0 0 3 2.48Z"
-                />
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M12 18a3.75 3.75 0 0 0 .495-7.468 5.99 5.99 0 0 0-1.925 3.547 5.975 5.975 0 0 1-2.133-1.001A3.75 3.75 0 0 0 12 18Z"
-                />
-              </svg>
-              <span className="text-red-500 text-lg">
-                {calcExp(currentQuest.difficulty, currentQuest.continuationLevel)}
-              </span>
-            </div>
+    <div className="w-full min-h-[240px] py-3 border-2 border-rhyth-light-gray shadow-lg rounded-lg">
+      <div className="flex flex-col gap-1 px-3">
+        <h1 className="font-bold text-lg text-rhyth-dark-blue mb-2">{currentQuest.title}</h1>
+        <hr className="h-1.5 bg-rhyth-blue" />
+        <div className="flex items-center gap-2 text-sm mt-2">
+          <div className="font-cp-font text-white bg-rhyth-gray py-1 px-3 rounded-full tracking-wider">
+            <p>ひとこと</p>
           </div>
-          {getIsStarted(currentQuest.startedAt) && <span>開始: {formatDateTimeOnlyTime(currentQuest.startedAt)}</span>}
+          <h3 className="font-bold text-rhyth-dark-blue">{currentQuest.description}</h3>
         </div>
-        <h2 className="text-lg">{currentQuest.title}</h2>
-        <div className="w-full h-[2px] bg-gray-200 rounded-md" />
-        <span className="text-base">{currentQuest.description}</span>
-        <div className="text-center font-bold mt-2 flex items-center justify-center gap-1">
-          <span>
-            {questStatus === CLOSED ? (
-              <span>クエスト解放まで</span>
-            ) : questStatus === OPEN ? (
-              <span>クエスト解放中</span>
-            ) : questStatus === ENGAGED ? (
-              <span>残り時間</span>
-            ) : (
-              <span>クエスト終了</span>
-            )}
-          </span>
-          <QuestBoardTimer
-            startsAt={currentQuest.startsAt}
-            isStarted={getIsStarted(currentQuest.startedAt)}
-            minutes={currentQuest.minutes}
-            startedAt={currentQuest.startedAt}
-          />
+        <div className="my-2 text-sm">
+          <div className="w-[200px] flex justify-center items-center gap-2 text-white bg-rhyth-blue py-1 px-3 rounded-full">
+            <ClockIcon color="text-white" />
+            <p className="text-sm font-cp-font tracking-widest">クエスト実行タイム</p>
+          </div>
         </div>
+        {/* {getIsStarted(currentQuest.startedAt) && <span>開始: {formatDateTimeOnlyTime(currentQuest.startedAt)}</span>} */}
+      </div>
+      <div className="text-center font-bold my-2 flex items-center justify-center gap-2">
+        <span className="text-md text-rhyth-dark-blue">
+          {questStatus === CLOSED ? (
+            <span>クエスト解放まで</span>
+          ) : questStatus === OPEN ? (
+            <span>クエスト解放中</span>
+          ) : questStatus === ENGAGED ? (
+            <span>残り時間</span>
+          ) : (
+            <span>クエスト終了</span>
+          )}
+        </span>
+        <QuestBoardTimer
+          startsAt={currentQuest.startsAt}
+          isStarted={getIsStarted(currentQuest.startedAt)}
+          minutes={currentQuest.minutes}
+          startedAt={currentQuest.startedAt}
+        />
+      </div>
+      <hr className="h-0.2 bg-rhyth-light-gray mb-2" />
+      <div className="flex items-center gap-1 px-3 mt-2">
         {questStatus === CLOSED ? (
-          <div className="text-black bg-gray-200 rounded-lg text-lg font-bold p-3 mt-4 text-center">クエスト未開放</div>
+          <div className="text-rhyth-gray bg-[#D9D9D9] rounded-lg text-lg font-bold p-3 text-center w-full shadow-lg mt-1">
+            クエスト未開放
+          </div>
         ) : questStatus === OPEN ? (
           <button
             onClick={() => setStartConfirmModalOpen(true)}
-            className="text-white bg-green-400 hover:bg-green-500 focus:ring-4 focus:ring-blue-300 rounded-lg text-lg font-bold p-3 mt-4 focus:outline-none"
+            className="text-white bg-rhyth-green focus:ring-4 focus:ring-blue-300 rounded-lg text-lg font-bold p-3 mt-1 focus:outline-none w-full shadow-lg"
           >
             クエストを開始する
           </button>
         ) : questStatus === ENGAGED ? (
-          <div className="text-white bg-yellow-500 rounded-lg text-lg font-bold p-3 mt-4 text-center">
+          <div className="text-white bg-rhyth-orange rounded-lg text-lg font-bold p-3 text-center mt-1 w-full shadow-lg">
             クエストに集中しましょう
           </div>
         ) : questStatus === DONE ? (
           <button
             onClick={() => setFinishConfirmModalOpen(true)}
-            className="text-white bg-blue-400 hover:bg-blue-500 focus:ring-4 focus:ring-blue-300 rounded-lg text-lg font-bold p-3 mt-4 focus:outline-none"
+            className="text-white bg-rhyth-blue focus:ring-4 focus:ring-blue-300 rounded-lg text-lg font-bold p-3 mt-1 focus:outline-none w-full shadow-lg"
           >
             クエストを完了する
           </button>
         ) : (
           <button
             onClick={onClickForceFinishQuest}
-            className="text-white bg-red-400 hover:bg-red-500 focus:ring-4 focus:ring-blue-300 rounded-lg text-lg font-bold p-3 mt-4 focus:outline-none"
+            className="text-white bg-rhyth-red focus:ring-4 focus:ring-blue-300 rounded-lg text-lg font-bold p-3 mt-1 focus:outline-none w-full shadow-lg"
           >
             クエストを強制終了する
           </button>
