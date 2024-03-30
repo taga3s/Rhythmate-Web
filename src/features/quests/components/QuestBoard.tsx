@@ -5,10 +5,8 @@ import useInterval from "../../common/hooks/useInterval";
 import { CLOSED, DONE, ENGAGED, FORCE_STOP, NOT_STARTED_YET, OPEN, QuestStatus } from "../constant/constant";
 import { useMutateQuest } from "../api/quest/hooks/useMutateQuest";
 import { ConfirmModal, ClockIcon } from "../../common/components";
-import { calcExp } from "../../common/funcs/calcExp";
 import { getBaseTime, getDiffTime } from "../funcs/time";
 import { Quest } from "../../../api/quest/model";
-import { ManageProgressBar } from "../../manage/components/ManageProgressBar";
 
 export const getIsStarted = (startedAt: string) => {
   return startedAt !== NOT_STARTED_YET;
@@ -100,7 +98,7 @@ export const QuestBoard: FC<Props> = (props) => {
         </div>
         {/* {getIsStarted(currentQuest.startedAt) && <span>開始: {formatDateTimeOnlyTime(currentQuest.startedAt)}</span>} */}
       </div>
-      <div className="text-center font-bold mt-2 flex items-center justify-center gap-2">
+      <div className="text-center font-bold my-2 flex items-center justify-center gap-2">
         <span className="text-md text-rhyth-dark-blue">
           {questStatus === CLOSED ? (
             <span>クエスト解放まで</span>
@@ -119,52 +117,8 @@ export const QuestBoard: FC<Props> = (props) => {
           startedAt={currentQuest.startedAt}
         />
       </div>
-      <hr className="h-0.2 bg-rhyth-light-gray mt-2" />
-      <div className="flex items-center gap-3 ml-3 h-24">
-        <div className=" w-full h-full">
-          <div className="mt-2">
-            <div className="flex">
-              <p className="font-cp-font text-rhyth-green mt-auto ml-1">継続レベル</p>
-            </div>
-            <ManageProgressBar level={currentQuest.continuationLevel} />
-          </div>
-          <div className="flex justify-end items-center text-sm">
-            <p className="font-cp-font tracking-[0.2em] text-white bg-rhyth-orange px-2 py-1 rounded-full">BONUS</p>
-            <span className="ml-1 font-medium text-md text-rhyth-orange tracking-wider">&times;</span>
-            <span className="ml-1 font-bold text-lg text-rhyth-orange tracking-wider">
-              {currentQuest.continuationLevel}.0
-            </span>
-          </div>
-        </div>
-        <div className="bg-rhyth-red h-full flex flex-col justify-center items-center gap-2 font-cp-font text-[12px] tracking-wider">
-          <p className="text-white font-semibold">獲得Exp</p>
-          <div className="flex justify-between items-center">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth="1.5"
-              className="w-6 h-6 fill-rhyth-orange ml-2"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M15.362 5.214A8.252 8.252 0 0 1 12 21 8.25 8.25 0 0 1 6.038 7.047 8.287 8.287 0 0 0 9 9.601a8.983 8.983 0 0 1 3.361-6.867 8.21 8.21 0 0 0 3 2.48Z"
-              />
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M12 18a3.75 3.75 0 0 0 .495-7.468 5.99 5.99 0 0 0-1.925 3.547 5.975 5.975 0 0 1-2.133-1.001A3.75 3.75 0 0 0 12 18Z"
-              />
-            </svg>
-            <p className="text-white text-xl font-semibold text-right mr-3">
-              {calcExp(currentQuest.difficulty, currentQuest.continuationLevel)}
-            </p>
-          </div>
-        </div>
-      </div>
       <hr className="h-0.2 bg-rhyth-light-gray mb-2" />
-      <div className="flex items-center gap-1 px-3">
+      <div className="flex items-center gap-1 px-3 mt-2">
         {questStatus === CLOSED ? (
           <div className="text-rhyth-gray bg-[#D9D9D9] rounded-lg text-lg font-bold p-3 text-center w-full shadow-lg mt-1">
             クエスト未開放

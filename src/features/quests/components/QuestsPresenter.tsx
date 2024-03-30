@@ -73,7 +73,7 @@ export const QuestsPresenter = () => {
           <div className="bg-white">
             {currentQuest ? <QuestBoard currentQuest={currentQuest} /> : <QuestBoardNoData />}
           </div>
-          <div className={`flex flex-col w-full p-3 mt-4 bg-gray-100 rounded-md`}>
+          <div className={`flex flex-col w-full mt-6 bg-gray-100 rounded-md`}>
             <div className="flex items-center">
               <button
                 className={`px-4 py-2 text-base font-cp-font tracking-widest font-bold rounded-t-lg ${
