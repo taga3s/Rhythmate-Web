@@ -1,11 +1,11 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { FC } from "react";
 import { useForm } from "react-hook-form";
+import { ModalBase } from "../../common/components/modal/ModalBase";
+import { ModalHeaderCloseButton } from "../../common/components/modal/ModalHeaderCloseButton";
 import { FormErrorMsg } from "../../common/components/utils/FormErrorMsg";
 import { useMutateUser } from "../api/user/hooks/useMutateUser";
 import { TUserEditValidationSchema, userEditValidationSchema } from "../libs/validation";
-import { ModalBase } from "../../common/components/modal/ModalBase";
-import { ModalHeaderCloseButton } from "../../common/components/modal/ModalHeaderCloseButton";
 
 type Props = {
   username: string;
@@ -57,7 +57,7 @@ export const ProfileUserSettingsModal: FC<Props> = ({ username, onClickFn }) => 
             </div>
             <button
               type="submit"
-              className="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+              className="w-full text-white bg-rhyth-light-blue hover:bg-rhyth-blue focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
             >
               保存
             </button>

@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
+import { formatDateTimeJP } from "../../../pkg/util/dayjs";
 import { Loading, LoadingContainer } from "../../common/components";
 import { useQueryWeeklyReportSummary, useQueryWeeklyReports } from "../api/weeklyReport/hooks/useQueryWeeklyReport";
+import { AnalyticsAIFeedback } from "./AnalyticsAIFeedback";
 import { AnalyticsBarChart } from "./AnalyticsBarChart";
 import { AnalyticsCard } from "./AnalyticsCard";
-import { AnalyticsAIFeedback } from "./AnalyticsAIFeedback";
 import { AnalyticsSwitchButton } from "./AnalyticsSwitchButton";
-import { formatDateTimeJP } from "../../../pkg/util/dayjs";
 
 export const AnalyticsPresenter = () => {
   const [currentIndex, setCurrentIndex] = useState<number>(0);
