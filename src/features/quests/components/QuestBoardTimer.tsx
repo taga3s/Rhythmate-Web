@@ -36,7 +36,7 @@ export const QuestBoardTimer: FC<Props> = ({ startsAt, isStarted, minutes, start
   }, 1000);
 
   return (
-    <span className="text-2xl">
+    <span className="text-2xl text-rhyth-light-blue tracking-wider">
       {String(hh)}時間{String(mm).padStart(2, "0")}分{String(ss).padStart(2, "0")}秒
     </span>
   );
