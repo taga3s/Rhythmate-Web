@@ -60,25 +60,25 @@ export const AnalyticsPresenter = () => {
             <AnalyticsCard
               title={"達成したクエスト数"}
               data={weeklyReports[currentIndex].completed_quests}
-              color={"rhyth-red"}
+              color={"#E0201B"}
               isRate={false}
             />
             <AnalyticsCard
               title={"失敗したクエスト数"}
               data={weeklyReports[currentIndex].failed_quests}
-              color={"rhyth-blue"}
+              color={"#0087EE"}
               isRate={false}
             />
             <AnalyticsCard
               title={"達成率"}
               data={weeklyReports[currentIndex].completed_percentage}
-              color={"rhyth-orange"}
+              color={"#FFAA00"}
               isRate={true}
             />
             <AnalyticsCard
               title={"コンプリート日数"}
               data={weeklyReports[currentIndex].completed_days}
-              color={"rhyth-green"}
+              color={"#28AC00"}
               isRate={false}
             />
           </div>
