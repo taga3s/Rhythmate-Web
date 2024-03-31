@@ -6,9 +6,12 @@ import { ProfileLogoutModal } from "./ProfileLogoutModal";
 import { ProfileLogoutModalButton } from "./ProfileLogoutModalButton";
 import { ProfileUserSettingsModal } from "./ProfileUserSettingModal";
 import { ProfileUserSettingsModalButton } from "./ProfileUserSettingsModalButton";
+import { useQueryBadgeList } from "../badges/api/badge/hooks/useQueryBadge";
+import { Badge } from "../badges/components/badge/Badge";
 
 export const ProfilePresenter = () => {
   const { data: loginUser, isLoading } = useQueryLoginUser();
+  const { data: badgeList } = useQueryBadgeList();
   const [isSettingsModalOpen, setIsSettingsModalOpen] = useState<boolean>(false);
   const [isLogoutModalOpen, setIsLogoutModalOpen] = useState<boolean>(false);
   const profileDefaultImage = "/assets/profile/profilecat.jpg";
@@ -26,6 +29,8 @@ export const ProfilePresenter = () => {
   const closeLogoutModal = () => {
     setIsLogoutModalOpen(false);
   };
+
+  const pinnedBadgeList = badgeList?.filter((badge) => badge.isPinned);
 
   return (
     <>
@@ -47,7 +52,22 @@ export const ProfilePresenter = () => {
                 <div className="text-base">Lv. </div>
                 <div>{loginUser?.level}</div>
               </div>
+              <div className="flex justify-end gap-7 z-30">
+                {/* {
+                pinnedBadgeList?.map((badge) => {
+                  return (
+                    <Badge 
+                    imageType={badge.imageDir} 
+                    flameClassName="" 
+                    sparklingClassName="" 
+                    itemClassName="" 
+                    />
+                  );
+                })} */}
+                <Badge imageType="Cat" frameClassName="" sparklingClassName="" itemClassName="" />
+              </div>
             </div>
+
           </div>
           <ProfileExpCard />
           <ProfileUserSettingsModalButton onClickFn={openSettingsModal} />

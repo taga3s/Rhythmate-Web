@@ -18,10 +18,10 @@ export const BadgeCard: FC<Props> = (props) => {
 
   return (
     <div className="w-full h-full bg-white border border-[#AAAAAA] border-solid rounded-lg shadow">
-      <div className="h-35 grid grid-flow-row-dense grid-cols-3 gap-3 p-2" key={badgeId}>
-        <div className="h-auto col-span-1">
+      <div className="h-full grid grid-flow-row-dense grid-cols-3 gap-3 p-2" key={badgeId}>
+        <div className="h-full col-span-1">
           {/* <img src={imageDir} alt={badgeId} /> */}
-          <Badge imageType={imageDir} flameClassName="" sparklingClassName="" itemClassName="" />
+          <Badge imageType={imageDir} frameClassName="" sparklingClassName="" itemClassName="" />
         </div>
         <div className="flex flex-col col-span-2 ">
           <div className="flex justify-end">達成日: {obtainedAt}</div>
