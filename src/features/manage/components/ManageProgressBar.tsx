@@ -26,7 +26,7 @@ export const ManageProgressBar: FC<Props> = (props) => {
             return (
               <div
                 key={v}
-                className="w-full h-3 flex flex-col justify-center overflow-hidden bg-light-gray text-xs  whitespace-nowrap transition duration-500"
+                className="w-full h-3 flex flex-col justify-center overflow-hidden bg-rhyth-light-gray text-xs  whitespace-nowrap transition duration-500"
                 role="progressbar"
                 aria-valuenow={25}
                 aria-valuemin={0}

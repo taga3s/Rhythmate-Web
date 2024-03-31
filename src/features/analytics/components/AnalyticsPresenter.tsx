@@ -42,7 +42,7 @@ export const AnalyticsPresenter = () => {
           <Loading />
         </LoadingContainer>
       ) : weeklyReports?.length ? (
-        <div className="flex flex-col items-center w-fit mx-auto">
+        <div className="flex flex-col items-center mx-auto">
           <div className="flex justify-between  w-full">
             {
               <AnalyticsSwitchButton
