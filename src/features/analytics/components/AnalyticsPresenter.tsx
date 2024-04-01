@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { formatDateTimeJP } from "../../../pkg/util/dayjs";
 import { Loading, LoadingContainer } from "../../common/components";
 import { useQueryWeeklyReportSummary, useQueryWeeklyReports } from "../api/weeklyReport/hooks/useQueryWeeklyReport";
@@ -11,16 +11,8 @@ export const AnalyticsPresenter = () => {
   const [currentIndex, setCurrentIndex] = useState<number>(0);
 
   const { data: weeklyReports, isLoading: isLoadingWeeklyReports } = useQueryWeeklyReports();
-  const {
-    data: summaryData,
-    refetch: refetchSummary,
-    isFetching: isFetchingSummary,
-  } = useQueryWeeklyReportSummary(currentIndex);
-  useEffect(() => {
-    refetchSummary();
-  }, [currentIndex]);
+  const { data: summaryData, isFetching: isFetchingSummary } = useQueryWeeklyReportSummary(currentIndex);
 
-  // TODO: 日付の配列の作成
   const dateArray = weeklyReports?.length
     ? weeklyReports.map((item) => ({
         start: formatDateTimeJP(item.start_date),
@@ -29,11 +21,11 @@ export const AnalyticsPresenter = () => {
     : [];
 
   const handleClickPrev = () => {
-    setCurrentIndex((prevIndex) => (prevIndex === 0 ? (weeklyReports ? weeklyReports.length - 1 : 0) : prevIndex - 1));
+    setCurrentIndex(currentIndex + 1);
   };
 
   const handleClickNext = () => {
-    setCurrentIndex((prevIndex) => (prevIndex === (weeklyReports ? weeklyReports.length - 1 : 0) ? 0 : prevIndex + 1));
+    setCurrentIndex(currentIndex - 1);
   };
   return (
     <>

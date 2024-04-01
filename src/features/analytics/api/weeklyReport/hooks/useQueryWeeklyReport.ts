@@ -18,7 +18,7 @@ export const useQueryWeeklyReports = () => {
 export const useQueryWeeklyReportSummary = (weeklyReportIndex: number) => {
   const weeklyReportFactory = createFactory();
   return useQuery<string, FetchError>({
-    queryKey: ["weeklyReportSummary"],
+    queryKey: [`weeklyReportSummary-${weeklyReportIndex}`],
     queryFn: async () => {
       const summary = await weeklyReportFactory.getWeeklyReportSummary({ weeklyReportIndex: weeklyReportIndex });
       return summary;
