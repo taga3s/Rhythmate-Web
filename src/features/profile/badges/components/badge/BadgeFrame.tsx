@@ -8,12 +8,13 @@ export const BadgeFrame: FC<Props> = ({ className }) => {
   return (
     <svg
       version="1.1"
-      id="flame"
+      id="frame"
       xmlns="http://www.w3.org/2000/svg"
       xmlnsXlink="http://www.w3.org/1999/xlink"
       x="0px"
       y="0px"
       width="100%"
+      height="100%"
       viewBox="0 0 500 500"
       enableBackground="new 0 0 500 500"
       xmlSpace="preserve"

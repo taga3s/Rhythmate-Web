@@ -26,19 +26,19 @@ export const BadgesPresenter = () => {
             <Loading />
           </LoadingContainer>
         ) : (
-          <ul className="flex flex-col items-center mt-3 gap-3 w-full">
+          <ul className="flex flex-col items-center mt-3 gap-3 w-full h-full">
             {badgeList?.map((badge) => {
               return (
-                <BadgeCard
-                  key={badge.id}
-                  id={badge.id}
-                  badgeId={badge.badgeId}
-                  name={badge.name}
-                  description={badge.description}
-                  imageDir={badge.imageDir}
-                  isPinned={badge.isPinned}
-                  obtainedAt={badge.obtainedAt}
-                />
+                  <li key={badge.id} className="w-full h-full" >
+                      <BadgeCard
+                        id={badge.id}
+                        name={badge.name}
+                        description={badge.description}
+                        imageDir={badge.imageDir}
+                        isPinned={badge.isPinned}
+                        obtainedAt={badge.obtainedAt}
+                      />
+                  </li>
               );
             })}
           </ul>
