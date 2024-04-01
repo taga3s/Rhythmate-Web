@@ -12,10 +12,10 @@ type Props = {
 
 export const Badge: FC<Props> = ({ imageType, frameClassName, sparklingClassName, itemClassName }) => {
   return (
-    <div className="relative w-full h-full overflow-hidden">
+    <div className="relative w-full h-full overflow-hidden drop-shadow-lg">
       <BadgeSparkling className={`absolute z-30 ${sparklingClassName}`} />
-      <BadgeFrame className={`absolute z-20 ${frameClassName}`} />
-      <BadgeItem imageType={imageType} className={`absolute z-10 p-9${itemClassName}`} />
+      <BadgeFrame className={`absolute z-20 scale-125 ${frameClassName}`} />
+      <BadgeItem imageType={imageType} className={`absolute z-10 scale-50 ${itemClassName}`} />
     </div>
   );
 };
