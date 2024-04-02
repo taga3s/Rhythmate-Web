@@ -43,32 +43,25 @@ export const ProfilePresenter = () => {
           <div className="w-full p-5 bg-white border border-gray-200 rounded-lg shadow">
             <div className="flex justify-between gap-4 box-border mb-4">
               <img src={profileDefaultImage} alt="プロフィール画像" className="w-1/4 h-1/4 rounded-full" />
-              <div className="flex flex-col justify-center text-right break-all font-extrabold text-[#004479]">
+              <div className="flex flex-col justify-center text-right break-all font-extrabold text-rhyth-dark-blue">
                 <h1 className="text-3xl">{loginUser?.name}</h1>
               </div>
             </div>
             <div className="flex justify-between">
-              <div className="flex items-end gap-7 text-white bg-[#1EA1FF] focus:outline-none focus:ring-4 font-extrabold text-3xl px-3 py-2 mb-2 -ml-5">
+              <div className="flex items-end gap-7 text-white bg-rhyth-light-blue focus:outline-none focus:ring-4 font-extrabold text-3xl px-3 py-2 mb-2 -ml-5">
                 <div className="text-base">Lv. </div>
                 <div>{loginUser?.level}</div>
               </div>
               <div className="flex justify-end w-2/3 gap-3">
-                {
-                pinnedBadgeList?.map((badge) => {
+                {pinnedBadgeList?.map((badge) => {
                   return (
                     <div className="flex h-full w-1/3" key={badge.badgeId}>
-                      <Badge 
-                      imageType={badge.imageType} 
-                      frameClassName="" 
-                      sparklingClassName="" 
-                      itemClassName="" 
-                      />
+                      <Badge imageType={badge.imageType} frameClassName="" sparklingClassName="" itemClassName="" />
                     </div>
                   );
                 })}
               </div>
             </div>
-
           </div>
           <ProfileExpCard />
           <ProfileUserSettingsModalButton onClickFn={openSettingsModal} />

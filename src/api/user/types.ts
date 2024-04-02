@@ -33,6 +33,7 @@ export type GetResponse = {
   name: string;
   email: string;
   level: number;
+  exp: number;
 };
 
 export type UpdateLoginUserRequest = {
@@ -43,6 +44,7 @@ export type UpdateLoginUserResponse = {
   name: string;
   email: string;
   level: number;
+  exp: number;
 };
 
 export type UpdateLoginUserParams = {

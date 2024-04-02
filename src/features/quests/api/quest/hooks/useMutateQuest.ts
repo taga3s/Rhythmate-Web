@@ -5,9 +5,15 @@ import { Quest } from "../../../../../api/quest/model";
 import { notifyFailed, notifySuccess } from "../../../../../pkg/ui/toast";
 import { FetchError } from "../../../../../pkg/api/util/fetchError";
 import { FinishQuestParams, ForceFinishQuestParams, StartQuestParams } from "../../../../../api/quest/types";
+import { useQueryLoginUser } from "../../../../profile/api/user/hooks/useQueryUser";
+import { useQueryWeeklyReports } from "../../../../analytics/api/weeklyReport/hooks/useQueryWeeklyReport";
 
 export const useMutateQuest = () => {
   const questFactory = createFactory();
+
+  const { refetch: refetchLoginUser } = useQueryLoginUser();
+  const { refetch: refetchWeeklyReports } = useQueryWeeklyReports();
+
   const startQuestMutation = useMutation({
     mutationFn: async (params: StartQuestParams) => {
       return await questFactory.startQuest(params);
@@ -40,6 +46,9 @@ export const useMutateQuest = () => {
           questList.map((quest) => (quest.id === data.id ? data : quest)),
         );
       }
+      // XXX: 合わせて再取得してしまう
+      refetchLoginUser();
+      refetchWeeklyReports();
       notifySuccess("クエストを終了しました。");
     },
     onError: (err: FetchError) => {
@@ -60,6 +69,9 @@ export const useMutateQuest = () => {
           questList.map((quest) => (quest.id === data.id ? data : quest)),
         );
       }
+      // XXX: 合わせて再取得してしまう
+      refetchLoginUser();
+      refetchWeeklyReports();
       notifySuccess("クエストを強制終了しました。");
     },
     onError: (err: FetchError) => {

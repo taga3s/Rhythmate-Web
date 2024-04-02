@@ -18,37 +18,31 @@ export const BadgeCard: FC<Props> = (props) => {
   return (
     <div className="w-full h-full bg-white border border-[#AAAAAA] border-solid rounded-lg shadow key={badgeId}">
       <div className="h-full flex gap-3 p-3">
-          <div className="w-1/3 h-100 flex-row">
-            <Badge 
-              imageType={imageType} 
-              frameClassName="" 
-              sparklingClassName="" 
-              itemClassName="" 
-            />
+        <div className="w-1/3 h-100 flex-row">
+          <Badge imageType={imageType} frameClassName="" sparklingClassName="" itemClassName="" />
+        </div>
+        <div className="w-2/3 h-full flex-row ">
+          <span className="flex justify-end">達成日: {obtainedAt}</span>
+          <span className="flex items-center text-2xl">{name}</span>
+          <span className="flex items-center text-xl">{description}</span>
+          <div className="flex justify-end mt-2">
+            {isPinned ? (
+              <button
+                className="w-30 px-4 py-2 text-white bg-red-500 rounded-lg"
+                onClick={() => unpinBadgeMutation.mutate({ id })}
+              >
+                ピン留め解除
+              </button>
+            ) : (
+              <button
+                className="w-30 px-4 py-2 text-white bg-blue-500 rounded-lg"
+                onClick={() => pinBadgeMutation.mutate({ id })}
+              >
+                ピン留め
+              </button>
+            )}
           </div>
-          <div className="w-2/3 h-full flex-row ">
-            <span className="flex justify-end">達成日: {obtainedAt}</span>
-            <span className="flex items-center text-2xl">{name}</span>
-            <span className="flex items-center text-xl">{description}</span>
-            <div className="flex justify-end mt-2">
-              {isPinned ? (
-                <button
-                  className="w-30 px-4 py-2 text-white bg-red-500 rounded-lg"
-                  onClick={() => unpinBadgeMutation.mutate({ id })}
-                >
-                  ピン留め解除
-                </button>
-              ) : (
-                <button
-                  className="w-30 px-4 py-2 text-white bg-blue-500 rounded-lg"
-                  onClick={() => pinBadgeMutation.mutate({ id })}
-                >
-                  ピン留め
-                </button>
-              )}
-            </div>
-          </div>
-
+        </div>
       </div>
     </div>
   );

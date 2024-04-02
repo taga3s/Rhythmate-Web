@@ -14,8 +14,6 @@ export type Quest = {
   difficulty: Difficulty;
   state: QuestState;
   isSucceeded: boolean;
-  startDate: Date;
-  endDate: Date;
   days: Day[];
   continuationLevel: number;
   weeklyFrequency: number;
@@ -34,8 +32,6 @@ export const toQuest = (obj: {
   difficulty: Difficulty;
   state: QuestState;
   is_succeeded: boolean;
-  start_date: Date;
-  end_date: Date;
   days: Day[];
   continuation_level?: number;
   weekly_frequency: number;
@@ -54,8 +50,6 @@ export const toQuest = (obj: {
     difficulty: obj.difficulty,
     state: obj.state,
     isSucceeded: obj.is_succeeded,
-    startDate: obj.start_date,
-    endDate: obj.end_date,
     days: obj.days,
     continuationLevel: obj.continuation_level ?? 0,
     weeklyFrequency: obj.weekly_frequency,

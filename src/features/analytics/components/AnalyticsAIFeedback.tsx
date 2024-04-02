@@ -7,7 +7,7 @@ type Props = {
 };
 export const AnalyticsAIFeedback: FC<Props> = ({ summaryData, isLoading }) => {
   return (
-    <div className="mt-3 text-sm border-2 max-w-sm w-full min-h-36 p-4 bg-white rounded-lg shadow">
+    <div className="mt-3 text-sm border-2 w-full min-h-36 p-4 bg-white rounded-lg shadow">
       <div className="flex gap-2 items-center mb-1">
         <svg
           className="w-6 h-6 text-gray-800"

@@ -1,26 +1,18 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import { formatDateTimeJP } from "../../../pkg/util/dayjs";
 import { Loading, LoadingContainer } from "../../common/components";
 import { useQueryWeeklyReportSummary, useQueryWeeklyReports } from "../api/weeklyReport/hooks/useQueryWeeklyReport";
+import { AnalyticsAIFeedback } from "./AnalyticsAIFeedback";
 import { AnalyticsBarChart } from "./AnalyticsBarChart";
 import { AnalyticsCard } from "./AnalyticsCard";
-import { AnalyticsAIFeedback } from "./AnalyticsAIFeedback";
 import { AnalyticsSwitchButton } from "./AnalyticsSwitchButton";
-import { formatDateTimeJP } from "../../../pkg/util/dayjs";
 
 export const AnalyticsPresenter = () => {
   const [currentIndex, setCurrentIndex] = useState<number>(0);
 
   const { data: weeklyReports, isLoading: isLoadingWeeklyReports } = useQueryWeeklyReports();
-  const {
-    data: summaryData,
-    refetch: refetchSummary,
-    isFetching: isFetchingSummary,
-  } = useQueryWeeklyReportSummary(currentIndex);
-  useEffect(() => {
-    refetchSummary();
-  }, [currentIndex]);
+  const { data: summaryData, isFetching: isFetchingSummary } = useQueryWeeklyReportSummary(currentIndex);
 
-  // TODO: 日付の配列の作成
   const dateArray = weeklyReports?.length
     ? weeklyReports.map((item) => ({
         start: formatDateTimeJP(item.start_date),
@@ -29,11 +21,11 @@ export const AnalyticsPresenter = () => {
     : [];
 
   const handleClickPrev = () => {
-    setCurrentIndex((prevIndex) => (prevIndex === 0 ? (weeklyReports ? weeklyReports.length - 1 : 0) : prevIndex - 1));
+    setCurrentIndex(currentIndex + 1);
   };
 
   const handleClickNext = () => {
-    setCurrentIndex((prevIndex) => (prevIndex === (weeklyReports ? weeklyReports.length - 1 : 0) ? 0 : prevIndex + 1));
+    setCurrentIndex(currentIndex - 1);
   };
   return (
     <>
@@ -42,7 +34,7 @@ export const AnalyticsPresenter = () => {
           <Loading />
         </LoadingContainer>
       ) : weeklyReports?.length ? (
-        <div className="flex flex-col items-center w-fit mx-auto">
+        <div className="flex flex-col items-center mx-auto">
           <div className="flex justify-between  w-full">
             {
               <AnalyticsSwitchButton
@@ -58,13 +50,13 @@ export const AnalyticsPresenter = () => {
           </div>
           <div className="grid grid-cols-2 gap-6 w-full mt-6">
             <AnalyticsCard
-              title={"達成したクエストの数"}
+              title={"達成したクエスト数"}
               data={weeklyReports[currentIndex].completed_quests}
               color={"#E0201B"}
               isRate={false}
             />
             <AnalyticsCard
-              title={"失敗したクエストの数"}
+              title={"失敗したクエスト数"}
               data={weeklyReports[currentIndex].failed_quests}
               color={"#0087EE"}
               isRate={false}
