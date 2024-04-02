@@ -1,6 +1,6 @@
 export type ListResponse = {
   status: string;
-  badgeWithDetail: {
+  badgesWithDetail: {
     id: string;
     badge_id: string;
     name: string;

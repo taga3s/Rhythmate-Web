@@ -6,13 +6,13 @@ type Props = {
   id: string;
   name: string;
   description: string;
-  imageDir: string;
+  imageType: string;
   obtainedAt: string;
   isPinned: boolean;
 };
 
 export const BadgeCard: FC<Props> = (props) => {
-  const { id, name, description, imageDir, obtainedAt, isPinned } = props;
+  const { id, name, description, imageType, obtainedAt, isPinned } = props;
   const { pinBadgeMutation, unpinBadgeMutation } = useMutateBadge();
 
   return (
@@ -20,7 +20,7 @@ export const BadgeCard: FC<Props> = (props) => {
       <div className="h-full flex gap-3 p-3">
           <div className="w-1/3 h-100 flex-row">
             <Badge 
-              imageType={imageDir} 
+              imageType={imageType} 
               frameClassName="" 
               sparklingClassName="" 
               itemClassName="" 
