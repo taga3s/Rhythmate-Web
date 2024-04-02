@@ -58,7 +58,7 @@ export const ProfilePresenter = () => {
                   return (
                     <div className="flex h-full w-1/3">
                       <Badge 
-                      imageType={badge.imageDir} 
+                      imageType={badge.imageType} 
                       frameClassName="" 
                       sparklingClassName="" 
                       itemClassName="" 

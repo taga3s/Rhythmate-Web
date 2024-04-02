@@ -27,9 +27,9 @@ export const BadgeCard: FC<Props> = (props) => {
             />
           </div>
           <div className="w-2/3 h-full flex-row ">
-            <div className="flex justify-end">達成日: {obtainedAt}</div>
-            <div className="flex items-center text-2xl">{name}</div>
-            <div className="flex items-center text-xl">{description}</div>
+            <span className="flex justify-end">達成日: {obtainedAt}</span>
+            <span className="flex items-center text-2xl">{name}</span>
+            <span className="flex items-center text-xl">{description}</span>
             <div className="flex justify-end mt-2">
               {isPinned ? (
                 <button

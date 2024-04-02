@@ -3,7 +3,7 @@ export type Badge = {
   badgeId: string;
   name: string;
   description: string;
-  imageDir: string;
+  imageType: string;
   obtainedAt: string;
   isPinned: boolean;
 };
@@ -13,7 +13,7 @@ export const toBadge = (obj: {
   badge_id: string;
   name: string;
   description: string;
-  image_dir: string;
+  image_type: string;
   obtained_at: string;
   is_pinned: boolean;
 }): Badge => {
@@ -22,7 +22,7 @@ export const toBadge = (obj: {
     badgeId: obj.badge_id,
     name: obj.name,
     description: obj.description,
-    imageDir: obj.image_dir,
+    imageType: obj.image_type,
     obtainedAt: obj.obtained_at,
     isPinned: obj.is_pinned,
   };

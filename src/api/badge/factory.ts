@@ -8,7 +8,7 @@ export const createFactory = () => {
   return {
     listBadges: async () => {
       const response = await repository.list();
-      const badges: Badge[] = response.badges.map((badge) => {
+      const badges: Badge[] = response.badgeWithDetail.map((badge) => {
         return toBadge(badge);
       });
       return badges;

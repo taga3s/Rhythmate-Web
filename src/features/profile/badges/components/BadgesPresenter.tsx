@@ -34,7 +34,7 @@ export const BadgesPresenter = () => {
                         id={badge.id}
                         name={badge.name}
                         description={badge.description}
-                        imageDir={badge.imageDir}
+                        imageDir={badge.imageType}
                         isPinned={badge.isPinned}
                         obtainedAt={badge.obtainedAt}
                       />
