@@ -56,7 +56,7 @@ export const ProfilePresenter = () => {
                 {
                 pinnedBadgeList?.map((badge) => {
                   return (
-                    <div className="flex h-full w-1/3">
+                    <div className="flex h-full w-1/3" key={badge.badgeId}>
                       <Badge 
                       imageType={badge.imageType} 
                       frameClassName="" 

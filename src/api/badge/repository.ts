@@ -9,7 +9,6 @@ export interface BadgeRepository {
 
 const list: BadgeRepository["list"] = async () => {
   const response = await apiClient.get("/badge");
-  console.log(response);
   return response;
 };
 
