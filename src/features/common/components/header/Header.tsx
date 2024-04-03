@@ -39,7 +39,7 @@ export const Header = () => {
   };
 
   return (
-    <header className="w-full shadow-md bg-rhyth-bg-gray fixed top-0 left-0 right-0 border-b-2 border-rhyth-light-gray">
+    <header className="w-full shadow-md bg-rhyth-bg-gray fixed top-0 left-0 right-0 border-b-2 border-rhyth-light-gray z-50">
       <div className="flex justify-between items-center">
         <div className="px-4 py-2 flex items-center gap-2">
           <div>
