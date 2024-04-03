@@ -210,7 +210,7 @@ export const NewPresenter = () => {
             </button>
           </div>
         </div>
-        <div className="w-full flex justify-between items-center gap-2 mt-6">
+        <div className="w-full gap-2 mt-6">
           <div className="flex items-center gap-2 w-24">
             <svg
               className="w-6 h-6 text-rhyth-gray"
@@ -221,14 +221,14 @@ export const NewPresenter = () => {
             >
               <path stroke="currentColor" strokeLinecap="round" strokeWidth="2" d="M5 7h14M5 12h14M5 17h10" />
             </svg>
-            <label htmlFor="new-quest-description" className="my-2 text-base font-bold text-rhyth-gray">
-              説明
+            <label htmlFor="new-quest-description" className="text-base font-bold text-rhyth-gray">
+              ひとこと
             </label>
           </div>
           <input
             type="text"
             id="new-quest-description"
-            className="w-full border-2 p-2 rounded-md"
+            className="w-full border-2 p-2 rounded-md mt-4"
             {...register("description")}
           />
         </div>
