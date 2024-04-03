@@ -6,7 +6,8 @@ export const HeaderProfileButton = () => {
   return (
     <>
       <HeaderButton icon="Badge" onClickFn={() => navigation({ to: "/profile/badges" })} />
-      <HeaderButton icon="Ranking" onClickFn={() => console.log("ランキングページへ")} />
+      {/* TODO: 実装したらコメントアウトを外す */}
+      {/* <HeaderButton icon="Ranking" onClickFn={() => console.log("ランキングページへ")} /> */}
     </>
   );
 };
