@@ -1,11 +1,11 @@
 import { useNavigate } from "@tanstack/react-router";
-import { ManageProgressBar } from "./ManageProgressBar";
 import { FC } from "react";
+import { Day, Difficulty } from "../../../api/quest/types";
 import { formatDateTimeOnlyTime } from "../../../pkg/util/dayjs";
 import { ClockIcon } from "../../common/components/icons/ClockIcon";
 import { calcExp } from "../../common/funcs/calcExp";
 import { convertEnToJPWeekday } from "../common/funcs";
-import { Day, Difficulty } from "../../../api/quest/types";
+import { ManageProgressBar } from "./ManageProgressBar";
 
 const convertENToJPWeekdayString = (weekDays: Day[]) => {
   const result = weekDays.map((day) => convertEnToJPWeekday(day)).join("・");
@@ -58,9 +58,9 @@ export const ManageQuestCard: FC<Props> = (props) => {
           </button>
         </div>
         <hr className="h-1.5 bg-rhyth-blue" />
-        <div className="flex items-center gap-2 text-sm mt-2">
+        <div className="flex items-start gap-2 text-sm mt-2">
           <div className="font-cp-font text-white bg-rhyth-gray py-1 px-3 rounded-full tracking-wider">
-            <p>ひとこと</p>
+            <p className="text-center whitespace-nowrap">ひとこと</p>
           </div>
           <h3 className="font-bold text-rhyth-dark-blue">{description}</h3>
         </div>

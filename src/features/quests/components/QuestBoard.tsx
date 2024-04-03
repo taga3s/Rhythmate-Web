@@ -84,9 +84,9 @@ export const QuestBoard: FC<Props> = (props) => {
       <div className="flex flex-col gap-1 px-3">
         <h1 className="font-bold text-lg text-rhyth-dark-blue mb-2">{currentQuest.title}</h1>
         <hr className="h-1.5 bg-rhyth-blue" />
-        <div className="flex items-center gap-2 text-sm mt-2">
+        <div className="flex items-start gap-2 text-sm mt-2">
           <div className="font-cp-font text-white bg-rhyth-gray py-1 px-3 rounded-full tracking-wider">
-            <p>ひとこと</p>
+            <p className="text-center whitespace-nowrap">ひとこと</p>
           </div>
           <h3 className="font-bold text-rhyth-dark-blue">{currentQuest.description}</h3>
         </div>
