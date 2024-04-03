@@ -12,7 +12,7 @@ type Props = {
   onClickFn: () => void;
 };
 
-export const HeaderButton: FC<Props> = ({ icon, onClickFn }) => {
+export const HeaderBaseButton: FC<Props> = ({ icon, onClickFn }) => {
   const selectIcon = (icon: string) => {
     switch (icon) {
       case "Bell":
