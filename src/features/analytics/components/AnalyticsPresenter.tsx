@@ -79,7 +79,10 @@ export const AnalyticsPresenter = () => {
               曜日別クエスト達成状況
             </h1>
           </div>
-          <AnalyticsBarChart data={weeklyReports[currentIndex].completed_quests_each_day} />
+          <AnalyticsBarChart
+            completedQuestsData={weeklyReports[currentIndex].completed_quests_each_day}
+            failedQuestsData={weeklyReports[currentIndex].failed_quests_each_day}
+          />
           <AnalyticsAIFeedback summaryData={summaryData ?? ""} isLoading={isFetchingSummary} />
         </div>
       ) : (
