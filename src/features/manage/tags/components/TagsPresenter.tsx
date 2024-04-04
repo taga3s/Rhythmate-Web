@@ -7,6 +7,7 @@ import { useNavigate } from "@tanstack/react-router";
 import { useQueryTagList } from "../api/tag/hooks/useQueryTag";
 import { Loading, LoadingContainer } from "../../../common/components";
 import { useMutateTag } from "../api/tag/hooks/useMutateTag";
+import { TagsNewModal } from "./TagsNewModal";
 
 type Tag = {
   name: string;
@@ -32,14 +33,15 @@ export const TagsPresenter = () => {
   };
 
 
-  const openTagsEditModal = () => {
+  const openTagsEditModal = (tag_id: string) => {
+    setSelectedTagId(tag_id);
     setIsTagsEditModalOpen(true);
   };
   const closeTagsEditModal = () => {
     setIsTagsEditModalOpen(false);
   };
-  const openTagsDeleteModal = (id: string) => {
-    setSelectedTagId(id);
+  const openTagsDeleteModal = (tag_id: string) => {
+    setSelectedTagId(tag_id);
     setIsTagsDeleteModalOpen(true);
   };
   const closeTagsDeleteModal = () => {
@@ -95,7 +97,7 @@ export const TagsPresenter = () => {
                 key={index}
                 tagName={item.name}
                 tagColor={item.color}
-                onEditFn={openTagsEditModal}
+                onEditFn={() => openTagsEditModal(item.id)}
                 onDeleteFn={() => openTagsDeleteModal(item.id)}
               />
               ))
@@ -111,11 +113,8 @@ export const TagsPresenter = () => {
       {isTagsEditModalOpen && (
         <TagsEditModal
           modalType="タグ編集"
-          // confirmBtnText="タグを削除する"
-          // cancelBtnText="キャンセルする"
-          // btnColor="red"
-          // // actionFnは後ほど修正
           closeModal={closeTagsEditModal}
+          tag_id={selectedTagId?? ""}
         />
       )}
       {isTagsDeleteModalOpen && (
@@ -128,7 +127,7 @@ export const TagsPresenter = () => {
           closeModal={closeTagsDeleteModal}
         />
       )}
-      {isTagsNewModalOpen && <TagsEditModal modalType="タグ作成" closeModal={closeTagsNewModal} />}
+      {isTagsNewModalOpen && <TagsNewModal modalType="タグ作成" closeModal={closeTagsNewModal} />}
     </>
   );
 };

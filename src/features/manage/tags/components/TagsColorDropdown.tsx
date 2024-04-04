@@ -5,20 +5,12 @@ import { UseFormRegister, UseFormWatch } from "react-hook-form";
 import { selectTagColorText } from "../../common/funcs";
 
 type Props = {
-  onSelectFn: (color: string) => void;
   register: UseFormRegister<TTagValidationSchema>;
   watch: UseFormWatch<TTagValidationSchema>;
 };
 
-export const TagsColorDropdown: FC<Props> = ({ onSelectFn, register, watch }) => {
-  // const [colorValue, setColorValue] = useState<string>("");
+export const TagsColorDropdown: FC<Props> = ({ register, watch }) => {
   const colorValue = watch("color");
-
-  // const handleColorValue = (event: { target: { value: SetStateAction<string> } }) => {
-  //   setColorValue(event.target.value);
-  //   onSelectFn(colorValue);
-  // };
-
   return (
     <select
       id="tag-color"
