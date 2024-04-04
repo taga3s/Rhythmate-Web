@@ -101,7 +101,7 @@ export const ManagePresenter = () => {
           </svg>
           <h1 className="text-lg">まずはクエストを作成しましょう！</h1>
           <button
-            className="bg-rhyth-blue text-white flex mt-3 h-12 w-44 items-center justify-center rounded-lg"
+            className="bg-rhyth-blue hover:bg-rhyth-hover-blue text-white flex mt-3 h-12 w-44 items-center justify-center rounded-lg"
             onClick={() => navigate({ to: "/manage/new" })}
           >
             <svg

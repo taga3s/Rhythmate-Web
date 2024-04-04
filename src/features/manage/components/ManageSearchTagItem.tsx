@@ -27,7 +27,7 @@ export const ManageSearchTagItem: FC<Props> = ({ tagName, color }) => {
 
   return (
     <option
-      className={`border-b border-rhyth-light-gray w-full h-hull font-bold flex items-center px-4 py-2 rounded-t-lg ${selectColorLabel(
+      className={`border-b border-rhyth-light-gray w-full h-hull font-bold flex items-center px-4 py-2 rounded-t-lg hover:text-white hover:bg-rhyth-hover-blue ${selectColorLabel(
         color,
       )}`}
       value={tagName}
