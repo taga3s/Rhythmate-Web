@@ -8,7 +8,7 @@ export const TagsEditButton: FC<Props> = ({ onClickFn }) => {
   return (
     <button onClick={onClickFn}>
       <svg
-        className="w-6 h-6 text-rhyth-gray"
+        className="w-6 h-6 text-rhyth-gray hover:text-rhyth-black"
         aria-hidden="true"
         xmlns="http://www.w3.org/2000/svg"
         width="24"

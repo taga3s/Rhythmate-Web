@@ -22,7 +22,7 @@ export const ManageDifficultyCheckBox: FC<Props> = ({ handleDifficulties, diffic
       />
       <label
         htmlFor={difficulty}
-        className="flex ml-auto peer-checked:bg-rhyth-blue px-2 py-1 rounded-lg border-2 border-rhyth-light-gray cursor-pointer shadow-sm"
+        className="flex ml-auto peer-checked:bg-rhyth-blue px-2 py-1 rounded-lg border-2 border-rhyth-light-gray cursor-pointer shadow-sm hover:bg-rhyth-bg-dark-gray"
       >
         {Array.from({ length: convertDifficultyToNumber(difficulty) }).map((_, index) => (
           <Star key={index} />

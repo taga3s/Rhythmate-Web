@@ -35,7 +35,7 @@ export const ManageQuestCard: FC<Props> = (props) => {
           <button className="p-1 ml-auto" onClick={() => navigate({ to: `/manage/edit`, search: { quest_id: id } })}>
             <div className="flex items-center gap-2 justify-center">
               <svg
-                className="w-6 h-6 text-rhyth-blue"
+                className="w-6 h-6 text-rhyth-blue hover:text-rhyth-hover-blue"
                 aria-hidden="true"
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"

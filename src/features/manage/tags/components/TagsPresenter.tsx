@@ -55,7 +55,7 @@ export const TagsPresenter = () => {
   return (
     <>
       <button onClick={() => navigate({ to: "/manage" })} className="block">
-        <div className="px-2 py-2 flex gap-2 items-center bg-white font-bold text-sm rounded-md border-2 border-rhyth-light-gray shadow-sm">
+        <div className="px-2 py-2 flex gap-2 items-center bg-white hover:bg-rhyth-hover-light-gray font-bold text-sm rounded-md border-2 border-rhyth-light-gray shadow-sm">
           <svg
             className="w-6 h-6 text-rhyth-gray"
             aria-hidden="true"
