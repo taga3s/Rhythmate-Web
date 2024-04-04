@@ -2,23 +2,47 @@ import { FC, useState } from "react";
 import { TagsColorDropdown } from "./TagsColorDropdown";
 import { ModalBase } from "../../../common/components/modal/ModalBase";
 import { ModalHeaderCloseButton } from "../../../common/components/modal/ModalHeaderCloseButton";
+import { useMutateTag } from "../api/tag/hooks/useMutateTag";
+import { TTagValidationSchema, tagValidationSchema } from "../common/libs/validation";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
+import { FormErrorMsg } from "../../../common/components";
 
 type Props = {
   modalType: string;
   closeModal: () => void;
 };
 
+type NewValues = {
+  name: string;
+  color: string;
+};
+
 export const TagsEditModal: FC<Props> = ({ modalType, closeModal }) => {
   const [tagColor, setTagColor] = useState<string>("");
+  const { createTagMutation } = useMutateTag();
+
+  const {
+    register,
+    watch,
+    setValue,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<TTagValidationSchema>({
+    mode: "onBlur",
+    resolver: zodResolver(tagValidationSchema)
+  })
 
   const handleTagColor = (color: string) => {
     setTagColor(color);
   };
 
-  const onSubmit = () => {
+  const onSubmit = async (data: NewValues) => {
+    await createTagMutation.mutateAsync({ 
+      name: data.name, 
+      color: data.color 
+    });
     closeModal();
-    // 一時的に追加しておきます
-    console.log(tagColor);
   };
 
   return (
@@ -31,7 +55,7 @@ export const TagsEditModal: FC<Props> = ({ modalType, closeModal }) => {
         </div>
         {/* <!-- Modal body --> */}
         <div className="p-4 md:p-4">
-          <form className="space-y-4" onSubmit={onSubmit}>
+          <form className="space-y-4" onSubmit={handleSubmit(onSubmit)}>
             <div className="flex items-center justify-between">
               <label className="flex gap-2 mb-2 text-sm font-bold text-rhyth-dark-blue my-2" htmlFor="tag-name">
                 <svg
@@ -53,10 +77,10 @@ export const TagsEditModal: FC<Props> = ({ modalType, closeModal }) => {
                 // defaultValue={beforeUserName}
                 className="bg-white border border-rhyth-light-gray text-rhyth-dark-blue text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-1/2 p-2"
                 placeholder="tagname"
-                // {...register("tagName")}
                 required
+                {...register("name")}
               />
-              {/* {errors.name && <FormErrorMsg msg={errors.name.message ?? ""} />} */}
+              {errors.name && <FormErrorMsg msg={errors.name.message ?? ""} />}
             </div>
             <div className="flex items-start justify-between">
               <label className="flex gap-2 mb-2 text-sm font-bold text-rhyth-dark-blue my-2" htmlFor="tag-color">
@@ -73,7 +97,7 @@ export const TagsEditModal: FC<Props> = ({ modalType, closeModal }) => {
                 </svg>
                 <span>色ラベル</span>
               </label>
-              <TagsColorDropdown onSelectFn={handleTagColor} />
+              <TagsColorDropdown onSelectFn={handleTagColor} register={register} watch={watch}/>
             </div>
             <button
               type="submit"

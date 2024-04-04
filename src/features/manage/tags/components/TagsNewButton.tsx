@@ -5,6 +5,7 @@ type Props = {
 };
 
 export const TagsNewButton: FC<Props> = ({ onClickFn }) => {
+
   return (
     <button
       onClick={onClickFn}

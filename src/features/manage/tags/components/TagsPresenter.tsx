@@ -4,6 +4,8 @@ import { ConfirmModal } from "../../../common/components/ConfirmModal";
 import { TagsEditModal } from "./TagsEditModal";
 import { TagsNewButton } from "./TagsNewButton";
 import { useNavigate } from "@tanstack/react-router";
+import { useQueryTagList } from "../api/tag/hooks/useQueryTag";
+import { Loading, LoadingContainer } from "../../../common/components";
 
 type Tag = {
   tagName: string;
@@ -15,11 +17,13 @@ export const TagsPresenter = () => {
   const [isTagsEditModalOpen, setIsTagsEditModalOpen] = useState<boolean>(false);
   const [isTagsDeleteModalOpen, setIsTagsDeleteModalOpen] = useState<boolean>(false);
   const [isTagsNewModalOpen, setIsTagsNewModalOpen] = useState<boolean>(false);
-  const [tagItems] = useState<Tag[]>([
-    { tagName: "勉強・スキルアップ", tagColor: "Green" },
-    { tagName: "健康的な習慣", tagColor: "Purple" },
-    { tagName: "生活・ライフスタイル", tagColor: "Blue" },
-  ]);
+  // const [tagItems] = useState<Tag[]>([
+  //   { tagName: "勉強・スキルアップ", tagColor: "Green" },
+  //   { tagName: "健康的な習慣", tagColor: "Purple" },
+  //   { tagName: "生活・ライフスタイル", tagColor: "Blue" },
+  // ]);
+  const { data: tagItems, isLoading } = useQueryTagList();
+
   // const [editTag, setEditTag] = useState<Tag>({ tagName: "", tagColor: "" });
 
   const openTagsEditModal = () => {
@@ -78,20 +82,33 @@ export const TagsPresenter = () => {
       </button>
       <div className="mt-4">
         <div className="flex justify-between items-center mb-2">
-          <h1 className="font-cp-font font-black text-xl text-rhyth-gray tracking-widest">タグ管理</h1>
+          <h1 className="font-cp-font font-black text-xl text-rhyth-gray tracking-widest">
+            タグ管理
+          </h1>
           <TagsNewButton onClickFn={openTagsNewModal} />
         </div>
         <div>
           <ul className="text-md font-bold text-rhyth-dark-blue bg-white border-2 border-rhyth-light-gray rounded-lg shadow-md">
-            {tagItems.map((item, index) => (
+            {isLoading ? (
+              <LoadingContainer>
+                <Loading />
+              </LoadingContainer>
+            ) : tagItems?.length ? (
+              tagItems.map((item, index) => (
               <TagsItem
                 key={index}
-                tagName={item.tagName}
-                tagColor={item.tagColor}
+                tagName={item.name}
+                tagColor={item.color}
                 onEditFn={openTagsEditModal}
                 onDeleteFn={openTagsDeleteModal}
               />
-            ))}
+              ))
+              ) : (
+                <div className="w-full gap-4 flex flex-col items-center mx-auto text-xl">
+                  <p>タグが登録されていません</p>
+                  <p>タグを作成してください</p>
+                </div>
+            )}
           </ul>
         </div>
       </div>
