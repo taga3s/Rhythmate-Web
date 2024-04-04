@@ -7,7 +7,7 @@ type Props = {
 export const ManageIcon: FC<Props> = ({ color }) => {
   return (
     <svg
-      className={`w-6 h-6 ${color}`}
+      className={`w-6 h-6 ${color} hover:text-rhyth-orange`}
       aria-hidden="true"
       xmlns="http://www.w3.org/2000/svg"
       fill="none"
