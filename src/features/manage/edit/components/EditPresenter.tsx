@@ -76,7 +76,7 @@ export const EditPresenter: FC<Props> = (props) => {
     <>
       <div>
         <button onClick={() => navigate({ to: "/manage" })} className="block">
-          <div className="px-2 py-2 flex gap-2 items-center bg-white font-bold text-black text-sm rounded-md border-2 border-rhyth-light-gray shadow-sm">
+          <div className="px-2 py-2 flex gap-2 items-center bg-white hover:bg-rhyth-hover-light-gray font-bold text-black text-sm rounded-md border-2 border-rhyth-light-gray shadow-sm">
             <svg
               className="w-6 h-6 text-rhyth-gray"
               aria-hidden="true"
@@ -198,7 +198,7 @@ export const EditPresenter: FC<Props> = (props) => {
               <button
                 type="button"
                 className={`w-1/4 border-2 flex justify-center items-center gap-1 p-2 rounded-md shadow-sm ${
-                  difficulty === "EASY" ? "bg-rhyth-blue" : "bg-white"
+                  difficulty === "EASY" ? "bg-rhyth-blue" : "bg-white hover:bg-rhyth-bg-dark-gray"
                 }`}
                 onClick={() => {
                   setDifficulty("EASY");
@@ -209,7 +209,7 @@ export const EditPresenter: FC<Props> = (props) => {
               <button
                 type="button"
                 className={`w-1/4 border-2 flex justify-center items-center gap-1 p-2 rounded-md shadow-sm ${
-                  difficulty === "NORMAL" ? "bg-rhyth-blue" : "bg-white"
+                  difficulty === "NORMAL" ? "bg-rhyth-blue" : "bg-white hover:bg-rhyth-bg-dark-gray"
                 }`}
                 onClick={() => {
                   setDifficulty("NORMAL");
@@ -221,7 +221,7 @@ export const EditPresenter: FC<Props> = (props) => {
               <button
                 type="button"
                 className={`w-1/4 border-2 flex justify-center items-center gap-1 p-2 rounded-md shadow-sm ${
-                  difficulty === "HARD" ? "bg-rhyth-blue" : "bg-white"
+                  difficulty === "HARD" ? "bg-rhyth-blue" : "bg-white hover:bg-rhyth-bg-dark-gray"
                 }`}
                 onClick={() => {
                   setDifficulty("HARD");
@@ -260,14 +260,14 @@ export const EditPresenter: FC<Props> = (props) => {
           <div className="flex flex-col mt-8 mb-4 gap-4">
             <button
               type="submit"
-              className="w-full text-white bg-rhyth-blue focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-base p-3 focus:outline-none shadow-lg"
+              className="w-full text-white bg-rhyth-blue hover:bg-rhyth-hover-blue focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-base p-3 focus:outline-none shadow-lg"
             >
               クエストを更新する
             </button>
             <button
               onClick={() => setOpenModal(true)}
               type="button"
-              className="w-full text-white bg-rhyth-red focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-base p-3 focus:outline-none shadow-lg"
+              className="w-full text-white bg-rhyth-red hover:bg-rhyth-hover-red focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-base p-3 focus:outline-none shadow-lg"
             >
               クエストを削除する
             </button>
