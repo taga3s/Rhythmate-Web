@@ -11,7 +11,9 @@ export const AnalyticsSwitchButton: FC<Props> = ({ onClickFn, direction, isEdgy 
     <button onClick={onClickFn} disabled={isEdgy}>
       {direction === "left" ? (
         <svg
-          className={`w-6 h-6 text-rhyth-gray ${isEdgy ? "w-6 h-6 text-transparent" : "w-6 h-6 text-rhyth-gray"} `}
+          className={`w-6 h-6 text-rhyth-gray ${
+            isEdgy ? "w-6 h-6 text-transparent" : "w-6 h-6 text-rhyth-gray hover:text-rhyth-black"
+          } `}
           aria-hidden="true"
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
@@ -27,7 +29,9 @@ export const AnalyticsSwitchButton: FC<Props> = ({ onClickFn, direction, isEdgy 
         </svg>
       ) : (
         <svg
-          className={`w-6 h-6 text-rhyth-gray ${isEdgy ? "w-6 h-6 text-transparent" : "w-6 h-6 text-rhyth-gray"} `}
+          className={`w-6 h-6 text-rhyth-gray ${
+            isEdgy ? "w-6 h-6 text-transparent" : "w-6 h-6 text-rhyth-gray hover:text-rhyth-black"
+          } `}
           aria-hidden="true"
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
