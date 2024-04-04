@@ -8,8 +8,8 @@ import { useQueryTagList } from "../api/tag/hooks/useQueryTag";
 import { Loading, LoadingContainer } from "../../../common/components";
 
 type Tag = {
-  tagName: string;
-  tagColor: string;
+  name: string;
+  color: string;
 };
 
 export const TagsPresenter = () => {

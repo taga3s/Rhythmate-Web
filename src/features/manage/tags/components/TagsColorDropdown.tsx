@@ -2,6 +2,7 @@ import { FC, SetStateAction, useState } from "react";
 import { TagsColorItem } from "./TagsColorItem";
 import { TTagValidationSchema } from "../common/libs/validation";
 import { UseFormRegister, UseFormWatch } from "react-hook-form";
+import { selectTagColorText } from "../../common/funcs";
 
 type Props = {
   onSelectFn: (color: string) => void;
@@ -18,31 +19,10 @@ export const TagsColorDropdown: FC<Props> = ({ onSelectFn, register, watch }) =>
   //   onSelectFn(colorValue);
   // };
 
-  const selectColorLabel = (color: string) => {
-    switch (color) {
-      case "Blue":
-        return "text-rhyth-blue";
-      case "Green":
-        return "text-rhyth-green";
-      case "Red":
-        return "text-rhyth-red";
-      case "Purple":
-        return "text-rhyth-purple";
-      case "Orange":
-        return "text-rhyth-orange";
-      case "Yellow":
-        return "text-rhyth-yellow";
-      case "LightBlue":
-        return "text-rhyth-light-blue";
-      default:
-        return "";
-    }
-  };
-
   return (
     <select
       id="tag-color"
-      className={`bg-white border border-rhyth-light-gray text-rhyth-dark-blue text-sm font-bold rounded-lg w-1/2 p-2 ${selectColorLabel(
+      className={`bg-white border border-rhyth-light-gray text-rhyth-dark-blue text-sm font-bold rounded-lg w-1/2 p-2 ${selectTagColorText(
         colorValue,
       )}`}
       value={colorValue}
