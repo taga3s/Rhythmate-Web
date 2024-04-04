@@ -6,6 +6,7 @@ import { TagsNewButton } from "./TagsNewButton";
 import { useNavigate } from "@tanstack/react-router";
 import { useQueryTagList } from "../api/tag/hooks/useQueryTag";
 import { Loading, LoadingContainer } from "../../../common/components";
+import { useMutateTag } from "../api/tag/hooks/useMutateTag";
 
 type Tag = {
   name: string;
@@ -17,14 +18,19 @@ export const TagsPresenter = () => {
   const [isTagsEditModalOpen, setIsTagsEditModalOpen] = useState<boolean>(false);
   const [isTagsDeleteModalOpen, setIsTagsDeleteModalOpen] = useState<boolean>(false);
   const [isTagsNewModalOpen, setIsTagsNewModalOpen] = useState<boolean>(false);
-  // const [tagItems] = useState<Tag[]>([
-  //   { tagName: "勉強・スキルアップ", tagColor: "Green" },
-  //   { tagName: "健康的な習慣", tagColor: "Purple" },
-  //   { tagName: "生活・ライフスタイル", tagColor: "Blue" },
-  // ]);
+
+  const [ selectedTagId, setSelectedTagId ] = useState<string>();
+
   const { data: tagItems, isLoading } = useQueryTagList();
 
-  // const [editTag, setEditTag] = useState<Tag>({ tagName: "", tagColor: "" });
+  const { deleteTagMutation } = useMutateTag();
+
+  const onClickDelete = async () => {
+    await deleteTagMutation.mutateAsync({
+      id: selectedTagId?? ""
+    });
+  };
+
 
   const openTagsEditModal = () => {
     setIsTagsEditModalOpen(true);
@@ -32,7 +38,8 @@ export const TagsPresenter = () => {
   const closeTagsEditModal = () => {
     setIsTagsEditModalOpen(false);
   };
-  const openTagsDeleteModal = () => {
+  const openTagsDeleteModal = (id: string) => {
+    setSelectedTagId(id);
     setIsTagsDeleteModalOpen(true);
   };
   const closeTagsDeleteModal = () => {
@@ -44,17 +51,6 @@ export const TagsPresenter = () => {
   const closeTagsNewModal = () => {
     setIsTagsNewModalOpen(false);
   };
-
-  // const changeTagItem = (key: number, tag: Tag) => {
-  //   const nextTagsName = tagItems.map((tagItem, index) => {
-  //     if (key === index) {
-  //       return { tagName: tag.tagName, tagColor: tag.tagColor };
-  //     } else {
-  //       return tagItem;
-  //     }
-  //   });
-  //   setTagItems(nextTagsName);
-  // };
 
   return (
     <>
@@ -100,7 +96,7 @@ export const TagsPresenter = () => {
                 tagName={item.name}
                 tagColor={item.color}
                 onEditFn={openTagsEditModal}
-                onDeleteFn={openTagsDeleteModal}
+                onDeleteFn={() => openTagsDeleteModal(item.id)}
               />
               ))
               ) : (
@@ -128,8 +124,7 @@ export const TagsPresenter = () => {
           confirmBtnText="タグを削除する"
           cancelBtnText="キャンセルする"
           btnColor="red"
-          // actionFnは後ほど修正
-          actionFn={closeTagsDeleteModal}
+          actionFn={onClickDelete}
           closeModal={closeTagsDeleteModal}
         />
       )}
