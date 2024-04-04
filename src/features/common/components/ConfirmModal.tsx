@@ -40,7 +40,7 @@ export const ConfirmModal: FC<Props> = (props) => {
               />
             </svg>
           </div>
-          <p className="text-center text-lg">{text}</p>
+          <p className="text-center text-lg tracking-wide font-medium">{text}</p>
           <div className="space-y-4 pt-4 w-full">
             <button
               type="submit"
@@ -48,10 +48,10 @@ export const ConfirmModal: FC<Props> = (props) => {
               className={`w-full text-white focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center
                   ${
                     btnColor === "green"
-                      ? `bg-rhyth-green hover:bg-green-500`
+                      ? `bg-rhyth-green hover:bg-rhyth-hover-green`
                       : btnColor === "blue"
-                        ? `bg-rhyth-blue hover:bg-blue-500`
-                        : "bg-rhyth-red hover:bg-red-500"
+                        ? `bg-rhyth-blue hover:bg-rhyth-hover-blue`
+                        : "bg-rhyth-red hover:bg-rhyth-hover-red"
                   }
                   `}
             >
@@ -60,7 +60,7 @@ export const ConfirmModal: FC<Props> = (props) => {
             <button
               type="submit"
               onClick={closeModal}
-              className="w-full text-white bg-rhyth-black hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+              className="w-full text-white bg-rhyth-black hover:bg-[#222222] focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
             >
               {cancelBtnText}
             </button>

@@ -77,7 +77,9 @@ export const QuestsPresenter = () => {
             <div className="flex items-center">
               <button
                 className={`px-4 py-2 text-base font-cp-font tracking-widest font-bold rounded-t-lg ${
-                  view === "NEXT" ? "text-white bg-rhyth-light-blue" : "bg-white text-rhyth-dark-blue "
+                  view === "NEXT"
+                    ? "text-white bg-rhyth-light-blue"
+                    : "bg-white text-rhyth-dark-blue hover:bg-rhyth-hover-light-gray"
                 }`}
                 onClick={() => setView("NEXT")}
               >
@@ -85,7 +87,9 @@ export const QuestsPresenter = () => {
               </button>
               <button
                 className={`px-4 py-2 text-base font-cp-font tracking-widest font-bold rounded-t-lg shadow-l-lg ${
-                  view === "FINISHED" ? "text-white bg-rhyth-light-blue" : "bg-white text-rhyth-dark-blue"
+                  view === "FINISHED"
+                    ? "text-white bg-rhyth-light-blue"
+                    : "bg-white text-rhyth-dark-blue hover:bg-rhyth-hover-light-gray"
                 }`}
                 onClick={() => setView("FINISHED")}
               >
