@@ -23,6 +23,11 @@ export default {
         'rhyth-black': '#333333',
         'rhyth-bg-gray': '#FAFAFA',
         'rhyth-bg-dark-gray': '#F5F5F5',
+        'rhyth-hover-light-gray': '#E5E5E5',
+        'rhyth-hover-gray': '#555555',
+        'rhyth-hover-green': '#229300',
+        'rhyth-hover-blue': '#0079D5',
+        'rhyth-hover-red': '#B11815',
       },
       // animation: {
       //   "glow": "glow 2s infinite ease",
