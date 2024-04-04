@@ -6,11 +6,11 @@ type Props = {
 
 export const ProfileUserSettingsModalButton: FC<Props> = ({ onClickFn }) => {
   return (
-    <div className="w-full text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg shadow">
+    <div className="w-full text-sm font-medium text-rhyth-black bg-white hover:bg-rhyth-hover-light-gray border border-gray-200 rounded-t-lg shadow">
       <button onClick={onClickFn} className="block w-full h-hull">
         <div className="px-4 py-3 flex gap-6 items-center">
           <svg
-            className="w-[32px] h-[32px] text-gray-800"
+            className="w-[32px] h-[32px] text-rhyth-black"
             aria-hidden="true"
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
