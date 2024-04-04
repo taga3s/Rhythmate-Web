@@ -1,4 +1,4 @@
-import { FC, SetStateAction, useState } from "react";
+import { FC } from "react";
 import { TagsColorItem } from "./TagsColorItem";
 import { TTagValidationSchema } from "../common/libs/validation";
 import { UseFormRegister, UseFormWatch } from "react-hook-form";

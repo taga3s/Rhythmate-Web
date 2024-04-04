@@ -9,11 +9,6 @@ import { Loading, LoadingContainer } from "../../../common/components";
 import { useMutateTag } from "../api/tag/hooks/useMutateTag";
 import { TagsNewModal } from "./TagsNewModal";
 
-type Tag = {
-  name: string;
-  color: string;
-};
-
 export const TagsPresenter = () => {
   const navigate = useNavigate();
   const [isTagsEditModalOpen, setIsTagsEditModalOpen] = useState<boolean>(false);
