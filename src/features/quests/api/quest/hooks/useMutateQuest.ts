@@ -7,12 +7,14 @@ import { FetchError } from "../../../../../pkg/api/util/fetchError";
 import { FinishQuestParams, ForceFinishQuestParams, StartQuestParams } from "../../../../../api/quest/types";
 import { useQueryLoginUser } from "../../../../profile/api/user/hooks/useQueryUser";
 import { useQueryWeeklyReports } from "../../../../analytics/api/weeklyReport/hooks/useQueryWeeklyReport";
+import { useQueryBadgeList } from "../../../../profile/badges/api/badge/hooks/useQueryBadge";
 
 export const useMutateQuest = () => {
   const questFactory = createFactory();
 
   const { refetch: refetchLoginUser } = useQueryLoginUser();
   const { refetch: refetchWeeklyReports } = useQueryWeeklyReports();
+  const { refetch: refetchBadgeList } = useQueryBadgeList();
 
   const startQuestMutation = useMutation({
     mutationFn: async (params: StartQuestParams) => {
@@ -49,6 +51,7 @@ export const useMutateQuest = () => {
       // XXX: 合わせて再取得してしまう
       refetchLoginUser();
       refetchWeeklyReports();
+      refetchBadgeList();
       notifySuccess("クエストを終了しました。");
     },
     onError: (err: FetchError) => {

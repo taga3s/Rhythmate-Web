@@ -1,5 +1,5 @@
 import { useMutation } from "@tanstack/react-query";
-import { PinBadgeParams } from "../../../../../../api/badge/type";
+import { AchieveBadgeParams, PinBadgeParams } from "../../../../../../api/badge/type";
 import { createFactory } from "../../../../../../api/badge/factory";
 import { queryClient } from "../../../../../../pkg/api/client/queryClient";
 import { Badge } from "../../../../../../api/badge/model";
@@ -8,6 +8,28 @@ import { FetchError } from "../../../../../../pkg/api/util/fetchError";
 
 export const useMutateBadge = () => {
   const badgeFactory = createFactory();
+
+  const achieveBadgeMutation = useMutation({
+    mutationFn: async (params: AchieveBadgeParams) => {
+      return await badgeFactory.achieveBadge(params);
+    },
+    onSuccess: (data) => {
+      const badgeList = queryClient.getQueryData<Badge[]>(["badges"]);
+      if (badgeList) {
+        queryClient.setQueryData<Badge[]>(
+          ["badges"],
+          badgeList.map((badge) => (badge.id === data.id ? data : badge)),
+        );
+      }
+      console.log(queryClient.getQueryData(["badges"]));
+      notifySuccess("バッジを取得しました。");
+    },
+    onError: (err: FetchError) => {
+      notifyFailed("処理に失敗しました。");
+      console.log(err);
+    },
+  });
+
   const pinBadgeMutation = useMutation({
     mutationFn: async (params: PinBadgeParams) => {
       return await badgeFactory.pinBadge(params);
@@ -49,6 +71,7 @@ export const useMutateBadge = () => {
   });
 
   return {
+    achieveBadgeMutation,
     pinBadgeMutation,
     unpinBadgeMutation,
   };
