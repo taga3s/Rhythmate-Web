@@ -58,6 +58,11 @@ export const useMutateTag = () => {
           tagList.filter((tag) => tag.id !== variables.id),
         );
       }
+      notifySuccess("タグを削除しました。");
+    },
+    onError: (err: FetchError) => {
+      notifyFailed("処理に失敗しました。");
+      console.log(err);
     },
   });
 

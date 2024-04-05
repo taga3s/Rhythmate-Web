@@ -42,10 +42,10 @@ export const TagsEditModal: FC<Props> = ({ modalType, closeModal, tag_id }) => {
   }, [isLoading]);
 
   const onSubmit = async (data: NewValues) => {
-    await updateTagMutation.mutateAsync({ 
+    await updateTagMutation.mutateAsync({
       id: tag_id,
-      name: data.name, 
-      color: data.color 
+      name: data.name,
+      color: data.color
     });
     closeModal();
   };

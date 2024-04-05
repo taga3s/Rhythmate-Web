@@ -18,7 +18,6 @@ export const TagsColorDropdown: FC<Props> = ({ register, watch }) => {
         colorValue,
       )}`}
       value={colorValue}
-      // onChange={handleColorValue}
       { ...register("color")}
     >
       <option
