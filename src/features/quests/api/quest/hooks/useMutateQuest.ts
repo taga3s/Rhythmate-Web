@@ -75,6 +75,7 @@ export const useMutateQuest = () => {
       // XXX: 合わせて再取得してしまう
       refetchLoginUser();
       refetchWeeklyReports();
+      refetchBadgeList();
       notifySuccess("クエストを強制終了しました。");
     },
     onError: (err: FetchError) => {

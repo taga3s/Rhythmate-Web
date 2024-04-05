@@ -16,7 +16,7 @@ export const useMutateTag = () => {
     onSuccess: (data) => {
       const tagList = queryClient.getQueryData<Tag[]>(["tags"]);
       if (tagList) {
-        queryClient.setQueryData<Tag[]>(["tags"], [data, ...tagList]);
+        queryClient.setQueryData<Tag[]>(["tags"], [...tagList, data]);
       }
       notifySuccess("タグを作成しました。");
     },
