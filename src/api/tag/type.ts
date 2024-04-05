@@ -50,5 +50,3 @@ export type UpdateRequest = {
 export type UpdateResponse = TagBaseResponse & {
   status: string;
 };
-
-

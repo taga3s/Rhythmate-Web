@@ -1,4 +1,4 @@
-import { tagRepository } from "./repository"
+import { tagRepository } from "./repository";
 import { CreateTagParams, DeleteTagParams, UpdateTagParams } from "./type";
 
 export const createFactory = () => {
@@ -21,4 +21,4 @@ export const createFactory = () => {
       return response;
     },
   };
-}
+};

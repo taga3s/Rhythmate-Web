@@ -11,7 +11,6 @@ type Props = {
 };
 
 export const TagsItem: FC<Props> = ({ tagName, tagColor, onEditFn, onDeleteFn }) => {
-
   return (
     <li className="h-12 flex items-center justify-between w-full border-b-2 border-rhyth-light-gray last:border-none px-4 py-2 rounded-t-lg">
       <div className="flex items-center">

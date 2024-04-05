@@ -27,15 +27,15 @@ export const TagsPresenter = () => {
     });
   };
 
-  const openTagsEditModal = (tag_id: string) => {
-    setSelectedTagId(tag_id);
+  const openTagsEditModal = (tagId: string) => {
+    setSelectedTagId(tagId);
     setIsTagsEditModalOpen(true);
   };
   const closeTagsEditModal = () => {
     setIsTagsEditModalOpen(false);
   };
-  const openTagsDeleteModal = (tag_id: string) => {
-    setSelectedTagId(tag_id);
+  const openTagsDeleteModal = (tagId: string) => {
+    setSelectedTagId(tagId);
     setIsTagsDeleteModalOpen(true);
   };
   const closeTagsDeleteModal = () => {
@@ -103,7 +103,7 @@ export const TagsPresenter = () => {
         </div>
       </div>
       {isTagsEditModalOpen && (
-        <TagsEditModal modalType="タグ編集" closeModal={closeTagsEditModal} tag_id={selectedTagId ?? ""} />
+        <TagsEditModal modalType="タグ編集" closeModal={closeTagsEditModal} tagId={selectedTagId ?? ""} />
       )}
       {isTagsDeleteModalOpen && (
         <ConfirmModal

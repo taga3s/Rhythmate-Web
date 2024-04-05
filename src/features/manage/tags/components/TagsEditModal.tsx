@@ -12,7 +12,7 @@ import { useQueryTagList } from "../api/tag/hooks/useQueryTag";
 type Props = {
   modalType: string;
   closeModal: () => void;
-  tag_id: string;
+  tagId: string;
 };
 
 type NewValues = {
@@ -20,11 +20,11 @@ type NewValues = {
   color: string;
 };
 
-export const TagsEditModal: FC<Props> = ({ modalType, closeModal, tag_id }) => {
+export const TagsEditModal: FC<Props> = ({ modalType, closeModal, tagId }) => {
   const { updateTagMutation } = useMutateTag();
   const { data, isLoading } = useQueryTagList();
 
-  const targetTag = data?.find((v) => v.id === tag_id);
+  const targetTag = data?.find((v) => v.id === tagId);
 
   const {
     register,
@@ -43,7 +43,7 @@ export const TagsEditModal: FC<Props> = ({ modalType, closeModal, tag_id }) => {
 
   const onSubmit = async (data: NewValues) => {
     await updateTagMutation.mutateAsync({
-      id: tag_id,
+      id: tagId,
       name: data.name,
       color: data.color,
     });
