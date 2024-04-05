@@ -39,10 +39,14 @@ export const ProfilePresenter = () => {
           <Loading />
         </LoadingContainer>
       ) : (
-        <div className="flex flex-col items-center mx-auto">
+        <div className="flex flex-col items-center gap-4">
           <div className="w-full p-5 bg-white border border-gray-200 rounded-lg shadow">
             <div className="flex justify-between gap-4 box-border mb-4">
-              <img src={profileDefaultImage} alt="プロフィール画像" className="w-1/4 h-1/4 rounded-full" />
+              <img
+                src={profileDefaultImage}
+                alt="プロフィール画像"
+                className="max-w-[220px] w-1/4 max-h-[220px] h-1/4 rounded-full"
+              />
               <div className="flex flex-col justify-center text-right break-all font-extrabold text-rhyth-dark-blue">
                 <h1 className="text-3xl">{loginUser?.name}</h1>
               </div>
@@ -70,8 +74,10 @@ export const ProfilePresenter = () => {
             </div>
           </div>
           <ProfileExpCard />
-          <ProfileUserSettingsModalButton onClickFn={openSettingsModal} />
-          <ProfileLogoutModalButton onClickFn={openLogoutModal} />
+          <div className="w-full">
+            <ProfileUserSettingsModalButton onClickFn={openSettingsModal} />
+            <ProfileLogoutModalButton onClickFn={openLogoutModal} />
+          </div>
         </div>
       )}
       {isSettingsModalOpen && (

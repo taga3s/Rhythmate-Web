@@ -48,6 +48,8 @@ export const AnalyticsBarChart: FC<Props> = ({ completedQuestsData, failedQuests
                 color: "rgba(0, 68, 121, 1)",
                 stepSize: 1,
               },
+              min: 0,
+              max: 10,
             },
           },
           backgroundColor: "rgba(250, 250, 250, 1)",
