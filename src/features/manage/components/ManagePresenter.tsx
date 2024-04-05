@@ -7,6 +7,7 @@ import { useQueryQuestList } from "../api/quest/hooks/useQueryQuest";
 import { ManageNewButton } from "./ManageNewButton";
 import { ManageQuestCard } from "./ManageQuestCard";
 import { ManageQuestSearchModal } from "./ManageQuestSearchModal,";
+import { ManageTimetableCard } from "./ManageTimetableCard";
 
 export const ManagePresenter = () => {
   const navigate = useNavigate();
@@ -66,23 +67,26 @@ export const ManagePresenter = () => {
           </div>
         )
       ) : quests?.length ? (
-        <ul className="mt-4 flex flex-col items-center gap-6">
-          {quests?.map((quest) => {
-            return (
-              <ManageQuestCard
-                key={quest.id}
-                id={quest.id}
-                title={quest.title}
-                description={quest.description}
-                startsAt={quest.startsAt}
-                minutes={quest.minutes}
-                difficulty={quest.difficulty}
-                days={quest.days}
-                continuationLevel={quest.continuationLevel ?? 0}
-              />
-            );
-          })}
-        </ul>
+        <div>
+          <ManageTimetableCard />
+          <ul className="mt-4 flex flex-col items-center gap-6">
+            {quests?.map((quest) => {
+              return (
+                <ManageQuestCard
+                  key={quest.id}
+                  id={quest.id}
+                  title={quest.title}
+                  description={quest.description}
+                  startsAt={quest.startsAt}
+                  minutes={quest.minutes}
+                  difficulty={quest.difficulty}
+                  days={quest.days}
+                  continuationLevel={quest.continuationLevel ?? 0}
+                />
+              );
+            })}
+          </ul>
+        </div>
       ) : (
         <div className="w-full gap-4 flex flex-col items-center mx-auto mt-24">
           <svg
