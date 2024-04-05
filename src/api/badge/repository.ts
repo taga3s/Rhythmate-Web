@@ -22,9 +22,7 @@ const list: BadgeRepository["list"] = async () => {
 };
 
 const achieve: BadgeRepository["achieve"] = async (params: AchieveBadgeRequest) => {
-  const response = await apiClient.post("/badge/", {
-    badgeId: params.badgeId,
-  });
+  const response = await apiClient.patch(`/badge/${params.badgeId}`);
   return response;
 };
 
