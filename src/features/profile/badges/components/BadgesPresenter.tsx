@@ -29,14 +29,16 @@ export const BadgesPresenter = () => {
           <ul className="flex flex-col items-center mt-3 gap-3 w-full h-full">
             {badgeList?.map((badge) => {
               return (
-                <li key={badge.id} className="w-full h-full">
+                <li key={badge.id} className="w-full">
                   <BadgeCard
                     id={badge.id}
                     name={badge.name}
                     description={badge.description}
                     imageType={badge.imageType}
+                    frameColor={badge.frameColor}
                     isPinned={badge.isPinned}
                     obtainedAt={badge.obtainedAt}
+                    unlockable={badge.unlockable}
                   />
                 </li>
               );

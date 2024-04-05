@@ -55,8 +55,14 @@ export const ProfilePresenter = () => {
               <div className="flex justify-end w-2/3 gap-3">
                 {pinnedBadgeList?.map((badge) => {
                   return (
-                    <div className="flex h-full w-1/3" key={badge.badgeId}>
-                      <Badge imageType={badge.imageType} frameClassName="" sparklingClassName="" itemClassName="" />
+                    <div className="flex h-full w-1/3" key={badge.id}>
+                      <Badge
+                        imageType={badge.imageType}
+                        frameColor={badge.frameColor}
+                        frameClassName=""
+                        sparklingClassName=""
+                        itemClassName=""
+                      />
                     </div>
                   );
                 })}
