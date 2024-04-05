@@ -1,5 +1,5 @@
 import { useMutation } from "@tanstack/react-query";
-import { createFactory } from "../../../../../../api/tag/factory"
+import { createFactory } from "../../../../../../api/tag/factory";
 import { Tag } from "../../../../../../api/tag/model";
 import { CreateTagParams, UpdateTagParams } from "../../../../../../api/tag/type";
 import { queryClient } from "../../../../../../pkg/api/client/queryClient";
@@ -16,7 +16,7 @@ export const useMutateTag = () => {
     onSuccess: (data) => {
       const tagList = queryClient.getQueryData<Tag[]>(["tags"]);
       if (tagList) {
-        queryClient.setQueryData<Tag[]>(["tags"], [data, ...tagList]);
+        queryClient.setQueryData<Tag[]>(["tags"], [...tagList, data]);
       }
       notifySuccess("タグを作成しました。");
     },
@@ -66,9 +66,9 @@ export const useMutateTag = () => {
     },
   });
 
-  return { 
-    createTagMutation, 
-    updateTagMutation, 
+  return {
+    createTagMutation,
+    updateTagMutation,
     deleteTagMutation,
   };
-}
+};

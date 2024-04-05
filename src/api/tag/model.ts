@@ -15,4 +15,3 @@ export const toTag = (obj: {
     color: obj.color,
   };
 };
-

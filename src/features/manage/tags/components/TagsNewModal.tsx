@@ -28,13 +28,13 @@ export const TagsNewModal: FC<Props> = ({ modalType, closeModal }) => {
     formState: { errors },
   } = useForm<TTagValidationSchema>({
     mode: "onBlur",
-    resolver: zodResolver(tagValidationSchema)
-  })
+    resolver: zodResolver(tagValidationSchema),
+  });
 
   const onSubmit = async (data: NewValues) => {
-    await createTagMutation.mutateAsync({ 
-      name: data.name, 
-      color: data.color 
+    await createTagMutation.mutateAsync({
+      name: data.name,
+      color: data.color,
     });
     closeModal();
   };
@@ -49,7 +49,7 @@ export const TagsNewModal: FC<Props> = ({ modalType, closeModal }) => {
         </div>
         {/* <!-- Modal body --> */}
         <div className="p-4 md:p-4">
-          <form className="space-y-4" onSubmit={handleSubmit(onSubmit)}>
+          <form className="space-y-3" onSubmit={handleSubmit(onSubmit)}>
             <div className="flex items-center justify-between">
               <label className="flex gap-2 mb-2 text-sm font-bold text-rhyth-dark-blue my-2" htmlFor="tag-name">
                 <svg
@@ -68,13 +68,13 @@ export const TagsNewModal: FC<Props> = ({ modalType, closeModal }) => {
               <input
                 id="tag-name"
                 type="text"
-                className="bg-white border border-rhyth-light-gray text-rhyth-dark-blue text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-1/2 p-2"
-                placeholder="tagname"
+                className="bg-white border border-rhyth-light-gray text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-1/2 p-2"
+                placeholder="例) 家事"
                 required
                 {...register("name")}
               />
-              {errors.name && <FormErrorMsg msg={errors.name.message ?? ""} />}
             </div>
+            {errors.name && <FormErrorMsg msg={errors.name.message} />}
             <div className="flex items-start justify-between">
               <label className="flex gap-2 mb-2 text-sm font-bold text-rhyth-dark-blue my-2" htmlFor="tag-color">
                 <svg
@@ -90,11 +90,11 @@ export const TagsNewModal: FC<Props> = ({ modalType, closeModal }) => {
                 </svg>
                 <span>色ラベル</span>
               </label>
-              <TagsColorDropdown register={register} watch={watch}/>
+              <TagsColorDropdown register={register} watch={watch} />
             </div>
             <button
               type="submit"
-              className="w-full text-white bg-rhyth-blue hover:bg-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center shadow-md"
+              className="w-full text-white bg-rhyth-light-blue hover:bg-rhyth-blue font-medium rounded-lg text-sm px-5 py-2.5 text-center shadow-md"
             >
               決定する
             </button>
