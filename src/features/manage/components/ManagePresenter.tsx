@@ -45,7 +45,14 @@ export const ManagePresenter = () => {
     });
   };
 
+  const sortQuestsByTime = (questList: Quest[]) => {
+    return questList.sort((a, b) => {
+      return a.startedAt > b.startedAt ? 1 : -1;
+    });
+  };
+
   const DayOfTheWeekQuests = filterQuestsByDayOfTheWeek(quests ?? []);
+  const sortedDayOfTheWeekQuests = sortQuestsByTime(DayOfTheWeekQuests);
 
   return (
     <div className="w-full">
@@ -153,7 +160,7 @@ export const ManagePresenter = () => {
                 日
               </button>
             </div>
-            <ManageTimetable questList={DayOfTheWeekQuests} />
+            <ManageTimetable questList={sortedDayOfTheWeekQuests} />
           </div>
           <ul className="mt-4 flex flex-col items-center gap-6">
             {quests?.map((quest) => {
