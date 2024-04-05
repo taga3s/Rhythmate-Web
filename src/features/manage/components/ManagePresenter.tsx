@@ -68,7 +68,21 @@ export const ManagePresenter = () => {
         )
       ) : quests?.length ? (
         <div>
-          <ManageTimetableCard />
+          <div className="flex flex-col w-full mt-4">
+            <div className="flex items-center">
+              <button className="w-full px-4 py-2 font-cp-font bg-rhyth-light-blue text-white rounded-t-lg">月</button>
+              <button className="w-full px-4 py-2 font-cp-font bg-rhyth-light-blue text-white rounded-t-lg">火</button>
+              <button className="w-full px-4 py-2 font-cp-font bg-rhyth-light-blue text-white rounded-t-lg">水</button>
+              <button className="w-full px-4 py-2 font-cp-font bg-rhyth-light-blue text-white rounded-t-lg">木</button>
+              <button className="w-full px-4 py-2 font-cp-font bg-rhyth-light-blue text-white rounded-t-lg">金</button>
+              <button className="w-full px-4 py-2 font-cp-font bg-rhyth-light-blue text-white rounded-t-lg">土</button>
+              <button className="w-full px-4 py-2 font-cp-font bg-rhyth-light-blue text-white rounded-t-lg">日</button>
+            </div>
+            <div className="flex flex-col gap-4 bg-rhyth-light-blue p-4 rounded-b-lg">
+              <ManageTimetableCard />
+              <ManageTimetableCard />
+            </div>
+          </div>
           <ul className="mt-4 flex flex-col items-center gap-6">
             {quests?.map((quest) => {
               return (
