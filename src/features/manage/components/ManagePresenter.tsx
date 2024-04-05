@@ -7,7 +7,8 @@ import { useQueryQuestList } from "../api/quest/hooks/useQueryQuest";
 import { ManageNewButton } from "./ManageNewButton";
 import { ManageQuestCard } from "./ManageQuestCard";
 import { ManageQuestSearchModal } from "./ManageQuestSearchModal,";
-import { ManageTimetableCard } from "./ManageTimetableCard";
+import { ManageTimetable } from "./ManageTimetable";
+import { Quest } from "../../../api/quest/model";
 
 export const ManagePresenter = () => {
   const navigate = useNavigate();
@@ -16,6 +17,8 @@ export const ManagePresenter = () => {
   const [filterDay, setFilterDay] = useState<Day | "">("");
   const [filterDifficulties, setFilterDifficulties] = useState<Difficulty[]>([]);
   const [filterActivation, setFilterActivation] = useState<boolean>(false);
+
+  const [dayOfTheWeekView, setDayOfTheWeekView] = useState<Day>("MON");
 
   const closeQuestSearchModal = () => {
     setSearchModalIsOpen(false);
@@ -34,6 +37,15 @@ export const ManagePresenter = () => {
       return true;
     }
   });
+
+  const filterQuestsByDayOfTheWeek = (questList: Quest[]) => {
+    return questList.filter((quest) => {
+      const isDayOfTheWeek: boolean = quest.days.some((day: string) => day === dayOfTheWeekView);
+      return isDayOfTheWeek ? quest : null;
+    });
+  };
+
+  const DayOfTheWeekQuests = filterQuestsByDayOfTheWeek(quests ?? []);
 
   return (
     <div className="w-full">
@@ -70,18 +82,78 @@ export const ManagePresenter = () => {
         <div>
           <div className="flex flex-col w-full mt-4">
             <div className="flex items-center">
-              <button className="w-full px-4 py-2 font-cp-font bg-rhyth-light-blue text-white rounded-t-lg">月</button>
-              <button className="w-full px-4 py-2 font-cp-font bg-rhyth-light-blue text-white rounded-t-lg">火</button>
-              <button className="w-full px-4 py-2 font-cp-font bg-rhyth-light-blue text-white rounded-t-lg">水</button>
-              <button className="w-full px-4 py-2 font-cp-font bg-rhyth-light-blue text-white rounded-t-lg">木</button>
-              <button className="w-full px-4 py-2 font-cp-font bg-rhyth-light-blue text-white rounded-t-lg">金</button>
-              <button className="w-full px-4 py-2 font-cp-font bg-rhyth-light-blue text-white rounded-t-lg">土</button>
-              <button className="w-full px-4 py-2 font-cp-font bg-rhyth-light-blue text-white rounded-t-lg">日</button>
+              <button
+                className={`w-full px-4 py-2 font-cp-font rounded-t-lg shadow-xl ${
+                  dayOfTheWeekView === "MON"
+                    ? "text-white bg-rhyth-light-blue"
+                    : "bg-white text-rhyth-dark-blue hover:bg-rhyth-hover-light-gray"
+                }`}
+                onClick={() => setDayOfTheWeekView("MON")}
+              >
+                月
+              </button>
+              <button
+                className={`w-full px-4 py-2 font-cp-font rounded-t-lg shadow-xl ${
+                  dayOfTheWeekView === "TUE"
+                    ? "text-white bg-rhyth-light-blue"
+                    : "bg-white text-rhyth-dark-blue hover:bg-rhyth-hover-light-gray"
+                }`}
+                onClick={() => setDayOfTheWeekView("TUE")}
+              >
+                火
+              </button>
+              <button
+                className={`w-full px-4 py-2 font-cp-font rounded-t-lg shadow-xl ${
+                  dayOfTheWeekView === "WED"
+                    ? "text-white bg-rhyth-light-blue"
+                    : "bg-white text-rhyth-dark-blue hover:bg-rhyth-hover-light-gray"
+                }`}
+                onClick={() => setDayOfTheWeekView("WED")}
+              >
+                水
+              </button>
+              <button
+                className={`w-full px-4 py-2 font-cp-font rounded-t-lg shadow-xl ${
+                  dayOfTheWeekView === "THU"
+                    ? "text-white bg-rhyth-light-blue"
+                    : "bg-white text-rhyth-dark-blue hover:bg-rhyth-hover-light-gray"
+                }`}
+                onClick={() => setDayOfTheWeekView("THU")}
+              >
+                木
+              </button>
+              <button
+                className={`w-full px-4 py-2 font-cp-font rounded-t-lg shadow-xl ${
+                  dayOfTheWeekView === "FRI"
+                    ? "text-white bg-rhyth-light-blue"
+                    : "bg-white text-rhyth-dark-blue hover:bg-rhyth-hover-light-gray"
+                }`}
+                onClick={() => setDayOfTheWeekView("FRI")}
+              >
+                金
+              </button>
+              <button
+                className={`w-full px-4 py-2 font-cp-font rounded-t-lg shadow-xl ${
+                  dayOfTheWeekView === "SAT"
+                    ? "text-white bg-rhyth-light-blue"
+                    : "bg-white text-rhyth-dark-blue hover:bg-rhyth-hover-light-gray"
+                }`}
+                onClick={() => setDayOfTheWeekView("SAT")}
+              >
+                土
+              </button>
+              <button
+                className={`w-full px-4 py-2 font-cp-font rounded-t-lg shadow-xl ${
+                  dayOfTheWeekView === "SUN"
+                    ? "text-white bg-rhyth-light-blue"
+                    : "bg-white text-rhyth-dark-blue hover:bg-rhyth-hover-light-gray"
+                }`}
+                onClick={() => setDayOfTheWeekView("SUN")}
+              >
+                日
+              </button>
             </div>
-            <div className="flex flex-col gap-4 bg-rhyth-light-blue p-4 rounded-b-lg">
-              <ManageTimetableCard />
-              <ManageTimetableCard />
-            </div>
+            <ManageTimetable questList={DayOfTheWeekQuests} />
           </div>
           <ul className="mt-4 flex flex-col items-center gap-6">
             {quests?.map((quest) => {

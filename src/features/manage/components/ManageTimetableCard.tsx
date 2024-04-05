@@ -1,13 +1,26 @@
-export const ManageTimetableCard = () => {
+import { FC } from "react";
+
+type Props = {
+  key: string;
+  title: string;
+  startsAt: string;
+  // isDone={quest.state === "ACTIVE"}
+  // isSuccess
+  minutes: number;
+  //   difficulty: Difficulty;
+  // continuationLevel = { quest.continuationLevel }
+};
+
+export const ManageTimetableCard: FC<Props> = (props) => {
   return (
     <div className="flex items-center p-2 border-[3px] bg-rhyth-bg-gray border-rhyth-green shadow-lg text-rhyth-dark-blue rounded-lg">
       {/* h-min-16 h-20 h-max-24 */}
       <div className="h-16 flex flex-col items-center justify-center font-cp-font tracking-wider p-2 pr-3 border-r-2 border-rhyth-dark-blue">
-        <h2 className="text-lg">9:00</h2>
-        <p className="text-sm">10分間</p>
+        <h2 className="w-[4.5rem] text-lg text-center">{props.startsAt}</h2>
+        <p className="text-sm">{props.minutes}分間</p>
       </div>
       <div className="w-full flex items-center justify-between p-2">
-        <h1 className="ml-2 font-cp-font text-md font-bold">本を読む</h1>
+        <h1 className="ml-2 font-cp-font text-md font-bold">{props.title}</h1>
         <svg
           className="w-8 h-8 hover:text-rhyth-gray"
           aria-hidden="true"
