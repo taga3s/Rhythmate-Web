@@ -47,7 +47,7 @@ export const ManagePresenter = () => {
 
   const sortQuestsByTime = (questList: Quest[]) => {
     return questList.sort((a, b) => {
-      return a.startedAt > b.startedAt ? 1 : -1;
+      return a.startsAt > b.startsAt ? 1 : -1;
     });
   };
 
@@ -162,23 +162,6 @@ export const ManagePresenter = () => {
             </div>
             <ManageTimetable questList={sortedDayOfTheWeekQuests} />
           </div>
-          <ul className="mt-4 flex flex-col items-center gap-6">
-            {quests?.map((quest) => {
-              return (
-                <ManageQuestCard
-                  key={quest.id}
-                  id={quest.id}
-                  title={quest.title}
-                  description={quest.description}
-                  startsAt={quest.startsAt}
-                  minutes={quest.minutes}
-                  difficulty={quest.difficulty}
-                  days={quest.days}
-                  continuationLevel={quest.continuationLevel ?? 0}
-                />
-              );
-            })}
-          </ul>
         </div>
       ) : (
         <div className="w-full gap-4 flex flex-col items-center mx-auto mt-24">

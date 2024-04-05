@@ -12,17 +12,18 @@ export const ManageTimetable: FC<Props> = (props: { questList: any }) => {
 
   return (
     <div className="flex flex-col gap-4 bg-rhyth-light-blue p-4 rounded-b-lg">
-      {questList.map((quest: { id: string; title: string; startsAt: string; minutes: number }) => {
+      {questList.map((quest: Quest) => {
         return (
           <ManageTimetableCard
             key={quest.id}
+            id={quest.id}
             title={quest.title}
+            description={quest.description}
             startsAt={formatDateTimeOnlyTime(quest.startsAt)}
-            // isDone={quest.state === "ACTIVE"}
-            // isSuccess={quest.isSucceeded}
             minutes={quest.minutes}
-            // difficulty={quest.difficulty}
-            // continuationLevel={quest.continuationLevel}
+            difficulty={quest.difficulty}
+            days={quest.days}
+            continuationLevel={quest.continuationLevel}
           />
         );
       })}
