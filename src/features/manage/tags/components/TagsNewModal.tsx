@@ -1,4 +1,4 @@
-import { FC, useEffect } from "react";
+import { FC } from "react";
 import { TagsColorDropdown } from "./TagsColorDropdown";
 import { ModalBase } from "../../../common/components/modal/ModalBase";
 import { ModalHeaderCloseButton } from "../../../common/components/modal/ModalHeaderCloseButton";
@@ -7,12 +7,10 @@ import { TTagValidationSchema, tagValidationSchema } from "../common/libs/valida
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { FormErrorMsg } from "../../../common/components";
-import { useQueryTagList } from "../api/tag/hooks/useQueryTag";
 
 type Props = {
   modalType: string;
   closeModal: () => void;
-  tag_id: string;
 };
 
 type NewValues = {
@@ -20,16 +18,12 @@ type NewValues = {
   color: string;
 };
 
-export const TagsEditModal: FC<Props> = ({ modalType, closeModal, tag_id }) => {
-  const { updateTagMutation } = useMutateTag();
-  const { data, isLoading } = useQueryTagList();
-
-  const targetTag = data?.find((v) => v.id === tag_id);
+export const TagsNewModal: FC<Props> = ({ modalType, closeModal }) => {
+  const { createTagMutation } = useMutateTag();
 
   const {
     register,
     watch,
-    setValue,
     handleSubmit,
     formState: { errors },
   } = useForm<TTagValidationSchema>({
@@ -37,15 +31,10 @@ export const TagsEditModal: FC<Props> = ({ modalType, closeModal, tag_id }) => {
     resolver: zodResolver(tagValidationSchema)
   })
 
-  useEffect(() => {
-    setValue("color", targetTag?.color ?? "")
-  }, [isLoading]);
-
   const onSubmit = async (data: NewValues) => {
-    await updateTagMutation.mutateAsync({
-      id: tag_id,
-      name: data.name,
-      color: data.color
+    await createTagMutation.mutateAsync({ 
+      name: data.name, 
+      color: data.color 
     });
     closeModal();
   };
@@ -79,7 +68,6 @@ export const TagsEditModal: FC<Props> = ({ modalType, closeModal, tag_id }) => {
               <input
                 id="tag-name"
                 type="text"
-                defaultValue={targetTag?.name}
                 className="bg-white border border-rhyth-light-gray text-rhyth-dark-blue text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-1/2 p-2"
                 placeholder="tagname"
                 required
@@ -106,7 +94,7 @@ export const TagsEditModal: FC<Props> = ({ modalType, closeModal, tag_id }) => {
             </div>
             <button
               type="submit"
-              className="w-full text-white bg-rhyth-blue hover:bg-rhyth-hover-blue font-medium rounded-lg text-sm px-5 py-2.5 text-center shadow-md"
+              className="w-full text-white bg-rhyth-blue hover:bg-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center shadow-md"
             >
               決定する
             </button>
