@@ -1,6 +1,6 @@
 import { createLazyFileRoute } from "@tanstack/react-router";
 import { LoginPresenter } from "../../features/login/components/LoginPresenter";
-import { CopyrightLayout } from "../../features/common/components/layouts/CopyrightLayout";
+import { CopyrightLayout } from "../../features/common/components/layouts";
 
 export const Route = createLazyFileRoute("/login/")({
   component: () => <Login />,

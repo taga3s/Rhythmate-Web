@@ -1,5 +1,4 @@
 import { FC, ReactNode } from "react";
-import { Copyright } from "../Copyright";
 
 type Props = {
   children: ReactNode;
@@ -9,7 +8,9 @@ export const CopyrightLayout: FC<Props> = ({ children }) => {
   return (
     <div className="h-screen relative">
       {children}
-      <Copyright />
+      <div className="absolute inset-x-0 bottom-5 text-center text-gray-400">
+        <small>&copy; 2024 Rhythmate All rights reserved.</small>
+      </div>
     </div>
   );
 };

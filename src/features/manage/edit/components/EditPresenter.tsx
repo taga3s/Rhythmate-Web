@@ -10,8 +10,8 @@ import { useMutateQuest } from "../../api/quest/hooks/useMutateQuest";
 import { DAYS } from "../../common/constant/constant";
 import { convertEnToJPWeekday } from "../../common/funcs";
 import { TManageValidationSchema, manageValidationSchema } from "../../common/libs/validation";
-import { NewDayOfTheWeek } from "../../new/components/NewDayOfTheWeek";
-import { NewStar } from "../../new/components/NewStar";
+import { Star } from "../../common/components/Star";
+import { DayOfTheWeek } from "../../common/components/DayOfTheWeek";
 
 type NewValues = {
   title: string;
@@ -167,7 +167,7 @@ export const EditPresenter: FC<Props> = (props) => {
                 <div className="flex mt-4 gap-1">
                   {DAYS.map((day, i) => {
                     return (
-                      <NewDayOfTheWeek
+                      <DayOfTheWeek
                         key={i}
                         day={convertEnToJPWeekday(day)}
                         value={day}
@@ -204,7 +204,7 @@ export const EditPresenter: FC<Props> = (props) => {
                   setDifficulty("EASY");
                 }}
               >
-                <NewStar />
+                <Star />
               </button>
               <button
                 type="button"
@@ -215,8 +215,8 @@ export const EditPresenter: FC<Props> = (props) => {
                   setDifficulty("NORMAL");
                 }}
               >
-                <NewStar />
-                <NewStar />
+                <Star />
+                <Star />
               </button>
               <button
                 type="button"
@@ -227,9 +227,9 @@ export const EditPresenter: FC<Props> = (props) => {
                   setDifficulty("HARD");
                 }}
               >
-                <NewStar />
-                <NewStar />
-                <NewStar />
+                <Star />
+                <Star />
+                <Star />
               </button>
             </div>
           </div>
