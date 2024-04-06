@@ -14,6 +14,7 @@ export const BadgeSparkling: FC<Props> = ({ className }) => {
       x="0px"
       y="0px"
       width="100%"
+      height="100%"
       viewBox="0 0 500 500"
       enableBackground="new 0 0 500 500"
       xmlSpace="preserve"

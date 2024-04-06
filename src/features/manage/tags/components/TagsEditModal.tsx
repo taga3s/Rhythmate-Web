@@ -1,24 +1,53 @@
-import { FC, useState } from "react";
+import { FC, useEffect } from "react";
 import { TagsColorDropdown } from "./TagsColorDropdown";
 import { ModalBase } from "../../../common/components/modal/ModalBase";
 import { ModalHeaderCloseButton } from "../../../common/components/modal/ModalHeaderCloseButton";
+import { useMutateTag } from "../api/tag/hooks/useMutateTag";
+import { TTagValidationSchema, tagValidationSchema } from "../common/libs/validation";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
+import { FormErrorMsg } from "../../../common/components";
+import { useQueryTagList } from "../api/tag/hooks/useQueryTag";
 
 type Props = {
   modalType: string;
   closeModal: () => void;
+  tagId: string;
 };
 
-export const TagsEditModal: FC<Props> = ({ modalType, closeModal }) => {
-  const [tagColor, setTagColor] = useState<string>("");
+type NewValues = {
+  name: string;
+  color: string;
+};
 
-  const handleTagColor = (color: string) => {
-    setTagColor(color);
-  };
+export const TagsEditModal: FC<Props> = ({ modalType, closeModal, tagId }) => {
+  const { updateTagMutation } = useMutateTag();
+  const { data, isLoading } = useQueryTagList();
 
-  const onSubmit = () => {
+  const targetTag = data?.find((v) => v.id === tagId);
+
+  const {
+    register,
+    watch,
+    setValue,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<TTagValidationSchema>({
+    mode: "onBlur",
+    resolver: zodResolver(tagValidationSchema),
+  });
+
+  useEffect(() => {
+    setValue("color", targetTag?.color ?? "");
+  }, [isLoading]);
+
+  const onSubmit = async (data: NewValues) => {
+    await updateTagMutation.mutateAsync({
+      id: tagId,
+      name: data.name,
+      color: data.color,
+    });
     closeModal();
-    // 一時的に追加しておきます
-    console.log(tagColor);
   };
 
   return (
@@ -31,7 +60,7 @@ export const TagsEditModal: FC<Props> = ({ modalType, closeModal }) => {
         </div>
         {/* <!-- Modal body --> */}
         <div className="p-4 md:p-4">
-          <form className="space-y-4" onSubmit={onSubmit}>
+          <form className="space-y-3" onSubmit={handleSubmit(onSubmit)}>
             <div className="flex items-center justify-between">
               <label className="flex gap-2 mb-2 text-sm font-bold text-rhyth-dark-blue my-2" htmlFor="tag-name">
                 <svg
@@ -50,14 +79,14 @@ export const TagsEditModal: FC<Props> = ({ modalType, closeModal }) => {
               <input
                 id="tag-name"
                 type="text"
-                // defaultValue={beforeUserName}
-                className="bg-white border border-rhyth-light-gray text-rhyth-dark-blue text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-1/2 p-2"
-                placeholder="tagname"
-                // {...register("tagName")}
+                defaultValue={targetTag?.name}
+                className="bg-white border border-rhyth-light-gray text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-1/2 p-2"
+                placeholder="例) 家事"
                 required
+                {...register("name")}
               />
-              {/* {errors.name && <FormErrorMsg msg={errors.name.message ?? ""} />} */}
             </div>
+            {errors.name && <FormErrorMsg msg={errors.name.message} />}
             <div className="flex items-start justify-between">
               <label className="flex gap-2 mb-2 text-sm font-bold text-rhyth-dark-blue my-2" htmlFor="tag-color">
                 <svg
@@ -73,11 +102,12 @@ export const TagsEditModal: FC<Props> = ({ modalType, closeModal }) => {
                 </svg>
                 <span>色ラベル</span>
               </label>
-              <TagsColorDropdown onSelectFn={handleTagColor} />
+              <TagsColorDropdown register={register} watch={watch} />
             </div>
+            {errors.color && <FormErrorMsg msg={errors.color.message} />}
             <button
               type="submit"
-              className="w-full text-white bg-rhyth-blue hover:bg-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center shadow-md"
+              className="w-full text-white bg-rhyth-blue hover:bg-rhyth-hover-blue font-medium rounded-lg text-sm px-5 py-2.5 text-center shadow-md"
             >
               決定する
             </button>

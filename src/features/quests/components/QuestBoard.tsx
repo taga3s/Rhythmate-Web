@@ -126,7 +126,7 @@ export const QuestBoard: FC<Props> = (props) => {
         ) : questStatus === OPEN ? (
           <button
             onClick={() => setStartConfirmModalOpen(true)}
-            className="text-white bg-rhyth-green focus:ring-4 focus:ring-blue-300 rounded-lg text-lg font-bold p-3 mt-1 focus:outline-none w-full shadow-lg"
+            className="text-white bg-rhyth-green hover:bg-rhyth-hover-green focus:ring-4 focus:ring-blue-300 rounded-lg text-lg font-bold p-3 mt-1 focus:outline-none w-full shadow-lg"
           >
             クエストを開始する
           </button>
@@ -137,14 +137,14 @@ export const QuestBoard: FC<Props> = (props) => {
         ) : questStatus === DONE ? (
           <button
             onClick={() => setFinishConfirmModalOpen(true)}
-            className="text-white bg-rhyth-blue focus:ring-4 focus:ring-blue-300 rounded-lg text-lg font-bold p-3 mt-1 focus:outline-none w-full shadow-lg"
+            className="text-white bg-rhyth-blue hover:bg-rhyth-hover-blue focus:ring-4 focus:ring-blue-300 rounded-lg text-lg font-bold p-3 mt-1 focus:outline-none w-full shadow-lg"
           >
             クエストを完了する
           </button>
         ) : (
           <button
             onClick={onClickForceFinishQuest}
-            className="text-white bg-rhyth-red focus:ring-4 focus:ring-blue-300 rounded-lg text-lg font-bold p-3 mt-1 focus:outline-none w-full shadow-lg"
+            className="text-white bg-rhyth-red hover:bg-rhyth-hover-red focus:ring-4 focus:ring-blue-300 rounded-lg text-lg font-bold p-3 mt-1 focus:outline-none w-full shadow-lg"
           >
             クエストを強制終了する
           </button>

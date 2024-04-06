@@ -18,8 +18,8 @@ export const NewDayOfTheWeek: FC<Props> = ({ day, value, register, watch }) => {
     <>
       <input type="checkbox" className="hidden peer" value={value} id={`${value}`} {...register("days")} />
       <label
-        className={`px-2 py-1 rounded border-2 cursor-pointer font-bold shadow-sm ${
-          isChecked ? "bg-rhyth-blue text-white" : "bg-white text-rhyth-dark-blue"
+        className={`px-2 py-1 rounded-lg border-2 cursor-pointer font-bold shadow-sm ${
+          isChecked ? "bg-rhyth-blue text-white" : "bg-white text-rhyth-dark-blue hover:bg-rhyth-bg-dark-gray"
         }`}
         htmlFor={`${value}`}
       >

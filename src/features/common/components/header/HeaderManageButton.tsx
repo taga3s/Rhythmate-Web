@@ -1,5 +1,5 @@
 import { useSetSearchModalIsOpen } from "../../contexts/searchModalIsOpenContext";
-import { HeaderButton } from "./HeaderButton";
+import { HeaderBaseButton } from "./HeaderBaseButton";
 import { useNavigate } from "@tanstack/react-router";
 
 export const HeaderManageButton = () => {
@@ -8,8 +8,8 @@ export const HeaderManageButton = () => {
 
   return (
     <>
-      <HeaderButton icon="Tag" onClickFn={() => navigation({ to: "/manage/tags" })} />
-      <HeaderButton
+      <HeaderBaseButton icon="Tag" onClickFn={() => navigation({ to: "/manage/tags" })} />
+      <HeaderBaseButton
         icon="Search"
         onClickFn={() => {
           setSearchModalIsOpen(true);

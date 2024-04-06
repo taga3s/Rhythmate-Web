@@ -1,9 +1,10 @@
-import { HeaderButton } from "./HeaderButton";
+// import { HeaderButton } from "./HeaderButton";
 
 export const HeaderQuestsButton = () => {
   return (
     <>
-      <HeaderButton icon="Bell" onClickFn={() => console.log("通知設定")} />
+      {/* TODO: 実装したらコメントアウトを外す */}
+      {/* <HeaderButton icon="Bell" onClickFn={() => console.log("通知設定")} /> */}
     </>
   );
 };

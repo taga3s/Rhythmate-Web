@@ -79,16 +79,15 @@ export const AnalyticsPresenter = () => {
               曜日別クエスト達成状況
             </h1>
           </div>
-          <AnalyticsBarChart data={weeklyReports[currentIndex].completed_quests_each_day} />
+          <AnalyticsBarChart
+            completedQuestsData={weeklyReports[currentIndex].completed_quests_each_day}
+            failedQuestsData={weeklyReports[currentIndex].failed_quests_each_day}
+          />
           <AnalyticsAIFeedback summaryData={summaryData ?? ""} isLoading={isFetchingSummary} />
         </div>
       ) : (
-        <div className="w-full gap-4 flex flex-col items-center mx-auto mt-24 text-lg text-center">
-          <span>
-            週間レポートがまだありません。
-            <br />
-            日曜日が終わるとレポートが作成されます。
-          </span>
+        <div className="mt-20 gap-2 flex flex-col items-center text-lg text-rhyth-dark-blue font-bold">
+          <span>週次レポートが存在しません。</span>
         </div>
       )}
     </>

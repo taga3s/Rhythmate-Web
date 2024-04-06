@@ -12,7 +12,7 @@ type Props = {
   onClickFn: () => void;
 };
 
-export const HeaderButton: FC<Props> = ({ icon, onClickFn }) => {
+export const HeaderBaseButton: FC<Props> = ({ icon, onClickFn }) => {
   const selectIcon = (icon: string) => {
     switch (icon) {
       case "Bell":
@@ -31,7 +31,7 @@ export const HeaderButton: FC<Props> = ({ icon, onClickFn }) => {
   return (
     <button
       type="button"
-      className="w-16 h-full flex justify-center items-center border-l-2 border-rhyth-light-gray"
+      className="w-16 h-full flex justify-center items-center border-l-2 border-rhyth-light-gray hover:bg-rhyth-hover-light-gray"
       onClick={onClickFn}
     >
       {selectIcon(icon)}

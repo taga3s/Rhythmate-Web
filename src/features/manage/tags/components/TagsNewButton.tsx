@@ -8,7 +8,7 @@ export const TagsNewButton: FC<Props> = ({ onClickFn }) => {
   return (
     <button
       onClick={onClickFn}
-      className="flex justify-between items-center gap-2 bg-rhyth-blue h-14 w-auto rounded-full fixed right-8 bottom-24 shadow-lg p-4"
+      className="flex justify-between items-center gap-2 bg-rhyth-blue hover:bg-rhyth-hover-blue h-14 w-auto rounded-full fixed right-8 bottom-24 shadow-lg p-4"
     >
       <span className="flex items-center text-white tracking-wider">タグ新規作成</span>
       <svg

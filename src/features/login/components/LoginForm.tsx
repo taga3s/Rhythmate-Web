@@ -44,7 +44,7 @@ export const LoginForm = () => {
       <LoginBird className={"mx-auto"} />
       <h1 className="text-md font-bold text-rhyth-black text-center">Rhythmateを始めましょう！</h1>
       <button
-        className="p-4 mt-10 font-bold text-rhyth-black rounded-md shadow-md border-2 border-rhyth-bg-light-gray cursor-pointer flex justify-center items-center gap-4"
+        className="p-4 mt-10 font-bold text-rhyth-black rounded-md shadow-md border-2 border-rhyth-bg-light-gray cursor-pointer flex justify-center items-center gap-4 hover:bg-rhyth-bg-gray"
         onClick={signInWithGoogle}
       >
         <img src="/icons/google.png" width={20} height={20} alt="googleのアイコン" />
