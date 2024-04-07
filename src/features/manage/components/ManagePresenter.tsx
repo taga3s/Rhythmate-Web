@@ -145,7 +145,7 @@ export const ManagePresenter = () => {
             </div>
           ) : (
             <ul className="mt-4 flex flex-col items-center gap-6">
-              {sortedDayOfTheWeekQuests?.map((quest) => {
+              {quests?.map((quest) => {
                 return (
                   <ManageQuestCard
                     key={quest.id}

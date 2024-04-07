@@ -58,14 +58,12 @@ export const ManageQuestCard: FC<Props> = (props) => {
           </button>
         </div>
         <hr className="h-1.5 bg-rhyth-blue" />
-        <div className="flex items-center gap-2 text-sm mt-2">
-          <div className="font-cp-font text-white bg-rhyth-gray py-1 px-3 rounded-full tracking-wider">
-            <p>ひとこと</p>
-          </div>
-          <h3 className="font-bold text-rhyth-dark-blue">{description}</h3>
+        <div className="text-md mt-4">
+          <p className="inline font-bold text-sm text-white bg-rhyth-gray py-1 px-3 rounded-lg tracking-wider">メモ</p>
+          <h3 className="font-bold text-rhyth-dark-blue mt-2 ml-2">{description}</h3>
         </div>
-        <div className="my-2 text-sm">
-          <div className="w-[200px] flex justify-center items-center gap-2 text-white bg-rhyth-blue py-1 px-3 rounded-full">
+        <div className="mt-4 mb-2 text-sm">
+          <div className="w-fit flex justify-center items-center gap-2 text-white bg-rhyth-blue py-1 px-3 rounded-lg text-sm">
             <ClockIcon color="text-white" />
             <p className="text-sm font-cp-font tracking-widest">クエスト実行タイム</p>
           </div>
