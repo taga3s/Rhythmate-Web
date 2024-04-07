@@ -9,6 +9,7 @@ import { ManageQuestCard } from "./ManageQuestCard";
 import { ManageQuestSearchModal } from "./ManageQuestSearchModal,";
 import { ManageTimetable } from "./ManageTimetable";
 import { Quest } from "../../../api/quest/model";
+import { ManageTimetableNoData } from "./ManageTimetableNoData";
 
 export const ManagePresenter = () => {
   const navigate = useNavigate();
@@ -160,7 +161,11 @@ export const ManagePresenter = () => {
                 日
               </button>
             </div>
-            <ManageTimetable questList={sortedDayOfTheWeekQuests} />
+            {sortedDayOfTheWeekQuests?.length ? (
+              <ManageTimetable questList={sortedDayOfTheWeekQuests} />
+            ) : (
+              <ManageTimetableNoData />
+            )}
           </div>
         </div>
       ) : (

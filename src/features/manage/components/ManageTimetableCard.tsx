@@ -38,10 +38,10 @@ export const ManageTimetableCard: FC<Props> = (props) => {
   };
 
   return (
-    <div className="pt-2 border-[3px] bg-rhyth-bg-gray border-rhyth-green shadow-lg text-rhyth-dark-blue rounded-lg">
-      <div className="flex items-center justify-between mb-2">
+    <div className="pt-2 border-4 bg-rhyth-bg-gray border-rhyth-green shadow-lg text-rhyth-dark-blue rounded-lg">
+      <div className="min-h-16 flex items-center justify-between mb-2">
         {/* h-min-16 h-20 h-max-24 */}
-        <div className="h-16 flex flex-col items-center justify-center font-cp-font tracking-wider p-2 pr-3 border-r-2 border-rhyth-dark-blue">
+        <div className="flex flex-col items-center justify-center font-cp-font tracking-wider p-2 pr-3 border-r-2 border-rhyth-dark-blue">
           <h2 className="w-[4.5rem] text-lg text-center">{props.startsAt}</h2>
           <p className="text-sm">{props.minutes}分間</p>
         </div>
