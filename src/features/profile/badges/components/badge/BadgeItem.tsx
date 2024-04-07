@@ -6,27 +6,28 @@ import { Gem } from "./badgeItems/Gem";
 import { Horse } from "./badgeItems/Horse";
 import { Shield } from "./badgeItems/Shield";
 import { Sword } from "./badgeItems/Sword";
+import { ImageType } from "../../../../../api/badge/type";
 
 type Props = {
-  imageType: string;
+  imageType: ImageType;
   className: string;
 };
 
 export const BadgeItem: FC<Props> = ({ imageType, className }) => {
   switch (imageType) {
-    case "Bow":
+    case "bow":
       return <Bow className={className} />;
-    case "Cat":
+    case "cat":
       return <Cat className={className} />;
-    case "Crown":
+    case "crown":
       return <Crown className={className} />;
-    case "Gem":
+    case "gem":
       return <Gem className={className} />;
-    case "Horse":
+    case "horse":
       return <Horse className={className} />;
-    case "Shield":
+    case "shield":
       return <Shield className={className} />;
-    case "Sword":
+    case "sword":
       return <Sword className={className} />;
   }
 };

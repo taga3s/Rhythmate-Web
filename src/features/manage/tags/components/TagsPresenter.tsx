@@ -4,31 +4,38 @@ import { ConfirmModal } from "../../../common/components/ConfirmModal";
 import { TagsEditModal } from "./TagsEditModal";
 import { TagsNewButton } from "./TagsNewButton";
 import { useNavigate } from "@tanstack/react-router";
-
-type Tag = {
-  tagName: string;
-  tagColor: string;
-};
+import { useQueryTagList } from "../api/tag/hooks/useQueryTag";
+import { Loading, LoadingContainer } from "../../../common/components";
+import { useMutateTag } from "../api/tag/hooks/useMutateTag";
+import { TagsNewModal } from "./TagsNewModal";
 
 export const TagsPresenter = () => {
   const navigate = useNavigate();
   const [isTagsEditModalOpen, setIsTagsEditModalOpen] = useState<boolean>(false);
   const [isTagsDeleteModalOpen, setIsTagsDeleteModalOpen] = useState<boolean>(false);
   const [isTagsNewModalOpen, setIsTagsNewModalOpen] = useState<boolean>(false);
-  const [tagItems] = useState<Tag[]>([
-    { tagName: "勉強・スキルアップ", tagColor: "Green" },
-    { tagName: "健康的な習慣", tagColor: "Purple" },
-    { tagName: "生活・ライフスタイル", tagColor: "Blue" },
-  ]);
-  // const [editTag, setEditTag] = useState<Tag>({ tagName: "", tagColor: "" });
 
-  const openTagsEditModal = () => {
+  const [selectedTagId, setSelectedTagId] = useState<string>();
+
+  const { data: tagItems, isLoading } = useQueryTagList();
+
+  const { deleteTagMutation } = useMutateTag();
+
+  const onClickDelete = async () => {
+    await deleteTagMutation.mutateAsync({
+      id: selectedTagId ?? "",
+    });
+  };
+
+  const openTagsEditModal = (tagId: string) => {
+    setSelectedTagId(tagId);
     setIsTagsEditModalOpen(true);
   };
   const closeTagsEditModal = () => {
     setIsTagsEditModalOpen(false);
   };
-  const openTagsDeleteModal = () => {
+  const openTagsDeleteModal = (tagId: string) => {
+    setSelectedTagId(tagId);
     setIsTagsDeleteModalOpen(true);
   };
   const closeTagsDeleteModal = () => {
@@ -40,17 +47,6 @@ export const TagsPresenter = () => {
   const closeTagsNewModal = () => {
     setIsTagsNewModalOpen(false);
   };
-
-  // const changeTagItem = (key: number, tag: Tag) => {
-  //   const nextTagsName = tagItems.map((tagItem, index) => {
-  //     if (key === index) {
-  //       return { tagName: tag.tagName, tagColor: tag.tagColor };
-  //     } else {
-  //       return tagItem;
-  //     }
-  //   });
-  //   setTagItems(nextTagsName);
-  // };
 
   return (
     <>
@@ -78,32 +74,36 @@ export const TagsPresenter = () => {
       </button>
       <div className="mt-4">
         <div className="flex justify-between items-center mb-2">
-          <h1 className="font-cp-font font-black text-xl text-rhyth-gray tracking-widest">タグ管理</h1>
+          <h1 className="font-cp-font font-black text-xl text-rhyth-gray tracking-widest">登録しているタグ一覧</h1>
           <TagsNewButton onClickFn={openTagsNewModal} />
         </div>
-        <div>
-          <ul className="text-md font-bold text-rhyth-dark-blue bg-white border-2 border-rhyth-light-gray rounded-lg shadow-md">
-            {tagItems.map((item, index) => (
-              <TagsItem
-                key={index}
-                tagName={item.tagName}
-                tagColor={item.tagColor}
-                onEditFn={openTagsEditModal}
-                onDeleteFn={openTagsDeleteModal}
-              />
-            ))}
-          </ul>
+        <div className="text-rhyth-dark-blue">
+          {isLoading ? (
+            <LoadingContainer>
+              <Loading />
+            </LoadingContainer>
+          ) : tagItems?.length ? (
+            <ul className="text-md font-bold bg-white border-2 border-rhyth-light-gray rounded-lg shadow-md">
+              {tagItems.map((item, index) => (
+                <TagsItem
+                  key={index}
+                  tagName={item.name}
+                  tagColor={item.color}
+                  onEditFn={() => openTagsEditModal(item.id)}
+                  onDeleteFn={() => openTagsDeleteModal(item.id)}
+                />
+              ))}
+            </ul>
+          ) : (
+            <div className="mt-20 gap-2 flex flex-col items-center text-lg font-bold">
+              <span>タグが登録されていません。</span>
+              <span>新規作成から作成できます。</span>
+            </div>
+          )}
         </div>
       </div>
       {isTagsEditModalOpen && (
-        <TagsEditModal
-          modalType="タグ編集"
-          // confirmBtnText="タグを削除する"
-          // cancelBtnText="キャンセルする"
-          // btnColor="red"
-          // // actionFnは後ほど修正
-          closeModal={closeTagsEditModal}
-        />
+        <TagsEditModal modalType="タグ編集" closeModal={closeTagsEditModal} tagId={selectedTagId ?? ""} />
       )}
       {isTagsDeleteModalOpen && (
         <ConfirmModal
@@ -111,12 +111,11 @@ export const TagsPresenter = () => {
           confirmBtnText="タグを削除する"
           cancelBtnText="キャンセルする"
           btnColor="red"
-          // actionFnは後ほど修正
-          actionFn={closeTagsDeleteModal}
+          actionFn={onClickDelete}
           closeModal={closeTagsDeleteModal}
         />
       )}
-      {isTagsNewModalOpen && <TagsEditModal modalType="タグ作成" closeModal={closeTagsNewModal} />}
+      {isTagsNewModalOpen && <TagsNewModal modalType="タグ作成" closeModal={closeTagsNewModal} />}
     </>
   );
 };

@@ -12,14 +12,13 @@ import { Badge } from "../badges/components/badge/Badge";
 export const ProfilePresenter = () => {
   const { data: loginUser, isLoading } = useQueryLoginUser();
   const { data: badgeList } = useQueryBadgeList();
+
   const [isSettingsModalOpen, setIsSettingsModalOpen] = useState<boolean>(false);
   const [isLogoutModalOpen, setIsLogoutModalOpen] = useState<boolean>(false);
-  const profileDefaultImage = "/assets/profile/profilecat.jpg";
 
   const openSettingsModal = () => {
     setIsSettingsModalOpen(true);
   };
-
   const closeSettingsModal = () => {
     setIsSettingsModalOpen(false);
   };
@@ -30,7 +29,7 @@ export const ProfilePresenter = () => {
     setIsLogoutModalOpen(false);
   };
 
-  const pinnedBadgeList = badgeList?.filter((badge) => badge.isPinned);
+  const pinnedBadgeList = badgeList?.filter((badge) => badge.isPinned) ?? [];
 
   return (
     <>
@@ -39,10 +38,12 @@ export const ProfilePresenter = () => {
           <Loading />
         </LoadingContainer>
       ) : (
-        <div className="flex flex-col items-center mx-auto">
+        <div className="flex flex-col items-center gap-4">
           <div className="w-full p-5 bg-white border border-gray-200 rounded-lg shadow">
             <div className="flex justify-between gap-4 box-border mb-4">
-              <img src={profileDefaultImage} alt="プロフィール画像" className="w-1/4 h-1/4 rounded-full" />
+              <div className="max-w-[220px] w-1/4 max-h-[220px] h-1/4">
+                <img src={loginUser?.imgURL} alt="プロフィール画像" className="w-full h-full rounded-full" />
+              </div>
               <div className="flex flex-col justify-center text-right break-all font-extrabold text-rhyth-dark-blue">
                 <h1 className="text-3xl">{loginUser?.name}</h1>
               </div>
@@ -55,8 +56,14 @@ export const ProfilePresenter = () => {
               <div className="flex justify-end w-2/3 gap-3">
                 {pinnedBadgeList?.map((badge) => {
                   return (
-                    <div className="flex h-full w-1/3" key={badge.badgeId}>
-                      <Badge imageType={badge.imageType} frameClassName="" sparklingClassName="" itemClassName="" />
+                    <div className="flex h-full w-1/3" key={badge.id}>
+                      <Badge
+                        imageType={badge.imageType}
+                        frameColor={badge.frameColor}
+                        frameClassName=""
+                        sparklingClassName=""
+                        itemClassName=""
+                      />
                     </div>
                   );
                 })}
@@ -64,8 +71,10 @@ export const ProfilePresenter = () => {
             </div>
           </div>
           <ProfileExpCard />
-          <ProfileUserSettingsModalButton onClickFn={openSettingsModal} />
-          <ProfileLogoutModalButton onClickFn={openLogoutModal} />
+          <div className="w-full">
+            <ProfileUserSettingsModalButton onClickFn={openSettingsModal} />
+            <ProfileLogoutModalButton onClickFn={openLogoutModal} />
+          </div>
         </div>
       )}
       {isSettingsModalOpen && (

@@ -10,7 +10,7 @@ export type Quest = {
   startedAt: string;
   minutes: number;
   // TODO
-  tag_id: string;
+  tagId: string;
   difficulty: Difficulty;
   state: QuestState;
   isSucceeded: boolean;
@@ -46,7 +46,7 @@ export const toQuest = (obj: {
     startedAt:
       obj.started_at === NOT_STARTED_YET ? obj.started_at : `${formatDateTime(convertUTCtoJST(obj.started_at))}`,
     minutes: obj.minutes,
-    tag_id: obj.tag_id,
+    tagId: obj.tag_id,
     difficulty: obj.difficulty,
     state: obj.state,
     isSucceeded: obj.is_succeeded,

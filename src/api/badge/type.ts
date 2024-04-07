@@ -1,50 +1,54 @@
+export type ImageType = "bow" | "cat" | "crown" | "gem" | "horse" | "shield" | "sword";
+export type FrameColor = "bronze" | "silver" | "gold";
+
+type BaseResponse = {
+  badge_id: string;
+  name: string;
+  description: string;
+  image_type: ImageType;
+  frame_color: FrameColor;
+  unlockable: boolean;
+  obtained_at: string;
+  is_pinned: boolean;
+};
+
 export type ListResponse = {
   status: string;
-  badgesWithDetail: {
-    id: string;
-    badge_id: string;
-    name: string;
-    description: string;
-    image_type: string;
-    obtained_at: string;
-    is_pinned: boolean;
-  }[];
+  badgesWithDetail: BaseResponse[];
+};
+
+export type AchieveBadgeParams = {
+  badgeId: string;
+};
+
+export type AchieveBadgeRequest = {
+  badgeId: string;
+};
+
+export type AchieveBadgeResponse = BaseResponse & {
+  status: string;
 };
 
 export type PinBadgeParams = {
-  id: string;
+  badgeId: string;
 };
 
 export type PinBadgeRequest = {
-  id: string;
+  badgeId: string;
 };
 
-export type PinBadgeResponse = {
+export type PinBadgeResponse = BaseResponse & {
   status: string;
-  id: string;
-  badge_id: string;
-  name: string;
-  description: string;
-  image_type: string;
-  obtained_at: string;
-  is_pinned: boolean;
 };
 
 export type UnpinBadgeParams = {
-  id: string;
+  badgeId: string;
 };
 
 export type UnpinBadgeRequest = {
-  id: string;
+  badgeId: string;
 };
 
-export type UnpinBadgeResponse = {
+export type UnpinBadgeResponse = BaseResponse & {
   status: string;
-  id: string;
-  badge_id: string;
-  name: string;
-  description: string;
-  image_type: string;
-  obtained_at: string;
-  is_pinned: boolean;
 };

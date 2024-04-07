@@ -16,7 +16,7 @@ export const useMutateQuest = () => {
     onSuccess: (data) => {
       const questList = queryClient.getQueryData<Quest[]>(["quests"]);
       if (questList) {
-        queryClient.setQueryData<Quest[]>(["quests"], [data, ...questList]);
+        queryClient.setQueryData<Quest[]>(["quests"], [...questList, data]);
       }
       notifySuccess("クエストを作成しました。");
     },

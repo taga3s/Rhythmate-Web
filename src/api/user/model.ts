@@ -3,6 +3,7 @@ export type User = {
   email: string;
   level: number;
   exp: number;
+  imgURL: string;
 };
 
 export const toUser = (obj: {
@@ -16,5 +17,6 @@ export const toUser = (obj: {
     email: obj.email,
     level: obj.level,
     exp: obj.exp,
+    imgURL: "/assets/profile/profilecat.jpg",
   };
 };
