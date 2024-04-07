@@ -7,7 +7,7 @@ type Props = {
   onClickFn: (dayOfTheWeek: Day) => void;
 };
 
-export const ManageDayOfTheWeekButton: FC<Props> = ({ view, dayOfTheWeek, onClickFn }) => {
+export const ManageDayOfTheWeekSwitchButton: FC<Props> = ({ view, dayOfTheWeek, onClickFn }) => {
   const handleDayOfTheWeek = (dayOfTheWeek: Day) => {
     switch (dayOfTheWeek) {
       case "MON":

@@ -11,7 +11,7 @@ import { ManageTimetable } from "./ManageTimetable";
 import { Quest } from "../../../api/quest/model";
 import { ManageTimetableNoData } from "./ManageTimetableNoData";
 import { DAYS } from "../common/constant/constant";
-import { ManageDayOfTheWeekButton } from "./ManageDayOfTheWeekButton";
+import { ManageDayOfTheWeekSwitchButton } from "./ManageDayOfTheWeekSwitchButton";
 
 export const ManagePresenter = () => {
   const navigate = useNavigate();
@@ -20,8 +20,8 @@ export const ManagePresenter = () => {
   const [filterDay, setFilterDay] = useState<Day | "">("");
   const [filterDifficulties, setFilterDifficulties] = useState<Difficulty[]>([]);
   const [filterActivation, setFilterActivation] = useState<boolean>(false);
-
   const [dayOfTheWeekView, setDayOfTheWeekView] = useState<Day>("MON");
+  const [manageView, setManageView] = useState<"Timetable" | "Card">("Timetable");
 
   const closeQuestSearchModal = () => {
     setSearchModalIsOpen(false);
@@ -57,6 +57,14 @@ export const ManagePresenter = () => {
   const DayOfTheWeekQuests = filterQuestsByDayOfTheWeek(quests ?? []);
   const sortedDayOfTheWeekQuests = sortQuestsByTime(DayOfTheWeekQuests);
 
+  const handleManageView = () => {
+    if (manageView === "Timetable") {
+      setManageView("Card");
+    } else {
+      setManageView("Timetable");
+    }
+  };
+
   return (
     <div className="w-full">
       {isLoading ? (
@@ -90,25 +98,70 @@ export const ManagePresenter = () => {
         )
       ) : quests?.length ? (
         <div>
-          <div className="flex flex-col w-full mt-4">
-            <div className="flex items-center">
-              {DAYS.map((day, i) => {
+          <div className="flex justify-end">
+            <button
+              className="flex items-center gap-1 bg-white py-2 px-4 rounded-full border-2 border-rhyth-light-gray shadow-sm hover:bg-rhyth-bg-dark-gray"
+              onClick={handleManageView}
+            >
+              <svg
+                className="w-6 h-6 text-rhyth-blue"
+                aria-hidden="true"
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                fill="none"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke="currentColor"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="m16 10 3-3m0 0-3-3m3 3H5v3m3 4-3 3m0 0 3 3m-3-3h14v-3"
+                />
+              </svg>
+              <span className="text-sm font-bold text-rhyth-dark-blue">表示切り替え</span>
+            </button>
+          </div>
+          {manageView === "Timetable" ? (
+            <div className="flex flex-col w-full mt-4">
+              <div className="flex items-center">
+                {DAYS.map((day, i) => {
+                  return (
+                    <ManageDayOfTheWeekSwitchButton
+                      key={i}
+                      view={day}
+                      dayOfTheWeek={dayOfTheWeekView}
+                      onClickFn={setDayOfTheWeekView}
+                    />
+                  );
+                })}
+              </div>
+              {sortedDayOfTheWeekQuests?.length ? (
+                <ManageTimetable questList={sortedDayOfTheWeekQuests} />
+              ) : (
+                <ManageTimetableNoData />
+              )}
+            </div>
+          ) : (
+            <ul className="mt-4 flex flex-col items-center gap-6">
+              {sortedDayOfTheWeekQuests?.map((quest) => {
                 return (
-                  <ManageDayOfTheWeekButton
-                    key={i}
-                    view={day}
-                    dayOfTheWeek={dayOfTheWeekView}
-                    onClickFn={setDayOfTheWeekView}
+                  <ManageQuestCard
+                    key={quest.id}
+                    id={quest.id}
+                    title={quest.title}
+                    description={quest.description}
+                    startsAt={quest.startsAt}
+                    minutes={quest.minutes}
+                    difficulty={quest.difficulty}
+                    days={quest.days}
+                    continuationLevel={quest.continuationLevel}
                   />
                 );
               })}
-            </div>
-            {sortedDayOfTheWeekQuests?.length ? (
-              <ManageTimetable questList={sortedDayOfTheWeekQuests} />
-            ) : (
-              <ManageTimetableNoData />
-            )}
-          </div>
+            </ul>
+          )}
         </div>
       ) : (
         <div className="w-full gap-4 flex flex-col items-center mx-auto mt-24">
