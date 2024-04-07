@@ -120,7 +120,9 @@ export const ManagePresenter = () => {
                   d="m16 10 3-3m0 0-3-3m3 3H5v3m3 4-3 3m0 0 3 3m-3-3h14v-3"
                 />
               </svg>
-              <span className="text-sm font-bold text-rhyth-dark-blue">表示切り替え</span>
+              <span className="text-sm font-bold text-rhyth-dark-blue">
+                {manageView === "Timetable" ? "全表示" : "曜日別表示"}
+              </span>
             </button>
           </div>
           {manageView === "Timetable" ? (
