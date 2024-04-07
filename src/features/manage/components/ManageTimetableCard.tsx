@@ -39,15 +39,15 @@ export const ManageTimetableCard: FC<Props> = (props) => {
 
   return (
     <div className="pt-2 border-4 bg-rhyth-bg-gray border-rhyth-green shadow-lg text-rhyth-dark-blue rounded-lg">
-      <div className="min-h-16 flex items-center justify-between mb-2">
+      <div className="h-16 flex items-center justify-between mb-2">
         {/* h-min-16 h-20 h-max-24 */}
         <div className="flex flex-col items-center justify-center font-cp-font tracking-wider p-2 pr-3 border-r-2 border-rhyth-dark-blue">
           <h2 className="w-[4.5rem] text-lg text-center">{props.startsAt}</h2>
           <p className="text-sm">{props.minutes}分間</p>
         </div>
-        <div className="w-full flex items-center justify-between p-2">
+        <div className="h-full w-full flex items-center justify-between p-2">
           <h1 className="ml-2 font-cp-font text-md font-bold">{props.title}</h1>
-          <button onClick={handleAccordionInfo}>
+          <button className="p-2" onClick={handleAccordionInfo}>
             {isAccordionOpen ? (
               <svg
                 className="w-6 h-6 text-rhyth-dark-blue hover:text-rhyth-light-blue"
