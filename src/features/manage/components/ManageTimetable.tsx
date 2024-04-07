@@ -11,7 +11,7 @@ export const ManageTimetable: FC<Props> = (props: { questList: any }) => {
   const { questList } = props;
 
   return (
-    <div className="flex flex-col gap-4 bg-rhyth-light-blue p-4 rounded-b-lg">
+    <div className="flex flex-col gap-4 bg-rhyth-light-blue px-2 py-4 rounded-b-lg">
       {questList.map((quest: Quest) => {
         return (
           <ManageTimetableCard

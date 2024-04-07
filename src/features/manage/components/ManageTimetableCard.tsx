@@ -38,10 +38,10 @@ export const ManageTimetableCard: FC<Props> = (props) => {
   };
 
   return (
-    <div className="pt-2 border-4 bg-rhyth-bg-gray border-rhyth-green shadow-lg text-rhyth-dark-blue rounded-lg">
-      <div className="h-16 flex items-center justify-between mb-2">
+    <div className="border-4 bg-rhyth-bg-gray border-rhyth-green shadow-lg text-rhyth-dark-blue rounded-lg">
+      <div className="flex items-center justify-between">
         {/* h-min-16 h-20 h-max-24 */}
-        <div className="flex flex-col items-center justify-center font-cp-font tracking-wider p-2 pr-3 border-r-2 border-rhyth-dark-blue">
+        <div className="h-20 flex flex-col items-center justify-center font-bold tracking-widest p-2 pr-3 bg-rhyth-green text-white">
           <h2 className="w-[4.5rem] text-lg text-center">{props.startsAt}</h2>
           <p className="text-sm">{props.minutes}分間</p>
         </div>
@@ -92,10 +92,10 @@ export const ManageTimetableCard: FC<Props> = (props) => {
         <div>
           <hr className="h-0.5 bg-rhyth-light-gray mb-2" />
           <div>
-            <div className="m-3">
-              <div className="flex items-center p-2">
-                <h1 className="font-bold text-md text-rhyth-dark-blue">{props.title}</h1>
-                <button
+            <div className="m-2">
+              {/* <div className="flex items-center p-2"> */}
+              {/* <h1 className="font-bold text-md text-rhyth-dark-blue">{props.title}</h1> */}
+              {/* <button
                   className="p-1 ml-auto"
                   onClick={() => navigate({ to: `/manage/edit`, search: { quest_id: props.id } })}
                 >
@@ -121,29 +121,56 @@ export const ManageTimetableCard: FC<Props> = (props) => {
                       />
                     </svg>
                   </div>
-                </button>
-              </div>
-              <hr className="h-1 bg-rhyth-blue my-2 rounded-sm" />
-              <div className="p-2">
-                <div className="inline-block font-cp-font text-white bg-rhyth-gray py-1 px-3 mb-2 rounded-full tracking-wider">
-                  <p>ひとこと</p>
+                </button> */}
+              {/* </div> */}
+              {/* <hr className="h-1 bg-rhyth-blue my-2 rounded-sm" /> */}
+              <div>
+                <div className="flex items-center justify-between mb-2">
+                  <p className="font-bold text-sm text-white bg-rhyth-gray py-1 px-3 rounded-lg tracking-wider">メモ</p>
+                  <button
+                    className="p-1 ml-auto"
+                    onClick={() => navigate({ to: `/manage/edit`, search: { quest_id: props.id } })}
+                  >
+                    <div className="flex items-center gap-2 justify-center">
+                      <svg
+                        className="w-6 h-6 text-rhyth-blue hover:text-rhyth-hover-blue"
+                        aria-hidden="true"
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="24"
+                        height="24"
+                        fill="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          fillRule="evenodd"
+                          d="M11.32 6.176H5c-1.105 0-2 .949-2 2.118v10.588C3 20.052 3.895 21 5 21h11c1.105 0 2-.948 2-2.118v-7.75l-3.914 4.144A2.46 2.46 0 0 1 12.81 16l-2.681.568c-1.75.37-3.292-1.263-2.942-3.115l.536-2.839c.097-.512.335-.983.684-1.352l2.914-3.086Z"
+                          clipRule="evenodd"
+                        />
+                        <path
+                          fillRule="evenodd"
+                          d="M19.846 4.318a2.148 2.148 0 0 0-.437-.692 2.014 2.014 0 0 0-.654-.463 1.92 1.92 0 0 0-1.544 0 2.014 2.014 0 0 0-.654.463l-.546.578 2.852 3.02.546-.579a2.14 2.14 0 0 0 .437-.692 2.244 2.244 0 0 0 0-1.635ZM17.45 8.721 14.597 5.7 9.82 10.76a.54.54 0 0 0-.137.27l-.536 2.84c-.07.37.239.696.588.622l2.682-.567a.492.492 0 0 0 .255-.145l4.778-5.06Z"
+                          clipRule="evenodd"
+                        />
+                      </svg>
+                    </div>
+                  </button>
                 </div>
                 <h3 className="text-sm font-bold text-rhyth-dark-blue">{props.description}</h3>
               </div>
-              <div className="m-2 text-sm">
-                <div className="w-[200px] flex justify-center items-center gap-2 text-white bg-rhyth-blue py-1 px-3 rounded-full">
+              <div className="text-sm mt-4">
+                <div className="w-fit flex justify-center items-center gap-2 text-white bg-rhyth-blue py-1 px-3 rounded-lg text-sm">
                   <ClockIcon color="text-white" />
-                  <p className="text-sm font-cp-font tracking-widest">クエスト実行タイム</p>
+                  <p className="text-sm font-bold tracking-widest">クエスト実行頻度</p>
                 </div>
                 <h3 className="my-2 text-md font-bold text-rhyth-dark-blue">
                   {convertENToJPWeekdayString(props.days)}
                 </h3>
-                <div className="flex items-center gap-2 font-bold">
+                {/* <div className="flex items-center gap-2 font-bold">
                   <span className="text-2xl text-rhyth-light-blue font-cp-font tracking-wider">{props.startsAt}</span>
                   <span className="text-md text-rhyth-dark-blue">から</span>
                   <span className="text-2xl text-rhyth-light-blue font-cp-font tracking-wider">{props.minutes}分</span>
                   <span className="text-md text-rhyth-dark-blue">集中！</span>
-                </div>
+                </div> */}
               </div>
             </div>
             <hr className="h-0.5 bg-rhyth-light-gray" />
