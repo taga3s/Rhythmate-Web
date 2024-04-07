@@ -95,8 +95,8 @@ export const NewPresenter = () => {
           <input
             type="text"
             id="new-quest-title"
-            placeholder="タイトルを入力"
             className="w-full p-2 border-2 border-rhyth-light-gray rounded-lg"
+            placeholder="例) 朝のストレッチ"
             {...register("title")}
           />
         </div>

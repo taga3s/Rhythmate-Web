@@ -114,6 +114,7 @@ export const EditPresenter: FC<Props> = (props) => {
               className="w-full p-2 border-2 border-rhyth-light-gray rounded-lg"
               id="edit-quest-title"
               defaultValue={targetQuest?.title}
+              placeholder="例) 朝のストレッチ"
               {...register("title")}
             />
           </div>
