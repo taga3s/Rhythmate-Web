@@ -60,7 +60,9 @@ export const ManageQuestCard: FC<Props> = (props) => {
         <hr className="h-1.5 bg-rhyth-blue" />
         <div className="text-md mt-4">
           <p className="inline font-bold text-sm text-white bg-rhyth-gray py-1 px-3 rounded-lg tracking-wider">メモ</p>
-          <h3 className="font-bold text-rhyth-dark-blue mt-2 ml-2">{description}</h3>
+          <h3 className="font-bold text-rhyth-dark-blue mt-2 ml-2">
+            {description === "" ? "サンプルメモ" : description}
+          </h3>
         </div>
         <div className="mt-4 mb-2 text-sm">
           <div className="w-fit flex justify-center items-center gap-2 text-white bg-rhyth-blue py-1 px-3 rounded-lg text-sm">

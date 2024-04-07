@@ -123,7 +123,9 @@ export const ManageTimetableCard: FC<Props> = (props) => {
                     </div>
                   </button>
                 </div>
-                <h3 className="text-md ml-2 font-bold text-rhyth-dark-blue">{props.description}</h3>
+                <h3 className="text-md ml-2 font-bold text-rhyth-dark-blue">
+                  {props.description === "" ? "サンプルメモ" : props.description}
+                </h3>
               </div>
               <div className="mt-4">
                 <div className="w-fit flex justify-center items-center gap-2 text-white bg-rhyth-blue py-1 px-3 rounded-lg text-sm">
