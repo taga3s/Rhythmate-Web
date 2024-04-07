@@ -10,7 +10,7 @@ type Props = {
   watch: UseFormWatch<TManageValidationSchema>;
 };
 
-export const NewDayOfTheWeek: FC<Props> = ({ day, value, register, watch }) => {
+export const DayOfTheWeek: FC<Props> = ({ day, value, register, watch }) => {
   const days = watch("days");
   const isChecked = Array.isArray(days) && days.some((v: string) => v === value);
 

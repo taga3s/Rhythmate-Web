@@ -1,7 +1,5 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { NewStar } from "./NewStar";
-import { NewDayOfTheWeek } from "./NewDayOfTheWeek";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { FormErrorMsg } from "../../../common/components/utils/FormErrorMsg";
 import { useMutateQuest } from "../../api/quest/hooks/useMutateQuest";
@@ -11,6 +9,8 @@ import { DAYS } from "../../common/constant/constant";
 import { convertEnToJPWeekday } from "../../common/funcs";
 import { Day, Difficulty } from "../../../../api/quest/types";
 import { formatDateTimeOnlyDate, formatDateTimeWithAddMinutes, isBefore, now } from "../../../../pkg/util/dayjs";
+import { DayOfTheWeek } from "../../common/components/DayOfTheWeek";
+import { Star } from "../../common/components/Star";
 
 type NewValues = {
   title: string;
@@ -95,8 +95,8 @@ export const NewPresenter = () => {
           <input
             type="text"
             id="new-quest-title"
-            placeholder="タイトルを入力"
             className="w-full p-2 border-2 border-rhyth-light-gray rounded-lg"
+            placeholder="例) 朝のストレッチ"
             {...register("title")}
           />
         </div>
@@ -144,7 +144,7 @@ export const NewPresenter = () => {
               <div className="flex mt-4 gap-1">
                 {DAYS.map((day, i) => {
                   return (
-                    <NewDayOfTheWeek
+                    <DayOfTheWeek
                       key={i}
                       day={convertEnToJPWeekday(day)}
                       value={day}
@@ -181,7 +181,7 @@ export const NewPresenter = () => {
                 setDifficulty("EASY");
               }}
             >
-              <NewStar />
+              <Star />
             </button>
             <button
               type="button"
@@ -192,8 +192,8 @@ export const NewPresenter = () => {
                 setDifficulty("NORMAL");
               }}
             >
-              <NewStar />
-              <NewStar />
+              <Star />
+              <Star />
             </button>
             <button
               type="button"
@@ -204,9 +204,9 @@ export const NewPresenter = () => {
                 setDifficulty("HARD");
               }}
             >
-              <NewStar />
-              <NewStar />
-              <NewStar />
+              <Star />
+              <Star />
+              <Star />
             </button>
           </div>
         </div>
