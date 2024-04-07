@@ -10,6 +10,8 @@ import { ManageQuestSearchModal } from "./ManageQuestSearchModal,";
 import { ManageTimetable } from "./ManageTimetable";
 import { Quest } from "../../../api/quest/model";
 import { ManageTimetableNoData } from "./ManageTimetableNoData";
+import { DAYS } from "../common/constant/constant";
+import { ManageDayOfTheWeekButton } from "./ManageDayOfTheWeekButton";
 
 export const ManagePresenter = () => {
   const navigate = useNavigate();
@@ -90,76 +92,16 @@ export const ManagePresenter = () => {
         <div>
           <div className="flex flex-col w-full mt-4">
             <div className="flex items-center">
-              <button
-                className={`w-full px-4 py-2 font-cp-font rounded-t-lg shadow-xl ${
-                  dayOfTheWeekView === "MON"
-                    ? "text-white bg-rhyth-light-blue"
-                    : "bg-white text-rhyth-dark-blue hover:bg-rhyth-hover-light-gray"
-                }`}
-                onClick={() => setDayOfTheWeekView("MON")}
-              >
-                月
-              </button>
-              <button
-                className={`w-full px-4 py-2 font-cp-font rounded-t-lg shadow-xl ${
-                  dayOfTheWeekView === "TUE"
-                    ? "text-white bg-rhyth-light-blue"
-                    : "bg-white text-rhyth-dark-blue hover:bg-rhyth-hover-light-gray"
-                }`}
-                onClick={() => setDayOfTheWeekView("TUE")}
-              >
-                火
-              </button>
-              <button
-                className={`w-full px-4 py-2 font-cp-font rounded-t-lg shadow-xl ${
-                  dayOfTheWeekView === "WED"
-                    ? "text-white bg-rhyth-light-blue"
-                    : "bg-white text-rhyth-dark-blue hover:bg-rhyth-hover-light-gray"
-                }`}
-                onClick={() => setDayOfTheWeekView("WED")}
-              >
-                水
-              </button>
-              <button
-                className={`w-full px-4 py-2 font-cp-font rounded-t-lg shadow-xl ${
-                  dayOfTheWeekView === "THU"
-                    ? "text-white bg-rhyth-light-blue"
-                    : "bg-white text-rhyth-dark-blue hover:bg-rhyth-hover-light-gray"
-                }`}
-                onClick={() => setDayOfTheWeekView("THU")}
-              >
-                木
-              </button>
-              <button
-                className={`w-full px-4 py-2 font-cp-font rounded-t-lg shadow-xl ${
-                  dayOfTheWeekView === "FRI"
-                    ? "text-white bg-rhyth-light-blue"
-                    : "bg-white text-rhyth-dark-blue hover:bg-rhyth-hover-light-gray"
-                }`}
-                onClick={() => setDayOfTheWeekView("FRI")}
-              >
-                金
-              </button>
-              <button
-                className={`w-full px-4 py-2 font-cp-font rounded-t-lg shadow-xl ${
-                  dayOfTheWeekView === "SAT"
-                    ? "text-white bg-rhyth-light-blue"
-                    : "bg-white text-rhyth-dark-blue hover:bg-rhyth-hover-light-gray"
-                }`}
-                onClick={() => setDayOfTheWeekView("SAT")}
-              >
-                土
-              </button>
-              <button
-                className={`w-full px-4 py-2 font-cp-font rounded-t-lg shadow-xl ${
-                  dayOfTheWeekView === "SUN"
-                    ? "text-white bg-rhyth-light-blue"
-                    : "bg-white text-rhyth-dark-blue hover:bg-rhyth-hover-light-gray"
-                }`}
-                onClick={() => setDayOfTheWeekView("SUN")}
-              >
-                日
-              </button>
+              {DAYS.map((day, i) => {
+                return (
+                  <ManageDayOfTheWeekButton
+                    key={i}
+                    view={day}
+                    dayOfTheWeek={dayOfTheWeekView}
+                    onClickFn={setDayOfTheWeekView}
+                  />
+                );
+              })}
             </div>
             {sortedDayOfTheWeekQuests?.length ? (
               <ManageTimetable questList={sortedDayOfTheWeekQuests} />
