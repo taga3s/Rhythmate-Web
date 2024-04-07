@@ -93,8 +93,8 @@ export const ManageTimetableCard: FC<Props> = (props) => {
           <hr className="h-0.5 bg-rhyth-light-gray mb-2" />
           <div>
             <div className="m-3">
-              <div className="flex items-center">
-                <h1 className="font-bold text-lg text-rhyth-dark-blue">{props.title}</h1>
+              <div className="flex items-center p-2">
+                <h1 className="font-bold text-md text-rhyth-dark-blue">{props.title}</h1>
                 <button
                   className="p-1 ml-auto"
                   onClick={() => navigate({ to: `/manage/edit`, search: { quest_id: props.id } })}
@@ -124,39 +124,37 @@ export const ManageTimetableCard: FC<Props> = (props) => {
                 </button>
               </div>
               <hr className="h-1 bg-rhyth-blue my-2 rounded-sm" />
-              <div className="flex items-center gap-2 text-sm">
-                <div className="font-cp-font text-white bg-rhyth-gray py-1 px-3 rounded-full tracking-wider">
+              <div className="p-2">
+                <div className="inline-block font-cp-font text-white bg-rhyth-gray py-1 px-3 mb-2 rounded-full tracking-wider">
                   <p>ひとこと</p>
                 </div>
-                <h3 className="font-bold text-rhyth-dark-blue">{props.description}</h3>
+                <h3 className="text-sm font-bold text-rhyth-dark-blue">{props.description}</h3>
               </div>
-              <div className="my-2 text-sm">
+              <div className="m-2 text-sm">
                 <div className="w-[200px] flex justify-center items-center gap-2 text-white bg-rhyth-blue py-1 px-3 rounded-full">
                   <ClockIcon color="text-white" />
                   <p className="text-sm font-cp-font tracking-widest">クエスト実行タイム</p>
                 </div>
-                <h3 className="ml-2 my-2 text-lg font-bold text-rhyth-dark-blue">
+                <h3 className="my-2 text-md font-bold text-rhyth-dark-blue">
                   {convertENToJPWeekdayString(props.days)}
                 </h3>
-                <div className="ml-2 flex items-center gap-2 font-bold">
+                <div className="flex items-center gap-2 font-bold">
                   <span className="text-2xl text-rhyth-light-blue font-cp-font tracking-wider">{props.startsAt}</span>
-                  <span className="text-lg text-rhyth-dark-blue">から</span>
-                  <span className="text-2xl text-rhyth-light-blue font-cp-font tracking-wider">
-                    {props.minutes}分間
-                  </span>
-                  <span className="text-lg text-rhyth-dark-blue">集中！</span>
+                  <span className="text-md text-rhyth-dark-blue">から</span>
+                  <span className="text-2xl text-rhyth-light-blue font-cp-font tracking-wider">{props.minutes}分</span>
+                  <span className="text-md text-rhyth-dark-blue">集中！</span>
                 </div>
               </div>
             </div>
             <hr className="h-0.5 bg-rhyth-light-gray" />
-            <div className="flex items-center h-24">
+            <div className="flex items-center h-28">
               <div className=" w-full h-full p-2">
-                <div className="flex">
+                <div className="flex my-2">
                   <p className="font-cp-font text-rhyth-green mt-auto ml-1">継続レベル</p>
                 </div>
                 <ManageProgressBar level={props.continuationLevel} />
                 <div className="flex justify-end items-center text-sm">
-                  <p className="font-cp-font tracking-[0.2em] text-white bg-rhyth-orange px-2 py-1 rounded-full">
+                  <p className="font-cp-font tracking-[0.2em] text-white mt-1 bg-rhyth-orange px-2 py-1 rounded-full">
                     BONUS
                   </p>
                   <span className="ml-1 font-medium text-md text-rhyth-orange tracking-wider">&times;</span>
