@@ -58,9 +58,16 @@ export const ManageQuestCard: FC<Props> = (props) => {
           </button>
         </div>
         <hr className="h-1.5 bg-rhyth-blue" />
-        <div className="text-md mt-4">
-          <p className="inline font-bold text-sm text-white bg-rhyth-gray py-1 px-3 rounded-lg tracking-wider">メモ</p>
-          <h3 className="font-bold text-rhyth-dark-blue mt-2 ml-2">
+        <div className="text-md">
+          <div className="flex items-center gap-4 font-bold mt-2 px-2">
+            <span className="text-2xl text-rhyth-dark-blue">{formatDateTimeOnlyTime(startsAt)}</span>
+            <span className="text-lg text-rhyth-dark-blue">から</span>
+            <span className="text-2xl text-rhyth-dark-blue">{minutes}分間</span>
+          </div>
+          <p className="w-fit font-bold text-sm text-white bg-rhyth-gray py-1 px-3 mt-2 rounded-lg tracking-wider">
+            メモ
+          </p>
+          <h3 className="font-bold text-rhyth-dark-blue mt-2 px-2">
             {description === "" ? (
               <div className="flex items-center gap-1">
                 <svg
@@ -87,18 +94,12 @@ export const ManageQuestCard: FC<Props> = (props) => {
             )}
           </h3>
         </div>
-        <div className="mt-4 mb-2 text-sm">
+        <div className="mt-2 text-sm">
           <div className="w-fit flex justify-center items-center gap-2 text-white bg-rhyth-blue py-1 px-3 rounded-lg text-sm">
             <ClockIcon color="text-white" />
-            <p className="text-sm font-cp-font tracking-widest">クエスト実行タイム</p>
+            <p className="text-sm font-bold tracking-widest">クエスト実行頻度</p>
           </div>
-          <h3 className="ml-2 my-2 text-lg font-bold text-rhyth-dark-blue">{convertENToJPWeekdayString(days)}</h3>
-          <div className="ml-2 flex items-center gap-4 font-bold">
-            <span className="text-2xl text-rhyth-light-blue">{formatDateTimeOnlyTime(startsAt)}</span>
-            <span className="text-lg text-rhyth-dark-blue">から</span>
-            <span className="text-2xl text-rhyth-light-blue">{minutes}分間</span>
-            <span className="text-lg text-rhyth-dark-blue">集中！</span>
-          </div>
+          <h3 className="px-2 mt-2 text-lg font-bold text-rhyth-dark-blue">{convertENToJPWeekdayString(days)}</h3>
         </div>
       </div>
       <hr className="h-0.5 bg-rhyth-light-gray" />

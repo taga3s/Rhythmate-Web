@@ -29,7 +29,7 @@ export const ManageTimetableCard: FC<Props> = (props) => {
   const [isAccordionOpen, setIsAccordionOpen] = useState<boolean>(false);
   const navigate = useNavigate();
 
-  const handleAccordionInfo = () => {
+  const handleAccordionOpen = () => {
     if (isAccordionOpen) {
       setIsAccordionOpen(false);
     } else {
@@ -38,15 +38,15 @@ export const ManageTimetableCard: FC<Props> = (props) => {
   };
 
   return (
-    <div className="border-4 bg-rhyth-bg-gray border-rhyth-green shadow-lg text-rhyth-dark-blue rounded-lg">
+    <div className="border-4 bg-rhyth-bg-gray border-rhyth-light-gray shadow-lg text-rhyth-dark-blue rounded-lg">
       <div className="flex items-center justify-between">
-        <div className="h-20 flex flex-col items-center justify-center font-bold tracking-widest p-2 pr-3 bg-rhyth-green text-white">
-          <h2 className="w-[4.5rem] text-lg text-center">{props.startsAt}</h2>
+        <div className="h-20 flex flex-col items-center justify-center font-bold tracking-widest p-2 pr-3 bg-rhyth-light-gray text-rhyth-dark-blue">
+          <h2 className="w-[4.5rem] text-lg text-center">{props.startsAt}-</h2>
           <p className="text-sm">{props.minutes}分間</p>
         </div>
         <div className="h-full w-full flex items-center justify-between p-2">
-          <h1 className="ml-2 font-cp-font text-md font-bold">{props.title}</h1>
-          <button className="p-2" onClick={handleAccordionInfo}>
+          <h1 className="ml-2 text-md font-bold">{props.title}</h1>
+          <button className="p-2" onClick={handleAccordionOpen}>
             {isAccordionOpen ? (
               <svg
                 className="w-6 h-6 text-rhyth-dark-blue hover:text-rhyth-light-blue"

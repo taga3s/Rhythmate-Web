@@ -9,7 +9,6 @@ import { ManageQuestCard } from "./ManageQuestCard";
 import { ManageQuestSearchModal } from "./ManageQuestSearchModal,";
 import { ManageTimetable } from "./ManageTimetable";
 import { Quest } from "../../../api/quest/model";
-import { ManageTimetableNoData } from "./ManageTimetableNoData";
 import { DAYS } from "../common/constant/constant";
 import { ManageDayOfTheWeekSwitchButton } from "./ManageDayOfTheWeekSwitchButton";
 
@@ -28,7 +27,6 @@ export const ManagePresenter = () => {
   };
 
   const { data: quests, isLoading } = useQueryQuestList();
-
   const filteredData = quests?.filter((quest) => {
     if (filterDay && filterDifficulties.length) {
       return quest.days.includes(filterDay) && filterDifficulties.some((difficulty) => quest.difficulty === difficulty);
@@ -98,7 +96,10 @@ export const ManagePresenter = () => {
         )
       ) : quests?.length ? (
         <div>
-          <div className="flex justify-end">
+          <div className="flex justify-between items-center">
+            <h1 className="font-cp-font tracking-widest text-rhyth-gray text-xl font-bold ">
+              {manageView === "Timetable" ? "曜日別クエスト" : "全てのクエスト"}
+            </h1>
             <button
               className="flex items-center gap-1 bg-white py-2 px-4 rounded-full border-2 border-rhyth-light-gray shadow-sm hover:bg-rhyth-bg-dark-gray"
               onClick={handleManageView}
@@ -139,11 +140,7 @@ export const ManagePresenter = () => {
                   );
                 })}
               </div>
-              {sortedDayOfTheWeekQuests?.length ? (
-                <ManageTimetable questList={sortedDayOfTheWeekQuests} />
-              ) : (
-                <ManageTimetableNoData />
-              )}
+              <ManageTimetable questList={sortedDayOfTheWeekQuests} />
             </div>
           ) : (
             <ul className="mt-4 flex flex-col items-center gap-6">
