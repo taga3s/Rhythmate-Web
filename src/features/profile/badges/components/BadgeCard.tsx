@@ -2,6 +2,7 @@ import { FC } from "react";
 import { Badge } from "./badge/Badge";
 import { useMutateBadge } from "../api/badge/hooks/useMutateBadge";
 import { FrameColor, ImageType } from "../../../../api/badge/type";
+import { BadgeSecret } from "./badge/BadgeSecret";
 
 type Props = {
   id: string;
@@ -31,13 +32,7 @@ export const BadgeCard: FC<Props> = (props) => {
               itemClassName=""
             />
           ) : (
-            <Badge
-              imageType={imageType}
-              frameColor={frameColor}
-              frameClassName=""
-              sparklingClassName=""
-              itemClassName=""
-            />
+            <BadgeSecret />
           )}
         </div>
         <div className="w-2/3 h-full flex-row ">
