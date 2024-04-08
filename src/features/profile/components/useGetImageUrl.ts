@@ -23,7 +23,6 @@ export const useGetImageUrl = ({ file }: Args) => {
       reader = null;
     };
   }, [file]);
-  console.log(imageUrl);
   return {
     imageUrl,
   };

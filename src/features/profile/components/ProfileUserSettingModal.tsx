@@ -30,6 +30,7 @@ export const ProfileUserSettingsModal: FC<Props> = ({ username, onClickFn }) => 
 
   const onSubmit = async (userdata: TUserEditValidationSchema) => {
     onClickFn();
+    console.log(imageUrl);
     await updateUserMutation.mutateAsync({
       name: userdata.name,
     });
@@ -47,8 +48,6 @@ export const ProfileUserSettingsModal: FC<Props> = ({ username, onClickFn }) => 
   };
   const { imageUrl } = useGetImageUrl({ file: imageFile });
 
-  console.log(imageFile);
-
   return (
     <ModalBase onClickClose={onClickFn}>
       <div className="order relative bg-white rounded-lg shadow">
@@ -61,18 +60,17 @@ export const ProfileUserSettingsModal: FC<Props> = ({ username, onClickFn }) => 
         <div className="p-4 md:p-4">
           <form className="space-y-4" action="#" onSubmit={handleSubmit(onSubmit)}>
             {/* 画像ボタンとプレビュー */}
-            <label htmlFor={IMAGE_ID}>
-              {imageUrl && imageFile ? (
-                <img
-                  src={imageUrl}
-                  alt="アップロード画像"
-                  style={{ objectFit: "cover", width: "100%", height: "100%" }}
-                />
-              ) : (
-                "+画像をアップロード"
-              )}
-              <InputImage ref={fileInputRef} id={IMAGE_ID} onChange={handleFileChange} />
-            </label>
+
+            {imageUrl && imageFile ? (
+              <img
+                src={imageUrl}
+                alt="アップロード画像"
+                style={{ objectFit: "cover", width: "100%", height: "100%" }}
+              />
+            ) : (
+              ""
+            )}
+            <InputImage ref={fileInputRef} id={IMAGE_ID} onChange={handleFileChange} />
             {/* 画像ボタンとプレビュー終 */}
 
             <div>
