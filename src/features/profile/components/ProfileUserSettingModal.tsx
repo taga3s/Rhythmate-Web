@@ -1,16 +1,18 @@
 import { zodResolver } from "@hookform/resolvers/zod";
-import { FC } from "react";
+import { FC, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { ModalBase } from "../../common/components/modal/ModalBase";
 import { ModalHeaderCloseButton } from "../../common/components/modal/ModalHeaderCloseButton";
 import { FormErrorMsg } from "../../common/components/utils/FormErrorMsg";
 import { useMutateUser } from "../api/user/hooks/useMutateUser";
 import { TUserEditValidationSchema, userEditValidationSchema } from "../libs/validation";
+import { InputImage } from "./InputImage";
 
 type Props = {
   username: string;
   onClickFn: () => void;
 };
+const IMAGE_ID = "imageId";
 
 export const ProfileUserSettingsModal: FC<Props> = ({ username, onClickFn }) => {
   const { updateUserMutation } = useMutateUser();
@@ -31,6 +33,17 @@ export const ProfileUserSettingsModal: FC<Props> = ({ username, onClickFn }) => 
       name: userdata.name,
     });
   };
+  const fileInputRef = useRef<HTMLInputElement>(null);
+  const [imageFile, setImageFile] = useState<File | null>(null);
+
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.currentTarget?.files && e.currentTarget.files[0]) {
+      const targetFile = e.currentTarget.files[0];
+      setImageFile(targetFile);
+    }
+  };
+
+  console.log(imageFile);
 
   return (
     <ModalBase onClickClose={onClickFn}>
@@ -42,6 +55,9 @@ export const ProfileUserSettingsModal: FC<Props> = ({ username, onClickFn }) => 
         </div>
         {/* <!-- Modal body --> */}
         <div className="p-4 md:p-4">
+          <label htmlFor={IMAGE_ID}>
+            <InputImage ref={fileInputRef} id={IMAGE_ID} onChange={handleFileChange} />
+          </label>
           <form className="space-y-4" action="#" onSubmit={handleSubmit(onSubmit)}>
             <div>
               <label className="block mb-2 text-sm font-medium text-gray-900 my-4">ユーザーネーム</label>
