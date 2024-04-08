@@ -7,6 +7,7 @@ import { FormErrorMsg } from "../../common/components/utils/FormErrorMsg";
 import { useMutateUser } from "../api/user/hooks/useMutateUser";
 import { TUserEditValidationSchema, userEditValidationSchema } from "../libs/validation";
 import { InputImage } from "./InputImage";
+import { useGetImageUrl } from "./useGetImageUrl";
 
 type Props = {
   username: string;
@@ -33,6 +34,8 @@ export const ProfileUserSettingsModal: FC<Props> = ({ username, onClickFn }) => 
       name: userdata.name,
     });
   };
+
+  // 変更箇所
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [imageFile, setImageFile] = useState<File | null>(null);
 
@@ -42,6 +45,7 @@ export const ProfileUserSettingsModal: FC<Props> = ({ username, onClickFn }) => 
       setImageFile(targetFile);
     }
   };
+  const { imageUrl } = useGetImageUrl({ file: imageFile });
 
   console.log(imageFile);
 
@@ -55,10 +59,22 @@ export const ProfileUserSettingsModal: FC<Props> = ({ username, onClickFn }) => 
         </div>
         {/* <!-- Modal body --> */}
         <div className="p-4 md:p-4">
-          <label htmlFor={IMAGE_ID}>
-            <InputImage ref={fileInputRef} id={IMAGE_ID} onChange={handleFileChange} />
-          </label>
           <form className="space-y-4" action="#" onSubmit={handleSubmit(onSubmit)}>
+            {/* 画像ボタンとプレビュー */}
+            <label htmlFor={IMAGE_ID}>
+              {imageUrl && imageFile ? (
+                <img
+                  src={imageUrl}
+                  alt="アップロード画像"
+                  style={{ objectFit: "cover", width: "100%", height: "100%" }}
+                />
+              ) : (
+                "+画像をアップロード"
+              )}
+              <InputImage ref={fileInputRef} id={IMAGE_ID} onChange={handleFileChange} />
+            </label>
+            {/* 画像ボタンとプレビュー終 */}
+
             <div>
               <label className="block mb-2 text-sm font-medium text-gray-900 my-4">ユーザーネーム</label>
               <input
