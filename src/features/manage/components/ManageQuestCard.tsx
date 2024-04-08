@@ -58,24 +58,48 @@ export const ManageQuestCard: FC<Props> = (props) => {
           </button>
         </div>
         <hr className="h-1.5 bg-rhyth-blue" />
-        <div className="flex items-center gap-2 text-sm mt-2">
-          <div className="font-cp-font text-white bg-rhyth-gray py-1 px-3 rounded-full tracking-wider">
-            <p>ひとこと</p>
-          </div>
-          <h3 className="font-bold text-rhyth-dark-blue">{description}</h3>
-        </div>
-        <div className="my-2 text-sm">
-          <div className="w-[200px] flex justify-center items-center gap-2 text-white bg-rhyth-blue py-1 px-3 rounded-full">
-            <ClockIcon color="text-white" />
-            <p className="text-sm font-cp-font tracking-widest">クエスト実行タイム</p>
-          </div>
-          <h3 className="ml-2 my-2 text-lg font-bold text-rhyth-dark-blue">{convertENToJPWeekdayString(days)}</h3>
-          <div className="ml-2 flex items-center gap-4 font-bold">
-            <span className="text-2xl text-rhyth-light-blue">{formatDateTimeOnlyTime(startsAt)}</span>
+        <div className="text-md">
+          <div className="flex items-center gap-4 font-bold mt-2 px-2">
+            <span className="text-2xl text-rhyth-dark-blue">{formatDateTimeOnlyTime(startsAt)}</span>
             <span className="text-lg text-rhyth-dark-blue">から</span>
-            <span className="text-2xl text-rhyth-light-blue">{minutes}分間</span>
-            <span className="text-lg text-rhyth-dark-blue">集中！</span>
+            <span className="text-2xl text-rhyth-dark-blue">{minutes}分間</span>
           </div>
+          <p className="w-fit font-bold text-sm text-white bg-rhyth-gray py-1 px-3 mt-2 rounded-lg tracking-wider">
+            メモ
+          </p>
+          <h3 className="font-bold text-rhyth-dark-blue mt-2 px-2">
+            {description === "" ? (
+              <div className="flex items-center gap-1">
+                <svg
+                  className="w-6 h-6 text-rhyth-dark-blue"
+                  aria-hidden="true"
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke="currentColor"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M10.779 17.779 4.36 19.918 6.5 13.5m4.279 4.279 8.364-8.643a3.027 3.027 0 0 0-2.14-5.165 3.03 3.03 0 0 0-2.14.886L6.5 13.5m4.279 4.279L6.499 13.5m2.14 2.14 6.213-6.504M12.75 7.04 17 11.28"
+                  />
+                </svg>
+                メモを入力できます
+              </div>
+            ) : (
+              description
+            )}
+          </h3>
+        </div>
+        <div className="mt-2 text-sm">
+          <div className="w-fit flex justify-center items-center gap-2 text-white bg-rhyth-blue py-1 px-3 rounded-lg text-sm">
+            <ClockIcon color="text-white" />
+            <p className="text-sm font-bold tracking-widest">クエスト実行頻度</p>
+          </div>
+          <h3 className="px-2 mt-2 text-lg font-bold text-rhyth-dark-blue">{convertENToJPWeekdayString(days)}</h3>
         </div>
       </div>
       <hr className="h-0.5 bg-rhyth-light-gray" />

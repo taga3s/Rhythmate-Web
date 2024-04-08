@@ -246,13 +246,14 @@ export const EditPresenter: FC<Props> = (props) => {
                 <path stroke="currentColor" strokeLinecap="round" strokeWidth="2" d="M5 7h14M5 12h14M5 17h10" />
               </svg>
               <label htmlFor="new-quest-description" className="text-base font-bold text-rhyth-gray">
-                ひとこと
+                メモ
               </label>
             </div>
             <input
               type="text"
-              className="w-full border-2 p-2 rounded-md mt-4"
               id="edit-quest-description"
+              className="w-full border-2 p-2 rounded-md mt-4"
+              placeholder="例) 同じメニューを毎日欠かさず行う"
               defaultValue={targetQuest?.description}
               {...register("description")}
             />
