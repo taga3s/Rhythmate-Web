@@ -6,22 +6,14 @@ import { Badge } from "../badges/components/badge/Badge";
 import { ProfileExpCard } from "./ProfileExpCard";
 import { ProfileLogoutModal } from "./ProfileLogoutModal";
 import { ProfileLogoutModalButton } from "./ProfileLogoutModalButton";
-import { ProfileUserSettingsModal } from "./ProfileUserSettingModal";
 import { ProfileUserSettingsModalButton } from "./ProfileUserSettingsModalButton";
 
 export const ProfilePresenter = () => {
   const { data: loginUser, isLoading } = useQueryLoginUser();
   const { data: badgeList } = useQueryBadgeList();
 
-  const [isSettingsModalOpen, setIsSettingsModalOpen] = useState<boolean>(false);
   const [isLogoutModalOpen, setIsLogoutModalOpen] = useState<boolean>(false);
 
-  const openSettingsModal = () => {
-    setIsSettingsModalOpen(true);
-  };
-  const closeSettingsModal = () => {
-    setIsSettingsModalOpen(false);
-  };
   const openLogoutModal = () => {
     setIsLogoutModalOpen(true);
   };
@@ -72,13 +64,10 @@ export const ProfilePresenter = () => {
           </div>
           <ProfileExpCard />
           <div className="w-full">
-            <ProfileUserSettingsModalButton onClickFn={openSettingsModal} />
+            <ProfileUserSettingsModalButton />
             <ProfileLogoutModalButton onClickFn={openLogoutModal} />
           </div>
         </div>
-      )}
-      {isSettingsModalOpen && (
-        <ProfileUserSettingsModal username={loginUser?.name ?? ""} onClickFn={closeSettingsModal} />
       )}
       {isLogoutModalOpen && <ProfileLogoutModal onClickFn={closeLogoutModal} />}
     </>

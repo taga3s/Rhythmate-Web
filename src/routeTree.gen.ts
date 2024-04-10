@@ -22,6 +22,7 @@ const ProfileIndexLazyImport = createFileRoute("/profile/")();
 const ManageIndexLazyImport = createFileRoute("/manage/")();
 const LoginIndexLazyImport = createFileRoute("/login/")();
 const AnalyticsIndexLazyImport = createFileRoute("/analytics/")();
+const ProfileSettingsIndexLazyImport = createFileRoute("/profile/settings/")();
 const ProfileBadgesIndexLazyImport = createFileRoute("/profile/badges/")();
 const ManageTagsIndexLazyImport = createFileRoute("/manage/tags/")();
 const ManageNewIndexLazyImport = createFileRoute("/manage/new/")();
@@ -58,6 +59,11 @@ const AnalyticsIndexLazyRoute = AnalyticsIndexLazyImport.update({
   path: "/analytics/",
   getParentRoute: () => rootRoute,
 } as any).lazy(() => import("./routes/analytics/index.lazy").then((d) => d.Route));
+
+const ProfileSettingsIndexLazyRoute = ProfileSettingsIndexLazyImport.update({
+  path: "/profile/settings/",
+  getParentRoute: () => rootRoute,
+} as any).lazy(() => import("./routes/profile/settings/index.lazy").then((d) => d.Route));
 
 const ProfileBadgesIndexLazyRoute = ProfileBadgesIndexLazyImport.update({
   path: "/profile/badges/",
@@ -123,6 +129,10 @@ declare module "@tanstack/react-router" {
       preLoaderRoute: typeof ProfileBadgesIndexLazyImport;
       parentRoute: typeof rootRoute;
     };
+    "/profile/settings/": {
+      preLoaderRoute: typeof ProfileSettingsIndexLazyImport;
+      parentRoute: typeof rootRoute;
+    };
   }
 }
 
@@ -139,6 +149,7 @@ export const routeTree = rootRoute.addChildren([
   ManageNewIndexLazyRoute,
   ManageTagsIndexLazyRoute,
   ProfileBadgesIndexLazyRoute,
+  ProfileSettingsIndexLazyRoute,
 ]);
 
 /* prettier-ignore-end */

@@ -19,7 +19,12 @@ export const Header = () => {
       return "クエスト管理";
     } else if (pathname === "/analytics") {
       return "達成分析";
-    } else if (pathname === "/profile" || pathname === "/profile/badges" || pathname === "/profile/ranking") {
+    } else if (
+      pathname === "/profile" ||
+      pathname === "/profile/badges" ||
+      pathname === "/profile/ranking" ||
+      pathname === "/profile/settings"
+    ) {
       return "プロフィール";
     }
     return "";
