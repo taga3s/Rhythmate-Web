@@ -36,7 +36,11 @@ export const Menu = () => {
         <MenuButton
           name="プロフィール"
           path="/profile"
-          icon={<ProfileIcon color={getMenuIconColor(["/profile", "/profile/badges", "/profile/ranking"])} />}
+          icon={
+            <ProfileIcon
+              color={getMenuIconColor(["/profile", "/profile/badges", "/profile/ranking", "/profile/settings"])}
+            />
+          }
         />
       </div>
     </ul>

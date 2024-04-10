@@ -23,7 +23,7 @@ export const useMutateUser = () => {
           email: loginUser.email,
           level: loginUser.level,
           exp: loginUser.exp,
-          imgURL: loginUser.imgURL,
+          imageUrl: loginUser.imageUrl,
         });
       }
       notifySuccess("正常に更新しました。");
