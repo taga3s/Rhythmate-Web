@@ -1,13 +1,13 @@
 import { useState } from "react";
 import { Loading, LoadingContainer } from "../../common/components";
 import { useQueryLoginUser } from "../api/user/hooks/useQueryUser";
+import { useQueryBadgeList } from "../badges/api/badge/hooks/useQueryBadge";
+import { Badge } from "../badges/components/badge/Badge";
 import { ProfileExpCard } from "./ProfileExpCard";
 import { ProfileLogoutModal } from "./ProfileLogoutModal";
 import { ProfileLogoutModalButton } from "./ProfileLogoutModalButton";
 import { ProfileUserSettingsModal } from "./ProfileUserSettingModal";
 import { ProfileUserSettingsModalButton } from "./ProfileUserSettingsModalButton";
-import { useQueryBadgeList } from "../badges/api/badge/hooks/useQueryBadge";
-import { Badge } from "../badges/components/badge/Badge";
 
 export const ProfilePresenter = () => {
   const { data: loginUser, isLoading } = useQueryLoginUser();
