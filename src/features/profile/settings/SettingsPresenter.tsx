@@ -60,7 +60,7 @@ export const SettingsPresenter = () => {
                 {imageUrl && imageFile ? (
                   <img src={imageUrl} alt="アップロード画像" className="w-full h-full rounded-full" />
                 ) : (
-                  <img src={loginUser?.imgURL} alt="現在設定されている画像" className="w-full h-full rounded-full" />
+                  <img src={loginUser?.imageUrl} alt="現在設定されている画像" className="w-full h-full rounded-full" />
                 )}
               </div>
               <SettingsInputImage ref={fileInputRef} id={IMAGE_ID} onChange={handleFileChange} />

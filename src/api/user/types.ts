@@ -1,7 +1,7 @@
 type BaseResponse = {
   name: string;
   email: string;
-  imgUrl: string;
+  imageUrl: string;
   level: number;
   exp: number;
 };
