@@ -18,6 +18,6 @@ export const toUser = (obj: {
     email: obj.email,
     level: obj.level,
     exp: obj.exp,
-    imageUrl: obj.imageUrl ? obj.imageUrl : "/assets/profile/profilecat.jpg",
+    imageUrl: obj.imageUrl !== "" ? obj.imageUrl : "/assets/profile/profilecat.jpg",
   };
 };
