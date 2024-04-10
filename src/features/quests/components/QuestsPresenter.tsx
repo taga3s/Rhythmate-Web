@@ -8,7 +8,7 @@ import { QuestListNoData } from "./QuestListNoData";
 import { Quest } from "../../../api/quest/model";
 import { Loading, LoadingContainer } from "../../common/components";
 
-const filterQuestsByDayOfTheWeek = (questList: Quest[]) => {
+const filterTodaysQuestsByDayOfTheWeek = (questList: Quest[]) => {
   const todaysDayOfTheWeek = getTodayEn().toUpperCase();
 
   return questList.filter((quest) => {
@@ -27,7 +27,7 @@ export const QuestsPresenter = () => {
   const { data, isLoading } = useQueryQuestList();
 
   // 曜日でフィルターする
-  const filteredQuestsData = filterQuestsByDayOfTheWeek(data ?? []);
+  const filteredQuestsData = filterTodaysQuestsByDayOfTheWeek(data ?? []);
 
   // 時間順でソートする
   const sortedQuestsData = sortQuestsByTime(filteredQuestsData);

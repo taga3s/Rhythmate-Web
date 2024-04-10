@@ -1,5 +1,4 @@
 import { FC, useState } from "react";
-// import { formatDateTimeOnlyTime } from "../../../pkg/util/dayjs";
 import { Quest } from "../../../api/quest/model";
 import { ClockIcon, ConfirmModal } from "../../common/components";
 import useInterval from "../../common/hooks/useInterval";
@@ -18,6 +17,7 @@ type Props = {
 
 export const QuestBoard: FC<Props> = (props) => {
   const { currentQuest } = props;
+
   const [startConfirmModalOpen, setStartConfirmModalOpen] = useState(false);
   const [finishConfirmModalOpen, setFinishConfirmModalOpen] = useState(false);
   const { startQuestMutation, finishQuestMutation, forceFinishQuestMutation } = useMutateQuest();
@@ -81,22 +81,19 @@ export const QuestBoard: FC<Props> = (props) => {
 
   return (
     <div className="w-full min-h-[240px] py-3 border-2 border-rhyth-light-gray shadow-lg rounded-lg">
-      <div className="flex flex-col gap-1 px-3">
-        <h1 className="font-bold text-lg text-rhyth-dark-blue mb-2">{currentQuest.title}</h1>
+      <div className="flex flex-col gap-1 px-4">
+        <h1 className="py-2 font-bold text-lg text-rhyth-dark-blue">{currentQuest.title}</h1>
         <hr className="h-1.5 bg-rhyth-blue" />
         <div className="flex items-center gap-2 text-sm mt-2">
-          <div className="font-cp-font text-white bg-rhyth-gray py-1 px-3 rounded-full tracking-wider">
-            <p>ひとこと</p>
+          <div className="font-bold text-white bg-rhyth-gray py-1 px-3 rounded-lg tracking-wider">
+            <span>メモ</span>
           </div>
           <h3 className="font-bold text-rhyth-dark-blue">{currentQuest.description}</h3>
         </div>
-        <div className="my-2 text-sm">
-          <div className="w-[200px] flex justify-center items-center gap-2 text-white bg-rhyth-blue py-1 px-3 rounded-full">
-            <ClockIcon color="text-white" />
-            <p className="text-sm font-cp-font tracking-widest">クエスト実行タイム</p>
-          </div>
+        <div className="w-fit my-2 py-1 px-3 flex justify-center items-center gap-2 text-white bg-rhyth-blue rounded-lg">
+          <ClockIcon color="text-white" />
+          <span className="text-sm font-bold tracking-widest">実行タイム</span>
         </div>
-        {/* {getIsStarted(currentQuest.startedAt) && <span>開始: {formatDateTimeOnlyTime(currentQuest.startedAt)}</span>} */}
       </div>
       <div className="text-center font-bold my-2 flex items-center justify-center gap-2">
         <span className="text-md text-rhyth-dark-blue">
