@@ -1,13 +1,9 @@
-import { FC } from "react";
+import { Link } from "@tanstack/react-router";
 
-type Props = {
-  onClickFn: () => void;
-};
-
-export const ProfileUserSettingsModalButton: FC<Props> = ({ onClickFn }) => {
+export const ProfileUserSettingsModalButton = () => {
   return (
-    <div className="w-full text-sm font-medium text-rhyth-black bg-white hover:bg-rhyth-hover-light-gray border border-gray-200 rounded-t-lg shadow">
-      <button onClick={onClickFn} className="block w-full h-hull">
+    <Link to="/profile/settings">
+      <div className="block text-sm font-medium text-rhyth-black bg-white hover:bg-rhyth-hover-light-gray border border-gray-200 rounded-t-lg shadow w-full h-hull">
         <div className="px-4 py-3 flex gap-6 items-center">
           <svg
             className="w-[32px] h-[32px] text-rhyth-black"
@@ -26,7 +22,7 @@ export const ProfileUserSettingsModalButton: FC<Props> = ({ onClickFn }) => {
           </svg>
           <p className="text-lg font-bold">ユーザー情報編集</p>
         </div>
-      </button>
-    </div>
+      </div>
+    </Link>
   );
 };
