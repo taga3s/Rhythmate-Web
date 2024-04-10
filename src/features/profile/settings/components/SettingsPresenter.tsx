@@ -1,14 +1,14 @@
 import { useNavigate } from "@tanstack/react-router";
-import { BadgesBackButton } from "../badges/components/BadgesBackButton";
-import { FormErrorMsg } from "../../common/components";
-import { useGetImageUrl } from "../components/useGetImageUrl";
 import { useRef, useState } from "react";
-import { TUserEditValidationSchema, userEditValidationSchema } from "../libs/validation";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { useMutateUser } from "../api/user/hooks/useMutateUser";
-import { useQueryLoginUser } from "../api/user/hooks/useQueryUser";
 import { SettingsInputImage } from "./SettingsInputImage";
+import { useQueryLoginUser } from "../../api/user/hooks/useQueryUser";
+import { useMutateUser } from "../../api/user/hooks/useMutateUser";
+import { TUserEditValidationSchema, userEditValidationSchema } from "../../libs/validation";
+import { useGetImageUrl } from "../hooks/useGetImageUrl";
+import { BadgesBackButton } from "../../badges/components/BadgesBackButton";
+import { FormErrorMsg } from "../../../common/components";
 
 const IMAGE_ID = "imageId";
 
