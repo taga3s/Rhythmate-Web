@@ -53,39 +53,47 @@ export const SettingsPresenter = () => {
           <BadgesBackButton onClickFn={() => navigation({ to: "/profile" })} />
         </div>
         <p className="flex text-2xl justify-center font-bold">ユーザー情報編集</p>
-        <div className="order relative bg-white rounded-lg shadow">
-          <div className="p-4 md:p-4">
-            <form className="space-y-4" onSubmit={handleSubmit(onSubmit)}>
-              {imageUrl && imageFile ? (
-                <img
-                  src={imageUrl}
-                  alt="アップロード画像"
-                  style={{ objectFit: "cover", width: "100%", height: "100%" }}
-                />
-              ) : (
-                ""
-              )}
-              <InputImage ref={fileInputRef} id={IMAGE_ID} onChange={handleFileChange} />
-              <div>
-                <label className="block mb-2 text-sm font-medium text-gray-900 my-4">ユーザーネーム</label>
-                <input
-                  type="text"
-                  defaultValue={loginUser?.name ?? ""}
-                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-                  placeholder="あなたの名前"
-                  {...register("name")}
-                  required
-                />
-                {errors.name && <FormErrorMsg msg={errors.name.message ?? ""} />}
-              </div>
-              <button
-                type="submit"
-                className="w-full text-white bg-rhyth-light-blue hover:bg-rhyth-blue focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
-              >
-                保存
-              </button>
-            </form>
-          </div>
+        <div className="p-4 order relative bg-white rounded-lg shadow">
+          <form className="space-y-4" onSubmit={handleSubmit(onSubmit)}>
+            {imageUrl && imageFile ? (
+              <img
+                src={imageUrl}
+                alt="アップロード画像"
+                style={{ objectFit: "cover", width: "100%", height: "100%" }}
+              />
+            ) : (
+              ""
+            )}
+            <InputImage ref={fileInputRef} id={IMAGE_ID} onChange={handleFileChange} />
+            <div>
+              <label className="block mb-2 text-sm font-medium text-gray-900 my-4">ユーザーネーム</label>
+              <input
+                type="text"
+                defaultValue={loginUser?.name ?? ""}
+                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                placeholder="あなたの名前"
+                {...register("name")}
+                required
+              />
+              {errors.name && <FormErrorMsg msg={errors.name.message ?? ""} />}
+            </div>
+            <button
+              type="submit"
+              className="w-full text-white bg-rhyth-light-blue hover:bg-rhyth-blue focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+            >
+              保存
+            </button>
+          </form>
+        </div>
+        <div className="p-4 flex flex-col gap-3 order relative bg-red-100 rounded-lg shadow">
+          <h2 className="font-bold text-rhyth-dark-red">Danger Zone</h2>
+          <p className="text-sm">ユーザ―削除を実行すると、このアカウントのデータは復元することができません。</p>
+          <button
+            type="submit"
+            className="w-full text-white bg-rhyth-red hover:bg-rhyth-dark-red focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+          >
+            ユーザー削除
+          </button>
         </div>
       </div>
     </div>
