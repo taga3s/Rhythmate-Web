@@ -55,7 +55,8 @@ export const SettingsPresenter = () => {
         <p className="flex text-2xl justify-center font-bold">ユーザー情報編集</p>
         <div className="p-4 order relative bg-white rounded-lg shadow">
           <form className="space-y-4" onSubmit={handleSubmit(onSubmit)}>
-            <div className="flex justify-center items-center">
+            <label className="block mb-2 text-sm font-medium text-gray-900 my-4">プロフィール画像</label>
+            <div className="flex justify-start items-center gap-6">
               <div className="max-w-[220px] w-1/4 max-h-[220px] h-1/4">
                 {imageUrl && imageFile ? (
                   <img src={imageUrl} alt="アップロード画像" className="w-full h-full rounded-full" />
@@ -87,7 +88,7 @@ export const SettingsPresenter = () => {
         </div>
         <div className="p-4 flex flex-col gap-3 order relative bg-red-100 rounded-lg shadow">
           <h2 className="font-bold text-rhyth-dark-red">Danger Zone</h2>
-          <p className="text-sm">ユーザ―削除を実行すると、このアカウントのデータは復元することができません。</p>
+          <p className="text-sm">ユーザー削除を実行すると、このアカウントのデータは復元することができません。</p>
           <button
             type="submit"
             className="w-full text-white bg-rhyth-red hover:bg-rhyth-dark-red focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
