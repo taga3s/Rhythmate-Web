@@ -11,12 +11,13 @@ export const toUser = (obj: {
   email: string;
   level: number;
   exp: number;
+  imgUrl: string;
 }): User => {
   return {
     name: obj.name,
     email: obj.email,
     level: obj.level,
     exp: obj.exp,
-    imgURL: "/assets/profile/profilecat.jpg",
+    imgURL: obj.imgUrl ? obj.imgUrl : "/assets/profile/profilecat.jpg",
   };
 };

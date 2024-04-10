@@ -1,3 +1,11 @@
+type BaseResponse = {
+  name: string;
+  email: string;
+  imgUrl: string;
+  level: number;
+  exp: number;
+};
+
 export type AuthParams = {
   idToken: string;
 };
@@ -29,22 +37,16 @@ export type LoginResponse = {
   status: string;
 };
 
-export type GetResponse = {
-  name: string;
-  email: string;
-  level: number;
-  exp: number;
+export type GetResponse = BaseResponse & {
+  status: string;
 };
 
 export type UpdateLoginUserRequest = {
   name: string;
 };
 
-export type UpdateLoginUserResponse = {
-  name: string;
-  email: string;
-  level: number;
-  exp: number;
+export type UpdateLoginUserResponse = BaseResponse & {
+  status: string;
 };
 
 export type UpdateLoginUserParams = {

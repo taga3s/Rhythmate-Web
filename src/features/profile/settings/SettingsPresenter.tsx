@@ -1,6 +1,5 @@
 import { useNavigate } from "@tanstack/react-router";
 import { BadgesBackButton } from "../badges/components/BadgesBackButton";
-import { InputImage } from "../components/InputImage";
 import { FormErrorMsg } from "../../common/components";
 import { useGetImageUrl } from "../components/useGetImageUrl";
 import { useRef, useState } from "react";
@@ -9,6 +8,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { useMutateUser } from "../api/user/hooks/useMutateUser";
 import { useQueryLoginUser } from "../api/user/hooks/useQueryUser";
+import { SettingsInputImage } from "./SettingsInputImage";
 
 const IMAGE_ID = "imageId";
 
@@ -55,16 +55,16 @@ export const SettingsPresenter = () => {
         <p className="flex text-2xl justify-center font-bold">ユーザー情報編集</p>
         <div className="p-4 order relative bg-white rounded-lg shadow">
           <form className="space-y-4" onSubmit={handleSubmit(onSubmit)}>
-            {imageUrl && imageFile ? (
-              <img
-                src={imageUrl}
-                alt="アップロード画像"
-                style={{ objectFit: "cover", width: "100%", height: "100%" }}
-              />
-            ) : (
-              ""
-            )}
-            <InputImage ref={fileInputRef} id={IMAGE_ID} onChange={handleFileChange} />
+            <div className="flex justify-center items-center">
+              <div className="max-w-[220px] w-1/4 max-h-[220px] h-1/4">
+                {imageUrl && imageFile ? (
+                  <img src={imageUrl} alt="アップロード画像" className="w-full h-full rounded-full" />
+                ) : (
+                  <img src={loginUser?.imgURL} alt="現在設定されている画像" className="w-full h-full rounded-full" />
+                )}
+              </div>
+              <SettingsInputImage ref={fileInputRef} id={IMAGE_ID} onChange={handleFileChange} />
+            </div>
             <div>
               <label className="block mb-2 text-sm font-medium text-gray-900 my-4">ユーザーネーム</label>
               <input
