@@ -55,7 +55,7 @@ export const SettingsPresenter = () => {
         <p className="flex text-2xl justify-center font-bold">ユーザー情報編集</p>
         <div className="p-4 order relative bg-white rounded-lg shadow">
           <form className="space-y-4" onSubmit={handleSubmit(onSubmit)}>
-            <label className="block mb-2 text-sm font-medium text-gray-900 my-4">プロフィール画像</label>
+            <label className="block text-sm font-medium text-gray-900">プロフィール画像</label>
             <div className="flex justify-start items-center gap-6">
               <div className="max-w-[220px] w-1/4 max-h-[220px] h-1/4">
                 {imageUrl && imageFile ? (
