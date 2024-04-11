@@ -7,10 +7,10 @@ import { useQueryTagList } from "../../tags/api/tag/hooks/useQueryTag";
 
 type Props = {
   register: UseFormRegister<TManageValidationSchema>;
-  // watch: UseFormWatch<TManageValidationSchema>;
+  tagId: string | undefined;
 };
 
-export const EditTagDropdown: FC<Props> = ({ register }) => {
+export const EditTagDropdown: FC<Props> = ({ register, tagId }) => {
   const { data: tagItems, isLoading } = useQueryTagList();
 
   return (
@@ -20,7 +20,12 @@ export const EditTagDropdown: FC<Props> = ({ register }) => {
           <Loading />
         </LoadingContainer>
       ) : tagItems?.length ? (
-        <select className={`w-full border-2 p-2 rounded-md mt-4`} id="edit-quest-description" {...register("tagId")}>
+        <select
+          className={`w-full border-2 p-2 rounded-md mt-4`}
+          id="edit-quest-description"
+          defaultValue={tagId}
+          {...register("tagId")}
+        >
           <option
             className="border-b border-rhyth-light-gray w-full h-hull font-bold flex items-center px-4 py-2 rounded-t-lg text-rhyth-dark-blue"
             value=""

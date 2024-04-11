@@ -10,7 +10,6 @@ export const ManageSearchTagsDropdown: FC<Props> = ({ onSelectFn }) => {
 
   const handleColorValue = (event: { target: { value: SetStateAction<string> } }) => {
     setColorValue(event.target.value);
-    console.log(colorValue);
     onSelectFn(colorValue);
   };
 
@@ -51,13 +50,13 @@ export const ManageSearchTagsDropdown: FC<Props> = ({ onSelectFn }) => {
       >
         色を選択
       </option>
-      <ManageSearchTagItem tagName="aaa" color="Blue" />
-      <ManageSearchTagItem tagName="bbb" color="Green" />
-      <ManageSearchTagItem tagName="ccc" color="Red" />
-      <ManageSearchTagItem tagName="ddd" color="Purple" />
-      <ManageSearchTagItem tagName="aaa" color="Orange" />
-      <ManageSearchTagItem tagName="aaa" color="Yellow" />
-      <ManageSearchTagItem tagName="aaa" color="LightBlue" />
+      <ManageSearchTagItem tagName="aaa" tagColor="Blue" />
+      <ManageSearchTagItem tagName="bbb" tagColor="Green" />
+      <ManageSearchTagItem tagName="ccc" tagColor="Red" />
+      <ManageSearchTagItem tagName="ddd" tagColor="Purple" />
+      <ManageSearchTagItem tagName="aaa" tagColor="Orange" />
+      <ManageSearchTagItem tagName="aaa" tagColor="Yellow" />
+      <ManageSearchTagItem tagName="aaa" tagColor="LightBlue" />
     </select>
   );
 };
