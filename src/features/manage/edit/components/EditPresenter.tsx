@@ -53,6 +53,7 @@ export const EditPresenter: FC<Props> = (props) => {
     mode: "onBlur",
     resolver: zodResolver(manageValidationSchema),
   });
+
   const onSubmit = async (data: NewValues) => {
     await updateQuestMutation.mutateAsync({
       id: quest_id,
@@ -74,6 +75,7 @@ export const EditPresenter: FC<Props> = (props) => {
     });
     navigate({ to: "/manage" });
   };
+
   return (
     <>
       <div>
