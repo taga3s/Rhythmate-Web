@@ -60,7 +60,7 @@ export const ConfirmModal: FC<Props> = (props) => {
             <button
               type="submit"
               onClick={closeModal}
-              className="w-full bg-rhyth-hover-light-gray hover:bg-rhyth-light-gray font-bold text-rhyth-black focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg text-sm px-5 py-2.5 text-center"
+              className="w-full bg-rhyth-hover-light-gray hover:bg-rhyth-hover-gray font-bold text-rhyth-black focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg text-sm px-5 py-2.5 text-center"
             >
               {cancelBtnText}
             </button>
