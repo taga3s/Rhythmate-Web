@@ -16,6 +16,7 @@ import { NewTagDropdown } from "./NewTagDropdown";
 type NewValues = {
   title: string;
   startsAt: string;
+  tagId?: string | undefined;
   minutes: string;
   days: string[];
   description: string;
@@ -50,7 +51,7 @@ export const NewPresenter = () => {
       title: data.title,
       description: data.description,
       startsAt: data.startsAt,
-      tagId: "",
+      tagId: data.tagId ?? "",
       minutes: Number(data.minutes),
       days: data.days as Day[],
       difficulty: difficulty,
@@ -228,7 +229,7 @@ export const NewPresenter = () => {
               タグ
             </label>
           </div>
-          <NewTagDropdown />
+          <NewTagDropdown register={register} />
         </div>
         <div className="w-full gap-2 mt-6">
           <div className="flex items-center gap-2 w-24">
