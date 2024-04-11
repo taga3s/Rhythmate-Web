@@ -31,6 +31,7 @@ export const ManageTimetable: FC<Props> = (props: { questList: any }) => {
               difficulty={quest.difficulty}
               days={quest.days}
               continuationLevel={quest.continuationLevel}
+              tagName={quest.tagName}
               tagColor={quest.tagColor}
             />
           );
