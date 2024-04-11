@@ -12,10 +12,12 @@ import { convertEnToJPWeekday } from "../../common/funcs";
 import { TManageValidationSchema, manageValidationSchema } from "../../common/libs/validation";
 import { Star } from "../../common/components/Star";
 import { DayOfTheWeek } from "../../common/components/DayOfTheWeek";
+import { EditTagDropdown } from "./EditTagDropdown";
 
 type NewValues = {
   title: string;
   startsAt: string;
+  tagId?: string | undefined;
   minutes: string;
   days: string[];
   description: string;
@@ -57,7 +59,7 @@ export const EditPresenter: FC<Props> = (props) => {
       title: data.title,
       description: data.description,
       startsAt: data.startsAt,
-      tagId: "",
+      tagId: data.tagId ?? "",
       minutes: Number(data.minutes),
       difficulty: difficulty,
       days: data.days as Day[],
@@ -233,6 +235,25 @@ export const EditPresenter: FC<Props> = (props) => {
                 <Star />
               </button>
             </div>
+          </div>
+          <div className="w-full gap-2 mt-6">
+            <div className="flex items-center gap-2 w-24">
+              <svg
+                className="w-6 h-6 text-rhyth-gray"
+                aria-hidden="true"
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                fill="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path d="M18.045 3.007 12.31 3a1.965 1.965 0 0 0-1.4.585l-7.33 7.394a2 2 0 0 0 0 2.805l6.573 6.631a1.957 1.957 0 0 0 1.4.585 1.965 1.965 0 0 0 1.4-.585l7.409-7.477A2 2 0 0 0 21 11.479v-5.5a2.972 2.972 0 0 0-2.955-2.972Zm-2.452 6.438a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z" />
+              </svg>
+              <label htmlFor="edit-quest-tag" className="text-base font-bold text-rhyth-gray">
+                タグ
+              </label>
+            </div>
+            <EditTagDropdown register={register} />
           </div>
           <div className="w-full gap-2 mt-6">
             <div className="flex items-center gap-2 w-24">
