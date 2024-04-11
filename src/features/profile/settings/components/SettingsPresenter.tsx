@@ -109,7 +109,7 @@ export const SettingsPresenter = () => {
       </div>
       {openModal && (
         <ConfirmModal
-          text={"本当にアカウント削除を行いますか? この処理は取り戻せません。"}
+          text={"本当にアカウント削除を行いますか?"}
           confirmBtnText={"削除する"}
           cancelBtnText={"キャンセルする"}
           btnColor={"red"}
