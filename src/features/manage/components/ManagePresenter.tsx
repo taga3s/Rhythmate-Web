@@ -104,6 +104,8 @@ export const ManagePresenter = () => {
                   difficulty={quest.difficulty}
                   days={quest.days}
                   continuationLevel={quest.continuationLevel}
+                  tagName={quest.tagName}
+                  tagColor={quest.tagColor}
                 />
               );
             })}
@@ -164,7 +166,7 @@ export const ManagePresenter = () => {
             </div>
           ) : (
             <ul className="mt-4 flex flex-col items-center gap-6">
-              {quests?.map((quest) => {
+              {questList?.map((quest) => {
                 return (
                   <ManageQuestCard
                     key={quest.id}
@@ -176,6 +178,8 @@ export const ManagePresenter = () => {
                     difficulty={quest.difficulty}
                     days={quest.days}
                     continuationLevel={quest.continuationLevel}
+                    tagName={quest.tagName}
+                    tagColor={quest.tagColor}
                   />
                 );
               })}
