@@ -15,7 +15,7 @@ export const selectTagColorText = (color: string) => {
     case "LightBlue":
       return "text-rhyth-light-blue";
     default:
-      return "";
+      return "text-rhyth-dark-blue";
   }
 };
 

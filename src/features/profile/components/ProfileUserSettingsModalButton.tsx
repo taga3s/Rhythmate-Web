@@ -20,7 +20,7 @@ export const ProfileUserSettingsModalButton = () => {
               clipRule="evenodd"
             />
           </svg>
-          <p className="text-lg font-bold">ユーザー情報編集</p>
+          <p className="text-lg font-bold">ユーザー設定</p>
         </div>
       </div>
     </Link>
