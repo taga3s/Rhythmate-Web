@@ -8,13 +8,18 @@ type Props = {
   questList: Quest[];
 };
 
+type QuestWithTag = Quest & {
+  tagName: string | undefined;
+  tagColor: string | undefined;
+};
+
 export const ManageTimetable: FC<Props> = (props: { questList: any }) => {
   const { questList } = props;
 
   return (
     <div className="flex flex-col gap-4 min-h-[440px] bg-rhyth-light-blue px-2 py-4 rounded-b-lg">
       {questList.length > 0 ? (
-        questList.map((quest: Quest) => {
+        questList.map((quest: QuestWithTag) => {
           return (
             <ManageTimetableCard
               key={quest.id}
@@ -26,6 +31,7 @@ export const ManageTimetable: FC<Props> = (props: { questList: any }) => {
               difficulty={quest.difficulty}
               days={quest.days}
               continuationLevel={quest.continuationLevel}
+              tagColor={quest.tagColor}
             />
           );
         })

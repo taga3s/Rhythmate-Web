@@ -18,11 +18,11 @@ type Props = {
   description: string;
   startsAt: string;
   minutes: number;
-  // TODO
-  // tag_id: string;
   difficulty: Difficulty;
   days: Day[];
   continuationLevel: number;
+  // tagName: string;
+  tagColor: string | undefined;
 };
 
 export const ManageTimetableCard: FC<Props> = (props) => {
@@ -37,10 +37,35 @@ export const ManageTimetableCard: FC<Props> = (props) => {
     }
   };
 
+  const handleBgTagColor = (tagColor: string | undefined) => {
+    switch (tagColor) {
+      case "Blue":
+        return "bg-rhyth-blue";
+      case "Green":
+        return "bg-rhyth-green";
+      case "Red":
+        return "bg-rhyth-red";
+      case "Purple":
+        return "bg-rhyth-purple";
+      case "Orange":
+        return "bg-rhyth-orange";
+      case "Yellow":
+        return "bg-rhyth-yellow";
+      case "LightBlue":
+        return "bg-rhyth-light-blue";
+      case undefined:
+        return "bg-rhyth-light-gray";
+    }
+  };
+
   return (
-    <div className="border-4 bg-rhyth-bg-gray border-rhyth-light-gray shadow-lg text-rhyth-dark-blue rounded-lg">
+    <div className={`bg-rhyth-bg-gray shadow-lg text-rhyth-dark-blue rounded-lg`}>
       <div className="flex items-center justify-between">
-        <div className="h-20 flex flex-col items-center justify-center font-bold tracking-widest p-2 pr-3 bg-rhyth-light-gray text-rhyth-dark-blue">
+        <div
+          className={`h-20 flex flex-col items-center justify-center font-bold tracking-widest p-2 pr-3 ${handleBgTagColor(
+            props.tagColor,
+          )} text-white rounded-l-lg`}
+        >
           <h2 className="w-[4.5rem] text-lg text-center">{props.startsAt}-</h2>
           <p className="text-sm">{props.minutes}分間</p>
         </div>
