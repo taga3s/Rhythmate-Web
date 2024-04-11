@@ -8,7 +8,7 @@ import { useMutateUser } from "../../api/user/hooks/useMutateUser";
 import { TUserEditValidationSchema, userEditValidationSchema } from "../../libs/validation";
 import { useGetImageUrl } from "../hooks/useGetImageUrl";
 import { BadgesBackButton } from "../../badges/components/BadgesBackButton";
-import { FormErrorMsg } from "../../../common/components";
+import { ConfirmModal, FormErrorMsg } from "../../../common/components";
 
 const IMAGE_ID = "imageId";
 
@@ -36,7 +36,6 @@ export const SettingsPresenter = () => {
 
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [imageFile, setImageFile] = useState<File | null>(null);
-
   const { imageUrl } = useGetImageUrl({ file: imageFile });
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -46,17 +45,20 @@ export const SettingsPresenter = () => {
     }
   };
 
+  const [openModal, setOpenModal] = useState(false);
+
   return (
-    <div className="flex flex-col items-center w-full">
+    <>
       <div className="flex flex-col space-y-5 w-full">
         <div className="flex justify-start gap-3">
           <BadgesBackButton onClickFn={() => navigation({ to: "/profile" })} />
         </div>
-        <p className="flex text-2xl justify-center font-bold">ユーザー情報編集</p>
-        <div className="p-4 order relative bg-white rounded-lg shadow">
+        <h1 className="flex text-2xl justify-center font-bold">ユーザー設定</h1>
+        <div className="p-4 flex flex-col gap-3 bg-white rounded-lg shadow">
+          <h2 className="font-bold text-lg text-gray-900">ユーザー情報編集</h2>
           <form className="space-y-4" onSubmit={handleSubmit(onSubmit)}>
             <label className="block text-sm font-medium text-gray-900">プロフィール画像</label>
-            <div className="flex justify-start items-center gap-6">
+            <div className="flex flex-col sm:flex-row justify-start items-center gap-6">
               <div className="max-w-[220px] w-1/4 max-h-[220px] h-1/4">
                 {imageUrl && imageFile ? (
                   <img src={imageUrl} alt="アップロード画像" className="w-full h-full rounded-full" />
@@ -67,7 +69,7 @@ export const SettingsPresenter = () => {
               <SettingsInputImage ref={fileInputRef} id={IMAGE_ID} onChange={handleFileChange} />
             </div>
             <div>
-              <label className="block mb-2 text-sm font-medium text-gray-900 my-4">ユーザーネーム</label>
+              <label className="block mb-2 text-sm font-medium text-gray-900 my-4">ユーザー名</label>
               <input
                 type="text"
                 defaultValue={loginUser?.name ?? ""}
@@ -87,16 +89,34 @@ export const SettingsPresenter = () => {
           </form>
         </div>
         <div className="p-4 flex flex-col gap-3 order relative bg-red-100 rounded-lg shadow">
-          <h2 className="font-bold text-rhyth-dark-red">Danger Zone</h2>
-          <p className="text-sm">ユーザー削除を実行すると、このアカウントのデータは復元することができません。</p>
-          <button
-            type="submit"
-            className="w-full text-white bg-rhyth-red hover:bg-rhyth-dark-red focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
-          >
-            ユーザー削除
-          </button>
+          <h2 className="font-bold text-lg text-rhyth-dark-red">Danger Zone</h2>
+          <div className="space-y-4">
+            <div>
+              <label className="block text-sm font-medium text-gray-900">アカウント削除</label>
+              <p className="text-sm mt-2">
+                アカウント削除を実行すると、このアカウントのデータは復元することができません。
+              </p>
+            </div>
+            <button
+              type="submit"
+              className="w-full text-white bg-rhyth-red hover:bg-rhyth-dark-red focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mt-2 text-center"
+              onClick={() => setOpenModal(true)}
+            >
+              アカウント削除
+            </button>
+          </div>
         </div>
       </div>
-    </div>
+      {openModal && (
+        <ConfirmModal
+          text={"本当にアカウント削除を行いますか? この処理は取り戻せません。"}
+          confirmBtnText={"削除する"}
+          cancelBtnText={"キャンセルする"}
+          btnColor={"red"}
+          actionFn={() => console.log("something")}
+          closeModal={() => setOpenModal(false)}
+        />
+      )}
+    </>
   );
 };
