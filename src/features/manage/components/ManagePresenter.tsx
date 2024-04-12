@@ -1,5 +1,5 @@
 import { useNavigate } from "@tanstack/react-router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Day, Difficulty } from "../../../api/quest/types";
 import { Loading, LoadingContainer } from "../../common/components";
 import { useSearchModalIsOpen, useSetSearchModalIsOpen } from "../../common/contexts/searchModalIsOpenContext";
@@ -11,6 +11,12 @@ import { ManageTimetable } from "./ManageTimetable";
 import { Quest } from "../../../api/quest/model";
 import { DAYS } from "../common/constant/constant";
 import { ManageDayOfTheWeekSwitchButton } from "./ManageDayOfTheWeekSwitchButton";
+import { useQueryTagList } from "../tags/api/tag/hooks/useQueryTag";
+
+type QuestWithTag = Quest & {
+  tagName: string | undefined;
+  tagColor: string | undefined;
+};
 
 export const ManagePresenter = () => {
   const navigate = useNavigate();
@@ -26,8 +32,22 @@ export const ManagePresenter = () => {
     setSearchModalIsOpen(false);
   };
 
-  const { data: quests, isLoading } = useQueryQuestList();
-  const filteredData = quests?.filter((quest) => {
+  const { data: quests, isLoading: questListIsLoading } = useQueryQuestList();
+  const { data: tags, isLoading: tagListIsLoading } = useQueryTagList();
+  const [questList, setQuestList] = useState<QuestWithTag[]>([]);
+  useEffect(() => {
+    const allQuests = quests?.map((quest) => {
+      const tag = tags?.find((tag) => tag.id === quest.tagId);
+      return {
+        tagName: tag?.name,
+        tagColor: tag?.color,
+        ...quest,
+      };
+    });
+    setQuestList(allQuests ?? []);
+  }, [questListIsLoading, tagListIsLoading]);
+
+  const filteredData = questList?.filter((quest) => {
     if (filterDay && filterDifficulties.length) {
       return quest.days.includes(filterDay) && filterDifficulties.some((difficulty) => quest.difficulty === difficulty);
     } else if (filterDay) {
@@ -39,20 +59,20 @@ export const ManagePresenter = () => {
     }
   });
 
-  const filterQuestsByDayOfTheWeek = (questList: Quest[]) => {
+  const filterQuestsByDayOfTheWeek = (questList: QuestWithTag[]) => {
     return questList.filter((quest) => {
       const isDayOfTheWeek: boolean = quest.days.some((day: string) => day === dayOfTheWeekView);
       return isDayOfTheWeek ? quest : null;
     });
   };
 
-  const sortQuestsByTime = (questList: Quest[]) => {
+  const sortQuestsByTime = (questList: QuestWithTag[]) => {
     return questList.sort((a, b) => {
       return a.startsAt > b.startsAt ? 1 : -1;
     });
   };
 
-  const DayOfTheWeekQuests = filterQuestsByDayOfTheWeek(quests ?? []);
+  const DayOfTheWeekQuests = filterQuestsByDayOfTheWeek(questList ?? []);
   const sortedDayOfTheWeekQuests = sortQuestsByTime(DayOfTheWeekQuests);
 
   const handleManageView = () => {
@@ -65,7 +85,7 @@ export const ManagePresenter = () => {
 
   return (
     <div className="w-full">
-      {isLoading ? (
+      {questListIsLoading ? (
         <LoadingContainer>
           <Loading />
         </LoadingContainer>
@@ -84,6 +104,8 @@ export const ManagePresenter = () => {
                   difficulty={quest.difficulty}
                   days={quest.days}
                   continuationLevel={quest.continuationLevel}
+                  tagName={quest.tagName}
+                  tagColor={quest.tagColor}
                 />
               );
             })}
@@ -144,7 +166,7 @@ export const ManagePresenter = () => {
             </div>
           ) : (
             <ul className="mt-4 flex flex-col items-center gap-6">
-              {quests?.map((quest) => {
+              {questList?.map((quest) => {
                 return (
                   <ManageQuestCard
                     key={quest.id}
@@ -156,6 +178,8 @@ export const ManagePresenter = () => {
                     difficulty={quest.difficulty}
                     days={quest.days}
                     continuationLevel={quest.continuationLevel}
+                    tagName={quest.tagName}
+                    tagColor={quest.tagColor}
                   />
                 );
               })}

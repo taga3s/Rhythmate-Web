@@ -53,6 +53,7 @@ export const EditPresenter: FC<Props> = (props) => {
     mode: "onBlur",
     resolver: zodResolver(manageValidationSchema),
   });
+
   const onSubmit = async (data: NewValues) => {
     await updateQuestMutation.mutateAsync({
       id: quest_id,
@@ -74,6 +75,7 @@ export const EditPresenter: FC<Props> = (props) => {
     });
     navigate({ to: "/manage" });
   };
+
   return (
     <>
       <div>
@@ -253,7 +255,7 @@ export const EditPresenter: FC<Props> = (props) => {
                 タグ
               </label>
             </div>
-            <EditTagDropdown register={register} />
+            <EditTagDropdown register={register} tagId={targetQuest?.tagId} />
           </div>
           <div className="w-full gap-2 mt-6">
             <div className="flex items-center gap-2 w-24">
