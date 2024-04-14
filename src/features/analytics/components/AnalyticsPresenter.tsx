@@ -1,17 +1,17 @@
 import { useState } from "react";
 import { formatDateTimeJP } from "../../../pkg/util/dayjs";
 import { Loading, LoadingContainer } from "../../common/components";
-import { useQueryWeeklyReportSummary, useQueryWeeklyReports } from "../api/weeklyReport/hooks/useQueryWeeklyReport";
+import { useQueryWeeklyReportFeedBack, useQueryWeeklyReports } from "../api/weeklyReport/hooks/useQueryWeeklyReport";
 import { AnalyticsAIFeedback } from "./AnalyticsAIFeedback";
 import { AnalyticsBarChart } from "./AnalyticsBarChart";
 import { AnalyticsCard } from "./AnalyticsCard";
 import { AnalyticsSwitchButton } from "./AnalyticsSwitchButton";
 
 export const AnalyticsPresenter = () => {
-  const [currentIndex, setCurrentIndex] = useState<number>(0);
-
   const { data: weeklyReports, isLoading: isLoadingWeeklyReports } = useQueryWeeklyReports();
-  const { data: summaryData, isFetching: isFetchingSummary } = useQueryWeeklyReportSummary(currentIndex);
+  const [currentIndex, setCurrentIndex] = useState<number>(0);
+  const currentWeeklyReportsId = weeklyReports?.length ? weeklyReports[currentIndex].id : "";
+  const { data: summaryData, isFetching: isFetchingSummary } = useQueryWeeklyReportFeedBack(currentWeeklyReportsId);
 
   const dateArray = weeklyReports?.length
     ? weeklyReports.map((item) => ({
