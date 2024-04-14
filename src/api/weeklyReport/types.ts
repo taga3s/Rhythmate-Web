@@ -13,13 +13,13 @@ export type ListResponse = {
     user_id: string;
   }[];
 };
-export type GetSummaryParams = {
-  weeklyReportIndex: number;
+export type GetFeedBackParams = {
+  weeklyReportId: string;
 };
-export type GetSummaryRequest = {
-  weeklyReportIndex: number;
+export type GetFeedBackRequest = {
+  weeklyReportId: string;
 };
-export type GetSummaryResponse = {
+export type GetFeedBackResponse = {
   status: string;
-  summary: string;
+  feedBack: string;
 };

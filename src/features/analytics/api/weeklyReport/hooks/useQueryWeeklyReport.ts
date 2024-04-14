@@ -15,13 +15,13 @@ export const useQueryWeeklyReports = () => {
   });
 };
 
-export const useQueryWeeklyReportSummary = (weeklyReportIndex: number) => {
+export const useQueryWeeklyReportSummary = (weeklyReportId: string) => {
   const weeklyReportFactory = createFactory();
   return useQuery<string, FetchError>({
-    queryKey: [`weeklyReportSummary-${weeklyReportIndex}`],
+    queryKey: [`weeklyReportFeedBack-${weeklyReportId}`],
     queryFn: async () => {
-      const summary = await weeklyReportFactory.getWeeklyReportSummary({ weeklyReportIndex: weeklyReportIndex });
-      return summary;
+      const feedBack = await weeklyReportFactory.getWeeklyReportSummary({ weeklyReportId: weeklyReportId });
+      return feedBack;
     },
     staleTime: Infinity,
   });
