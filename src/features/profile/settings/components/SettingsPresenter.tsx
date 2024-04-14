@@ -1,22 +1,31 @@
-import { useNavigate } from "@tanstack/react-router";
-import { useRef, useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useNavigate } from "@tanstack/react-router";
+import { FC, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
-import { SettingsInputImage } from "./SettingsInputImage";
-import { useQueryLoginUser } from "../../api/user/hooks/useQueryUser";
-import { useMutateUser } from "../../api/user/hooks/useMutateUser";
-import { TUserEditValidationSchema, userEditValidationSchema } from "../../libs/validation";
-import { useGetImageUrl } from "../hooks/useGetImageUrl";
-import { BadgesBackButton } from "../../badges/components/BadgesBackButton";
 import { ConfirmModal, FormErrorMsg } from "../../../common/components";
+import { useMutateUser } from "../../api/user/hooks/useMutateUser";
+import { useQueryLoginUser } from "../../api/user/hooks/useQueryUser";
+import { BadgesBackButton } from "../../badges/components/BadgesBackButton";
+import {
+  TUserEditValidationSchema,
+  userEditValidationSchema,
+} from "../../libs/validation";
+import { useGetImageUrl } from "../hooks/useGetImageUrl";
+import { ImageCropModal } from "./ImageCropModal";
+import { SettingsInputImage } from "./SettingsInputImage";
 
 const IMAGE_ID = "imageId";
 
-export const SettingsPresenter = () => {
+type Props = {
+  onClickFn: () => void;
+};
+
+export const SettingsPresenter: FC<Props> = ({ onClickFn }) => {
   const navigation = useNavigate();
 
   const { data: loginUser } = useQueryLoginUser();
   const { updateUserMutation } = useMutateUser();
+  const [openModal, setOpenModal] = useState(false);
 
   const {
     register,
@@ -45,7 +54,15 @@ export const SettingsPresenter = () => {
     }
   };
 
-  const [openModal, setOpenModal] = useState(false);
+  const [imageCropModalOpen, setImageCropModalOpen] = useState<boolean>(false);
+
+  const ShowImageCropModal = () => {
+    setImageCropModalOpen(true);
+  };
+
+  const closeImageCropModal = () => {
+    setImageCropModalOpen(false);
+  };
 
   return (
     <>
@@ -57,19 +74,45 @@ export const SettingsPresenter = () => {
         <div className="p-4 flex flex-col gap-3 bg-white rounded-lg shadow">
           <h2 className="font-bold text-lg text-gray-900">ユーザー情報編集</h2>
           <form className="space-y-4" onSubmit={handleSubmit(onSubmit)}>
-            <label className="block text-sm font-medium text-gray-900">プロフィール画像</label>
+            <label className="block text-sm font-medium text-gray-900">
+              プロフィール画像
+            </label>
             <div className="flex flex-col sm:flex-row justify-start items-center gap-6">
               <div className="max-w-[220px] w-1/4 max-h-[220px] h-1/4">
                 {imageUrl && imageFile ? (
-                  <img src={imageUrl} alt="アップロード画像" className="w-full h-full rounded-full" />
+                  {imageCropModalOpen &&
+                    <div>
+                    <ImageCropModal
+                      imageUrl={imageUrl}
+                      closeModal={closeImageCropModal}
+                    />
+                    // useeffect imageurlとimagefileを監視 値がかわｘったら発火 useeffectのなかでif文してみる
+                    {/* <img
+                      src={imageUrl}
+                      alt="アップロード画像"
+                      className="w-full h-full rounded-full"
+                    /> */}
+                  </div>}
+                  {ShowImageCropModal}
+                  
                 ) : (
-                  <img src={loginUser?.imageUrl} alt="現在設定されている画像" className="w-full h-full rounded-full" />
+                  <img
+                    src={loginUser?.imageUrl}
+                    alt="現在設定されている画像"
+                    className="w-full h-full rounded-full"
+                  />
                 )}
               </div>
-              <SettingsInputImage ref={fileInputRef} id={IMAGE_ID} onChange={handleFileChange} />
+              <SettingsInputImage
+                ref={fileInputRef}
+                id={IMAGE_ID}
+                onChange={handleFileChange}
+              />
             </div>
             <div>
-              <label className="block mb-2 text-sm font-medium text-gray-900 my-4">ユーザー名</label>
+              <label className="block mb-2 text-sm font-medium text-gray-900 my-4">
+                ユーザー名
+              </label>
               <input
                 type="text"
                 defaultValue={loginUser?.name ?? ""}
@@ -92,7 +135,9 @@ export const SettingsPresenter = () => {
           <h2 className="font-bold text-lg text-rhyth-dark-red">Danger Zone</h2>
           <div className="space-y-4">
             <div>
-              <label className="block text-sm font-medium text-gray-900">アカウント削除</label>
+              <label className="block text-sm font-medium text-gray-900">
+                アカウント削除
+              </label>
               <p className="text-sm mt-2">
                 アカウント削除を実行すると、このアカウントのデータは復元することができません。
               </p>
