@@ -21,8 +21,7 @@ export const useMutateBadge = () => {
           badgeList.map((badge) => (badge.id === data.id ? data : badge)),
         );
       }
-      console.log(queryClient.getQueryData(["badges"]));
-      notifySuccess("バッジを取得しました。");
+      notifySuccess("新しいバッジを取得しました。");
     },
     onError: (err: FetchError) => {
       notifyFailed("処理に失敗しました。");
