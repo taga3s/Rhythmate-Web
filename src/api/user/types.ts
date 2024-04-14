@@ -19,8 +19,8 @@ export type AuthResponse = {
 };
 
 export type IsAuthenticatedResponse = {
-  status: boolean;
-  message: string;
+  status: string;
+  isAuthenticated: boolean;
 };
 
 export type LoginParams = {

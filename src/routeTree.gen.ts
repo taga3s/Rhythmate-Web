@@ -17,6 +17,7 @@ import { Route as rootRoute } from "./routes/__root";
 // Create Virtual Routes
 
 const IndexLazyImport = createFileRoute("/")();
+const TimeoutIndexLazyImport = createFileRoute("/timeout/")();
 const QuestsIndexLazyImport = createFileRoute("/quests/")();
 const ProfileIndexLazyImport = createFileRoute("/profile/")();
 const ManageIndexLazyImport = createFileRoute("/manage/")();
@@ -34,6 +35,11 @@ const IndexLazyRoute = IndexLazyImport.update({
   path: "/",
   getParentRoute: () => rootRoute,
 } as any).lazy(() => import("./routes/index.lazy").then((d) => d.Route));
+
+const TimeoutIndexLazyRoute = TimeoutIndexLazyImport.update({
+  path: "/timeout/",
+  getParentRoute: () => rootRoute,
+} as any).lazy(() => import("./routes/timeout/index.lazy").then((d) => d.Route));
 
 const QuestsIndexLazyRoute = QuestsIndexLazyImport.update({
   path: "/quests/",
@@ -113,6 +119,10 @@ declare module "@tanstack/react-router" {
       preLoaderRoute: typeof QuestsIndexLazyImport;
       parentRoute: typeof rootRoute;
     };
+    "/timeout/": {
+      preLoaderRoute: typeof TimeoutIndexLazyImport;
+      parentRoute: typeof rootRoute;
+    };
     "/manage/edit/": {
       preLoaderRoute: typeof ManageEditIndexLazyImport;
       parentRoute: typeof rootRoute;
@@ -145,6 +155,7 @@ export const routeTree = rootRoute.addChildren([
   ManageIndexLazyRoute,
   ProfileIndexLazyRoute,
   QuestsIndexLazyRoute,
+  TimeoutIndexLazyRoute,
   ManageEditIndexLazyRoute,
   ManageNewIndexLazyRoute,
   ManageTagsIndexLazyRoute,

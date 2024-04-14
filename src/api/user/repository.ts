@@ -24,7 +24,7 @@ const auth: UserRepository["auth"] = async (params: AuthRequest) => {
 };
 
 const isAuthenticated: UserRepository["isAuthenticated"] = async () => {
-  const response = await apiClient.get("/users/is-authenticated");
+  const response = await apiClient.get("/users/authenticated");
   return response;
 };
 
