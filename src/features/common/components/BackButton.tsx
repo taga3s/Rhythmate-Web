@@ -1,13 +1,13 @@
 import { FC } from "react";
 
 type Props = {
-  onClickFn: () => void;
+  onClickNavigation: () => void;
 };
 
-export const BadgesBackButton: FC<Props> = ({ onClickFn }) => {
+export const BackButton: FC<Props> = ({ onClickNavigation }) => {
   return (
     <button
-      onClick={onClickFn}
+      onClick={onClickNavigation}
       className="px-2 py-2 flex gap-2 items-center bg-white hover:bg-rhyth-hover-light-gray font-bold text-sm rounded-md border-2 border-rhyth-light-gray shadow-sm"
     >
       <svg
