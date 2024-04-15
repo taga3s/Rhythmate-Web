@@ -5,7 +5,7 @@ export type ListResponse = {
     completed_quests: number;
     failed_quests: number;
     completed_percentage: number;
-    completed_days: number;
+    streak_days: number;
     completed_quests_each_day: number[];
     failed_quests_each_day: number[];
     start_date: string;
