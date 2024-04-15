@@ -11,8 +11,8 @@ type Props = {
 };
 
 export const ImageCropModal: FC<Props> = ({ imageUrl, closeModal }) => {
-  const imgRef = useRef(null);
-  const previewCanvasRef = useRef(null);
+  const imgRef = useRef<HTMLImageElement>(null);
+  const previewCanvasRef = useRef<HTMLCanvasElement>(null);
   const [crop, setCrop] = useState<Crop>({
     unit: "%",
     x: 25,
@@ -22,7 +22,7 @@ export const ImageCropModal: FC<Props> = ({ imageUrl, closeModal }) => {
   });
 
   const centerAspectCrop = (mediaWidth: number, mediaHeight: number, aspect: number) => {
-    const cropWidthInPercent = (150 / mediaHeight) * 100;
+    const cropWidthInPercent = (150 / mediaWidth) * 100;
     return centerCrop(
       makeAspectCrop(
         {
@@ -68,13 +68,23 @@ export const ImageCropModal: FC<Props> = ({ imageUrl, closeModal }) => {
               setCanvasPreview(
                 imgRef.current,
                 previewCanvasRef.current,
-                convertToPixelCrop(crop, imgRef.current.width, imgRef.current.height),
+                convertToPixelCrop(crop, imgRef.current!.width, imgRef.current!.height),
               );
             }}
           >
             画像を切り取る
           </button>
-          {crop && <canvas ref={previewCanvasRef} style={{ objectFit: "contain", width: 200, height: 200 }} />}
+          {crop ? <canvas ref={previewCanvasRef} style={{ objectFit: "contain", width: 200, height: 200 }} /> : null}
+          <button
+            type="submit"
+            onClick={() => {
+              const dataUrl = previewCanvasRef.current?.toDataURL();
+              console.log(dataUrl);
+            }}
+            className="border p-2 bg-gray-300"
+          >
+            送信
+          </button>
         </div>
       </div>
     </ModalBase>
