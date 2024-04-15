@@ -9,13 +9,14 @@ import { LoginBird } from "./LoginBird";
 
 export const LoginForm = () => {
   const { authMutation } = useMutateUser();
-  const provider = new GoogleAuthProvider();
+  const provider = new GoogleAuthProvider().setCustomParameters({
+    prompt: "select_account",
+  });
   const auth = getAuth();
 
   const [isLoading, setIsLoading] = useState(false);
 
   const signInWithGoogle = async () => {
-    setIsLoading(true);
     try {
       const result = await signInWithPopup(auth, provider);
       const user = result.user;
@@ -24,17 +25,17 @@ export const LoginForm = () => {
         throw new Error("ログインに失敗しました。");
       }
 
+      setIsLoading(true);
+
       const idToken = await user.getIdToken();
       await authMutation.mutateAsync({
         idToken: idToken,
       });
-      setIsLoading(false);
     } catch (error) {
-      if (error instanceof FirebaseError) {
-        if (error.code !== "auth/popup-closed-by-user") {
-          notifyFailed("エラーが発生しました。\n時間をおいて再度お試しください。");
-        }
+      if (error instanceof FirebaseError && error.code !== "auth/popup-closed-by-user") {
+        notifyFailed("ログインに失敗しました。");
       }
+    } finally {
       setIsLoading(false);
     }
   };
