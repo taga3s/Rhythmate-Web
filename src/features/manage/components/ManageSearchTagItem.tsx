@@ -3,7 +3,6 @@ import { Tag } from "../../../api/tag/model";
 
 type Props = {
   tagItem: Tag;
-  // setOptionTagId: () => void;
 };
 
 export const ManageSearchTagItem: FC<Props> = ({ tagItem }) => {

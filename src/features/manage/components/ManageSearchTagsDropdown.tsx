@@ -10,7 +10,6 @@ type Props = {
 };
 
 export const ManageSearchTagsDropdown: FC<Props> = ({ tagItems, handleTag, filterTag, onSelectFn }) => {
-  // const [optionTagId, setOptionTagId] = useState<string>("");
   const [tagValue, setTagValue] = useState<Tag | undefined>({ id: "", name: "", color: "" });
   const [colorValue, setColorValue] = useState<string>("");
 

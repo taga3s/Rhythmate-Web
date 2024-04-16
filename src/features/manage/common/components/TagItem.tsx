@@ -23,6 +23,8 @@ export const TagItem: FC<Props> = ({ tagId, tagName, tagColor }) => {
         return "text-rhyth-yellow";
       case "LightBlue":
         return "text-rhyth-light-blue";
+      default:
+        return "text-rhyth-dark-blue";
     }
   };
 
