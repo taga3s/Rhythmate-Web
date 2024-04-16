@@ -6,11 +6,15 @@ import { ManageDifficultyCheckBox } from "./ManageDifficultyCheckBox";
 import { ModalBase } from "../../common/components/modal/ModalBase";
 import { ModalHeaderCloseButton } from "../../common/components/modal/ModalHeaderCloseButton";
 import { ManageSearchTagsDropdown } from "./ManageSearchTagsDropdown";
+import { Tag } from "../../../api/tag/model";
 
 type Props = {
   onClickFn: () => void;
   filterDay: Day | "";
   setFilterDay: (day: Day | "") => void;
+  filterTag: string;
+  setFilterTag: (tagId: string | "") => void;
+  tagItems: Tag[] | undefined;
   filterDifficulties: Difficulty[];
   setFilterDifficulties: (difficulty: Difficulty[]) => void;
   setFilterActivation: (activation: boolean) => void;
@@ -20,11 +24,15 @@ export const ManageQuestSearchModal: FC<Props> = ({
   onClickFn,
   filterDay,
   setFilterDay,
+  filterTag,
+  setFilterTag,
+  tagItems,
   filterDifficulties,
   setFilterDifficulties,
   setFilterActivation,
 }) => {
   const [day, setDay] = useState<Day | "">(filterDay);
+  // const [tag, setTag] = useState<string | "">(filterTag);
   const [difficulties, setDifficulties] = useState<Difficulty[]>(filterDifficulties);
   const [tagColor, setTagColor] = useState<string>("");
 
@@ -99,7 +107,12 @@ export const ManageQuestSearchModal: FC<Props> = ({
             </svg>
             <p className="font-cp-font text-rhyth-dark-blue">タグ</p>
             <div className="w-1/2 flex ml-auto">
-              <ManageSearchTagsDropdown onSelectFn={handleTagColorItem} />
+              <ManageSearchTagsDropdown
+                tagItems={tagItems}
+                handleTag={setFilterTag}
+                filterTag={filterTag}
+                onSelectFn={handleTagColorItem}
+              />
             </div>
           </div>
           {/* 難易度 */}

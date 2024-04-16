@@ -23,6 +23,7 @@ export const ManagePresenter = () => {
   const setSearchModalIsOpen = useSetSearchModalIsOpen();
   const searchModalIsOpen = useSearchModalIsOpen();
   const [filterDay, setFilterDay] = useState<Day | "">("");
+  const [filterTag, setFilterTag] = useState<string | "">("");
   const [filterDifficulties, setFilterDifficulties] = useState<Difficulty[]>([]);
   const [filterActivation, setFilterActivation] = useState<boolean>(false);
   const [dayOfTheWeekView, setDayOfTheWeekView] = useState<Day>("MON");
@@ -52,6 +53,8 @@ export const ManagePresenter = () => {
       return quest.days.includes(filterDay) && filterDifficulties.some((difficulty) => quest.difficulty === difficulty);
     } else if (filterDay) {
       return quest.days.includes(filterDay);
+    } else if (filterTag) {
+      return quest.tagId.includes(filterTag);
     } else if (filterDifficulties.length) {
       return filterDifficulties.some((difficulty) => quest.difficulty === difficulty);
     } else {
@@ -231,6 +234,9 @@ export const ManagePresenter = () => {
           onClickFn={closeQuestSearchModal}
           filterDay={filterDay}
           setFilterDay={setFilterDay}
+          filterTag={filterTag}
+          setFilterTag={setFilterTag}
+          tagItems={tags}
           filterDifficulties={filterDifficulties}
           setFilterDifficulties={setFilterDifficulties}
           setFilterActivation={setFilterActivation}
