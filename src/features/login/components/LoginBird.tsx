@@ -1,10 +1,4 @@
-import { FC } from "react";
-
-type Props = {
-  className: string;
-};
-
-export const LoginBird: FC<Props> = ({ className }) => {
+export const LoginBird = () => {
   return (
     <svg
       version="1.1"
@@ -17,7 +11,6 @@ export const LoginBird: FC<Props> = ({ className }) => {
       viewBox="0 0 500 500"
       enableBackground="new 0 0 500 500"
       xmlSpace="preserve"
-      className={className}
     >
       <path
         fill="#1FA1FF"
