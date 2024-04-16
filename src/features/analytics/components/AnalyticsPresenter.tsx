@@ -6,12 +6,18 @@ import { AnalyticsAIFeedback } from "./AnalyticsAIFeedback";
 import { AnalyticsBarChart } from "./AnalyticsBarChart";
 import { AnalyticsCard } from "./AnalyticsCard";
 import { AnalyticsSwitchButton } from "./AnalyticsSwitchButton";
+import { useMutateWeeklyReport } from "../api/weeklyReport/hooks/useMutateWeeklyReport";
 
 export const AnalyticsPresenter = () => {
   const { data: weeklyReports, isLoading: isLoadingWeeklyReports } = useQueryWeeklyReports();
   const [currentIndex, setCurrentIndex] = useState<number>(0);
   const currentWeeklyReportsId = weeklyReports?.length ? weeklyReports[currentIndex].id : "";
   const { data: summaryData, isFetching: isFetchingSummary } = useQueryWeeklyReportFeedBack(currentWeeklyReportsId);
+  const { generateFeedBackMutation } = useMutateWeeklyReport();
+
+  const onClickGenerateFeedback = () => {
+    generateFeedBackMutation.mutate({ weeklyReportId: currentWeeklyReportsId });
+  };
 
   const dateArray = weeklyReports?.length
     ? weeklyReports.map((item) => ({
@@ -83,7 +89,11 @@ export const AnalyticsPresenter = () => {
             completedQuestsData={weeklyReports[currentIndex].completed_quests_each_day}
             failedQuestsData={weeklyReports[currentIndex].failed_quests_each_day}
           />
-          <AnalyticsAIFeedback summaryData={summaryData ?? ""} isLoading={isFetchingSummary} />
+          <AnalyticsAIFeedback
+            summaryData={summaryData ?? ""}
+            isLoading={isFetchingSummary}
+            onClick={onClickGenerateFeedback}
+          />
         </div>
       ) : (
         <div className="mt-20 gap-2 flex flex-col items-center text-lg text-rhyth-dark-blue font-bold">
