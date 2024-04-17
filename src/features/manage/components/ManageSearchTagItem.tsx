@@ -1,11 +1,12 @@
 import { FC } from "react";
-import { Tag } from "../../../api/tag/model";
 
 type Props = {
-  tagItem: Tag;
+  tagId: string;
+  tagName: string;
+  tagColor: string;
 };
 
-export const ManageSearchTagItem: FC<Props> = ({ tagItem }) => {
+export const ManageSearchTagItem: FC<Props> = ({ tagId, tagName, tagColor }) => {
   const selectColorLabel = (color: string) => {
     switch (color) {
       case "Blue":
@@ -28,11 +29,11 @@ export const ManageSearchTagItem: FC<Props> = ({ tagItem }) => {
   return (
     <option
       className={`border-b border-rhyth-light-gray w-full h-hull font-bold flex items-center px-4 py-2 rounded-t-lg hover:text-white hover:bg-rhyth-hover-blue ${selectColorLabel(
-        tagItem.color,
+        tagColor,
       )}`}
-      value={tagItem.id}
+      value={tagId}
     >
-      {tagItem.name}
+      {tagName}
     </option>
   );
 };

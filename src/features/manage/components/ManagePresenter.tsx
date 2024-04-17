@@ -234,7 +234,6 @@ export const ManagePresenter = () => {
           onClickFn={closeQuestSearchModal}
           filterDay={filterDay}
           setFilterDay={setFilterDay}
-          filterTag={filterTag}
           setFilterTag={setFilterTag}
           tagItems={tags}
           filterDifficulties={filterDifficulties}

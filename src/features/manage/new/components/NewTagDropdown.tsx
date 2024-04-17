@@ -11,7 +11,6 @@ type Props = {
 };
 
 export const NewTagDropdown: FC<Props> = ({ register, watch }) => {
-  // const tagItem = watch("tagId");
   const { data: tagItems, isLoading } = useQueryTagList();
   const tagIdForColorSelect = watch("tagId");
 

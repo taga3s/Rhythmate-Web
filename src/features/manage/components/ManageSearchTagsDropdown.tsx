@@ -5,35 +5,19 @@ import { Tag } from "../../../api/tag/model";
 type Props = {
   tagItems: Tag[] | undefined;
   handleTag: (tagId: string | "") => void;
-  filterTag: string;
-  onSelectFn: (color: string) => void;
 };
 
-export const ManageSearchTagsDropdown: FC<Props> = ({ tagItems, handleTag, filterTag, onSelectFn }) => {
-  const [tagValue, setTagValue] = useState<Tag | undefined>({ id: "", name: "", color: "" });
-  const [colorValue, setColorValue] = useState<string>("");
+export const ManageSearchTagsDropdown: FC<Props> = ({ tagItems, handleTag }) => {
+  const [tagIdValue, setTagIdValue] = useState<string>("");
 
-  const convertTagItem = (tagId: string) => {
-    if (tagItems === undefined) {
-      return { id: "", name: "", color: "" };
-    } else {
-      return tagItems.find((tagItem) => tagItem.id === tagId);
-    }
+  const handleTagValue = (tagId: string) => {
+    handleTag(tagId);
+    setTagIdValue(tagId);
   };
 
-  const handleTagValue = (event: { target: { value: string } }) => {
-    handleTag(event.target.value);
-    setTagValue(convertTagItem(filterTag));
-    handleColorValue(tagValue);
-  };
-
-  const handleColorValue = (tagItem: Tag | undefined) => {
-    setColorValue(tagItem === undefined ? "" : tagItem.color);
-    onSelectFn(colorValue);
-  };
-
-  const selectColorLabel = (color: string) => {
-    switch (color) {
+  const handleColorValue = (tagId: string) => {
+    const selectTagItem = tagItems?.find((tagItem) => tagItem.id === tagId);
+    switch (selectTagItem?.color) {
       case "Blue":
         return "text-rhyth-blue";
       case "Green":
@@ -57,10 +41,10 @@ export const ManageSearchTagsDropdown: FC<Props> = ({ tagItems, handleTag, filte
     <select
       name="tag-color"
       id="tag-color"
-      className={`bg-white border-2 border-rhyth-light-gray text-rhyth-dark-blue text-sm font-bold rounded-lg w-full p-2 shadow-sm ${selectColorLabel(
-        colorValue,
+      className={`bg-white border-2 border-rhyth-light-gray text-rhyth-dark-blue text-sm font-bold rounded-lg w-full p-2 shadow-sm ${handleColorValue(
+        tagIdValue,
       )}`}
-      onChange={handleTagValue}
+      onChange={(event) => handleTagValue(event.target.value)}
     >
       <option
         value={""}
@@ -69,7 +53,7 @@ export const ManageSearchTagsDropdown: FC<Props> = ({ tagItems, handleTag, filte
         色を選択
       </option>
       {tagItems?.map((tagItem, i) => {
-        return <ManageSearchTagItem key={i} tagItem={tagItem} />;
+        return <ManageSearchTagItem key={i} tagId={tagItem.id} tagName={tagItem.name} tagColor={tagItem.color} />;
       })}
     </select>
   );

@@ -12,7 +12,6 @@ type Props = {
   onClickFn: () => void;
   filterDay: Day | "";
   setFilterDay: (day: Day | "") => void;
-  filterTag: string;
   setFilterTag: (tagId: string | "") => void;
   tagItems: Tag[] | undefined;
   filterDifficulties: Difficulty[];
@@ -24,7 +23,6 @@ export const ManageQuestSearchModal: FC<Props> = ({
   onClickFn,
   filterDay,
   setFilterDay,
-  filterTag,
   setFilterTag,
   tagItems,
   filterDifficulties,
@@ -32,15 +30,7 @@ export const ManageQuestSearchModal: FC<Props> = ({
   setFilterActivation,
 }) => {
   const [day, setDay] = useState<Day | "">(filterDay);
-  // const [tag, setTag] = useState<string | "">(filterTag);
   const [difficulties, setDifficulties] = useState<Difficulty[]>(filterDifficulties);
-  const [tagColor, setTagColor] = useState<string>("");
-
-  const handleTagColorItem = (color: string) => {
-    setTagColor(color);
-    // 一時的に追加
-    console.log(tagColor);
-  };
 
   const handleDay = (newDay: Day | "") => {
     if (newDay === day) {
@@ -107,12 +97,7 @@ export const ManageQuestSearchModal: FC<Props> = ({
             </svg>
             <p className="font-cp-font text-rhyth-dark-blue">タグ</p>
             <div className="w-1/2 flex ml-auto">
-              <ManageSearchTagsDropdown
-                tagItems={tagItems}
-                handleTag={setFilterTag}
-                filterTag={filterTag}
-                onSelectFn={handleTagColorItem}
-              />
+              <ManageSearchTagsDropdown tagItems={tagItems} handleTag={setFilterTag} />
             </div>
           </div>
           {/* 難易度 */}
