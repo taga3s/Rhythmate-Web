@@ -4,16 +4,16 @@ import { Quest } from "../../../api/quest/model";
 import { FC } from "react";
 import { ManageTimetableNoData } from "./ManageTimetableNoData";
 
-type Props = {
-  questList: Quest[];
-};
-
 type QuestWithTag = Quest & {
   tagName: string | undefined;
   tagColor: string | undefined;
 };
 
-export const ManageTimetable: FC<Props> = (props: { questList: any }) => {
+type Props = {
+  questList: QuestWithTag[];
+};
+
+export const ManageTimetable: FC<Props> = (props) => {
   const { questList } = props;
 
   return (

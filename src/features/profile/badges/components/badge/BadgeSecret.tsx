@@ -10,7 +10,7 @@ export const BadgeSecret = () => {
       width="100%"
       height="100%"
       viewBox="0 0 500 500"
-      enable-background="new 0 0 500 500"
+      enableBackground="new 0 0 500 500"
       xmlSpace="preserve"
     >
       <path
