@@ -18,6 +18,7 @@ type Props = {
   difficulty: string;
   continuationLevel: number;
 };
+
 export const QuestListItem: FC<Props> = (props) => {
   const { title, startsAt, minutes, isDone, isSuccess, difficulty, continuationLevel } = props;
   const status = getStatus(isDone, isSuccess);

@@ -3,8 +3,8 @@ import { FC } from "react";
 type Props = {
   view: "NEXT" | "FINISHED";
 };
-export const QuestListNoData: FC<Props> = (props) => {
-  const { view } = props;
+
+export const QuestListNoData: FC<Props> = ({ view }) => {
   return view === "NEXT" ? (
     <div className="w-full min-h-[230px] p-3 shadow-lg rounded-b-md rounded-tr-md flex flex-col justify-center bg-rhyth-light-blue">
       <div className="flex flex-col justify-center items-center bg-white rounded-lg shadow-md py-2">
@@ -21,11 +21,11 @@ export const QuestListNoData: FC<Props> = (props) => {
             clipRule="evenodd"
           />
         </svg>
-        <p className="font-bold text-center p-2 text-rhyth-dark-blue">
+        <span className="font-bold text-center p-2 text-rhyth-dark-blue">
           新しい習慣がどのくらい身に付いたか
           <br />
           統計レポートで確認しましょう！
-        </p>
+        </span>
       </div>
     </div>
   ) : (
@@ -44,11 +44,11 @@ export const QuestListNoData: FC<Props> = (props) => {
             clipRule="evenodd"
           />
         </svg>
-        <p className="font-bold text-center p-2 text-rhyth-dark-blue">
+        <span className="font-bold text-center p-2 text-rhyth-dark-blue">
           終了したクエストはまだありません。
           <br />
           今日も一日頑張りましょう！
-        </p>
+        </span>
       </div>
     </div>
   );

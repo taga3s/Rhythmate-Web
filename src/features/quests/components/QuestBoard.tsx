@@ -4,10 +4,10 @@ import { ClockIcon, ConfirmModal } from "../../common/components";
 import useInterval from "../../common/hooks/useInterval";
 import { useMutateQuest } from "../api/quest/hooks/useMutateQuest";
 import { CLOSED, DONE, ENGAGED, FORCE_STOP, NOT_STARTED_YET, OPEN, QuestStatus } from "../constant/constant";
-import { getBaseTime, getDiffTime } from "../funcs/time";
+import { calcBaseTime, calcDiffTimeBetweenNowAndTargetTime } from "../funcs/time";
 import { QuestBoardTimer } from "./QuestBoardTimer";
 
-export const getIsStarted = (startedAt: string) => {
+export const getIsStarted = (startedAt: string): boolean => {
   return startedAt !== NOT_STARTED_YET;
 };
 
@@ -22,7 +22,7 @@ export const QuestBoard: FC<Props> = (props) => {
   const [finishConfirmModalOpen, setFinishConfirmModalOpen] = useState(false);
   const { startQuestMutation, finishQuestMutation, forceFinishQuestMutation } = useMutateQuest();
 
-  const { status } = getBaseTime(
+  const { status } = calcBaseTime(
     currentQuest.startsAt,
     getIsStarted(currentQuest.startedAt),
     currentQuest.minutes,
@@ -32,14 +32,14 @@ export const QuestBoard: FC<Props> = (props) => {
   const [questStatus, setQuestStatus] = useState<QuestStatus>(status);
 
   useInterval(() => {
-    const { baseTime, status } = getBaseTime(
+    const { baseTime, status } = calcBaseTime(
       currentQuest.startsAt,
       getIsStarted(currentQuest.startedAt),
       currentQuest.minutes,
       currentQuest.startedAt,
     );
 
-    const { diffHH, diffMM, diffSS } = getDiffTime(baseTime);
+    const { diffHH, diffMM, diffSS } = calcDiffTimeBetweenNowAndTargetTime(baseTime);
 
     if (status === FORCE_STOP && questStatus !== FORCE_STOP) {
       setQuestStatus(FORCE_STOP);
@@ -58,21 +58,21 @@ export const QuestBoard: FC<Props> = (props) => {
     }
   }, 1000);
 
-  const onClickStartQuest = async () => {
+  const handleStartQuest = async () => {
     await startQuestMutation.mutateAsync({
       id: currentQuest.id,
     });
     setQuestStatus(ENGAGED);
   };
 
-  const onClickFinishQuest = async () => {
+  const handleFinishQuest = async () => {
     await finishQuestMutation.mutateAsync({
       id: currentQuest.id,
     });
     setQuestStatus(CLOSED);
   };
 
-  const onClickForceFinishQuest = async () => {
+  const handleForceFinishQuest = async () => {
     await forceFinishQuestMutation.mutateAsync({
       id: currentQuest.id,
     });
@@ -80,7 +80,7 @@ export const QuestBoard: FC<Props> = (props) => {
   };
 
   return (
-    <div className="w-full min-h-[240px] py-3 border-2 border-rhyth-light-gray shadow-lg rounded-lg">
+    <div className="w-full min-h-[240px] py-3 border-2 border-rhyth-light-gray bg-white shadow-lg rounded-lg">
       <div className="flex flex-col gap-1 px-4">
         <h1 className="py-2 font-bold text-lg text-rhyth-dark-blue">{currentQuest.title}</h1>
         <hr className="h-1.5 bg-rhyth-blue" />
@@ -140,7 +140,7 @@ export const QuestBoard: FC<Props> = (props) => {
           </button>
         ) : (
           <button
-            onClick={onClickForceFinishQuest}
+            onClick={handleForceFinishQuest}
             className="text-white bg-rhyth-red hover:bg-rhyth-hover-red focus:ring-4 focus:ring-blue-300 rounded-lg text-lg font-bold p-3 mt-1 focus:outline-none w-full shadow-lg"
           >
             クエストを強制終了する
@@ -153,7 +153,7 @@ export const QuestBoard: FC<Props> = (props) => {
           confirmBtnText={"開始する"}
           cancelBtnText={"キャンセル"}
           btnColor={"green"}
-          actionFn={onClickStartQuest}
+          actionFn={handleStartQuest}
           closeModal={() => setStartConfirmModalOpen(false)}
         />
       )}
@@ -163,7 +163,7 @@ export const QuestBoard: FC<Props> = (props) => {
           confirmBtnText={"完了する"}
           cancelBtnText={"キャンセル"}
           btnColor={"blue"}
-          actionFn={onClickFinishQuest}
+          actionFn={handleFinishQuest}
           closeModal={() => setFinishConfirmModalOpen(false)}
         />
       )}
