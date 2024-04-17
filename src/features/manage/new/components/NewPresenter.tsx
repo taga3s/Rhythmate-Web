@@ -229,7 +229,7 @@ export const NewPresenter = () => {
               タグ
             </label>
           </div>
-          <NewTagDropdown register={register} />
+          <NewTagDropdown register={register} watch={watch} />
         </div>
         <div className="w-full gap-2 mt-6">
           <div className="flex items-center gap-2 w-24">

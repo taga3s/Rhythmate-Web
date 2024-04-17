@@ -253,7 +253,7 @@ export const EditPresenter: FC<Props> = (props) => {
                 タグ
               </label>
             </div>
-            <EditTagDropdown register={register} tagId={targetQuest?.tagId} />
+            <EditTagDropdown register={register} watch={watch} tagId={targetQuest?.tagId} />
           </div>
           <div className="w-full gap-2 mt-6">
             <div className="flex items-center gap-2 w-24">
