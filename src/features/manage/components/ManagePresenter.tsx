@@ -1,5 +1,5 @@
 import { useNavigate } from "@tanstack/react-router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Day, Difficulty } from "../../../api/quest/types";
 import { Loading, LoadingContainer } from "../../common/components";
 import { useSearchModalIsOpen, useSetSearchModalIsOpen } from "../../common/contexts/searchModalIsOpenContext";
@@ -7,26 +7,54 @@ import { useQueryQuestList } from "../api/quest/hooks/useQueryQuest";
 import { ManageNewButton } from "./ManageNewButton";
 import { ManageQuestCard } from "./ManageQuestCard";
 import { ManageQuestSearchModal } from "./ManageQuestSearchModal,";
+import { ManageTimetable } from "./ManageTimetable";
+import { Quest } from "../../../api/quest/model";
+import { DAYS } from "../common/constant/constant";
+import { ManageDayOfTheWeekSwitchButton } from "./ManageDayOfTheWeekSwitchButton";
+import { useQueryTagList } from "../tags/api/tag/hooks/useQueryTag";
+
+type QuestWithTag = Quest & {
+  tagName: string | undefined;
+  tagColor: string | undefined;
+};
 
 export const ManagePresenter = () => {
   const navigate = useNavigate();
   const setSearchModalIsOpen = useSetSearchModalIsOpen();
   const searchModalIsOpen = useSearchModalIsOpen();
   const [filterDay, setFilterDay] = useState<Day | "">("");
+  const [filterTag, setFilterTag] = useState<string | "">("");
   const [filterDifficulties, setFilterDifficulties] = useState<Difficulty[]>([]);
   const [filterActivation, setFilterActivation] = useState<boolean>(false);
+  const [dayOfTheWeekView, setDayOfTheWeekView] = useState<Day>("MON");
+  const [manageView, setManageView] = useState<"Timetable" | "Card">("Timetable");
 
   const closeQuestSearchModal = () => {
     setSearchModalIsOpen(false);
   };
 
-  const { data: quests, isLoading } = useQueryQuestList();
+  const { data: quests, isLoading: questListIsLoading } = useQueryQuestList();
+  const { data: tags, isLoading: tagListIsLoading } = useQueryTagList();
+  const [questList, setQuestList] = useState<QuestWithTag[]>([]);
+  useEffect(() => {
+    const allQuests = quests?.map((quest) => {
+      const tag = tags?.find((tag) => tag.id === quest.tagId);
+      return {
+        tagName: tag?.name,
+        tagColor: tag?.color,
+        ...quest,
+      };
+    });
+    setQuestList(allQuests ?? []);
+  }, [questListIsLoading, tagListIsLoading]);
 
-  const filteredData = quests?.filter((quest) => {
+  const filteredData = questList?.filter((quest) => {
     if (filterDay && filterDifficulties.length) {
       return quest.days.includes(filterDay) && filterDifficulties.some((difficulty) => quest.difficulty === difficulty);
     } else if (filterDay) {
       return quest.days.includes(filterDay);
+    } else if (filterTag) {
+      return quest.tagId.includes(filterTag);
     } else if (filterDifficulties.length) {
       return filterDifficulties.some((difficulty) => quest.difficulty === difficulty);
     } else {
@@ -34,9 +62,63 @@ export const ManagePresenter = () => {
     }
   });
 
+  const filterQuestsByDayOfTheWeek = (questList: QuestWithTag[]) => {
+    return questList.filter((quest) => {
+      const isDayOfTheWeek: boolean = quest.days.some((day: string) => day === dayOfTheWeekView);
+      return isDayOfTheWeek ? quest : null;
+    });
+  };
+
+  const sortQuestsByTime = (questList: QuestWithTag[]) => {
+    return questList.sort((a, b) => {
+      return a.startsAt > b.startsAt ? 1 : -1;
+    });
+  };
+
+  const dayOfTheWeekQuests = filterQuestsByDayOfTheWeek(questList ?? []);
+  const sortedDayOfTheWeekQuests = sortQuestsByTime(dayOfTheWeekQuests);
+
+  const handleManageView = () => {
+    if (manageView === "Timetable") {
+      setManageView("Card");
+    } else {
+      setManageView("Timetable");
+    }
+  };
+
   return (
     <div className="w-full">
-      {isLoading ? (
+      <div className="flex justify-between items-center">
+        <h1 className="font-cp-font tracking-widest text-rhyth-gray text-xl font-bold ">
+          {manageView === "Timetable" ? "曜日別クエスト" : "全てのクエスト"}
+        </h1>
+        <button
+          className="flex items-center gap-1 bg-white py-2 px-4 rounded-full border-2 border-rhyth-light-gray shadow-sm hover:bg-rhyth-bg-dark-gray"
+          onClick={handleManageView}
+        >
+          <svg
+            className="w-6 h-6 text-rhyth-blue"
+            aria-hidden="true"
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            fill="none"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke="currentColor"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
+              d="m16 10 3-3m0 0-3-3m3 3H5v3m3 4-3 3m0 0 3 3m-3-3h14v-3"
+            />
+          </svg>
+          <span className="text-sm font-bold text-rhyth-dark-blue">
+            {manageView === "Timetable" ? "全表示" : "曜日別表示"}
+          </span>
+        </button>
+      </div>
+      {questListIsLoading ? (
         <LoadingContainer>
           <Loading />
         </LoadingContainer>
@@ -55,6 +137,8 @@ export const ManagePresenter = () => {
                   difficulty={quest.difficulty}
                   days={quest.days}
                   continuationLevel={quest.continuationLevel}
+                  tagName={quest.tagName}
+                  tagColor={quest.tagColor}
                 />
               );
             })}
@@ -66,23 +150,45 @@ export const ManagePresenter = () => {
           </div>
         )
       ) : quests?.length ? (
-        <ul className="mt-4 flex flex-col items-center gap-6">
-          {quests?.map((quest) => {
-            return (
-              <ManageQuestCard
-                key={quest.id}
-                id={quest.id}
-                title={quest.title}
-                description={quest.description}
-                startsAt={quest.startsAt}
-                minutes={quest.minutes}
-                difficulty={quest.difficulty}
-                days={quest.days}
-                continuationLevel={quest.continuationLevel ?? 0}
-              />
-            );
-          })}
-        </ul>
+        <div>
+          {manageView === "Timetable" ? (
+            <div className="flex flex-col w-full mt-4">
+              <div className="flex items-center">
+                {DAYS.map((day, i) => {
+                  return (
+                    <ManageDayOfTheWeekSwitchButton
+                      key={i}
+                      view={day}
+                      dayOfTheWeek={dayOfTheWeekView}
+                      onClickFn={setDayOfTheWeekView}
+                    />
+                  );
+                })}
+              </div>
+              <ManageTimetable questList={sortedDayOfTheWeekQuests} />
+            </div>
+          ) : (
+            <ul className="mt-4 flex flex-col items-center gap-6">
+              {questList?.map((quest) => {
+                return (
+                  <ManageQuestCard
+                    key={quest.id}
+                    id={quest.id}
+                    title={quest.title}
+                    description={quest.description}
+                    startsAt={quest.startsAt}
+                    minutes={quest.minutes}
+                    difficulty={quest.difficulty}
+                    days={quest.days}
+                    continuationLevel={quest.continuationLevel}
+                    tagName={quest.tagName}
+                    tagColor={quest.tagColor}
+                  />
+                );
+              })}
+            </ul>
+          )}
+        </div>
       ) : (
         <div className="w-full gap-4 flex flex-col items-center mx-auto mt-24">
           <svg
@@ -128,6 +234,8 @@ export const ManagePresenter = () => {
           onClickFn={closeQuestSearchModal}
           filterDay={filterDay}
           setFilterDay={setFilterDay}
+          setFilterTag={setFilterTag}
+          tagItems={tags}
           filterDifficulties={filterDifficulties}
           setFilterDifficulties={setFilterDifficulties}
           setFilterActivation={setFilterActivation}

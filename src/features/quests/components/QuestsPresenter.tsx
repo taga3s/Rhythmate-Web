@@ -8,48 +8,42 @@ import { QuestListNoData } from "./QuestListNoData";
 import { Quest } from "../../../api/quest/model";
 import { Loading, LoadingContainer } from "../../common/components";
 
-const filterQuestsByDayOfTheWeek = (questList: Quest[]) => {
-  const todaysDayOfTheWeek = getTodayEn().toUpperCase();
+type View = "NEXT" | "FINISHED";
 
-  return questList.filter((quest) => {
-    const isToday: boolean = quest.days.some((day) => day === todaysDayOfTheWeek);
-    return isToday ? quest : null;
-  });
+const filterTodaysQuestListByDayOfTheWeek = (questList: Quest[]) => {
+  const todaysDayOfTheWeek = getTodayEn().toUpperCase();
+  return questList.filter((quest) => quest.days.some((day) => day === todaysDayOfTheWeek));
 };
 
-const sortQuestsByTime = (questList: Quest[]) => {
-  return questList.sort((a, b) => {
-    return a.startsAt > b.startsAt ? 1 : -1;
-  });
+const sortQuestListByTime = (questList: Quest[]) => {
+  return questList.sort((a, b) => (a.startsAt > b.startsAt ? 1 : -1));
 };
 
 export const QuestsPresenter = () => {
-  const { data, isLoading } = useQueryQuestList();
+  const { data: questListData, isLoading } = useQueryQuestList();
 
-  // 曜日でフィルターする
-  const filteredQuestsData = filterQuestsByDayOfTheWeek(data ?? []);
+  const filteredQuestList = filterTodaysQuestListByDayOfTheWeek(questListData ?? []);
 
-  // 時間順でソートする
-  const sortedQuestsData = sortQuestsByTime(filteredQuestsData);
+  const sortedQuestList = sortQuestListByTime(filteredQuestList);
 
-  const nextQuestList = sortedQuestsData.filter((value) => value.state === "INACTIVE");
-  const finishedQuestList = sortedQuestsData.filter((value) => value.state === "ACTIVE");
+  const nextQuestList = sortedQuestList.filter((value) => value.state === "INACTIVE");
+  const finishedQuestList = sortedQuestList.filter((value) => value.state === "ACTIVE");
   const currentQuest = nextQuestList[0];
 
-  const [view, setView] = useState<"NEXT" | "FINISHED">("NEXT");
+  const [view, setView] = useState<View>("NEXT");
 
   return (
     <>
-      <h1 className="font-cp-font text-rhyth-light-blue text-2xl tracking-widest">
+      <span className="font-cp-font text-rhyth-light-blue text-2xl tracking-widest">
         {formatDateJP(now())}
         {`(${getToday()})`}
-      </h1>
+      </span>
       {isLoading ? (
         <LoadingContainer>
           <Loading />
         </LoadingContainer>
       ) : (
-        <>
+        <div>
           <div className="flex gap-2 my-2">
             <svg
               className="w-6 h-6 text-rhyth-gray"
@@ -70,9 +64,7 @@ export const QuestsPresenter = () => {
             </svg>
             <h1 className="font-cp-font text-rhyth-gray tracking-widest">NEXT CHALLENGE</h1>
           </div>
-          <div className="bg-white">
-            {currentQuest ? <QuestBoard currentQuest={currentQuest} /> : <QuestBoardNoData />}
-          </div>
+          {currentQuest ? <QuestBoard currentQuest={currentQuest} /> : <QuestBoardNoData />}
           <div className={`flex flex-col w-full mt-6 bg-gray-100 rounded-md`}>
             <div className="flex items-center">
               <button
@@ -108,7 +100,7 @@ export const QuestsPresenter = () => {
               <QuestListNoData view={view} />
             )}
           </div>
-        </>
+        </div>
       )}
     </>
   );

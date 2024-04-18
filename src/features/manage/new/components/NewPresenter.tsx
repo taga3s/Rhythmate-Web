@@ -1,7 +1,5 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { NewStar } from "./NewStar";
-import { NewDayOfTheWeek } from "./NewDayOfTheWeek";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { FormErrorMsg } from "../../../common/components/utils/FormErrorMsg";
 import { useMutateQuest } from "../../api/quest/hooks/useMutateQuest";
@@ -11,10 +9,15 @@ import { DAYS } from "../../common/constant/constant";
 import { convertEnToJPWeekday } from "../../common/funcs";
 import { Day, Difficulty } from "../../../../api/quest/types";
 import { formatDateTimeOnlyDate, formatDateTimeWithAddMinutes, isBefore, now } from "../../../../pkg/util/dayjs";
+import { DayOfTheWeek } from "../../common/components/DayOfTheWeek";
+import { Star } from "../../common/components/Star";
+import { NewTagDropdown } from "./NewTagDropdown";
+import { BackButton } from "../../../common/components/BackButton";
 
 type NewValues = {
   title: string;
   startsAt: string;
+  tagId?: string | undefined;
   minutes: string;
   days: string[];
   description: string;
@@ -49,7 +52,7 @@ export const NewPresenter = () => {
       title: data.title,
       description: data.description,
       startsAt: data.startsAt,
-      tagId: "",
+      tagId: data.tagId ?? "",
       minutes: Number(data.minutes),
       days: data.days as Day[],
       difficulty: difficulty,
@@ -64,28 +67,7 @@ export const NewPresenter = () => {
   };
   return (
     <>
-      <button onClick={() => navigate({ to: "/manage" })} className="block">
-        <div className="px-2 py-2 flex gap-2 items-center bg-white hover:bg-rhyth-hover-light-gray font-bold text-sm rounded-md border-2 border-rhyth-light-gray shadow-sm">
-          <svg
-            className="w-6 h-6 text-rhyth-gray"
-            aria-hidden="true"
-            xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
-            fill="none"
-            viewBox="0 0 24 24"
-          >
-            <path
-              stroke="currentColor"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2"
-              d="M5 12h14M5 12l4-4m-4 4 4 4"
-            />
-          </svg>
-          <p className="text-rhyth-gray">ひとつ前へ戻る</p>
-        </div>
-      </button>
+      <BackButton onClickNavigation={() => navigate({ to: "/manage" })} />
       <h1 className="text-xl font-cp-font text-rhyth-gray mt-4 mb-2">クエスト作成</h1>
       <form className="bg-white px-3 py-2 rounded-lg shadow-lg" onSubmit={handleSubmit(onSubmit)}>
         <div className="mt-2 flex flex-col gap-2">
@@ -95,8 +77,8 @@ export const NewPresenter = () => {
           <input
             type="text"
             id="new-quest-title"
-            placeholder="タイトルを入力"
             className="w-full p-2 border-2 border-rhyth-light-gray rounded-lg"
+            placeholder="例) 朝のストレッチ"
             {...register("title")}
           />
         </div>
@@ -144,7 +126,7 @@ export const NewPresenter = () => {
               <div className="flex mt-4 gap-1">
                 {DAYS.map((day, i) => {
                   return (
-                    <NewDayOfTheWeek
+                    <DayOfTheWeek
                       key={i}
                       day={convertEnToJPWeekday(day)}
                       value={day}
@@ -181,7 +163,7 @@ export const NewPresenter = () => {
                 setDifficulty("EASY");
               }}
             >
-              <NewStar />
+              <Star />
             </button>
             <button
               type="button"
@@ -192,8 +174,8 @@ export const NewPresenter = () => {
                 setDifficulty("NORMAL");
               }}
             >
-              <NewStar />
-              <NewStar />
+              <Star />
+              <Star />
             </button>
             <button
               type="button"
@@ -204,11 +186,30 @@ export const NewPresenter = () => {
                 setDifficulty("HARD");
               }}
             >
-              <NewStar />
-              <NewStar />
-              <NewStar />
+              <Star />
+              <Star />
+              <Star />
             </button>
           </div>
+        </div>
+        <div className="w-full gap-2 mt-6">
+          <div className="flex items-center gap-2 w-24">
+            <svg
+              className="w-6 h-6 text-rhyth-gray"
+              aria-hidden="true"
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              fill="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path d="M18.045 3.007 12.31 3a1.965 1.965 0 0 0-1.4.585l-7.33 7.394a2 2 0 0 0 0 2.805l6.573 6.631a1.957 1.957 0 0 0 1.4.585 1.965 1.965 0 0 0 1.4-.585l7.409-7.477A2 2 0 0 0 21 11.479v-5.5a2.972 2.972 0 0 0-2.955-2.972Zm-2.452 6.438a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z" />
+            </svg>
+            <label htmlFor="new-quest-tag" className="text-base font-bold text-rhyth-gray">
+              タグ
+            </label>
+          </div>
+          <NewTagDropdown register={register} watch={watch} />
         </div>
         <div className="w-full gap-2 mt-6">
           <div className="flex items-center gap-2 w-24">
@@ -222,13 +223,14 @@ export const NewPresenter = () => {
               <path stroke="currentColor" strokeLinecap="round" strokeWidth="2" d="M5 7h14M5 12h14M5 17h10" />
             </svg>
             <label htmlFor="new-quest-description" className="text-base font-bold text-rhyth-gray">
-              ひとこと
+              メモ
             </label>
           </div>
           <input
             type="text"
             id="new-quest-description"
             className="w-full border-2 p-2 rounded-md mt-4"
+            placeholder="例) 同じメニューを毎日欠かさず行う"
             {...register("description")}
           />
         </div>

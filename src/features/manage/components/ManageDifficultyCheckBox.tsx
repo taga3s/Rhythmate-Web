@@ -1,5 +1,5 @@
 import { ChangeEvent, FC } from "react";
-import { Star } from "./ManageStar";
+import { Star } from "../common/components/Star";
 import { convertDifficultyToNumber } from "../common/funcs";
 import { Difficulty } from "../../../api/quest/types";
 

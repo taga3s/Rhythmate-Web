@@ -1,4 +1,4 @@
-export const NewStar = () => {
+export const Star = () => {
   return (
     <div>
       <svg

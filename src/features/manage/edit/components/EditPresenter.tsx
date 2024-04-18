@@ -10,12 +10,15 @@ import { useMutateQuest } from "../../api/quest/hooks/useMutateQuest";
 import { DAYS } from "../../common/constant/constant";
 import { convertEnToJPWeekday } from "../../common/funcs";
 import { TManageValidationSchema, manageValidationSchema } from "../../common/libs/validation";
-import { NewDayOfTheWeek } from "../../new/components/NewDayOfTheWeek";
-import { NewStar } from "../../new/components/NewStar";
+import { Star } from "../../common/components/Star";
+import { DayOfTheWeek } from "../../common/components/DayOfTheWeek";
+import { EditTagDropdown } from "./EditTagDropdown";
+import { BackButton } from "../../../common/components/BackButton";
 
 type NewValues = {
   title: string;
   startsAt: string;
+  tagId?: string | undefined;
   minutes: string;
   days: string[];
   description: string;
@@ -51,13 +54,14 @@ export const EditPresenter: FC<Props> = (props) => {
     mode: "onBlur",
     resolver: zodResolver(manageValidationSchema),
   });
+
   const onSubmit = async (data: NewValues) => {
     await updateQuestMutation.mutateAsync({
       id: quest_id,
       title: data.title,
       description: data.description,
       startsAt: data.startsAt,
-      tagId: "",
+      tagId: data.tagId ?? "",
       minutes: Number(data.minutes),
       difficulty: difficulty,
       days: data.days as Day[],
@@ -72,32 +76,10 @@ export const EditPresenter: FC<Props> = (props) => {
     });
     navigate({ to: "/manage" });
   };
+
   return (
     <>
-      <div>
-        <button onClick={() => navigate({ to: "/manage" })} className="block">
-          <div className="px-2 py-2 flex gap-2 items-center bg-white hover:bg-rhyth-hover-light-gray font-bold text-black text-sm rounded-md border-2 border-rhyth-light-gray shadow-sm">
-            <svg
-              className="w-6 h-6 text-rhyth-gray"
-              aria-hidden="true"
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              fill="none"
-              viewBox="0 0 24 24"
-            >
-              <path
-                stroke="currentColor"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M5 12h14M5 12l4-4m-4 4 4 4"
-              />
-            </svg>
-            <p className="text-rhyth-gray">ひとつ前へ戻る</p>
-          </div>
-        </button>
-      </div>
+      <BackButton onClickNavigation={() => navigate({ to: "/manage" })} />
       <h1 className="text-xl font-cp-font text-rhyth-gray mt-4 mb-2">クエスト編集</h1>
       {isLoading ? (
         <LoadingContainer>
@@ -114,6 +96,7 @@ export const EditPresenter: FC<Props> = (props) => {
               className="w-full p-2 border-2 border-rhyth-light-gray rounded-lg"
               id="edit-quest-title"
               defaultValue={targetQuest?.title}
+              placeholder="例) 朝のストレッチ"
               {...register("title")}
             />
           </div>
@@ -167,7 +150,7 @@ export const EditPresenter: FC<Props> = (props) => {
                 <div className="flex mt-4 gap-1">
                   {DAYS.map((day, i) => {
                     return (
-                      <NewDayOfTheWeek
+                      <DayOfTheWeek
                         key={i}
                         day={convertEnToJPWeekday(day)}
                         value={day}
@@ -204,7 +187,7 @@ export const EditPresenter: FC<Props> = (props) => {
                   setDifficulty("EASY");
                 }}
               >
-                <NewStar />
+                <Star />
               </button>
               <button
                 type="button"
@@ -215,8 +198,8 @@ export const EditPresenter: FC<Props> = (props) => {
                   setDifficulty("NORMAL");
                 }}
               >
-                <NewStar />
-                <NewStar />
+                <Star />
+                <Star />
               </button>
               <button
                 type="button"
@@ -227,11 +210,30 @@ export const EditPresenter: FC<Props> = (props) => {
                   setDifficulty("HARD");
                 }}
               >
-                <NewStar />
-                <NewStar />
-                <NewStar />
+                <Star />
+                <Star />
+                <Star />
               </button>
             </div>
+          </div>
+          <div className="w-full gap-2 mt-6">
+            <div className="flex items-center gap-2 w-24">
+              <svg
+                className="w-6 h-6 text-rhyth-gray"
+                aria-hidden="true"
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                fill="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path d="M18.045 3.007 12.31 3a1.965 1.965 0 0 0-1.4.585l-7.33 7.394a2 2 0 0 0 0 2.805l6.573 6.631a1.957 1.957 0 0 0 1.4.585 1.965 1.965 0 0 0 1.4-.585l7.409-7.477A2 2 0 0 0 21 11.479v-5.5a2.972 2.972 0 0 0-2.955-2.972Zm-2.452 6.438a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z" />
+              </svg>
+              <label htmlFor="edit-quest-tag" className="text-base font-bold text-rhyth-gray">
+                タグ
+              </label>
+            </div>
+            <EditTagDropdown register={register} watch={watch} tagId={targetQuest?.tagId} />
           </div>
           <div className="w-full gap-2 mt-6">
             <div className="flex items-center gap-2 w-24">
@@ -245,13 +247,14 @@ export const EditPresenter: FC<Props> = (props) => {
                 <path stroke="currentColor" strokeLinecap="round" strokeWidth="2" d="M5 7h14M5 12h14M5 17h10" />
               </svg>
               <label htmlFor="new-quest-description" className="text-base font-bold text-rhyth-gray">
-                ひとこと
+                メモ
               </label>
             </div>
             <input
               type="text"
-              className="w-full border-2 p-2 rounded-md mt-4"
               id="edit-quest-description"
+              className="w-full border-2 p-2 rounded-md mt-4"
+              placeholder="例) 同じメニューを毎日欠かさず行う"
               defaultValue={targetQuest?.description}
               {...register("description")}
             />

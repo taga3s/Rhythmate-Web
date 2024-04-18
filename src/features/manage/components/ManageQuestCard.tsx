@@ -21,11 +21,34 @@ type Props = {
   difficulty: Difficulty;
   days: Day[];
   continuationLevel: number;
+  tagName: string | undefined;
+  tagColor: string | undefined;
 };
 
 export const ManageQuestCard: FC<Props> = (props) => {
   const { id, title, description, startsAt, minutes, days, difficulty, continuationLevel } = props;
   const navigate = useNavigate();
+
+  const handleBgTagColor = (tagColor: string | undefined) => {
+    switch (tagColor) {
+      case "Blue":
+        return "bg-rhyth-blue";
+      case "Green":
+        return "bg-rhyth-green";
+      case "Red":
+        return "bg-rhyth-red";
+      case "Purple":
+        return "bg-rhyth-purple";
+      case "Orange":
+        return "bg-rhyth-orange";
+      case "Yellow":
+        return "bg-rhyth-yellow";
+      case "LightBlue":
+        return "bg-rhyth-light-blue";
+      case undefined:
+        return "bg-rhyth-gray";
+    }
+  };
 
   return (
     <div className="w-full h-auto  bg-white border-2 border-rhyth-light-gray border-solid rounded-lg shadow-lg">
@@ -58,25 +81,73 @@ export const ManageQuestCard: FC<Props> = (props) => {
           </button>
         </div>
         <hr className="h-1.5 bg-rhyth-blue" />
-        <div className="flex items-center gap-2 text-sm mt-2">
-          <div className="font-cp-font text-white bg-rhyth-gray py-1 px-3 rounded-full tracking-wider">
-            <p>ひとこと</p>
-          </div>
-          <h3 className="font-bold text-rhyth-dark-blue">{description}</h3>
-        </div>
-        <div className="my-2 text-sm">
-          <div className="w-[200px] flex justify-center items-center gap-2 text-white bg-rhyth-blue py-1 px-3 rounded-full">
-            <ClockIcon color="text-white" />
-            <p className="text-sm font-cp-font tracking-widest">クエスト実行タイム</p>
-          </div>
-          <h3 className="ml-2 my-2 text-lg font-bold text-rhyth-dark-blue">{convertENToJPWeekdayString(days)}</h3>
-          <div className="ml-2 flex items-center gap-4 font-bold">
-            <span className="text-2xl text-rhyth-light-blue">{formatDateTimeOnlyTime(startsAt)}</span>
+        <div className="text-md">
+          <div className="flex items-center gap-4 font-bold mt-2 px-2">
+            <span className="text-2xl text-rhyth-dark-blue">{formatDateTimeOnlyTime(startsAt)}</span>
             <span className="text-lg text-rhyth-dark-blue">から</span>
-            <span className="text-2xl text-rhyth-light-blue">{minutes}分間</span>
-            <span className="text-lg text-rhyth-dark-blue">集中！</span>
+            <span className="text-2xl text-rhyth-dark-blue">{minutes}分間</span>
           </div>
+          <p className="w-fit font-bold text-sm text-white bg-rhyth-gray py-1 px-3 mt-2 rounded-lg tracking-wider">
+            メモ
+          </p>
+          <h3 className="font-bold text-rhyth-dark-blue mt-2 px-2">
+            {description === "" ? (
+              <div className="flex items-center gap-1">
+                <svg
+                  className="w-6 h-6 text-rhyth-dark-blue"
+                  aria-hidden="true"
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke="currentColor"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M10.779 17.779 4.36 19.918 6.5 13.5m4.279 4.279 8.364-8.643a3.027 3.027 0 0 0-2.14-5.165 3.03 3.03 0 0 0-2.14.886L6.5 13.5m4.279 4.279L6.499 13.5m2.14 2.14 6.213-6.504M12.75 7.04 17 11.28"
+                  />
+                </svg>
+                メモを入力できます
+              </div>
+            ) : (
+              description
+            )}
+          </h3>
         </div>
+        <div className="mt-2 text-sm">
+          <div className="w-fit flex justify-center items-center gap-2 text-white bg-rhyth-blue py-1 px-3 rounded-lg text-sm">
+            <ClockIcon color="text-white" />
+            <p className="text-sm font-bold tracking-widest">クエスト実行頻度</p>
+          </div>
+          <h3 className="px-2 mt-2 text-lg font-bold text-rhyth-dark-blue">{convertENToJPWeekdayString(days)}</h3>
+        </div>
+        {props.tagName !== undefined ? (
+          <div className="mt-2">
+            <div
+              className={`w-fit flex justify-center items-center gap-2 text-white ${handleBgTagColor(
+                props.tagColor,
+              )} py-1 px-3 rounded-lg text-sm`}
+            >
+              <svg
+                className="w-6 h-6 text-white"
+                aria-hidden="true"
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                fill="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path d="M18.045 3.007 12.31 3a1.965 1.965 0 0 0-1.4.585l-7.33 7.394a2 2 0 0 0 0 2.805l6.573 6.631a1.957 1.957 0 0 0 1.4.585 1.965 1.965 0 0 0 1.4-.585l7.409-7.477A2 2 0 0 0 21 11.479v-5.5a2.972 2.972 0 0 0-2.955-2.972Zm-2.452 6.438a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z" />
+              </svg>
+              <p className="text-sm font-bold tracking-widest">{props.tagName}</p>
+            </div>
+          </div>
+        ) : (
+          <div></div>
+        )}
       </div>
       <hr className="h-0.5 bg-rhyth-light-gray" />
       <div className="flex items-center h-24">
