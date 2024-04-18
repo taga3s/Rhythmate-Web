@@ -10,6 +10,7 @@ export type ListResponse = {
     failed_quests_each_day: number[];
     start_date: string;
     end_date: string;
+    feedback: string;
     user_id: string;
   }[];
 };

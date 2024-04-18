@@ -6,7 +6,7 @@ import { createFactory } from "../../../../../api/weeklyReport/factory";
 export const useQueryWeeklyReports = () => {
   const weeklyReportFactory = createFactory();
   return useQuery<WeeklyReport[], FetchError>({
-    queryKey: ["listWeeklyReports"],
+    queryKey: ["weeklyReports"],
     queryFn: async () => {
       const weeklyReports = await weeklyReportFactory.listWeeklyReports();
       return weeklyReports;

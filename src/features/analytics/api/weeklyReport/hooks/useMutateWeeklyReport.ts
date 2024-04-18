@@ -3,6 +3,7 @@ import { notifyFailed, notifySuccess } from "../../../../../pkg/ui/toast";
 import { createFactory } from "../../../../../api/weeklyReport/factory";
 import { FetchError } from "../../../../../pkg/api/util/fetchError";
 import { queryClient } from "../../../../../pkg/api/client/queryClient";
+import { WeeklyReport } from "../../../../../api/weeklyReport/model";
 
 export const useMutateWeeklyReport = () => {
   const weeklyReportFactory = createFactory();
@@ -14,7 +15,21 @@ export const useMutateWeeklyReport = () => {
       return { feedBack, weeklyReportId };
     },
     onSuccess: (data) => {
-      queryClient.setQueryData<string>([`weeklyReportFeedBack-${data.weeklyReportId}`], data.feedBack);
+      const weeklyReports = queryClient.getQueryData<WeeklyReport[]>(["weeklyReports"]);
+      if (weeklyReports) {
+        queryClient.setQueryData<WeeklyReport[]>(
+          ["weeklyReports"],
+          weeklyReports.map((weeklyReport) =>
+            weeklyReport.id === data.weeklyReportId
+              ? {
+                  ...weeklyReport,
+                  feedback: data.feedBack,
+                }
+              : weeklyReport,
+          ),
+        );
+      }
+      // queryClient.setQueryData<string>([`weeklyReportFeedBack-${data.weeklyReportId}`], data.feedBack);
       notifySuccess("フィードバックを生成しました。");
     },
     onError: (err: FetchError) => {

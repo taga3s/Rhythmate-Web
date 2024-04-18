@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { formatDateTimeJP } from "../../../pkg/util/dayjs";
 import { Loading, LoadingContainer } from "../../common/components";
-import { useQueryWeeklyReportFeedBack, useQueryWeeklyReports } from "../api/weeklyReport/hooks/useQueryWeeklyReport";
+import { useQueryWeeklyReports } from "../api/weeklyReport/hooks/useQueryWeeklyReport";
 import { AnalyticsAIFeedback } from "./AnalyticsAIFeedback";
 import { AnalyticsBarChart } from "./AnalyticsBarChart";
 import { AnalyticsCard } from "./AnalyticsCard";
@@ -12,7 +12,6 @@ export const AnalyticsPresenter = () => {
   const { data: weeklyReports, isLoading: isLoadingWeeklyReports } = useQueryWeeklyReports();
   const [currentIndex, setCurrentIndex] = useState<number>(0);
   const currentWeeklyReportsId = weeklyReports?.length ? weeklyReports[currentIndex].id : "";
-  const { data: summaryData, isFetching: isFetchingSummary } = useQueryWeeklyReportFeedBack(currentWeeklyReportsId);
   const { generateFeedBackMutation } = useMutateWeeklyReport();
 
   const onClickGenerateFeedback = () => {
@@ -90,8 +89,8 @@ export const AnalyticsPresenter = () => {
             failedQuestsData={weeklyReports[currentIndex].failed_quests_each_day}
           />
           <AnalyticsAIFeedback
-            summaryData={summaryData ?? ""}
-            isLoading={isFetchingSummary}
+            summaryData={weeklyReports[currentIndex].feedback ?? ""}
+            isLoading={generateFeedBackMutation.isPending}
             onClick={onClickGenerateFeedback}
           />
         </div>
