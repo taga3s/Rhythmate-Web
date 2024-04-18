@@ -87,12 +87,6 @@ export const SettingsPresenter = () => {
                 ) : (
                   <img src={loginUser?.imageUrl} alt="現在設定されている画像" className="w-full h-full rounded-full" />
                 )}
-                {/* // useeffect imageurlとimagefileを監視 値がかわｘったら発火 useeffectのなかでif文してみる */}
-                {/* <img
-                      src={imageUrl}
-                      alt="アップロード画像"
-                      className="w-full h-full rounded-full"
-                    /> */}
               </div>
               <SettingsInputImage ref={fileInputRef} id={IMAGE_ID} onChange={handleFileChange} />
             </div>

@@ -21,6 +21,8 @@ export const ImageCropModal: FC<Props> = ({ imageUrl, closeModal }) => {
     height: 50,
   });
 
+  const [isCropped, setIsCropped] = useState<boolean>(false);
+
   const centerAspectCrop = (mediaWidth: number, mediaHeight: number, aspect: number) => {
     const cropWidthInPercent = (150 / mediaWidth) * 100;
     return centerCrop(
@@ -48,23 +50,19 @@ export const ImageCropModal: FC<Props> = ({ imageUrl, closeModal }) => {
       <div className="order relative bg-white rounded-lg shadow">
         {/* <!-- Modal header --> */}
         <div className="flex items-center justify-between p-4 md:p-4 rounded-t border-b">
-          <h3 className="font-cp-font text-xl font-bold text-rhyth-dark-blue">あああ</h3>
+          <h3 className="font-cp-font text-xl font-bold text-rhyth-dark-blue">画像の切り取り</h3>
           <ModalHeaderCloseButton onClickClose={closeModal} />
         </div>
         {/* <!-- Modal body --> */}
-        <div className="p-4 md:p-4">
-          <ReactCrop
-            crop={crop}
-            keepSelection
-            onChange={(_, percentCrop) => setCrop(percentCrop)}
-            aspect={1}
-            className="bg-red-400"
-          >
+        <div className="grid gap-3 p-4 md:p-4">
+          <ReactCrop crop={crop} keepSelection onChange={(_, percentCrop) => setCrop(percentCrop)} aspect={1}>
             <img ref={imgRef} src={imageUrl} onLoad={onImageLoad} />
           </ReactCrop>
           <button
-            className="border p-2 bg-gray-300"
+            type="button"
+            className="w-full text-white bg-rhyth-gray hover:bg-hover-gray active:ring-4 focus:outline-none  font-medium rounded-lg text-sm px-5 py-2.5 text-center"
             onClick={() => {
+              setIsCropped(true);
               setCanvasPreview(
                 imgRef.current,
                 previewCanvasRef.current,
@@ -74,14 +72,26 @@ export const ImageCropModal: FC<Props> = ({ imageUrl, closeModal }) => {
           >
             画像を切り取る
           </button>
-          {crop ? <canvas ref={previewCanvasRef} style={{ objectFit: "contain", width: 200, height: 200 }} /> : null}
+          {crop ? (
+            <div className="flex items-center justify-center">
+              <canvas
+                ref={previewCanvasRef}
+                style={{
+                  objectFit: "contain",
+                  // クロップされてないときは display:none にしたいのにできない
+                  // display: isCropped ? "contents" : "none",
+                }}
+                className="w-full"
+              />
+            </div>
+          ) : null}
           <button
             type="submit"
             onClick={() => {
               const dataUrl = previewCanvasRef.current?.toDataURL();
               console.log(dataUrl);
             }}
-            className="border p-2 bg-gray-300"
+            className="w-full text-white bg-rhyth-light-blue hover:bg-rhyth-blue focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
           >
             送信
           </button>
