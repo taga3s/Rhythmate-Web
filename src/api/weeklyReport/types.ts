@@ -23,3 +23,10 @@ export type GetFeedBackResponse = {
   status: string;
   feedBack: string;
 };
+export type GenerateFeedBackRequest = {
+  weeklyReportId: string;
+};
+export type GenerateFeedBackResponse = {
+  status: string;
+  feedBack: string;
+};

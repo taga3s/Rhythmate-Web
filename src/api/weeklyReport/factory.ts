@@ -18,7 +18,8 @@ export const createFactory = () => {
       return response.feedBack;
     },
     generateWeeklyReportFeedBack: async (getFeedBackParams: GetFeedBackParams) => {
-      await repository.generateFeedBack({ weeklyReportId: getFeedBackParams.weeklyReportId });
+      const response = await repository.generateFeedBack({ weeklyReportId: getFeedBackParams.weeklyReportId });
+      return response.feedBack;
     },
   };
 };
