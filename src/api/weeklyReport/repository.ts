@@ -1,9 +1,17 @@
 import { apiClient } from "../../pkg/api/client/apiClient";
-import { ListResponse, GetSummaryRequest, GetSummaryResponse } from "./types";
+import {
+  ListResponse,
+  GetFeedBackParams,
+  GetFeedBackRequest,
+  GetFeedBackResponse,
+  GenerateFeedBackResponse,
+  GenerateFeedBackRequest,
+} from "./types";
 
 export interface WeeklyReportsRepository {
   list: () => Promise<ListResponse>;
-  summarize: (params: GetSummaryRequest) => Promise<GetSummaryResponse>;
+  getFeedBack: (params: GetFeedBackRequest) => Promise<GetFeedBackResponse>;
+  generateFeedBack: (params: GenerateFeedBackRequest) => Promise<GenerateFeedBackResponse>;
 }
 
 const list: WeeklyReportsRepository["list"] = async () => {
@@ -11,12 +19,18 @@ const list: WeeklyReportsRepository["list"] = async () => {
   return response;
 };
 
-const summarize: WeeklyReportsRepository["summarize"] = async (params: GetSummaryRequest) => {
-  const response = await apiClient.get(`/weekly-reports/summarize/${params.weeklyReportIndex}`);
+const getFeedBack: WeeklyReportsRepository["getFeedBack"] = async (params: GetFeedBackParams) => {
+  const response = await apiClient.get(`/weekly-reports/feedback/${params.weeklyReportId}`);
+  return response;
+};
+
+const generateFeedBack: WeeklyReportsRepository["generateFeedBack"] = async (params: GetFeedBackParams) => {
+  const response = await apiClient.post(`/weekly-reports/feedback/${params.weeklyReportId}`);
   return response;
 };
 
 export const weeklyReportsRepository: WeeklyReportsRepository = {
   list,
-  summarize,
+  getFeedBack,
+  generateFeedBack,
 };

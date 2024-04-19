@@ -6,7 +6,7 @@ import { createFactory } from "../../../../../api/weeklyReport/factory";
 export const useQueryWeeklyReports = () => {
   const weeklyReportFactory = createFactory();
   return useQuery<WeeklyReport[], FetchError>({
-    queryKey: ["listWeeklyReports"],
+    queryKey: ["weeklyReports"],
     queryFn: async () => {
       const weeklyReports = await weeklyReportFactory.listWeeklyReports();
       return weeklyReports;
@@ -15,13 +15,13 @@ export const useQueryWeeklyReports = () => {
   });
 };
 
-export const useQueryWeeklyReportSummary = (weeklyReportIndex: number) => {
+export const useQueryWeeklyReportFeedBack = (weeklyReportId: string) => {
   const weeklyReportFactory = createFactory();
   return useQuery<string, FetchError>({
-    queryKey: [`weeklyReportSummary-${weeklyReportIndex}`],
+    queryKey: [`weeklyReportFeedBack-${weeklyReportId}`],
     queryFn: async () => {
-      const summary = await weeklyReportFactory.getWeeklyReportSummary({ weeklyReportIndex: weeklyReportIndex });
-      return summary;
+      const feedBack = await weeklyReportFactory.getWeeklyReportFeedBack({ weeklyReportId: weeklyReportId });
+      return feedBack;
     },
     staleTime: Infinity,
   });
