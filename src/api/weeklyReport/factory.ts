@@ -1,6 +1,6 @@
 import { WeeklyReport, toWeeklyReport } from "./model";
 import { weeklyReportsRepository } from "./repository";
-import { GetSummaryParams } from "./types";
+import { GetFeedBackParams } from "./types";
 
 export const createFactory = () => {
   const repository = weeklyReportsRepository;
@@ -13,9 +13,13 @@ export const createFactory = () => {
       });
       return weeklyReports;
     },
-    getWeeklyReportSummary: async (getSummaryParams: GetSummaryParams) => {
-      const response = await repository.summarize(getSummaryParams);
-      return response.summary;
+    getWeeklyReportFeedBack: async (getFeedBackParams: GetFeedBackParams) => {
+      const response = await repository.getFeedBack({ weeklyReportId: getFeedBackParams.weeklyReportId });
+      return response.feedBack;
+    },
+    generateWeeklyReportFeedBack: async (getFeedBackParams: GetFeedBackParams) => {
+      const response = await repository.generateFeedBack({ weeklyReportId: getFeedBackParams.weeklyReportId });
+      return response.feedBack;
     },
   };
 };

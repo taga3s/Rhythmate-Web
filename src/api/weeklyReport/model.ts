@@ -10,6 +10,7 @@ export type WeeklyReport = {
   failed_quests_each_day: number[];
   start_date: string;
   end_date: string;
+  feedback: string;
 };
 
 export const toWeeklyReport = (obj: {
@@ -22,6 +23,7 @@ export const toWeeklyReport = (obj: {
   failed_quests_each_day: number[];
   start_date: string;
   end_date: string;
+  feedback: string;
 }): WeeklyReport => {
   return {
     id: obj.id,
@@ -33,5 +35,6 @@ export const toWeeklyReport = (obj: {
     failed_quests_each_day: obj.failed_quests_each_day,
     start_date: convertUTCtoJST(obj.start_date),
     end_date: convertUTCtoJST(obj.end_date),
+    feedback: obj.feedback,
   };
 };

@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { UseFormRegister } from "react-hook-form";
+import { UseFormRegister, UseFormWatch } from "react-hook-form";
 import { TagItem } from "../../common/components/TagItem";
 import { TManageValidationSchema } from "../../common/libs/validation";
 import { Loading, LoadingContainer } from "../../../common/components";
@@ -7,11 +7,35 @@ import { useQueryTagList } from "../../tags/api/tag/hooks/useQueryTag";
 
 type Props = {
   register: UseFormRegister<TManageValidationSchema>;
+  watch: UseFormWatch<TManageValidationSchema>;
   tagId: string | undefined;
 };
 
-export const EditTagDropdown: FC<Props> = ({ register, tagId }) => {
+export const EditTagDropdown: FC<Props> = ({ register, watch, tagId }) => {
   const { data: tagItems, isLoading } = useQueryTagList();
+  const tagIdForColorSelect = watch("tagId");
+
+  const selectColorLabel = (tagId: string | undefined) => {
+    const selectTagItem = tagItems?.find((tagItem) => tagItem.id === tagId);
+    switch (selectTagItem?.color) {
+      case "Blue":
+        return "text-rhyth-blue";
+      case "Green":
+        return "text-rhyth-green";
+      case "Red":
+        return "text-rhyth-red";
+      case "Purple":
+        return "text-rhyth-purple";
+      case "Orange":
+        return "text-rhyth-orange";
+      case "Yellow":
+        return "text-rhyth-yellow";
+      case "LightBlue":
+        return "text-rhyth-light-blue";
+      default:
+        return "text-rhyth-dark-blue";
+    }
+  };
 
   return (
     <>
@@ -21,7 +45,7 @@ export const EditTagDropdown: FC<Props> = ({ register, tagId }) => {
         </LoadingContainer>
       ) : tagItems?.length ? (
         <select
-          className={`w-full border-2 p-2 rounded-md mt-4`}
+          className={`w-full border-2 p-2 rounded-md mt-4 ${selectColorLabel(tagIdForColorSelect)}`}
           id="edit-quest-description"
           defaultValue={tagId}
           {...register("tagId")}
