@@ -12,6 +12,7 @@ import { formatDateTimeOnlyDate, formatDateTimeWithAddMinutes, isBefore, now } f
 import { DayOfTheWeek } from "../../common/components/DayOfTheWeek";
 import { Star } from "../../common/components/Star";
 import { NewTagDropdown } from "./NewTagDropdown";
+import { BackButton } from "../../../common/components/BackButton";
 
 type NewValues = {
   title: string;
@@ -66,28 +67,7 @@ export const NewPresenter = () => {
   };
   return (
     <>
-      <button onClick={() => navigate({ to: "/manage" })} className="block">
-        <div className="px-2 py-2 flex gap-2 items-center bg-white hover:bg-rhyth-hover-light-gray font-bold text-sm rounded-md border-2 border-rhyth-light-gray shadow-sm">
-          <svg
-            className="w-6 h-6 text-rhyth-gray"
-            aria-hidden="true"
-            xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
-            fill="none"
-            viewBox="0 0 24 24"
-          >
-            <path
-              stroke="currentColor"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2"
-              d="M5 12h14M5 12l4-4m-4 4 4 4"
-            />
-          </svg>
-          <p className="text-rhyth-gray">ひとつ前へ戻る</p>
-        </div>
-      </button>
+      <BackButton onClickNavigation={() => navigate({ to: "/manage" })} />
       <h1 className="text-xl font-cp-font text-rhyth-gray mt-4 mb-2">クエスト作成</h1>
       <form className="bg-white px-3 py-2 rounded-lg shadow-lg" onSubmit={handleSubmit(onSubmit)}>
         <div className="mt-2 flex flex-col gap-2">
@@ -229,7 +209,7 @@ export const NewPresenter = () => {
               タグ
             </label>
           </div>
-          <NewTagDropdown register={register} />
+          <NewTagDropdown register={register} watch={watch} />
         </div>
         <div className="w-full gap-2 mt-6">
           <div className="flex items-center gap-2 w-24">

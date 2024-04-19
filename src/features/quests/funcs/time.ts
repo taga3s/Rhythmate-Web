@@ -2,13 +2,15 @@ import dayjs from "dayjs";
 import { formatDate, formatDateTimeWithAddMinutes, formatDateTimeWithSubtract, now } from "../../../pkg/util/dayjs";
 import { CLOSED, DONE, ENGAGED, FORCE_STOP, OPEN, QuestStatus } from "../constant/constant";
 
-export const getBaseTime = (
+export const calcBaseTime = (
   startsAt: string,
   isStarted: boolean,
   minutes: number,
   startedAt: string,
 ): { baseTime: string; status: QuestStatus } => {
-  const { diffHH: beforeDiffHH, diffMM: beforeDiffMM } = getDiffTime(formatDateTimeWithSubtract(startsAt, 15));
+  const { diffHH: beforeDiffHH, diffMM: beforeDiffMM } = calcDiffTimeBetweenNowAndTargetTime(
+    formatDateTimeWithSubtract(startsAt, 15),
+  );
 
   // クエスト解放前
   if (!isStarted && 0 <= beforeDiffMM) {
@@ -34,7 +36,9 @@ export const getBaseTime = (
     };
   }
 
-  const { diffHH: afterDiffHH, diffMM: afterDiffMM } = getDiffTime(formatDateTimeWithAddMinutes(startedAt, minutes));
+  const { diffHH: afterDiffHH, diffMM: afterDiffMM } = calcDiffTimeBetweenNowAndTargetTime(
+    formatDateTimeWithAddMinutes(startedAt, minutes),
+  );
 
   // クエスト集中
   if (isStarted && 0 <= afterDiffMM) {
@@ -59,8 +63,8 @@ export const getBaseTime = (
   };
 };
 
-export const getDiffTime = (target: string) => {
-  const timeDiff = dayjs(target).diff(now());
+export const calcDiffTimeBetweenNowAndTargetTime = (targetTime: string) => {
+  const timeDiff = dayjs(targetTime).diff(now());
   const hours = Math.floor(timeDiff / (1000 * 60 * 60)) % 24;
   const minutes = Math.floor((timeDiff / (1000 * 60)) % 60);
   const seconds = Math.floor((timeDiff / 1000) % 60);

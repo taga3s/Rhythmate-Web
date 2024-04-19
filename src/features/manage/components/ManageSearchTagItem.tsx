@@ -1,11 +1,12 @@
 import { FC } from "react";
 
 type Props = {
+  tagId: string;
   tagName: string;
-  color: string;
+  tagColor: string;
 };
 
-export const ManageSearchTagItem: FC<Props> = ({ tagName, color }) => {
+export const ManageSearchTagItem: FC<Props> = ({ tagId, tagName, tagColor }) => {
   const selectColorLabel = (color: string) => {
     switch (color) {
       case "Blue":
@@ -28,9 +29,9 @@ export const ManageSearchTagItem: FC<Props> = ({ tagName, color }) => {
   return (
     <option
       className={`border-b border-rhyth-light-gray w-full h-hull font-bold flex items-center px-4 py-2 rounded-t-lg hover:text-white hover:bg-rhyth-hover-blue ${selectColorLabel(
-        color,
+        tagColor,
       )}`}
-      value={tagName}
+      value={tagId}
     >
       {tagName}
     </option>

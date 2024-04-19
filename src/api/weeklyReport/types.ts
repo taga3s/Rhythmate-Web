@@ -10,16 +10,24 @@ export type ListResponse = {
     failed_quests_each_day: number[];
     start_date: string;
     end_date: string;
+    feedback: string;
     user_id: string;
   }[];
 };
-export type GetSummaryParams = {
-  weeklyReportIndex: number;
+export type GetFeedBackParams = {
+  weeklyReportId: string;
 };
-export type GetSummaryRequest = {
-  weeklyReportIndex: number;
+export type GetFeedBackRequest = {
+  weeklyReportId: string;
 };
-export type GetSummaryResponse = {
+export type GetFeedBackResponse = {
   status: string;
-  summary: string;
+  feedBack: string;
+};
+export type GenerateFeedBackRequest = {
+  weeklyReportId: string;
+};
+export type GenerateFeedBackResponse = {
+  status: string;
+  feedBack: string;
 };

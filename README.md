@@ -1,6 +1,7 @@
 # Rhythmate-Web
 
-ゲーム感覚で習慣化を楽しむ「Rhythmate」のフロントエンドです。
+ゲーム感覚で習慣化を楽しむ「Rhythmate」のフロントエンドです。  
+バックエンドは[こちら](https://github.com/ayanami77/Rhythmate-Service)
 
 ## アプリ概要
 
@@ -8,7 +9,7 @@
 
 - クエスト機能
 - 週次レポート機能
-- レベルアップ・報酬機能
+- レベルアップ・バッジ機能
 
 ## 技術スタック
 
@@ -24,7 +25,7 @@
 
 ## システム構成
 
-![alt text](/public/docs/system-architecture.png)
+![システム構成図](/docs/system-architecture.png)
 
 ## 環境構築
 

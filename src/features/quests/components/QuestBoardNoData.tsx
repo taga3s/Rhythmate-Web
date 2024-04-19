@@ -15,16 +15,16 @@ export const QuestBoardNoData = () => {
             clipRule="evenodd"
           />
         </svg>
-        <p className="font-cp-font absolute top-1 right-[-3.8rem] text-rhyth-green tracking-widest origin-top-left rotate-[20deg]">
+        <span className="font-cp-font absolute top-1 right-[-3.8rem] text-rhyth-green tracking-widest origin-top-left rotate-[20deg]">
           Good!
-        </p>
+        </span>
       </div>
-      <p className="font-bold text-center p-2 text-rhyth-dark-blue">
+      <span className="font-bold text-center p-2 text-rhyth-dark-blue">
         今日のクエストは終了しました！
         <br />
         お疲れさまでした!
-      </p>
-      <p className="font-bold text-center p-2 text-rhyth-dark-blue">全てを終えた気分はどうですか？</p>
+      </span>
+      <span className="font-bold text-center p-2 text-rhyth-dark-blue">全てを終えた気分はどうですか？</span>
     </div>
   );
 };
