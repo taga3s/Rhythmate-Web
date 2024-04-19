@@ -73,8 +73,8 @@ export const AnalyticsPresenter = () => {
               isRate={true}
             />
             <AnalyticsCard
-              title={"コンプリート日数"}
-              data={weeklyReports[currentIndex].completed_days}
+              title={"連続ストリーク日数"}
+              data={weeklyReports[currentIndex].streak_days}
               color={"#28AC00"}
               isRate={false}
             />
