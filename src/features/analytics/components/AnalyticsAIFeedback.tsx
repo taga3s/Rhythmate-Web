@@ -8,7 +8,7 @@ type Props = {
 };
 export const AnalyticsAIFeedback: FC<Props> = ({ summaryData, isLoading, onClick }) => {
   return (
-    <div className="mt-3 text-sm border-2 w-full min-h-36 p-4 bg-white rounded-lg shadow">
+    <div className="mt-3 text-sm border-2 w-full min-h-[174px] p-4 bg-white rounded-lg shadow">
       <div className="flex gap-2 items-center mb-1 justify-start">
         <svg
           className="w-6 h-6 text-gray-800"
@@ -25,7 +25,7 @@ export const AnalyticsAIFeedback: FC<Props> = ({ summaryData, isLoading, onClick
         </svg>
         <p className="text-base font-bold">AIによるフィードバック</p>
         <button
-          className="flex ml-auto text-2xs text-rhyth-blue border border-rhyth-blue rounded px-1 py-1"
+          className="flex ml-auto text-2xs text-rhyth-blue border border-rhyth-blue rounded px-2 py-1"
           onClick={onClick}
         >
           生成
@@ -36,8 +36,10 @@ export const AnalyticsAIFeedback: FC<Props> = ({ summaryData, isLoading, onClick
         <div className="p-8">
           <Loading />
         </div>
-      ) : (
+      ) : summaryData.length ? (
         <p className="mt-2">{summaryData}</p>
+      ) : (
+        <p className="mt-2 text-rhyth-dark-blue font-bold">フィードバックを生成してみましょう!</p>
       )}
     </div>
   );
