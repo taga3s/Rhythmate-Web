@@ -21,8 +21,6 @@ export const ImageCropModal: FC<Props> = ({ imageUrl, closeModal }) => {
     height: 50,
   });
 
-  const [isCropped, setIsCropped] = useState<boolean>(false);
-
   const centerAspectCrop = (mediaWidth: number, mediaHeight: number, aspect: number) => {
     const cropWidthInPercent = (150 / mediaWidth) * 100;
     return centerCrop(
@@ -62,7 +60,6 @@ export const ImageCropModal: FC<Props> = ({ imageUrl, closeModal }) => {
             type="button"
             className="w-full text-white bg-rhyth-gray hover:bg-hover-gray active:ring-4 focus:outline-none  font-medium rounded-lg text-sm px-5 py-2.5 text-center"
             onClick={() => {
-              setIsCropped(true);
               setCanvasPreview(
                 imgRef.current,
                 previewCanvasRef.current,
