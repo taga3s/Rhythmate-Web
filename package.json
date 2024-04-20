@@ -3,13 +3,15 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
+  "packageManager": "pnpm@9.0.4",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
     "lint": "biome check --apply ./src",
     "format": "biome format --write ./src",
     "preview": "vite preview",
-    "prepare": "husky"
+    "prepare": "husky",
+    "preinstall": "npx only-allow pnpm"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.3.4",
@@ -47,6 +49,6 @@
     "vite-plugin-pwa": "^0.19.8"
   },
   "lint-staged": {
-    "*.{ts,tsx}": "biome format --write src"
+    "*.{ts,tsx}": "biome format --write ./src"
   }
 }
