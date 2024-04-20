@@ -1,6 +1,15 @@
 {
-  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": [
-    "config:recommended"
-  ]
+  "extends": ["config:base"],
+  "schedule": "before 2pm on Monday",
+  "timezone": "Asia/Tokyo",
+  "prHourlyLimit": 0,
+  "rangeStrategy": "bump",
+  "packageRules": [
+    {
+      "matchUpdateTypes": ["patch", "minor"],
+      "excludePackageNames": ["typescript"],
+      "groupName": "all minor and patch dependencies"
+    }
+  ],
+  "enabledManagers": ["github-actions", "npm"]
 }
