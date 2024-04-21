@@ -124,25 +124,45 @@ export const ManagePresenter = () => {
         </LoadingContainer>
       ) : filterActivation ? (
         filteredData?.length ? (
-          <ul className="mt-4 flex flex-col items-center gap-6">
-            {filteredData?.map((quest) => {
-              return (
-                <ManageQuestCard
-                  key={quest.id}
-                  id={quest.id}
-                  title={quest.title}
-                  description={quest.description}
-                  startsAt={quest.startsAt}
-                  minutes={quest.minutes}
-                  difficulty={quest.difficulty}
-                  days={quest.days}
-                  continuationLevel={quest.continuationLevel}
-                  tagName={quest.tagName}
-                  tagColor={quest.tagColor}
-                />
-              );
-            })}
-          </ul>
+          <div>
+            {manageView === "Timetable" ? (
+              <div className="flex flex-col w-full mt-4">
+                <div className="flex items-center">
+                  {DAYS.map((day, i) => {
+                    return (
+                      <ManageDayOfTheWeekSwitchButton
+                        key={i}
+                        view={day}
+                        dayOfTheWeek={dayOfTheWeekView}
+                        onClickFn={setDayOfTheWeekView}
+                      />
+                    );
+                  })}
+                </div>
+                <ManageTimetable questList={sortedDayOfTheWeekQuests} />
+              </div>
+            ) : (
+              <ul className="mt-4 flex flex-col items-center gap-6">
+                {filteredData?.map((quest) => {
+                  return (
+                    <ManageQuestCard
+                      key={quest.id}
+                      id={quest.id}
+                      title={quest.title}
+                      description={quest.description}
+                      startsAt={quest.startsAt}
+                      minutes={quest.minutes}
+                      difficulty={quest.difficulty}
+                      days={quest.days}
+                      continuationLevel={quest.continuationLevel}
+                      tagName={quest.tagName}
+                      tagColor={quest.tagColor}
+                    />
+                  );
+                })}
+              </ul>
+            )}
+          </div>
         ) : (
           <div className="w-full gap-4 flex flex-col items-center mx-auto mt-24 text-xl">
             <div>検索結果無し</div>
