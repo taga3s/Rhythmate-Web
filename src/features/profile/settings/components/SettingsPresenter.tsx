@@ -1,15 +1,15 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useNavigate } from "@tanstack/react-router";
-import { useEffect, useRef, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
+import { ConfirmModal, FormErrorMsg, Loading, LoadingContainer } from "../../../common/components";
+import { BackButton } from "../../../common/components/BackButton";
 import { useMutateUser } from "../../api/user/hooks/useMutateUser";
 import { useQueryLoginUser } from "../../api/user/hooks/useQueryUser";
 import { TUserEditValidationSchema, userEditValidationSchema } from "../../libs/validation";
 import { useGetImageUrl } from "../hooks/useGetImageUrl";
 import { ImageCropModal } from "./ImageCropModal";
 import { SettingsInputImage } from "./SettingsInputImage";
-import { ConfirmModal, FormErrorMsg, Loading, LoadingContainer } from "../../../common/components";
-import { BackButton } from "../../../common/components/BackButton";
 
 const IMAGE_ID = "imageId";
 
@@ -68,6 +68,19 @@ export const SettingsPresenter = () => {
     }
   });
 
+  // 0421追加
+  const [profileImage, setProfileImage] = useState<string>(
+    loginUser?.imageUrl === "undefined" ? "" : loginUser!.imageUrl,
+  );
+  // const handleImageChange = (newImage: string) => {
+  //   setProfileImage(newImage);
+  //   console.log(profileImage);
+  // };
+  const handleImageChange = useCallback((newImage: string) => {
+    setProfileImage(newImage);
+  }, []);
+  // ここまで
+
   return (
     <>
       {isLoading ? (
@@ -88,17 +101,14 @@ export const SettingsPresenter = () => {
                 <div className="max-w-[220px] w-1/4 max-h-[220px] h-1/4">
                   {imageUrl && imageFile ? (
                     imageCropModalOpen ? (
-                      <ImageCropModal imageUrl={imageUrl} closeModal={closeImageCropModal} />
-                    ) : (
-                      <p>エラー</p>
-                    )
-                  ) : (
-                    <img
-                      src={loginUser?.imageUrl}
-                      alt="現在設定されている画像"
-                      className="w-full h-full rounded-full"
-                    />
-                  )}
+                      <ImageCropModal
+                        handleImageChange={handleImageChange}
+                        imageUrl={imageUrl}
+                        closeModal={closeImageCropModal}
+                      />
+                    ) : null
+                  ) : null}
+                  <img src={profileImage} alt="現在設定されている画像" className="w-full h-full rounded-full" />
                 </div>
                 <SettingsInputImage ref={fileInputRef} id={IMAGE_ID} onChange={handleFileChange} />
               </div>

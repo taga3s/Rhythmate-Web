@@ -8,9 +8,10 @@ import { setCanvasPreview } from "./setCanvasPreview";
 type Props = {
   closeModal: () => void;
   imageUrl: string;
+  handleImageChange: any;
 };
 
-export const ImageCropModal: FC<Props> = ({ imageUrl, closeModal }) => {
+export const ImageCropModal: FC<Props> = ({ imageUrl, closeModal, handleImageChange }) => {
   const imgRef = useRef<HTMLImageElement>(null);
   const previewCanvasRef = useRef<HTMLCanvasElement>(null);
   const [crop, setCrop] = useState<Crop>({
@@ -20,6 +21,11 @@ export const ImageCropModal: FC<Props> = ({ imageUrl, closeModal }) => {
     width: 50,
     height: 50,
   });
+
+  const handleInputChange = (e: any) => {
+    const value = e.target.value;
+    handleImageChange.handleImageChange(value);
+  };
 
   const centerAspectCrop = (mediaWidth: number, mediaHeight: number, aspect: number) => {
     const cropWidthInPercent = (150 / mediaWidth) * 100;
@@ -83,10 +89,12 @@ export const ImageCropModal: FC<Props> = ({ imageUrl, closeModal }) => {
             </div>
           ) : null}
           <button
-            type="submit"
+            type="button"
             onClick={() => {
               const dataUrl = previewCanvasRef.current?.toDataURL();
               console.log(dataUrl);
+              handleInputChange(dataUrl);
+              closeModal();
             }}
             className="w-full text-white bg-rhyth-light-blue hover:bg-rhyth-blue focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
           >
