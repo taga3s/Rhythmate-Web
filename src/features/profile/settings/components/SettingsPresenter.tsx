@@ -16,7 +16,7 @@ export const SettingsPresenter = () => {
   const navigation = useNavigate();
 
   const { data: loginUser } = useQueryLoginUser();
-  const { updateUserMutation } = useMutateUser();
+  const { updateUserMutation, deleteUserMutation } = useMutateUser();
 
   const {
     register,
@@ -33,6 +33,10 @@ export const SettingsPresenter = () => {
     });
     navigation({ to: "/profile" });
   };
+
+  const onSubmitDelete = async () => {
+    await deleteUserMutation.mutateAsync({ id: loginUser?.id ?? ""});
+  }
 
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [imageFile, setImageFile] = useState<File | null>(null);
@@ -113,7 +117,7 @@ export const SettingsPresenter = () => {
           confirmBtnText={"削除する"}
           cancelBtnText={"キャンセルする"}
           btnColor={"red"}
-          actionFn={() => console.log("something")}
+          actionFn={onSubmitDelete}
           closeModal={() => setOpenModal(false)}
         />
       )}
