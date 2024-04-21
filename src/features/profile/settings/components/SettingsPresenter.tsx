@@ -27,15 +27,14 @@ export const SettingsPresenter = () => {
     resolver: zodResolver(userEditValidationSchema),
   });
 
-  const onSubmit = async (userData: TUserEditValidationSchema) => {
+  const onSubmitUpdate = async (userData: TUserEditValidationSchema) => {
     await updateUserMutation.mutateAsync({
       name: userData.name,
     });
     navigation({ to: "/profile" });
   };
-
   const onSubmitDelete = async () => {
-    await deleteUserMutation.mutateAsync({ id: loginUser?.id ?? ""});
+    await deleteUserMutation.mutateAsync();
   }
 
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -60,7 +59,7 @@ export const SettingsPresenter = () => {
         <h1 className="flex text-2xl justify-center font-bold">ユーザー設定</h1>
         <div className="p-4 flex flex-col gap-3 bg-white rounded-lg shadow">
           <h2 className="font-bold text-lg text-gray-900">ユーザー情報編集</h2>
-          <form className="space-y-4" onSubmit={handleSubmit(onSubmit)}>
+          <form className="space-y-4" onSubmit={handleSubmit(onSubmitUpdate)}>
             <label className="block text-sm font-medium text-gray-900">プロフィール画像</label>
             <div className="flex flex-col sm:flex-row justify-start items-center gap-6">
               <div className="max-w-[220px] w-1/4 max-h-[220px] h-1/4">

@@ -53,15 +53,3 @@ export type UpdateLoginUserResponse = BaseResponse & {
 export type UpdateLoginUserParams = {
   name: string;
 };
-
-export type DeleteLoginUserRequest = {
-  id: string;
-};
-
-export type DeleteLoginUserResponse = {
-  status: string;
-};
-
-export type DeleteLoginUserParams = {
-  id: string;
-};

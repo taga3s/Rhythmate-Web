@@ -2,7 +2,7 @@ import { useMutation } from "@tanstack/react-query";
 import { useNavigate } from "@tanstack/react-router";
 import { createFactory } from "../../../../../api/user/factory";
 import { User } from "../../../../../api/user/model";
-import { DeleteLoginUserParams, UpdateLoginUserParams } from "../../../../../api/user/types";
+import { UpdateLoginUserParams } from "../../../../../api/user/types";
 import { queryClient } from "../../../../../pkg/api/client/queryClient";
 import { FetchError } from "../../../../../pkg/api/util/fetchError";
 import { notifyFailed, notifySuccess } from "../../../../../pkg/ui/toast";
@@ -45,7 +45,7 @@ export const useMutateUser = () => {
     },
   });
   const deleteUserMutation = useMutation({
-    mutationFn: async (params: DeleteLoginUserParams) => await userFactory.deleteLoginUser(params),
+    mutationFn: async () => await userFactory.deleteLoginUser(),
     onSuccess: () => {
       queryClient.clear();
       navigate({ to: "/" });

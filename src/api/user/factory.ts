@@ -1,6 +1,6 @@
 import { toUser } from "./model";
 import { userRepository } from "./repository";
-import { AuthParams, DeleteLoginUserParams, UpdateLoginUserParams } from "./types";
+import { AuthParams, UpdateLoginUserParams } from "./types";
 
 export const createFactory = () => {
   const repository = userRepository;
@@ -21,8 +21,8 @@ export const createFactory = () => {
       const response = await repository.update(params);
       return toUser(response);
     },
-    deleteLoginUser: async (params: DeleteLoginUserParams) => {
-      const response = await repository.destroy(params);
+    deleteLoginUser: async () => {
+      const response = await repository.destroy();
       return response;
     }
   };

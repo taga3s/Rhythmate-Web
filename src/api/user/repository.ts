@@ -2,8 +2,6 @@ import { apiClient } from "../../pkg/api/client/apiClient";
 import {
   AuthRequest,
   AuthResponse,
-  DeleteLoginUserRequest,
-  DeleteLoginUserResponse,
   GetResponse,
   IsAuthenticatedResponse,
   UpdateLoginUserRequest,
@@ -16,7 +14,7 @@ export interface UserRepository {
   logout: () => Promise<void>;
   get: () => Promise<GetResponse>;
   update: (params: UpdateLoginUserRequest) => Promise<UpdateLoginUserResponse>;
-  destroy: (params: DeleteLoginUserRequest) => Promise<DeleteLoginUserResponse>;
+  destroy: () => Promise<void>;
 }
 
 const auth: UserRepository["auth"] = async (params: AuthRequest) => {
@@ -45,8 +43,8 @@ const update: UserRepository["update"] = async (params: UpdateLoginUserRequest) 
   return response;
 };
 
-const destroy: UserRepository["destroy"] = async (params: DeleteLoginUserRequest) => {
-  const response = await apiClient.destroy(`/users/me/${params.id}`);
+const destroy: UserRepository["destroy"] = async () => {
+  const response = await apiClient.destroy(`/users/me`);
   return response;
 };
 
