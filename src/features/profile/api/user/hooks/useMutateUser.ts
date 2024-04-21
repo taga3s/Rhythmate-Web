@@ -44,8 +44,20 @@ export const useMutateUser = () => {
       console.log(err);
     },
   });
+  const deleteUserMutation = useMutation({
+    mutationFn: async () => await userFactory.deleteLoginUser(),
+    onSuccess: () => {
+      queryClient.clear();
+      navigate({ to: "/" });
+    },
+    onError: (err: FetchError) => {
+      notifyFailed("アカウントの削除に失敗しました。");
+      console.log(err);
+    },
+  });
   return {
     updateUserMutation,
     logoutMutation,
+    deleteUserMutation,
   };
 };
