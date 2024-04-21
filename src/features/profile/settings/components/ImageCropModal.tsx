@@ -8,10 +8,9 @@ import { setCanvasPreview } from "./setCanvasPreview";
 type Props = {
   closeModal: () => void;
   imageUrl: string;
-  handleImageChange: any;
 };
 
-export const ImageCropModal: FC<Props> = ({ imageUrl, closeModal, handleImageChange }) => {
+export const ImageCropModal: FC<Props> = ({ imageUrl, closeModal }) => {
   const imgRef = useRef<HTMLImageElement>(null);
   const previewCanvasRef = useRef<HTMLCanvasElement>(null);
   const [crop, setCrop] = useState<Crop>({
@@ -21,11 +20,6 @@ export const ImageCropModal: FC<Props> = ({ imageUrl, closeModal, handleImageCha
     width: 50,
     height: 50,
   });
-
-  const handleInputChange = (e: any) => {
-    const value = e.target.value;
-    handleImageChange.handleImageChange(value);
-  };
 
   const centerAspectCrop = (mediaWidth: number, mediaHeight: number, aspect: number) => {
     const cropWidthInPercent = (150 / mediaWidth) * 100;
@@ -52,16 +46,23 @@ export const ImageCropModal: FC<Props> = ({ imageUrl, closeModal, handleImageCha
   return (
     <ModalBase onClickClose={closeModal}>
       <div className="order relative bg-white rounded-lg shadow">
-        {/* <!-- Modal header --> */}
         <div className="flex items-center justify-between p-4 md:p-4 rounded-t border-b">
           <h3 className="font-cp-font text-xl font-bold text-rhyth-dark-blue">画像の切り取り</h3>
           <ModalHeaderCloseButton onClickClose={closeModal} />
         </div>
-        {/* <!-- Modal body --> */}
         <div className="grid gap-3 p-4 md:p-4">
           <ReactCrop crop={crop} keepSelection onChange={(_, percentCrop) => setCrop(percentCrop)} aspect={1}>
             <img ref={imgRef} src={imageUrl} onLoad={onImageLoad} />
           </ReactCrop>
+          <div className="hidden">
+            <canvas
+              ref={previewCanvasRef}
+              style={{
+                objectFit: "contain",
+              }}
+              className="w-full"
+            />
+          </div>
           <button
             type="button"
             className="w-full text-white bg-rhyth-gray hover:bg-hover-gray active:ring-4 focus:outline-none  font-medium rounded-lg text-sm px-5 py-2.5 text-center"
@@ -71,34 +72,13 @@ export const ImageCropModal: FC<Props> = ({ imageUrl, closeModal, handleImageCha
                 previewCanvasRef.current,
                 convertToPixelCrop(crop, imgRef.current!.width, imgRef.current!.height),
               );
+              const dataUrl = previewCanvasRef.current?.toDataURL();
+              //TODO: setProfileImage(dataUrl)など
+              console.log(dataUrl);
+              closeModal();
             }}
           >
             画像を切り取る
-          </button>
-          {crop ? (
-            <div className="flex items-center justify-center">
-              <canvas
-                ref={previewCanvasRef}
-                style={{
-                  objectFit: "contain",
-                  // クロップされてないときは display:none にしたいのにできない
-                  // display: isCropped ? "contents" : "none",
-                }}
-                className="w-full"
-              />
-            </div>
-          ) : null}
-          <button
-            type="button"
-            onClick={() => {
-              const dataUrl = previewCanvasRef.current?.toDataURL();
-              console.log(dataUrl);
-              handleInputChange(dataUrl);
-              closeModal();
-            }}
-            className="w-full text-white bg-rhyth-light-blue hover:bg-rhyth-blue focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
-          >
-            送信
           </button>
         </div>
       </div>
