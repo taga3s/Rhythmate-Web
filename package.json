@@ -3,49 +3,52 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
+  "packageManager": "pnpm@9.0.4",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
     "lint": "biome check --apply ./src",
     "format": "biome format --write ./src",
     "preview": "vite preview",
-    "prepare": "husky"
+    "prepare": "husky",
+    "preinstall": "npx only-allow pnpm"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.3.4",
-    "@tanstack/react-query": "^5.21.7",
-    "@tanstack/react-router": "^1.16.6",
-    "@tanstack/router-devtools": "^1.16.6",
-    "chart.js": "^4.4.1",
+    "@tanstack/react-query": "^5.29.2",
+    "@tanstack/react-router": "^1.29.2",
+    "@tanstack/router-devtools": "^1.29.2",
+    "chart.js": "^4.4.2",
     "dayjs": "^1.11.10",
-    "firebase": "^10.6.0",
+    "firebase": "^10.11.0",
     "lodash": "^4.17.21",
     "react": "^18.2.0",
     "react-chartjs-2": "^5.2.0",
     "react-dom": "^18.2.0",
-    "react-hook-form": "^7.50.1",
+    "react-hook-form": "^7.51.3",
     "react-hot-toast": "^2.4.1",
-    "zod": "^3.22.4"
+    "zod": "^3.22.5"
   },
   "devDependencies": {
-    "@biomejs/biome": "1.5.3",
-    "@tanstack/router-vite-plugin": "^1.16.5",
-    "@types/lodash": "^4.14.202",
-    "@types/react": "^18.2.55",
-    "@types/react-dom": "^18.2.19",
+    "@biomejs/biome": "1.7.0",
+    "@tanstack/router-vite-plugin": "^1.28.2",
+    "@types/lodash": "^4.17.0",
+    "@types/react": "^18.2.79",
+    "@types/react-dom": "^18.2.25",
     "@typescript-eslint/eslint-plugin": "^6.21.0",
     "@typescript-eslint/parser": "^6.21.0",
     "@vitejs/plugin-react": "^4.2.1",
-    "autoprefixer": "^10.4.17",
+    "@vitejs/plugin-react-swc": "^3.6.0",
+    "autoprefixer": "^10.4.19",
     "husky": "^9.0.11",
     "lint-staged": "^15.2.2",
-    "postcss": "^8.4.35",
-    "tailwindcss": "^3.4.1",
+    "postcss": "^8.4.38",
+    "tailwindcss": "^3.4.3",
     "typescript": "^5.2.2",
-    "vite": "^5.1.7",
-    "vite-plugin-pwa": "^0.19.7"
+    "vite": "^5.2.9",
+    "vite-plugin-pwa": "^0.19.8"
   },
   "lint-staged": {
-    "*.{ts,tsx}": "biome format --write src"
+    "*.{ts,tsx}": "biome format --write ./src"
   }
 }
