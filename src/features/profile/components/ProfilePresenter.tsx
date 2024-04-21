@@ -17,6 +17,7 @@ export const ProfilePresenter = () => {
   const openLogoutModal = () => {
     setIsLogoutModalOpen(true);
   };
+
   const closeLogoutModal = () => {
     setIsLogoutModalOpen(false);
   };
@@ -56,7 +57,7 @@ export const ProfilePresenter = () => {
               </div>
             </div>
           </div>
-          <ProfileExpCard />
+          <ProfileExpCard currentLevel={loginUser?.level ?? 1} exp={loginUser?.exp ?? 0} />
           <div className="w-full">
             <ProfileUserSettingsModalButton />
             <ProfileLogoutModalButton onClickFn={openLogoutModal} />
