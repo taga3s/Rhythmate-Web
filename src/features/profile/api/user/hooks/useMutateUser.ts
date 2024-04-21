@@ -54,7 +54,7 @@ export const useMutateUser = () => {
       notifyFailed("アカウントの削除に失敗しました。");
       console.log(err);
     },
-  })
+  });
   return {
     updateUserMutation,
     logoutMutation,

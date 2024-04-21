@@ -24,6 +24,6 @@ export const createFactory = () => {
     deleteLoginUser: async () => {
       const response = await repository.destroy();
       return response;
-    }
+    },
   };
 };
