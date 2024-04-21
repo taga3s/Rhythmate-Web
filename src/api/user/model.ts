@@ -1,5 +1,4 @@
 export type User = {
-  id: string;
   name: string;
   email: string;
   level: number;
@@ -8,7 +7,6 @@ export type User = {
 };
 
 export const toUser = (obj: {
-  id: string;
   name: string;
   email: string;
   level: number;
@@ -16,7 +14,6 @@ export const toUser = (obj: {
   imageUrl: string;
 }): User => {
   return {
-    id: obj.id,
     name: obj.name,
     email: obj.email,
     level: obj.level,

@@ -1,5 +1,4 @@
 type BaseResponse = {
-  id: string;
   name: string;
   email: string;
   imageUrl: string;
