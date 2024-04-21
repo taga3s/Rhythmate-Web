@@ -41,14 +41,16 @@ export type GetResponse = BaseResponse & {
   status: string;
 };
 
+export type UpdateLoginUserParams = {
+  name: string;
+  image_binary: string;
+};
+
 export type UpdateLoginUserRequest = {
   name: string;
+  image_binary: string;
 };
 
 export type UpdateLoginUserResponse = BaseResponse & {
   status: string;
-};
-
-export type UpdateLoginUserParams = {
-  name: string;
 };
