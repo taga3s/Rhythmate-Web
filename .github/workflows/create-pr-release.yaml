@@ -32,7 +32,8 @@ jobs:
           gh pr create \
             -B main \
             -t '【本番反映】${{ env.CURRENT_DATETIME }}' \
-            -a ${{ github.actor }}
+            -a ${{ github.actor }}  \
+            -F ./.github/release_workflow_template.md
 
       - name: Edit Release Pull Request
         if: ${{ steps.check_pr.outputs.count != 0 }}
