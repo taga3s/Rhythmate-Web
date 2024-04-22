@@ -11,5 +11,5 @@
       "groupName": "all minor and patch dependencies"
     }
   ],
-  "enabledManagers": ["github-actions", "npm", "pnpm"]
+  "enabledManagers": ["github-actions", "npm"]
 }
