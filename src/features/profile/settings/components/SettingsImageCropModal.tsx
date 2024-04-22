@@ -11,11 +11,11 @@ type Props = {
   setProfileImage: React.Dispatch<React.SetStateAction<string>>;
 };
 
-export const ImageCropModal: FC<Props> = ({ imageUrl, closeModal, setProfileImage }) => {
+export const SettingsImageCropModal: FC<Props> = ({ imageUrl, closeModal, setProfileImage }) => {
   const imgRef = useRef<HTMLImageElement>(null);
   const previewCanvasRef = useRef<HTMLCanvasElement>(null);
 
-  const updateImage = (setProfileImage: React.Dispatch<React.SetStateAction<string>>, dataUrl: string) => {
+  const updateImage = (dataUrl: string) => {
     if (dataUrl !== "undefined") {
       setProfileImage(dataUrl);
     } else {
@@ -83,14 +83,7 @@ export const ImageCropModal: FC<Props> = ({ imageUrl, closeModal, setProfileImag
                 convertToPixelCrop(crop, imgRef.current!.width, imgRef.current!.height),
               );
               const dataUrl = previewCanvasRef.current?.toDataURL();
-              //TODO: setProfileImage(dataUrl)など
-              if (dataUrl !== undefined) {
-                updateImage(setProfileImage, dataUrl);
-              } else {
-                return;
-              }
-
-              console.log(dataUrl);
+              updateImage(dataUrl ?? "");
               closeModal();
             }}
           >

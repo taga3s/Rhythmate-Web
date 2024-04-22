@@ -8,7 +8,7 @@ import { useMutateUser } from "../../api/user/hooks/useMutateUser";
 import { useQueryLoginUser } from "../../api/user/hooks/useQueryUser";
 import { TUserEditValidationSchema, userEditValidationSchema } from "../../libs/validation";
 import { useGetImageUrl } from "../hooks/useGetImageUrl";
-import { ImageCropModal } from "./ImageCropModal";
+import { SettingsImageCropModal } from "./SettingsImageCropModal";
 import { SettingsInputImage } from "./SettingsInputImage";
 
 const IMAGE_ID = "imageId";
@@ -32,7 +32,7 @@ export const SettingsPresenter = () => {
   const onSubmitUpdate = async (userData: TUserEditValidationSchema) => {
     await updateUserMutation.mutateAsync({
       name: userData.name,
-      image_binary: imageUrl,
+      image_binary: profileImage,
     });
     navigation({ to: "/profile" });
   };
@@ -96,7 +96,7 @@ export const SettingsPresenter = () => {
                 <div className="max-w-[220px] w-1/4 max-h-[220px] h-1/4">
                   {imageUrl && imageFile ? (
                     imageCropModalOpen ? (
-                      <ImageCropModal
+                      <SettingsImageCropModal
                         imageUrl={imageUrl}
                         closeModal={closeImageCropModal}
                         setProfileImage={setProfileImage}
