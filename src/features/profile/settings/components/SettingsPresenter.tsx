@@ -1,20 +1,22 @@
-import { useNavigate } from "@tanstack/react-router";
-import { useRef, useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useNavigate } from "@tanstack/react-router";
+import React, { useEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
-import { SettingsInputImage } from "./SettingsInputImage";
-import { useQueryLoginUser } from "../../api/user/hooks/useQueryUser";
-import { useMutateUser } from "../../api/user/hooks/useMutateUser";
-import { TUserEditValidationSchema, userEditValidationSchema } from "../../libs/validation";
-import { useGetImageUrl } from "../hooks/useGetImageUrl";
 import { ConfirmModal, FormErrorMsg, Loading, LoadingContainer } from "../../../common/components";
 import { BackButton } from "../../../common/components/BackButton";
+import { useMutateUser } from "../../api/user/hooks/useMutateUser";
+import { useQueryLoginUser } from "../../api/user/hooks/useQueryUser";
+import { TUserEditValidationSchema, userEditValidationSchema } from "../../libs/validation";
+import { useGetImageUrl } from "../hooks/useGetImageUrl";
+import { ImageCropModal } from "./ImageCropModal";
+import { SettingsInputImage } from "./SettingsInputImage";
 
 const IMAGE_ID = "imageId";
 
 export const SettingsPresenter = () => {
   const navigation = useNavigate();
 
+  const [openModal, setOpenModal] = useState(false);
   const { data: loginUserData, isLoading } = useQueryLoginUser();
   const { updateUserMutation, deleteUserMutation } = useMutateUser();
 
@@ -49,7 +51,29 @@ export const SettingsPresenter = () => {
     }
   };
 
-  const [openModal, setOpenModal] = useState(false);
+  const [imageCropModalOpen, setImageCropModalOpen] = useState<boolean>(false);
+
+  const showImageCropModal = () => {
+    setImageCropModalOpen(true);
+  };
+
+  const closeImageCropModal = () => {
+    setImageCropModalOpen(false);
+  };
+
+  useEffect(() => {
+    if (imageUrl && imageFile) {
+      showImageCropModal();
+    }
+  }, [imageUrl, imageFile]);
+
+  const [profileImage, setProfileImage] = useState<string>("");
+
+  useEffect(() => {
+    if (loginUserData?.imageUrl) {
+      setProfileImage(loginUserData.imageUrl);
+    }
+  }, [isLoading]);
 
   return (
     <>
@@ -70,14 +94,19 @@ export const SettingsPresenter = () => {
               <div className="flex flex-col sm:flex-row justify-start items-center gap-6">
                 <div className="max-w-[220px] w-1/4 max-h-[220px] h-1/4">
                   {imageUrl && imageFile ? (
-                    <img src={imageUrl} alt="アップロード画像" className="w-full h-full rounded-full" />
+                    imageCropModalOpen ? (
+                      <ImageCropModal
+                        imageUrl={imageUrl}
+                        closeModal={closeImageCropModal}
+                        setProfileImage={setProfileImage}
+                      />
+                    ) : (
+                      <></>
+                    )
                   ) : (
-                    <img
-                      src={loginUserData?.imageUrl}
-                      alt="現在設定されている画像"
-                      className="w-full h-full rounded-full"
-                    />
+                    <></>
                   )}
+                  <img src={profileImage} alt="現在設定されている画像" className="w-full h-full rounded-full" />
                 </div>
                 <SettingsInputImage ref={fileInputRef} id={IMAGE_ID} onChange={handleFileChange} />
               </div>
