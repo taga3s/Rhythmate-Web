@@ -95,7 +95,11 @@ export const SettingsPresenter = () => {
                 <div className="max-w-[220px] w-1/4 max-h-[220px] h-1/4">
                   {imageUrl && imageFile ? (
                     imageCropModalOpen ? (
-                      <ImageCropModal imageUrl={imageUrl} closeModal={closeImageCropModal} />
+                      <ImageCropModal
+                        imageUrl={imageUrl}
+                        closeModal={closeImageCropModal}
+                        setProfileImage={setProfileImage}
+                      />
                     ) : (
                       <></>
                     )

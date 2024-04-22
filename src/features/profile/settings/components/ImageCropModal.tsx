@@ -1,4 +1,4 @@
-import { FC, useRef, useState } from "react";
+import React, { FC, useRef, useState } from "react";
 import ReactCrop, { centerCrop, convertToPixelCrop, makeAspectCrop, type Crop } from "react-image-crop";
 import "react-image-crop/dist/ReactCrop.css";
 import { ModalBase } from "../../../common/components/modal/ModalBase";
@@ -8,11 +8,21 @@ import { setCanvasPreview } from "./setCanvasPreview";
 type Props = {
   closeModal: () => void;
   imageUrl: string;
+  setProfileImage: React.Dispatch<React.SetStateAction<string>>;
 };
 
-export const ImageCropModal: FC<Props> = ({ imageUrl, closeModal }) => {
+export const ImageCropModal: FC<Props> = ({ imageUrl, closeModal, setProfileImage }) => {
   const imgRef = useRef<HTMLImageElement>(null);
   const previewCanvasRef = useRef<HTMLCanvasElement>(null);
+
+  const updateImage = (setProfileImage: React.Dispatch<React.SetStateAction<string>>, dataUrl: string) => {
+    if (dataUrl !== "undefined") {
+      setProfileImage(dataUrl);
+    } else {
+      return;
+    }
+  };
+
   const [crop, setCrop] = useState<Crop>({
     unit: "%",
     x: 25,
@@ -74,6 +84,12 @@ export const ImageCropModal: FC<Props> = ({ imageUrl, closeModal }) => {
               );
               const dataUrl = previewCanvasRef.current?.toDataURL();
               //TODO: setProfileImage(dataUrl)など
+              if (dataUrl !== undefined) {
+                updateImage(setProfileImage, dataUrl);
+              } else {
+                return;
+              }
+
               console.log(dataUrl);
               closeModal();
             }}
