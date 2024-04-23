@@ -43,12 +43,12 @@ export type GetResponse = BaseResponse & {
 
 export type UpdateLoginUserParams = {
   name: string;
-  image_binary: string;
+  image_src: string;
 };
 
 export type UpdateLoginUserRequest = {
   name: string;
-  image_binary: string;
+  image_src: string;
 };
 
 export type UpdateLoginUserResponse = BaseResponse & {

@@ -32,7 +32,7 @@ export const SettingsPresenter = () => {
   const onSubmitUpdate = async (userData: TUserEditValidationSchema) => {
     await updateUserMutation.mutateAsync({
       name: userData.name,
-      image_binary: profileImage,
+      image_src: profileImage,
     });
     navigation({ to: "/profile" });
   };
