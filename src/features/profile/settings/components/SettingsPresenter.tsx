@@ -1,6 +1,6 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useNavigate } from "@tanstack/react-router";
-import React, { useEffect, useRef, useState } from "react";
+import { ChangeEvent, useEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { ConfirmModal, FormErrorMsg, Loading, LoadingContainer } from "../../../common/components";
 import { BackButton } from "../../../common/components/BackButton";
@@ -42,13 +42,13 @@ export const SettingsPresenter = () => {
   };
 
   const fileInputRef = useRef<HTMLInputElement>(null);
-  const [imageFile, setImageFile] = useState<File | null>(null);
-  const { imageUrl } = useGetImageUrl({ file: imageFile });
+  const [inputImageFile, setInputImageFile] = useState<File | null>(null);
+  const { imageUrl: inputImageUrl } = useGetImageUrl({ file: inputImageFile });
 
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.currentTarget?.files && e.currentTarget.files[0]) {
       const targetFile = e.currentTarget.files[0];
-      setImageFile(targetFile);
+      setInputImageFile(targetFile);
     }
   };
 
@@ -59,14 +59,15 @@ export const SettingsPresenter = () => {
   };
 
   const closeImageCropModal = () => {
+    setInputImageFile(null);
     setImageCropModalOpen(false);
   };
 
   useEffect(() => {
-    if (imageUrl && imageFile) {
+    if (inputImageUrl && inputImageFile) {
       showImageCropModal();
     }
-  }, [imageUrl, imageFile]);
+  }, [inputImageUrl, inputImageFile]);
 
   const [profileImage, setProfileImage] = useState<string>("");
 
@@ -94,20 +95,7 @@ export const SettingsPresenter = () => {
               <label className="block text-sm font-medium text-gray-900">プロフィール画像</label>
               <div className="flex flex-col sm:flex-row justify-start items-center gap-6">
                 <div className="max-w-[220px] w-1/4 max-h-[220px] h-1/4">
-                  {imageUrl && imageFile ? (
-                    imageCropModalOpen ? (
-                      <SettingsImageCropModal
-                        imageUrl={imageUrl}
-                        closeModal={closeImageCropModal}
-                        setProfileImage={setProfileImage}
-                      />
-                    ) : (
-                      <></>
-                    )
-                  ) : (
-                    <></>
-                  )}
-                  <img src={profileImage} alt="現在設定されている画像" className="w-full h-full rounded-full" />
+                  <img src={profileImage} alt="現在のプロフィール画像" className="w-full h-full rounded-full" />
                 </div>
                 <SettingsInputImage ref={fileInputRef} id={IMAGE_ID} onChange={handleFileChange} />
               </div>
@@ -150,6 +138,13 @@ export const SettingsPresenter = () => {
             </div>
           </div>
         </div>
+      )}
+      {imageCropModalOpen && (
+        <SettingsImageCropModal
+          imageUrl={inputImageUrl}
+          closeModal={closeImageCropModal}
+          setProfileImage={setProfileImage}
+        />
       )}
       {openModal && (
         <ConfirmModal
