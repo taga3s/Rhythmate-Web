@@ -9,7 +9,6 @@ export type Quest = {
   startsAt: string;
   startedAt: string;
   minutes: number;
-  // TODO
   tagId: string;
   difficulty: Difficulty;
   state: QuestState;

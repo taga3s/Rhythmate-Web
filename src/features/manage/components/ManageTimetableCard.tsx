@@ -122,7 +122,12 @@ export const ManageTimetableCard: FC<Props> = (props) => {
                   <p className="font-bold text-sm text-white bg-rhyth-gray py-1 px-3 rounded-lg tracking-wider">メモ</p>
                   <button
                     className="p-1 ml-auto"
-                    onClick={() => navigate({ to: `/manage/edit`, search: { quest_id: props.id } })}
+                    onClick={() =>
+                      navigate({
+                        to: `/manage/edit`,
+                        search: { quest_id: props.id },
+                      })
+                    }
                   >
                     <div className="flex items-center gap-2 justify-center">
                       <svg
