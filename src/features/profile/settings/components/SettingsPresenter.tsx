@@ -49,6 +49,7 @@ export const SettingsPresenter = () => {
     if (e.currentTarget?.files && e.currentTarget.files[0]) {
       const targetFile = e.currentTarget.files[0];
       setInputImageFile(targetFile);
+      fileInputRef.current && (fileInputRef.current.value = "");
     }
   };
 
