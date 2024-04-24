@@ -1,6 +1,6 @@
 import { toUser } from "./model";
 import { userRepository } from "./repository";
-import { AuthParams, UpdateLoginUserParams } from "./types";
+import type { AuthParams, UpdateLoginUserParams } from "./types";
 
 export const createFactory = () => {
   const repository = userRepository;

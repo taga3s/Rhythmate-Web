@@ -1,12 +1,12 @@
-import { FC, useState } from "react";
-import { Day, Difficulty } from "../../../api/quest/types";
+import { type FC, useState } from "react";
+import type { Day, Difficulty } from "../../../api/quest/types";
+import type { Tag } from "../../../api/tag/model";
+import { ModalBase } from "../../common/components/modal/ModalBase";
+import { ModalHeaderCloseButton } from "../../common/components/modal/ModalHeaderCloseButton";
 import { DAYS, DIFFICULTIES } from "../common/constant/constant";
 import { ManageDayOfTheWeekCheckBox } from "./ManageDayOfTheWeekCheckBox";
 import { ManageDifficultyCheckBox } from "./ManageDifficultyCheckBox";
-import { ModalBase } from "../../common/components/modal/ModalBase";
-import { ModalHeaderCloseButton } from "../../common/components/modal/ModalHeaderCloseButton";
 import { ManageSearchTagsDropdown } from "./ManageSearchTagsDropdown";
-import { Tag } from "../../../api/tag/model";
 
 type Props = {
   onClickFn: () => void;

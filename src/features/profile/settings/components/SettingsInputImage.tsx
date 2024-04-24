@@ -1,4 +1,4 @@
-import { forwardRef, InputHTMLAttributes } from "react";
+import { type InputHTMLAttributes, forwardRef } from "react";
 
 export type Props = {
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;

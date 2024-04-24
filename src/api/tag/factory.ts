@@ -1,5 +1,5 @@
 import { tagRepository } from "./repository";
-import { CreateTagParams, DeleteTagParams, UpdateTagParams } from "./type";
+import type { CreateTagParams, DeleteTagParams, UpdateTagParams } from "./type";
 
 export const createFactory = () => {
   const repository = tagRepository;

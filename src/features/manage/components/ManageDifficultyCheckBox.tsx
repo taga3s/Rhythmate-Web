@@ -1,7 +1,7 @@
-import { ChangeEvent, FC } from "react";
+import type { ChangeEvent, FC } from "react";
+import type { Difficulty } from "../../../api/quest/types";
 import { Star } from "../common/components/Star";
 import { convertDifficultyToNumber } from "../common/funcs";
-import { Difficulty } from "../../../api/quest/types";
 
 type Props = {
   handleDifficulties: (difficulty: Difficulty) => void;

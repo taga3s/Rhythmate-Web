@@ -1,5 +1,5 @@
 import { apiClient } from "../../pkg/api/client/apiClient";
-import {
+import type {
   AuthRequest,
   AuthResponse,
   GetResponse,
@@ -44,7 +44,7 @@ const update: UserRepository["update"] = async (params: UpdateLoginUserRequest) 
 };
 
 const destroy: UserRepository["destroy"] = async () => {
-  const response = await apiClient.destroy(`/users/me`);
+  const response = await apiClient.destroy("/users/me");
   return response;
 };
 

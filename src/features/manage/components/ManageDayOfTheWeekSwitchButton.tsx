@@ -1,5 +1,5 @@
-import { FC } from "react";
-import { Day } from "../../../api/quest/types";
+import type { FC } from "react";
+import type { Day } from "../../../api/quest/types";
 
 type Props = {
   view: Day;

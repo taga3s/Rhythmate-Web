@@ -1,9 +1,9 @@
-import { FC } from "react";
-import { BellIcon } from "../icons/header/BellIcon";
-import { TagIcon } from "../icons/header/TagIcon";
-import { SearchIcon } from "../icons/header/SearchIcon";
+import type { FC } from "react";
 import { BadgeIcon } from "../icons/header/BadgeIcon";
+import { BellIcon } from "../icons/header/BellIcon";
 import { RankingIcon } from "../icons/header/RankingIcon";
+import { SearchIcon } from "../icons/header/SearchIcon";
+import { TagIcon } from "../icons/header/TagIcon";
 
 type Icon = "Bell" | "Tag" | "Search" | "Badge" | "Ranking";
 

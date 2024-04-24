@@ -1,10 +1,10 @@
 import { useMutation } from "@tanstack/react-query";
-import { AchieveBadgeParams, PinBadgeParams } from "../../../../../../api/badge/type";
 import { createFactory } from "../../../../../../api/badge/factory";
+import type { Badge } from "../../../../../../api/badge/model";
+import type { AchieveBadgeParams, PinBadgeParams } from "../../../../../../api/badge/type";
 import { queryClient } from "../../../../../../pkg/api/client/queryClient";
-import { Badge } from "../../../../../../api/badge/model";
+import type { FetchError } from "../../../../../../pkg/api/util/fetchError";
 import { notifyFailed, notifySuccess } from "../../../../../../pkg/ui/toast";
-import { FetchError } from "../../../../../../pkg/api/util/fetchError";
 
 export const useMutateBadge = () => {
   const badgeFactory = createFactory();

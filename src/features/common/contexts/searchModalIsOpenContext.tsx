@@ -1,4 +1,4 @@
-import { Dispatch, FC, SetStateAction, createContext, useContext, useState } from "react";
+import { type Dispatch, type FC, type SetStateAction, createContext, useContext, useState } from "react";
 
 const searchModalIsOpenContext = createContext<boolean>(false);
 const setSearchModalIsOpenContext = createContext<Dispatch<SetStateAction<boolean>>>(() => undefined);

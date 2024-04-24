@@ -1,6 +1,6 @@
+import { useNavigate } from "@tanstack/react-router";
 import { useSetSearchModalIsOpen } from "../../contexts/searchModalIsOpenContext";
 import { HeaderBaseButton } from "./HeaderBaseButton";
-import { useNavigate } from "@tanstack/react-router";
 
 export const HeaderManageButton = () => {
   const setSearchModalIsOpen = useSetSearchModalIsOpen();

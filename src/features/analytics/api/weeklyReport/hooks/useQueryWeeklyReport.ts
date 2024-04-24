@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
-import { FetchError } from "../../../../../pkg/api/util/fetchError";
-import { WeeklyReport } from "../../../../../api/weeklyReport/model";
 import { createFactory } from "../../../../../api/weeklyReport/factory";
+import type { WeeklyReport } from "../../../../../api/weeklyReport/model";
+import type { FetchError } from "../../../../../pkg/api/util/fetchError";
 
 export const useQueryWeeklyReports = () => {
   const weeklyReportFactory = createFactory();
@@ -11,7 +11,7 @@ export const useQueryWeeklyReports = () => {
       const weeklyReports = await weeklyReportFactory.listWeeklyReports();
       return weeklyReports;
     },
-    staleTime: Infinity,
+    staleTime: Number.POSITIVE_INFINITY,
   });
 };
 
@@ -25,6 +25,6 @@ export const useQueryWeeklyReportFeedBack = (weeklyReportId: string) => {
       });
       return feedBack;
     },
-    staleTime: Infinity,
+    staleTime: Number.POSITIVE_INFINITY,
   });
 };

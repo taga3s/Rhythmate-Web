@@ -1,12 +1,12 @@
-import { QuestBoard } from "./QuestBoard";
-import { QuestList } from "./QuestList";
-import { formatDateJP, getToday, getTodayEn, now } from "../../../pkg/util/dayjs";
-import { useQueryQuestList } from "../api/quest/hooks/useQueryQuest";
-import { QuestBoardNoData } from "./QuestBoardNoData";
 import { useState } from "react";
-import { QuestListNoData } from "./QuestListNoData";
-import { Quest } from "../../../api/quest/model";
+import type { Quest } from "../../../api/quest/model";
+import { formatDateJP, getToday, getTodayEn, now } from "../../../pkg/util/dayjs";
 import { Loading, LoadingContainer } from "../../common/components";
+import { useQueryQuestList } from "../api/quest/hooks/useQueryQuest";
+import { QuestBoard } from "./QuestBoard";
+import { QuestBoardNoData } from "./QuestBoardNoData";
+import { QuestList } from "./QuestList";
+import { QuestListNoData } from "./QuestListNoData";
 
 type View = "NEXT" | "FINISHED";
 
@@ -65,9 +65,10 @@ export const QuestsPresenter = () => {
             <h1 className="font-cp-font text-rhyth-gray tracking-widest">NEXT CHALLENGE</h1>
           </div>
           {currentQuest ? <QuestBoard currentQuest={currentQuest} /> : <QuestBoardNoData />}
-          <div className={`flex flex-col w-full mt-6 bg-gray-100 rounded-md`}>
+          <div className={"flex flex-col w-full mt-6 bg-gray-100 rounded-md"}>
             <div className="flex items-center">
               <button
+                type="button"
                 className={`px-4 py-2 text-base font-cp-font tracking-widest font-bold rounded-t-lg ${
                   view === "NEXT"
                     ? "text-white bg-rhyth-light-blue"
@@ -78,6 +79,7 @@ export const QuestsPresenter = () => {
                 次のクエスト
               </button>
               <button
+                type="button"
                 className={`px-4 py-2 text-base font-cp-font tracking-widest font-bold rounded-t-lg shadow-l-lg ${
                   view === "FINISHED"
                     ? "text-white bg-rhyth-light-blue"

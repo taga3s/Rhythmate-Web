@@ -1,7 +1,7 @@
 import { useRouterState } from "@tanstack/react-router";
-import { HeaderQuestsButton } from "./HeaderQuestsButton";
 import { HeaderManageButton } from "./HeaderManageButton";
 import { HeaderProfileButton } from "./HeaderProfileButton";
+import { HeaderQuestsButton } from "./HeaderQuestsButton";
 
 export const Header = () => {
   const router = useRouterState();

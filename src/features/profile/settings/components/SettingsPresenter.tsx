@@ -1,12 +1,12 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useNavigate } from "@tanstack/react-router";
-import { ChangeEvent, useEffect, useRef, useState } from "react";
+import { type ChangeEvent, useEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { ConfirmModal, FormErrorMsg, Loading, LoadingContainer } from "../../../common/components";
 import { BackButton } from "../../../common/components/BackButton";
 import { useMutateUser } from "../../api/user/hooks/useMutateUser";
 import { useQueryLoginUser } from "../../api/user/hooks/useQueryUser";
-import { TUserEditValidationSchema, userEditValidationSchema } from "../../libs/validation";
+import { type TUserEditValidationSchema, userEditValidationSchema } from "../../libs/validation";
 import { useGetImageUrl } from "../hooks/useGetImageUrl";
 import { SettingsImageCropModal } from "./SettingsImageCropModal";
 import { SettingsInputImage } from "./SettingsInputImage";

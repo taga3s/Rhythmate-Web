@@ -1,7 +1,7 @@
-import { FC } from "react";
+import type { FC } from "react";
+import { selectTagColorBg } from "../../common/funcs";
 import { TagsDeleteButton } from "./TagsDeleteButton";
 import { TagsEditButton } from "./TagsEditButton";
-import { selectTagColorBg } from "../../common/funcs";
 
 type Props = {
   tagName: string;
