@@ -1,6 +1,6 @@
-import { Quest, toQuest } from "./model";
+import { type Quest, toQuest } from "./model";
 import { questRepository } from "./repository";
-import {
+import type {
   CreateQuestParams,
   DeleteQuestParams,
   FinishQuestParams,

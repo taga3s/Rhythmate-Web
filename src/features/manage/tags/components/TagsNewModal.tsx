@@ -1,12 +1,12 @@
-import { FC } from "react";
-import { TagsColorDropdown } from "./TagsColorDropdown";
+import { zodResolver } from "@hookform/resolvers/zod";
+import type { FC } from "react";
+import { useForm } from "react-hook-form";
+import { FormErrorMsg } from "../../../common/components";
 import { ModalBase } from "../../../common/components/modal/ModalBase";
 import { ModalHeaderCloseButton } from "../../../common/components/modal/ModalHeaderCloseButton";
 import { useMutateTag } from "../api/tag/hooks/useMutateTag";
-import { TTagValidationSchema, tagValidationSchema } from "../common/libs/validation";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import { FormErrorMsg } from "../../../common/components";
+import { type TTagValidationSchema, tagValidationSchema } from "../common/libs/validation";
+import { TagsColorDropdown } from "./TagsColorDropdown";
 
 type Props = {
   modalType: string;

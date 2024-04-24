@@ -1,4 +1,4 @@
-import { FC } from "react";
+import type { FC } from "react";
 
 type Props = {
   className: string;
@@ -19,9 +19,6 @@ export const Bow: FC<Props> = ({ className }) => {
       xmlSpace="preserve"
       className={className}
     >
-      {/* <style type="text/css">
-      .st0{fill:#4B4B4B;}
-    </style> */}
       <g>
         <path
           className="st0"

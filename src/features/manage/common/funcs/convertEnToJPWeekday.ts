@@ -1,4 +1,4 @@
-import { Day } from "../../../../api/quest/types";
+import type { Day } from "../../../../api/quest/types";
 
 export const convertEnToJPWeekday = (dayOfTheWeek: Day): string => {
   switch (dayOfTheWeek) {

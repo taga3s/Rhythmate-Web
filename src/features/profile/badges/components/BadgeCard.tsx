@@ -1,9 +1,9 @@
-import { FC } from "react";
-import { Badge } from "./badge/Badge";
-import { useMutateBadge } from "../api/badge/hooks/useMutateBadge";
-import { FrameColor, ImageType } from "../../../../api/badge/type";
-import { BadgeSecret } from "./badge/BadgeSecret";
+import type { FC } from "react";
+import type { FrameColor, ImageType } from "../../../../api/badge/type";
 import { formatDateJP } from "../../../../pkg/util/dayjs";
+import { useMutateBadge } from "../api/badge/hooks/useMutateBadge";
+import { Badge } from "./badge/Badge";
+import { BadgeSecret } from "./badge/BadgeSecret";
 
 type Props = {
   id: string;

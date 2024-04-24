@@ -1,10 +1,10 @@
-import "../../../firebase/config";
-import { GoogleAuthProvider, getAuth, signInWithPopup } from "firebase/auth";
-import { notifyFailed } from "../../../pkg/ui/toast";
-import { useMutateUser } from "../api/user/hooks/useMutateUser";
 import { FirebaseError } from "firebase/app";
+import { GoogleAuthProvider, getAuth, signInWithPopup } from "firebase/auth";
 import { useState } from "react";
+import "../../../firebase/config";
+import { notifyFailed } from "../../../pkg/ui/toast";
 import { Loading } from "../../common/components";
+import { useMutateUser } from "../api/user/hooks/useMutateUser";
 import { LoginBird } from "./LoginBird";
 
 export const LoginForm = () => {

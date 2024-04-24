@@ -1,4 +1,5 @@
-import React, { FC, useRef, useState } from "react";
+import type React from "react";
+import { type FC, useRef, useState } from "react";
 import ReactCrop, { centerCrop, convertToPixelCrop, makeAspectCrop, type Crop } from "react-image-crop";
 import "react-image-crop/dist/ReactCrop.css";
 import { ModalBase } from "../../../common/components/modal/ModalBase";

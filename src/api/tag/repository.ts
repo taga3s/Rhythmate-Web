@@ -1,12 +1,12 @@
 import { apiClient } from "../../pkg/api/client/apiClient";
-import {
+import type {
   CreateRequest,
   CreateResponse,
   DeleteRequest,
   DeleteResponse,
+  ListTagsResponse,
   UpdateRequest,
   UpdateResponse,
-  ListTagsResponse,
 } from "./type";
 
 export interface TagRepository {

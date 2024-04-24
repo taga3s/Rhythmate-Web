@@ -1,4 +1,4 @@
-import { FC } from "react";
+import type { FC } from "react";
 import { Loading } from "../../common/components/Loading";
 
 type Props = {

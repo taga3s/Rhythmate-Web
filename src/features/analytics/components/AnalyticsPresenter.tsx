@@ -1,12 +1,12 @@
 import { useState } from "react";
 import { formatDateTimeJP } from "../../../pkg/util/dayjs";
 import { Loading, LoadingContainer } from "../../common/components";
+import { useMutateWeeklyReport } from "../api/weeklyReport/hooks/useMutateWeeklyReport";
 import { useQueryWeeklyReports } from "../api/weeklyReport/hooks/useQueryWeeklyReport";
 import { AnalyticsAIFeedback } from "./AnalyticsAIFeedback";
 import { AnalyticsBarChart } from "./AnalyticsBarChart";
 import { AnalyticsCard } from "./AnalyticsCard";
 import { AnalyticsSwitchButton } from "./AnalyticsSwitchButton";
-import { useMutateWeeklyReport } from "../api/weeklyReport/hooks/useMutateWeeklyReport";
 
 export const AnalyticsPresenter = () => {
   const { data: weeklyReports, isLoading: isLoadingWeeklyReports } = useQueryWeeklyReports();

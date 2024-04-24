@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
-import { FetchError } from "../../../../../pkg/api/util/fetchError";
-import { User } from "../../../../../api/user/model";
 import { createFactory } from "../../../../../api/user/factory";
+import type { User } from "../../../../../api/user/model";
+import type { FetchError } from "../../../../../pkg/api/util/fetchError";
 
 export const useQueryLoginUser = () => {
   const userFactory = createFactory();
@@ -11,6 +11,6 @@ export const useQueryLoginUser = () => {
       const user = await userFactory.getLoginUser();
       return user;
     },
-    staleTime: Infinity,
+    staleTime: Number.POSITIVE_INFINITY,
   });
 };

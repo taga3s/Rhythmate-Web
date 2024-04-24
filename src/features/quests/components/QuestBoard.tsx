@@ -1,9 +1,9 @@
-import { FC, useState } from "react";
-import { Quest } from "../../../api/quest/model";
+import { type FC, useState } from "react";
+import type { Quest } from "../../../api/quest/model";
 import { ClockIcon, ConfirmModal } from "../../common/components";
 import useInterval from "../../common/hooks/useInterval";
 import { useMutateQuest } from "../api/quest/hooks/useMutateQuest";
-import { CLOSED, DONE, ENGAGED, FORCE_STOP, NOT_STARTED_YET, OPEN, QuestStatus } from "../constant/constant";
+import { CLOSED, DONE, ENGAGED, FORCE_STOP, NOT_STARTED_YET, OPEN, type QuestStatus } from "../constant/constant";
 import { calcBaseTime, calcDiffTimeBetweenNowAndTargetTime } from "../funcs/time";
 import { QuestBoardTimer } from "./QuestBoardTimer";
 

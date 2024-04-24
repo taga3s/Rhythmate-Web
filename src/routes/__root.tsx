@@ -1,4 +1,4 @@
-import { createRootRoute, Outlet, ScrollRestoration } from "@tanstack/react-router";
+import { Outlet, ScrollRestoration, createRootRoute } from "@tanstack/react-router";
 import { Toaster } from "react-hot-toast";
 
 export const Route = createRootRoute({

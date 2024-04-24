@@ -1,19 +1,19 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useNavigate } from "@tanstack/react-router";
-import { FC, useEffect, useState } from "react";
+import { type FC, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { Day, Difficulty } from "../../../../api/quest/types";
+import type { Day, Difficulty } from "../../../../api/quest/types";
 import { formatDateTimeOnlyTime } from "../../../../pkg/util/dayjs";
 import { ConfirmModal, FormErrorMsg, Loading, LoadingContainer } from "../../../common/components";
+import { BackButton } from "../../../common/components/BackButton";
 import { useQueryQuestList } from "../../../quests/api/quest/hooks/useQueryQuest";
 import { useMutateQuest } from "../../api/quest/hooks/useMutateQuest";
+import { DayOfTheWeek } from "../../common/components/DayOfTheWeek";
+import { Star } from "../../common/components/Star";
 import { DAYS } from "../../common/constant/constant";
 import { convertEnToJPWeekday } from "../../common/funcs";
-import { TManageValidationSchema, manageValidationSchema } from "../../common/libs/validation";
-import { Star } from "../../common/components/Star";
-import { DayOfTheWeek } from "../../common/components/DayOfTheWeek";
+import { type TManageValidationSchema, manageValidationSchema } from "../../common/libs/validation";
 import { EditTagDropdown } from "./EditTagDropdown";
-import { BackButton } from "../../../common/components/BackButton";
 
 type NewValues = {
   title: string;
