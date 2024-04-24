@@ -20,7 +20,9 @@ export const useQueryWeeklyReportFeedBack = (weeklyReportId: string) => {
   return useQuery<string, FetchError>({
     queryKey: [`weeklyReportFeedBack-${weeklyReportId}`],
     queryFn: async () => {
-      const feedBack = await weeklyReportFactory.getWeeklyReportFeedBack({ weeklyReportId: weeklyReportId });
+      const feedBack = await weeklyReportFactory.getWeeklyReportFeedBack({
+        weeklyReportId: weeklyReportId,
+      });
       return feedBack;
     },
     staleTime: Infinity,
