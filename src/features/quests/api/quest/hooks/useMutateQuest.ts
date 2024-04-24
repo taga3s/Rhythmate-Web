@@ -48,7 +48,7 @@ export const useMutateQuest = () => {
           questList.map((quest) => (quest.id === data.id ? data : quest)),
         );
       }
-      // XXX: 合わせて再取得してしまう
+      // 一緒に再取得してしまう
       refetchLoginUser();
       refetchWeeklyReports();
       refetchBadgeList();
@@ -72,7 +72,7 @@ export const useMutateQuest = () => {
           questList.map((quest) => (quest.id === data.id ? data : quest)),
         );
       }
-      // XXX: 合わせて再取得してしまう
+      // 一緒に再取得してしまう
       refetchLoginUser();
       refetchWeeklyReports();
       refetchBadgeList();

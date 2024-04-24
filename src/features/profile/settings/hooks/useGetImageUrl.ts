@@ -6,6 +6,7 @@ type Args = {
 
 export const useGetImageUrl = ({ file }: Args) => {
   const [imageUrl, setImageUrl] = useState("");
+
   useEffect(() => {
     if (!file) {
       return;
@@ -23,6 +24,7 @@ export const useGetImageUrl = ({ file }: Args) => {
       reader = null;
     };
   }, [file]);
+
   return {
     imageUrl,
   };

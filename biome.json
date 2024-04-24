@@ -10,9 +10,14 @@
     }
   },
   "formatter": {
+    "enabled": true,
     "formatWithErrors": false,
-    "indentStyle": "space",
+    "ignore": [],
     "indentWidth": 2,
+    "indentStyle": "space",
     "lineWidth": 120
+  },
+  "files": {
+    "ignore": ["src/routeTree.gen.ts"]
   }
 }
