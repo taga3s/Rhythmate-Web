@@ -1,5 +1,5 @@
 import { apiClient } from "../../pkg/api/client/apiClient";
-import {
+import type {
   AchieveBadgeRequest,
   AchieveBadgeResponse,
   ListResponse,

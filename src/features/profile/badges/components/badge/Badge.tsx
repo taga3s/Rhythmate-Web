@@ -1,8 +1,8 @@
-import { FC } from "react";
+import type { FC } from "react";
+import type { FrameColor, ImageType } from "../../../../../api/badge/type";
 import { BadgeFrame } from "./BadgeFrame";
-import { BadgeSparkling } from "./BadgeSparkling";
 import { BadgeItem } from "./BadgeItem";
-import { FrameColor, ImageType } from "../../../../../api/badge/type";
+import { BadgeSparkling } from "./BadgeSparkling";
 
 type Props = {
   imageType: ImageType;

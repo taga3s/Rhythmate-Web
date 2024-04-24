@@ -1,14 +1,14 @@
-import { useState } from "react";
-import { TagsItem } from "./TagsItem";
-import { ConfirmModal } from "../../../common/components/ConfirmModal";
-import { TagsEditModal } from "./TagsEditModal";
-import { TagsNewButton } from "./TagsNewButton";
 import { useNavigate } from "@tanstack/react-router";
-import { useQueryTagList } from "../api/tag/hooks/useQueryTag";
+import { useState } from "react";
 import { Loading, LoadingContainer } from "../../../common/components";
-import { useMutateTag } from "../api/tag/hooks/useMutateTag";
-import { TagsNewModal } from "./TagsNewModal";
 import { BackButton } from "../../../common/components/BackButton";
+import { ConfirmModal } from "../../../common/components/ConfirmModal";
+import { useMutateTag } from "../api/tag/hooks/useMutateTag";
+import { useQueryTagList } from "../api/tag/hooks/useQueryTag";
+import { TagsEditModal } from "./TagsEditModal";
+import { TagsItem } from "./TagsItem";
+import { TagsNewButton } from "./TagsNewButton";
+import { TagsNewModal } from "./TagsNewModal";
 
 export const TagsPresenter = () => {
   const navigate = useNavigate();

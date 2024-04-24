@@ -1,7 +1,7 @@
-import { FC } from "react";
+import type { FC } from "react";
 import { ClockIcon } from "../../common/components/icons/ClockIcon";
-import { QuestStatusTag } from "./QuestStatusTag";
 import { calcExp } from "../../common/funcs/calcExp";
+import { QuestStatusTag } from "./QuestStatusTag";
 
 const getStatus = (isDone: boolean, isSuccess: boolean) => {
   if (!isDone) return "CLOSED";

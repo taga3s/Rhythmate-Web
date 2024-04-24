@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
-import { FetchError } from "../../../../../pkg/api/util/fetchError";
 import { createFactory } from "../../../../../api/quest/factory";
-import { Quest } from "../../../../../api/quest/model";
+import type { Quest } from "../../../../../api/quest/model";
+import type { FetchError } from "../../../../../pkg/api/util/fetchError";
 
 export const useQueryQuestList = () => {
   const questFactory = createFactory();
@@ -11,6 +11,6 @@ export const useQueryQuestList = () => {
       const quests = await questFactory.listQuests();
       return quests;
     },
-    staleTime: Infinity,
+    staleTime: Number.POSITIVE_INFINITY,
   });
 };

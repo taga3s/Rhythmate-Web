@@ -1,9 +1,9 @@
-import { FC } from "react";
-import { UseFormRegister, UseFormWatch } from "react-hook-form";
-import { TagItem } from "../../common/components/TagItem";
-import { TManageValidationSchema } from "../../common/libs/validation";
-import { useQueryTagList } from "../../tags/api/tag/hooks/useQueryTag";
+import type { FC } from "react";
+import type { UseFormRegister, UseFormWatch } from "react-hook-form";
 import { Loading, LoadingContainer } from "../../../common/components";
+import { TagItem } from "../../common/components/TagItem";
+import type { TManageValidationSchema } from "../../common/libs/validation";
+import { useQueryTagList } from "../../tags/api/tag/hooks/useQueryTag";
 
 type Props = {
   register: UseFormRegister<TManageValidationSchema>;

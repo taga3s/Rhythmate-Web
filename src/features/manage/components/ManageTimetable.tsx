@@ -1,7 +1,7 @@
+import type { FC } from "react";
+import type { Quest } from "../../../api/quest/model";
 import { formatDateTimeOnlyTime } from "../../../pkg/util/dayjs";
 import { ManageTimetableCard } from "./ManageTimetableCard";
-import { Quest } from "../../../api/quest/model";
-import { FC } from "react";
 import { ManageTimetableNoData } from "./ManageTimetableNoData";
 
 type QuestWithTag = Quest & {

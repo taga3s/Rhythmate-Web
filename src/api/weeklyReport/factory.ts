@@ -1,6 +1,6 @@
-import { WeeklyReport, toWeeklyReport } from "./model";
+import { type WeeklyReport, toWeeklyReport } from "./model";
 import { weeklyReportsRepository } from "./repository";
-import { GetFeedBackParams } from "./types";
+import type { GetFeedBackParams } from "./types";
 
 export const createFactory = () => {
   const repository = weeklyReportsRepository;

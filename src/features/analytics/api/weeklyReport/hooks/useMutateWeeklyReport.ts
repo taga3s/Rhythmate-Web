@@ -1,9 +1,9 @@
 import { useMutation } from "@tanstack/react-query";
-import { notifyFailed, notifySuccess } from "../../../../../pkg/ui/toast";
 import { createFactory } from "../../../../../api/weeklyReport/factory";
-import { FetchError } from "../../../../../pkg/api/util/fetchError";
+import type { WeeklyReport } from "../../../../../api/weeklyReport/model";
 import { queryClient } from "../../../../../pkg/api/client/queryClient";
-import { WeeklyReport } from "../../../../../api/weeklyReport/model";
+import type { FetchError } from "../../../../../pkg/api/util/fetchError";
+import { notifyFailed, notifySuccess } from "../../../../../pkg/ui/toast";
 
 export const useMutateWeeklyReport = () => {
   const weeklyReportFactory = createFactory();

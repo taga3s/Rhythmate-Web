@@ -1,11 +1,11 @@
 import { useNavigate } from "@tanstack/react-router";
-import { ManageProgressBar } from "./ManageProgressBar";
-import { FC } from "react";
+import type { FC } from "react";
+import type { Day, Difficulty } from "../../../api/quest/types";
 import { formatDateTimeOnlyTime } from "../../../pkg/util/dayjs";
 import { ClockIcon } from "../../common/components/icons/ClockIcon";
 import { calcExp } from "../../common/funcs/calcExp";
 import { convertEnToJPWeekday } from "../common/funcs";
-import { Day, Difficulty } from "../../../api/quest/types";
+import { ManageProgressBar } from "./ManageProgressBar";
 
 const convertENToJPWeekdayString = (weekDays: Day[]) => {
   const result = weekDays.map((day) => convertEnToJPWeekday(day)).join("・");

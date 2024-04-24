@@ -1,6 +1,6 @@
-import { FC, useState } from "react";
+import { type FC, useState } from "react";
+import type { Tag } from "../../../api/tag/model";
 import { ManageSearchTagItem } from "./ManageSearchTagItem";
-import { Tag } from "../../../api/tag/model";
 
 type Props = {
   tagItems: Tag[] | undefined;

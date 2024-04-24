@@ -1,4 +1,4 @@
-import { FrameColor, ImageType } from "./type";
+import type { FrameColor, ImageType } from "./type";
 
 export type Badge = {
   id: string;

@@ -1,4 +1,4 @@
-import { PixelCrop } from "react-image-crop";
+import type { PixelCrop } from "react-image-crop";
 
 export const setCanvasPreview = (image: HTMLImageElement | null, canvas: HTMLCanvasElement | null, crop: PixelCrop) => {
   if (canvas == null) {

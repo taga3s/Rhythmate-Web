@@ -1,9 +1,9 @@
 import { useMutation } from "@tanstack/react-query";
-import { FetchError } from "../../../../../pkg/api/util/fetchError";
-import { notifyFailed, notifySuccess } from "../../../../../pkg/ui/toast";
 import { useNavigate } from "@tanstack/react-router";
 import { createFactory } from "../../../../../api/user/factory";
-import { AuthParams } from "../../../../../api/user/types";
+import type { AuthParams } from "../../../../../api/user/types";
+import type { FetchError } from "../../../../../pkg/api/util/fetchError";
+import { notifyFailed, notifySuccess } from "../../../../../pkg/ui/toast";
 
 export const useMutateUser = () => {
   const userFactory = createFactory();

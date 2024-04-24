@@ -1,14 +1,11 @@
 import { useNavigate } from "@tanstack/react-router";
-import { useQueryBadgeList } from "../api/badge/hooks/useQueryBadge";
-import { BadgeCard } from "./BadgeCard";
 import { Loading, LoadingContainer } from "../../../common/components";
 import { BackButton } from "../../../common/components/BackButton";
+import { useQueryBadgeList } from "../api/badge/hooks/useQueryBadge";
+import { BadgeCard } from "./BadgeCard";
 
 export const BadgesPresenter = () => {
   const navigation = useNavigate();
-  const navigationToProfile = () => {
-    navigation({ to: "/profile" });
-  };
 
   const { data: badgeList, isLoading } = useQueryBadgeList();
 
@@ -16,7 +13,11 @@ export const BadgesPresenter = () => {
     <div className="flex flex-col items-center w-full">
       <div className="flex flex-col space-y-5 w-full">
         <div className="flex justify-start gap-3">
-          <BackButton onClickNavigation={navigationToProfile} />
+          <BackButton
+            onClickNavigation={() => {
+              navigation({ to: "/profile" });
+            }}
+          />
         </div>
         <p className="flex text-2xl justify-center font-bold">獲得バッジ一覧</p>
       </div>

@@ -1,6 +1,6 @@
-import { Badge, toBadge } from "./model";
+import { type Badge, toBadge } from "./model";
 import { badgeRepository } from "./repository";
-import { AchieveBadgeParams, PinBadgeParams, UnpinBadgeParams } from "./type";
+import type { AchieveBadgeParams, PinBadgeParams, UnpinBadgeParams } from "./type";
 
 export const createFactory = () => {
   const repository = badgeRepository;
