@@ -8,7 +8,7 @@ type Props = {
 
 export const AnalyticsSwitchButton: FC<Props> = ({ onClickFn, direction, isEdgy }) => {
   return (
-    <button onClick={onClickFn} disabled={isEdgy}>
+    <button type="button" onClick={onClickFn} disabled={isEdgy}>
       {direction === "left" ? (
         <svg
           className={`w-6 h-6 text-rhyth-gray ${

@@ -25,6 +25,7 @@ export const AnalyticsAIFeedback: FC<Props> = ({ summaryData, isLoading, onClick
         </svg>
         <p className="text-base font-bold">AIによるフィードバック</p>
         <button
+          type="button"
           className="flex ml-auto text-2xs text-rhyth-blue border border-rhyth-blue rounded px-2 py-1"
           onClick={onClick}
         >

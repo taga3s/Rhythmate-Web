@@ -97,15 +97,13 @@ export const QuestBoard: FC<Props> = (props) => {
       </div>
       <div className="text-center font-bold my-2 flex items-center justify-center gap-2">
         <span className="text-md text-rhyth-dark-blue">
-          {questStatus === CLOSED ? (
-            <span>クエスト解放まで</span>
-          ) : questStatus === OPEN ? (
-            <span>クエスト解放中</span>
-          ) : questStatus === ENGAGED ? (
-            <span>残り時間</span>
-          ) : (
-            <span>クエスト終了</span>
-          )}
+          {questStatus === CLOSED
+            ? "クエスト解放まで"
+            : questStatus === OPEN
+              ? "クエスト解放中"
+              : questStatus === ENGAGED
+                ? "残り時間"
+                : "クエスト終了"}
         </span>
         <QuestBoardTimer
           startsAt={currentQuest.startsAt}
@@ -122,6 +120,7 @@ export const QuestBoard: FC<Props> = (props) => {
           </div>
         ) : questStatus === OPEN ? (
           <button
+            type="button"
             onClick={() => setStartConfirmModalOpen(true)}
             className="text-white bg-rhyth-green hover:bg-rhyth-hover-green focus:ring-4 focus:ring-blue-300 rounded-lg text-lg font-bold p-3 mt-1 focus:outline-none w-full shadow-lg"
           >
@@ -133,6 +132,7 @@ export const QuestBoard: FC<Props> = (props) => {
           </div>
         ) : questStatus === DONE ? (
           <button
+            type="button"
             onClick={() => setFinishConfirmModalOpen(true)}
             className="text-white bg-rhyth-blue hover:bg-rhyth-hover-blue focus:ring-4 focus:ring-blue-300 rounded-lg text-lg font-bold p-3 mt-1 focus:outline-none w-full shadow-lg"
           >
@@ -140,6 +140,7 @@ export const QuestBoard: FC<Props> = (props) => {
           </button>
         ) : (
           <button
+            type="button"
             onClick={handleForceFinishQuest}
             className="text-white bg-rhyth-red hover:bg-rhyth-hover-red focus:ring-4 focus:ring-blue-300 rounded-lg text-lg font-bold p-3 mt-1 focus:outline-none w-full shadow-lg"
           >
