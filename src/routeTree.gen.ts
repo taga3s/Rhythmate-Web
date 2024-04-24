@@ -43,7 +43,9 @@ const QuestsIndexLazyRoute = QuestsIndexLazyImport.update({
 const ProfileIndexLazyRoute = ProfileIndexLazyImport.update({
   path: "/profile/",
   getParentRoute: () => rootRoute,
-} as any).lazy(() => import("./routes/profile/index.lazy").then((d) => d.Route));
+} as any).lazy(() =>
+  import("./routes/profile/index.lazy").then((d) => d.Route),
+);
 
 const ManageIndexLazyRoute = ManageIndexLazyImport.update({
   path: "/manage/",
@@ -58,32 +60,44 @@ const LoginIndexLazyRoute = LoginIndexLazyImport.update({
 const AnalyticsIndexLazyRoute = AnalyticsIndexLazyImport.update({
   path: "/analytics/",
   getParentRoute: () => rootRoute,
-} as any).lazy(() => import("./routes/analytics/index.lazy").then((d) => d.Route));
+} as any).lazy(() =>
+  import("./routes/analytics/index.lazy").then((d) => d.Route),
+);
 
 const ProfileSettingsIndexLazyRoute = ProfileSettingsIndexLazyImport.update({
   path: "/profile/settings/",
   getParentRoute: () => rootRoute,
-} as any).lazy(() => import("./routes/profile/settings/index.lazy").then((d) => d.Route));
+} as any).lazy(() =>
+  import("./routes/profile/settings/index.lazy").then((d) => d.Route),
+);
 
 const ProfileBadgesIndexLazyRoute = ProfileBadgesIndexLazyImport.update({
   path: "/profile/badges/",
   getParentRoute: () => rootRoute,
-} as any).lazy(() => import("./routes/profile/badges/index.lazy").then((d) => d.Route));
+} as any).lazy(() =>
+  import("./routes/profile/badges/index.lazy").then((d) => d.Route),
+);
 
 const ManageTagsIndexLazyRoute = ManageTagsIndexLazyImport.update({
   path: "/manage/tags/",
   getParentRoute: () => rootRoute,
-} as any).lazy(() => import("./routes/manage/tags/index.lazy").then((d) => d.Route));
+} as any).lazy(() =>
+  import("./routes/manage/tags/index.lazy").then((d) => d.Route),
+);
 
 const ManageNewIndexLazyRoute = ManageNewIndexLazyImport.update({
   path: "/manage/new/",
   getParentRoute: () => rootRoute,
-} as any).lazy(() => import("./routes/manage/new/index.lazy").then((d) => d.Route));
+} as any).lazy(() =>
+  import("./routes/manage/new/index.lazy").then((d) => d.Route),
+);
 
 const ManageEditIndexLazyRoute = ManageEditIndexLazyImport.update({
   path: "/manage/edit/",
   getParentRoute: () => rootRoute,
-} as any).lazy(() => import("./routes/manage/edit/index.lazy").then((d) => d.Route));
+} as any).lazy(() =>
+  import("./routes/manage/edit/index.lazy").then((d) => d.Route),
+);
 
 // Populate the FileRoutesByPath interface
 
