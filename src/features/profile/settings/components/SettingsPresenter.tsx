@@ -46,10 +46,13 @@ export const SettingsPresenter = () => {
   const { imageUrl: inputImageUrl } = useGetImageUrl({ file: inputImageFile });
 
   const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
-    if (e.currentTarget?.files && e.currentTarget.files[0]) {
+    if (e.currentTarget.files?.[0]) {
       const targetFile = e.currentTarget.files[0];
       setInputImageFile(targetFile);
-      fileInputRef.current && (fileInputRef.current.value = "");
+
+      if (fileInputRef.current) {
+        fileInputRef.current.value = "";
+      }
     }
   };
 
@@ -76,7 +79,7 @@ export const SettingsPresenter = () => {
     if (loginUserData?.imageUrl) {
       setProfileImage(loginUserData.imageUrl);
     }
-  }, [isLoading]);
+  }, [loginUserData?.imageUrl]);
 
   return (
     <>

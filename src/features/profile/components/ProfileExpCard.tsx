@@ -12,7 +12,7 @@ export const ProfileExpCard: FC<Props> = ({ currentLevel, exp }) => {
       <p className="font-bold">経験値</p>
       <div className="w-full bg-rhyth-bg-dark-gray rounded-full h-3">
         <div style={{ width: `${expBarProportion}%` }}>
-          <div className="bg-rhyth-green h-3 rounded-full animate-expbar"></div>
+          <div className="bg-rhyth-green h-3 rounded-full animate-expbar" />
         </div>
       </div>
       <p className="text-end text-xs">あと{toNextLevel * level - remainingExp}Expでレベルアップ</p>

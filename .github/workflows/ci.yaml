@@ -1,0 +1,27 @@
+on:
+  push:
+    branches: ["develop", "feat/**", "fix/**", "refac/**", "impl/**"]
+  pull_request:
+    branches: ["develop"]
+
+jobs:
+  build_and_test:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [18.x, 20.x]
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Node.js ${{ matrix.node-version }}
+        uses: pnpm/action-setup@v2
+        with:
+          version: 8
+
+      - name: Install dependencies
+        run: pnpm i --frozen-lockfile
+
+      - run: pnpm run lint
+      - run: pnpm run build

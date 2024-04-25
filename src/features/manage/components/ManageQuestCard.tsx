@@ -146,7 +146,7 @@ export const ManageQuestCard: FC<Props> = (props) => {
             </div>
           </div>
         ) : (
-          <div></div>
+          <></>
         )}
       </div>
       <hr className="h-0.5 bg-rhyth-light-gray" />

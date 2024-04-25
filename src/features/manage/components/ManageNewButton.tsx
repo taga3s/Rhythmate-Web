@@ -5,6 +5,7 @@ export const ManageNewButton = () => {
 
   return (
     <button
+      type="button"
       onClick={() => navigate({ to: "/manage/new" })}
       className="flex justify-between items-center gap-2 bg-rhyth-blue hover:bg-rhyth-hover-blue h-14 w-auto rounded-full fixed right-8 bottom-24 shadow-lg p-4"
     >

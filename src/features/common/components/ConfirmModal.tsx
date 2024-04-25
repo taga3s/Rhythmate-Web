@@ -48,9 +48,9 @@ export const ConfirmModal: FC<Props> = (props) => {
               className={`w-full text-white focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center
                   ${
                     btnColor === "green"
-                      ? `bg-rhyth-green hover:bg-rhyth-hover-green`
+                      ? "bg-rhyth-green hover:bg-rhyth-hover-green"
                       : btnColor === "blue"
-                        ? `bg-rhyth-blue hover:bg-rhyth-hover-blue`
+                        ? "bg-rhyth-blue hover:bg-rhyth-hover-blue"
                         : "bg-rhyth-red hover:bg-rhyth-hover-red"
                   }
                   `}
