@@ -44,6 +44,7 @@ export const LoginForm = () => {
       <LoginBird />
       <span className="text-md font-bold text-rhyth-black text-center">さぁ、Rhythmateを始めましょう！</span>
       <button
+        type="button"
         className="p-4 mt-10 font-bold text-rhyth-black rounded-md shadow-md border-2 border-rhyth-bg-light-gray cursor-pointer flex justify-center items-center gap-4 hover:bg-rhyth-bg-gray"
         onClick={signInWithGoogle}
       >

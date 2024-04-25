@@ -124,7 +124,7 @@ export const ManageTimetableCard: FC<Props> = (props) => {
                     className="p-1 ml-auto"
                     onClick={() =>
                       navigate({
-                        to: `/manage/edit`,
+                        to: "/manage/edit",
                         search: { quest_id: props.id },
                       })
                     }
@@ -211,7 +211,7 @@ export const ManageTimetableCard: FC<Props> = (props) => {
                   </div>
                 </div>
               ) : (
-                <div></div>
+                <></>
               )}
             </div>
             <hr className="h-0.5 bg-rhyth-light-gray" />

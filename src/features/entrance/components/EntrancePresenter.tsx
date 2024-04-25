@@ -64,6 +64,7 @@ export const EntrancePresenter = () => {
         </div>
       </div>
       <button
+        type="button"
         onClick={() => navigation({ to: "/login" })}
         className="my-4  text-center text-white bg-rhyth-blue hover:bg-rhyth-hover-blue font-medium rounded-lg px-10 py-4  shadow-lg"
       >
