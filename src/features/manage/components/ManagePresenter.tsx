@@ -93,6 +93,7 @@ export const ManagePresenter = () => {
           {manageView === "Timetable" ? "曜日別クエスト" : "全てのクエスト"}
         </h1>
         <button
+          type="button"
           className="flex items-center gap-1 bg-white py-2 px-4 rounded-full border-2 border-rhyth-light-gray shadow-sm hover:bg-rhyth-bg-dark-gray"
           onClick={handleManageView}
         >

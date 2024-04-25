@@ -14,7 +14,7 @@ export const useGetImageUrl = ({ file }: Args) => {
 
     let reader: FileReader | null = new FileReader();
     reader.onloadend = () => {
-      const base64 = reader && reader.result;
+      const base64 = reader?.result;
       if (base64 && typeof base64 === "string") {
         setImageUrl(base64);
       }
