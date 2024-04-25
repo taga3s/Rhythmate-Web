@@ -24,10 +24,7 @@ jobs:
         run: |
           COMMIT_MESSAGE=$(echo "${HEAD_MESSAGE}" | sed -n -e 1p)
           echo "message=${COMMIT_MESSAGE}" >> "$GITHUB_OUTPUT"
-          echo "count=$(gh pr list -S '本番反映'in:title | wc -l)" >> "$GITHUB_OUTPUT"
-
-      - name: count
-        run: echo "${{ steps.check_pr.outputs.count }}"
+          echo "count=$(gh pr list -S 本番反映 | wc -l)" >> "$GITHUB_OUTPUT"
 
       - name: Create Release PullRequest
         if: ${{ steps.check_pr.outputs.count == 0 }}
