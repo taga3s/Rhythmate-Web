@@ -6,5 +6,5 @@ export type Props = {
 };
 
 export const SettingsInputImage = forwardRef<HTMLInputElement, Props>(({ onChange, id }, ref) => {
-  return <input ref={ref} id={id} type="file" accept="image/*" onChange={onChange} />;
+  return <input ref={ref} id={id} type="file" accept="image/jpeg, image/jpg, image/png" onChange={onChange} />;
 });
