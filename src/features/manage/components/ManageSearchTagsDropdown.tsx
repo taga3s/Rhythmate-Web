@@ -47,10 +47,10 @@ export const ManageSearchTagsDropdown: FC<Props> = ({ tagItems, handleTag }) => 
       onChange={(event) => handleTagValue(event.target.value)}
     >
       <option
-        value={""}
+        value=""
         className={`w-full bg-white text-rhyth-dark-blue border border-rhyth-light-gray font-medium rounded-lg text-sm px-5 py-2.5 inline-flex`}
       >
-        色を選択
+        タグを選択
       </option>
       {tagItems?.map((tagItem, i) => {
         return <ManageSearchTagItem key={i} tagId={tagItem.id} tagName={tagItem.name} tagColor={tagItem.color} />;

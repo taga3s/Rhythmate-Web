@@ -49,8 +49,20 @@ export const ManagePresenter = () => {
   }, [questListIsLoading, tagListIsLoading]);
 
   const filteredData = questList?.filter((quest) => {
-    if (filterDay && filterDifficulties.length) {
+    if (filterDay && filterTag && filterDifficulties.length) {
+      return (
+        quest.days.includes(filterDay) &&
+        quest.tagId.includes(filterTag) &&
+        filterDifficulties.some((difficulty) => quest.difficulty === difficulty)
+      );
+    } else if (filterDay && filterTag) {
+      return quest.days.includes(filterDay) && quest.tagId.includes(filterTag);
+    } else if (filterDay && filterDifficulties.length) {
       return quest.days.includes(filterDay) && filterDifficulties.some((difficulty) => quest.difficulty === difficulty);
+    } else if (filterTag && filterDifficulties.length) {
+      return (
+        quest.tagId.includes(filterTag) && filterDifficulties.some((difficulty) => quest.difficulty === difficulty)
+      );
     } else if (filterDay) {
       return quest.days.includes(filterDay);
     } else if (filterTag) {
@@ -58,6 +70,9 @@ export const ManagePresenter = () => {
     } else if (filterDifficulties.length) {
       return filterDifficulties.some((difficulty) => quest.difficulty === difficulty);
     } else {
+      if (filterTag === "") {
+        return quest;
+      }
       return true;
     }
   });
