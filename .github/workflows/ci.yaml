@@ -1,4 +1,4 @@
-name: ci
+name: rhythmate-web-ci
 
 on:
   push:
@@ -30,4 +30,4 @@ jobs:
         run: pnpm run format
 
       - name: Run Lint Check
-        run: echo "Lint Check"
+        run: pnpm run lint
