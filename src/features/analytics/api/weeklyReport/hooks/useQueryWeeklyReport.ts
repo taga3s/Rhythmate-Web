@@ -14,17 +14,3 @@ export const useQueryWeeklyReports = () => {
     staleTime: Number.POSITIVE_INFINITY,
   });
 };
-
-export const useQueryWeeklyReportFeedBack = (weeklyReportId: string) => {
-  const weeklyReportFactory = createFactory();
-  return useQuery<string, FetchError>({
-    queryKey: [`weeklyReportFeedBack-${weeklyReportId}`],
-    queryFn: async () => {
-      const feedBack = await weeklyReportFactory.getWeeklyReportFeedBack({
-        weeklyReportId: weeklyReportId,
-      });
-      return feedBack;
-    },
-    staleTime: Number.POSITIVE_INFINITY,
-  });
-};

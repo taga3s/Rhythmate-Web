@@ -79,11 +79,9 @@ export const AnalyticsPresenter = () => {
               isRate={false}
             />
           </div>
-          <div className="flex justify-start w-full">
-            <h1 className="mt-8 font-cp-font tracking-widest text-rhyth-gray text-lg font-bold ">
-              曜日別クエスト達成状況
-            </h1>
-          </div>
+          <h2 className="flex justify-start w-full mt-8 font-cp-font tracking-widest text-rhyth-gray text-lg font-bold ">
+            曜日別クエスト達成状況
+          </h2>
           <AnalyticsBarChart
             completedQuestsData={weeklyReports[currentIndex].completed_quests_each_day}
             failedQuestsData={weeklyReports[currentIndex].failed_quests_each_day}
@@ -95,9 +93,9 @@ export const AnalyticsPresenter = () => {
           />
         </div>
       ) : (
-        <div className="mt-20 gap-2 flex flex-col items-center text-lg text-rhyth-dark-blue font-bold">
-          <span>週次レポートが存在しません。</span>
-        </div>
+        <span className="mt-20 gap-2 flex flex-col items-center text-lg text-rhyth-dark-blue font-bold">
+          週次レポートが存在しません。
+        </span>
       )}
     </>
   );

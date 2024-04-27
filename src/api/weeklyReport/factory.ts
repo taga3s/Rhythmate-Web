@@ -13,12 +13,6 @@ export const createFactory = () => {
       });
       return weeklyReports;
     },
-    getWeeklyReportFeedBack: async (getFeedBackParams: GetFeedBackParams) => {
-      const response = await repository.getFeedBack({
-        weeklyReportId: getFeedBackParams.weeklyReportId,
-      });
-      return response.feedBack;
-    },
     generateWeeklyReportFeedBack: async (getFeedBackParams: GetFeedBackParams) => {
       const response = await repository.generateFeedBack({
         weeklyReportId: getFeedBackParams.weeklyReportId,
