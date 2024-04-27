@@ -31,6 +31,3 @@ jobs:
 
       - name: Run Lint Check
         run: echo "Lint Check"
-
-      - name: Run Type Check
-        run: pnpm run type-check

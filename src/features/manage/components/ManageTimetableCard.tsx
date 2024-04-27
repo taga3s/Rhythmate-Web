@@ -59,7 +59,7 @@ export const ManageTimetableCard: FC<Props> = (props) => {
   };
 
   return (
-    <div className={`bg-rhyth-bg-gray shadow-lg text-rhyth-dark-blue rounded-lg`}>
+    <div className={"bg-rhyth-bg-gray shadow-lg text-rhyth-dark-blue rounded-lg"}>
       <div className="flex items-center justify-between">
         <div
           className={`h-20 flex flex-col items-center justify-center font-bold tracking-widest p-2 pr-3 ${handleBgTagColor(

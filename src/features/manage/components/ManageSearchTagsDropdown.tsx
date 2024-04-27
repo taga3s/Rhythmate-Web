@@ -48,7 +48,9 @@ export const ManageSearchTagsDropdown: FC<Props> = ({ tagItems, handleTag }) => 
     >
       <option
         value={""}
-        className={`w-full bg-white text-rhyth-dark-blue border border-rhyth-light-gray font-medium rounded-lg text-sm px-5 py-2.5 inline-flex`}
+        className={
+          "w-full bg-white text-rhyth-dark-blue border border-rhyth-light-gray font-medium rounded-lg text-sm px-5 py-2.5 inline-flex"
+        }
       >
         色を選択
       </option>

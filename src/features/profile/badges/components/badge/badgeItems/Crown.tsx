@@ -19,9 +19,9 @@ export const Crown: FC<Props> = ({ className }) => {
       xmlSpace="preserve"
       className={className}
     >
-      <rect x="192.008" y="47.625" className="st0" width="128" height="38.406" fill="#E0201B"></rect>
-      <rect x="236.805" y="2.828" className="st0" width="38.391" height="128" fill="#E0201B"></rect>
-      <rect x="63.008" y="445.172" className="st0" width="386" height="64" fill="#E0201B"></rect>
+      <rect x="192.008" y="47.625" className="st0" width="128" height="38.406" fill="#E0201B" />
+      <rect x="236.805" y="2.828" className="st0" width="38.391" height="128" fill="#E0201B" />
+      <rect x="63.008" y="445.172" className="st0" width="386" height="64" fill="#E0201B" />
       <path
         className="st0"
         d="M107.992,213.641c8.047,62.859,40.75,139.859,68,196.828h48.422V188.438c0-38.281-37.188-53.594-69.766-47.25
