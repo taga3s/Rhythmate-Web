@@ -54,7 +54,7 @@ export const SettingsImageCropModal: FC<Props> = ({ imageUrl, closeModal, setPro
         </div>
         <div className="grid gap-3 p-4 md:p-4">
           <ReactCrop crop={crop} keepSelection onChange={(_, percentCrop) => setCrop(percentCrop)} aspect={1}>
-            <img ref={imgRef} src={imageUrl} onLoad={onImageLoad} />
+            <img ref={imgRef} src={imageUrl} onLoad={onImageLoad} alt="切り取られる対象の画像" />
           </ReactCrop>
           <div className="hidden">
             <canvas

@@ -121,6 +121,7 @@ export const ManageTimetableCard: FC<Props> = (props) => {
                 <div className="flex items-center justify-between mb-2">
                   <p className="font-bold text-sm text-white bg-rhyth-gray py-1 px-3 rounded-lg tracking-wider">メモ</p>
                   <button
+                    type="button"
                     className="p-1 ml-auto"
                     onClick={() =>
                       navigate({

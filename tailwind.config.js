@@ -29,45 +29,19 @@ export default {
         "rhyth-hover-blue": "#0079D5",
         "rhyth-hover-red": "#B11815",
       },
-      // animation: {
-      //   "glow": "glow 2s infinite ease",
-      //   "shine": "shine 10s infinite"
-      // },
-      // keyframes: {
-      //   "glow": {
-      //     "0%, 100%": {
-      //       boxShadow: '1px 1px #1D8758, 0 0 20px 5px #8FFFCF, inset 2px 2px'
-      //     },
-      //     "50%": {
-      //       boxShadow: 'box-shadow: 1px 1px #1D8758, 0 0 16px 8px #8FFFCF, inset 2px 2px #D3FFEC'
-      //     }
-      //   },
-      //   "shine": {
-      //     "0%": {
-      //       opacity: 0,
-      //     },
-      //     "34%": {
-      //       opacity: 0,
-      //       transform: 'rotate(15deg)',
-      //     },
-      //     "40%": {
-      //       opacity: 0.6,
-      //       transform: 'rotate(620deg)',
-      //     },
-      //     "48%, 100%": {
-      //       opacity: 0,
-      //       transform: 'rotate(635deg)',
-      //     }
-      //   }
-      // }
       keyframes: {
         expbar: {
           "0%": { width: "0%" },
           "100%": { width: "100%" },
         },
+        fadein: {
+          "0%": { opacity: 0, transform: "translateY(20px)" },
+          "100%": { opacity: 1, transform: "translateY(0px)" },
+        },
       },
       animation: {
         expbar: "expbar 0.5s ease-out 1",
+        fadein: "fadein 0.2s ease-out 1",
       },
     },
   },
