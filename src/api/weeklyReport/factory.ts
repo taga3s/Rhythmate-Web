@@ -1,6 +1,6 @@
 import { type WeeklyReport, toWeeklyReport } from "./model";
 import { weeklyReportsRepository } from "./repository";
-import type { GetFeedBackParams } from "./types";
+import { GenerateFeedBackParams } from "./types";
 
 export const createFactory = () => {
   const repository = weeklyReportsRepository;
@@ -13,9 +13,9 @@ export const createFactory = () => {
       });
       return weeklyReports;
     },
-    generateWeeklyReportFeedBack: async (getFeedBackParams: GetFeedBackParams) => {
+    generateWeeklyReportFeedBack: async (generateFeedBackParams: GenerateFeedBackParams) => {
       const response = await repository.generateFeedBack({
-        weeklyReportId: getFeedBackParams.weeklyReportId,
+        weeklyReportId: generateFeedBackParams.weeklyReportId,
       });
       return response.feedBack;
     },

@@ -15,6 +15,10 @@ export type ListResponse = {
   }[];
 };
 
+export type GenerateFeedBackParams = {
+  weeklyReportId: string;
+};
+
 export type GenerateFeedBackRequest = {
   weeklyReportId: string;
 };
