@@ -4,26 +4,15 @@ import ReactCrop, { centerCrop, convertToPixelCrop, makeAspectCrop, type Crop } 
 import "react-image-crop/dist/ReactCrop.css";
 import { ModalBase } from "../../../common/components/modal/ModalBase";
 import { ModalHeaderCloseButton } from "../../../common/components/modal/ModalHeaderCloseButton";
-import { setCanvasPreview } from "./setCanvasPreview";
+import { setCanvasPreview } from "../funcs/setCanvasPreview";
 
 type Props = {
-  closeModal: () => void;
   imageUrl: string;
+  closeModal: () => void;
   setProfileImage: React.Dispatch<React.SetStateAction<string>>;
 };
 
 export const SettingsImageCropModal: FC<Props> = ({ imageUrl, closeModal, setProfileImage }) => {
-  const imgRef = useRef<HTMLImageElement>(null);
-  const previewCanvasRef = useRef<HTMLCanvasElement>(null);
-
-  const updateImage = (dataUrl: string) => {
-    if (dataUrl !== "undefined") {
-      setProfileImage(dataUrl);
-    } else {
-      return;
-    }
-  };
-
   const [crop, setCrop] = useState<Crop>({
     unit: "%",
     x: 25,
@@ -31,6 +20,8 @@ export const SettingsImageCropModal: FC<Props> = ({ imageUrl, closeModal, setPro
     width: 50,
     height: 50,
   });
+  const imgRef = useRef<HTMLImageElement>(null);
+  const previewCanvasRef = useRef<HTMLCanvasElement>(null);
 
   const centerAspectCrop = (mediaWidth: number, mediaHeight: number, aspect: number) => {
     const cropWidthInPercent = (150 / mediaWidth) * 100;
@@ -63,7 +54,7 @@ export const SettingsImageCropModal: FC<Props> = ({ imageUrl, closeModal, setPro
         </div>
         <div className="grid gap-3 p-4 md:p-4">
           <ReactCrop crop={crop} keepSelection onChange={(_, percentCrop) => setCrop(percentCrop)} aspect={1}>
-            <img ref={imgRef} src={imageUrl} onLoad={onImageLoad} />
+            <img ref={imgRef} src={imageUrl} onLoad={onImageLoad} alt="切り取られる対象の画像" />
           </ReactCrop>
           <div className="hidden">
             <canvas
@@ -84,7 +75,7 @@ export const SettingsImageCropModal: FC<Props> = ({ imageUrl, closeModal, setPro
                 convertToPixelCrop(crop, imgRef.current!.width, imgRef.current!.height),
               );
               const dataUrl = previewCanvasRef.current?.toDataURL();
-              updateImage(dataUrl ?? "");
+              setProfileImage(dataUrl ?? "");
               closeModal();
             }}
           >

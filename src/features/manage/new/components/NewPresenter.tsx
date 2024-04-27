@@ -124,10 +124,10 @@ export const NewPresenter = () => {
             <div className="my-2">
               <p className="block my-2 font-bold text-rhyth-gray">実施頻度</p>
               <div className="flex mt-4 gap-1">
-                {DAYS.map((day, i) => {
+                {DAYS.map((day) => {
                   return (
                     <DayOfTheWeek
-                      key={i}
+                      key={day}
                       day={convertEnToJPWeekday(day)}
                       value={day}
                       register={register}
