@@ -11,14 +11,11 @@ import { useGetImageUrl } from "../hooks/useGetImageUrl";
 import { SettingsImageCropModal } from "./SettingsImageCropModal";
 import { SettingsInputImage } from "./SettingsInputImage";
 
-const IMAGE_ID = "imageId";
-
 export const SettingsPresenter = () => {
-  const navigation = useNavigate();
-
   const [openModal, setOpenModal] = useState(false);
   const { data: loginUserData, isLoading } = useQueryLoginUser();
   const { updateUserMutation, deleteUserMutation } = useMutateUser();
+  const navigation = useNavigate();
 
   const {
     register,
@@ -57,23 +54,13 @@ export const SettingsPresenter = () => {
   };
 
   const [imageCropModalOpen, setImageCropModalOpen] = useState<boolean>(false);
-
-  const showImageCropModal = () => {
-    setImageCropModalOpen(true);
-  };
-
-  const closeImageCropModal = () => {
-    setInputImageFile(null);
-    setImageCropModalOpen(false);
-  };
+  const [profileImage, setProfileImage] = useState<string>("");
 
   useEffect(() => {
     if (inputImageUrl && inputImageFile) {
-      showImageCropModal();
+      setImageCropModalOpen(true);
     }
   }, [inputImageUrl, inputImageFile]);
-
-  const [profileImage, setProfileImage] = useState<string>("");
 
   useEffect(() => {
     if (loginUserData?.imageUrl) {
@@ -98,10 +85,10 @@ export const SettingsPresenter = () => {
             <form className="space-y-4" onSubmit={handleSubmit(onSubmitUpdate)}>
               <label className="block text-sm font-medium text-gray-900">プロフィール画像</label>
               <div className="flex flex-col sm:flex-row justify-start items-center gap-6">
-                <div className="max-w-[220px] w-1/4 max-h-[220px] h-1/4">
+                <div className="w-20 md:w-32 h-20 md:h-32">
                   <img src={profileImage} alt="現在のプロフィール画像" className="w-full h-full rounded-full" />
                 </div>
-                <SettingsInputImage ref={fileInputRef} id={IMAGE_ID} onChange={handleFileChange} />
+                <SettingsInputImage ref={fileInputRef} onChange={handleFileChange} />
               </div>
               <div>
                 <label className="block mb-2 text-sm font-medium text-gray-900 my-4">ユーザー名</label>
@@ -146,7 +133,10 @@ export const SettingsPresenter = () => {
       {imageCropModalOpen && (
         <SettingsImageCropModal
           imageUrl={inputImageUrl}
-          closeModal={closeImageCropModal}
+          closeModal={() => {
+            setInputImageFile(null);
+            setImageCropModalOpen(false);
+          }}
           setProfileImage={setProfileImage}
         />
       )}
