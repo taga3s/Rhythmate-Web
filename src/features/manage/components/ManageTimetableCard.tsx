@@ -71,7 +71,7 @@ export const ManageTimetableCard: FC<Props> = (props) => {
         </div>
         <div className="h-full w-full flex items-center justify-between p-2">
           <h1 className="ml-2 text-md font-bold">{props.title}</h1>
-          <button className="p-2" onClick={handleAccordionOpen}>
+          <button type="button" className="p-2" onClick={handleAccordionOpen}>
             {isAccordionOpen ? (
               <svg
                 className="w-6 h-6 text-rhyth-dark-blue hover:text-rhyth-light-blue"

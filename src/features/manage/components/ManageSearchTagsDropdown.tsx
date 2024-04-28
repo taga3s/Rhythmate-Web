@@ -54,8 +54,10 @@ export const ManageSearchTagsDropdown: FC<Props> = ({ tagItems, handleTag }) => 
       >
         色を選択
       </option>
-      {tagItems?.map((tagItem, i) => {
-        return <ManageSearchTagItem key={i} tagId={tagItem.id} tagName={tagItem.name} tagColor={tagItem.color} />;
+      {tagItems?.map((tagItem) => {
+        return (
+          <ManageSearchTagItem key={tagItem.id} tagId={tagItem.id} tagName={tagItem.name} tagColor={tagItem.color} />
+        );
       })}
     </select>
   );
