@@ -237,7 +237,8 @@ export const NewPresenter = () => {
         {errors.description && <FormErrorMsg msg={errors.description.message ?? ""} />}
         <button
           type="submit"
-          className="w-full mt-8 text-white bg-rhyth-blue hover:bg-rhyth-hover-blue focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-base my-4 p-3 shadow-lg focus:outline-none"
+          className="w-full mt-8 text-white bg-rhyth-blue hover:bg-rhyth-hover-blue disabled:bg-rhyth-light-gray focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-base my-4 p-3 shadow-lg focus:outline-none"
+          disabled={createQuestMutation.isPending}
         >
           クエストを作成する
         </button>
