@@ -242,6 +242,7 @@ export const ManageTimetableCard: FC<Props> = (props) => {
                     strokeWidth="1.5"
                     className="w-6 h-6 fill-rhyth-orange ml-2"
                   >
+                    <title>rhythmate hono icon</title>
                     <path
                       strokeLinecap="round"
                       strokeLinejoin="round"

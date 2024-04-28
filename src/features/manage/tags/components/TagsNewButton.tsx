@@ -19,6 +19,7 @@ export const TagsNewButton: FC<Props> = ({ onClickFn }) => {
         stroke="white"
         className="w-8 h-8"
       >
+        <title>rhythmate add icon</title>
         <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
       </svg>
     </button>

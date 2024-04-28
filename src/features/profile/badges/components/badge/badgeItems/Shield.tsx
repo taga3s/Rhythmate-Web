@@ -20,6 +20,7 @@ export const Shield: FC<Props> = ({ className }) => {
       className={className}
     >
       <g>
+        <title>rhythmate shield icon</title>
         <path
           className="st0"
           d="M435.209,96.685l-19.627-1.077c-53.229-2.957-99.37-23.39-126.611-56.099L255.999,0l-32.98,39.509

@@ -155,10 +155,10 @@ export const ManagePresenter = () => {
           {manageView === "Timetable" ? (
             <div className="flex flex-col w-full mt-4">
               <div className="flex items-center">
-                {DAYS.map((day, i) => {
+                {DAYS.map((day) => {
                   return (
                     <ManageDayOfTheWeekSwitchButton
-                      key={i}
+                      key={day}
                       view={day}
                       dayOfTheWeek={dayOfTheWeekView}
                       onClickFn={setDayOfTheWeekView}
@@ -200,6 +200,7 @@ export const ManagePresenter = () => {
             stroke="currentColor"
             className="w-36 h-36 stroke-rhyth-blue"
           >
+            <title>rhythmate chat icon</title>
             <path
               strokeLinecap="round"
               strokeLinejoin="round"
@@ -219,6 +220,7 @@ export const ManagePresenter = () => {
               stroke="currentColor"
               className="w-7 h-7 mr-2"
             >
+              <title>rhythmate edit icon</title>
               <path
                 strokeLinecap="round"
                 strokeLinejoin="round"

@@ -20,6 +20,7 @@ export const Horse: FC<Props> = ({ className }) => {
       className={className}
     >
       <g>
+        <title>rhythmate horse icon</title>
         <path
           className="st0"
           d="M512,361.947c0-120.882-23.587-156.974-88.99-156.974H304.998c-5.518-26.281-12.648-50.691-21.62-72.694
