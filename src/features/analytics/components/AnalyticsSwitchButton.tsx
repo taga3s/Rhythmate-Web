@@ -19,6 +19,7 @@ export const AnalyticsSwitchButton: FC<Props> = ({ onClickFn, direction, isEdgy 
           fill="none"
           viewBox="0 0 8 14"
         >
+          <title>rhythmate left switch icon</title>
           <path
             stroke="currentColor"
             strokeLinecap="round"
@@ -37,6 +38,7 @@ export const AnalyticsSwitchButton: FC<Props> = ({ onClickFn, direction, isEdgy 
           fill="none"
           viewBox="0 0 8 14"
         >
+          <title>rhythmate right switch icon</title>
           <path
             stroke="currentColor"
             strokeLinecap="round"

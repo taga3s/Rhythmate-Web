@@ -20,6 +20,7 @@ export const BadgeSparkling: FC<Props> = ({ className }) => {
       xmlSpace="preserve"
       className={className}
     >
+      <title>rhythmate badge sparkling icon</title>
       <path
         fill="#FFAC06"
         opacity="1.000000"

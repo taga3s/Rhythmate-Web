@@ -6,7 +6,7 @@ type Props = {
 
 export const TagsEditButton: FC<Props> = ({ onClickFn }) => {
   return (
-    <button onClick={onClickFn}>
+    <button type="button" onClick={onClickFn}>
       <svg
         className="w-6 h-6 text-rhyth-gray hover:text-rhyth-black"
         aria-hidden="true"

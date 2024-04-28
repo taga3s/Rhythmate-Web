@@ -5,9 +5,9 @@ import App from "./app";
 import "./index.css";
 import { queryClient } from "./pkg/api/client/queryClient";
 
-const rootElement = document.getElementById("app")!;
+const rootElement = document.getElementById("app");
 
-if (!rootElement.innerHTML) {
+if (rootElement && !rootElement.innerHTML) {
   const root = ReactDOM.createRoot(rootElement);
   root.render(
     <StrictMode>

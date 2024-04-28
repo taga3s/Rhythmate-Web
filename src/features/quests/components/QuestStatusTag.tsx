@@ -7,7 +7,7 @@ type Props = {
 
 export const QuestStatusTag: FC<Props> = ({ status, calcExp }) => {
   return status === "CLOSED" ? (
-    <div className="w-[70px] h-full flex items-center justify-center bg-rhyth-red text-white tracking-widest font-bold px-2 py-1 rounded-r-md shadow-md font-cp-font">
+    <div className="w-[70px] flex items-center justify-center bg-rhyth-red text-white tracking-widest font-bold px-2 py-1 rounded-r-md shadow-md font-cp-font">
       <svg
         xmlns="http://www.w3.org/2000/svg"
         fill="none"
@@ -15,6 +15,7 @@ export const QuestStatusTag: FC<Props> = ({ status, calcExp }) => {
         strokeWidth="1.5"
         className="w-6 h-6 fill-rhyth-orange"
       >
+        <title>rhythmate hono icon</title>
         <path
           strokeLinecap="round"
           strokeLinejoin="round"

@@ -12,6 +12,7 @@ export const RankingIcon = () => {
       className="w-6 h-16"
     >
       <g>
+        <title>rhythmate ranking icon</title>
         <path
           className="st0 fill-rhyth-orange"
           d="M512,148.71c0-24.609-19.953-44.563-44.563-44.563c-24.625,0-44.563,19.953-44.563,44.563

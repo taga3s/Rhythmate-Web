@@ -69,11 +69,9 @@ export const SettingsImageCropModal: FC<Props> = ({ imageUrl, closeModal, setPro
             type="button"
             className="w-full text-white bg-rhyth-gray hover:bg-hover-gray active:ring-4 focus:outline-none  font-medium rounded-lg text-sm px-5 py-2.5 text-center"
             onClick={() => {
-              setCanvasPreview(
-                imgRef.current,
-                previewCanvasRef.current,
-                convertToPixelCrop(crop, imgRef.current!.width, imgRef.current!.height),
-              );
+              const imgWidth = imgRef.current?.width ?? 0;
+              const imgHeight = imgRef.current?.height ?? 0;
+              setCanvasPreview(imgRef.current, previewCanvasRef.current, convertToPixelCrop(crop, imgWidth, imgHeight));
               const dataUrl = previewCanvasRef.current?.toDataURL();
               setProfileImage(dataUrl ?? "");
               closeModal();

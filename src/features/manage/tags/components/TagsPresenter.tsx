@@ -64,9 +64,9 @@ export const TagsPresenter = () => {
             </LoadingContainer>
           ) : tagItems?.length ? (
             <ul className="text-md font-bold bg-white border-2 border-rhyth-light-gray rounded-lg shadow-md">
-              {tagItems.map((item, index) => (
+              {tagItems.map((item) => (
                 <TagsItem
-                  key={index}
+                  key={item.id}
                   tagName={item.name}
                   tagColor={item.color}
                   onEditFn={() => openTagsEditModal(item.id)}

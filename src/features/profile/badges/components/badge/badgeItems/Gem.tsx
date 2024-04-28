@@ -20,6 +20,7 @@ export const Gem: FC<Props> = ({ className }) => {
       className={className}
     >
       <g>
+        <title>rhythmate gem icon</title>
         <path
           className="st0"
           d="M400.406,53.719H258.094h-6.609H111.594L0,207.172l256.016,251.109l10.547-10.344L512,207.172L400.406,53.719z

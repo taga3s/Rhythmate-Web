@@ -3,6 +3,7 @@ import type { FC } from "react";
 type Props = {
   level: number;
 };
+
 export const ManageProgressBar: FC<Props> = (props) => {
   const { level } = props;
   const max = 7;
@@ -20,20 +21,19 @@ export const ManageProgressBar: FC<Props> = (props) => {
                 aria-valuenow={25}
                 aria-valuemin={0}
                 aria-valuemax={100}
-              ></div>
-            );
-          } else {
-            return (
-              <div
-                key={v}
-                className="w-full h-3 flex flex-col justify-center overflow-hidden bg-rhyth-light-gray text-xs  whitespace-nowrap transition duration-500"
-                role="progressbar"
-                aria-valuenow={25}
-                aria-valuemin={0}
-                aria-valuemax={100}
-              ></div>
+              />
             );
           }
+          return (
+            <div
+              key={v}
+              className="w-full h-3 flex flex-col justify-center overflow-hidden bg-rhyth-light-gray text-xs  whitespace-nowrap transition duration-500"
+              role="progressbar"
+              aria-valuenow={25}
+              aria-valuemin={0}
+              aria-valuemax={100}
+            />
+          );
         })}
     </div>
   );

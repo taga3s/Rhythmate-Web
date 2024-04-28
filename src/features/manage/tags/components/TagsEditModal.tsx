@@ -22,9 +22,9 @@ type NewValues = {
 
 export const TagsEditModal: FC<Props> = ({ modalType, closeModal, tagId }) => {
   const { updateTagMutation } = useMutateTag();
-  const { data, isLoading } = useQueryTagList();
+  const { data: tagListData } = useQueryTagList();
 
-  const targetTag = data?.find((v) => v.id === tagId);
+  const targetTag = tagListData?.find((v) => v.id === tagId);
 
   const {
     register,
@@ -39,7 +39,7 @@ export const TagsEditModal: FC<Props> = ({ modalType, closeModal, tagId }) => {
 
   useEffect(() => {
     setValue("color", targetTag?.color ?? "");
-  }, [isLoading]);
+  }, [setValue, targetTag]);
 
   const onSubmit = async (data: NewValues) => {
     await updateTagMutation.mutateAsync({
