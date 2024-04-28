@@ -29,7 +29,6 @@ export const useMutateWeeklyReport = () => {
           ),
         );
       }
-      // queryClient.setQueryData<string>([`weeklyReportFeedBack-${data.weeklyReportId}`], data.feedBack);
       notifySuccess("フィードバックを生成しました。");
     },
     onError: (err: FetchError) => {

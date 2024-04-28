@@ -2,7 +2,6 @@ import { useNavigate } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import type { Quest } from "../../../api/quest/model";
 import type { Day, Difficulty } from "../../../api/quest/types";
-import { Loading, LoadingContainer } from "../../common/components";
 import { useSearchModalIsOpen, useSetSearchModalIsOpen } from "../../common/contexts/searchModalIsOpenContext";
 import { useQueryQuestList } from "../api/quest/hooks/useQueryQuest";
 import { DAYS } from "../common/constant/constant";
@@ -33,7 +32,7 @@ export const ManagePresenter = () => {
     setSearchModalIsOpen(false);
   };
 
-  const { data: questListData, isLoading: questListIsLoading } = useQueryQuestList();
+  const { data: questListData } = useQueryQuestList();
   const { data: tagListData } = useQueryTagList();
   const [questList, setQuestList] = useState<QuestWithTag[]>([]);
 
@@ -122,11 +121,7 @@ export const ManagePresenter = () => {
           </span>
         </button>
       </div>
-      {questListIsLoading ? (
-        <LoadingContainer>
-          <Loading />
-        </LoadingContainer>
-      ) : filterActivation ? (
+      {filterActivation ? (
         filteredData?.length ? (
           <ul className="mt-4 flex flex-col items-center gap-6">
             {filteredData?.map((quest) => {
