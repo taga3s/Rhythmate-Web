@@ -42,12 +42,10 @@ export const TagsNewModal: FC<Props> = ({ modalType, closeModal }) => {
   return (
     <ModalBase onClickClose={closeModal}>
       <div className="order relative bg-white rounded-lg shadow">
-        {/* <!-- Modal header --> */}
         <div className="flex items-center justify-between p-4 md:p-4 rounded-t border-b">
           <h3 className="font-cp-font text-xl font-bold text-rhyth-dark-blue">{modalType}</h3>
           <ModalHeaderCloseButton onClickClose={closeModal} />
         </div>
-        {/* <!-- Modal body --> */}
         <div className="p-4 md:p-4">
           <form className="space-y-3" onSubmit={handleSubmit(onSubmit)}>
             <div className="flex items-center justify-between">
@@ -94,7 +92,8 @@ export const TagsNewModal: FC<Props> = ({ modalType, closeModal }) => {
             </div>
             <button
               type="submit"
-              className="w-full text-white bg-rhyth-light-blue hover:bg-rhyth-blue font-medium rounded-lg text-sm px-5 py-2.5 text-center shadow-md"
+              className="w-full text-white bg-rhyth-light-blue hover:bg-rhyth-blue disabled:bg-rhyth-light-gray font-medium rounded-lg text-sm px-5 py-2.5 text-center shadow-md"
+              disabled={createTagMutation.isPending}
             >
               決定する
             </button>

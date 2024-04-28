@@ -3,7 +3,7 @@ import { useNavigate } from "@tanstack/react-router";
 import { createFactory } from "../../../../../api/user/factory";
 import type { AuthParams } from "../../../../../api/user/types";
 import type { FetchError } from "../../../../../pkg/api/util/fetchError";
-import { notifyFailed, notifySuccess } from "../../../../../pkg/ui/toast";
+import { notifyWithToast } from "../../../../../pkg/ui/toast";
 
 export const useMutateUser = () => {
   const userFactory = createFactory();
@@ -14,11 +14,11 @@ export const useMutateUser = () => {
       return await userFactory.auth(params);
     },
     onSuccess: () => {
-      notifySuccess("ログインに成功しました。");
+      notifyWithToast({ status: "success", msg: "ログインしました。" });
       navigate({ to: "/quests" });
     },
     onError: (err: FetchError) => {
-      notifyFailed("ログインに失敗しました。");
+      notifyWithToast({ status: "error", msg: "ログインに失敗しました。" });
       console.log(err);
     },
   });

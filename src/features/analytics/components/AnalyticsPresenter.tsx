@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { formatDateTimeJP } from "../../../pkg/util/dayjs";
-import { Loading, LoadingContainer } from "../../common/components";
 import { useMutateWeeklyReport } from "../api/weeklyReport/hooks/useMutateWeeklyReport";
 import { useQueryWeeklyReports } from "../api/weeklyReport/hooks/useQueryWeeklyReport";
 import { AnalyticsAIFeedback } from "./AnalyticsAIFeedback";
@@ -9,7 +8,7 @@ import { AnalyticsCard } from "./AnalyticsCard";
 import { AnalyticsSwitchButton } from "./AnalyticsSwitchButton";
 
 export const AnalyticsPresenter = () => {
-  const { data: weeklyReports, isLoading: isLoadingWeeklyReports } = useQueryWeeklyReports();
+  const { data: weeklyReports } = useQueryWeeklyReports();
   const [currentIndex, setCurrentIndex] = useState<number>(0);
   const currentWeeklyReportsId = weeklyReports?.length ? weeklyReports[currentIndex].id : "";
   const { generateFeedBackMutation } = useMutateWeeklyReport();
@@ -34,11 +33,7 @@ export const AnalyticsPresenter = () => {
   };
   return (
     <>
-      {isLoadingWeeklyReports ? (
-        <LoadingContainer>
-          <Loading />
-        </LoadingContainer>
-      ) : weeklyReports?.length ? (
+      {weeklyReports?.length ? (
         <div className="flex flex-col items-center mx-auto">
           <div className="flex justify-between  w-full">
             {

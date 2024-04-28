@@ -1,5 +1,4 @@
 import { useNavigate } from "@tanstack/react-router";
-import { Loading, LoadingContainer } from "../../../common/components";
 import { BackButton } from "../../../common/components/BackButton";
 import { useQueryBadgeList } from "../api/badge/hooks/useQueryBadge";
 import { BadgeCard } from "./BadgeCard";
@@ -7,7 +6,7 @@ import { BadgeCard } from "./BadgeCard";
 export const BadgesPresenter = () => {
   const navigation = useNavigate();
 
-  const { data: badgeList, isLoading } = useQueryBadgeList();
+  const { data: badgeList } = useQueryBadgeList();
 
   return (
     <div className="flex flex-col items-center w-full">
@@ -21,30 +20,24 @@ export const BadgesPresenter = () => {
         </div>
         <p className="flex text-2xl justify-center font-bold">獲得バッジ一覧</p>
       </div>
-      {isLoading ? (
-        <LoadingContainer>
-          <Loading />
-        </LoadingContainer>
-      ) : (
-        <ul className="flex flex-col items-center mt-3 gap-3 w-full h-full">
-          {badgeList?.map((badge) => {
-            return (
-              <li key={badge.id} className="w-full">
-                <BadgeCard
-                  id={badge.id}
-                  name={badge.name}
-                  description={badge.description}
-                  imageType={badge.imageType}
-                  frameColor={badge.frameColor}
-                  isPinned={badge.isPinned}
-                  obtainedAt={badge.obtainedAt}
-                  unlockable={badge.unlockable}
-                />
-              </li>
-            );
-          })}
-        </ul>
-      )}
+      <ul className="flex flex-col items-center mt-3 gap-3 w-full h-full">
+        {badgeList?.map((badge) => {
+          return (
+            <li key={badge.id} className="w-full">
+              <BadgeCard
+                id={badge.id}
+                name={badge.name}
+                description={badge.description}
+                imageType={badge.imageType}
+                frameColor={badge.frameColor}
+                isPinned={badge.isPinned}
+                obtainedAt={badge.obtainedAt}
+                unlockable={badge.unlockable}
+              />
+            </li>
+          );
+        })}
+      </ul>
     </div>
   );
 };
