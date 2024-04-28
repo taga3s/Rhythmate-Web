@@ -1,6 +1,5 @@
 import { useNavigate } from "@tanstack/react-router";
 import { useState } from "react";
-import { Loading, LoadingContainer } from "../../../common/components";
 import { BackButton } from "../../../common/components/BackButton";
 import { ConfirmModal } from "../../../common/components/ConfirmModal";
 import { useMutateTag } from "../api/tag/hooks/useMutateTag";
@@ -18,7 +17,7 @@ export const TagsPresenter = () => {
 
   const [selectedTagId, setSelectedTagId] = useState<string>();
 
-  const { data: tagItems, isLoading } = useQueryTagList();
+  const { data: tagItems } = useQueryTagList();
 
   const { deleteTagMutation } = useMutateTag();
 
@@ -58,11 +57,7 @@ export const TagsPresenter = () => {
           <TagsNewButton onClickFn={openTagsNewModal} />
         </div>
         <div className="text-rhyth-dark-blue">
-          {isLoading ? (
-            <LoadingContainer>
-              <Loading />
-            </LoadingContainer>
-          ) : tagItems?.length ? (
+          {tagItems?.length ? (
             <ul className="text-md font-bold bg-white border-2 border-rhyth-light-gray rounded-lg shadow-md">
               {tagItems.map((item) => (
                 <TagsItem

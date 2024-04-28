@@ -3,7 +3,7 @@ import { createFactory } from "../../../../../api/weeklyReport/factory";
 import type { WeeklyReport } from "../../../../../api/weeklyReport/model";
 import { queryClient } from "../../../../../pkg/api/client/queryClient";
 import type { FetchError } from "../../../../../pkg/api/util/fetchError";
-import { notifyFailed, notifySuccess } from "../../../../../pkg/ui/toast";
+import { notifyWithToast } from "../../../../../pkg/ui/toast";
 
 export const useMutateWeeklyReport = () => {
   const weeklyReportFactory = createFactory();
@@ -29,11 +29,10 @@ export const useMutateWeeklyReport = () => {
           ),
         );
       }
-      // queryClient.setQueryData<string>([`weeklyReportFeedBack-${data.weeklyReportId}`], data.feedBack);
-      notifySuccess("フィードバックを生成しました。");
+      notifyWithToast({ status: "success", msg: "フィードバックを生成しました。" });
     },
     onError: (err: FetchError) => {
-      notifyFailed("処理に失敗しました。");
+      notifyWithToast({ status: "error", msg: "処理に失敗しました。" });
       console.log(err);
     },
   });

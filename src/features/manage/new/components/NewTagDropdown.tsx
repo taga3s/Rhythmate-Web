@@ -1,6 +1,5 @@
 import type { FC } from "react";
 import type { UseFormRegister, UseFormWatch } from "react-hook-form";
-import { Loading, LoadingContainer } from "../../../common/components";
 import { TagItem } from "../../common/components/TagItem";
 import type { TManageValidationSchema } from "../../common/libs/validation";
 import { useQueryTagList } from "../../tags/api/tag/hooks/useQueryTag";
@@ -11,7 +10,7 @@ type Props = {
 };
 
 export const NewTagDropdown: FC<Props> = ({ register, watch }) => {
-  const { data: tagItems, isLoading } = useQueryTagList();
+  const { data: tagItems } = useQueryTagList();
   const tagIdForColorSelect = watch("tagId");
 
   const selectColorLabel = (tagId: string | undefined) => {
@@ -38,11 +37,7 @@ export const NewTagDropdown: FC<Props> = ({ register, watch }) => {
 
   return (
     <>
-      {isLoading ? (
-        <LoadingContainer>
-          <Loading />
-        </LoadingContainer>
-      ) : tagItems?.length ? (
+      {tagItems?.length ? (
         <select
           className={`w-full border-2 p-2 rounded-md mt-4 ${selectColorLabel(tagIdForColorSelect)}`}
           id="new-quest-description"

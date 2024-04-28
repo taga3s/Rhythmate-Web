@@ -1,7 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { z } from "zod";
-import { ContentLayout, Header, Menu } from "../../../features/common/components";
+import { ContentLayout, Header, Loading, LoadingContainer, Menu } from "../../../features/common/components";
 import { EditPresenter } from "../../../features/manage/edit/components/EditPresenter";
+import { Suspense } from "react";
 
 const manageSearchSchema = z.object({
   quest_id: z.string().catch(""),
@@ -18,7 +19,15 @@ const Edit = () => {
     <>
       <Header />
       <ContentLayout>
-        <EditPresenter quest_id={quest_id} />
+        <Suspense
+          fallback={
+            <LoadingContainer>
+              <Loading />
+            </LoadingContainer>
+          }
+        >
+          <EditPresenter quest_id={quest_id} />
+        </Suspense>
       </ContentLayout>
       <Menu />
     </>
