@@ -14,7 +14,7 @@ export const AnalyticsAIFeedback: FC<Props> = ({ summaryData, isLoading, onClick
         <span className="text-base font-bold">AIによるフィードバック</span>
         <button
           type="button"
-          className="flex gap-2 items-center ml-auto text-sm text-white bg-rhyth-light-blue hover:bg-rhyth-blue border border-rhyth-blue rounded-lg px-2 py-1"
+          className="flex gap-2 items-center ml-auto text-sm text-white bg-rhyth-light-blue hover:bg-rhyth-blue disabled:bg-rhyth-light-gray border border-rhyth-blue disabled:border-rhyth-light-gray rounded-lg px-2 py-1"
           disabled={isLoading}
           onClick={onClick}
         >
