@@ -7,6 +7,7 @@ type Props = {
 export const TagsNewButton: FC<Props> = ({ onClickFn }) => {
   return (
     <button
+      type="button"
       onClick={onClickFn}
       className="flex justify-between items-center gap-2 bg-rhyth-blue hover:bg-rhyth-hover-blue h-14 w-auto rounded-full fixed right-8 bottom-24 shadow-lg p-4"
     >
@@ -19,6 +20,7 @@ export const TagsNewButton: FC<Props> = ({ onClickFn }) => {
         stroke="white"
         className="w-8 h-8"
       >
+        <title>rhythmate add icon</title>
         <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
       </svg>
     </button>

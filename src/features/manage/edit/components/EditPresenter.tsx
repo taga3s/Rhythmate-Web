@@ -32,17 +32,11 @@ export const EditPresenter: FC<Props> = (props) => {
   const { quest_id } = props;
   const navigate = useNavigate();
   const { deleteQuestMutation, updateQuestMutation } = useMutateQuest();
-  const { data, isLoading } = useQueryQuestList();
+  const { data: questListData, isLoading } = useQueryQuestList();
 
-  const targetQuest = data?.find((v) => v.id === quest_id);
+  const targetQuest = questListData?.find((v) => v.id === quest_id);
 
   const [difficulty, setDifficulty] = useState<Difficulty>("EASY");
-
-  useEffect(() => {
-    const modifiedDays = targetQuest?.days ?? [];
-    setValue("days", modifiedDays);
-    setDifficulty(targetQuest?.difficulty ?? "EASY");
-  }, [isLoading]);
 
   const {
     register,
@@ -54,6 +48,12 @@ export const EditPresenter: FC<Props> = (props) => {
     mode: "onBlur",
     resolver: zodResolver(manageValidationSchema),
   });
+
+  useEffect(() => {
+    const modifiedDays = targetQuest?.days ?? [];
+    setValue("days", modifiedDays);
+    setDifficulty(targetQuest?.difficulty ?? "EASY");
+  }, [targetQuest, setValue]);
 
   const onSubmit = async (data: NewValues) => {
     await updateQuestMutation.mutateAsync({

@@ -20,6 +20,7 @@ export const Bow: FC<Props> = ({ className }) => {
       className={className}
     >
       <g>
+        <title>rhythmate bow icon</title>
         <path
           className="st0"
           d="M150.037,428.586c1.781,4.797,3.529,9.878,5.267,15.189l157.583-44.245l-13.047-13.037L150.037,428.586z"

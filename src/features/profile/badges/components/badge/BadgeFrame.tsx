@@ -24,6 +24,7 @@ export const BadgeFrame: FC<Props> = ({ frameColor, className }) => {
       xmlSpace="preserve"
       className={className}
     >
+      <title>rhythmate badge frame icon</title>
       <path
         fill={colorCode}
         opacity="1.000000"

@@ -20,6 +20,7 @@ export const Cat: FC<Props> = ({ className }) => {
       className={className}
     >
       <g>
+        <title>rhythmate cat icon</title>
         <path
           className="st0"
           d="M487.318,70.379c0,0-4.138-59.206-19.264-59.206c-15.146,0-37.18,35.795-37.18,35.795h-77.112

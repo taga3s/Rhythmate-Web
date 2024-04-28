@@ -1,3 +1,5 @@
+name: Create PR Release
+
 on:
   push:
     branches: [develop]

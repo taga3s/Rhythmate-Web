@@ -12,28 +12,20 @@ export const ManageDayOfTheWeekSwitchButton: FC<Props> = ({ view, dayOfTheWeek, 
     switch (dayOfTheWeek) {
       case "MON":
         return "月";
-        break;
       case "TUE":
         return "火";
-        break;
       case "WED":
         return "水";
-        break;
       case "THU":
         return "木";
-        break;
       case "FRI":
         return "金";
-        break;
       case "SAT":
         return "土";
-        break;
       case "SUN":
         return "日";
-        break;
       default:
         return "";
-        break;
     }
   };
 

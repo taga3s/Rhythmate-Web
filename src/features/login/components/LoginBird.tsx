@@ -12,6 +12,7 @@ export const LoginBird = () => {
       enableBackground="new 0 0 500 500"
       xmlSpace="preserve"
     >
+      <title>rhythmate bird icon</title>
       <path
         fill="#1FA1FF"
         opacity="1.000000"

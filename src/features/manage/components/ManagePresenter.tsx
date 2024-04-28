@@ -33,12 +33,13 @@ export const ManagePresenter = () => {
     setSearchModalIsOpen(false);
   };
 
-  const { data: quests, isLoading: questListIsLoading } = useQueryQuestList();
-  const { data: tags, isLoading: tagListIsLoading } = useQueryTagList();
+  const { data: questListData, isLoading: questListIsLoading } = useQueryQuestList();
+  const { data: tagListData } = useQueryTagList();
   const [questList, setQuestList] = useState<QuestWithTag[]>([]);
+
   useEffect(() => {
-    const allQuests = quests?.map((quest) => {
-      const tag = tags?.find((tag) => tag.id === quest.tagId);
+    const allQuests = questListData?.map((quest) => {
+      const tag = tagListData?.find((tag) => tag.id === quest.tagId);
       return {
         tagName: tag?.name,
         tagColor: tag?.color,
@@ -46,20 +47,22 @@ export const ManagePresenter = () => {
       };
     });
     setQuestList(allQuests ?? []);
-  }, [questListIsLoading, tagListIsLoading]);
+  }, [questListData, tagListData]);
 
   const filteredData = questList?.filter((quest) => {
-    if (filterDay && filterDifficulties.length) {
+    if (filterDay && filterDifficulties.length > 0) {
       return quest.days.includes(filterDay) && filterDifficulties.some((difficulty) => quest.difficulty === difficulty);
-    } else if (filterDay) {
-      return quest.days.includes(filterDay);
-    } else if (filterTag) {
-      return quest.tagId.includes(filterTag);
-    } else if (filterDifficulties.length) {
-      return filterDifficulties.some((difficulty) => quest.difficulty === difficulty);
-    } else {
-      return true;
     }
+    if (filterDay) {
+      return quest.days.includes(filterDay);
+    }
+    if (filterTag) {
+      return quest.tagId.includes(filterTag);
+    }
+    if (filterDifficulties.length) {
+      return filterDifficulties.some((difficulty) => quest.difficulty === difficulty);
+    }
+    return true;
   });
 
   const filterQuestsByDayOfTheWeek = (questList: QuestWithTag[]) => {
@@ -150,15 +153,15 @@ export const ManagePresenter = () => {
             <div>条件を変えて再検索してください</div>
           </div>
         )
-      ) : quests?.length ? (
+      ) : questListData?.length ? (
         <div>
           {manageView === "Timetable" ? (
             <div className="flex flex-col w-full mt-4">
               <div className="flex items-center">
-                {DAYS.map((day, i) => {
+                {DAYS.map((day) => {
                   return (
                     <ManageDayOfTheWeekSwitchButton
-                      key={i}
+                      key={day}
                       view={day}
                       dayOfTheWeek={dayOfTheWeekView}
                       onClickFn={setDayOfTheWeekView}
@@ -200,6 +203,7 @@ export const ManagePresenter = () => {
             stroke="currentColor"
             className="w-36 h-36 stroke-rhyth-blue"
           >
+            <title>rhythmate chat icon</title>
             <path
               strokeLinecap="round"
               strokeLinejoin="round"
@@ -208,6 +212,7 @@ export const ManagePresenter = () => {
           </svg>
           <h1 className="text-lg">まずはクエストを作成しましょう！</h1>
           <button
+            type="button"
             className="bg-rhyth-blue hover:bg-rhyth-hover-blue text-white flex mt-3 h-12 w-44 items-center justify-center rounded-lg"
             onClick={() => navigate({ to: "/manage/new" })}
           >
@@ -219,6 +224,7 @@ export const ManagePresenter = () => {
               stroke="currentColor"
               className="w-7 h-7 mr-2"
             >
+              <title>rhythmate edit icon</title>
               <path
                 strokeLinecap="round"
                 strokeLinejoin="round"
@@ -236,7 +242,7 @@ export const ManagePresenter = () => {
           filterDay={filterDay}
           setFilterDay={setFilterDay}
           setFilterTag={setFilterTag}
-          tagItems={tags}
+          tagItems={tagListData}
           filterDifficulties={filterDifficulties}
           setFilterDifficulties={setFilterDifficulties}
           setFilterActivation={setFilterActivation}

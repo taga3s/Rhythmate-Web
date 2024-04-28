@@ -59,7 +59,7 @@ export const ManageTimetableCard: FC<Props> = (props) => {
   };
 
   return (
-    <div className={`bg-rhyth-bg-gray shadow-lg text-rhyth-dark-blue rounded-lg`}>
+    <div className={"bg-rhyth-bg-gray shadow-lg text-rhyth-dark-blue rounded-lg"}>
       <div className="flex items-center justify-between">
         <div
           className={`h-20 flex flex-col items-center justify-center font-bold tracking-widest p-2 pr-3 ${handleBgTagColor(
@@ -71,7 +71,7 @@ export const ManageTimetableCard: FC<Props> = (props) => {
         </div>
         <div className="h-full w-full flex items-center justify-between p-2">
           <h1 className="ml-2 text-md font-bold">{props.title}</h1>
-          <button className="p-2" onClick={handleAccordionOpen}>
+          <button type="button" className="p-2" onClick={handleAccordionOpen}>
             {isAccordionOpen ? (
               <svg
                 className="w-6 h-6 text-rhyth-dark-blue hover:text-rhyth-light-blue"
@@ -242,6 +242,7 @@ export const ManageTimetableCard: FC<Props> = (props) => {
                     strokeWidth="1.5"
                     className="w-6 h-6 fill-rhyth-orange ml-2"
                   >
+                    <title>rhythmate hono icon</title>
                     <path
                       strokeLinecap="round"
                       strokeLinejoin="round"
