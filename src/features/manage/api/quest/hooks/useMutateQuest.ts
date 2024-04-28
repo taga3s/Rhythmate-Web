@@ -4,7 +4,7 @@ import type { Quest } from "../../../../../api/quest/model";
 import type { CreateQuestParams, DeleteQuestParams, UpdateQuestParams } from "../../../../../api/quest/types";
 import { queryClient } from "../../../../../pkg/api/client/queryClient";
 import type { FetchError } from "../../../../../pkg/api/util/fetchError";
-import { notifyFailed, notifySuccess } from "../../../../../pkg/ui/toast";
+import { notifyWithToast } from "../../../../../pkg/ui/toast";
 
 export const useMutateQuest = () => {
   const questFactory = createFactory();
@@ -18,10 +18,10 @@ export const useMutateQuest = () => {
       if (questList) {
         queryClient.setQueryData<Quest[]>(["quests"], [...questList, data]);
       }
-      notifySuccess("クエストを作成しました。");
+      notifyWithToast({ status: "success", msg: "クエストを作成しました。" });
     },
     onError: (err: FetchError) => {
-      notifyFailed("処理に失敗しました。");
+      notifyWithToast({ status: "error", msg: "処理に失敗しました。" });
       console.log(err);
     },
   });
@@ -38,10 +38,10 @@ export const useMutateQuest = () => {
           questList.map((quest) => (quest.id === data.id ? data : quest)),
         );
       }
-      notifySuccess("クエストを更新しました。");
+      notifyWithToast({ status: "success", msg: "クエストを更新しました。" });
     },
     onError: (err: FetchError) => {
-      notifyFailed("処理に失敗しました。");
+      notifyWithToast({ status: "error", msg: "処理に失敗しました。" });
       console.log(err);
     },
   });
@@ -58,10 +58,10 @@ export const useMutateQuest = () => {
           questList.filter((quest) => quest.id !== variables.id),
         );
       }
-      notifySuccess("クエストを削除しました。");
+      notifyWithToast({ status: "success", msg: "クエストを削除しました。" });
     },
     onError: (err: FetchError) => {
-      notifyFailed("処理に失敗しました。");
+      notifyWithToast({ status: "error", msg: "処理に失敗しました。" });
       console.log(err);
     },
   });
