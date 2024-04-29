@@ -1,14 +1,13 @@
-import { useState } from "react";
-import { TagsItem } from "./TagsItem";
-import { ConfirmModal } from "../../../common/components/ConfirmModal";
-import { TagsEditModal } from "./TagsEditModal";
-import { TagsNewButton } from "./TagsNewButton";
 import { useNavigate } from "@tanstack/react-router";
-import { useQueryTagList } from "../api/tag/hooks/useQueryTag";
-import { Loading, LoadingContainer } from "../../../common/components";
-import { useMutateTag } from "../api/tag/hooks/useMutateTag";
-import { TagsNewModal } from "./TagsNewModal";
+import { useState } from "react";
 import { BackButton } from "../../../common/components/BackButton";
+import { ConfirmModal } from "../../../common/components/ConfirmModal";
+import { useMutateTag } from "../api/tag/hooks/useMutateTag";
+import { useQueryTagList } from "../api/tag/hooks/useQueryTag";
+import { TagsEditModal } from "./TagsEditModal";
+import { TagsItem } from "./TagsItem";
+import { TagsNewButton } from "./TagsNewButton";
+import { TagsNewModal } from "./TagsNewModal";
 
 export const TagsPresenter = () => {
   const navigate = useNavigate();
@@ -18,7 +17,7 @@ export const TagsPresenter = () => {
 
   const [selectedTagId, setSelectedTagId] = useState<string>();
 
-  const { data: tagItems, isLoading } = useQueryTagList();
+  const { data: tagItems } = useQueryTagList();
 
   const { deleteTagMutation } = useMutateTag();
 
@@ -58,15 +57,11 @@ export const TagsPresenter = () => {
           <TagsNewButton onClickFn={openTagsNewModal} />
         </div>
         <div className="text-rhyth-dark-blue">
-          {isLoading ? (
-            <LoadingContainer>
-              <Loading />
-            </LoadingContainer>
-          ) : tagItems?.length ? (
+          {tagItems?.length ? (
             <ul className="text-md font-bold bg-white border-2 border-rhyth-light-gray rounded-lg shadow-md">
-              {tagItems.map((item, index) => (
+              {tagItems.map((item) => (
                 <TagsItem
-                  key={index}
+                  key={item.id}
                   tagName={item.name}
                   tagColor={item.color}
                   onEditFn={() => openTagsEditModal(item.id)}

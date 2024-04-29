@@ -1,4 +1,4 @@
-import { FC } from "react";
+import type { FC } from "react";
 import { ConfirmModal } from "../../common/components";
 import { useMutateUser } from "../api/user/hooks/useMutateUser";
 

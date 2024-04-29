@@ -1,11 +1,11 @@
 import { useNavigate } from "@tanstack/react-router";
-import { ManageProgressBar } from "./ManageProgressBar";
-import { FC } from "react";
+import type { FC } from "react";
+import type { Day, Difficulty } from "../../../api/quest/types";
 import { formatDateTimeOnlyTime } from "../../../pkg/util/dayjs";
 import { ClockIcon } from "../../common/components/icons/ClockIcon";
 import { calcExp } from "../../common/funcs/calcExp";
 import { convertEnToJPWeekday } from "../common/funcs";
-import { Day, Difficulty } from "../../../api/quest/types";
+import { ManageProgressBar } from "./ManageProgressBar";
 
 const convertENToJPWeekdayString = (weekDays: Day[]) => {
   const result = weekDays.map((day) => convertEnToJPWeekday(day)).join("・");
@@ -55,7 +55,11 @@ export const ManageQuestCard: FC<Props> = (props) => {
       <div className="px-4 py-2">
         <div className="flex items-center py-2">
           <h1 className="font-bold text-lg text-rhyth-dark-blue">{title}</h1>
-          <button className="p-1 ml-auto" onClick={() => navigate({ to: `/manage/edit`, search: { quest_id: id } })}>
+          <button
+            type="button"
+            className="p-1 ml-auto"
+            onClick={() => navigate({ to: "/manage/edit", search: { quest_id: id } })}
+          >
             <div className="flex items-center gap-2 justify-center">
               <svg
                 className="w-6 h-6 text-rhyth-blue hover:text-rhyth-hover-blue"
@@ -146,7 +150,7 @@ export const ManageQuestCard: FC<Props> = (props) => {
             </div>
           </div>
         ) : (
-          <div></div>
+          <></>
         )}
       </div>
       <hr className="h-0.5 bg-rhyth-light-gray" />
@@ -172,6 +176,7 @@ export const ManageQuestCard: FC<Props> = (props) => {
               strokeWidth="1.5"
               className="w-6 h-6 fill-rhyth-orange ml-2"
             >
+              <title>rhythmate hono icon</title>
               <path
                 strokeLinecap="round"
                 strokeLinejoin="round"

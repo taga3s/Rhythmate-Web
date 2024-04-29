@@ -1,7 +1,7 @@
 import { useRouterState } from "@tanstack/react-router";
-import { HeaderQuestsButton } from "./HeaderQuestsButton";
 import { HeaderManageButton } from "./HeaderManageButton";
 import { HeaderProfileButton } from "./HeaderProfileButton";
+import { HeaderQuestsButton } from "./HeaderQuestsButton";
 
 export const Header = () => {
   const router = useRouterState();
@@ -10,16 +10,19 @@ export const Header = () => {
   const handlePageTitle = (pathname: string) => {
     if (pathname === "/quests") {
       return "今日の一覧";
-    } else if (
+    }
+    if (
       pathname === "/manage" ||
       pathname === "/manage/new" ||
       pathname === "/manage/edit" ||
       pathname === "/manage/tags"
     ) {
       return "クエスト管理";
-    } else if (pathname === "/analytics") {
+    }
+    if (pathname === "/analytics") {
       return "達成分析";
-    } else if (
+    }
+    if (
       pathname === "/profile" ||
       pathname === "/profile/badges" ||
       pathname === "/profile/ranking" ||

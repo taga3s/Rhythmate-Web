@@ -1,10 +1,10 @@
 import { useMutation } from "@tanstack/react-query";
 import { createFactory } from "../../../../../../api/tag/factory";
-import { Tag } from "../../../../../../api/tag/model";
-import { CreateTagParams, UpdateTagParams } from "../../../../../../api/tag/type";
+import type { Tag } from "../../../../../../api/tag/model";
+import type { CreateTagParams, UpdateTagParams } from "../../../../../../api/tag/type";
 import { queryClient } from "../../../../../../pkg/api/client/queryClient";
-import { FetchError } from "../../../../../../pkg/api/util/fetchError";
-import { notifyFailed, notifySuccess } from "../../../../../../pkg/ui/toast";
+import type { FetchError } from "../../../../../../pkg/api/util/fetchError";
+import { notifyWithToast } from "../../../../../../pkg/ui/toast";
 
 export const useMutateTag = () => {
   const tagFactory = createFactory();
@@ -18,10 +18,10 @@ export const useMutateTag = () => {
       if (tagList) {
         queryClient.setQueryData<Tag[]>(["tags"], [...tagList, data]);
       }
-      notifySuccess("タグを作成しました。");
+      notifyWithToast({ status: "success", msg: "タグを作成しました。" });
     },
     onError: (err: FetchError) => {
-      notifyFailed("処理に失敗しました。");
+      notifyWithToast({ status: "error", msg: "処理に失敗しました。" });
       console.log(err);
     },
   });
@@ -38,10 +38,10 @@ export const useMutateTag = () => {
           tagList.map((tag) => (tag.id === data.id ? data : tag)),
         );
       }
-      notifySuccess("タグを更新しました。");
+      notifyWithToast({ status: "success", msg: "タグを更新しました。" });
     },
     onError: (err: FetchError) => {
-      notifyFailed("処理に失敗しました。");
+      notifyWithToast({ status: "error", msg: "処理に失敗しました。" });
       console.log(err);
     },
   });
@@ -58,10 +58,10 @@ export const useMutateTag = () => {
           tagList.filter((tag) => tag.id !== variables.id),
         );
       }
-      notifySuccess("タグを削除しました。");
+      notifyWithToast({ status: "success", msg: "タグを削除しました。" });
     },
     onError: (err: FetchError) => {
-      notifyFailed("処理に失敗しました。");
+      notifyWithToast({ status: "error", msg: "処理に失敗しました。" });
       console.log(err);
     },
   });

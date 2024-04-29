@@ -1,4 +1,4 @@
-import { FC } from "react";
+import type { FC } from "react";
 
 type Props = {
   className: string;
@@ -19,10 +19,8 @@ export const Shield: FC<Props> = ({ className }) => {
       xmlSpace="preserve"
       className={className}
     >
-      {/* <style type="text/css">
-      .st0{fill:#4B4B4B;}
-    </style> */}
       <g>
+        <title>rhythmate shield icon</title>
         <path
           className="st0"
           d="M435.209,96.685l-19.627-1.077c-53.229-2.957-99.37-23.39-126.611-56.099L255.999,0l-32.98,39.509
@@ -31,7 +29,7 @@ export const Shield: FC<Props> = ({ className }) => {
         L435.209,96.685z M98.737,261.106c0-46.326,0-122.674,0-122.674c64.333-3.579,121.509-28.578,157.263-71.5v194.174h157.247v23.836
         c0,96.501-157.247,178.668-157.247,178.668V261.106H98.737z"
           fill="#0087EE"
-        ></path>
+        />
       </g>
     </svg>
   );

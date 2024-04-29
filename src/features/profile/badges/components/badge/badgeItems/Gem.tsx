@@ -1,4 +1,4 @@
-import { FC } from "react";
+import type { FC } from "react";
 
 type Props = {
   className: string;
@@ -19,12 +19,8 @@ export const Gem: FC<Props> = ({ className }) => {
       xmlSpace="preserve"
       className={className}
     >
-      {/* <style type="text/css">
-
-      .st0{fill:#4B4B4B;}
-
-    </style> */}
       <g>
+        <title>rhythmate gem icon</title>
         <path
           className="st0"
           d="M400.406,53.719H258.094h-6.609H111.594L0,207.172l256.016,251.109l10.547-10.344L512,207.172L400.406,53.719z
@@ -33,7 +29,7 @@ export const Gem: FC<Props> = ({ className }) => {
         l70.422,153.875L54.953,218.859H141.438z M256.016,405.094l-85.219-186.234h170.406L256.016,405.094z M300.141,372.734
         l70.422-153.875h86.453L300.141,372.734z M378.672,192.172l20.109-89.453v0.016l65.031,89.438H378.672z"
           fill="#DA06AC"
-        ></path>
+        />
       </g>
     </svg>
   );

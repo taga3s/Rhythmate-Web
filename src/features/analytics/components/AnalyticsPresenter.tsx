@@ -1,15 +1,14 @@
 import { useState } from "react";
 import { formatDateTimeJP } from "../../../pkg/util/dayjs";
-import { Loading, LoadingContainer } from "../../common/components";
+import { useMutateWeeklyReport } from "../api/weeklyReport/hooks/useMutateWeeklyReport";
 import { useQueryWeeklyReports } from "../api/weeklyReport/hooks/useQueryWeeklyReport";
 import { AnalyticsAIFeedback } from "./AnalyticsAIFeedback";
 import { AnalyticsBarChart } from "./AnalyticsBarChart";
 import { AnalyticsCard } from "./AnalyticsCard";
 import { AnalyticsSwitchButton } from "./AnalyticsSwitchButton";
-import { useMutateWeeklyReport } from "../api/weeklyReport/hooks/useMutateWeeklyReport";
 
 export const AnalyticsPresenter = () => {
-  const { data: weeklyReports, isLoading: isLoadingWeeklyReports } = useQueryWeeklyReports();
+  const { data: weeklyReports } = useQueryWeeklyReports();
   const [currentIndex, setCurrentIndex] = useState<number>(0);
   const currentWeeklyReportsId = weeklyReports?.length ? weeklyReports[currentIndex].id : "";
   const { generateFeedBackMutation } = useMutateWeeklyReport();
@@ -34,11 +33,7 @@ export const AnalyticsPresenter = () => {
   };
   return (
     <>
-      {isLoadingWeeklyReports ? (
-        <LoadingContainer>
-          <Loading />
-        </LoadingContainer>
-      ) : weeklyReports?.length ? (
+      {weeklyReports?.length ? (
         <div className="flex flex-col items-center mx-auto">
           <div className="flex justify-between  w-full">
             {
@@ -79,11 +74,9 @@ export const AnalyticsPresenter = () => {
               isRate={false}
             />
           </div>
-          <div className="flex justify-start w-full">
-            <h1 className="mt-8 font-cp-font tracking-widest text-rhyth-gray text-lg font-bold ">
-              曜日別クエスト達成状況
-            </h1>
-          </div>
+          <h2 className="flex justify-start w-full mt-8 font-cp-font tracking-widest text-rhyth-gray text-lg font-bold ">
+            曜日別クエスト達成状況
+          </h2>
           <AnalyticsBarChart
             completedQuestsData={weeklyReports[currentIndex].completed_quests_each_day}
             failedQuestsData={weeklyReports[currentIndex].failed_quests_each_day}
@@ -95,9 +88,9 @@ export const AnalyticsPresenter = () => {
           />
         </div>
       ) : (
-        <div className="mt-20 gap-2 flex flex-col items-center text-lg text-rhyth-dark-blue font-bold">
-          <span>週次レポートが存在しません。</span>
-        </div>
+        <span className="mt-20 gap-2 flex flex-col items-center text-lg text-rhyth-dark-blue font-bold">
+          週次レポートが存在しません。
+        </span>
       )}
     </>
   );

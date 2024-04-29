@@ -1,18 +1,18 @@
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useNavigate } from "@tanstack/react-router";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
+import type { Day, Difficulty } from "../../../../api/quest/types";
+import { formatDateTimeOnlyDate, formatDateTimeWithAddMinutes, isBefore, now } from "../../../../pkg/util/dayjs";
+import { BackButton } from "../../../common/components/BackButton";
 import { FormErrorMsg } from "../../../common/components/utils/FormErrorMsg";
 import { useMutateQuest } from "../../api/quest/hooks/useMutateQuest";
-import { useNavigate } from "@tanstack/react-router";
-import { TManageValidationSchema, manageValidationSchema } from "../../common/libs/validation";
-import { DAYS } from "../../common/constant/constant";
-import { convertEnToJPWeekday } from "../../common/funcs";
-import { Day, Difficulty } from "../../../../api/quest/types";
-import { formatDateTimeOnlyDate, formatDateTimeWithAddMinutes, isBefore, now } from "../../../../pkg/util/dayjs";
 import { DayOfTheWeek } from "../../common/components/DayOfTheWeek";
 import { Star } from "../../common/components/Star";
+import { DAYS } from "../../common/constant/constant";
+import { convertEnToJPWeekday } from "../../common/funcs";
+import { type TManageValidationSchema, manageValidationSchema } from "../../common/libs/validation";
 import { NewTagDropdown } from "./NewTagDropdown";
-import { BackButton } from "../../../common/components/BackButton";
 
 type NewValues = {
   title: string;
@@ -124,10 +124,10 @@ export const NewPresenter = () => {
             <div className="my-2">
               <p className="block my-2 font-bold text-rhyth-gray">実施頻度</p>
               <div className="flex mt-4 gap-1">
-                {DAYS.map((day, i) => {
+                {DAYS.map((day) => {
                   return (
                     <DayOfTheWeek
-                      key={i}
+                      key={day}
                       day={convertEnToJPWeekday(day)}
                       value={day}
                       register={register}
@@ -237,7 +237,8 @@ export const NewPresenter = () => {
         {errors.description && <FormErrorMsg msg={errors.description.message ?? ""} />}
         <button
           type="submit"
-          className="w-full mt-8 text-white bg-rhyth-blue hover:bg-rhyth-hover-blue focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-base my-4 p-3 shadow-lg focus:outline-none"
+          className="w-full mt-8 text-white bg-rhyth-blue hover:bg-rhyth-hover-blue disabled:bg-rhyth-light-gray focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-base my-4 p-3 shadow-lg focus:outline-none"
+          disabled={createQuestMutation.isPending}
         >
           クエストを作成する
         </button>

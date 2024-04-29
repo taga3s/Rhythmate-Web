@@ -1,11 +1,11 @@
 import { useMutation } from "@tanstack/react-query";
 import { useNavigate } from "@tanstack/react-router";
 import { createFactory } from "../../../../../api/user/factory";
-import { User } from "../../../../../api/user/model";
-import { UpdateLoginUserParams } from "../../../../../api/user/types";
+import type { User } from "../../../../../api/user/model";
+import type { UpdateLoginUserParams } from "../../../../../api/user/types";
 import { queryClient } from "../../../../../pkg/api/client/queryClient";
-import { FetchError } from "../../../../../pkg/api/util/fetchError";
-import { notifyFailed, notifySuccess } from "../../../../../pkg/ui/toast";
+import type { FetchError } from "../../../../../pkg/api/util/fetchError";
+import { notifyWithToast } from "../../../../../pkg/ui/toast";
 
 export const useMutateUser = () => {
   const userFactory = createFactory();
@@ -23,13 +23,13 @@ export const useMutateUser = () => {
           email: loginUser.email,
           level: loginUser.level,
           exp: loginUser.exp,
-          imageUrl: loginUser.imageUrl,
+          imageUrl: data.imageUrl,
         });
       }
-      notifySuccess("正常に更新しました。");
+      notifyWithToast({ status: "success", msg: "ユーザー情報を更新しました。" });
     },
     onError: (err: FetchError) => {
-      notifyFailed("処理に失敗しました。");
+      notifyWithToast({ status: "error", msg: "処理に失敗しました。" });
       console.log(err);
     },
   });
@@ -40,12 +40,24 @@ export const useMutateUser = () => {
       navigate({ to: "/" });
     },
     onError: (err: FetchError) => {
-      notifyFailed("ログアウトに失敗しました。");
+      notifyWithToast({ status: "error", msg: "処理に失敗しました。" });
+      console.log(err);
+    },
+  });
+  const deleteUserMutation = useMutation({
+    mutationFn: async () => await userFactory.deleteLoginUser(),
+    onSuccess: () => {
+      queryClient.clear();
+      navigate({ to: "/" });
+    },
+    onError: (err: FetchError) => {
+      notifyWithToast({ status: "error", msg: "処理に失敗しました。" });
       console.log(err);
     },
   });
   return {
     updateUserMutation,
     logoutMutation,
+    deleteUserMutation,
   };
 };

@@ -1,5 +1,5 @@
-import { FC } from "react";
-import { Day } from "../../../api/quest/types";
+import type { FC } from "react";
+import type { Day } from "../../../api/quest/types";
 
 type Props = {
   view: Day;
@@ -12,33 +12,26 @@ export const ManageDayOfTheWeekSwitchButton: FC<Props> = ({ view, dayOfTheWeek, 
     switch (dayOfTheWeek) {
       case "MON":
         return "月";
-        break;
       case "TUE":
         return "火";
-        break;
       case "WED":
         return "水";
-        break;
       case "THU":
         return "木";
-        break;
       case "FRI":
         return "金";
-        break;
       case "SAT":
         return "土";
-        break;
       case "SUN":
         return "日";
-        break;
       default:
         return "";
-        break;
     }
   };
 
   return (
     <button
+      type="button"
       className={`w-full px-4 py-2 font-cp-font rounded-t-lg shadow-xl ${
         view === dayOfTheWeek
           ? "text-white bg-rhyth-light-blue"

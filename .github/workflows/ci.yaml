@@ -1,0 +1,33 @@
+name: rhythmate-web-ci
+
+on:
+  push:
+    branches: ["develop", "feat/**", "fix/**", "refac/**", "impl/**"]
+  pull_request:
+    branches: ["develop"]
+
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [18.x, 20.x]
+        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Node.js ${{ matrix.node-version }}
+        uses: pnpm/action-setup@v2
+        with:
+          version: 9
+
+      - name: Install dependencies
+        run: pnpm i --frozen-lockfile
+
+      - name: Run Format Check
+        run: pnpm run format
+
+      - name: Run Lint Check
+        run: pnpm run lint

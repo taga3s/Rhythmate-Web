@@ -1,6 +1,6 @@
-import { FC, useState } from "react";
+import { type FC, useState } from "react";
+import type { Tag } from "../../../api/tag/model";
 import { ManageSearchTagItem } from "./ManageSearchTagItem";
-import { Tag } from "../../../api/tag/model";
 
 type Props = {
   tagItems: Tag[] | undefined;
@@ -48,12 +48,16 @@ export const ManageSearchTagsDropdown: FC<Props> = ({ tagItems, handleTag }) => 
     >
       <option
         value=""
-        className={`w-full bg-white text-rhyth-dark-blue border border-rhyth-light-gray font-medium rounded-lg text-sm px-5 py-2.5 inline-flex`}
+        className={
+          "w-full bg-white text-rhyth-dark-blue border border-rhyth-light-gray font-medium rounded-lg text-sm px-5 py-2.5 inline-flex"
+        }
       >
         タグを選択
       </option>
-      {tagItems?.map((tagItem, i) => {
-        return <ManageSearchTagItem key={i} tagId={tagItem.id} tagName={tagItem.name} tagColor={tagItem.color} />;
+      {tagItems?.map((tagItem) => {
+        return (
+          <ManageSearchTagItem key={tagItem.id} tagId={tagItem.id} tagName={tagItem.name} tagColor={tagItem.color} />
+        );
       })}
     </select>
   );

@@ -1,6 +1,6 @@
 import { NOT_STARTED_YET } from "../../features/quests/constant/constant";
 import { convertUTCtoJST, formatDate, formatDateTime, now } from "../../pkg/util/dayjs";
-import { Day, Difficulty, QuestState } from "./types";
+import type { Day, Difficulty, QuestState } from "./types";
 
 export type Quest = {
   id: string;
@@ -9,7 +9,6 @@ export type Quest = {
   startsAt: string;
   startedAt: string;
   minutes: number;
-  // TODO
   tagId: string;
   difficulty: Difficulty;
   state: QuestState;

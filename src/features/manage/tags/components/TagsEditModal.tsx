@@ -1,13 +1,13 @@
-import { FC, useEffect } from "react";
-import { TagsColorDropdown } from "./TagsColorDropdown";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { type FC, useEffect } from "react";
+import { useForm } from "react-hook-form";
+import { FormErrorMsg } from "../../../common/components";
 import { ModalBase } from "../../../common/components/modal/ModalBase";
 import { ModalHeaderCloseButton } from "../../../common/components/modal/ModalHeaderCloseButton";
 import { useMutateTag } from "../api/tag/hooks/useMutateTag";
-import { TTagValidationSchema, tagValidationSchema } from "../common/libs/validation";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import { FormErrorMsg } from "../../../common/components";
 import { useQueryTagList } from "../api/tag/hooks/useQueryTag";
+import { type TTagValidationSchema, tagValidationSchema } from "../common/libs/validation";
+import { TagsColorDropdown } from "./TagsColorDropdown";
 
 type Props = {
   modalType: string;
@@ -22,9 +22,9 @@ type NewValues = {
 
 export const TagsEditModal: FC<Props> = ({ modalType, closeModal, tagId }) => {
   const { updateTagMutation } = useMutateTag();
-  const { data, isLoading } = useQueryTagList();
+  const { data: tagListData } = useQueryTagList();
 
-  const targetTag = data?.find((v) => v.id === tagId);
+  const targetTag = tagListData?.find((v) => v.id === tagId);
 
   const {
     register,
@@ -39,7 +39,7 @@ export const TagsEditModal: FC<Props> = ({ modalType, closeModal, tagId }) => {
 
   useEffect(() => {
     setValue("color", targetTag?.color ?? "");
-  }, [isLoading]);
+  }, [setValue, targetTag]);
 
   const onSubmit = async (data: NewValues) => {
     await updateTagMutation.mutateAsync({

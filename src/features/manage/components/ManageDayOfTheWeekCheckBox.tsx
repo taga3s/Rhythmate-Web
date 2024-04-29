@@ -1,5 +1,5 @@
-import { ChangeEvent, FC } from "react";
-import { Day } from "../../../api/quest/types";
+import type { ChangeEvent, FC } from "react";
+import type { Day } from "../../../api/quest/types";
 import { convertEnToJPWeekday } from "../common/funcs";
 
 type Props = {

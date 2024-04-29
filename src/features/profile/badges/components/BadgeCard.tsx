@@ -1,9 +1,9 @@
-import { FC } from "react";
-import { Badge } from "./badge/Badge";
-import { useMutateBadge } from "../api/badge/hooks/useMutateBadge";
-import { FrameColor, ImageType } from "../../../../api/badge/type";
-import { BadgeSecret } from "./badge/BadgeSecret";
+import type { FC } from "react";
+import type { FrameColor, ImageType } from "../../../../api/badge/type";
 import { formatDateJP } from "../../../../pkg/util/dayjs";
+import { useMutateBadge } from "../api/badge/hooks/useMutateBadge";
+import { Badge } from "./badge/Badge";
+import { BadgeSecret } from "./badge/BadgeSecret";
 
 type Props = {
   id: string;
@@ -28,28 +28,29 @@ export const BadgeCard: FC<Props> = (props) => {
       <div className="w-2/3 h-full flex-row ">
         {obtainedAt && <span className="flex justify-end text-sm">達成日: {formatDateJP(obtainedAt)}</span>}
         <span className="block text-xl font-bold">{obtainedAt ? name : "???"}</span>
-        <span className="block text-md">{description}</span>
-        <div className="flex justify-end mt-2">
+        <span className="block text-sm">{description}</span>
+        <div className="flex justify-end mt-4">
           {obtainedAt ? (
-            <div>
-              {isPinned ? (
-                <button
-                  className="w-30 px-4 py-2 text-white bg-rhyth-red rounded-lg"
-                  onClick={() => unpinBadgeMutation.mutate({ badgeId: id })}
-                >
-                  ピン留め解除
-                </button>
-              ) : (
-                <button
-                  className="w-30 px-4 py-2 text-white bg-rhyth-light-blue rounded-lg"
-                  onClick={() => pinBadgeMutation.mutate({ badgeId: id })}
-                >
-                  ピン留め
-                </button>
-              )}
-            </div>
+            isPinned ? (
+              <button
+                type="button"
+                className="w-30 px-4 py-2 text-white bg-rhyth-red rounded-lg"
+                onClick={() => unpinBadgeMutation.mutate({ badgeId: id })}
+              >
+                ピン留め解除
+              </button>
+            ) : (
+              <button
+                type="button"
+                className="w-30 px-4 py-2 text-white bg-rhyth-light-blue rounded-lg"
+                onClick={() => pinBadgeMutation.mutate({ badgeId: id })}
+              >
+                ピン留め
+              </button>
+            )
           ) : (
             <button
+              type="button"
               className={`w-30 px-4 py-2 text-white rounded-lg ${unlockable ? "bg-rhyth-blue" : "bg-rhyth-light-gray"}`}
               onClick={() => achieveBadgeMutation.mutate({ badgeId: id })}
               disabled={!unlockable}

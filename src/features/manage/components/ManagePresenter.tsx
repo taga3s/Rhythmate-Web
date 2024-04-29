@@ -1,17 +1,16 @@
 import { useNavigate } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
-import { Day, Difficulty } from "../../../api/quest/types";
-import { Loading, LoadingContainer } from "../../common/components";
+import type { Quest } from "../../../api/quest/model";
+import type { Day, Difficulty } from "../../../api/quest/types";
 import { useSearchModalIsOpen, useSetSearchModalIsOpen } from "../../common/contexts/searchModalIsOpenContext";
 import { useQueryQuestList } from "../api/quest/hooks/useQueryQuest";
+import { DAYS } from "../common/constant/constant";
+import { useQueryTagList } from "../tags/api/tag/hooks/useQueryTag";
+import { ManageDayOfTheWeekSwitchButton } from "./ManageDayOfTheWeekSwitchButton";
 import { ManageNewButton } from "./ManageNewButton";
 import { ManageQuestCard } from "./ManageQuestCard";
 import { ManageQuestSearchModal } from "./ManageQuestSearchModal,";
 import { ManageTimetable } from "./ManageTimetable";
-import { Quest } from "../../../api/quest/model";
-import { DAYS } from "../common/constant/constant";
-import { ManageDayOfTheWeekSwitchButton } from "./ManageDayOfTheWeekSwitchButton";
-import { useQueryTagList } from "../tags/api/tag/hooks/useQueryTag";
 
 type QuestWithTag = Quest & {
   tagName: string | undefined;
@@ -33,12 +32,13 @@ export const ManagePresenter = () => {
     setSearchModalIsOpen(false);
   };
 
-  const { data: quests, isLoading: questListIsLoading } = useQueryQuestList();
-  const { data: tags, isLoading: tagListIsLoading } = useQueryTagList();
+  const { data: questListData } = useQueryQuestList();
+  const { data: tagListData } = useQueryTagList();
   const [questList, setQuestList] = useState<QuestWithTag[]>([]);
+
   useEffect(() => {
-    const allQuests = quests?.map((quest) => {
-      const tag = tags?.find((tag) => tag.id === quest.tagId);
+    const allQuests = questListData?.map((quest) => {
+      const tag = tagListData?.find((tag) => tag.id === quest.tagId);
       return {
         tagName: tag?.name,
         tagColor: tag?.color,
@@ -46,7 +46,7 @@ export const ManagePresenter = () => {
       };
     });
     setQuestList(allQuests ?? []);
-  }, [questListIsLoading, tagListIsLoading]);
+  }, [questListData, tagListData]);
 
   const filteredData = questList?.filter((quest) => {
     if (filterDay && filterTag && filterDifficulties.length) {
@@ -75,6 +75,16 @@ export const ManagePresenter = () => {
       }
       return true;
     }
+    // if (filterDay) {
+    //   return quest.days.includes(filterDay);
+    // }
+    // if (filterTag) {
+    //   return quest.tagId.includes(filterTag);
+    // }
+    // if (filterDifficulties.length) {
+    //   return filterDifficulties.some((difficulty) => quest.difficulty === difficulty);
+    // }
+    // return true;
   });
 
   const filterQuestsByDayOfTheWeek = (questList: QuestWithTag[]) => {
@@ -103,45 +113,38 @@ export const ManagePresenter = () => {
 
   return (
     <div className="w-full">
-      {filterActivation === true ? (
-        <></>
-      ) : (
-        <div className="flex justify-between items-center">
-          <h1 className="font-cp-font tracking-widest text-rhyth-gray text-xl font-bold ">
-            {manageView === "Timetable" ? "曜日別クエスト" : "全てのクエスト"}
-          </h1>
-          <button
-            className="flex items-center gap-1 bg-white py-2 px-4 rounded-full border-2 border-rhyth-light-gray shadow-sm hover:bg-rhyth-bg-dark-gray"
-            onClick={handleManageView}
+      <div className="flex justify-between items-center">
+        <h1 className="font-cp-font tracking-widest text-rhyth-gray text-xl font-bold ">
+          {manageView === "Timetable" ? "曜日別クエスト" : "全てのクエスト"}
+        </h1>
+        <button
+          type="button"
+          className="flex items-center gap-1 bg-white py-2 px-4 rounded-full border-2 border-rhyth-light-gray shadow-sm hover:bg-rhyth-bg-dark-gray"
+          onClick={handleManageView}
+        >
+          <svg
+            className="w-6 h-6 text-rhyth-blue"
+            aria-hidden="true"
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            fill="none"
+            viewBox="0 0 24 24"
           >
-            <svg
-              className="w-6 h-6 text-rhyth-blue"
-              aria-hidden="true"
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              fill="none"
-              viewBox="0 0 24 24"
-            >
-              <path
-                stroke="currentColor"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="m16 10 3-3m0 0-3-3m3 3H5v3m3 4-3 3m0 0 3 3m-3-3h14v-3"
-              />
-            </svg>
-            <span className="text-sm font-bold text-rhyth-dark-blue">
-              {manageView === "Timetable" ? "全表示" : "曜日別表示"}
-            </span>
-          </button>
-        </div>
-      )}
-      {questListIsLoading ? (
-        <LoadingContainer>
-          <Loading />
-        </LoadingContainer>
-      ) : filterActivation ? (
+            <path
+              stroke="currentColor"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
+              d="m16 10 3-3m0 0-3-3m3 3H5v3m3 4-3 3m0 0 3 3m-3-3h14v-3"
+            />
+          </svg>
+          <span className="text-sm font-bold text-rhyth-dark-blue">
+            {manageView === "Timetable" ? "全表示" : "曜日別表示"}
+          </span>
+        </button>
+      </div>
+      {filterActivation ? (
         filteredData?.length ? (
           <div>
             <ul className="mt-4 flex flex-col items-center gap-6">
@@ -170,15 +173,15 @@ export const ManagePresenter = () => {
             <div>条件を変えて再検索してください</div>
           </div>
         )
-      ) : quests?.length ? (
+      ) : questListData?.length ? (
         <div>
           {manageView === "Timetable" ? (
             <div className="flex flex-col w-full mt-4">
               <div className="flex items-center">
-                {DAYS.map((day, i) => {
+                {DAYS.map((day) => {
                   return (
                     <ManageDayOfTheWeekSwitchButton
-                      key={i}
+                      key={day}
                       view={day}
                       dayOfTheWeek={dayOfTheWeekView}
                       onClickFn={setDayOfTheWeekView}
@@ -220,6 +223,7 @@ export const ManagePresenter = () => {
             stroke="currentColor"
             className="w-36 h-36 stroke-rhyth-blue"
           >
+            <title>rhythmate chat icon</title>
             <path
               strokeLinecap="round"
               strokeLinejoin="round"
@@ -228,6 +232,7 @@ export const ManagePresenter = () => {
           </svg>
           <h1 className="text-lg">まずはクエストを作成しましょう！</h1>
           <button
+            type="button"
             className="bg-rhyth-blue hover:bg-rhyth-hover-blue text-white flex mt-3 h-12 w-44 items-center justify-center rounded-lg"
             onClick={() => navigate({ to: "/manage/new" })}
           >
@@ -239,6 +244,7 @@ export const ManagePresenter = () => {
               stroke="currentColor"
               className="w-7 h-7 mr-2"
             >
+              <title>rhythmate edit icon</title>
               <path
                 strokeLinecap="round"
                 strokeLinejoin="round"
@@ -256,7 +262,7 @@ export const ManagePresenter = () => {
           filterDay={filterDay}
           setFilterDay={setFilterDay}
           setFilterTag={setFilterTag}
-          tagItems={tags}
+          tagItems={tagListData}
           filterDifficulties={filterDifficulties}
           setFilterDifficulties={setFilterDifficulties}
           setFilterActivation={setFilterActivation}

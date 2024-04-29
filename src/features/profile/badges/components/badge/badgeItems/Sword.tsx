@@ -1,4 +1,4 @@
-import { FC } from "react";
+import type { FC } from "react";
 
 type Props = {
   className: string;
@@ -19,12 +19,8 @@ export const Sword: FC<Props> = ({ className }) => {
       xmlSpace="preserve"
       className={className}
     >
-      {/* <style type="text/css">
-
-      .st0{fill:#4B4B4B;}
-
-    </style> */}
       <g>
+        <title>rhythmate sword icon</title>
         <path
           className="st0"
           d="M511.996,0.004L376.387,35.379L116.434,318.254l-48.516-36.75c19.484-19.781,30.563-40.25,24.781-46.031
@@ -38,7 +34,7 @@ export const Sword: FC<Props> = ({ className }) => {
         M180.887,378.582l-17.578-23.203l238.141-238.156l48.922,13.719L180.887,378.582z M403.887,108.129l-15.125-54.031l93.563-24.406
         l-24.406,93.563L403.887,108.129z"
           fill="#333333"
-        ></path>
+        />
       </g>
     </svg>
   );

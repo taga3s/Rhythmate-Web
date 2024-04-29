@@ -13,6 +13,7 @@ export const BadgeSecret = () => {
       enableBackground="new 0 0 500 500"
       xmlSpace="preserve"
     >
+      <title>rhythmate secret icon</title>
       <path
         fill="#737373"
         opacity="1.000000"

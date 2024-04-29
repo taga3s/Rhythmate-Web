@@ -1,10 +1,10 @@
 import { useNavigate } from "@tanstack/react-router";
-import { ManageProgressBar } from "./ManageProgressBar";
-import { FC, useState } from "react";
+import { type FC, useState } from "react";
+import type { Day, Difficulty } from "../../../api/quest/types";
 import { ClockIcon } from "../../common/components/icons/ClockIcon";
 import { calcExp } from "../../common/funcs/calcExp";
 import { convertEnToJPWeekday } from "../common/funcs";
-import { Day, Difficulty } from "../../../api/quest/types";
+import { ManageProgressBar } from "./ManageProgressBar";
 
 const convertENToJPWeekdayString = (weekDays: Day[]) => {
   const result = weekDays.map((day) => convertEnToJPWeekday(day)).join("・");
@@ -59,7 +59,7 @@ export const ManageTimetableCard: FC<Props> = (props) => {
   };
 
   return (
-    <div className={`bg-rhyth-bg-gray shadow-lg text-rhyth-dark-blue rounded-lg`}>
+    <div className={"bg-rhyth-bg-gray shadow-lg text-rhyth-dark-blue rounded-lg"}>
       <div className="flex items-center justify-between">
         <div
           className={`h-20 flex flex-col items-center justify-center font-bold tracking-widest p-2 pr-3 ${handleBgTagColor(
@@ -71,7 +71,7 @@ export const ManageTimetableCard: FC<Props> = (props) => {
         </div>
         <div className="h-full w-full flex items-center justify-between p-2">
           <h1 className="ml-2 text-md font-bold">{props.title}</h1>
-          <button className="p-2" onClick={handleAccordionOpen}>
+          <button type="button" className="p-2" onClick={handleAccordionOpen}>
             {isAccordionOpen ? (
               <svg
                 className="w-6 h-6 text-rhyth-dark-blue hover:text-rhyth-light-blue"
@@ -121,8 +121,14 @@ export const ManageTimetableCard: FC<Props> = (props) => {
                 <div className="flex items-center justify-between mb-2">
                   <p className="font-bold text-sm text-white bg-rhyth-gray py-1 px-3 rounded-lg tracking-wider">メモ</p>
                   <button
+                    type="button"
                     className="p-1 ml-auto"
-                    onClick={() => navigate({ to: `/manage/edit`, search: { quest_id: props.id } })}
+                    onClick={() =>
+                      navigate({
+                        to: "/manage/edit",
+                        search: { quest_id: props.id },
+                      })
+                    }
                   >
                     <div className="flex items-center gap-2 justify-center">
                       <svg
@@ -206,7 +212,7 @@ export const ManageTimetableCard: FC<Props> = (props) => {
                   </div>
                 </div>
               ) : (
-                <div></div>
+                <></>
               )}
             </div>
             <hr className="h-0.5 bg-rhyth-light-gray" />
@@ -236,6 +242,7 @@ export const ManageTimetableCard: FC<Props> = (props) => {
                     strokeWidth="1.5"
                     className="w-6 h-6 fill-rhyth-orange ml-2"
                   >
+                    <title>rhythmate hono icon</title>
                     <path
                       strokeLinecap="round"
                       strokeLinejoin="round"

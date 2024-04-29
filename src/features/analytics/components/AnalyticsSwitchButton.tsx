@@ -1,4 +1,4 @@
-import { FC } from "react";
+import type { FC } from "react";
 
 type Props = {
   direction: "left" | "right";
@@ -8,7 +8,7 @@ type Props = {
 
 export const AnalyticsSwitchButton: FC<Props> = ({ onClickFn, direction, isEdgy }) => {
   return (
-    <button onClick={onClickFn} disabled={isEdgy}>
+    <button type="button" onClick={onClickFn} disabled={isEdgy}>
       {direction === "left" ? (
         <svg
           className={`w-6 h-6 text-rhyth-gray ${
@@ -19,6 +19,7 @@ export const AnalyticsSwitchButton: FC<Props> = ({ onClickFn, direction, isEdgy 
           fill="none"
           viewBox="0 0 8 14"
         >
+          <title>rhythmate left switch icon</title>
           <path
             stroke="currentColor"
             strokeLinecap="round"
@@ -37,6 +38,7 @@ export const AnalyticsSwitchButton: FC<Props> = ({ onClickFn, direction, isEdgy 
           fill="none"
           viewBox="0 0 8 14"
         >
+          <title>rhythmate right switch icon</title>
           <path
             stroke="currentColor"
             strokeLinecap="round"

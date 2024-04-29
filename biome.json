@@ -6,13 +6,23 @@
   "linter": {
     "enabled": true,
     "rules": {
-      "recommended": true
+      "recommended": true,
+      "suspicious": {
+        "noExtraNonNullAssertion": "warn",
+        "noExplicitAny": "warn",
+        "noArrayIndexKey": "warn"
+      }
     }
   },
   "formatter": {
+    "enabled": true,
     "formatWithErrors": false,
-    "indentStyle": "space",
+    "ignore": [],
     "indentWidth": 2,
+    "indentStyle": "space",
     "lineWidth": 120
+  },
+  "files": {
+    "ignore": ["src/routeTree.gen.ts"]
   }
 }

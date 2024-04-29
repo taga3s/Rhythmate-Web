@@ -1,4 +1,4 @@
-import { FC } from "react";
+import type { FC } from "react";
 import { ModalBase } from "./modal/ModalBase";
 import { ModalHeaderCloseButton } from "./modal/ModalHeaderCloseButton";
 
@@ -33,6 +33,7 @@ export const ConfirmModal: FC<Props> = (props) => {
               fill="currentColor"
               viewBox="0 0 24 24"
             >
+              <title>rhythmate alert icon</title>
               <path
                 fillRule="evenodd"
                 d="M18.5 3.1c.3.2.5.5.5.9v16a1 1 0 0 1-1.6.8L12 17V7.1l5.4-4a1 1 0 0 1 1 0ZM22 12a4 4 0 0 1-2 3.5v-7c1.2.7 2 2 2 3.5ZM10 8H4a1 1 0 0 0-1 1v6c0 .6.4 1 1 1h6V8Zm0 9H5v3c0 .6.4 1 1 1h3c.6 0 1-.4 1-1v-3Z"
@@ -48,9 +49,9 @@ export const ConfirmModal: FC<Props> = (props) => {
               className={`w-full text-white focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center
                   ${
                     btnColor === "green"
-                      ? `bg-rhyth-green hover:bg-rhyth-hover-green`
+                      ? "bg-rhyth-green hover:bg-rhyth-hover-green"
                       : btnColor === "blue"
-                        ? `bg-rhyth-blue hover:bg-rhyth-hover-blue`
+                        ? "bg-rhyth-blue hover:bg-rhyth-hover-blue"
                         : "bg-rhyth-red hover:bg-rhyth-hover-red"
                   }
                   `}

@@ -1,13 +1,13 @@
-import ReactDOM from "react-dom/client";
-import { StrictMode } from "react";
 import { QueryClientProvider } from "@tanstack/react-query";
-import { queryClient } from "./pkg/api/client/queryClient";
-import "./index.css";
+import { StrictMode } from "react";
+import ReactDOM from "react-dom/client";
 import App from "./app";
+import "./index.css";
+import { queryClient } from "./pkg/api/client/queryClient";
 
-const rootElement = document.getElementById("app")!;
+const rootElement = document.getElementById("app");
 
-if (!rootElement.innerHTML) {
+if (rootElement && !rootElement.innerHTML) {
   const root = ReactDOM.createRoot(rootElement);
   root.render(
     <StrictMode>

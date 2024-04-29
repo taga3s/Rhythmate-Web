@@ -31,13 +31,19 @@
 
 ### 前提
 
-1. npm モジュールをインストールする。
+1. パッケージ管理に`pnpm`を利用するので、有効化します。
 
 ```
-$ npm i
+$ corepack enable pnpm
 ```
 
-2. `.env.example`をコピーして`.env`配置する。
+2. `node_modules` をインストールする。
+
+```
+$ pnpm i
+```
+
+3. `.env.example`をコピーして`.env`配置する。
 
 ```
 cp .env.example .env
@@ -46,11 +52,17 @@ cp .env.example .env
 ### React を起動する。
 
 ```
-$ npm run dev
+$ pnpm run dev
 ```
 
 ### formatterをかける。
 
 ```
-$ npm run format
+$ pnpm run format
+```
+
+### linterをかける。
+
+```
+$ pnpm run lint
 ```

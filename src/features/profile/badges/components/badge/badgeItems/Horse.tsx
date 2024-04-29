@@ -1,4 +1,4 @@
-import { FC } from "react";
+import type { FC } from "react";
 
 type Props = {
   className: string;
@@ -19,10 +19,8 @@ export const Horse: FC<Props> = ({ className }) => {
       xmlSpace="preserve"
       className={className}
     >
-      {/* <style type="text/css">
-	.st0{fill:#4B4B4B;}
-</style> */}
       <g>
+        <title>rhythmate horse icon</title>
         <path
           className="st0"
           d="M512,361.947c0-120.882-23.587-156.974-88.99-156.974H304.998c-5.518-26.281-12.648-50.691-21.62-72.694
@@ -46,7 +44,7 @@ export const Horse: FC<Props> = ({ className }) => {
 		C239.02,163.844,235.582,156.265,231.92,149.149z M253.044,202.039c-1.935-5.861-3.966-11.546-6.076-17.054l34.956-7.964
 		c2.303,8.036,4.366,16.391,6.221,25.018H253.044z"
           fill="#86310C"
-        ></path>
+        />
       </g>
     </svg>
   );

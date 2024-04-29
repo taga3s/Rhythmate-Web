@@ -1,8 +1,8 @@
-import { FC } from "react";
-import { TagsColorItem } from "./TagsColorItem";
-import { TTagValidationSchema } from "../common/libs/validation";
-import { UseFormRegister, UseFormWatch } from "react-hook-form";
+import type { FC } from "react";
+import type { UseFormRegister, UseFormWatch } from "react-hook-form";
 import { selectTagColorText } from "../../common/funcs";
+import type { TTagValidationSchema } from "../common/libs/validation";
+import { TagsColorItem } from "./TagsColorItem";
 
 type Props = {
   register: UseFormRegister<TTagValidationSchema>;
@@ -22,7 +22,9 @@ export const TagsColorDropdown: FC<Props> = ({ register, watch }) => {
     >
       <option
         value=""
-        className={`w-full bg-white text-rhyth-dark-blue border border-rhyth-light-gray font-medium rounded-lg text-sm px-5 py-2.5 inline-flex`}
+        className={
+          "w-full bg-white text-rhyth-dark-blue border border-rhyth-light-gray font-medium rounded-lg text-sm px-5 py-2.5 inline-flex"
+        }
       >
         色を選択
       </option>

@@ -1,9 +1,7 @@
-import { User } from "../../../api/user/model";
-
-export const profileExpCalculation = (loginUser: User | undefined) => {
-  const currentLevel = loginUser?.level ?? 1;
+export const profileExpCalculation = (level: number, exp: number) => {
+  const currentLevel = level;
   const toNextLevel = 100;
-  let remainingExp = loginUser?.exp ?? 0;
+  let remainingExp = exp;
 
   for (let i = 1; i < currentLevel; i++) {
     remainingExp -= toNextLevel * i;

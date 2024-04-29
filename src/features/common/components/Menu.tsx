@@ -14,9 +14,8 @@ export const Menu = () => {
     const isCurrentPath = paths.some((path) => isCurrent(path));
     if (isCurrentPath) {
       return "text-rhyth-orange";
-    } else {
-      return "text-rhyth-gray";
     }
+    return "text-rhyth-gray";
   };
 
   return (

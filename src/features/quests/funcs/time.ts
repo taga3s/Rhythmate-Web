@@ -1,6 +1,6 @@
 import dayjs from "dayjs";
 import { formatDate, formatDateTimeWithAddMinutes, formatDateTimeWithSubtract, now } from "../../../pkg/util/dayjs";
-import { CLOSED, DONE, ENGAGED, FORCE_STOP, OPEN, QuestStatus } from "../constant/constant";
+import { CLOSED, DONE, ENGAGED, FORCE_STOP, OPEN, type QuestStatus } from "../constant/constant";
 
 export const calcBaseTime = (
   startsAt: string,

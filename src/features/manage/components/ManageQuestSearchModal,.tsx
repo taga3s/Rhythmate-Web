@@ -1,12 +1,12 @@
-import { FC, useState } from "react";
-import { Day, Difficulty } from "../../../api/quest/types";
+import { type FC, useState } from "react";
+import type { Day, Difficulty } from "../../../api/quest/types";
+import type { Tag } from "../../../api/tag/model";
+import { ModalBase } from "../../common/components/modal/ModalBase";
+import { ModalHeaderCloseButton } from "../../common/components/modal/ModalHeaderCloseButton";
 import { DAYS, DIFFICULTIES } from "../common/constant/constant";
 import { ManageDayOfTheWeekCheckBox } from "./ManageDayOfTheWeekCheckBox";
 import { ManageDifficultyCheckBox } from "./ManageDifficultyCheckBox";
-import { ModalBase } from "../../common/components/modal/ModalBase";
-import { ModalHeaderCloseButton } from "../../common/components/modal/ModalHeaderCloseButton";
 import { ManageSearchTagsDropdown } from "./ManageSearchTagsDropdown";
-import { Tag } from "../../../api/tag/model";
 
 type Props = {
   onClickFn: () => void;
@@ -78,7 +78,7 @@ export const ManageQuestSearchModal: FC<Props> = ({
           <div className="flex gap-1 ml-auto">
             {DAYS.map((v, i) => {
               return (
-                <ManageDayOfTheWeekCheckBox key={i} handleDay={handleDay} day={day} dayOfTheWeek={v} index={i + 1} />
+                <ManageDayOfTheWeekCheckBox key={v} handleDay={handleDay} day={day} dayOfTheWeek={v} index={i + 1} />
               );
             })}
           </div>
@@ -100,7 +100,6 @@ export const ManageQuestSearchModal: FC<Props> = ({
               <ManageSearchTagsDropdown tagItems={tagItems} handleTag={setFilterTag} />
             </div>
           </div>
-          {/* 難易度 */}
           <div className="flex gap-3 items-center">
             <svg
               className="w-6 h-6 text-rhyth-gray"
@@ -115,12 +114,12 @@ export const ManageQuestSearchModal: FC<Props> = ({
             </svg>
             <p className="font-cp-font text-rhyth-dark-blue">難易度</p>
             <div className="flex gap-1 ml-auto">
-              {DIFFICULTIES.map((v, i) => {
+              {DIFFICULTIES.map((difficulty) => {
                 return (
                   <ManageDifficultyCheckBox
-                    key={i}
+                    key={difficulty}
                     handleDifficulties={handleDifficulty}
-                    difficulty={v}
+                    difficulty={difficulty}
                     filterDifficulties={filterDifficulties}
                   />
                 );
