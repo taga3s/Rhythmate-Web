@@ -1,5 +1,5 @@
 import { useNavigate } from "@tanstack/react-router";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import type { Quest } from "../../../api/quest/model";
 import type { Day, Difficulty } from "../../../api/quest/types";
 import { useSearchModalIsOpen, useSetSearchModalIsOpen } from "../../common/contexts/searchModalIsOpenContext";
@@ -22,7 +22,7 @@ export const ManagePresenter = () => {
   const setSearchModalIsOpen = useSetSearchModalIsOpen();
   const searchModalIsOpen = useSearchModalIsOpen();
   const [filterDay, setFilterDay] = useState<Day | "">("");
-  const [filterTag, setFilterTag] = useState<string | "">("");
+  const [filterTag, setFilterTag] = useState<string>("");
   const [filterDifficulties, setFilterDifficulties] = useState<Difficulty[]>([]);
   const [filterActivation, setFilterActivation] = useState<boolean>(false);
   const [dayOfTheWeekView, setDayOfTheWeekView] = useState<Day>("MON");
@@ -34,21 +34,17 @@ export const ManagePresenter = () => {
 
   const { data: questListData } = useQueryQuestList();
   const { data: tagListData } = useQueryTagList();
-  const [questList, setQuestList] = useState<QuestWithTag[]>([]);
 
-  useEffect(() => {
-    const allQuests = questListData?.map((quest) => {
-      const tag = tagListData?.find((tag) => tag.id === quest.tagId);
-      return {
-        tagName: tag?.name,
-        tagColor: tag?.color,
-        ...quest,
-      };
-    });
-    setQuestList(allQuests ?? []);
-  }, [questListData, tagListData]);
+  const allQuestList = questListData?.map((quest) => {
+    const tag = tagListData?.find((tag) => tag.id === quest.tagId);
+    return {
+      tagName: tag?.name,
+      tagColor: tag?.color,
+      ...quest,
+    };
+  });
 
-  const filteredData = questList?.filter((quest) => {
+  const filteredData = allQuestList?.filter((quest) => {
     if (filterDay && filterDifficulties.length && filterTag) {
       return (
         quest.days.includes(filterDay) &&
@@ -92,7 +88,7 @@ export const ManagePresenter = () => {
     });
   };
 
-  const dayOfTheWeekQuests = filterQuestsByDayOfTheWeek(questList ?? []);
+  const dayOfTheWeekQuests = filterQuestsByDayOfTheWeek(allQuestList ?? []);
   const sortedDayOfTheWeekQuests = sortQuestsByTime(dayOfTheWeekQuests);
 
   const handleManageView = () => {
@@ -185,7 +181,7 @@ export const ManagePresenter = () => {
             </div>
           ) : (
             <ul className="mt-4 flex flex-col items-center gap-6">
-              {questList?.map((quest) => {
+              {allQuestList?.map((quest) => {
                 return (
                   <ManageQuestCard
                     key={quest.id}
