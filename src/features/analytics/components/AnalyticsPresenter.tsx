@@ -77,15 +77,17 @@ export const AnalyticsPresenter = () => {
           <h2 className="flex justify-start w-full mt-8 font-cp-font tracking-widest text-rhyth-gray text-lg font-bold ">
             曜日別クエスト達成状況
           </h2>
-          <AnalyticsBarChart
-            completedQuestsData={weeklyReports[currentIndex].completed_quests_each_day}
-            failedQuestsData={weeklyReports[currentIndex].failed_quests_each_day}
-          />
-          <AnalyticsAIFeedback
-            summaryData={weeklyReports[currentIndex].feedback ?? ""}
-            isLoading={generateFeedBackMutation.isPending}
-            onClick={onClickGenerateFeedback}
-          />
+          <div className="flex flex-col gap-4 w-full">
+            <AnalyticsBarChart
+              completedQuestsData={weeklyReports[currentIndex].completed_quests_each_day}
+              failedQuestsData={weeklyReports[currentIndex].failed_quests_each_day}
+            />
+            <AnalyticsAIFeedback
+              summaryData={weeklyReports[currentIndex].feedback ?? ""}
+              isLoading={generateFeedBackMutation.isPending}
+              onClick={onClickGenerateFeedback}
+            />
+          </div>
         </div>
       ) : (
         <span className="mt-20 gap-2 flex flex-col items-center text-lg text-rhyth-dark-blue font-bold">
