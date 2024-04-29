@@ -11,13 +11,15 @@ export const MenuButton: FC<Props> = (props) => {
   const navigate = useNavigate();
 
   return (
-    <button
-      type="button"
-      className="inline-flex flex-col items-center justify-center px-2 group"
-      onClick={() => navigate({ to: path })}
-    >
-      {icon}
-      <span className="text-xs tracking-wider text-rhyth-black mt-1">{name}</span>
-    </button>
+    <li className="text-center p-2">
+      <button
+        type="button"
+        onClick={() => navigate({ to: path })}
+        className="inline-flex flex-col items-center justify-center"
+      >
+        {icon}
+        <span className="text-xs tracking-wider text-rhyth-black mt-1">{name}</span>
+      </button>
+    </li>
   );
 };
