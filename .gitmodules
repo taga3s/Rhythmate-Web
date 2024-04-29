@@ -1,0 +1,3 @@
+[submodule "src/Rhythmate-Service"]
+	path = src/Rhythmate-Service
+	url = git@github.com:ayanami77/Rhythmate-Service.git
