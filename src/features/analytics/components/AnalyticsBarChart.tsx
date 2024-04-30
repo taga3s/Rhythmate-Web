@@ -33,35 +33,45 @@ export const AnalyticsBarChart: FC<Props> = ({ completedQuestsData, failedQuests
   };
 
   return (
-    <div className="w-full mt-4">
-      <Bar
-        data={currentData}
-        options={{
-          scales: {
-            x: {
-              ticks: {
-                color: "rgba(0, 68, 121, 1)",
+    <div className="mt-2 text-sm border-2 w-full p-3 bg-white rounded-lg shadow">
+      <div className="w-full min-h-48 md:min-h-52">
+        <Bar
+          data={currentData}
+          options={{
+            scales: {
+              x: {
+                ticks: {
+                  color: "rgba(0, 68, 121, 1)",
+                },
+              },
+              y: {
+                ticks: {
+                  color: "rgba(0, 68, 121, 1)",
+                  stepSize: 1,
+                },
+                min: 0,
+                max: 10,
               },
             },
-            y: {
-              ticks: {
-                color: "rgba(0, 68, 121, 1)",
-                stepSize: 1,
+            backgroundColor: "rgba(250, 250, 250, 1)",
+            maintainAspectRatio: false,
+            responsive: true,
+            datasets: {},
+            plugins: {
+              legend: {
+                display: true,
+                position: "bottom",
+                labels: {
+                  font: {
+                    size: 12,
+                  },
+                  boxHeight: 10,
+                },
               },
-              min: 0,
-              max: 10,
             },
-          },
-          backgroundColor: "rgba(250, 250, 250, 1)",
-          maintainAspectRatio: false,
-          responsive: true,
-          plugins: {
-            legend: {
-              display: false,
-            },
-          },
-        }}
-      />
+          }}
+        />
+      </div>
     </div>
   );
 };
