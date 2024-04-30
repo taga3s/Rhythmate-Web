@@ -26,7 +26,6 @@ export const ManagePresenter = () => {
   const [filterDay, setFilterDay] = useState<Day | "">("");
   const [filterTag, setFilterTag] = useState<Tag>({ id: "", name: "", color: "" });
   const [filterDifficulties, setFilterDifficulties] = useState<Difficulty[]>([]);
-  // TODO
   const [filterActivation, setFilterActivation] = useState<boolean>(false);
   const [dayOfTheWeekView, setDayOfTheWeekView] = useState<Day>("MON");
   const [manageView, setManageView] = useState<"Timetable" | "Card">("Timetable");
