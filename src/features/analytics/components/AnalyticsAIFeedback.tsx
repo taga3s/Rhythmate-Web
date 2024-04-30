@@ -9,7 +9,7 @@ type Props = {
 
 export const AnalyticsAIFeedback: FC<Props> = ({ summaryData, isLoading, onClick }) => {
   return (
-    <div className="mt-3 text-sm border-2 w-full min-h-[174px] px-3 py-4 bg-white rounded-lg shadow">
+    <div className="text-sm border-2 w-full min-h-[174px] px-3 py-4 bg-white rounded-lg shadow">
       <div className="flex gap-2 items-center justify-start">
         <span className="text-base font-bold">AIによるフィードバック</span>
         <button
