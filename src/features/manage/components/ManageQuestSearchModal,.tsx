@@ -1,4 +1,4 @@
-import { type FC, useState } from "react";
+import { type FC, useState, Dispatch, SetStateAction } from "react";
 import type { Day, Difficulty } from "../../../api/quest/types";
 import type { Tag } from "../../../api/tag/model";
 import { ModalBase } from "../../common/components/modal/ModalBase";
@@ -10,27 +10,30 @@ import { ManageSearchTagsDropdown } from "./ManageSearchTagsDropdown";
 
 type Props = {
   onClickFn: () => void;
-  filterDay: Day | "";
-  setFilterDay: (day: Day | "") => void;
-  setFilterTag: (tagId: string | "") => void;
   tagItems: Tag[] | undefined;
+  filterDay: Day | "";
+  filterTag: Tag;
   filterDifficulties: Difficulty[];
-  setFilterDifficulties: (difficulty: Difficulty[]) => void;
-  setFilterActivation: (activation: boolean) => void;
+  setFilterDay: Dispatch<SetStateAction<Day | "">>;
+  setFilterTag: Dispatch<SetStateAction<Tag>>;
+  setFilterDifficulties: Dispatch<SetStateAction<Difficulty[]>>;
+  setFilterActivation: Dispatch<SetStateAction<boolean>>;
 };
 
 export const ManageQuestSearchModal: FC<Props> = ({
   onClickFn,
+  tagItems,
   filterDay,
+  filterTag,
+  filterDifficulties,
   setFilterDay,
   setFilterTag,
-  tagItems,
-  filterDifficulties,
   setFilterDifficulties,
   setFilterActivation,
 }) => {
   const [day, setDay] = useState<Day | "">(filterDay);
   const [difficulties, setDifficulties] = useState<Difficulty[]>(filterDifficulties);
+  const [tag, setTag] = useState<Tag>(filterTag);
 
   const handleDay = (newDay: Day | "") => {
     if (newDay === day) {
@@ -49,14 +52,16 @@ export const ManageQuestSearchModal: FC<Props> = ({
     }
   };
 
+  const handleTag = (tag: Tag) => {
+    setTag(tag);
+  };
+
   return (
     <ModalBase onClickClose={onClickFn}>
       <div className="order relative bg-white rounded-lg shadow p-4">
         <ModalHeaderCloseButton onClickClose={onClickFn} />
-        {/* <!-- Modal body --> */}
-        <h1 className="font-cp-font text-rhyth-dark-blue text-xl text-center -mt-4 mb-2">クエスト検索</h1>
+        <span className="block -mt-4 mb-2 font-cp-font text-rhyth-dark-blue text-xl text-center">クエスト検索</span>
         <div className="flex flex-col gap-y-4">
-          {/* 実施曜日 */}
           <div className="flex gap-3 items-center y-4">
             <svg
               className="w-6 h-6 text-rhyth-gray "
@@ -82,7 +87,6 @@ export const ManageQuestSearchModal: FC<Props> = ({
               );
             })}
           </div>
-          {/* タグ */}
           <div className="flex gap-3 items-center">
             <svg
               className="w-6 h-6 text-rhyth-gray"
@@ -97,7 +101,7 @@ export const ManageQuestSearchModal: FC<Props> = ({
             </svg>
             <p className="font-cp-font text-rhyth-dark-blue">タグ</p>
             <div className="w-1/2 flex ml-auto">
-              <ManageSearchTagsDropdown tagItems={tagItems} handleTag={setFilterTag} />
+              <ManageSearchTagsDropdown tagItems={tagItems ?? []} tag={tag} handleTag={handleTag} />
             </div>
           </div>
           <div className="flex gap-3 items-center">
@@ -131,6 +135,7 @@ export const ManageQuestSearchModal: FC<Props> = ({
             onClick={() => {
               setFilterDay(day);
               setFilterDifficulties(difficulties);
+              setFilterTag(tag);
               setFilterActivation(true);
               onClickFn();
             }}

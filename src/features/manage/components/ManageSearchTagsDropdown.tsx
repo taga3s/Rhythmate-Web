@@ -1,20 +1,14 @@
-import { type FC, useState } from "react";
+import { type FC } from "react";
 import type { Tag } from "../../../api/tag/model";
 import { ManageSearchTagItem } from "./ManageSearchTagItem";
 
 type Props = {
-  tagItems: Tag[] | undefined;
-  handleTag: (tagId: string | "") => void;
+  tagItems: Tag[];
+  tag: Tag;
+  handleTag: (tag: Tag) => void;
 };
 
-export const ManageSearchTagsDropdown: FC<Props> = ({ tagItems, handleTag }) => {
-  const [tagIdValue, setTagIdValue] = useState<string>("");
-
-  const handleTagValue = (tagId: string) => {
-    handleTag(tagId);
-    setTagIdValue(tagId);
-  };
-
+export const ManageSearchTagsDropdown: FC<Props> = ({ tagItems, tag, handleTag }) => {
   const handleColorValue = (tagId: string) => {
     const selectTagItem = tagItems?.find((tagItem) => tagItem.id === tagId);
     switch (selectTagItem?.color) {
@@ -42,9 +36,17 @@ export const ManageSearchTagsDropdown: FC<Props> = ({ tagItems, handleTag }) => 
       name="tag-color"
       id="tag-color"
       className={`bg-white border-2 border-rhyth-light-gray text-rhyth-dark-blue text-sm font-bold rounded-lg w-full p-2 shadow-sm ${handleColorValue(
-        tagIdValue,
+        tag.id,
       )}`}
-      onChange={(event) => handleTagValue(event.target.value)}
+      onChange={(event) => {
+        const selectedTag = tagItems?.find((tagItem) => tagItem.id === event.target.value) ?? {
+          id: "",
+          name: "",
+          color: "",
+        };
+        handleTag(selectedTag);
+      }}
+      defaultValue={tag.id}
     >
       <option
         value=""
