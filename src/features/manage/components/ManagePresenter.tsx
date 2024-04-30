@@ -26,6 +26,7 @@ export const ManagePresenter = () => {
   const [filterDay, setFilterDay] = useState<Day | "">("");
   const [filterTag, setFilterTag] = useState<Tag>({ id: "", name: "", color: "" });
   const [filterDifficulties, setFilterDifficulties] = useState<Difficulty[]>([]);
+  // TODO
   const [filterActivation, setFilterActivation] = useState<boolean>(false);
   const [dayOfTheWeekView, setDayOfTheWeekView] = useState<Day>("MON");
   const [manageView, setManageView] = useState<"Timetable" | "Card">("Timetable");
@@ -99,34 +100,38 @@ export const ManagePresenter = () => {
     <div className="w-full">
       <div className="flex justify-between items-center">
         <h1 className="font-cp-font tracking-widest text-rhyth-gray text-xl font-bold ">
-          {manageView === "Timetable" ? "曜日別クエスト" : "全てのクエスト"}
+          {filterActivation ? "検索適用中" : manageView === "Timetable" ? "曜日別クエスト" : "全てのクエスト"}
         </h1>
-        <button
-          type="button"
-          className="flex items-center gap-1 bg-white py-2 px-4 rounded-full border-2 border-rhyth-light-gray shadow-sm hover:bg-rhyth-bg-dark-gray"
-          onClick={handleManageView}
-        >
-          <svg
-            className="w-6 h-6 text-rhyth-blue"
-            aria-hidden="true"
-            xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
-            fill="none"
-            viewBox="0 0 24 24"
+        {filterActivation ? (
+          <></>
+        ) : (
+          <button
+            type="button"
+            className="flex items-center gap-1 bg-white py-2 px-4 rounded-full border-2 border-rhyth-light-gray shadow-sm hover:bg-rhyth-bg-dark-gray"
+            onClick={handleManageView}
           >
-            <path
-              stroke="currentColor"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2"
-              d="m16 10 3-3m0 0-3-3m3 3H5v3m3 4-3 3m0 0 3 3m-3-3h14v-3"
-            />
-          </svg>
-          <span className="text-sm font-bold text-rhyth-dark-blue">
-            {manageView === "Timetable" ? "全表示" : "曜日別表示"}
-          </span>
-        </button>
+            <svg
+              className="w-6 h-6 text-rhyth-blue"
+              aria-hidden="true"
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              fill="none"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke="currentColor"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="m16 10 3-3m0 0-3-3m3 3H5v3m3 4-3 3m0 0 3 3m-3-3h14v-3"
+              />
+            </svg>
+            <span className="text-sm font-bold text-rhyth-dark-blue">
+              {manageView === "Timetable" ? "全表示" : "曜日別表示"}
+            </span>
+          </button>
+        )}
       </div>
       {filterActivation ? (
         filteredQuestList?.length ? (

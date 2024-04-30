@@ -148,12 +148,13 @@ export const ManageQuestSearchModal: FC<Props> = ({
             onClick={() => {
               setFilterDay("");
               setFilterDifficulties([]);
+              setFilterTag({ id: "", name: "", color: "" });
               setFilterActivation(false);
               onClickFn();
             }}
             className="w-full text-white bg-rhyth-red hover:bg-rhyth-hover-red tracking-wider focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
           >
-            条件をリセット
+            検索をやめる
           </button>
         </div>
       </div>
