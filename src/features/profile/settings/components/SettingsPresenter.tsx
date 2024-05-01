@@ -54,19 +54,13 @@ export const SettingsPresenter = () => {
   };
 
   const [imageCropModalOpen, setImageCropModalOpen] = useState<boolean>(false);
-  const [profileImage, setProfileImage] = useState<string>("");
+  const [profileImage, setProfileImage] = useState<string>(loginUserData.imageUrl ?? "");
 
   useEffect(() => {
     if (inputImageUrl && inputImageFile) {
       setImageCropModalOpen(true);
     }
   }, [inputImageUrl, inputImageFile]);
-
-  useEffect(() => {
-    if (loginUserData?.imageUrl) {
-      setProfileImage(loginUserData.imageUrl);
-    }
-  }, [loginUserData?.imageUrl]);
 
   return (
     <>

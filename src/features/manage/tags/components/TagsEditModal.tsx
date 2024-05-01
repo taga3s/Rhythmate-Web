@@ -1,5 +1,5 @@
 import { zodResolver } from "@hookform/resolvers/zod";
-import { type FC, useEffect } from "react";
+import type { FC } from "react";
 import { useForm } from "react-hook-form";
 import { FormErrorMsg } from "../../../common/components";
 import { ModalBase } from "../../../common/components/modal/ModalBase";
@@ -29,17 +29,15 @@ export const TagsEditModal: FC<Props> = ({ modalType, closeModal, tagId }) => {
   const {
     register,
     watch,
-    setValue,
     handleSubmit,
     formState: { errors },
   } = useForm<TTagValidationSchema>({
     mode: "onBlur",
     resolver: zodResolver(tagValidationSchema),
+    defaultValues: {
+      color: targetTag?.color ?? "",
+    },
   });
-
-  useEffect(() => {
-    setValue("color", targetTag?.color ?? "");
-  }, [setValue, targetTag]);
 
   const onSubmit = async (data: NewValues) => {
     await updateTagMutation.mutateAsync({

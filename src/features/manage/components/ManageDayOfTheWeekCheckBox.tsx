@@ -21,7 +21,7 @@ export const ManageDayOfTheWeekCheckBox: FC<Props> = ({ handleDay, day, dayOfThe
       />
       <label
         htmlFor={`${index}`}
-        className={`px-2 py-1 rounded-lg border-2 border-rhyth-light-gray cursor-pointer font-medium bg-rhyth-bg-gray hover:bg-rhyth-bg-dark-gray shadow-sm ${
+        className={`px-2 py-1 rounded-lg border-2 border-rhyth-light-gray cursor-pointer font-medium bg-rhyth-bg-gray shadow-sm ${
           day === dayOfTheWeek ? "bg-rhyth-blue text-white" : "bg-white text-rhyth-dark-blue"
         }`}
       >
