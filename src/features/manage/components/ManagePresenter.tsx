@@ -1,5 +1,5 @@
 import { useNavigate } from "@tanstack/react-router";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import type { Quest } from "../../../api/quest/model";
 import type { Day, Difficulty } from "../../../api/quest/types";
 import { useSearchModalIsOpen, useSetSearchModalIsOpen } from "../../common/contexts/searchModalIsOpenContext";
@@ -11,6 +11,7 @@ import { ManageNewButton } from "./ManageNewButton";
 import { ManageQuestCard } from "./ManageQuestCard";
 import { ManageQuestSearchModal } from "./ManageQuestSearchModal,";
 import { ManageTimetable } from "./ManageTimetable";
+import { Tag } from "../../../api/tag/model";
 
 type QuestWithTag = Quest & {
   tagName: string | undefined;
@@ -21,47 +22,24 @@ export const ManagePresenter = () => {
   const navigate = useNavigate();
   const setSearchModalIsOpen = useSetSearchModalIsOpen();
   const searchModalIsOpen = useSearchModalIsOpen();
+
   const [filterDay, setFilterDay] = useState<Day | "">("");
-  const [filterTag, setFilterTag] = useState<string | "">("");
+  const [filterTag, setFilterTag] = useState<Tag>({ id: "", name: "", color: "" });
   const [filterDifficulties, setFilterDifficulties] = useState<Difficulty[]>([]);
   const [filterActivation, setFilterActivation] = useState<boolean>(false);
   const [dayOfTheWeekView, setDayOfTheWeekView] = useState<Day>("MON");
   const [manageView, setManageView] = useState<"Timetable" | "Card">("Timetable");
 
-  const closeQuestSearchModal = () => {
-    setSearchModalIsOpen(false);
-  };
-
   const { data: questListData } = useQueryQuestList();
   const { data: tagListData } = useQueryTagList();
-  const [questList, setQuestList] = useState<QuestWithTag[]>([]);
 
-  useEffect(() => {
-    const allQuests = questListData?.map((quest) => {
-      const tag = tagListData?.find((tag) => tag.id === quest.tagId);
-      return {
-        tagName: tag?.name,
-        tagColor: tag?.color,
-        ...quest,
-      };
-    });
-    setQuestList(allQuests ?? []);
-  }, [questListData, tagListData]);
-
-  const filteredData = questList?.filter((quest) => {
-    if (filterDay && filterDifficulties.length > 0) {
-      return quest.days.includes(filterDay) && filterDifficulties.some((difficulty) => quest.difficulty === difficulty);
-    }
-    if (filterDay) {
-      return quest.days.includes(filterDay);
-    }
-    if (filterTag) {
-      return quest.tagId.includes(filterTag);
-    }
-    if (filterDifficulties.length) {
-      return filterDifficulties.some((difficulty) => quest.difficulty === difficulty);
-    }
-    return true;
+  const allQuestList = questListData?.map((quest) => {
+    const tag = tagListData?.find((tag) => tag.id === quest.tagId);
+    return {
+      tagName: tag?.name,
+      tagColor: tag?.color,
+      ...quest,
+    };
   });
 
   const filterQuestsByDayOfTheWeek = (questList: QuestWithTag[]) => {
@@ -77,8 +55,37 @@ export const ManagePresenter = () => {
     });
   };
 
-  const dayOfTheWeekQuests = filterQuestsByDayOfTheWeek(questList ?? []);
+  const dayOfTheWeekQuests = filterQuestsByDayOfTheWeek(allQuestList ?? []);
   const sortedDayOfTheWeekQuests = sortQuestsByTime(dayOfTheWeekQuests);
+
+  const filteredQuestList = allQuestList?.filter((quest) => {
+    if (filterDay !== "" && filterDifficulties.length && filterTag.id !== "") {
+      return (
+        quest.days.includes(filterDay) &&
+        filterDifficulties.some((difficulty) => quest.difficulty === difficulty) &&
+        quest.tagId === filterTag.id
+      );
+    }
+    if (filterDay !== "" && filterDifficulties.length) {
+      return quest.days.includes(filterDay) && filterDifficulties.some((difficulty) => quest.difficulty === difficulty);
+    }
+    if (filterDay !== "" && filterTag.id !== "") {
+      return quest.days.includes(filterDay) && quest.tagId === filterTag.id;
+    }
+    if (filterDifficulties.length && filterTag.id !== "") {
+      return filterDifficulties.some((difficulty) => quest.difficulty === difficulty) && quest.tagId === filterTag.id;
+    }
+    if (filterDay !== "") {
+      return quest.days.includes(filterDay);
+    }
+    if (filterDifficulties.length) {
+      return filterDifficulties.some((difficulty) => quest.difficulty === difficulty);
+    }
+    if (filterTag.id !== "") {
+      return quest.tagId === filterTag.id;
+    }
+    return true;
+  });
 
   const handleManageView = () => {
     if (manageView === "Timetable") {
@@ -92,39 +99,43 @@ export const ManagePresenter = () => {
     <div className="w-full">
       <div className="flex justify-between items-center">
         <h1 className="font-cp-font tracking-widest text-rhyth-gray text-xl font-bold ">
-          {manageView === "Timetable" ? "曜日別クエスト" : "全てのクエスト"}
+          {filterActivation ? "検索適用中" : manageView === "Timetable" ? "曜日別クエスト" : "全てのクエスト"}
         </h1>
-        <button
-          type="button"
-          className="flex items-center gap-1 bg-white py-2 px-4 rounded-full border-2 border-rhyth-light-gray shadow-sm hover:bg-rhyth-bg-dark-gray"
-          onClick={handleManageView}
-        >
-          <svg
-            className="w-6 h-6 text-rhyth-blue"
-            aria-hidden="true"
-            xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
-            fill="none"
-            viewBox="0 0 24 24"
+        {filterActivation ? (
+          <></>
+        ) : (
+          <button
+            type="button"
+            className="flex items-center gap-1 bg-white py-2 px-4 rounded-full border-2 border-rhyth-light-gray shadow-sm hover:bg-rhyth-bg-dark-gray"
+            onClick={handleManageView}
           >
-            <path
-              stroke="currentColor"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2"
-              d="m16 10 3-3m0 0-3-3m3 3H5v3m3 4-3 3m0 0 3 3m-3-3h14v-3"
-            />
-          </svg>
-          <span className="text-sm font-bold text-rhyth-dark-blue">
-            {manageView === "Timetable" ? "全表示" : "曜日別表示"}
-          </span>
-        </button>
+            <svg
+              className="w-6 h-6 text-rhyth-blue"
+              aria-hidden="true"
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              fill="none"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke="currentColor"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="m16 10 3-3m0 0-3-3m3 3H5v3m3 4-3 3m0 0 3 3m-3-3h14v-3"
+              />
+            </svg>
+            <span className="text-sm font-bold text-rhyth-dark-blue">
+              {manageView === "Timetable" ? "全表示" : "曜日別表示"}
+            </span>
+          </button>
+        )}
       </div>
       {filterActivation ? (
-        filteredData?.length ? (
+        filteredQuestList?.length ? (
           <ul className="mt-4 flex flex-col items-center gap-6">
-            {filteredData?.map((quest) => {
+            {filteredQuestList?.map((quest) => {
               return (
                 <ManageQuestCard
                   key={quest.id}
@@ -144,11 +155,11 @@ export const ManagePresenter = () => {
           </ul>
         ) : (
           <div className="w-full gap-4 flex flex-col items-center mx-auto mt-24 text-xl">
-            <div>検索結果無し</div>
-            <div>条件を変えて再検索してください</div>
+            <span>検索結果無し</span>
+            <span>条件を変えて再検索してください</span>
           </div>
         )
-      ) : questListData?.length ? (
+      ) : questListData.length ? (
         <div>
           {manageView === "Timetable" ? (
             <div className="flex flex-col w-full mt-4">
@@ -168,7 +179,7 @@ export const ManagePresenter = () => {
             </div>
           ) : (
             <ul className="mt-4 flex flex-col items-center gap-6">
-              {questList?.map((quest) => {
+              {allQuestList?.map((quest) => {
                 return (
                   <ManageQuestCard
                     key={quest.id}
@@ -233,12 +244,13 @@ export const ManagePresenter = () => {
       <ManageNewButton />
       {searchModalIsOpen && (
         <ManageQuestSearchModal
-          onClickFn={closeQuestSearchModal}
+          onClickFn={() => setSearchModalIsOpen(false)}
+          tagItems={tagListData}
           filterDay={filterDay}
+          filterDifficulties={filterDifficulties}
+          filterTag={filterTag}
           setFilterDay={setFilterDay}
           setFilterTag={setFilterTag}
-          tagItems={tagListData}
-          filterDifficulties={filterDifficulties}
           setFilterDifficulties={setFilterDifficulties}
           setFilterActivation={setFilterActivation}
         />
