@@ -8,8 +8,8 @@ export const ProfileCard = () => {
   const pinnedBadgeList = badgeList?.filter((badge) => badge.isPinned) ?? [];
 
   return (
-    <div className="w-screen pt-16 -mt-16 p-5 bg-white bg-left border border-gray-200 rounded-b-lg shadow">
-      <div className="flex justify-between items-center gap-4 box-border ">
+    <div className="w-screen pt-16 -mt-16 p-5 bg-rhyth-light-blue  bg-left border border-gray-200 rounded-b-lg shadow">
+      <div className="flex justify-between items-center gap-4 box-border">
         <div className="w-20 md:w-32 h-20 md:h-32">
           <img src={loginUser?.imageUrl} alt="プロフィール画像" className="w-full h-full rounded-full" />
         </div>
