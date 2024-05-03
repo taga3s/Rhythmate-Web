@@ -1,4 +1,4 @@
-import { type FC, useState, Dispatch, SetStateAction } from "react";
+import { type FC, useState, type Dispatch, type SetStateAction } from "react";
 import type { Day, Difficulty } from "../../../api/quest/types";
 import type { Tag } from "../../../api/tag/model";
 import { ModalBase } from "../../common/components/modal/ModalBase";

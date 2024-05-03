@@ -11,7 +11,7 @@ import { ManageNewButton } from "./ManageNewButton";
 import { ManageQuestCard } from "./ManageQuestCard";
 import { ManageQuestSearchModal } from "./ManageQuestSearchModal,";
 import { ManageTimetable } from "./ManageTimetable";
-import { Tag } from "../../../api/tag/model";
+import type { Tag } from "../../../api/tag/model";
 
 type QuestWithTag = Quest & {
   tagName: string | undefined;
