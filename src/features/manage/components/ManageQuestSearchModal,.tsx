@@ -1,4 +1,4 @@
-import { type FC, useState, Dispatch, SetStateAction } from "react";
+import { type FC, useState, type Dispatch, type SetStateAction } from "react";
 import type { Day, Difficulty } from "../../../api/quest/types";
 import type { Tag } from "../../../api/tag/model";
 import { ModalBase } from "../../common/components/modal/ModalBase";
@@ -78,7 +78,7 @@ export const ManageQuestSearchModal: FC<Props> = ({
                 clipRule="evenodd"
               />
             </svg>
-            <p className="font-cp-font text-rhyth-dark-blue">実施曜日</p>
+            <span className="font-cp-font text-rhyth-dark-blue">実施曜日</span>
           </div>
           <div className="flex gap-1 ml-auto">
             {DAYS.map((v, i) => {
@@ -142,19 +142,6 @@ export const ManageQuestSearchModal: FC<Props> = ({
             className="w-full text-white bg-rhyth-blue hover:bg-rhyth-hover-blue tracking-widest focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
           >
             保存
-          </button>
-          <button
-            type="submit"
-            onClick={() => {
-              setFilterDay("");
-              setFilterDifficulties([]);
-              setFilterTag({ id: "", name: "", color: "" });
-              setFilterActivation(false);
-              onClickFn();
-            }}
-            className="w-full text-white bg-rhyth-red hover:bg-rhyth-hover-red tracking-wider focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
-          >
-            検索をやめる
           </button>
         </div>
       </div>

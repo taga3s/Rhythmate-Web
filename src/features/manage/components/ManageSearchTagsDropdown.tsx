@@ -1,4 +1,4 @@
-import { type FC } from "react";
+import type { FC } from "react";
 import type { Tag } from "../../../api/tag/model";
 import { ManageSearchTagItem } from "./ManageSearchTagItem";
 

@@ -48,7 +48,10 @@ export const AnalyticsPresenter = () => {
             </p>
             {<AnalyticsSwitchButton onClickFn={handleClickNext} direction="right" isEdgy={currentIndex === 0} />}
           </div>
-          <div className="grid grid-cols-2 gap-6 w-full mt-6">
+          <h2 className="flex justify-start w-full mt-8 font-cp-font tracking-widest text-rhyth-gray text-lg font-bold ">
+            クエスト達成状況
+          </h2>
+          <div className="grid grid-cols-2 gap-6 w-full mt-2">
             <AnalyticsCard
               title={"達成したクエスト数"}
               data={weeklyReports[currentIndex].completed_quests}
@@ -75,13 +78,21 @@ export const AnalyticsPresenter = () => {
             />
           </div>
           <h2 className="flex justify-start w-full mt-8 font-cp-font tracking-widest text-rhyth-gray text-lg font-bold ">
-            曜日別クエスト達成状況
+            曜日別グラフ
           </h2>
-          <div className="flex flex-col gap-4 w-full">
+          <div className="w-full mt-2">
             <AnalyticsBarChart
               completedQuestsData={weeklyReports[currentIndex].completed_quests_each_day}
               failedQuestsData={weeklyReports[currentIndex].failed_quests_each_day}
             />
+          </div>
+          <h2 className="flex justify-start w-full mt-8 font-cp-font tracking-widest text-rhyth-gray text-lg font-bold ">
+            AI フィードバック
+          </h2>
+          <div className="w-full mt-2">
+            <p className="text-sm">
+              クエストの達成状況に基づいて、AIからアドバイスなどのフィードバックを受けることができます。
+            </p>
             <AnalyticsAIFeedback
               summaryData={weeklyReports[currentIndex].feedback ?? ""}
               isLoading={generateFeedBackMutation.isPending}
