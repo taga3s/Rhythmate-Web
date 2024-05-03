@@ -33,7 +33,7 @@ export const AnalyticsBarChart: FC<Props> = ({ completedQuestsData, failedQuests
   };
 
   return (
-    <div className="mt-2 text-sm border-2 w-full p-3 bg-white rounded-lg shadow">
+    <div className="text-sm border-2 w-full p-3 bg-white rounded-lg shadow">
       <div className="w-full min-h-48 md:min-h-52">
         <Bar
           data={currentData}
