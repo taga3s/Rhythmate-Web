@@ -42,7 +42,7 @@ export const AnalyticsAIFeedback: FC<Props> = ({ summaryData, isLoading, onClick
             <p>{summaryData}</p>
           </div>
         ) : (
-          <div className="w-full h-full flex gap-2 items-center justify-center"></div>
+          <></>
         )}
       </div>
     </div>
