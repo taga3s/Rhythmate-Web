@@ -1,7 +1,6 @@
 import { useNavigate } from "@tanstack/react-router";
 import type { FC } from "react";
 import type { Day, Difficulty } from "../../../api/quest/types";
-import { formatDateTimeOnlyTime } from "../../../pkg/util/dayjs";
 import { ClockIcon } from "../../common/components/icons/ClockIcon";
 import { calcExp } from "../../common/funcs/calcExp";
 import { convertEnToJPWeekday } from "../common/funcs";
@@ -26,7 +25,6 @@ type Props = {
 };
 
 export const ManageQuestCard: FC<Props> = (props) => {
-  const { id, title, description, startsAt, minutes, days, difficulty, continuationLevel } = props;
   const navigate = useNavigate();
 
   const handleBgTagColor = (tagColor: string | undefined) => {
@@ -53,7 +51,7 @@ export const ManageQuestCard: FC<Props> = (props) => {
   return (
     <li className="w-full h-auto bg-white border-2 border-rhyth-light-gray border-solid rounded-lg shadow-lg">
       <div className="flex items-center p-4">
-        <span className="font-bold text-xl text-rhyth-dark-blue">{title}</span>
+        <span className="font-bold text-xl text-rhyth-dark-blue">{props.title}</span>
       </div>
       <div>
         <hr className="h-0.5 bg-rhyth-light-gray" />
