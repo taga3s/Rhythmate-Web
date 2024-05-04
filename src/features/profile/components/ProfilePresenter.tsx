@@ -22,7 +22,7 @@ export const ProfilePresenter = () => {
   return (
     <>
       <div className="flex flex-col items-center gap-4">
-        <ProfileCard />
+        <ProfileCard userName={loginUser?.name} imageUrl={loginUser?.imageUrl} currentLevel={loginUser?.level ?? 1} />
         <ProfileExpCard currentLevel={loginUser?.level ?? 1} exp={loginUser?.exp ?? 0} />
         <div className="w-full">
           <ProfileUserSettingsModalButton />
