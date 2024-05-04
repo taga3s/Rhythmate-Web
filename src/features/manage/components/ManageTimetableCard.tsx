@@ -67,7 +67,7 @@ export const ManageTimetableCard: FC<Props> = (props) => {
           )} text-white ${isAccordionOpen ? "rounded-tl-lg" : "rounded-l-lg"}`}
         >
           <h2 className="w-[4.5rem] text-lg text-center">{props.startsAt}</h2>
-          <p className="text-sm">{props.minutes}分間</p>
+          <p className="text-sm">{props.minutes}min</p>
         </div>
         <div className="w-full flex items-center justify-between p-2">
           <span className="ml-2 tracking-wider font-cp-font text-xl font-bold">{props.title}</span>
@@ -178,7 +178,9 @@ export const ManageTimetableCard: FC<Props> = (props) => {
               <div className="flex justify-start gap-2">
                 <ClockIcon color="text-rhyth-dark-blue" />
                 <div className="flex flex-col items-start text-rhyth-dark-blue">
-                  <span>{props.startsAt}～</span>
+                  <span>
+                    {props.startsAt}～ {props.minutes}min
+                  </span>
                   <span>{convertENToJPWeekdayString(props.days)}</span>
                 </div>
               </div>

@@ -119,7 +119,9 @@ export const ManageQuestCard: FC<Props> = (props) => {
             <div className="flex justify-start gap-2">
               <ClockIcon color="text-rhyth-dark-blue" />
               <div className="flex flex-col items-start text-rhyth-dark-blue">
-                <span>{formatDateTimeOnlyTime(props.startsAt)}～</span>
+                <span>
+                  {formatDateTimeOnlyTime(props.startsAt)}～ {props.minutes}min
+                </span>
                 <span>{convertENToJPWeekdayString(props.days)}</span>
               </div>
             </div>
