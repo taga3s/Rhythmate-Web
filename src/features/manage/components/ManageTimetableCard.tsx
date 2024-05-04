@@ -179,7 +179,7 @@ export const ManageTimetableCard: FC<Props> = (props) => {
                 <ClockIcon color="text-rhyth-dark-blue" />
                 <div className="flex flex-col items-start text-rhyth-dark-blue">
                   <span>
-                    {props.startsAt}～ {props.minutes}min
+                    {props.startsAt} ~ {props.minutes}min
                   </span>
                   <span>{convertENToJPWeekdayString(props.days)}</span>
                 </div>
