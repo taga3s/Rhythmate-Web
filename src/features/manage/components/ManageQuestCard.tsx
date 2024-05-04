@@ -153,7 +153,7 @@ export const ManageQuestCard: FC<Props> = (props) => {
         <div className="flex items-center h-28">
           <div className=" w-full h-full p-2">
             <div className="flex my-2">
-              <p className="mt-auto ml-1 font-bold text-rhyth-green">継続レベル</p>
+              <p className="font-cp-font text-rhyth-green mt-auto ml-1">継続レベル</p>
             </div>
             <ManageProgressBar level={props.continuationLevel} />
             <div className="flex justify-end items-center text-sm">
