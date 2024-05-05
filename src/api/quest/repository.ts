@@ -1,27 +1,27 @@
 import { apiClient } from "../../pkg/api/client/apiClient";
 import type {
-  CreateRequest,
-  CreateResponse,
-  DeleteRequest,
-  FinishRequest,
-  FinishResponse,
-  ForceFinishRequest,
-  ForceFinishResponse,
-  ListResponse,
-  StartRequest,
-  StartResponse,
-  UpdateRequest,
-  UpdateResponse,
+  CreateQuestRequest,
+  CreateQuestResponse,
+  DeleteQuestRequest,
+  FinishQuestRequest,
+  FinishQuestResponse,
+  ForceFinishQuestRequest,
+  ForceFinishQuestResponse,
+  ListQuestsResponse,
+  StartQuestRequest,
+  StartQuestResponse,
+  UpdateQuestRequest,
+  UpdateQuestResponse,
 } from "./types";
 
 export interface QuestRepository {
-  list: () => Promise<ListResponse>;
-  create: (params: CreateRequest) => Promise<CreateResponse>;
-  destroy: (params: DeleteRequest) => Promise<void>;
-  update: (params: UpdateRequest) => Promise<UpdateResponse>;
-  start: (params: StartRequest) => Promise<StartResponse>;
-  finish: (params: FinishRequest) => Promise<FinishResponse>;
-  forceFinish: (params: ForceFinishRequest) => Promise<ForceFinishResponse>;
+  list: () => Promise<ListQuestsResponse>;
+  create: (params: CreateQuestRequest) => Promise<CreateQuestResponse>;
+  destroy: (params: DeleteQuestRequest) => Promise<void>;
+  update: (params: UpdateQuestRequest) => Promise<UpdateQuestResponse>;
+  start: (params: StartQuestRequest) => Promise<StartQuestResponse>;
+  finish: (params: FinishQuestRequest) => Promise<FinishQuestResponse>;
+  forceFinish: (params: ForceFinishQuestRequest) => Promise<ForceFinishQuestResponse>;
 }
 
 const list: QuestRepository["list"] = async () => {
@@ -29,31 +29,31 @@ const list: QuestRepository["list"] = async () => {
   return response;
 };
 
-const create: QuestRepository["create"] = async (params: CreateRequest) => {
+const create: QuestRepository["create"] = async (params: CreateQuestRequest) => {
   const response = await apiClient.post("/quests", params);
   return response;
 };
 
-const destroy: QuestRepository["destroy"] = async (params: DeleteRequest) => {
+const destroy: QuestRepository["destroy"] = async (params: DeleteQuestRequest) => {
   await apiClient.destroy(`/quests/${params.id}`);
 };
 
-const update: QuestRepository["update"] = async (params: UpdateRequest) => {
+const update: QuestRepository["update"] = async (params: UpdateQuestRequest) => {
   const response = await apiClient.patch(`/quests/${params.id}`, params);
   return response;
 };
 
-const start: QuestRepository["start"] = async (params: StartRequest) => {
+const start: QuestRepository["start"] = async (params: StartQuestRequest) => {
   const response = await apiClient.patch(`/quests/start/${params.id}`);
   return response;
 };
 
-const finish: QuestRepository["finish"] = async (params: FinishRequest) => {
+const finish: QuestRepository["finish"] = async (params: FinishQuestRequest) => {
   const response = await apiClient.patch(`/quests/finish/${params.id}`);
   return response;
 };
 
-const forceFinish: QuestRepository["finish"] = async (params: ForceFinishRequest) => {
+const forceFinish: QuestRepository["finish"] = async (params: ForceFinishQuestRequest) => {
   const response = await apiClient.patch(`/quests/force-finish/${params.id}`);
   return response;
 };

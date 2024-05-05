@@ -1,6 +1,7 @@
 import * as schemaHelper from "../../Rhythmate-Service/src/pkg/schemaHelper";
 
 export type ImageType = "bow" | "cat" | "crown" | "gem" | "horse" | "shield" | "sword";
+
 export type FrameColor = "bronze" | "silver" | "gold";
 
 export type AchieveBadgeParams = schemaHelper.RequestData<"/badges/:id", "patch">;
