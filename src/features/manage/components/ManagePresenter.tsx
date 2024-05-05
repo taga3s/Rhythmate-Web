@@ -6,12 +6,13 @@ import { useSearchModalIsOpen, useSetSearchModalIsOpen } from "../../common/cont
 import { useQueryQuestList } from "../api/quest/hooks/useQueryQuest";
 import { DAYS } from "../common/constant/constant";
 import { useQueryTagList } from "../tags/api/tag/hooks/useQueryTag";
-import { ManageDayOfTheWeekSwitchButton } from "./ManageDayOfTheWeekSwitchButton";
 import { ManageNewButton } from "./ManageNewButton";
 import { ManageQuestCard } from "./ManageQuestCard";
 import { ManageQuestSearchModal } from "./ManageQuestSearchModal,";
 import { ManageTimetable } from "./ManageTimetable";
 import type { Tag } from "../../../api/tag/model";
+import { getTodayEn } from "../../../pkg/util/dayjs";
+import { ManageDayOfTheWeekSwitchButton } from "./ManageDayOfTheWeekSwitchButton";
 
 type QuestWithTag = Quest & {
   tagName: string | undefined;
@@ -23,12 +24,12 @@ export const ManagePresenter = () => {
   const setSearchModalIsOpen = useSetSearchModalIsOpen();
   const searchModalIsOpen = useSearchModalIsOpen();
 
+  const [manageView, setManageView] = useState<"Timetable" | "Card">("Timetable");
+  const [dayOfTheWeekView, setDayOfTheWeekView] = useState<Day>(getTodayEn().toUpperCase() as Day);
   const [filterDay, setFilterDay] = useState<Day | "">("");
   const [filterTag, setFilterTag] = useState<Tag>({ id: "", name: "", color: "" });
   const [filterDifficulties, setFilterDifficulties] = useState<Difficulty[]>([]);
   const [filterActivation, setFilterActivation] = useState<boolean>(false);
-  const [dayOfTheWeekView, setDayOfTheWeekView] = useState<Day>("MON");
-  const [manageView, setManageView] = useState<"Timetable" | "Card">("Timetable");
 
   const { data: questListData } = useQueryQuestList();
   const { data: tagListData } = useQueryTagList();
@@ -96,13 +97,40 @@ export const ManagePresenter = () => {
   };
 
   return (
-    <div className="w-full">
+    <>
       <div className="flex justify-between items-center">
-        <h1 className="font-cp-font tracking-widest text-rhyth-gray text-xl font-bold ">
-          {filterActivation ? "検索適用中" : manageView === "Timetable" ? "曜日別クエスト" : "全てのクエスト"}
-        </h1>
+        <span className="font-cp-font tracking-widest text-rhyth-gray text-xl font-bold ">クエスト一覧</span>
         {filterActivation ? (
-          <></>
+          <button
+            type="button"
+            className="flex items-center gap-1 bg-white py-2 px-4 rounded-full border-2 border-rhyth-light-gray shadow-sm hover:bg-rhyth-bg-dark-gray"
+            onClick={() => {
+              setFilterDay("");
+              setFilterDifficulties([]);
+              setFilterTag({ id: "", name: "", color: "" });
+              setFilterActivation(false);
+            }}
+          >
+            <svg
+              className="w-6 h-6 text-rhyth-red"
+              aria-hidden="true"
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              fill="none"
+              viewBox="0 0 24 24"
+            >
+              \<title>rhythmate close icon</title>
+              <path
+                stroke="currentColor"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M6 18 17.94 6M18 18 6.06 6"
+              />
+            </svg>
+            <span className="text-sm font-bold text-rhyth-dark-blue">検索をやめる</span>
+          </button>
         ) : (
           <button
             type="button"
@@ -133,8 +161,8 @@ export const ManagePresenter = () => {
         )}
       </div>
       {filterActivation ? (
-        filteredQuestList?.length ? (
-          <ul className="mt-4 flex flex-col items-center gap-6">
+        filteredQuestList.length > 0 ? (
+          <ul className="flex flex-col items-center gap-6 mt-4">
             {filteredQuestList?.map((quest) => {
               return (
                 <ManageQuestCard
@@ -154,7 +182,7 @@ export const ManagePresenter = () => {
             })}
           </ul>
         ) : (
-          <div className="w-full gap-4 flex flex-col items-center mx-auto mt-24 text-xl">
+          <div className="w-full flex flex-col items-center gap-4 mx-auto mt-24 text-xl">
             <span>検索結果無し</span>
             <span>条件を変えて再検索してください</span>
           </div>
@@ -179,7 +207,7 @@ export const ManagePresenter = () => {
             </div>
           ) : (
             <ul className="mt-4 flex flex-col items-center gap-6">
-              {allQuestList?.map((quest) => {
+              {allQuestList.map((quest) => {
                 return (
                   <ManageQuestCard
                     key={quest.id}
@@ -255,6 +283,6 @@ export const ManagePresenter = () => {
           setFilterActivation={setFilterActivation}
         />
       )}
-    </div>
+    </>
   );
 };

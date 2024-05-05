@@ -114,7 +114,7 @@ export const EditPresenter: FC<Props> = (props) => {
               <div className="col-span-3 flex justify-end items-center">
                 <input
                   type="time"
-                  className="w-[85px] border-2 rounded p-1 mr-2 shadow-sm"
+                  className="w-[85px] border-2 rounded p-1 mr-2 bg-white  shadow-sm"
                   defaultValue={targetQuest?.startsAt ? formatDateTimeOnlyTime(targetQuest.startsAt) : "00:00"}
                   {...register("startsAt")}
                 />

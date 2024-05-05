@@ -17,7 +17,7 @@ export const ManageTimetable: FC<Props> = (props) => {
   const { questList } = props;
 
   return (
-    <div className="flex flex-col gap-4 min-h-[440px] bg-rhyth-light-blue px-2 py-4 rounded-b-lg">
+    <div className="flex flex-col gap-3 min-h-[440px] bg-rhyth-light-blue px-2 py-4 rounded-b-lg">
       {questList.length > 0 ? (
         questList.map((quest: QuestWithTag) => {
           return (
