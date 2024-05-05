@@ -1,6 +1,6 @@
 import { type FC, useState } from "react";
 import type { Quest } from "../../../api/quest/model";
-import { ClockIcon, ConfirmModal } from "../../common/components";
+import { ConfirmModal } from "../../common/components";
 import useInterval from "../../common/hooks/useInterval";
 import { useMutateQuest } from "../api/quest/hooks/useMutateQuest";
 import { CLOSED, DONE, ENGAGED, FORCE_STOP, NOT_STARTED_YET, OPEN, type QuestStatus } from "../constant/constant";
@@ -80,19 +80,35 @@ export const QuestBoard: FC<Props> = (props) => {
   };
 
   return (
-    <div className="w-full min-h-[240px] py-3 border-2 border-rhyth-light-gray bg-white shadow-lg rounded-lg">
+    <div className="w-full min-h-[240px] py-3 bg-white shadow-lg rounded-lg">
       <div className="flex flex-col gap-1 px-4">
-        <h1 className="py-2 font-bold text-lg text-rhyth-dark-blue">{currentQuest.title}</h1>
-        <hr className="h-1.5 bg-rhyth-blue" />
+        <h1 className="py-2 font-cp-font font-bold text-2xl tracking-wider text-rhyth-dark-blue">
+          {currentQuest.title}
+        </h1>
+        <hr className="h-1.5" />
         <div className="flex items-center gap-2 text-sm mt-2">
-          <div className="font-bold text-white bg-rhyth-gray py-1 px-3 rounded-lg tracking-wider">
-            <span>メモ</span>
-          </div>
-          <h3 className="font-bold text-rhyth-dark-blue">{currentQuest.description}</h3>
-        </div>
-        <div className="w-fit my-2 py-1 px-3 flex justify-center items-center gap-2 text-white bg-rhyth-blue rounded-lg">
-          <ClockIcon color="text-white" />
-          <span className="text-sm font-bold tracking-widest">実行タイム</span>
+          <h3 className="text-md text-rhyth-dark-blue">
+            <div className="flex items-center gap-2">
+              <svg
+                className="w-6 h-6 text-rhyth-dark-blue"
+                aria-hidden="true"
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                fill="none"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke="currentColor"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M10.779 17.779 4.36 19.918 6.5 13.5m4.279 4.279 8.364-8.643a3.027 3.027 0 0 0-2.14-5.165 3.03 3.03 0 0 0-2.14.886L6.5 13.5m4.279 4.279L6.499 13.5m2.14 2.14 6.213-6.504M12.75 7.04 17 11.28"
+                />
+              </svg>
+              {currentQuest.description !== "" ? currentQuest.description : "メモがありません"}
+            </div>
+          </h3>
         </div>
       </div>
       <div className="text-center font-bold my-2 flex items-center justify-center gap-2">

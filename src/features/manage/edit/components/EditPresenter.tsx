@@ -1,6 +1,6 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useNavigate } from "@tanstack/react-router";
-import { type FC, useEffect, useState } from "react";
+import { type FC, useState } from "react";
 import { useForm } from "react-hook-form";
 import type { Day, Difficulty } from "../../../../api/quest/types";
 import { formatDateTimeOnlyTime } from "../../../../pkg/util/dayjs";
@@ -34,26 +34,22 @@ export const EditPresenter: FC<Props> = (props) => {
   const { deleteQuestMutation, updateQuestMutation } = useMutateQuest();
   const { data: questListData } = useQueryQuestList();
 
-  const targetQuest = questListData?.find((v) => v.id === quest_id);
+  const targetQuest = questListData.find((v) => v.id === quest_id);
 
-  const [difficulty, setDifficulty] = useState<Difficulty>("EASY");
+  const [difficulty, setDifficulty] = useState<Difficulty>(targetQuest?.difficulty ?? "EASY");
 
   const {
     register,
     watch,
-    setValue,
     handleSubmit,
     formState: { errors },
   } = useForm<TManageValidationSchema>({
     mode: "onBlur",
     resolver: zodResolver(manageValidationSchema),
+    defaultValues: {
+      days: targetQuest?.days ?? [],
+    },
   });
-
-  useEffect(() => {
-    const modifiedDays = targetQuest?.days ?? [];
-    setValue("days", modifiedDays);
-    setDifficulty(targetQuest?.difficulty ?? "EASY");
-  }, [targetQuest, setValue]);
 
   const onSubmit = async (data: NewValues) => {
     await updateQuestMutation.mutateAsync({
@@ -118,7 +114,7 @@ export const EditPresenter: FC<Props> = (props) => {
               <div className="col-span-3 flex justify-end items-center">
                 <input
                   type="time"
-                  className="w-[85px] border-2 rounded p-1 mr-2 shadow-sm"
+                  className="w-[85px] border-2 rounded p-1 mr-2 bg-white  shadow-sm"
                   defaultValue={targetQuest?.startsAt ? formatDateTimeOnlyTime(targetQuest.startsAt) : "00:00"}
                   {...register("startsAt")}
                 />

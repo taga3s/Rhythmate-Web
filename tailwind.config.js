@@ -41,7 +41,7 @@ export default {
       },
       animation: {
         expbar: "expbar 0.5s ease-out 1",
-        fadein: "fadein 0.2s ease-out 1",
+        fadein: "fadein 0.24s ease-out 1",
       },
     },
   },
