@@ -1,19 +1,19 @@
 import { apiClient } from "../../pkg/api/client/apiClient";
 import type {
-  CreateRequest,
-  CreateResponse,
-  DeleteRequest,
-  DeleteResponse,
+  CreateTagRequest,
+  CreateTagResponse,
+  DeleteTagRequest,
+  DeleteTagResponse,
   ListTagsResponse,
-  UpdateRequest,
-  UpdateResponse,
+  UpdateTagRequest,
+  UpdateTagResponse,
 } from "./type";
 
 export interface TagRepository {
   list: () => Promise<ListTagsResponse>;
-  create: (params: CreateRequest) => Promise<CreateResponse>;
-  destroy: (params: DeleteRequest) => Promise<DeleteResponse>;
-  update: (params: UpdateRequest) => Promise<UpdateResponse>;
+  create: (params: CreateTagRequest) => Promise<CreateTagResponse>;
+  destroy: (params: DeleteTagRequest) => Promise<DeleteTagResponse>;
+  update: (params: UpdateTagRequest) => Promise<UpdateTagResponse>;
 }
 
 const list: TagRepository["list"] = async () => {
@@ -21,17 +21,17 @@ const list: TagRepository["list"] = async () => {
   return response;
 };
 
-const create: TagRepository["create"] = async (params: CreateRequest) => {
+const create: TagRepository["create"] = async (params: CreateTagRequest) => {
   const response = await apiClient.post("/tags", params);
   return response;
 };
 
-const destroy: TagRepository["destroy"] = async (params: DeleteRequest) => {
+const destroy: TagRepository["destroy"] = async (params: DeleteTagRequest) => {
   const response = await apiClient.destroy(`/tags/${params.id}`);
   return response;
 };
 
-const update: TagRepository["update"] = async (params: UpdateRequest) => {
+const update: TagRepository["update"] = async (params: UpdateTagRequest) => {
   const response = await apiClient.patch(`/tags/${params.id}`, params);
   return response;
 };
