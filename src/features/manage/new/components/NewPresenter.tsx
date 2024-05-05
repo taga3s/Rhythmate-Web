@@ -103,7 +103,11 @@ export const NewPresenter = () => {
             <div className="grid grid-cols-5 my-2 items-center">
               <p className="col-span-2 font-bold text-rhyth-gray">実施時刻</p>
               <div className="col-span-3 flex justify-end items-center">
-                <input type="time" className="w-[85px] border-2 rounded p-1 mr-2 shadow-sm" {...register("startsAt")} />
+                <input
+                  type="time"
+                  className="w-[85px] border-2 rounded p-1 mr-2 bg-white shadow-sm"
+                  {...register("startsAt")}
+                />
                 <span className="font-bold text-rhyth-gray">から</span>
               </div>
             </div>

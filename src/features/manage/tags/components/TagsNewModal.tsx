@@ -73,7 +73,7 @@ export const TagsNewModal: FC<Props> = ({ modalType, closeModal }) => {
               />
             </div>
             {errors.name && <FormErrorMsg msg={errors.name.message} />}
-            <div className="flex items-start justify-between">
+            <div className="flex items-center justify-between">
               <label className="flex gap-2 mb-2 text-sm font-bold text-rhyth-dark-blue my-2" htmlFor="tag-color">
                 <svg
                   className="w-6 h-6 text-rhyth-gray"
@@ -95,7 +95,7 @@ export const TagsNewModal: FC<Props> = ({ modalType, closeModal }) => {
               className="w-full text-white bg-rhyth-light-blue hover:bg-rhyth-blue disabled:bg-rhyth-light-gray font-medium rounded-lg text-sm px-5 py-2.5 text-center shadow-md"
               disabled={createTagMutation.isPending}
             >
-              決定する
+              作成する
             </button>
           </form>
         </div>

@@ -3,6 +3,7 @@ import type { UseFormRegister, UseFormWatch } from "react-hook-form";
 import { TagItem } from "../../common/components/TagItem";
 import type { TManageValidationSchema } from "../../common/libs/validation";
 import { useQueryTagList } from "../../tags/api/tag/hooks/useQueryTag";
+import { toSelectColorLabel } from "../../common/funcs/toSelectColorLabel";
 
 type Props = {
   register: UseFormRegister<TManageValidationSchema>;
@@ -14,33 +15,13 @@ export const EditTagDropdown: FC<Props> = ({ register, watch, tagId }) => {
   const { data: tagItems } = useQueryTagList();
   const tagIdForColorSelect = watch("tagId");
 
-  const selectColorLabel = (tagId: string | undefined) => {
-    const selectTagItem = tagItems?.find((tagItem) => tagItem.id === tagId);
-    switch (selectTagItem?.color) {
-      case "Blue":
-        return "text-rhyth-blue";
-      case "Green":
-        return "text-rhyth-green";
-      case "Red":
-        return "text-rhyth-red";
-      case "Purple":
-        return "text-rhyth-purple";
-      case "Orange":
-        return "text-rhyth-orange";
-      case "Yellow":
-        return "text-rhyth-yellow";
-      case "LightBlue":
-        return "text-rhyth-light-blue";
-      default:
-        return "text-rhyth-dark-blue";
-    }
-  };
+  const selectColorLabel = toSelectColorLabel(tagItems, tagIdForColorSelect);
 
   return (
     <>
       {tagItems?.length ? (
         <select
-          className={`w-full border-2 p-2 rounded-md mt-4 ${selectColorLabel(tagIdForColorSelect)}`}
+          className={`w-full p-2 mt-4 border-2 rounded-md bg-white ${selectColorLabel}`}
           id="edit-quest-description"
           defaultValue={tagId}
           {...register("tagId")}
