@@ -1,29 +1,9 @@
-export type ListResponse = {
-  status: string;
-  weeklyReports: {
-    id: string;
-    completed_quests: number;
-    failed_quests: number;
-    completed_percentage: number;
-    streak_days: number;
-    completed_quests_each_day: number[];
-    failed_quests_each_day: number[];
-    start_date: string;
-    end_date: string;
-    feedback: string;
-    user_id: string;
-  }[];
-};
+import * as schemaHelper from "../../Rhythmate-Service/src/pkg/schemaHelper";
 
-export type GenerateFeedBackParams = {
-  weeklyReportId: string;
-};
+export type ListWeeklyReportsResponse = schemaHelper.ResponseData<"/weekly-reports", "get">;
 
-export type GenerateFeedBackRequest = {
-  weeklyReportId: string;
-};
+export type GenerateFeedBackParams = schemaHelper.RequestData<"/weekly-reports/feedback/:weeklyReportId", "post">;
 
-export type GenerateFeedBackResponse = {
-  status: string;
-  feedBack: string;
-};
+export type GenerateFeedBackRequest = schemaHelper.RequestData<"/weekly-reports/feedback/:weeklyReportId", "post">;
+
+export type GenerateFeedBackResponse = schemaHelper.ResponseData<"/weekly-reports/feedback/:weeklyReportId", "post">;
