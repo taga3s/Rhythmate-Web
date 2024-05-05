@@ -58,7 +58,7 @@ export const TagsPresenter = () => {
         </div>
         <div className="text-rhyth-dark-blue">
           {tagItems?.length ? (
-            <ul className="text-md font-bold bg-white border-2 border-rhyth-light-gray rounded-lg shadow-md">
+            <ul className="text-md font-bold bg-white border-2 border-rhyth-light-gray shadow-md">
               {tagItems.map((item) => (
                 <TagsItem
                   key={item.id}
