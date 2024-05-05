@@ -12,7 +12,7 @@ export const AnalyticsAIFeedback: FC<Props> = ({ summaryData, isLoading, onClick
     <div className="mt-4">
       <button
         type="button"
-        className="flex items-center justify-center gap-2 w-full text-md text-white bg-rhyth-light-blue hover:bg-rhyth-blue disabled:bg-rhyth-light-gray border border-rhyth-blue disabled:border-rhyth-light-gray rounded-lg px-4 py-2 mx-auto"
+        className="flex items-center justify-center gap-2 w-full text-md text-white bg-rhyth-light-blue hover:bg-rhyth-blue disabled:bg-rhyth-light-gray border border-rhyth-light-blue disabled:border-rhyth-light-gray rounded-lg px-4 py-2 mx-auto"
         disabled={isLoading}
         onClick={onClick}
       >
@@ -32,7 +32,7 @@ export const AnalyticsAIFeedback: FC<Props> = ({ summaryData, isLoading, onClick
         </svg>
         生成する
       </button>
-      <div className="mt-2">
+      <div className="mt-4">
         {isLoading ? (
           <div className="p-8">
             <Loading />

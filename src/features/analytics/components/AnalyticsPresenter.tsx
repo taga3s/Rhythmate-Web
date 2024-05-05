@@ -35,18 +35,16 @@ export const AnalyticsPresenter = () => {
     <>
       {weeklyReports?.length ? (
         <div className="flex flex-col items-center mx-auto">
-          <div className="flex justify-between  w-full">
-            {
-              <AnalyticsSwitchButton
-                onClickFn={handleClickPrev}
-                direction="left"
-                isEdgy={currentIndex === dateArray.length - 1}
-              />
-            }
-            <p className="text-xl tracking-wider mx-2 block font-cp-font text-center font-bold text-rhyth-gray">
+          <div className="flex justify-between w-full">
+            <AnalyticsSwitchButton
+              onClickFn={handleClickPrev}
+              direction="left"
+              isEdgy={currentIndex === dateArray.length - 1}
+            />
+            <span className="text-xl tracking-wider mx-2 block font-cp-font text-center font-bold text-rhyth-gray">
               {dateArray[currentIndex].start} ～ {dateArray[currentIndex].end}
-            </p>
-            {<AnalyticsSwitchButton onClickFn={handleClickNext} direction="right" isEdgy={currentIndex === 0} />}
+            </span>
+            <AnalyticsSwitchButton onClickFn={handleClickNext} direction="right" isEdgy={currentIndex === 0} />
           </div>
           <h2 className="flex justify-start w-full mt-8 font-cp-font tracking-widest text-rhyth-gray text-lg font-bold ">
             クエスト達成状況
@@ -87,9 +85,9 @@ export const AnalyticsPresenter = () => {
             />
           </div>
           <h2 className="flex justify-start w-full mt-8 font-cp-font tracking-widest text-rhyth-gray text-lg font-bold ">
-            AI フィードバック
+            AIフィードバック
           </h2>
-          <div className="w-full mt-2">
+          <div className="mt-2">
             <p className="text-sm">
               クエストの達成状況に基づいて、AIからアドバイスなどのフィードバックを受けることができます。
             </p>
