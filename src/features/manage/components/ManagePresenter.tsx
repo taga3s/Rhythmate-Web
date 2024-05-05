@@ -4,7 +4,6 @@ import type { Quest } from "../../../api/quest/model";
 import type { Day, Difficulty } from "../../../api/quest/types";
 import { useSearchModalIsOpen, useSetSearchModalIsOpen } from "../../common/contexts/searchModalIsOpenContext";
 import { useQueryQuestList } from "../api/quest/hooks/useQueryQuest";
-import { DAYS } from "../common/constant/constant";
 import { useQueryTagList } from "../tags/api/tag/hooks/useQueryTag";
 import { ManageNewButton } from "./ManageNewButton";
 import { ManageQuestCard } from "./ManageQuestCard";
@@ -12,7 +11,6 @@ import { ManageQuestSearchModal } from "./ManageQuestSearchModal,";
 import { ManageTimetable } from "./ManageTimetable";
 import type { Tag } from "../../../api/tag/model";
 import { getTodayEn } from "../../../pkg/util/dayjs";
-import { ManageDayOfTheWeekSwitchButton } from "./ManageDayOfTheWeekSwitchButton";
 
 type QuestWithTag = Quest & {
   tagName: string | undefined;
@@ -190,21 +188,11 @@ export const ManagePresenter = () => {
       ) : questListData.length ? (
         <div>
           {manageView === "Timetable" ? (
-            <div className="flex flex-col w-full mt-4">
-              <div className="flex items-center">
-                {DAYS.map((day) => {
-                  return (
-                    <ManageDayOfTheWeekSwitchButton
-                      key={day}
-                      view={day}
-                      dayOfTheWeek={dayOfTheWeekView}
-                      onClickFn={setDayOfTheWeekView}
-                    />
-                  );
-                })}
-              </div>
-              <ManageTimetable questList={sortedDayOfTheWeekQuests} />
-            </div>
+            <ManageTimetable
+              questList={sortedDayOfTheWeekQuests}
+              dayOfTheWeekView={dayOfTheWeekView}
+              setDayOfTheWeekView={setDayOfTheWeekView}
+            />
           ) : (
             <ul className="mt-4 flex flex-col items-center gap-6">
               {allQuestList.map((quest) => {
