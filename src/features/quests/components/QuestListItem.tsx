@@ -29,8 +29,8 @@ export const QuestListItem: FC<Props> = (props) => {
         <div className="w-full flex flex-col justify-center px-3">
           <div className="flex gap-2 my-2">
             <ClockIcon color="text-rhyth-dark-blue" />
-            <span className="font-bold text-rhyth-dark-blue">
-              {startsAt} ~ {minutes}分間
+            <span className="text-rhyth-dark-blue">
+              {startsAt} ~ {minutes}min
             </span>
           </div>
           <hr className="w-full h-0.5 bg-rhyth-light-gray" />

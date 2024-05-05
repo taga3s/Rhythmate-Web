@@ -59,7 +59,7 @@ export const ManageTimetableCard: FC<Props> = (props) => {
   };
 
   return (
-    <div className={"bg-rhyth-bg-gray shadow-lg text-rhyth-dark-blue rounded-lg"}>
+    <div className={"bg-rhyth-bg-gray shadow-lg text-rhyth-dark-blue rounded-xl"}>
       <div className="flex items-center justify-between">
         <div
           className={`h-20 flex flex-col items-center justify-center font-bold tracking-widest p-2 pr-3 ${handleBgTagColor(
@@ -67,14 +67,14 @@ export const ManageTimetableCard: FC<Props> = (props) => {
           )} text-white ${isAccordionOpen ? "rounded-tl-lg" : "rounded-l-lg"}`}
         >
           <h2 className="w-[4.5rem] text-lg text-center">{props.startsAt}</h2>
-          <p className="text-sm">{props.minutes}分間</p>
+          <p className="text-sm">{props.minutes}min</p>
         </div>
-        <div className="h-full w-full flex items-center justify-between p-2">
-          <span className="ml-2 text-md font-bold">{props.title}</span>
+        <div className="w-full flex items-center justify-between p-2">
+          <span className="ml-2 tracking-wider font-cp-font text-xl font-bold">{props.title}</span>
           <button type="button" className="p-2" onClick={handleAccordionOpen}>
             {isAccordionOpen ? (
               <svg
-                className="w-6 h-6 text-rhyth-dark-blue hover:text-rhyth-light-blue"
+                className="w-6 h-6 text-rhyth-dark-blue"
                 aria-hidden="true"
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"
@@ -92,7 +92,7 @@ export const ManageTimetableCard: FC<Props> = (props) => {
               </svg>
             ) : (
               <svg
-                className="w-6 h-6 text-rhyth-dark-blue hover:text-rhyth-light-blue"
+                className="w-6 h-6 text-rhyth-dark-blue"
                 aria-hidden="true"
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"
@@ -127,7 +127,7 @@ export const ManageTimetableCard: FC<Props> = (props) => {
                   })
                 }
               >
-                <div className="flex items-center justify-center gap-1 text-rhyth-blue hover:text-rhyth-hover-blue font-bold">
+                <div className="flex items-center justify-center gap-1 text-rhyth-dark-blue font-bold">
                   <svg
                     className="w-6 h-6"
                     aria-hidden="true"
@@ -152,8 +152,8 @@ export const ManageTimetableCard: FC<Props> = (props) => {
                 </div>
               </button>
             </div>
-            <h3 className="text-md font-bold text-rhyth-dark-blue">
-              <div className="flex items-center gap-1">
+            <h3 className="text-md text-rhyth-dark-blue">
+              <div className="flex items-center gap-2">
                 <svg
                   className="w-6 h-6 text-rhyth-dark-blue"
                   aria-hidden="true"
@@ -175,11 +175,14 @@ export const ManageTimetableCard: FC<Props> = (props) => {
               </div>
             </h3>
             <div className="flex justify-between items-center mt-2">
-              <div className="flex items-center">
-                <ClockIcon color="text-rhyth-blue" />
-                <h3 className="my-2 ml-2 text-md font-bold text-rhyth-blue">
-                  {convertENToJPWeekdayString(props.days)}
-                </h3>
+              <div className="flex justify-start gap-2">
+                <ClockIcon color="text-rhyth-dark-blue" />
+                <div className="flex flex-col items-start text-rhyth-dark-blue">
+                  <span>
+                    {props.startsAt} ~ {props.minutes}min
+                  </span>
+                  <span>{convertENToJPWeekdayString(props.days)}</span>
+                </div>
               </div>
               {props.tagName !== undefined ? (
                 <div
@@ -213,17 +216,17 @@ export const ManageTimetableCard: FC<Props> = (props) => {
               </div>
               <ManageProgressBar level={props.continuationLevel} />
               <div className="flex justify-end items-center text-sm">
-                <p className="font-cp-font tracking-[0.2em] text-white mt-1 bg-rhyth-orange px-2 py-1 rounded-full">
+                <span className="font-cp-font font-bold tracking-[0.2em] text-white mt-1 bg-rhyth-orange px-2 py-1 rounded-full">
                   BONUS
-                </p>
+                </span>
                 <span className="ml-1 font-medium text-md text-rhyth-orange tracking-wider">&times;</span>
                 <span className="ml-1 font-bold text-lg text-rhyth-orange tracking-wider">
                   {props.continuationLevel}.0
                 </span>
               </div>
             </div>
-            <div className="bg-rhyth-red min-w-20 h-full flex flex-col justify-center items-center gap-2 font-cp-font text-[12px] tracking-wider rounded-br-md">
-              <p className="text-white font-semibold">獲得Exp</p>
+            <div className="bg-rhyth-red min-w-20 h-full flex flex-col justify-center items-center gap-2 text-xs tracking-wider rounded-br-md">
+              <span className="text-white font-semibold font-cp-font">獲得Exp</span>
               <div className="flex justify-between items-center">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"

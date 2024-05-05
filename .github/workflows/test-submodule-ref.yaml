@@ -1,0 +1,13 @@
+name: Update Submodule
+
+on:
+  repository_dispatch:
+    types:
+      - update
+
+jobs:
+  update_submodule:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Show message
+        run: echo "Hello"

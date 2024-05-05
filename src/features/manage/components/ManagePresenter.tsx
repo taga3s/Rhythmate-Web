@@ -207,7 +207,7 @@ export const ManagePresenter = () => {
             </div>
           ) : (
             <ul className="mt-4 flex flex-col items-center gap-6">
-              {allQuestList?.map((quest) => {
+              {allQuestList.map((quest) => {
                 return (
                   <ManageQuestCard
                     key={quest.id}
