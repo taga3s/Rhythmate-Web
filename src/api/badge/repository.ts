@@ -2,7 +2,7 @@ import { apiClient } from "../../pkg/api/client/apiClient";
 import type {
   AchieveBadgeRequest,
   AchieveBadgeResponse,
-  ListResponse,
+  ListBadgesResponse,
   PinBadgeRequest,
   PinBadgeResponse,
   UnpinBadgeRequest,
@@ -10,7 +10,7 @@ import type {
 } from "./type";
 
 export interface BadgeRepository {
-  list: () => Promise<ListResponse>;
+  list: () => Promise<ListBadgesResponse>;
   achieve: (params: AchieveBadgeRequest) => Promise<AchieveBadgeResponse>;
   pin: (params: PinBadgeRequest) => Promise<PinBadgeResponse>;
   unpin: (params: UnpinBadgeRequest) => Promise<UnpinBadgeResponse>;
@@ -22,17 +22,17 @@ const list: BadgeRepository["list"] = async () => {
 };
 
 const achieve: BadgeRepository["achieve"] = async (params: AchieveBadgeRequest) => {
-  const response = await apiClient.patch(`/badge/${params.badgeId}`);
+  const response = await apiClient.patch(`/badge/${params.badge_id}`);
   return response;
 };
 
 const pin: BadgeRepository["pin"] = async (params: PinBadgeRequest) => {
-  const response = await apiClient.patch(`/badge/pin/${params.badgeId}`);
+  const response = await apiClient.patch(`/badge/pin/${params.badge_id}`);
   return response;
 };
 
 const unpin: BadgeRepository["unpin"] = async (params: UnpinBadgeRequest) => {
-  const response = await apiClient.patch(`/badge/unpin/${params.badgeId}`);
+  const response = await apiClient.patch(`/badge/unpin/${params.badge_id}`);
   return response;
 };
 
