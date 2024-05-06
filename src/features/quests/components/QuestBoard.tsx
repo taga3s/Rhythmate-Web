@@ -1,4 +1,4 @@
-import { type FC, useState } from "react";
+import { type FC, useState, Dispatch, SetStateAction } from "react";
 import type { Quest } from "../../../api/quest/model";
 import { ConfirmModal } from "../../common/components";
 import useInterval from "../../common/hooks/useInterval";
@@ -13,7 +13,7 @@ export const getIsStarted = (startedAt: string): boolean => {
 
 type Props = {
   currentQuest: Quest;
-  setLaunchConfetti: React.Dispatch<React.SetStateAction<boolean>>;
+  setLaunchConfetti: Dispatch<SetStateAction<boolean>>;
 };
 
 export const QuestBoard: FC<Props> = (props) => {

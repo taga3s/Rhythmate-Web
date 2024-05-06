@@ -9,9 +9,10 @@ type Props = {
 
 export const QuestList: FC<Props> = (props) => {
   const { questList } = props;
+
   return (
     <div className="bg-rhyth-light-blue rounded-b-md rounded-tr-md shadow-lg">
-      <div className="flex flex-col gap-2 py-2">
+      <div className="flex flex-col gap-2 px-3 py-4">
         {questList.map((quest) => {
           return (
             <QuestListItem

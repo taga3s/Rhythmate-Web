@@ -51,8 +51,7 @@ export const QuestsPresenter = () => {
           numberOfPieces={Math.round((width * height) / 1000)}
         />
       )}
-
-      <span className="font-cp-font text-rhyth-light-blue text-2xl tracking-widest">
+      <span className="font-cp-font text-rhyth-dark-blue text-2xl tracking-widest">
         {formatDateJP(now())}
         {`(${getToday()})`}
       </span>
@@ -78,11 +77,11 @@ export const QuestsPresenter = () => {
           <h1 className="font-cp-font text-rhyth-gray tracking-widest">NEXT CHALLENGE</h1>
         </div>
         {currentQuest ? (
-          <QuestBoard currentQuest={currentQuest} setLaunchConfetti={setLaunchConfetti} />
+          <QuestBoard setLaunchConfetti={setLaunchConfetti} currentQuest={currentQuest} />
         ) : (
           <QuestBoardNoData />
         )}
-        <div className={"flex flex-col w-full mt-6 bg-gray-100 rounded-md"}>
+        <div className={"flex flex-col w-full mt-6 rounded-md"}>
           <div className="flex items-center">
             <button
               type="button"
