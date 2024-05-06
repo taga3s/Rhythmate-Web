@@ -1,4 +1,6 @@
 import { useState } from "react";
+import Confetti from "react-confetti";
+import useWindowSize from "react-use/lib/useWindowSize";
 import type { Quest } from "../../../api/quest/model";
 import { formatDateJP, getToday, getTodayEn, now } from "../../../pkg/util/dayjs";
 import { useQueryQuestList } from "../api/quest/hooks/useQueryQuest";
@@ -30,8 +32,25 @@ export const QuestsPresenter = () => {
 
   const [view, setView] = useState<View>("NEXT");
 
+  const { width, height } = useWindowSize();
+
+  const [launchConfetti, setLaunchConfetti] = useState<boolean>(false);
+
   return (
     <>
+      {launchConfetti && (
+        <Confetti
+          width={width}
+          height={height}
+          confettiSource={{ x: width / 2, y: height / 2, w: 10, h: 0 }}
+          recycle={false}
+          gravity={0.2}
+          initialVelocityX={0.0083 * width + 1.1945}
+          initialVelocityY={0.0127 * height + 5.0227}
+          tweenDuration={2000}
+          numberOfPieces={Math.round((width * height) / 1000)}
+        />
+      )}
       <span className="font-cp-font text-rhyth-dark-blue text-2xl tracking-widest">
         {formatDateJP(now())}
         {`(${getToday()})`}
@@ -57,7 +76,11 @@ export const QuestsPresenter = () => {
           </svg>
           <h1 className="font-cp-font text-rhyth-gray tracking-widest">NEXT CHALLENGE</h1>
         </div>
-        {currentQuest ? <QuestBoard currentQuest={currentQuest} /> : <QuestBoardNoData />}
+        {currentQuest ? (
+          <QuestBoard setLaunchConfetti={setLaunchConfetti} currentQuest={currentQuest} />
+        ) : (
+          <QuestBoardNoData />
+        )}
         <div className={"flex flex-col w-full mt-6 rounded-md"}>
           <div className="flex items-center">
             <button

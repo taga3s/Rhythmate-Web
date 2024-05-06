@@ -1,4 +1,4 @@
-import { type FC, useState } from "react";
+import { type FC, useState, type Dispatch, type SetStateAction } from "react";
 import type { Quest } from "../../../api/quest/model";
 import { ConfirmModal } from "../../common/components";
 import useInterval from "../../common/hooks/useInterval";
@@ -13,10 +13,11 @@ export const getIsStarted = (startedAt: string): boolean => {
 
 type Props = {
   currentQuest: Quest;
+  setLaunchConfetti: Dispatch<SetStateAction<boolean>>;
 };
 
 export const QuestBoard: FC<Props> = (props) => {
-  const { currentQuest } = props;
+  const { currentQuest, setLaunchConfetti } = props;
 
   const [startConfirmModalOpen, setStartConfirmModalOpen] = useState(false);
   const [finishConfirmModalOpen, setFinishConfirmModalOpen] = useState(false);
@@ -70,6 +71,11 @@ export const QuestBoard: FC<Props> = (props) => {
       id: currentQuest.id,
     });
     setQuestStatus(CLOSED);
+
+    setLaunchConfetti(true);
+    setTimeout(() => {
+      setLaunchConfetti(false);
+    }, 1000 * 5);
   };
 
   const handleForceFinishQuest = async () => {
