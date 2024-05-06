@@ -23,7 +23,7 @@ export const ManageTimetable: FC<Props> = (props) => {
 
   return (
     <div className="flex flex-col gap-4 min-h-[440px] py-4">
-      <div className="flex gap-2 overflow-auto">
+      <div className="flex gap-2 rounded-lg overflow-auto">
         {DAYS.map((day) => {
           return (
             <ManageDayOfTheWeekSwitchButton

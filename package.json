@@ -15,9 +15,9 @@
   },
   "dependencies": {
     "@hookform/resolvers": "^3.3.4",
-    "@tanstack/react-query": "^5.32.0",
-    "@tanstack/react-router": "^1.31.3",
-    "@tanstack/router-devtools": "^1.31.3",
+    "@tanstack/react-query": "^5.34.2",
+    "@tanstack/react-router": "^1.31.20",
+    "@tanstack/router-devtools": "^1.31.20",
     "chart.js": "^4.4.2",
     "dayjs": "^1.11.11",
     "firebase": "^10.11.1",
@@ -25,16 +25,16 @@
     "react": "^18.3.1",
     "react-chartjs-2": "^5.2.0",
     "react-dom": "^18.3.1",
-    "react-hook-form": "^7.51.3",
+    "react-hook-form": "^7.51.4",
     "react-hot-toast": "^2.4.1",
     "react-image-crop": "^11.0.5",
     "type-fest": "^4.18.0",
-    "zod": "^3.23.5"
+    "zod": "^3.23.6"
   },
   "devDependencies": {
-    "@biomejs/biome": "1.7.1",
-    "@tanstack/router-vite-plugin": "^1.30.0",
-    "@types/lodash": "^4.17.0",
+    "@biomejs/biome": "1.7.2",
+    "@tanstack/router-vite-plugin": "^1.31.18",
+    "@types/lodash": "^4.17.1",
     "@types/react": "^18.3.1",
     "@types/react-dom": "^18.3.0",
     "@typescript-eslint/eslint-plugin": "^7.8.0",
@@ -47,8 +47,8 @@
     "postcss": "^8.4.38",
     "tailwindcss": "^3.4.3",
     "typescript": "^5.2.2",
-    "vite": "^5.2.10",
-    "vite-plugin-pwa": "^0.19.8"
+    "vite": "^5.2.11",
+    "vite-plugin-pwa": "^0.20.0"
   },
   "lint-staged": {
     "*.{ts,tsx}": "biome format --write ./src"

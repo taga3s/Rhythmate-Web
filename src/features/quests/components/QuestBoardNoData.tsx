@@ -1,6 +1,6 @@
 export const QuestBoardNoData = () => {
   return (
-    <div className="w-full min-h-[240px] p-3 border-2 border-rhyth-light-gray shadow-lg rounded-lg flex flex-col items-center justify-center bg-white">
+    <div className="w-full min-h-[240px] p-3 shadow-lg rounded-lg flex flex-col items-center justify-center bg-white">
       <div className="relative">
         <svg
           className="w-24 h-24 text-rhyth-green"
@@ -20,11 +20,10 @@ export const QuestBoardNoData = () => {
         </span>
       </div>
       <span className="font-bold text-center p-2 text-rhyth-dark-blue">
-        今日のクエストは終了しました！
+        今日のクエストは終了しました。
         <br />
         お疲れさまでした!
       </span>
-      <span className="font-bold text-center p-2 text-rhyth-dark-blue">全てを終えた気分はどうですか？</span>
     </div>
   );
 };
