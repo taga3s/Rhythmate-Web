@@ -1,4 +1,4 @@
-import { type FC, useState, Dispatch, SetStateAction } from "react";
+import { type FC, useState, type Dispatch, type SetStateAction } from "react";
 import type { Quest } from "../../../api/quest/model";
 import { ConfirmModal } from "../../common/components";
 import useInterval from "../../common/hooks/useInterval";
@@ -71,7 +71,11 @@ export const QuestBoard: FC<Props> = (props) => {
       id: currentQuest.id,
     });
     setQuestStatus(CLOSED);
+
     setLaunchConfetti(true);
+    setTimeout(() => {
+      setLaunchConfetti(false);
+    }, 1000 * 5);
   };
 
   const handleForceFinishQuest = async () => {
