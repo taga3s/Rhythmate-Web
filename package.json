@@ -11,8 +11,7 @@
     "format": "biome format --write ./src",
     "preview": "vite preview",
     "prepare": "husky",
-    "preinstall": "npx only-allow pnpm",
-    "vercel-install": "git submodule update --init && cd src/Rhythmate-Service && npm i"
+    "preinstall": "npx only-allow pnpm"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.3.4",
