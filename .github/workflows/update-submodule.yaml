@@ -1,0 +1,31 @@
+name: Update Submodule
+
+on:
+  repository_dispatch:
+    types:
+      - update
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set up a Git safe directory
+        run: git config --global --add safe.directory "${GITHUB_WORKSPACE}"
+      - uses: actions/checkout@v4
+        with:
+          submodules: true
+      - name: Update submodule
+        run: |
+          git submodule update --remote ./src/Rhythmate-Service/
+      - name: Git commit
+        run: |
+          git config --local user.name "github-actions"
+          git config --local user.email "github-actions@github.com"
+          git add -A
+          git status
+          git commit -m "update: update submodule"
+      - name: Git push
+        uses: ad-m/github-push-action@master
+        with:
+          branch: develop
+          github_token: ${{ secrets.GITHUB_TOKEN }}

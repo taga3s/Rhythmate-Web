@@ -1,8 +1,8 @@
 import { apiClient } from "../../pkg/api/client/apiClient";
-import type { GenerateFeedBackRequest, GenerateFeedBackResponse, ListResponse } from "./types";
+import type { GenerateFeedBackRequest, GenerateFeedBackResponse, ListWeeklyReportsResponse } from "./types";
 
 export interface WeeklyReportsRepository {
-  list: () => Promise<ListResponse>;
+  list: () => Promise<ListWeeklyReportsResponse>;
   generateFeedBack: (params: GenerateFeedBackRequest) => Promise<GenerateFeedBackResponse>;
 }
 

@@ -3,7 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "packageManager": "pnpm@9.0.6",
+  "packageManager": "pnpm@9.1.0",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
@@ -11,7 +11,8 @@
     "format": "biome format --write ./src",
     "preview": "vite preview",
     "prepare": "husky",
-    "preinstall": "npx only-allow pnpm"
+    "preinstall": "npx only-allow pnpm",
+    "submodule-install": "cd src/Rhythmate-Service && npm install"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.3.4",
@@ -30,6 +31,7 @@
     "react-hook-form": "^7.51.4",
     "react-hot-toast": "^2.4.1",
     "react-image-crop": "^11.0.5",
+    "type-fest": "^4.18.0",
     "react-use": "^17.5.0",
     "zod": "^3.23.6"
   },

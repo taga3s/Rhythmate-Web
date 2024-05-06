@@ -1,122 +1,43 @@
+import * as schemaHelper from "../../Rhythmate-Service/src/pkg/schemaHelper";
+
 export type Difficulty = "EASY" | "NORMAL" | "HARD";
 export type QuestState = "INACTIVE" | "ACTIVE";
 export type Day = "MON" | "TUE" | "WED" | "THU" | "FRI" | "SAT" | "SUN";
 
-type QuestBaseResponse = {
-  id: string;
-  title: string;
-  description: string;
-  starts_at: string;
-  started_at: string;
-  minutes: number;
-  tag_id: string;
-  difficulty: Difficulty;
-  state: QuestState;
-  is_succeeded: boolean;
-  continuation_level: number;
-  days: Day[];
-  weekly_frequency: number;
-  weekly_completion_count: number;
-  total_completion_count: number;
-};
+export type CreateQuestParams = schemaHelper.RequestData<"/quests", "post">;
 
-export type CreateQuestParams = {
-  title: string;
-  description: string;
-  startsAt: string;
-  minutes: number;
-  tagId: string;
-  days: Day[];
-  difficulty: Difficulty;
-  state: QuestState;
-};
+export type CreateQuestRequest = schemaHelper.RequestData<"/quests", "post">;
 
-export type CreateRequest = {
-  title: string;
-  description: string;
-  startsAt: string;
-  minutes: number;
-  tagId: string;
-  days: Day[];
-  difficulty: Difficulty;
-  state: QuestState;
-};
+export type CreateQuestResponse = schemaHelper.ResponseData<"/quests", "post">;
 
-export type CreateResponse = QuestBaseResponse & {
-  status: string;
-};
+export type UpdateQuestParams = schemaHelper.RequestData<"/quests/:id", "patch">;
 
-export type UpdateQuestParams = {
-  id: string;
-  title: string;
-  description: string;
-  startsAt: string;
-  minutes: number;
-  tagId: string;
-  difficulty: Difficulty;
-  days: Day[];
-};
+export type UpdateQuestRequest = schemaHelper.RequestData<"/quests/:id", "patch">;
 
-export type UpdateRequest = {
-  id: string;
-  title: string;
-  description: string;
-  startsAt: string;
-  minutes: number;
-  tagId: string;
-  difficulty: Difficulty;
-  days: Day[];
-};
+export type UpdateQuestResponse = schemaHelper.ResponseData<"/quests/:id", "patch">;
 
-export type UpdateResponse = QuestBaseResponse & {
-  status: string;
-};
+export type DeleteQuestParams = schemaHelper.RequestData<"/quests/:id", "delete">;
 
-export type DeleteQuestParams = {
-  id: string;
-};
+export type DeleteQuestRequest = schemaHelper.RequestData<"/quests/:id", "delete">;
 
-export type DeleteRequest = {
-  id: string;
-};
+export type DeleteQuestResponse = schemaHelper.ResponseData<"/quests/:id", "delete">;
 
-export type ListResponse = {
-  status: string;
-  quests: QuestBaseResponse[];
-};
+export type ListQuestsResponse = schemaHelper.ResponseData<"/quests", "get">;
 
-export type StartQuestParams = {
-  id: string;
-};
+export type StartQuestParams = schemaHelper.RequestData<"/quests/start/:id", "patch">;
 
-export type StartRequest = {
-  id: string;
-};
+export type StartQuestRequest = schemaHelper.RequestData<"/quests/start/:id", "patch">;
 
-export type StartResponse = QuestBaseResponse & {
-  status: string;
-};
+export type StartQuestResponse = schemaHelper.ResponseData<"/quests/start/:id", "patch">;
 
-export type FinishQuestParams = {
-  id: string;
-};
+export type FinishQuestParams = schemaHelper.RequestData<"/quests/finish/:id", "patch">;
 
-export type FinishRequest = {
-  id: string;
-};
+export type FinishQuestRequest = schemaHelper.RequestData<"/quests/finish/:id", "patch">;
 
-export type FinishResponse = QuestBaseResponse & {
-  status: string;
-};
+export type FinishQuestResponse = schemaHelper.ResponseData<"/quests/finish/:id", "patch">;
 
-export type ForceFinishQuestParams = {
-  id: string;
-};
+export type ForceFinishQuestParams = schemaHelper.RequestData<"/quests/force-finish/:id", "patch">;
 
-export type ForceFinishRequest = {
-  id: string;
-};
+export type ForceFinishQuestRequest = schemaHelper.RequestData<"/quests/force-finish/:id", "patch">;
 
-export type ForceFinishResponse = QuestBaseResponse & {
-  status: string;
-};
+export type ForceFinishQuestResponse = schemaHelper.ResponseData<"/quests/force-finish/:id", "patch">;
