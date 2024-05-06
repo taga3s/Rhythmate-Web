@@ -1,0 +1,29 @@
+name: Update Submodule
+
+on:
+  repository_dispatch:
+    types:
+      - update
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+      with:
+        submodules: true
+    - name: Update submodule
+      run: |
+        git submodule update --remote ./src/Rhythmate-Service/
+    - name: Git commit
+      run: |
+        git config --local user.name "github-actions"
+        git config --local user.email "github-actions@github.com"
+        git add -A
+        git status
+        git commit -m "update: update submodele (by GitHub Actions)"
+    - name: Git push
+      uses: ad-m/github-push-action@v0.5.0
+      with:
+        branch: develop
+        github_token: ${{ secrets.GITHUB_TOKEN }}

@@ -1,56 +1,17 @@
-type BaseResponse = {
-  name: string;
-  email: string;
-  imageUrl: string;
-  level: number;
-  exp: number;
-};
+import * as schemaHelper from "../../Rhythmate-Service/src/pkg/schemaHelper";
 
-export type AuthParams = {
-  idToken: string;
-};
+export type AuthParams = schemaHelper.RequestData<"/users/auth", "post">;
 
-export type AuthRequest = {
-  idToken: string;
-};
+export type AuthRequest = schemaHelper.RequestData<"/users/auth", "post">;
 
-export type AuthResponse = {
-  status: string;
-};
+export type AuthResponse = schemaHelper.ResponseData<"/users/auth", "post">;
 
-export type IsAuthenticatedResponse = {
-  status: boolean;
-  message: string;
-};
+export type UpdateLoginUserParams = schemaHelper.RequestData<"/users/me", "patch">;
 
-export type LoginParams = {
-  email: string;
-  password: string;
-};
+export type UpdateLoginUserRequest = schemaHelper.RequestData<"/users/me", "patch">;
 
-export type LoginRequest = {
-  email: string;
-  password: string;
-};
+export type UpdateLoginUserResponse = schemaHelper.ResponseData<"/users/me", "patch">;
 
-export type LoginResponse = {
-  status: string;
-};
+export type GetLoginUserResponse = schemaHelper.ResponseData<"/users/me", "get">;
 
-export type GetResponse = BaseResponse & {
-  status: string;
-};
-
-export type UpdateLoginUserParams = {
-  name: string;
-  image_src: string;
-};
-
-export type UpdateLoginUserRequest = {
-  name: string;
-  image_src: string;
-};
-
-export type UpdateLoginUserResponse = BaseResponse & {
-  status: string;
-};
+export type IsAuthenticatedResponse = schemaHelper.ResponseData<"/users/authenticated", "get">;
