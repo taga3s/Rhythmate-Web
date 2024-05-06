@@ -28,7 +28,7 @@ export const LoginForm = () => {
 
       const idToken = await user.getIdToken();
       await authMutation.mutateAsync({
-        idToken: idToken,
+        id_token: idToken,
       });
     } catch (error) {
       if (error instanceof FirebaseError && error.code !== "auth/popup-closed-by-user") {
