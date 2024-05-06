@@ -7,7 +7,7 @@ export const LoginBird = () => {
       xmlnsXlink="http://www.w3.org/1999/xlink"
       x="0px"
       y="0px"
-      width="90%"
+      width="75%"
       viewBox="0 0 500 500"
       enableBackground="new 0 0 500 500"
       xmlSpace="preserve"
