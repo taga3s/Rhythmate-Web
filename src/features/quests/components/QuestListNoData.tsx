@@ -6,7 +6,7 @@ type Props = {
 
 export const QuestListNoData: FC<Props> = ({ view }) => {
   return view === "NEXT" ? (
-    <div className="w-full min-h-[230px] p-3 shadow-lg rounded-b-md rounded-tr-md flex flex-col justify-center bg-rhyth-light-blue">
+    <div className="w-full h-full px-3 py-4 shadow-lg rounded-b-md rounded-tr-md bg-rhyth-light-blue">
       <div className="flex flex-col justify-center items-center bg-white rounded-lg shadow-md py-2">
         <svg
           className="w-20 h-24 text-rhyth-orange"
