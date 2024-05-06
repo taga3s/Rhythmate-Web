@@ -12,7 +12,7 @@ export const ManageDayOfTheWeekSwitchButton: FC<Props> = ({ view, dayOfTheWeek, 
   return (
     <button
       type="button"
-      className={`px-4 py-2 font-cp-font rounded-lg shadow-lg ${
+      className={`px-4 py-2 font-cp-font rounded-lg shadow-md ${
         view === dayOfTheWeek
           ? "text-white bg-rhyth-light-blue"
           : "bg-white text-rhyth-dark-blue hover:bg-rhyth-hover-light-gray"
