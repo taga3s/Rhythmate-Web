@@ -39,31 +39,19 @@ export const QuestsPresenter = () => {
   return (
     <>
       {launchConfetti && (
-        <>
-          <Confetti
-            width={width}
-            height={height}
-            confettiSource={{ x: 0, y: height, w: 10, h: 0 }}
-            recycle={false}
-            gravity={0.25}
-            initialVelocityX={-(0.0176 * width + 1.823)}
-            initialVelocityY={0.0216 * height + 10.242}
-            tweenDuration={2000}
-            numberOfPieces={400}
-          />
-          <Confetti
-            width={width}
-            height={height}
-            confettiSource={{ x: width, y: height, w: 10, h: 0 }}
-            recycle={false}
-            gravity={0.25}
-            initialVelocityX={0.0176 * width + 1.823}
-            initialVelocityY={0.0216 * height + 10.242}
-            tweenDuration={2000}
-            numberOfPieces={400}
-          />
-        </>
+        <Confetti
+          width={width}
+          height={height}
+          confettiSource={{ x: width / 2, y: height / 2, w: 10, h: 0 }}
+          recycle={false}
+          gravity={0.2}
+          initialVelocityX={0.0083 * width + 1.1945}
+          initialVelocityY={0.0127 * height + 5.0227}
+          tweenDuration={2000}
+          numberOfPieces={Math.round((width * height) / 1000)}
+        />
       )}
+
       <span className="font-cp-font text-rhyth-light-blue text-2xl tracking-widest">
         {formatDateJP(now())}
         {`(${getToday()})`}

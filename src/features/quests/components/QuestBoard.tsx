@@ -72,8 +72,6 @@ export const QuestBoard: FC<Props> = (props) => {
     });
     setQuestStatus(CLOSED);
     setLaunchConfetti(true);
-    //紙吹雪関数
-    //タイムアウト
   };
 
   const handleForceFinishQuest = async () => {
