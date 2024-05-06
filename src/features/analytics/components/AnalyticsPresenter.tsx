@@ -41,7 +41,7 @@ export const AnalyticsPresenter = () => {
               direction="left"
               isEdgy={currentIndex === dateArray.length - 1}
             />
-            <span className="text-xl tracking-wider mx-2 block font-cp-font text-center font-bold text-rhyth-gray">
+            <span className="text-xl tracking-wider mx-2 block font-cp-font text-center font-bold text-rhyth-dark-blue">
               {dateArray[currentIndex].start} ～ {dateArray[currentIndex].end}
             </span>
             <AnalyticsSwitchButton onClickFn={handleClickNext} direction="right" isEdgy={currentIndex === 0} />

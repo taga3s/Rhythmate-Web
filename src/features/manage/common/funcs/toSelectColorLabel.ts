@@ -1,4 +1,4 @@
-import { Tag } from "../../../../api/tag/model";
+import type { Tag } from "../../../../api/tag/model";
 
 export const toSelectColorLabel = (tagItems: Tag[], tagId: string | undefined) => {
   const selectTagItem = tagItems?.find((tagItem) => tagItem.id === tagId);
