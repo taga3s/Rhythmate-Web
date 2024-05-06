@@ -1,4 +1,6 @@
 import { useState } from "react";
+import Confetti from "react-confetti";
+import useWindowSize from "react-use/lib/useWindowSize";
 import type { Quest } from "../../../api/quest/model";
 import { formatDateJP, getToday, getTodayEn, now } from "../../../pkg/util/dayjs";
 import { useQueryQuestList } from "../api/quest/hooks/useQueryQuest";
@@ -30,8 +32,38 @@ export const QuestsPresenter = () => {
 
   const [view, setView] = useState<View>("NEXT");
 
+  const { width, height } = useWindowSize();
+
+  const [launchConfetti, setLaunchConfetti] = useState<boolean>(false);
+
   return (
     <>
+      {launchConfetti && (
+        <>
+          <Confetti
+            width={width}
+            height={height}
+            confettiSource={{ x: 0, y: height, w: 10, h: 0 }}
+            recycle={false}
+            gravity={0.25}
+            initialVelocityX={-(0.0176 * width + 1.823)}
+            initialVelocityY={0.0216 * height + 10.242}
+            tweenDuration={2000}
+            numberOfPieces={400}
+          />
+          <Confetti
+            width={width}
+            height={height}
+            confettiSource={{ x: width, y: height, w: 10, h: 0 }}
+            recycle={false}
+            gravity={0.25}
+            initialVelocityX={0.0176 * width + 1.823}
+            initialVelocityY={0.0216 * height + 10.242}
+            tweenDuration={2000}
+            numberOfPieces={400}
+          />
+        </>
+      )}
       <span className="font-cp-font text-rhyth-light-blue text-2xl tracking-widest">
         {formatDateJP(now())}
         {`(${getToday()})`}
@@ -57,7 +89,11 @@ export const QuestsPresenter = () => {
           </svg>
           <h1 className="font-cp-font text-rhyth-gray tracking-widest">NEXT CHALLENGE</h1>
         </div>
-        {currentQuest ? <QuestBoard currentQuest={currentQuest} /> : <QuestBoardNoData />}
+        {currentQuest ? (
+          <QuestBoard currentQuest={currentQuest} setLaunchConfetti={setLaunchConfetti} />
+        ) : (
+          <QuestBoardNoData />
+        )}
         <div className={"flex flex-col w-full mt-6 bg-gray-100 rounded-md"}>
           <div className="flex items-center">
             <button

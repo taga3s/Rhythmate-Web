@@ -13,10 +13,11 @@ export const getIsStarted = (startedAt: string): boolean => {
 
 type Props = {
   currentQuest: Quest;
+  setLaunchConfetti: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 export const QuestBoard: FC<Props> = (props) => {
-  const { currentQuest } = props;
+  const { currentQuest, setLaunchConfetti } = props;
 
   const [startConfirmModalOpen, setStartConfirmModalOpen] = useState(false);
   const [finishConfirmModalOpen, setFinishConfirmModalOpen] = useState(false);
@@ -70,6 +71,9 @@ export const QuestBoard: FC<Props> = (props) => {
       id: currentQuest.id,
     });
     setQuestStatus(CLOSED);
+    setLaunchConfetti(true);
+    //紙吹雪関数
+    //タイムアウト
   };
 
   const handleForceFinishQuest = async () => {
