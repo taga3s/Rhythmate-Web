@@ -18,6 +18,7 @@
     "@tanstack/react-query": "^5.34.2",
     "@tanstack/react-router": "^1.31.20",
     "@tanstack/router-devtools": "^1.31.20",
+    "@unpic/react": "^0.1.14",
     "chart.js": "^4.4.2",
     "dayjs": "^1.11.11",
     "firebase": "^10.11.1",
