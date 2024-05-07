@@ -2,6 +2,7 @@ import { useRouterState } from "@tanstack/react-router";
 import { HeaderManageButton } from "./HeaderManageButton";
 import { HeaderProfileButton } from "./HeaderProfileButton";
 import { HeaderQuestsButton } from "./HeaderQuestsButton";
+import { Image } from "@unpic/react";
 
 export const Header = () => {
   const router = useRouterState();
@@ -51,7 +52,7 @@ export const Header = () => {
       <div className="flex justify-between items-center">
         <div className="px-4 py-2 flex items-center gap-2">
           <div>
-            <img src="/brand-logo.svg" alt="rhythmateのロゴ" className="w-12" />
+            <Image src="/brand-logo.svg" alt="rhythmateのロゴ" width={48} height={48} />
           </div>
           <h1 className="font-cp-font font-bold text-xl text-rhyth-dark-blue tracking-wider">
             {handlePageTitle(pathname)}

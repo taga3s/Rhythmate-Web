@@ -16,7 +16,7 @@
   },
   "dependencies": {
     "@hookform/resolvers": "^3.3.4",
-    "@tanstack/react-query": "^5.34.2",
+    "@tanstack/react-query": "^5.35.1",
     "@tanstack/react-router": "^1.31.20",
     "@tanstack/router-devtools": "^1.31.20",
     "@unpic/react": "^0.1.14",
@@ -31,12 +31,12 @@
     "react-hook-form": "^7.51.4",
     "react-hot-toast": "^2.4.1",
     "react-image-crop": "^11.0.5",
-    "type-fest": "^4.18.0",
+    "type-fest": "^4.18.2",
     "react-use": "^17.5.0",
     "zod": "^3.23.6"
   },
   "devDependencies": {
-    "@biomejs/biome": "1.7.2",
+    "@biomejs/biome": "1.7.3",
     "@tanstack/router-vite-plugin": "^1.31.18",
     "@types/lodash": "^4.17.1",
     "@types/react": "^18.3.1",

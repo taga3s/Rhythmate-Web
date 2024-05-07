@@ -1,4 +1,4 @@
-import * as schemaHelper from "../../Rhythmate-Service/src/pkg/schemaHelper";
+import type * as schemaHelper from "../../Rhythmate-Service/src/pkg/schemaHelper";
 
 export type ListWeeklyReportsResponse = schemaHelper.ResponseData<"/weekly-reports", "get">;
 

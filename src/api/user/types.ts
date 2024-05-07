@@ -1,4 +1,4 @@
-import * as schemaHelper from "../../Rhythmate-Service/src/pkg/schemaHelper";
+import type * as schemaHelper from "../../Rhythmate-Service/src/pkg/schemaHelper";
 
 export type AuthParams = schemaHelper.RequestData<"/users/auth", "post">;
 
