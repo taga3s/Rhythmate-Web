@@ -6,6 +6,7 @@ import { notifyFailed } from "../../../pkg/ui/toast";
 import { Loading } from "../../common/components";
 import { useMutateUser } from "../api/user/hooks/useMutateUser";
 import { LoginBird } from "./LoginBird";
+import { Image } from "@unpic/react";
 
 export const LoginForm = () => {
   const { authMutation } = useMutateUser();
@@ -48,7 +49,7 @@ export const LoginForm = () => {
         className="p-4 mt-10 font-bold text-rhyth-black rounded-md shadow-md border-2 border-rhyth-bg-light-gray cursor-pointer flex justify-center items-center gap-4 hover:bg-rhyth-bg-gray"
         onClick={signInWithGoogle}
       >
-        <img src="/icons/google.png" width={20} height={20} alt="Googleのアイコン" />
+        <Image src="/icons/google.png" width={20} height={20} alt="Googleのアイコン" />
         Googleでサインイン
       </button>
       {isLoading && (

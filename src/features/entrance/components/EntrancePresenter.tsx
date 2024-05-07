@@ -6,9 +6,11 @@ export const EntrancePresenter = () => {
 
   return (
     <div className="py-16 flex flex-col items-center">
-      <img className="w-56 my-4 inline object-center" src="/logo-long.svg" alt="rhythmateのロゴ" />
-      <div>
-        <div className="mt-7 flex gap-4 items-center">
+      <div className="my-4">
+        <Image width={224} height={60} src="/logo-long.svg" alt="rhythmateのロゴ" />
+      </div>
+      <div className="flex flex-col gap-7 mt-7">
+        <div className="flex gap-4 items-center">
           <Image src="/icons/like.png" layout="constrained" width={80} height={80} alt="like icon" />
           <p className="text-sm font-bold text-rhyth-dark-blue">
             Rhythmateで
@@ -18,7 +20,7 @@ export const EntrancePresenter = () => {
             より楽しくしよう
           </p>
         </div>
-        <div className="mt-7 flex gap-4 items-center">
+        <div className="flex gap-4 items-center">
           <Image src="/icons/analysis.png" layout="constrained" width={80} height={80} alt="analysis icon" />
           <p className="text-sm font-bold text-rhyth-dark-blue">
             習慣を可視化して
@@ -26,7 +28,7 @@ export const EntrancePresenter = () => {
             自分を振り返ろう
           </p>
         </div>
-        <div className="mt-7 flex gap-4 items-center">
+        <div className="flex gap-4 items-center">
           <Image src="/icons/shuttle.png" layout="constrained" width={80} height={80} alt="shuttle icon" />
           <p className="text-sm font-bold text-rhyth-dark-blue">
             良い習慣を身に付けて
