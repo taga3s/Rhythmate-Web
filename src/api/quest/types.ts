@@ -24,20 +24,22 @@ export type DeleteQuestResponse = schemaHelper.ResponseData<"/quests/:id", "dele
 
 export type ListQuestsResponse = schemaHelper.ResponseData<"/quests", "get">;
 
-export type StartQuestParams = schemaHelper.RequestData<"/quests/start/:id", "patch">;
+type ImplQuestBase = { id: string };
 
-export type StartQuestRequest = schemaHelper.RequestData<"/quests/start/:id", "patch">;
+export type StartQuestParams = ImplQuestBase;
+
+export type StartQuestRequest = ImplQuestBase;
 
 export type StartQuestResponse = schemaHelper.ResponseData<"/quests/start/:id", "patch">;
 
-export type FinishQuestParams = schemaHelper.RequestData<"/quests/finish/:id", "patch">;
+export type FinishQuestParams = ImplQuestBase;
 
-export type FinishQuestRequest = schemaHelper.RequestData<"/quests/finish/:id", "patch">;
+export type FinishQuestRequest = ImplQuestBase;
 
 export type FinishQuestResponse = schemaHelper.ResponseData<"/quests/finish/:id", "patch">;
 
-export type ForceFinishQuestParams = schemaHelper.RequestData<"/quests/force-finish/:id", "patch">;
+export type ForceFinishQuestParams = ImplQuestBase;
 
-export type ForceFinishQuestRequest = schemaHelper.RequestData<"/quests/force-finish/:id", "patch">;
+export type ForceFinishQuestRequest = ImplQuestBase;
 
 export type ForceFinishQuestResponse = schemaHelper.ResponseData<"/quests/force-finish/:id", "patch">;
