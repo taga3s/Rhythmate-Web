@@ -23,6 +23,6 @@
     "lineWidth": 120
   },
   "files": {
-    "ignore": ["src/routeTree.gen.ts"]
+    "ignore": ["src/routeTree.gen.ts", "src/Rhythmate-Service/*"]
   }
 }
