@@ -29,7 +29,6 @@ export const QuestBoard: FC<Props> = (props) => {
     currentQuest.minutes,
     currentQuest.startedAt,
   );
-
   const [questStatus, setQuestStatus] = useState<QuestStatus>(status);
 
   useInterval(() => {
@@ -42,19 +41,16 @@ export const QuestBoard: FC<Props> = (props) => {
 
     const { diffHH, diffMM, diffSS } = calcDiffTimeBetweenNowAndTargetTime(baseTime);
 
-    if (status === FORCE_STOP && questStatus !== FORCE_STOP) {
+    // クエスト強制終了へ切り替える
+    if (status === FORCE_STOP) {
       setQuestStatus(FORCE_STOP);
     }
     // クエスト解放へ切り替える
-    if (diffHH === diffMM && diffMM === diffSS && questStatus === CLOSED) {
+    if (diffHH === 0 && diffMM === 0 && diffSS === 0 && questStatus === CLOSED) {
       setQuestStatus(OPEN);
     }
-    // クエスト集中へ切り替える
-    if (diffHH === diffMM && diffMM === diffSS && questStatus === OPEN) {
-      setQuestStatus(ENGAGED);
-    }
     // クエスト終了へ切り替える
-    if (diffHH === diffMM && diffMM === diffSS && questStatus === ENGAGED) {
+    if (diffHH === 0 && diffMM === 0 && diffSS === 0 && questStatus === ENGAGED) {
       setQuestStatus(DONE);
     }
   }, 1000);

@@ -11,33 +11,27 @@ type Props = {
   startedAt: string;
 };
 
+const constructTime = (hh: number, mm: number, ss: number) => {
+  return `${String(hh)}時間${String(mm).padStart(2, "0")}分${String(ss).padStart(2, "0")}秒`;
+};
+
 export const QuestBoardTimer: FC<Props> = ({ startsAt, isStarted, minutes, startedAt }) => {
   const { baseTime } = calcBaseTime(startsAt, isStarted, minutes, startedAt);
 
   const { diffHH, diffMM, diffSS } = calcDiffTimeBetweenNowAndTargetTime(baseTime);
 
-  const [hh, setHH] = useState(0 < diffHH ? diffHH : 0);
-  const [mm, setMM] = useState(0 < diffMM ? diffMM : 0);
-  const [ss, setSS] = useState(0 < diffSS ? diffSS : 0);
+  const [time, setTime] = useState(constructTime(diffHH, diffMM, diffSS));
 
   useInterval(() => {
     const { baseTime, status } = calcBaseTime(startsAt, getIsStarted(startedAt), minutes, startedAt);
 
     if (status !== FORCE_STOP) {
       const { diffHH, diffMM, diffSS } = calcDiffTimeBetweenNowAndTargetTime(baseTime);
-      setHH(diffHH);
-      setMM(diffMM);
-      setSS(diffSS);
+      setTime(constructTime(diffHH, diffMM, diffSS));
     } else {
-      setHH(0);
-      setMM(0);
-      setSS(0);
+      setTime(constructTime(0, 0, 0));
     }
   }, 1000);
 
-  return (
-    <span className="text-2xl text-rhyth-light-blue tracking-wider">
-      {String(hh)}時間{String(mm).padStart(2, "0")}分{String(ss).padStart(2, "0")}秒
-    </span>
-  );
+  return <span className="text-2xl text-rhyth-light-blue tracking-wider">{time}</span>;
 };
