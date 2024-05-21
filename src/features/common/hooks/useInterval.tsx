@@ -1,11 +1,9 @@
 import { useEffect } from "react";
 
-const useInterval = (callback: any, delay?: number | null) => {
+const useInterval = (callback: () => void, delay: number) => {
   useEffect(() => {
-    if (delay !== null) {
-      const interval = setInterval(() => callback(), delay || 0);
-      return () => clearInterval(interval);
-    }
+    const interval = setInterval(() => callback(), delay || 0);
+    return () => clearInterval(interval);
   }, [callback, delay]);
 };
 

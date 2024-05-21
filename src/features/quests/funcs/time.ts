@@ -29,7 +29,7 @@ export const calcBaseTime = (
   }
 
   // クエスト解放中前後30分
-  if (!isStarted && beforeDiffMM < 0) {
+  if (!isStarted && -30 <= beforeDiffMM && beforeDiffMM < 0) {
     return {
       baseTime: formatDateTimeWithAddMinutes(startsAt, 15),
       status: OPEN,
