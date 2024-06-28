@@ -1,29 +1,40 @@
 # Rhythmate-Web
 
-ゲーム感覚で習慣化を楽しむ「Rhythmate」のフロントエンドです。  
+ゲーム感覚で習慣化を楽しめるサービス**Rhythmate**のフロントエンドです。  
 バックエンドは[こちら](https://github.com/ayanami77/Rhythmate-Service)
 
 ## アプリ概要
 
-#### 技育CAMPハッカソン2023 vol15努力賞受賞、技育博2024 vol2企業賞受賞
+#### 技育CAMPハッカソン2023 vol15努力賞受賞・技育博2024 vol2企業賞受賞
 
 「習慣化×ゲーム」をコンセプトとし、自分の設定したクエストを達成していくことで習慣化を図ることができるWebアプリケーションです。モバイルファーストでUIの設計をしています。現在は、以下の機能を提供しています。
 
 - クエスト機能
 - 週次レポート機能
-- レベルアップ・バッジ機能
+- ユーザ―レベルアップ機能
+- バッジ収集機能
 
-## 技術スタック
+## 開発期間
+- 2024/02 - 2024/05
 
-- React
-- TypeScript
-- Tailwind CSS
-- Tanstack Router
-- Tanstack Query
-- react-hook-form
-- zod
-- vite
-- biome
+## 主な技術スタック
+
+- 言語
+  - TypeScript
+
+- フレームワーク・ライブラリ
+  - React
+  - Tailwind CSS
+  - Tanstack Router
+  - Tanstack Query
+  - react-hook-form
+  - zod
+
+- PaaS
+  - Vercel
+
+- その他
+  - Biome
 
 ## システム構成
 
