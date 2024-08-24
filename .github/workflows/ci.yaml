@@ -1,4 +1,4 @@
-name: rhythmate-web-ci
+name: CI
 
 on:
   push:
@@ -13,7 +13,6 @@ jobs:
     strategy:
       matrix:
         node-version: [20.x]
-        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
     steps:
       - uses: actions/checkout@v4
