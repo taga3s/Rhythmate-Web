@@ -1,7 +1,7 @@
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { createFactory } from "../../../../../api/weeklyReport/factory";
 import type { WeeklyReport } from "../../../../../api/weeklyReport/model";
-import type { FetchError } from "../../../../../pkg/api/util/fetchError";
+import type { FetchError } from "../../../../../api/util/fetchError";
 
 export const useQueryWeeklyReports = () => {
   const weeklyReportFactory = createFactory();

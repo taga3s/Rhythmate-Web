@@ -1,4 +1,4 @@
-import { convertUTCtoJST } from "../../pkg/util/dayjs";
+import { convertUTCtoJST } from "../../utils/dayjs";
 
 export type WeeklyReport = {
   id: string;

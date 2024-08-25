@@ -2,7 +2,7 @@ import { FirebaseError } from "firebase/app";
 import { GoogleAuthProvider, getAuth, signInWithPopup } from "firebase/auth";
 import { useState } from "react";
 import "../../../firebase/config";
-import { notifyFailed } from "../../../pkg/ui/toast";
+import { notifyFailed } from "../../../utils/toast";
 import { Loading } from "../../common/components";
 import { useMutateUser } from "../api/user/hooks/useMutateUser";
 import { LoginBird } from "./LoginBird";

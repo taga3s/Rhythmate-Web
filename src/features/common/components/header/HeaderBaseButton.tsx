@@ -1,9 +1,5 @@
 import type { FC } from "react";
-import { BadgeIcon } from "../icons/header/BadgeIcon";
-import { BellIcon } from "../icons/header/BellIcon";
-import { RankingIcon } from "../icons/header/RankingIcon";
-import { SearchIcon } from "../icons/header/SearchIcon";
-import { TagIcon } from "../icons/header/TagIcon";
+import { BadgeIcon, BellIcon, RankingIcon, SearchIcon, TagIcon } from "../icons/header";
 
 type Icon = "Bell" | "Tag" | "Search" | "Badge" | "Ranking";
 
