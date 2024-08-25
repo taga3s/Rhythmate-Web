@@ -1,6 +1,6 @@
 import { createLazyFileRoute } from "@tanstack/react-router";
-import { Header, Loading, LoadingContainer, Menu } from "../../../features/common/components";
-import { ContentLayout } from "../../../features/common/components/layouts/ContentLayout";
+import { Loading, LoadingContainer } from "../../../features/common/components";
+import { AppLayout } from "../../../features/common/components/layouts/AppLayout";
 import { TagsPresenter } from "../../../features/manage/tags/components/TagsPresenter";
 import { Suspense } from "react";
 
@@ -10,20 +10,16 @@ export const Route = createLazyFileRoute("/manage/tags/")({
 
 const Tags = () => {
   return (
-    <>
-      <Header />
-      <ContentLayout>
-        <Suspense
-          fallback={
-            <LoadingContainer>
-              <Loading />
-            </LoadingContainer>
-          }
-        >
-          <TagsPresenter />
-        </Suspense>
-      </ContentLayout>
-      <Menu />
-    </>
+    <AppLayout>
+      <Suspense
+        fallback={
+          <LoadingContainer>
+            <Loading />
+          </LoadingContainer>
+        }
+      >
+        <TagsPresenter />
+      </Suspense>
+    </AppLayout>
   );
 };

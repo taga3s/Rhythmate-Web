@@ -1,5 +1,5 @@
 import { createLazyFileRoute } from "@tanstack/react-router";
-import { ContentLayout, Header, Loading, LoadingContainer, Menu } from "../../../features/common/components";
+import { AppLayout, Loading, LoadingContainer, Menu } from "../../../features/common/components";
 import { NewPresenter } from "../../../features/manage/new/components/NewPresenter";
 import { Suspense } from "react";
 
@@ -10,8 +10,7 @@ export const Route = createLazyFileRoute("/manage/new/")({
 const New = () => {
   return (
     <>
-      <Header />
-      <ContentLayout>
+      <AppLayout>
         <Suspense
           fallback={
             <LoadingContainer>
@@ -21,7 +20,7 @@ const New = () => {
         >
           <NewPresenter />
         </Suspense>
-      </ContentLayout>
+      </AppLayout>
       <Menu />
     </>
   );

@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { z } from "zod";
-import { ContentLayout, Header, Loading, LoadingContainer, Menu } from "../../../features/common/components";
+import { AppLayout, Loading, LoadingContainer } from "../../../features/common/components";
 import { EditPresenter } from "../../../features/manage/edit/components/EditPresenter";
 import { Suspense } from "react";
 
@@ -16,20 +16,16 @@ export const Route = createFileRoute("/manage/edit/")({
 const Edit = () => {
   const { quest_id } = Route.useSearch();
   return (
-    <>
-      <Header />
-      <ContentLayout>
-        <Suspense
-          fallback={
-            <LoadingContainer>
-              <Loading />
-            </LoadingContainer>
-          }
-        >
-          <EditPresenter quest_id={quest_id} />
-        </Suspense>
-      </ContentLayout>
-      <Menu />
-    </>
+    <AppLayout>
+      <Suspense
+        fallback={
+          <LoadingContainer>
+            <Loading />
+          </LoadingContainer>
+        }
+      >
+        <EditPresenter quest_id={quest_id} />
+      </Suspense>
+    </AppLayout>
   );
 };

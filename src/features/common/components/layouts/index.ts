@@ -1,2 +1,2 @@
-export * from "./ContentLayout";
-export * from "./CopyrightLayout";
+export * from "./AppLayout";
+export * from "./BeforeLoginLayout";

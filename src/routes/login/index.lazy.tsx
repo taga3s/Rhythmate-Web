@@ -1,5 +1,5 @@
 import { createLazyFileRoute } from "@tanstack/react-router";
-import { CopyrightLayout } from "../../features/common/components/layouts";
+import { BeforeLoginLayout } from "../../features/common/components/layouts";
 import { LoginPresenter } from "../../features/login/components/LoginPresenter";
 
 export const Route = createLazyFileRoute("/login/")({
@@ -8,8 +8,8 @@ export const Route = createLazyFileRoute("/login/")({
 
 const Login = () => {
   return (
-    <CopyrightLayout>
+    <BeforeLoginLayout>
       <LoginPresenter />
-    </CopyrightLayout>
+    </BeforeLoginLayout>
   );
 };
