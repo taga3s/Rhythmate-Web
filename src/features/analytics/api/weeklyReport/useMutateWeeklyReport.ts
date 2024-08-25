@@ -32,7 +32,7 @@ export const useMutateWeeklyReport = () => {
       notifyWithToast({ status: "success", msg: "フィードバックを生成しました。" });
     },
     onError: (err: FetchError) => {
-      notifyWithToast({ status: "error", msg: "処理に失敗しました。" });
+      notifyWithToast({ status: "error", msg: "処理に失敗しました。時間を空けて再度お試しください。" });
       console.log(err);
     },
   });

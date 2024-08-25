@@ -29,7 +29,7 @@ export const useMutateUser = () => {
       notifyWithToast({ status: "success", msg: "ユーザー情報を更新しました。" });
     },
     onError: (err: FetchError) => {
-      notifyWithToast({ status: "error", msg: "処理に失敗しました。" });
+      notifyWithToast({ status: "error", msg: "処理に失敗しました。時間を空けて再度お試しください。" });
       console.log(err);
     },
   });
@@ -40,7 +40,7 @@ export const useMutateUser = () => {
       navigate({ to: "/" });
     },
     onError: (err: FetchError) => {
-      notifyWithToast({ status: "error", msg: "処理に失敗しました。" });
+      notifyWithToast({ status: "error", msg: "処理に失敗しました。時間を空けて再度お試しください。" });
       console.log(err);
     },
   });
@@ -51,7 +51,7 @@ export const useMutateUser = () => {
       navigate({ to: "/" });
     },
     onError: (err: FetchError) => {
-      notifyWithToast({ status: "error", msg: "処理に失敗しました。" });
+      notifyWithToast({ status: "error", msg: "処理に失敗しました。時間を空けて再度お試しください。" });
       console.log(err);
     },
   });
