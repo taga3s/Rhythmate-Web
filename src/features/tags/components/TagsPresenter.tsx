@@ -1,9 +1,9 @@
 import { useNavigate } from "@tanstack/react-router";
 import { useState } from "react";
-import { BackButton } from "../../../common/components/BackButton";
-import { ConfirmModal } from "../../../common/components/ConfirmModal";
-import { useMutateTag } from "../api/tag/hooks/useMutateTag";
-import { useQueryTagList } from "../api/tag/hooks/useQueryTag";
+import { BackButton } from "../../common/components/BackButton";
+import { ConfirmModal } from "../../common/components/ConfirmModal";
+import { useMutateTag } from "../api/tag/useMutateTag";
+import { useQueryTagList } from "../api/tag/useQueryTag";
 import { TagsEditModal } from "./TagsEditModal";
 import { TagsItem } from "./TagsItem";
 import { TagsNewButton } from "./TagsNewButton";

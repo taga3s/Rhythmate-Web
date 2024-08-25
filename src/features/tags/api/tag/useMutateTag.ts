@@ -1,10 +1,10 @@
 import { useMutation } from "@tanstack/react-query";
-import { createFactory } from "../../../../../../api/tag/factory";
-import type { Tag } from "../../../../../../api/tag/model";
-import type { CreateTagParams, UpdateTagParams } from "../../../../../../api/tag/type";
-import { queryClient } from "../../../../../../api/client/queryClient";
-import type { FetchError } from "../../../../../../api/util/fetchError";
-import { notifyWithToast } from "../../../../../../utils/toast";
+import { createFactory } from "../../../../api/tag/factory";
+import type { Tag } from "../../../../api/tag/model";
+import type { CreateTagParams, UpdateTagParams } from "../../../../api/tag/type";
+import { queryClient } from "../../../../api/client/queryClient";
+import type { FetchError } from "../../../../api/util/fetchError";
+import { notifyWithToast } from "../../../../utils/toast";
 
 export const useMutateTag = () => {
   const tagFactory = createFactory();

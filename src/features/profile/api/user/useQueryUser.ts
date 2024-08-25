@@ -1,7 +1,7 @@
 import { useSuspenseQuery } from "@tanstack/react-query";
-import { createFactory } from "../../../../../api/user/factory";
-import type { User } from "../../../../../api/user/model";
-import type { FetchError } from "../../../../../api/util/fetchError";
+import { createFactory } from "../../../../api/user/factory";
+import type { User } from "../../../../api/user/model";
+import type { FetchError } from "../../../../api/util/fetchError";
 
 export const useQueryLoginUser = () => {
   const userFactory = createFactory();

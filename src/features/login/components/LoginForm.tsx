@@ -4,7 +4,7 @@ import { useState } from "react";
 import "../../../firebase/config";
 import { notifyFailed } from "../../../utils/toast";
 import { Loading } from "../../common/components";
-import { useMutateUser } from "../api/user/hooks/useMutateUser";
+import { useMutateUser } from "../api/user/useMutateUser";
 import { LoginBird } from "./LoginBird";
 import { Image } from "@unpic/react";
 

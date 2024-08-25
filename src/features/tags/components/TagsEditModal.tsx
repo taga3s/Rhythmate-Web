@@ -1,16 +1,18 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import type { FC } from "react";
 import { useForm } from "react-hook-form";
-import { FormErrorMsg } from "../../../common/components";
-import { ModalBase } from "../../../common/components/modal/ModalBase";
-import { ModalHeaderCloseButton } from "../../../common/components/modal/ModalHeaderCloseButton";
-import { useMutateTag } from "../api/tag/hooks/useMutateTag";
-import { type TTagValidationSchema, tagValidationSchema } from "../common/libs/validation";
+import { FormErrorMsg } from "../../common/components";
+import { ModalBase } from "../../common/components/modal/ModalBase";
+import { ModalHeaderCloseButton } from "../../common/components/modal/ModalHeaderCloseButton";
+import { useMutateTag } from "../api/tag/useMutateTag";
+import { useQueryTagList } from "../api/tag/useQueryTag";
+import { type TTagValidationSchema, tagValidationSchema } from "../libs/validation";
 import { TagsColorDropdown } from "./TagsColorDropdown";
 
 type Props = {
   modalType: string;
   closeModal: () => void;
+  tagId: string;
 };
 
 type NewValues = {
@@ -18,8 +20,11 @@ type NewValues = {
   color: string;
 };
 
-export const TagsNewModal: FC<Props> = ({ modalType, closeModal }) => {
-  const { createTagMutation } = useMutateTag();
+export const TagsEditModal: FC<Props> = ({ modalType, closeModal, tagId }) => {
+  const { updateTagMutation } = useMutateTag();
+  const { data: tagListData } = useQueryTagList();
+
+  const targetTag = tagListData?.find((v) => v.id === tagId);
 
   const {
     register,
@@ -29,10 +34,14 @@ export const TagsNewModal: FC<Props> = ({ modalType, closeModal }) => {
   } = useForm<TTagValidationSchema>({
     mode: "onBlur",
     resolver: zodResolver(tagValidationSchema),
+    defaultValues: {
+      color: targetTag?.color ?? "",
+    },
   });
 
   const onSubmit = async (data: NewValues) => {
-    await createTagMutation.mutateAsync({
+    await updateTagMutation.mutateAsync({
+      id: tagId,
       name: data.name,
       color: data.color,
     });
@@ -42,10 +51,12 @@ export const TagsNewModal: FC<Props> = ({ modalType, closeModal }) => {
   return (
     <ModalBase onClickClose={closeModal}>
       <div className="order relative bg-white rounded-lg shadow">
+        {/* <!-- Modal header --> */}
         <div className="flex items-center justify-between p-4 md:p-4 rounded-t border-b">
           <h3 className="font-cp-font text-xl font-bold text-rhyth-dark-blue">{modalType}</h3>
           <ModalHeaderCloseButton onClickClose={closeModal} />
         </div>
+        {/* <!-- Modal body --> */}
         <div className="p-4 md:p-4">
           <form className="space-y-3" onSubmit={handleSubmit(onSubmit)}>
             <div className="flex items-center justify-between">
@@ -66,6 +77,7 @@ export const TagsNewModal: FC<Props> = ({ modalType, closeModal }) => {
               <input
                 id="tag-name"
                 type="text"
+                defaultValue={targetTag?.name}
                 className="bg-white border border-rhyth-light-gray text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-1/2 p-2"
                 placeholder="例) 家事"
                 required
@@ -73,7 +85,7 @@ export const TagsNewModal: FC<Props> = ({ modalType, closeModal }) => {
               />
             </div>
             {errors.name && <FormErrorMsg msg={errors.name.message} />}
-            <div className="flex items-center justify-between">
+            <div className="flex items-start justify-between">
               <label className="flex gap-2 mb-2 text-sm font-bold text-rhyth-dark-blue my-2" htmlFor="tag-color">
                 <svg
                   className="w-6 h-6 text-rhyth-gray"
@@ -90,12 +102,12 @@ export const TagsNewModal: FC<Props> = ({ modalType, closeModal }) => {
               </label>
               <TagsColorDropdown register={register} watch={watch} />
             </div>
+            {errors.color && <FormErrorMsg msg={errors.color.message} />}
             <button
               type="submit"
-              className="w-full text-white bg-rhyth-light-blue hover:bg-rhyth-blue disabled:bg-rhyth-light-gray font-medium rounded-lg text-sm px-5 py-2.5 text-center shadow-md"
-              disabled={createTagMutation.isPending}
+              className="w-full text-white bg-rhyth-blue hover:bg-rhyth-hover-blue font-medium rounded-lg text-sm px-5 py-2.5 text-center shadow-md"
             >
-              作成する
+              決定する
             </button>
           </form>
         </div>

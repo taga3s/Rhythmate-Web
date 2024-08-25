@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useQueryLoginUser } from "../api/user/hooks/useQueryUser";
+import { useQueryLoginUser } from "../api/user/useQueryUser";
 import { ProfileCard } from "./ProfileCard";
 import { ProfileExpCard } from "./ProfileExpCard";
 import { ProfileLogoutModal } from "./ProfileLogoutModal";
