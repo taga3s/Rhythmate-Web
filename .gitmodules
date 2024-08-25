@@ -1,3 +1,3 @@
-[submodule "src/Rhythmate-Service"]
-	path = src/Rhythmate-Service
-	url = https://github.com/ayanami77/Rhythmate-Service.git
+[submodule "submodules/service"]
+	path = submodules/service
+	url = https://github.com/taga3s/Rhythmate-Service.git
