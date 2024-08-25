@@ -1,5 +1,5 @@
 import { createLazyFileRoute } from "@tanstack/react-router";
-import { ContentLayout, Header, Loading, LoadingContainer, Menu } from "../../../features/common/components";
+import { AppLayout, Loading, LoadingContainer } from "../../../features/common/components";
 import { SettingsPresenter } from "../../../features/profile/settings/components/SettingsPresenter";
 import { Suspense } from "react";
 
@@ -9,20 +9,16 @@ export const Route = createLazyFileRoute("/profile/settings/")({
 
 const Profile = () => {
   return (
-    <>
-      <Header />
-      <ContentLayout>
-        <Suspense
-          fallback={
-            <LoadingContainer>
-              <Loading />
-            </LoadingContainer>
-          }
-        >
-          <SettingsPresenter />
-        </Suspense>
-      </ContentLayout>
-      <Menu />
-    </>
+    <AppLayout>
+      <Suspense
+        fallback={
+          <LoadingContainer>
+            <Loading />
+          </LoadingContainer>
+        }
+      >
+        <SettingsPresenter />
+      </Suspense>
+    </AppLayout>
   );
 };

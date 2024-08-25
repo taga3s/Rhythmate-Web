@@ -4,7 +4,7 @@ type Props = {
   children: ReactNode;
 };
 
-export const CopyrightLayout: FC<Props> = ({ children }) => {
+export const BeforeLoginLayout: FC<Props> = ({ children }) => {
   return (
     <div className="h-screen relative">
       {children}

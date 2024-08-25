@@ -118,7 +118,7 @@ export const ManagePresenter = () => {
               fill="none"
               viewBox="0 0 24 24"
             >
-              \<title>rhythmate close icon</title>
+              <title>rhythmate close icon</title>
               <path
                 stroke="currentColor"
                 strokeLinecap="round"
