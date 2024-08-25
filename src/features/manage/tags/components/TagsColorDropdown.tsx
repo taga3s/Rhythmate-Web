@@ -1,7 +1,7 @@
 import type { FC } from "react";
 import type { UseFormRegister, UseFormWatch } from "react-hook-form";
 import { selectTagColorText } from "../../common/funcs";
-import type { TTagValidationSchema } from "../common/libs/validation";
+import type { TTagValidationSchema } from "../libs/validation";
 import { TagsColorItem } from "./TagsColorItem";
 
 type Props = {

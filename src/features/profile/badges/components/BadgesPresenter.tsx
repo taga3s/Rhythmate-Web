@@ -1,6 +1,6 @@
 import { useNavigate } from "@tanstack/react-router";
 import { BackButton } from "../../../common/components/BackButton";
-import { useQueryBadgeList } from "../api/badge/hooks/useQueryBadge";
+import { useQueryBadgeList } from "../api/badge/useQueryBadge";
 import { BadgeCard } from "./BadgeCard";
 
 export const BadgesPresenter = () => {
