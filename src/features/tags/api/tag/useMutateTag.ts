@@ -21,7 +21,7 @@ export const useMutateTag = () => {
       notifyWithToast({ status: "success", msg: "タグを作成しました。" });
     },
     onError: (err: FetchError) => {
-      notifyWithToast({ status: "error", msg: "処理に失敗しました。" });
+      notifyWithToast({ status: "error", msg: "処理に失敗しました。時間を空けて再度お試しください。" });
       console.log(err);
     },
   });
@@ -41,7 +41,7 @@ export const useMutateTag = () => {
       notifyWithToast({ status: "success", msg: "タグを更新しました。" });
     },
     onError: (err: FetchError) => {
-      notifyWithToast({ status: "error", msg: "処理に失敗しました。" });
+      notifyWithToast({ status: "error", msg: "処理に失敗しました。時間を空けて再度お試しください。" });
       console.log(err);
     },
   });
@@ -61,7 +61,7 @@ export const useMutateTag = () => {
       notifyWithToast({ status: "success", msg: "タグを削除しました。" });
     },
     onError: (err: FetchError) => {
-      notifyWithToast({ status: "error", msg: "処理に失敗しました。" });
+      notifyWithToast({ status: "error", msg: "処理に失敗しました。時間を空けて再度お試しください。" });
       console.log(err);
     },
   });
