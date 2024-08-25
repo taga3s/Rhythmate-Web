@@ -15,7 +15,7 @@ export const Menu = () => {
   };
 
   return (
-    <nav className="fixed bottom-0 left-0 z-50 w-full h-16 bg-rhyth-bg-gray border-t-2 border-light-gray">
+    <nav className="fixed bottom-0 left-0 z-50 w-full bg-rhyth-bg-gray border-t-2 border-light-gray">
       <ul className="grid grid-cols-4 max-w-lg h-full mx-auto font-medium">
         <MenuButton
           name="今日のクエスト"
