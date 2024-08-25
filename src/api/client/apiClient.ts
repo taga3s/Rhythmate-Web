@@ -1,6 +1,5 @@
 import { FetchError } from "../util/fetchError";
 import { toJSONFormat } from "../util/toJSONFormat";
-
 const baseURL: string =
   import.meta.env.VITE_API_MOCKING === "enabled"
     ? import.meta.env.VITE_API_MOCK_ENDPOINT

@@ -3,7 +3,7 @@ import { useNavigate } from "@tanstack/react-router";
 import { type FC, useState } from "react";
 import { useForm } from "react-hook-form";
 import type { Day, Difficulty } from "../../../../api/quest/types";
-import { formatDateTimeOnlyTime } from "../../../../pkg/util/dayjs";
+import { formatDateTimeOnlyTime } from "../../../../utils/dayjs";
 import { ConfirmModal, FormErrorMsg } from "../../../common/components";
 import { BackButton } from "../../../common/components/BackButton";
 import { useQueryQuestList } from "../../../quests/api/quest/hooks/useQueryQuest";

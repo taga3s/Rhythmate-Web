@@ -10,7 +10,7 @@ import { ManageQuestCard } from "./ManageQuestCard";
 import { ManageQuestSearchModal } from "./ManageQuestSearchModal,";
 import { ManageTimetable } from "./ManageTimetable";
 import type { Tag } from "../../../api/tag/model";
-import { getTodayEn } from "../../../pkg/util/dayjs";
+import { getTodayEn } from "../../../utils/dayjs";
 
 type QuestWithTag = Quest & {
   tagName: string | undefined;

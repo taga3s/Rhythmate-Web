@@ -3,9 +3,9 @@ import { useNavigate } from "@tanstack/react-router";
 import { createFactory } from "../../../../../api/user/factory";
 import type { User } from "../../../../../api/user/model";
 import type { UpdateLoginUserParams } from "../../../../../api/user/types";
-import { queryClient } from "../../../../../pkg/api/client/queryClient";
-import type { FetchError } from "../../../../../pkg/api/util/fetchError";
-import { notifyWithToast } from "../../../../../pkg/ui/toast";
+import { queryClient } from "../../../../../api/client/queryClient";
+import type { FetchError } from "../../../../../api/util/fetchError";
+import { notifyWithToast } from "../../../../../utils/toast";
 
 export const useMutateUser = () => {
   const userFactory = createFactory();
