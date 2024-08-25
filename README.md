@@ -27,11 +27,14 @@
   - react-hook-form
   - zod
 
+- ツール
+  - biome
+
 - PaaS
   - Vercel
 
 - その他
-  - Biome
+  - git submodule
 
 ## システム構成
 
@@ -53,10 +56,15 @@ $ corepack enable pnpm
 $ pnpm i
 ```
 
-3. `.env.example`をコピーして`.env`配置する。
+3. `.env.example`をコピーして`.env`配置する。（値は管理人に尋ねること。）
 
 ```
 cp .env.example .env
+```
+
+4. git submoduleと連携する。また、特定のディレクトリやファイルのみを取得したい場合は、`sparse-checkout`の設定を行ってください。（[参考](https://leico.github.io/TechnicalNote/Git/sparse-checkout-submodule)）
+```
+$ git submodule update --init
 ```
 
 ### Reactを起動する。
