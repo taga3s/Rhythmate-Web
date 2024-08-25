@@ -1,4 +1,4 @@
-import { apiClient } from "../../pkg/api/client/apiClient";
+import { apiClient } from "../../api/client/apiClient";
 import type { GenerateFeedBackRequest, GenerateFeedBackResponse, ListWeeklyReportsResponse } from "./types";
 
 export interface WeeklyReportsRepository {

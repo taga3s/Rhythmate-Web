@@ -5,7 +5,7 @@ import { ClockIcon } from "../../common/components/icons/ClockIcon";
 import { calcExp } from "../../common/funcs/calcExp";
 import { convertEnToJPWeekday } from "../common/funcs";
 import { ManageProgressBar } from "./ManageProgressBar";
-import { formatDateTimeOnlyTime } from "../../../pkg/util/dayjs";
+import { formatDateTimeOnlyTime } from "../../../utils/dayjs";
 
 const convertENToJPWeekdayString = (weekDays: Day[]) => {
   const result = weekDays.map((day) => convertEnToJPWeekday(day)).join("・");

@@ -2,7 +2,7 @@ import { type FC, useState, type Dispatch, type SetStateAction } from "react";
 import type { Quest } from "../../../api/quest/model";
 import { ConfirmModal } from "../../common/components";
 import useInterval from "../../common/hooks/useInterval";
-import { useMutateQuest } from "../api/quest/hooks/useMutateQuest";
+import { useMutateQuest } from "../api/quest/useMutateQuest";
 import { CLOSED, DONE, ENGAGED, FORCE_STOP, NOT_STARTED_YET, OPEN, type QuestStatus } from "../constant/constant";
 import { calcBaseTime, calcDiffTimeBetweenNowAndTargetTime } from "../funcs/time";
 import { QuestBoardTimer } from "./QuestBoardTimer";

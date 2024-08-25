@@ -1,5 +1,5 @@
 import { NOT_STARTED_YET } from "../../features/quests/constant/constant";
-import { convertUTCtoJST, formatDate, formatDateTime, now } from "../../pkg/util/dayjs";
+import { convertUTCtoJST, formatDate, formatDateTime, now } from "../../utils/dayjs";
 import type { Day, Difficulty, QuestState } from "./types";
 
 export type Quest = {

@@ -1,5 +1,5 @@
 import type { FC } from "react";
-import { useQueryBadgeList } from "../badges/api/badge/hooks/useQueryBadge";
+import { useQueryBadgeList } from "../badges/api/badge/useQueryBadge";
 import { Badge } from "../badges/components/badge/Badge";
 
 type Props = {
