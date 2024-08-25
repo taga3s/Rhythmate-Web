@@ -3,7 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-	"packageManager": "pnpm@9.6.0",
+  "packageManager": "pnpm@9.6.0",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
@@ -17,8 +17,8 @@
   "dependencies": {
     "@hookform/resolvers": "^3.3.4",
     "@tanstack/react-query": "^5.36.0",
-    "@tanstack/react-router": "^1.32.0",
-    "@tanstack/router-devtools": "^1.32.0",
+    "@tanstack/react-router": "^1.50.0",
+    "@tanstack/router-devtools": "^1.50.0",
     "@unpic/react": "^0.1.14",
     "chart.js": "^4.4.2",
     "dayjs": "^1.11.11",
@@ -31,8 +31,8 @@
     "react-hook-form": "^7.51.4",
     "react-hot-toast": "^2.4.1",
     "react-image-crop": "^11.0.5",
-    "type-fest": "^4.18.2",
     "react-use": "^17.5.0",
+    "type-fest": "^4.18.2",
     "zod": "^3.23.8"
   },
   "devDependencies": {
@@ -52,7 +52,7 @@
     "tailwindcss": "^3.4.3",
     "typescript": "^5.2.2",
     "vite": "^5.2.11",
-    "vite-plugin-pwa": "^0.20.0"
+    "vite-plugin-pwa": "^0.20.1"
   },
   "lint-staged": {
     "*.{ts,tsx}": "biome format --write ./src"

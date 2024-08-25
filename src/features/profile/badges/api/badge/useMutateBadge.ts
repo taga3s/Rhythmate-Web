@@ -24,7 +24,7 @@ export const useMutateBadge = () => {
       notifyWithToast({ status: "success", msg: "新しいバッジを取得しました。" });
     },
     onError: (err: FetchError) => {
-      notifyWithToast({ status: "error", msg: "処理に失敗しました。" });
+      notifyWithToast({ status: "error", msg: "処理に失敗しました。時間を空けて再度お試しください。" });
       console.log(err);
     },
   });
@@ -44,7 +44,7 @@ export const useMutateBadge = () => {
       notifyWithToast({ status: "success", msg: "バッジをピン留めしました。" });
     },
     onError: (err: FetchError) => {
-      notifyWithToast({ status: "error", msg: "処理に失敗しました。" });
+      notifyWithToast({ status: "error", msg: "処理に失敗しました。時間を空けて再度お試しください。" });
       console.log(err);
     },
   });
@@ -64,7 +64,7 @@ export const useMutateBadge = () => {
       notifyWithToast({ status: "success", msg: "バッジのピン留めを解除しました。" });
     },
     onError: (err: FetchError) => {
-      notifyWithToast({ status: "error", msg: "処理に失敗しました。" });
+      notifyWithToast({ status: "error", msg: "処理に失敗しました。時間を空けて再度お試しください。" });
       console.log(err);
     },
   });

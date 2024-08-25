@@ -5,16 +5,9 @@ import type { FinishQuestParams, ForceFinishQuestParams, StartQuestParams } from
 import { queryClient } from "../../../../api/client/queryClient";
 import type { FetchError } from "../../../../api/util/fetchError";
 import { notifyWithToast } from "../../../../utils/toast";
-import { useQueryWeeklyReports } from "../../../analytics/api/weeklyReport/useQueryWeeklyReport";
-import { useQueryLoginUser } from "../../../profile/api/user/useQueryUser";
-import { useQueryBadgeList } from "../../../profile/badges/api/badge/useQueryBadge";
 
 export const useMutateQuest = () => {
   const questFactory = createFactory();
-
-  const { refetch: refetchLoginUser } = useQueryLoginUser();
-  const { refetch: refetchWeeklyReports } = useQueryWeeklyReports();
-  const { refetch: refetchBadgeList } = useQueryBadgeList();
 
   const startQuestMutation = useMutation({
     mutationFn: async (params: StartQuestParams) => {
@@ -31,7 +24,7 @@ export const useMutateQuest = () => {
       notifyWithToast({ status: "success", msg: "クエストを開始しました。" });
     },
     onError: (err: FetchError) => {
-      notifyWithToast({ status: "error", msg: "処理に失敗しました。" });
+      notifyWithToast({ status: "error", msg: "処理に失敗しました。時間を空けて再度お試しください。" });
       console.log(err);
     },
   });
@@ -48,14 +41,13 @@ export const useMutateQuest = () => {
           questList.map((quest) => (quest.id === data.id ? data : quest)),
         );
       }
-      // 一緒に再取得してしまう
-      refetchLoginUser();
-      refetchWeeklyReports();
-      refetchBadgeList();
+      // refetch all queries to sync data
+      queryClient.refetchQueries({});
+
       notifyWithToast({ status: "success", msg: "クエストを終了しました。" });
     },
     onError: (err: FetchError) => {
-      notifyWithToast({ status: "error", msg: "処理に失敗しました。" });
+      notifyWithToast({ status: "error", msg: "処理に失敗しました。時間を空けて再度お試しください。" });
       console.log(err);
     },
   });
@@ -72,14 +64,13 @@ export const useMutateQuest = () => {
           questList.map((quest) => (quest.id === data.id ? data : quest)),
         );
       }
-      // 一緒に再取得してしまう
-      refetchLoginUser();
-      refetchWeeklyReports();
-      refetchBadgeList();
+      // refetch all queries to sync data
+      queryClient.refetchQueries({});
+
       notifyWithToast({ status: "success", msg: "クエストを強制終了しました。" });
     },
     onError: (err: FetchError) => {
-      notifyWithToast({ status: "error", msg: "処理に失敗しました。" });
+      notifyWithToast({ status: "error", msg: "処理に失敗しました。時間を空けて再度お試しください。" });
       console.log(err);
     },
   });
