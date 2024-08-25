@@ -16,7 +16,7 @@ jobs:
           submodules: true
       - name: Update submodule
         run: |
-          git submodule update --remote ./src/Rhythmate-Service/
+          git submodule update --remote submodules/service/
       - name: Git commit
         run: |
           git config --local user.name "github-actions"
