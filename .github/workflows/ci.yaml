@@ -1,7 +1,10 @@
-name: rhythmate-web-ci
+name: CI
 
 on:
   push:
+
+env:
+  PNPM_VERSION: 9.6.0
 
 jobs:
   ci:
@@ -10,7 +13,6 @@ jobs:
     strategy:
       matrix:
         node-version: [20.x]
-        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
     steps:
       - uses: actions/checkout@v4
@@ -18,7 +20,7 @@ jobs:
       - name: Set up Node.js ${{ matrix.node-version }}
         uses: pnpm/action-setup@v2
         with:
-          version: 9.0.4
+          version: ${{ env.PNPM_VERSION }}
 
       - name: Install dependencies
         run: pnpm i --frozen-lockfile

@@ -1,7 +1,7 @@
 # Rhythmate-Web
 
 ゲーム感覚で習慣化を楽しめるサービス**Rhythmate**のフロントエンドです。  
-バックエンドは[こちら](https://github.com/ayanami77/Rhythmate-Service)
+バックエンドは[こちらから](https://github.com/taga3s/Rhythmate-Service)
 
 ## アプリ概要
 
@@ -13,9 +13,6 @@
 - 週次レポート機能
 - ユーザ―レベルアップ機能
 - バッジ収集機能
-
-## 開発期間
-- 2024/02 - 2024/05
 
 ## 主な技術スタック
 
@@ -38,7 +35,7 @@
 
 ## システム構成
 
-![システム構成図](/docs/system-architecture.png)
+![システム構成図](/docs/images/system-architecture.png)
 
 ## 環境構築
 
@@ -62,19 +59,19 @@ $ pnpm i
 cp .env.example .env
 ```
 
-### React を起動する。
+### Reactを起動する。
 
 ```
 $ pnpm run dev
 ```
 
-### formatterをかける。
+### Formatterをかける。
 
 ```
 $ pnpm run format
 ```
 
-### linterをかける。
+### Linterをかける。
 
 ```
 $ pnpm run lint
