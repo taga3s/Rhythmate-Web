@@ -35,7 +35,7 @@ export const BadgeCard: FC<Props> = (props) => {
               <button
                 type="button"
                 className="w-30 px-4 py-2 text-white bg-rhyth-red rounded-lg"
-                onClick={() => unpinBadgeMutation.mutate({ badgeId: id })}
+                onClick={() => unpinBadgeMutation.mutate({ badge_id: id })}
               >
                 ピン留め解除
               </button>
@@ -43,7 +43,7 @@ export const BadgeCard: FC<Props> = (props) => {
               <button
                 type="button"
                 className="w-30 px-4 py-2 text-white bg-rhyth-light-blue rounded-lg"
-                onClick={() => pinBadgeMutation.mutate({ badgeId: id })}
+                onClick={() => pinBadgeMutation.mutate({ badge_id: id })}
               >
                 ピン留め
               </button>
@@ -52,7 +52,7 @@ export const BadgeCard: FC<Props> = (props) => {
             <button
               type="button"
               className={`w-30 px-4 py-2 text-white rounded-lg ${unlockable ? "bg-rhyth-blue" : "bg-rhyth-light-gray"}`}
-              onClick={() => achieveBadgeMutation.mutate({ badgeId: id })}
+              onClick={() => achieveBadgeMutation.mutate({ badge_id: id })}
               disabled={!unlockable}
             >
               {unlockable ? "解放する" : "未開放"}
