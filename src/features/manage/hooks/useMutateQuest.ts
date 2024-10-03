@@ -1,10 +1,10 @@
 import { useMutation } from "@tanstack/react-query";
-import { createFactory } from "../../../../api/quest/factory";
-import type { Quest } from "../../../../api/quest/model";
-import type { CreateQuestParams, DeleteQuestParams, UpdateQuestParams } from "../../../../api/quest/types";
-import { queryClient } from "../../../../api/client/queryClient";
-import type { FetchError } from "../../../../api/util/fetchError";
-import { notifyWithToast } from "../../../../utils/toast";
+import { createFactory } from "../../../api/quest/factory";
+import type { Quest } from "../../../api/quest/model";
+import type { CreateQuestParams, DeleteQuestParams, UpdateQuestParams } from "../../../api/quest/types";
+import { queryClient } from "../../../api/client/queryClient";
+import type { FetchError } from "../../../api/util/fetchError";
+import { notifyWithToast } from "../../../utils/toast";
 
 export const useMutateQuest = () => {
   const questFactory = createFactory();

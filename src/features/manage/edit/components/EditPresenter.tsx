@@ -7,12 +7,12 @@ import { formatDateTimeOnlyTime } from "../../../../utils/dayjs";
 import { ConfirmModal, FormErrorMsg } from "../../../common/components";
 import { BackButton } from "../../../common/components/BackButton";
 import { useQueryQuestList } from "../../../quests/hooks/useQueryQuest";
-import { useMutateQuest } from "../../api/quest/useMutateQuest";
+import { useMutateQuest } from "../../hooks/useMutateQuest";
 import { DayOfTheWeek } from "../../common/components/DayOfTheWeek";
 import { Star } from "../../common/components/Star";
-import { DAYS } from "../../common/constant/constant";
+import { DAYS } from "../../common/consts";
 import { convertEnToJPWeekday } from "../../common/funcs";
-import { type TManageValidationSchema, manageValidationSchema } from "../../common/libs/validation";
+import { type TManageValidationSchema, manageValidationSchema } from "../../common/validation";
 import { EditTagDropdown } from "./EditTagDropdown";
 
 type NewValues = {

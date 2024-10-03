@@ -3,7 +3,7 @@ import { useState } from "react";
 import type { Quest } from "../../../api/quest/model";
 import type { Day, Difficulty } from "../../../api/quest/types";
 import { useSearchModalIsOpen, useSetSearchModalIsOpen } from "../../common/contexts/searchModalIsOpenContext";
-import { useQueryQuestList } from "../api/quest/useQueryQuest";
+import { useQueryQuestList } from "../hooks/useQueryQuest";
 import { ManageNewButton } from "./ManageNewButton";
 import { ManageQuestCard } from "./ManageQuestCard";
 import { ManageQuestSearchModal } from "./ManageQuestSearchModal,";
