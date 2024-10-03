@@ -1,6 +1,6 @@
 import type { FC } from "react";
-import { useQueryBadgeList } from "../badges/api/badge/useQueryBadge";
-import { Badge } from "../badges/components/badge/Badge";
+import { useQueryBadgeList } from "../../badges/hooks/useQueryBadge";
+import { Badge } from "../../badges/components/badge/Badge";
 
 type Props = {
   userName: string;

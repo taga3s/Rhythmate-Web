@@ -6,12 +6,12 @@ import type { Day, Difficulty } from "../../../../api/quest/types";
 import { formatDateTimeOnlyDate, formatDateTimeWithAddMinutes, isBefore, now } from "../../../../utils/dayjs";
 import { BackButton } from "../../../common/components/BackButton";
 import { FormErrorMsg } from "../../../common/components/utils/FormErrorMsg";
-import { useMutateQuest } from "../../api/quest/useMutateQuest";
+import { useMutateQuest } from "../../hooks/useMutateQuest";
 import { DayOfTheWeek } from "../../common/components/DayOfTheWeek";
 import { Star } from "../../common/components/Star";
-import { DAYS } from "../../common/constant/constant";
+import { DAYS } from "../../common/consts";
 import { convertEnToJPWeekday } from "../../common/funcs";
-import { type TManageValidationSchema, manageValidationSchema } from "../../common/libs/validation";
+import { type TManageValidationSchema, manageValidationSchema } from "../../common/validation";
 import { NewTagDropdown } from "./NewTagDropdown";
 
 type NewValues = {

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { formatDateTimeJP } from "../../../utils/dayjs";
-import { useMutateWeeklyReport } from "../api/weeklyReport/useMutateWeeklyReport";
-import { useQueryWeeklyReports } from "../api/weeklyReport/useQueryWeeklyReport";
+import { useMutateWeeklyReport } from "../hooks/useMutateWeeklyReport";
+import { useQueryWeeklyReports } from "../hooks/useQueryWeeklyReport";
 import { AnalyticsAIFeedback } from "./AnalyticsAIFeedback";
 import { AnalyticsBarChart } from "./AnalyticsBarChart";
 import { AnalyticsCard } from "./AnalyticsCard";

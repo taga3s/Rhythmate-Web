@@ -1,12 +1,12 @@
 import type { FC } from "react";
-import { profileExpCalculation } from "../funcs/profileExpCalculation";
+import { calcExp } from "../calcExp";
 
 type Props = {
   currentLevel: number;
   exp: number;
 };
 export const ProfileExpCard: FC<Props> = ({ currentLevel, exp }) => {
-  const { expBarProportion, remainingExp, toNextLevel, level } = profileExpCalculation(currentLevel, exp);
+  const { expBarProportion, remainingExp, toNextLevel, level } = calcExp(currentLevel, exp);
   return (
     <div className="w-full px-4 py-3 bg-white border border-gray-200 rounded-lg shadow flex flex-col gap-1.5">
       <p className="font-bold">経験値</p>

@@ -1,8 +1,8 @@
 import type { FC } from "react";
 import type { UseFormRegister, UseFormWatch } from "react-hook-form";
 import { TagItem } from "../../common/components/TagItem";
-import type { TManageValidationSchema } from "../../common/libs/validation";
-import { useQueryTagList } from "../../../tags/api/tag/useQueryTag";
+import type { TManageValidationSchema } from "../../common/validation";
+import { useQueryTagList } from "../../../tags/hooks/useQueryTag";
 import { toSelectColorLabel } from "../../common/funcs/toSelectColorLabel";
 
 type Props = {

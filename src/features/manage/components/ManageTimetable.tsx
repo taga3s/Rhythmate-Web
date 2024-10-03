@@ -3,7 +3,7 @@ import type { Quest } from "../../../api/quest/model";
 import { formatDateTimeOnlyTime } from "../../../utils/dayjs";
 import { ManageTimetableCard } from "./ManageTimetableCard";
 import { ManageTimetableNoData } from "./ManageTimetableNoData";
-import { DAYS } from "../common/constant/constant";
+import { DAYS } from "../common/consts";
 import { ManageDayOfTheWeekSwitchButton } from "./ManageDayOfTheWeekSwitchButton";
 import type { Day } from "../../../api/quest/types";
 

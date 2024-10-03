@@ -1,7 +1,7 @@
 import type { FC } from "react";
 import type { UseFormRegister, UseFormWatch } from "react-hook-form";
 import type { Day } from "../../../../api/quest/types";
-import type { TManageValidationSchema } from "../../common/libs/validation";
+import type { TManageValidationSchema } from "../validation";
 
 type Props = {
   day: string;

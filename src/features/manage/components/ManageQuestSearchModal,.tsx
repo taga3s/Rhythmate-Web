@@ -3,7 +3,7 @@ import type { Day, Difficulty } from "../../../api/quest/types";
 import type { Tag } from "../../../api/tag/model";
 import { ModalBase } from "../../common/components/modal/ModalBase";
 import { ModalHeaderCloseButton } from "../../common/components/modal/ModalHeaderCloseButton";
-import { DAYS, DIFFICULTIES } from "../common/constant/constant";
+import { DAYS, DIFFICULTIES } from "../common/consts";
 import { ManageDayOfTheWeekCheckBox } from "./ManageDayOfTheWeekCheckBox";
 import { ManageDifficultyCheckBox } from "./ManageDifficultyCheckBox";
 import { ManageSearchTagsDropdown } from "./ManageSearchTagsDropdown";

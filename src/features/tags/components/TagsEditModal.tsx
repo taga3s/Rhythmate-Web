@@ -4,9 +4,9 @@ import { useForm } from "react-hook-form";
 import { FormErrorMsg } from "../../common/components";
 import { ModalBase } from "../../common/components/modal/ModalBase";
 import { ModalHeaderCloseButton } from "../../common/components/modal/ModalHeaderCloseButton";
-import { useMutateTag } from "../api/tag/useMutateTag";
-import { useQueryTagList } from "../api/tag/useQueryTag";
-import { type TTagValidationSchema, tagValidationSchema } from "../libs/validation";
+import { useMutateTag } from "../hooks/useMutateTag";
+import { useQueryTagList } from "../hooks/useQueryTag";
+import { type TTagValidationSchema, tagValidationSchema } from "../validation";
 import { TagsColorDropdown } from "./TagsColorDropdown";
 
 type Props = {

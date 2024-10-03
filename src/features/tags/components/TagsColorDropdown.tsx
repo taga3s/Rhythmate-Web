@@ -1,8 +1,8 @@
 import type { FC } from "react";
 import type { UseFormRegister, UseFormWatch } from "react-hook-form";
-import type { TTagValidationSchema } from "../libs/validation";
+import type { TTagValidationSchema } from "../validation";
 import { TagsColorItem } from "./TagsColorItem";
-import { selectTagColorText } from "../funcs/selectTagColor";
+import { selectTagColorText } from "../selectTagColor";
 
 type Props = {
   register: UseFormRegister<TTagValidationSchema>;
