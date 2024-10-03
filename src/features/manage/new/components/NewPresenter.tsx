@@ -17,8 +17,8 @@ type NewValues = {
   title: string;
   startsAt: string;
   tagId?: string;
-  minutes: string;
-  days: string[];
+  minutes: number;
+  days: Day[];
   description: string;
 };
 
@@ -49,10 +49,10 @@ export const NewPresenter = () => {
       .mutateAsync({
         title: data.title,
         description: data.description,
-        startsAt: data.startsAt,
-        tagId: data.tagId,
-        minutes: Number(data.minutes),
-        days: data.days as Day[],
+        starts_at: data.startsAt,
+        tag_id: data.tagId ?? "",
+        minutes: data.minutes,
+        days: data.days,
         difficulty: selectedDifficulty,
         state: getCurrentQuestState(now(), data.startsAt),
       })

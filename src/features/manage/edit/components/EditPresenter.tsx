@@ -19,8 +19,8 @@ type NewValues = {
   title: string;
   startsAt: string;
   tagId?: string;
-  minutes: string;
-  days: string[];
+  minutes: number;
+  days: Day[];
   description: string;
 };
 
@@ -57,11 +57,11 @@ export const EditPresenter: FC<Props> = (props) => {
         id: quest_id,
         title: data.title,
         description: data.description,
-        startsAt: data.startsAt,
-        tagId: data.tagId,
-        minutes: Number(data.minutes),
+        starts_at: data.startsAt,
+        tag_id: data.tagId ?? "",
+        minutes: data.minutes,
         difficulty: selectedDifficulty,
-        days: data.days as Day[],
+        days: data.days,
       })
       .then(() => {
         navigate({ to: "/manage" });
