@@ -1,5 +1,4 @@
 import type { FC } from "react";
-import type { ImageType } from "../../../../../api/badge/type";
 import { Bow } from "./badgeItems/Bow";
 import { Cat } from "./badgeItems/Cat";
 import { Crown } from "./badgeItems/Crown";
@@ -7,6 +6,7 @@ import { Gem } from "./badgeItems/Gem";
 import { Horse } from "./badgeItems/Horse";
 import { Shield } from "./badgeItems/Shield";
 import { Sword } from "./badgeItems/Sword";
+import { ImageType } from "../../../../api/badge/type";
 
 type Props = {
   imageType: ImageType;

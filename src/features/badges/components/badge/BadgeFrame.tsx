@@ -1,5 +1,5 @@
 import type { FC } from "react";
-import type { FrameColor } from "../../../../../api/badge/type";
+import { FrameColor } from "../../../../api/badge/type";
 
 type Props = {
   frameColor: FrameColor;

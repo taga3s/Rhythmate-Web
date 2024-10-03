@@ -1,4 +1,4 @@
-export const profileExpCalculation = (level: number, exp: number) => {
+export const calcExp = (level: number, exp: number) => {
   const currentLevel = level;
   const toNextLevel = 100;
   let remainingExp = exp;

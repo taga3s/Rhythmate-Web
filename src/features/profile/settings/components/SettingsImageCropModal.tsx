@@ -4,7 +4,7 @@ import ReactCrop, { centerCrop, convertToPixelCrop, makeAspectCrop, type Crop } 
 import "react-image-crop/dist/ReactCrop.css";
 import { ModalBase } from "../../../common/components/modal/ModalBase";
 import { ModalHeaderCloseButton } from "../../../common/components/modal/ModalHeaderCloseButton";
-import { setCanvasPreview } from "../funcs/setCanvasPreview";
+import { setCanvasPreview } from "../setCanvasPreview";
 
 type Props = {
   imageUrl: string;
