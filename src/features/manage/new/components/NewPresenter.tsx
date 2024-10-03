@@ -1,24 +1,24 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useNavigate } from "@tanstack/react-router";
-import { useState } from "react";
 import { useForm } from "react-hook-form";
 import type { Day, Difficulty } from "../../../../api/quest/types";
 import { formatDateTimeOnlyDate, formatDateTimeWithAddMinutes, isBefore, now } from "../../../../utils/dayjs";
 import { BackButton, FormErrorMsg } from "../../../common/components";
 import { useMutateQuest } from "../../hooks/useMutateQuest";
 import { DayOfTheWeek } from "../../common/components/DayOfTheWeek";
-import { Star } from "../../common/components/Star";
 import { DAYS, DIFFICULTIES } from "../../common/consts";
-import { convertEnToJPWeekday } from "../../common/funcs";
+import { convertEnToJPWeekday } from "../../common/utils";
 import { type TManageValidationSchema, manageValidationSchema } from "../../common/validation";
 import { TagDropdown } from "../../common/components/TagDropdown";
+import { DifficultyOption } from "../../common/components/DifficultyOption";
 
 type NewValues = {
   title: string;
   startsAt: string;
-  tagId?: string;
-  minutes: string;
-  days: string[];
+  tagId: string;
+  minutes: number;
+  days: Day[];
+  difficulty: Difficulty;
   description: string;
 };
 
@@ -29,7 +29,6 @@ export const getCurrentQuestState = (now: string, startsAt: string) => {
 
 export const NewPresenter = () => {
   const navigate = useNavigate();
-  const [selectedDifficulty, setSelectedDifficulty] = useState<Difficulty>("EASY");
   const { createQuestMutation } = useMutateQuest();
   const {
     register,
@@ -41,19 +40,20 @@ export const NewPresenter = () => {
     resolver: zodResolver(manageValidationSchema),
     defaultValues: {
       days: [],
+      tagId: "",
     },
   });
 
-  const onSubmit = async (data: NewValues) => {
+  const onSubmit = (data: NewValues) => {
     createQuestMutation
       .mutateAsync({
         title: data.title,
         description: data.description,
-        startsAt: data.startsAt,
-        tagId: data.tagId,
-        minutes: Number(data.minutes),
-        days: data.days as Day[],
-        difficulty: selectedDifficulty,
+        starts_at: data.startsAt,
+        tag_id: data.tagId,
+        minutes: data.minutes,
+        days: data.days,
+        difficulty: data.difficulty,
         state: getCurrentQuestState(now(), data.startsAt),
       })
       .then(() => {
@@ -124,17 +124,15 @@ export const NewPresenter = () => {
             <div className="my-2">
               <p className="block my-2 font-bold text-rhyth-gray">実施頻度</p>
               <div className="flex mt-4 gap-1">
-                {DAYS.map((day) => {
-                  return (
-                    <DayOfTheWeek
-                      key={day}
-                      day={convertEnToJPWeekday(day)}
-                      value={day}
-                      register={register}
-                      watch={watch}
-                    />
-                  );
-                })}
+                {DAYS.map((day) => (
+                  <DayOfTheWeek
+                    key={day}
+                    day={convertEnToJPWeekday(day)}
+                    value={day}
+                    register={register}
+                    watch={watch}
+                  />
+                ))}
               </div>
               {errors.days && <FormErrorMsg msg={errors.days.message} />}
             </div>
@@ -154,36 +152,11 @@ export const NewPresenter = () => {
             <p className="font-bold text-rhyth-gray">難易度</p>
           </div>
           <div className="flex justify-center gap-4 mt-4">
-            {DIFFICULTIES.map((difficulty) => {
-              return (
-                <button
-                  type="button"
-                  className={`w-1/4 border-2 flex justify-center items-center gap-1 p-2 rounded-md shadow-sm ${
-                    selectedDifficulty === difficulty ? "bg-rhyth-blue" : "bg-white hover:bg-rhyth-bg-dark-gray"
-                  }`}
-                  onClick={() => {
-                    setSelectedDifficulty(difficulty);
-                  }}
-                  key={difficulty}
-                >
-                  {difficulty === "EASY" && <Star />}
-                  {difficulty === "NORMAL" && (
-                    <>
-                      <Star />
-                      <Star />
-                    </>
-                  )}
-                  {difficulty === "HARD" && (
-                    <>
-                      <Star />
-                      <Star />
-                      <Star />
-                    </>
-                  )}
-                </button>
-              );
-            })}
+            {DIFFICULTIES.map((difficulty) => (
+              <DifficultyOption key={difficulty} difficulty={difficulty} watch={watch} register={register} />
+            ))}
           </div>
+          {errors.difficulty && <FormErrorMsg msg={errors.difficulty.message} />}
         </div>
         <div className="w-full gap-2 mt-6">
           <div className="flex items-center gap-2 w-24">
@@ -227,7 +200,6 @@ export const NewPresenter = () => {
             {...register("description")}
           />
         </div>
-        {errors.description && <FormErrorMsg msg={errors.description.message} />}
         <button
           type="submit"
           className="w-full mt-8 text-white bg-rhyth-blue hover:bg-rhyth-hover-blue disabled:bg-rhyth-light-gray focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-base my-4 p-3 shadow-lg focus:outline-none"
