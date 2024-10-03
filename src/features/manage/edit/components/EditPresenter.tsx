@@ -6,11 +6,11 @@ import type { Day, Difficulty } from "../../../../api/quest/types";
 import { formatDateTimeOnlyTime } from "../../../../utils/dayjs";
 import { ConfirmModal, FormErrorMsg } from "../../../common/components";
 import { BackButton } from "../../../common/components/BackButton";
-import { useQueryQuestList } from "../../../quests/hooks/useQueryQuest";
+import { useQueryQuestList } from "../../hooks/useQueryQuest";
 import { useMutateQuest } from "../../hooks/useMutateQuest";
 import { DayOfTheWeek } from "../../common/components/DayOfTheWeek";
 import { Star } from "../../common/components/Star";
-import { DAYS } from "../../common/consts";
+import { DAYS, DIFFICULTIES } from "../../common/consts";
 import { convertEnToJPWeekday } from "../../common/funcs";
 import { type TManageValidationSchema, manageValidationSchema } from "../../common/validation";
 import { EditTagDropdown } from "./EditTagDropdown";
@@ -18,7 +18,7 @@ import { EditTagDropdown } from "./EditTagDropdown";
 type NewValues = {
   title: string;
   startsAt: string;
-  tagId?: string | undefined;
+  tagId?: string;
   minutes: string;
   days: string[];
   description: string;
@@ -36,7 +36,7 @@ export const EditPresenter: FC<Props> = (props) => {
 
   const targetQuest = questListData.find((v) => v.id === quest_id);
 
-  const [difficulty, setDifficulty] = useState<Difficulty>(targetQuest?.difficulty ?? "EASY");
+  const [selectedDifficulty, setSelectedDifficulty] = useState<Difficulty>(targetQuest?.difficulty ?? "EASY");
 
   const {
     register,
@@ -52,17 +52,20 @@ export const EditPresenter: FC<Props> = (props) => {
   });
 
   const onSubmit = async (data: NewValues) => {
-    await updateQuestMutation.mutateAsync({
-      id: quest_id,
-      title: data.title,
-      description: data.description,
-      startsAt: data.startsAt,
-      tagId: data.tagId ?? "",
-      minutes: Number(data.minutes),
-      difficulty: difficulty,
-      days: data.days as Day[],
-    });
-    navigate({ to: "/manage" });
+    updateQuestMutation
+      .mutateAsync({
+        id: quest_id,
+        title: data.title,
+        description: data.description,
+        startsAt: data.startsAt,
+        tagId: data.tagId,
+        minutes: Number(data.minutes),
+        difficulty: selectedDifficulty,
+        days: data.days as Day[],
+      })
+      .then(() => {
+        navigate({ to: "/manage" });
+      });
   };
 
   const [openModal, setOpenModal] = useState(false);
@@ -91,7 +94,7 @@ export const EditPresenter: FC<Props> = (props) => {
             {...register("title")}
           />
         </div>
-        {errors.title && <FormErrorMsg msg={errors.title.message ?? ""} />}
+        {errors.title && <FormErrorMsg msg={errors.title.message} />}
         <div className="grid grid-cols-8 mt-4">
           <div className="my-4">
             <svg
@@ -121,7 +124,7 @@ export const EditPresenter: FC<Props> = (props) => {
                 <span className="font-bold text-rhyth-gray">から</span>
               </div>
             </div>
-            {errors.startsAt && <FormErrorMsg msg={errors.startsAt.message ?? ""} />}
+            {errors.startsAt && <FormErrorMsg msg={errors.startsAt.message} />}
             <div className="grid grid-cols-5 my-2 items-center">
               <p className="col-span-2 font-bold text-rhyth-gray">取り組み時間</p>
               <div className="col-span-3 flex justify-end items-center">
@@ -135,7 +138,7 @@ export const EditPresenter: FC<Props> = (props) => {
                 <p className="font-bold text-rhyth-gray">分間</p>
               </div>
             </div>
-            {errors.minutes && <FormErrorMsg msg={errors.minutes.message ?? ""} />}
+            {errors.minutes && <FormErrorMsg msg={errors.minutes.message} />}
             <div className="my-2">
               <p className="block my-2 font-bold text-rhyth-gray">実施頻度</p>
               <div className="flex mt-4 gap-1">
@@ -151,7 +154,7 @@ export const EditPresenter: FC<Props> = (props) => {
                   );
                 })}
               </div>
-              {errors.days && <FormErrorMsg msg={errors.days.message ?? ""} />}
+              {errors.days && <FormErrorMsg msg={errors.days.message} />}
             </div>
           </div>
         </div>
@@ -169,42 +172,34 @@ export const EditPresenter: FC<Props> = (props) => {
             <p className="font-bold text-rhyth-gray">難易度</p>
           </div>
           <div className="flex justify-center gap-4 mt-4">
-            <button
-              type="button"
-              className={`w-1/4 border-2 flex justify-center items-center gap-1 p-2 rounded-md shadow-sm ${
-                difficulty === "EASY" ? "bg-rhyth-blue" : "bg-white hover:bg-rhyth-bg-dark-gray"
-              }`}
-              onClick={() => {
-                setDifficulty("EASY");
-              }}
-            >
-              <Star />
-            </button>
-            <button
-              type="button"
-              className={`w-1/4 border-2 flex justify-center items-center gap-1 p-2 rounded-md shadow-sm ${
-                difficulty === "NORMAL" ? "bg-rhyth-blue" : "bg-white hover:bg-rhyth-bg-dark-gray"
-              }`}
-              onClick={() => {
-                setDifficulty("NORMAL");
-              }}
-            >
-              <Star />
-              <Star />
-            </button>
-            <button
-              type="button"
-              className={`w-1/4 border-2 flex justify-center items-center gap-1 p-2 rounded-md shadow-sm ${
-                difficulty === "HARD" ? "bg-rhyth-blue" : "bg-white hover:bg-rhyth-bg-dark-gray"
-              }`}
-              onClick={() => {
-                setDifficulty("HARD");
-              }}
-            >
-              <Star />
-              <Star />
-              <Star />
-            </button>
+            {DIFFICULTIES.map((difficulty) => {
+              return (
+                <button
+                  type="button"
+                  className={`w-1/4 border-2 flex justify-center items-center gap-1 p-2 rounded-md shadow-sm ${
+                    selectedDifficulty === difficulty ? "bg-rhyth-blue" : "bg-white hover:bg-rhyth-bg-dark-gray"
+                  }`}
+                  onClick={() => {
+                    setSelectedDifficulty(difficulty);
+                  }}
+                >
+                  {difficulty === "EASY" && <Star />}
+                  {difficulty === "NORMAL" && (
+                    <>
+                      <Star />
+                      <Star />
+                    </>
+                  )}
+                  {difficulty === "HARD" && (
+                    <>
+                      <Star />
+                      <Star />
+                      <Star />
+                    </>
+                  )}
+                </button>
+              );
+            })}
           </div>
         </div>
         <div className="w-full gap-2 mt-6">
@@ -250,7 +245,7 @@ export const EditPresenter: FC<Props> = (props) => {
             {...register("description")}
           />
         </div>
-        {errors.description && <FormErrorMsg msg={errors.description.message ?? ""} />}
+        {errors.description && <FormErrorMsg msg={errors.description.message} />}
         <div className="flex flex-col mt-8 mb-4 gap-4">
           <button
             type="submit"

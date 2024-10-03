@@ -8,7 +8,7 @@ import { toSelectColorLabel } from "../../common/funcs/toSelectColorLabel";
 type Props = {
   register: UseFormRegister<TManageValidationSchema>;
   watch: UseFormWatch<TManageValidationSchema>;
-  tagId: string | undefined;
+  tagId?: string;
 };
 
 export const EditTagDropdown: FC<Props> = ({ register, watch, tagId }) => {
