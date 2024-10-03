@@ -11,7 +11,7 @@ import { Star } from "../../common/components/Star";
 import { DAYS, DIFFICULTIES } from "../../common/consts";
 import { convertEnToJPWeekday } from "../../common/funcs";
 import { type TManageValidationSchema, manageValidationSchema } from "../../common/validation";
-import { NewTagDropdown } from "./NewTagDropdown";
+import { TagDropdown } from "../../common/components/TagDropdown";
 
 type NewValues = {
   title: string;
@@ -202,7 +202,7 @@ export const NewPresenter = () => {
               タグ
             </label>
           </div>
-          <NewTagDropdown register={register} watch={watch} />
+          <TagDropdown register={register} watch={watch} />
         </div>
         <div className="w-full gap-2 mt-6">
           <div className="flex items-center gap-2 w-24">

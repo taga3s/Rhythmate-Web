@@ -13,7 +13,7 @@ import { Star } from "../../common/components/Star";
 import { DAYS, DIFFICULTIES } from "../../common/consts";
 import { convertEnToJPWeekday } from "../../common/funcs";
 import { type TManageValidationSchema, manageValidationSchema } from "../../common/validation";
-import { EditTagDropdown } from "./EditTagDropdown";
+import { TagDropdown } from "../../common/components/TagDropdown";
 
 type NewValues = {
   title: string;
@@ -220,7 +220,7 @@ export const EditPresenter: FC<Props> = (props) => {
               タグ
             </label>
           </div>
-          <EditTagDropdown register={register} watch={watch} tagId={targetQuest?.tagId} />
+          <TagDropdown register={register} watch={watch} tagId={targetQuest?.tagId} />
         </div>
         <div className="w-full gap-2 mt-6">
           <div className="flex items-center gap-2 w-24">

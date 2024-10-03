@@ -1,6 +1,6 @@
 import type { FC } from "react";
 import type { UseFormRegister, UseFormWatch } from "react-hook-form";
-import { TagItem } from "../../common/components/TagItem";
+import { TagItem } from "./TagItem";
 import type { TManageValidationSchema } from "../../common/validation";
 import { useQueryTagList } from "../../../tags/hooks/useQueryTag";
 import { toSelectColorLabel } from "../../common/funcs/toSelectColorLabel";
@@ -11,10 +11,9 @@ type Props = {
   tagId?: string;
 };
 
-export const EditTagDropdown: FC<Props> = ({ register, watch, tagId }) => {
+export const TagDropdown: FC<Props> = ({ register, watch, tagId }) => {
   const { data: tagItems } = useQueryTagList();
   const tagIdForColorSelect = watch("tagId");
-
   const selectColorLabel = toSelectColorLabel(tagItems, tagIdForColorSelect);
 
   return (
