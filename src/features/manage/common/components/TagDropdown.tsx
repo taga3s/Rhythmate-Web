@@ -3,7 +3,7 @@ import type { UseFormRegister, UseFormWatch } from "react-hook-form";
 import { TagItem } from "./TagItem";
 import type { TManageValidationSchema } from "../../common/validation";
 import { useQueryTagList } from "../../../tags/hooks/useQueryTag";
-import { toSelectColorLabel } from "../../common/funcs/toSelectColorLabel";
+import { toSelectColorLabel } from "../../common/utils";
 
 type Props = {
   register: UseFormRegister<TManageValidationSchema>;

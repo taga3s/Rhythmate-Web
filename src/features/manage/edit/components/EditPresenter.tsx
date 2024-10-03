@@ -11,7 +11,7 @@ import { useMutateQuest } from "../../hooks/useMutateQuest";
 import { DayOfTheWeek } from "../../common/components/DayOfTheWeek";
 import { Star } from "../../common/components/Star";
 import { DAYS, DIFFICULTIES } from "../../common/consts";
-import { convertEnToJPWeekday } from "../../common/funcs";
+import { convertEnToJPWeekday } from "../../common/utils";
 import { type TManageValidationSchema, manageValidationSchema } from "../../common/validation";
 import { TagDropdown } from "../../common/components/TagDropdown";
 
@@ -51,7 +51,7 @@ export const EditPresenter: FC<Props> = (props) => {
     },
   });
 
-  const onSubmit = async (data: NewValues) => {
+  const onSubmit = (data: NewValues) => {
     updateQuestMutation
       .mutateAsync({
         id: quest_id,
@@ -69,11 +69,14 @@ export const EditPresenter: FC<Props> = (props) => {
   };
 
   const [openModal, setOpenModal] = useState(false);
-  const onClickDelete = async () => {
-    await deleteQuestMutation.mutateAsync({
-      id: quest_id,
-    });
-    navigate({ to: "/manage" });
+  const onClickDelete = () => {
+    deleteQuestMutation
+      .mutateAsync({
+        id: quest_id,
+      })
+      .then(() => {
+        navigate({ to: "/manage" });
+      });
   };
 
   return (

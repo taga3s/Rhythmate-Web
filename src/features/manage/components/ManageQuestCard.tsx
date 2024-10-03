@@ -3,7 +3,7 @@ import type { FC } from "react";
 import type { Day, Difficulty } from "../../../api/quest/types";
 import { ClockIcon } from "../../common/components/icons/ClockIcon";
 import { calcExp } from "../../common/funcs/calcExp";
-import { convertEnToJPWeekday } from "../common/funcs";
+import { convertEnToJPWeekday } from "../common/utils";
 import { ManageProgressBar } from "./ManageProgressBar";
 import { formatDateTimeOnlyTime } from "../../../utils/dayjs";
 

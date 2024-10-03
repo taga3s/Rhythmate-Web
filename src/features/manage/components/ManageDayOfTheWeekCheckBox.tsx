@@ -1,6 +1,6 @@
 import type { ChangeEvent, FC } from "react";
 import type { Day } from "../../../api/quest/types";
-import { convertEnToJPWeekday } from "../common/funcs";
+import { convertEnToJPWeekday } from "../common/utils";
 
 type Props = {
   handleDay: (day: Day | "") => void;

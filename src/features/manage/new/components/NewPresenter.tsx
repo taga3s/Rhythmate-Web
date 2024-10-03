@@ -9,7 +9,7 @@ import { useMutateQuest } from "../../hooks/useMutateQuest";
 import { DayOfTheWeek } from "../../common/components/DayOfTheWeek";
 import { Star } from "../../common/components/Star";
 import { DAYS, DIFFICULTIES } from "../../common/consts";
-import { convertEnToJPWeekday } from "../../common/funcs";
+import { convertEnToJPWeekday } from "../../common/utils";
 import { type TManageValidationSchema, manageValidationSchema } from "../../common/validation";
 import { TagDropdown } from "../../common/components/TagDropdown";
 
@@ -44,7 +44,7 @@ export const NewPresenter = () => {
     },
   });
 
-  const onSubmit = async (data: NewValues) => {
+  const onSubmit = (data: NewValues) => {
     createQuestMutation
       .mutateAsync({
         title: data.title,
