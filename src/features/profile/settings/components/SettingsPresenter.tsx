@@ -54,7 +54,7 @@ export const SettingsPresenter = () => {
   };
 
   const [imageCropModalOpen, setImageCropModalOpen] = useState<boolean>(false);
-  const [profileImage, setProfileImage] = useState<string>(loginUserData.imageUrl ?? "");
+  const [profileImage, setProfileImage] = useState<string>(loginUserData.imageUrl);
 
   useEffect(() => {
     if (inputImageUrl && inputImageFile) {
@@ -83,13 +83,13 @@ export const SettingsPresenter = () => {
               <label className="block mb-2 text-sm font-medium text-gray-900 my-4">ユーザー名</label>
               <input
                 type="text"
-                defaultValue={loginUserData?.name ?? ""}
+                defaultValue={loginUserData?.name}
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                 placeholder="あなたの名前"
                 {...register("name")}
                 required
               />
-              {errors.name && <FormErrorMsg msg={errors.name.message ?? ""} />}
+              {errors.name && <FormErrorMsg msg={errors.name.message} />}
             </div>
             <button
               type="submit"

@@ -3,7 +3,7 @@ import { HeaderManageButtonGroup } from "./HeaderManageButtonGroup";
 import { HeaderProfileButtonGroup } from "./HeaderProfileButtonGroup";
 import { HeaderQuestsButtonGroup } from "./HeaderQuestsButtonGroup";
 import { Image } from "@unpic/react";
-import { FC } from "react";
+import type { FC } from "react";
 
 const Heading1: FC<{ title: string }> = ({ title }) => {
   return <h1 className="font-cp-font font-bold text-xl text-rhyth-dark-blue tracking-wider">{title}</h1>;
