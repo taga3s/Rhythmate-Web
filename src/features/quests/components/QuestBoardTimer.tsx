@@ -1,7 +1,7 @@
 import { type FC, useState } from "react";
 import useInterval from "../../common/hooks/useInterval";
-import { FORCE_STOP } from "../constant/constant";
-import { calcBaseTime, calcDiffTimeBetweenNowAndTargetTime } from "../funcs/time";
+import { FORCE_STOP } from "../consts";
+import { calcBaseTime, calcDiffTimeBetweenNowAndTargetTime } from "../calcTime";
 import { getIsStarted } from "./QuestBoard";
 
 type Props = {

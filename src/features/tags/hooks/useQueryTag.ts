@@ -1,7 +1,7 @@
 import { useSuspenseQuery } from "@tanstack/react-query";
-import { createFactory } from "../../../../api/tag/factory";
-import type { Tag } from "../../../../api/tag/model";
-import type { FetchError } from "../../../../api/util/fetchError";
+import { createFactory } from "../../../api/tag/factory";
+import type { Tag } from "../../../api/tag/model";
+import type { FetchError } from "../../../api/util/fetchError";
 
 export const useQueryTagList = () => {
   const tagFactory = createFactory();

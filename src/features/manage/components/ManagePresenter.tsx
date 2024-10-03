@@ -10,7 +10,7 @@ import { ManageQuestSearchModal } from "./ManageQuestSearchModal,";
 import { ManageTimetable } from "./ManageTimetable";
 import type { Tag } from "../../../api/tag/model";
 import { getTodayEn } from "../../../utils/dayjs";
-import { useQueryTagList } from "../../tags/api/tag/useQueryTag";
+import { useQueryTagList } from "../../tags/hooks/useQueryTag";
 
 type QuestWithTag = Quest & {
   tagName: string | undefined;

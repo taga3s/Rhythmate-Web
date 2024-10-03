@@ -6,7 +6,7 @@ import type { Day, Difficulty } from "../../../../api/quest/types";
 import { formatDateTimeOnlyTime } from "../../../../utils/dayjs";
 import { ConfirmModal, FormErrorMsg } from "../../../common/components";
 import { BackButton } from "../../../common/components/BackButton";
-import { useQueryQuestList } from "../../../quests/api/quest/useQueryQuest";
+import { useQueryQuestList } from "../../../quests/hooks/useQueryQuest";
 import { useMutateQuest } from "../../api/quest/useMutateQuest";
 import { DayOfTheWeek } from "../../common/components/DayOfTheWeek";
 import { Star } from "../../common/components/Star";
