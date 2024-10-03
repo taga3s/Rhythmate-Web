@@ -182,6 +182,7 @@ export const EditPresenter: FC<Props> = (props) => {
                   onClick={() => {
                     setSelectedDifficulty(difficulty);
                   }}
+                  key={difficulty}
                 >
                   {difficulty === "EASY" && <Star />}
                   {difficulty === "NORMAL" && (

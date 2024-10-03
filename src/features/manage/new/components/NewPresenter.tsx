@@ -164,6 +164,7 @@ export const NewPresenter = () => {
                   onClick={() => {
                     setSelectedDifficulty(difficulty);
                   }}
+                  key={difficulty}
                 >
                   {difficulty === "EASY" && <Star />}
                   {difficulty === "NORMAL" && (
