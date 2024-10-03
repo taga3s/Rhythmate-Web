@@ -3,14 +3,14 @@ import { useState } from "react";
 import type { Quest } from "../../../api/quest/model";
 import type { Day, Difficulty } from "../../../api/quest/types";
 import { useSearchModalIsOpen, useSetSearchModalIsOpen } from "../../common/contexts/searchModalIsOpenContext";
-import { useQueryQuestList } from "../api/quest/useQueryQuest";
+import { useQueryQuestList } from "../hooks/useQueryQuest";
 import { ManageNewButton } from "./ManageNewButton";
 import { ManageQuestCard } from "./ManageQuestCard";
 import { ManageQuestSearchModal } from "./ManageQuestSearchModal,";
 import { ManageTimetable } from "./ManageTimetable";
 import type { Tag } from "../../../api/tag/model";
 import { getTodayEn } from "../../../utils/dayjs";
-import { useQueryTagList } from "../../tags/api/tag/useQueryTag";
+import { useQueryTagList } from "../../tags/hooks/useQueryTag";
 
 type QuestWithTag = Quest & {
   tagName: string | undefined;

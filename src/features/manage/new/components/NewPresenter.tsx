@@ -4,20 +4,19 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import type { Day, Difficulty } from "../../../../api/quest/types";
 import { formatDateTimeOnlyDate, formatDateTimeWithAddMinutes, isBefore, now } from "../../../../utils/dayjs";
-import { BackButton } from "../../../common/components/BackButton";
-import { FormErrorMsg } from "../../../common/components/utils/FormErrorMsg";
-import { useMutateQuest } from "../../api/quest/useMutateQuest";
+import { BackButton, FormErrorMsg } from "../../../common/components";
+import { useMutateQuest } from "../../hooks/useMutateQuest";
 import { DayOfTheWeek } from "../../common/components/DayOfTheWeek";
 import { Star } from "../../common/components/Star";
-import { DAYS } from "../../common/constant/constant";
+import { DAYS, DIFFICULTIES } from "../../common/consts";
 import { convertEnToJPWeekday } from "../../common/funcs";
-import { type TManageValidationSchema, manageValidationSchema } from "../../common/libs/validation";
-import { NewTagDropdown } from "./NewTagDropdown";
+import { type TManageValidationSchema, manageValidationSchema } from "../../common/validation";
+import { TagDropdown } from "../../common/components/TagDropdown";
 
 type NewValues = {
   title: string;
   startsAt: string;
-  tagId?: string | undefined;
+  tagId?: string;
   minutes: string;
   days: string[];
   description: string;
@@ -30,16 +29,13 @@ export const getCurrentQuestState = (now: string, startsAt: string) => {
 
 export const NewPresenter = () => {
   const navigate = useNavigate();
-  const [difficulty, setDifficulty] = useState<Difficulty>("EASY");
+  const [selectedDifficulty, setSelectedDifficulty] = useState<Difficulty>("EASY");
   const { createQuestMutation } = useMutateQuest();
-
   const {
     register,
     watch,
-    setValue,
     handleSubmit,
     formState: { errors },
-    reset,
   } = useForm<TManageValidationSchema>({
     mode: "onBlur",
     resolver: zodResolver(manageValidationSchema),
@@ -47,24 +43,24 @@ export const NewPresenter = () => {
       days: [],
     },
   });
-  const onSubmit = async (data: NewValues) => {
-    await createQuestMutation.mutateAsync({
-      title: data.title,
-      description: data.description,
-      startsAt: data.startsAt,
-      tagId: data.tagId ?? "",
-      minutes: Number(data.minutes),
-      days: data.days as Day[],
-      difficulty: difficulty,
-      state: getCurrentQuestState(now(), data.startsAt),
-    });
 
-    // リセット処理
-    reset();
-    setValue("days", []);
-    setDifficulty("EASY");
-    navigate({ to: "/manage" });
+  const onSubmit = async (data: NewValues) => {
+    createQuestMutation
+      .mutateAsync({
+        title: data.title,
+        description: data.description,
+        startsAt: data.startsAt,
+        tagId: data.tagId,
+        minutes: Number(data.minutes),
+        days: data.days as Day[],
+        difficulty: selectedDifficulty,
+        state: getCurrentQuestState(now(), data.startsAt),
+      })
+      .then(() => {
+        navigate({ to: "/manage" });
+      });
   };
+
   return (
     <>
       <BackButton onClickNavigation={() => navigate({ to: "/manage" })} />
@@ -82,7 +78,7 @@ export const NewPresenter = () => {
             {...register("title")}
           />
         </div>
-        {errors.title && <FormErrorMsg msg={errors.title.message ?? ""} />}
+        {errors.title && <FormErrorMsg msg={errors.title.message} />}
         <div className="grid grid-cols-8 mt-4">
           <div className="my-4">
             <svg
@@ -111,7 +107,7 @@ export const NewPresenter = () => {
                 <span className="font-bold text-rhyth-gray">から</span>
               </div>
             </div>
-            {errors.startsAt && <FormErrorMsg msg={errors.startsAt.message ?? ""} />}
+            {errors.startsAt && <FormErrorMsg msg={errors.startsAt.message} />}
             <div className="grid grid-cols-5 my-2 items-center">
               <p className="col-span-2 font-bold text-rhyth-gray">取り組み時間</p>
               <div className="col-span-3 flex justify-end items-center">
@@ -124,7 +120,7 @@ export const NewPresenter = () => {
                 <p className="font-bold text-rhyth-gray">分間</p>
               </div>
             </div>
-            {errors.minutes && <FormErrorMsg msg={errors.minutes.message ?? ""} />}
+            {errors.minutes && <FormErrorMsg msg={errors.minutes.message} />}
             <div className="my-2">
               <p className="block my-2 font-bold text-rhyth-gray">実施頻度</p>
               <div className="flex mt-4 gap-1">
@@ -140,7 +136,7 @@ export const NewPresenter = () => {
                   );
                 })}
               </div>
-              {errors.days && <FormErrorMsg msg={errors.days.message ?? ""} />}
+              {errors.days && <FormErrorMsg msg={errors.days.message} />}
             </div>
           </div>
         </div>
@@ -158,42 +154,35 @@ export const NewPresenter = () => {
             <p className="font-bold text-rhyth-gray">難易度</p>
           </div>
           <div className="flex justify-center gap-4 mt-4">
-            <button
-              type="button"
-              className={`w-1/4 border-2 flex justify-center items-center gap-1 p-2 rounded-md shadow-sm ${
-                difficulty === "EASY" ? "bg-rhyth-blue" : "bg-white hover:bg-rhyth-bg-dark-gray"
-              }`}
-              onClick={() => {
-                setDifficulty("EASY");
-              }}
-            >
-              <Star />
-            </button>
-            <button
-              type="button"
-              className={`w-1/4 border-2 flex justify-center items-center gap-1 p-2 rounded-md shadow-sm ${
-                difficulty === "NORMAL" ? "bg-rhyth-blue" : "bg-white hover:bg-rhyth-bg-dark-gray"
-              }`}
-              onClick={() => {
-                setDifficulty("NORMAL");
-              }}
-            >
-              <Star />
-              <Star />
-            </button>
-            <button
-              type="button"
-              className={`w-1/4 border-2 flex justify-center items-center gap-1 p-2 rounded-md shadow-sm ${
-                difficulty === "HARD" ? "bg-rhyth-blue" : "bg-white hover:bg-rhyth-bg-dark-gray"
-              }`}
-              onClick={() => {
-                setDifficulty("HARD");
-              }}
-            >
-              <Star />
-              <Star />
-              <Star />
-            </button>
+            {DIFFICULTIES.map((difficulty) => {
+              return (
+                <button
+                  type="button"
+                  className={`w-1/4 border-2 flex justify-center items-center gap-1 p-2 rounded-md shadow-sm ${
+                    selectedDifficulty === difficulty ? "bg-rhyth-blue" : "bg-white hover:bg-rhyth-bg-dark-gray"
+                  }`}
+                  onClick={() => {
+                    setSelectedDifficulty(difficulty);
+                  }}
+                  key={difficulty}
+                >
+                  {difficulty === "EASY" && <Star />}
+                  {difficulty === "NORMAL" && (
+                    <>
+                      <Star />
+                      <Star />
+                    </>
+                  )}
+                  {difficulty === "HARD" && (
+                    <>
+                      <Star />
+                      <Star />
+                      <Star />
+                    </>
+                  )}
+                </button>
+              );
+            })}
           </div>
         </div>
         <div className="w-full gap-2 mt-6">
@@ -213,7 +202,7 @@ export const NewPresenter = () => {
               タグ
             </label>
           </div>
-          <NewTagDropdown register={register} watch={watch} />
+          <TagDropdown register={register} watch={watch} />
         </div>
         <div className="w-full gap-2 mt-6">
           <div className="flex items-center gap-2 w-24">
@@ -238,7 +227,7 @@ export const NewPresenter = () => {
             {...register("description")}
           />
         </div>
-        {errors.description && <FormErrorMsg msg={errors.description.message ?? ""} />}
+        {errors.description && <FormErrorMsg msg={errors.description.message} />}
         <button
           type="submit"
           className="w-full mt-8 text-white bg-rhyth-blue hover:bg-rhyth-hover-blue disabled:bg-rhyth-light-gray focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-base my-4 p-3 shadow-lg focus:outline-none"
