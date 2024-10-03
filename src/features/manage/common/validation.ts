@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { Day } from "../../../api/quest/types";
+import type { Day, Difficulty } from "../../../api/quest/types";
 
 export const manageValidationSchema = z.object({
   title: z
@@ -12,8 +12,17 @@ export const manageValidationSchema = z.object({
   minutes: z.coerce.number().min(1, "値が入力されていません。"),
   startsAt: z.string().regex(/^([01]\d|2[0-3]):([0-5]\d)$/, "値が入力されていません。"),
   days: z.array(z.any().transform((v) => v as Day)).min(1, "曜日を選択してください。"),
-  tagId: z.string().optional(),
-  description: z.string().max(20, "ひとことは20文字以下で入力します。"),
+  difficulty: z
+    .any()
+    .transform((v) => v as Difficulty)
+    .refine(
+      (v) => {
+        return ["EASY", "NORMAL", "HARD"].includes(v);
+      },
+      { message: "難易度を選択してください。" },
+    ),
+  tagId: z.string(),
+  description: z.string().max(20, "メモは20文字以下で入力します。"),
 });
 
 export type TManageValidationSchema = z.infer<typeof manageValidationSchema>;

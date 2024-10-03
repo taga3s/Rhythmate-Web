@@ -32,7 +32,7 @@ export const TagDropdown: FC<Props> = ({ register, watch, tagId }) => {
             未選択
           </option>
           {tagItems.map((item) => (
-            <TagItem key={item.id} tagId={item.id} tagName={item.name} tagColor={item.color} />
+            <TagItem key={item.id} tagId={item.id} tagName={item.name} />
           ))}
         </select>
       ) : (
