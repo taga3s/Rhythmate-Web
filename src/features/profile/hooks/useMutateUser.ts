@@ -6,12 +6,10 @@ import type { UpdateLoginUserParams } from "../../../api/user/types";
 import { queryClient } from "../../../api/client/queryClient";
 import type { FetchError } from "../../../api/util/fetchError";
 import { notifyWithToast } from "../../../utils/toast";
-import { useCookies } from "react-cookie";
 
 export const useMutateUser = () => {
   const userFactory = createFactory();
   const navigate = useNavigate();
-  const [, , removeCookie] = useCookies(["rtoken"]);
 
   const updateUserMutation = useMutation({
     mutationFn: async (params: UpdateLoginUserParams) => {
@@ -39,7 +37,6 @@ export const useMutateUser = () => {
     mutationFn: async () => await userFactory.logout(),
     onSuccess: () => {
       queryClient.clear();
-      removeCookie("rtoken");
       navigate({ to: "/" });
     },
     onError: (err: FetchError) => {
