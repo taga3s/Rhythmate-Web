@@ -6,7 +6,8 @@ export const createFactory = () => {
   const repository = userRepository;
   return {
     auth: async (params: AuthParams) => {
-      await repository.auth(params);
+      const response = await repository.auth(params);
+      return response;
     },
     isAuthenticated: async () => {
       const response = await repository.isAuthenticated();
