@@ -1,7 +1,11 @@
 import { apiClient } from "../../api/client/apiClient";
+
+type AuthResponse = {
+  rtoken: string;
+};
+
 import type {
   AuthRequest,
-  AuthResponse,
   GetLoginUserResponse,
   IsAuthenticatedResponse,
   UpdateLoginUserRequest,
