@@ -28,7 +28,9 @@ export const QuestListItem: FC<Props> = (props) => {
       <div className="flex justify-between">
         <div className="w-[calc(100%-70px)] flex flex-col justify-center px-3">
           <div className="w-full flex gap-2 my-2">
-            <ClockIcon color="text-rhyth-dark-blue" />
+            <div className="w-6 h-6">
+              <ClockIcon color="text-rhyth-dark-blue" />
+            </div>
             <span className="text-rhyth-dark-blue">
               {startsAt} ~ {minutes}min
             </span>
