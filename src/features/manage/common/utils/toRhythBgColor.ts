@@ -1,4 +1,4 @@
-const toTagBgColor = (tagColor?: string) => {
+const toRhythBgColor = (tagColor?: string) => {
   switch (tagColor) {
     case "Blue":
       return "bg-rhyth-blue";
@@ -19,4 +19,4 @@ const toTagBgColor = (tagColor?: string) => {
   }
 };
 
-export { toTagBgColor };
+export { toRhythBgColor };

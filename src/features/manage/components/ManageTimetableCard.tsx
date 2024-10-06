@@ -5,7 +5,7 @@ import { ClockIcon } from "../../common/components/icons/ClockIcon";
 import { calcExp } from "../../common/funcs/calcExp";
 import { ManageProgressBar } from "./ManageProgressBar";
 import { ChevronDownIcon, ChevronUpIcon, EditIcon, HonoIcon, PencilIcon, TagIcon } from "../../common/components/icons";
-import { toTagBgColor } from "../common/utils/toTagBgColor";
+import { toRhythBgColor } from "../common/utils/toRhythBgColor";
 import { convertENToJPWeekdayString } from "../common/utils/convertENtoJPWeekdayString";
 
 type Props = {
@@ -26,18 +26,14 @@ export const ManageTimetableCard: FC<Props> = (props) => {
   const navigate = useNavigate();
 
   const handleAccordion = () => {
-    if (isAccordionOpen) {
-      setIsAccordionOpen(false);
-    } else {
-      setIsAccordionOpen(true);
-    }
+    setIsAccordionOpen((prev) => !prev);
   };
 
   return (
     <div className={"bg-rhyth-bg-gray shadow-lg text-rhyth-dark-blue rounded-xl"}>
       <div className="flex items-center justify-between">
         <div
-          className={`h-20 flex flex-col items-center justify-center font-bold tracking-widest p-2 pr-3 ${toTagBgColor(
+          className={`h-20 flex flex-col items-center justify-center font-bold tracking-widest p-2 pr-3 ${toRhythBgColor(
             props.tagColor,
           )} text-white ${isAccordionOpen ? "rounded-tl-lg" : "rounded-l-lg"}`}
         >
@@ -105,7 +101,7 @@ export const ManageTimetableCard: FC<Props> = (props) => {
               </div>
               {props.tagName && (
                 <div
-                  className={`w-fit flex justify-center items-center gap-2 text-white ${toTagBgColor(
+                  className={`w-fit flex justify-center items-center gap-2 text-white ${toRhythBgColor(
                     props.tagColor,
                   )} py-1 px-3 rounded-lg text-sm`}
                 >
@@ -120,7 +116,7 @@ export const ManageTimetableCard: FC<Props> = (props) => {
           <hr className="h-0.5 bg-rhyth-light-gray" />
           <div className="flex items-center h-28">
             <div className="w-full h-full p-2">
-              <p className="font-cp-font text-rhyth-green mt-auto my-2 ml-1">継続レベル</p>
+              <span className="font-cp-font text-rhyth-green mt-auto my-2 ml-1">継続レベル</span>
               <ManageProgressBar level={props.continuationLevel} />
               <div className="flex justify-end items-center text-sm">
                 <span className="font-cp-font font-bold tracking-[0.2em] text-white mt-1 bg-rhyth-orange px-2 py-1 rounded-full">

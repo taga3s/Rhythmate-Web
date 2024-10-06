@@ -6,7 +6,7 @@ import { calcExp } from "../../common/funcs/calcExp";
 import { ManageProgressBar } from "./ManageProgressBar";
 import { formatDateTimeOnlyTime } from "../../../utils/dayjs";
 import { HonoIcon, TagIcon, EditIcon, PencilIcon } from "../../common/components/icons";
-import { toTagBgColor } from "../common/utils/toTagBgColor";
+import { toRhythBgColor } from "../common/utils/toRhythBgColor";
 import { convertENToJPWeekdayString } from "../common/utils/convertENtoJPWeekdayString";
 
 type Props = {
@@ -18,8 +18,8 @@ type Props = {
   difficulty: Difficulty;
   days: Day[];
   continuationLevel: number;
-  tagName: string | undefined;
-  tagColor: string | undefined;
+  tagName?: string;
+  tagColor?: string;
 };
 
 export const ManageQuestCard: FC<Props> = (props) => {
@@ -72,7 +72,7 @@ export const ManageQuestCard: FC<Props> = (props) => {
             </div>
             {props.tagName && (
               <div
-                className={`w-fit flex justify-center items-center gap-2 text-white ${toTagBgColor(
+                className={`w-fit flex justify-center items-center gap-2 text-white ${toRhythBgColor(
                   props.tagColor,
                 )} py-1 px-3 rounded-lg text-sm`}
               >
