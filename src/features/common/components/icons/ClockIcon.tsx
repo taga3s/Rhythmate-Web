@@ -7,7 +7,7 @@ type Props = {
 export const ClockIcon: FC<Props> = ({ color }) => {
   return (
     <svg
-      className={`w-6 h-6 ${color}`}
+      className={`w-full h-full ${color}`}
       aria-hidden="true"
       xmlns="http://www.w3.org/2000/svg"
       fill="currentColor"
