@@ -9,3 +9,4 @@ export * from "./PencilIcon";
 export * from "./EditIcon";
 export * from "./ChevronUpIcon";
 export * from "./ChevronDownIcon";
+export * from "./StarIcon";
