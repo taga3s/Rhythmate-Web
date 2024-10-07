@@ -8,8 +8,8 @@ import { ManageDayOfTheWeekSwitchButton } from "./ManageDayOfTheWeekSwitchButton
 import type { Day } from "../../../api/quest/types";
 
 type QuestWithTag = Quest & {
-  tagName: string | undefined;
-  tagColor: string | undefined;
+  tagName?: string;
+  tagColor?: string;
 };
 
 type Props = {
@@ -23,7 +23,7 @@ export const ManageTimetable: FC<Props> = (props) => {
 
   return (
     <div className="flex flex-col gap-4 min-h-[440px] py-4">
-      <div className="flex gap-2 rounded-lg overflow-auto">
+      <div className="flex gap-2 py-2 overflow-auto">
         {DAYS.map((day) => {
           return (
             <ManageDayOfTheWeekSwitchButton
