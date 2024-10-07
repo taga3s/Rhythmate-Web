@@ -11,6 +11,7 @@ import { ManageTimetable } from "./ManageTimetable";
 import type { Tag } from "../../../api/tag/model";
 import { getTodayEn } from "../../../utils/dayjs";
 import { useQueryTagList } from "../../tags/hooks/useQueryTag";
+import { AddIcon, ChatIcon, CloseIcon, SwitchIcon } from "../../common/components";
 
 type QuestWithTag = Quest & {
   tagName: string | undefined;
@@ -87,11 +88,7 @@ export const ManagePresenter = () => {
   });
 
   const handleManageView = () => {
-    if (manageView === "Timetable") {
-      setManageView("Card");
-    } else {
-      setManageView("Timetable");
-    }
+    setManageView((prev) => (prev === "Timetable" ? "Card" : "Timetable"));
   };
 
   return (
@@ -109,24 +106,9 @@ export const ManagePresenter = () => {
               setFilterActivation(false);
             }}
           >
-            <svg
-              className="w-6 h-6 text-rhyth-red"
-              aria-hidden="true"
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              fill="none"
-              viewBox="0 0 24 24"
-            >
-              <title>rhythmate close icon</title>
-              <path
-                stroke="currentColor"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M6 18 17.94 6M18 18 6.06 6"
-              />
-            </svg>
+            <div className="w-6 h-6 text-rhyth-red">
+              <CloseIcon />
+            </div>
             <span className="text-sm font-bold text-rhyth-dark-blue">検索をやめる</span>
           </button>
         ) : (
@@ -135,23 +117,9 @@ export const ManagePresenter = () => {
             className="flex items-center gap-1 bg-white py-2 px-4 rounded-full border-2 border-rhyth-light-gray shadow-sm hover:bg-rhyth-bg-dark-gray"
             onClick={handleManageView}
           >
-            <svg
-              className="w-6 h-6 text-rhyth-blue"
-              aria-hidden="true"
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              fill="none"
-              viewBox="0 0 24 24"
-            >
-              <path
-                stroke="currentColor"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="m16 10 3-3m0 0-3-3m3 3H5v3m3 4-3 3m0 0 3 3m-3-3h14v-3"
-              />
-            </svg>
+            <div className="w-6 h-6 text-rhyth-blue">
+              <SwitchIcon />
+            </div>
             <span className="text-sm font-bold text-rhyth-dark-blue">
               {manageView === "Timetable" ? "全表示" : "曜日別表示"}
             </span>
@@ -217,42 +185,18 @@ export const ManagePresenter = () => {
         </div>
       ) : (
         <div className="w-full gap-4 flex flex-col items-center mx-auto mt-24">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            strokeWidth="1"
-            stroke="currentColor"
-            className="w-36 h-36 stroke-rhyth-blue"
-          >
-            <title>rhythmate chat icon</title>
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M2.25 12.76c0 1.6 1.123 2.994 2.707 3.227 1.087.16 2.185.283 3.293.369V21l4.076-4.076a1.526 1.526 0 0 1 1.037-.443 48.282 48.282 0 0 0 5.68-.494c1.584-.233 2.707-1.626 2.707-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0 0 12 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018Z"
-            />
-          </svg>
+          <div className="w-36 h-36 text-rhyth-blue">
+            <ChatIcon />
+          </div>
           <h1 className="text-lg">まずはクエストを作成しましょう！</h1>
           <button
             type="button"
             className="bg-rhyth-blue hover:bg-rhyth-hover-blue text-white flex mt-3 h-12 w-44 items-center justify-center rounded-lg"
             onClick={() => navigate({ to: "/manage/new" })}
           >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth="1.5"
-              stroke="currentColor"
-              className="w-7 h-7 mr-2"
-            >
-              <title>rhythmate edit icon</title>
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10"
-              />
-            </svg>
+            <div className="w-7 h-7 mr-2">
+              <AddIcon />
+            </div>
             <span>クエストを作成</span>
           </button>
         </div>
