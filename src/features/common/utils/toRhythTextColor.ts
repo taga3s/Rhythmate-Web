@@ -1,8 +1,7 @@
-import type { Tag } from "../../../../api/tag/model";
+// type Color = "Blue" | "Green" | "Red" | "Purple" | "Orange" | "Yellow" | "LightBlue";
 
-export const toSelectColorLabel = (tagItems: Tag[], tagId: string | undefined) => {
-  const selectTagItem = tagItems?.find((tagItem) => tagItem.id === tagId);
-  switch (selectTagItem?.color) {
+const toRhythTextColor = (color: string): string => {
+  switch (color) {
     case "Blue":
       return "text-rhyth-blue";
     case "Green":
@@ -18,6 +17,8 @@ export const toSelectColorLabel = (tagItems: Tag[], tagId: string | undefined) =
     case "LightBlue":
       return "text-rhyth-light-blue";
     default:
-      return "text-rhyth-dark-blue";
+      return "text-rhyth-gray";
   }
 };
+
+export { toRhythTextColor };

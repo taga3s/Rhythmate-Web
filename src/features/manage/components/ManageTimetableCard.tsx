@@ -1,12 +1,19 @@
 import { useNavigate } from "@tanstack/react-router";
 import { type FC, useState } from "react";
 import type { Day, Difficulty } from "../../../api/quest/types";
-import { ClockIcon } from "../../common/components/icons/ClockIcon";
 import { calcExp } from "../../common/funcs/calcExp";
 import { ManageProgressBar } from "./ManageProgressBar";
-import { ChevronDownIcon, ChevronUpIcon, EditIcon, HonoIcon, PencilIcon, TagIcon } from "../../common/components/icons";
-import { toRhythBgColor } from "../common/utils/toRhythBgColor";
+import {
+  ChevronDownIcon,
+  ChevronUpIcon,
+  EditIcon,
+  HonoIcon,
+  PencilIcon,
+  TagIcon,
+  ClockIcon,
+} from "../../common/components/icons";
 import { convertENToJPWeekdayString } from "../common/utils/convertENtoJPWeekdayString";
+import { toRhythBgColor } from "../../common/utils";
 
 type Props = {
   id: string;
@@ -25,7 +32,7 @@ export const ManageTimetableCard: FC<Props> = (props) => {
   const [isAccordionOpen, setIsAccordionOpen] = useState<boolean>(false);
   const navigate = useNavigate();
 
-  const handleAccordion = () => {
+  const handleClickAccordion = () => {
     setIsAccordionOpen((prev) => !prev);
   };
 
@@ -34,7 +41,7 @@ export const ManageTimetableCard: FC<Props> = (props) => {
       <div className="flex items-center justify-between">
         <div
           className={`h-20 flex flex-col items-center justify-center font-bold tracking-widest p-2 pr-3 ${toRhythBgColor(
-            props.tagColor,
+            props.tagColor ?? "",
           )} text-white ${isAccordionOpen ? "rounded-tl-lg" : "rounded-l-lg"}`}
         >
           <h2 className="w-[4.5rem] text-lg text-center">{props.startsAt}</h2>
@@ -42,7 +49,7 @@ export const ManageTimetableCard: FC<Props> = (props) => {
         </div>
         <div className="w-full flex items-center justify-between p-2">
           <span className="ml-2 tracking-wider font-cp-font text-xl font-bold">{props.title}</span>
-          <button type="button" className="p-2" onClick={handleAccordion}>
+          <button type="button" className="p-2" onClick={handleClickAccordion}>
             {isAccordionOpen ? (
               <div className="w-6 h-6">
                 <ChevronUpIcon />
@@ -102,7 +109,7 @@ export const ManageTimetableCard: FC<Props> = (props) => {
               {props.tagName && (
                 <div
                   className={`w-fit flex justify-center items-center gap-2 text-white ${toRhythBgColor(
-                    props.tagColor,
+                    props.tagColor ?? "",
                   )} py-1 px-3 rounded-lg text-sm`}
                 >
                   <div className="w-6 h-6 text-white">
@@ -131,7 +138,7 @@ export const ManageTimetableCard: FC<Props> = (props) => {
             <div className="bg-rhyth-red min-w-20 h-full flex flex-col justify-center items-center gap-2 text-xs tracking-wider rounded-br-md">
               <span className="text-white font-semibold font-cp-font">獲得Exp</span>
               <div className="flex justify-between items-center">
-                <div className="w-6 h-6 ml-2">
+                <div className="w-6 h-6 ml-2 text-rhyth-orange">
                   <HonoIcon />
                 </div>
                 <span className="text-white text-lg font-semibold text-right mr-3">

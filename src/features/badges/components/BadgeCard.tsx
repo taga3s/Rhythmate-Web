@@ -1,6 +1,6 @@
 import type { FC } from "react";
 import type { FrameColor, ImageType } from "../../../api/badge/type";
-import { formatDateJP } from "../../../utils/dayjs";
+import { formatDateJP } from "../../common/utils";
 import { useMutateBadge } from "../hooks/useMutateBadge";
 import { Badge } from "./badge/Badge";
 import { BadgeSecret } from "./badge/BadgeSecret";

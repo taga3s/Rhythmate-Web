@@ -4,10 +4,10 @@ import type { Day, Difficulty } from "../../../api/quest/types";
 import { ClockIcon } from "../../common/components/icons/ClockIcon";
 import { calcExp } from "../../common/funcs/calcExp";
 import { ManageProgressBar } from "./ManageProgressBar";
-import { formatDateTimeOnlyTime } from "../../../utils/dayjs";
+import { formatDateTimeOnlyTime } from "../../common/utils";
 import { HonoIcon, TagIcon, EditIcon, PencilIcon } from "../../common/components/icons";
-import { toRhythBgColor } from "../common/utils/toRhythBgColor";
 import { convertENToJPWeekdayString } from "../common/utils/convertENtoJPWeekdayString";
+import { toRhythBgColor } from "../../common/utils";
 
 type Props = {
   id: string;
@@ -73,7 +73,7 @@ export const ManageQuestCard: FC<Props> = (props) => {
             {props.tagName && (
               <div
                 className={`w-fit flex justify-center items-center gap-2 text-white ${toRhythBgColor(
-                  props.tagColor,
+                  props.tagColor ?? "",
                 )} py-1 px-3 rounded-lg text-sm`}
               >
                 <div className="w-6 h-6 text-white">
@@ -104,7 +104,7 @@ export const ManageQuestCard: FC<Props> = (props) => {
           <div className="bg-rhyth-red min-w-20 h-full flex flex-col justify-center items-center gap-2 font-cp-font text-[12px] tracking-wider rounded-br-lg">
             <span className="text-white font-semibold font-cp-font">獲得Exp</span>
             <div className="flex justify-between items-center">
-              <div className="w-6 h-6">
+              <div className="w-6 h-6 text-rhyth-orange">
                 <HonoIcon />
               </div>
               <span className="text-white text-lg font-semibold text-right mr-3">

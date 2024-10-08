@@ -1,5 +1,5 @@
 import type { FC } from "react";
-import { toRhythBgColor } from "../common/utils/toRhythBgColor";
+import { toRhythBgColor } from "../../common/utils";
 
 type Props = {
   tagId: string;
