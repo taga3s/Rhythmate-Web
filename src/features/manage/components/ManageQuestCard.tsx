@@ -4,10 +4,10 @@ import type { Day, Difficulty } from "../../../api/quest/types";
 import { ClockIcon } from "../../common/components/icons/ClockIcon";
 import { calcExp } from "../../common/funcs/calcExp";
 import { ManageProgressBar } from "./ManageProgressBar";
-import { formatDateTimeOnlyTime } from "../../../utils/dayjs";
+import { formatDateTimeOnlyTime } from "../../common/utils";
 import { HonoIcon, TagIcon, EditIcon, PencilIcon } from "../../common/components/icons";
-import { toRhythBgColor } from "../common/utils/toRhythBgColor";
 import { convertENToJPWeekdayString } from "../common/utils/convertENtoJPWeekdayString";
+import { toRhythBgColor } from "../../common/utils";
 
 type Props = {
   id: string;
@@ -73,7 +73,7 @@ export const ManageQuestCard: FC<Props> = (props) => {
             {props.tagName && (
               <div
                 className={`w-fit flex justify-center items-center gap-2 text-white ${toRhythBgColor(
-                  props.tagColor,
+                  props.tagColor ?? "",
                 )} py-1 px-3 rounded-lg text-sm`}
               >
                 <div className="w-6 h-6 text-white">

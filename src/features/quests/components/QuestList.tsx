@@ -1,6 +1,6 @@
 import type { FC } from "react";
 import type { Quest } from "../../../api/quest/model";
-import { formatDateTimeOnlyTime } from "../../../utils/dayjs";
+import { formatDateTimeOnlyTime } from "../../common/utils";
 import { QuestListItem } from "./QuestListItem";
 
 type Props = {

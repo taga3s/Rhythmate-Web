@@ -3,7 +3,7 @@ import { useNavigate } from "@tanstack/react-router";
 import { type FC, useState } from "react";
 import { useForm } from "react-hook-form";
 import type { Day, Difficulty } from "../../../../api/quest/types";
-import { formatDateTimeOnlyTime } from "../../../../utils/dayjs";
+import { formatDateTimeOnlyTime } from "../../../common/utils";
 import { ClockIcon, ConfirmModal, FormErrorMsg, PencilIcon, StarIcon, TagIcon } from "../../../common/components";
 import { BackButton } from "../../../common/components/BackButton";
 import { useQueryQuestList } from "../../hooks/useQueryQuest";
@@ -178,7 +178,7 @@ export const EditPresenter: FC<Props> = (props) => {
               タグ
             </label>
           </div>
-          <TagDropdown register={register} watch={watch} tagId={targetQuest?.tagId} />
+          <TagDropdown register={register} watch={watch} />
         </div>
         <div className="w-full gap-2 mt-6">
           <div className="flex items-center gap-2 w-24">

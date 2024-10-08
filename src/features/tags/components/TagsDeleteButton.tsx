@@ -1,12 +1,12 @@
 import type { FC } from "react";
 
 type Props = {
-  onClickFn: () => void;
+  onClick: () => void;
 };
 
-export const TagsDeleteButton: FC<Props> = ({ onClickFn }) => {
+export const TagsDeleteButton: FC<Props> = ({ onClick }) => {
   return (
-    <button type="button" onClick={onClickFn}>
+    <button type="button" onClick={onClick}>
       <svg
         className="w-5 h-5 text-rhyth-red font-noto-sans font-bold"
         aria-hidden="true"
