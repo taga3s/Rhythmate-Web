@@ -9,6 +9,8 @@ export * from "./PencilIcon";
 export * from "./EditIcon";
 export * from "./ChevronUpIcon";
 export * from "./ChevronDownIcon";
+export * from "./ChevronLeftIcon";
+export * from "./ChevronRightIcon";
 export * from "./CloseIcon";
 export * from "./StarIcon";
 export * from "./SwitchIcon";

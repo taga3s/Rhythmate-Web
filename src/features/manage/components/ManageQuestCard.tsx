@@ -104,7 +104,7 @@ export const ManageQuestCard: FC<Props> = (props) => {
           <div className="bg-rhyth-red min-w-20 h-full flex flex-col justify-center items-center gap-2 font-cp-font text-[12px] tracking-wider rounded-br-lg">
             <span className="text-white font-semibold font-cp-font">獲得Exp</span>
             <div className="flex justify-between items-center">
-              <div className="w-6 h-6">
+              <div className="w-6 h-6 text-rhyth-orange">
                 <HonoIcon />
               </div>
               <span className="text-white text-lg font-semibold text-right mr-3">

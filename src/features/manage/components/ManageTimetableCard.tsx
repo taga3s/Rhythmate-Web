@@ -131,7 +131,7 @@ export const ManageTimetableCard: FC<Props> = (props) => {
             <div className="bg-rhyth-red min-w-20 h-full flex flex-col justify-center items-center gap-2 text-xs tracking-wider rounded-br-md">
               <span className="text-white font-semibold font-cp-font">獲得Exp</span>
               <div className="flex justify-between items-center">
-                <div className="w-6 h-6 ml-2">
+                <div className="w-6 h-6 ml-2 text-rhyth-orange">
                   <HonoIcon />
                 </div>
                 <span className="text-white text-lg font-semibold text-right mr-3">
