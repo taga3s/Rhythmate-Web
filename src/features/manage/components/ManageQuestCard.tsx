@@ -52,7 +52,7 @@ export const ManageQuestCard: FC<Props> = (props) => {
           </div>
           <h3 className="text-md text-rhyth-dark-blue">
             <div className="flex items-center gap-2">
-              <div className="w-6 h-6">
+              <div className="w-6 h-6 text-rhyth-dark-blue">
                 <PencilIcon />
               </div>
               {props.description !== "" ? props.description : "メモがありません"}
@@ -60,8 +60,8 @@ export const ManageQuestCard: FC<Props> = (props) => {
           </h3>
           <div className="flex justify-between items-center mt-2">
             <div className="flex justify-start gap-2">
-              <div className="w-6 h-6">
-                <ClockIcon color="text-rhyth-dark-blue" />
+              <div className="w-6 h-6 text-rhyth-dark-blue">
+                <ClockIcon />
               </div>
               <div className="flex flex-col items-start text-rhyth-dark-blue">
                 <span>
@@ -76,7 +76,7 @@ export const ManageQuestCard: FC<Props> = (props) => {
                   props.tagColor,
                 )} py-1 px-3 rounded-lg text-sm`}
               >
-                <div className="w-6 h-6">
+                <div className="w-6 h-6 text-white">
                   <TagIcon />
                 </div>
                 <span className="text-sm font-bold tracking-widest">{props.tagName}</span>

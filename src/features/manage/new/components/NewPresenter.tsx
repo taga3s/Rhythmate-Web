@@ -3,7 +3,7 @@ import { useNavigate } from "@tanstack/react-router";
 import { useForm } from "react-hook-form";
 import type { Day, Difficulty } from "../../../../api/quest/types";
 import { formatDateTimeOnlyDate, formatDateTimeWithAddMinutes, isBefore, now } from "../../../../utils/dayjs";
-import { BackButton, FormErrorMsg } from "../../../common/components";
+import { BackButton, ClockIcon, FormErrorMsg, PencilIcon, StarIcon, TagIcon } from "../../../common/components";
 import { useMutateQuest } from "../../hooks/useMutateQuest";
 import { DayOfTheWeek } from "../../common/components/DayOfTheWeek";
 import { DAYS, DIFFICULTIES } from "../../common/consts";
@@ -81,19 +81,9 @@ export const NewPresenter = () => {
         {errors.title && <FormErrorMsg msg={errors.title.message} />}
         <div className="grid grid-cols-8 mt-4">
           <div className="my-4">
-            <svg
-              className="w-6 h-6 text-rhyth-gray mt-2"
-              aria-hidden="true"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                fillRule="evenodd"
-                d="M2 12a10 10 0 1 1 20 0 10 10 0 0 1-20 0Zm11-4a1 1 0 1 0-2 0v4c0 .3.1.5.3.7l3 3a1 1 0 0 0 1.4-1.4L13 11.6V8Z"
-                clipRule="evenodd"
-              />
-            </svg>
+            <div className="w-6 h-6 text-rhyth-gray mt-2">
+              <ClockIcon />
+            </div>
           </div>
           <div className="my-2 col-span-7">
             <div className="grid grid-cols-5 my-2 items-center">
@@ -140,15 +130,9 @@ export const NewPresenter = () => {
         </div>
         <div className="mt-4">
           <div className="flex items-center gap-2">
-            <svg
-              className="w-6 h-6 text-rhyth-gray"
-              aria-hidden="true"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path d="M4 6a2 2 0 0 0-2 2v8c0 1.1.9 2 2 2h11.6c.5 0 1-.2 1.4-.5l4.4-4a2 2 0 0 0 0-3l-4.4-4a2 2 0 0 0-1.4-.5H4Z" />
-            </svg>
+            <div className="w-6 h-6 text-rhyth-gray">
+              <StarIcon />
+            </div>
             <p className="font-bold text-rhyth-gray">難易度</p>
           </div>
           <div className="flex justify-center gap-4 mt-4">
@@ -160,17 +144,9 @@ export const NewPresenter = () => {
         </div>
         <div className="w-full gap-2 mt-6">
           <div className="flex items-center gap-2 w-24">
-            <svg
-              className="w-6 h-6 text-rhyth-gray"
-              aria-hidden="true"
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              fill="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path d="M18.045 3.007 12.31 3a1.965 1.965 0 0 0-1.4.585l-7.33 7.394a2 2 0 0 0 0 2.805l6.573 6.631a1.957 1.957 0 0 0 1.4.585 1.965 1.965 0 0 0 1.4-.585l7.409-7.477A2 2 0 0 0 21 11.479v-5.5a2.972 2.972 0 0 0-2.955-2.972Zm-2.452 6.438a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z" />
-            </svg>
+            <div className="w-6 h-6 text-rhyth-gray">
+              <TagIcon />
+            </div>
             <label htmlFor="new-quest-tag" className="text-base font-bold text-rhyth-gray">
               タグ
             </label>
@@ -179,15 +155,9 @@ export const NewPresenter = () => {
         </div>
         <div className="w-full gap-2 mt-6">
           <div className="flex items-center gap-2 w-24">
-            <svg
-              className="w-6 h-6 text-rhyth-gray"
-              aria-hidden="true"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-            >
-              <path stroke="currentColor" strokeLinecap="round" strokeWidth="2" d="M5 7h14M5 12h14M5 17h10" />
-            </svg>
+            <div className="w-6 h-6 text-rhyth-gray">
+              <PencilIcon />
+            </div>
             <label htmlFor="new-quest-description" className="text-base font-bold text-rhyth-gray">
               メモ
             </label>

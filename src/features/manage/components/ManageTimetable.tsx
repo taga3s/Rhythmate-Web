@@ -30,7 +30,7 @@ export const ManageTimetable: FC<Props> = (props) => {
               key={day}
               view={day}
               dayOfTheWeek={dayOfTheWeekView}
-              onClickFn={setDayOfTheWeekView}
+              onClick={setDayOfTheWeekView}
             />
           );
         })}

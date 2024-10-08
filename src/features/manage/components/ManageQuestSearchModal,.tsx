@@ -7,6 +7,7 @@ import { DAYS, DIFFICULTIES } from "../common/consts";
 import { ManageDayOfTheWeekCheckBox } from "./ManageDayOfTheWeekCheckBox";
 import { ManageDifficultyCheckBox } from "./ManageDifficultyCheckBox";
 import { ManageSearchTagsDropdown } from "./ManageSearchTagsDropdown";
+import { ClockIcon, TagIcon, StarIcon } from "../../common/components";
 
 type Props = {
   onClickFn: () => void;
@@ -63,21 +64,9 @@ export const ManageQuestSearchModal: FC<Props> = ({
         <span className="block -mt-4 mb-2 font-cp-font text-rhyth-dark-blue text-xl text-center">クエスト検索</span>
         <div className="flex flex-col gap-y-4">
           <div className="flex gap-3 items-center y-4">
-            <svg
-              className="w-6 h-6 text-rhyth-gray "
-              aria-hidden="true"
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              fill="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                fillRule="evenodd"
-                d="M2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10S2 17.523 2 12Zm11-4a1 1 0 1 0-2 0v4a1 1 0 0 0 .293.707l3 3a1 1 0 0 0 1.414-1.414L13 11.586V8Z"
-                clipRule="evenodd"
-              />
-            </svg>
+            <div className="w-6 h-6 text-rhyth-gray">
+              <ClockIcon />
+            </div>
             <span className="font-cp-font text-rhyth-dark-blue">実施曜日</span>
           </div>
           <div className="flex gap-1 ml-auto">
@@ -88,34 +77,18 @@ export const ManageQuestSearchModal: FC<Props> = ({
             })}
           </div>
           <div className="flex gap-3 items-center">
-            <svg
-              className="w-6 h-6 text-rhyth-gray"
-              aria-hidden="true"
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              fill="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path d="M18.045 3.007 12.31 3a1.965 1.965 0 0 0-1.4.585l-7.33 7.394a2 2 0 0 0 0 2.805l6.573 6.631a1.957 1.957 0 0 0 1.4.585 1.965 1.965 0 0 0 1.4-.585l7.409-7.477A2 2 0 0 0 21 11.479v-5.5a2.972 2.972 0 0 0-2.955-2.972Zm-2.452 6.438a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z" />
-            </svg>
+            <div className="w-6 h-6 text-rhyth-gray">
+              <TagIcon />
+            </div>
             <p className="font-cp-font text-rhyth-dark-blue">タグ</p>
             <div className="w-1/2 flex ml-auto">
               <ManageSearchTagsDropdown tagItems={tagItems ?? []} tag={tag} handleTag={handleTag} />
             </div>
           </div>
           <div className="flex gap-3 items-center">
-            <svg
-              className="w-6 h-6 text-rhyth-gray"
-              aria-hidden="true"
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              fill="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path d="M13.849 4.22c-.684-1.626-3.014-1.626-3.698 0L8.397 8.387l-4.552.361c-1.775.14-2.495 2.331-1.142 3.477l3.468 2.937-1.06 4.392c-.413 1.713 1.472 3.067 2.992 2.149L12 19.35l3.897 2.354c1.52.918 3.405-.436 2.992-2.15l-1.06-4.39 3.468-2.938c1.353-1.146.633-3.336-1.142-3.477l-4.552-.36-1.754-4.17Z" />
-            </svg>
+            <div className="w-6 h-6 text-rhyth-gray">
+              <StarIcon />
+            </div>
             <p className="font-cp-font text-rhyth-dark-blue">難易度</p>
             <div className="flex gap-1 ml-auto">
               {DIFFICULTIES.map((difficulty) => {

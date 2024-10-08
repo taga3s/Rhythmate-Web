@@ -1,13 +1,7 @@
-import type { FC } from "react";
-
-type Props = {
-  color: string;
-};
-
-export const ClockIcon: FC<Props> = ({ color }) => {
+export const ClockIcon = () => {
   return (
     <svg
-      className={`w-full h-full ${color}`}
+      className="w-full h-full"
       aria-hidden="true"
       xmlns="http://www.w3.org/2000/svg"
       fill="currentColor"
