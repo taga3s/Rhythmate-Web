@@ -1,7 +1,7 @@
 const TagIcon = () => {
   return (
     <svg
-      className="w-full h-full text-white"
+      className="w-full h-full"
       aria-hidden="true"
       xmlns="http://www.w3.org/2000/svg"
       fill="currentColor"

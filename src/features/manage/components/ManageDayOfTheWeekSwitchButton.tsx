@@ -5,10 +5,10 @@ import { convertEnToJPWeekday } from "../common/utils";
 type Props = {
   view: Day;
   dayOfTheWeek: Day;
-  onClickFn: (dayOfTheWeek: Day) => void;
+  onClick: (dayOfTheWeek: Day) => void;
 };
 
-export const ManageDayOfTheWeekSwitchButton: FC<Props> = ({ view, dayOfTheWeek, onClickFn }) => {
+export const ManageDayOfTheWeekSwitchButton: FC<Props> = ({ view, dayOfTheWeek, onClick }) => {
   return (
     <button
       type="button"
@@ -17,7 +17,7 @@ export const ManageDayOfTheWeekSwitchButton: FC<Props> = ({ view, dayOfTheWeek, 
           ? "text-white bg-rhyth-light-blue"
           : "bg-white text-rhyth-dark-blue hover:bg-rhyth-hover-light-gray"
       }`}
-      onClick={() => onClickFn(view)}
+      onClick={() => onClick(view)}
     >
       {convertEnToJPWeekday(view)}
     </button>
