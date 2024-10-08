@@ -2,7 +2,7 @@ import type { FC } from "react";
 import type { UseFormRegister, UseFormWatch } from "react-hook-form";
 import type { TTagValidationSchema } from "../validation";
 import { TagsColorItem } from "./TagsColorItem";
-import { selectTagColorText } from "../selectTagColor";
+import { toRhythTextColor } from "../../common/utils";
 
 type Props = {
   register: UseFormRegister<TTagValidationSchema>;
@@ -10,14 +10,15 @@ type Props = {
 };
 
 export const TagsColorDropdown: FC<Props> = ({ register, watch }) => {
-  const colorValue = watch("color");
+  const color = watch("color");
+
   return (
     <select
       id="tag-color"
-      className={`bg-white border border-rhyth-light-gray text-rhyth-dark-blue text-sm font-bold rounded-lg w-1/2 p-2 ${selectTagColorText(
-        colorValue,
+      className={`bg-white border border-rhyth-light-gray text-rhyth-dark-blue text-sm font-bold rounded-lg w-1/2 p-2 ${toRhythTextColor(
+        color,
       )}`}
-      value={colorValue}
+      value={color}
       {...register("color")}
     >
       <option

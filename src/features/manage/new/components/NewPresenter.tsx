@@ -2,7 +2,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useNavigate } from "@tanstack/react-router";
 import { useForm } from "react-hook-form";
 import type { Day, Difficulty } from "../../../../api/quest/types";
-import { formatDateTimeOnlyDate, formatDateTimeWithAddMinutes, isBefore, now } from "../../../../utils/dayjs";
+import { formatDateTimeOnlyDate, formatDateTimeWithAddMinutes, isBefore, now } from "../../../common/utils";
 import { BackButton, ClockIcon, FormErrorMsg, PencilIcon, StarIcon, TagIcon } from "../../../common/components";
 import { useMutateQuest } from "../../hooks/useMutateQuest";
 import { DayOfTheWeek } from "../../common/components/DayOfTheWeek";

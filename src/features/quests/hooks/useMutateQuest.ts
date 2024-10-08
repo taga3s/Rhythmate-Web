@@ -4,7 +4,7 @@ import type { Quest } from "../../../api/quest/model";
 import type { FinishQuestParams, ForceFinishQuestParams, StartQuestParams } from "../../../api/quest/types";
 import { queryClient } from "../../../api/client/queryClient";
 import type { FetchError } from "../../../api/util/fetchError";
-import { notifyWithToast } from "../../../utils/toast";
+import { notifyWithToast } from "../../common/utils";
 
 export const useMutateQuest = () => {
   const questFactory = createFactory();

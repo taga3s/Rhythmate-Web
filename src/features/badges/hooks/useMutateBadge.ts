@@ -4,7 +4,7 @@ import type { Badge } from "../../../api/badge/model";
 import type { AchieveBadgeParams, PinBadgeParams } from "../../../api/badge/type";
 import { queryClient } from "../../../api/client/queryClient";
 import type { FetchError } from "../../../api/util/fetchError";
-import { notifyWithToast } from "../../../utils/toast";
+import { notifyWithToast } from "../../common/utils";
 
 export const useMutateBadge = () => {
   const badgeFactory = createFactory();

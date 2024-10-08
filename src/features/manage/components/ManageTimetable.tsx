@@ -1,6 +1,6 @@
 import type { Dispatch, FC } from "react";
 import type { Quest } from "../../../api/quest/model";
-import { formatDateTimeOnlyTime } from "../../../utils/dayjs";
+import { formatDateTimeOnlyTime } from "../../common/utils";
 import { ManageTimetableCard } from "./ManageTimetableCard";
 import { ManageTimetableNoData } from "./ManageTimetableNoData";
 import { DAYS } from "../common/consts";

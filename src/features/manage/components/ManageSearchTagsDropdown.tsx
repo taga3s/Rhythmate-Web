@@ -1,6 +1,7 @@
 import type { FC } from "react";
 import type { Tag } from "../../../api/tag/model";
 import { ManageSearchTagItem } from "./ManageSearchTagItem";
+import { toRhythTextColor } from "../../common/utils";
 
 type Props = {
   tagItems: Tag[];
@@ -9,34 +10,14 @@ type Props = {
 };
 
 export const ManageSearchTagsDropdown: FC<Props> = ({ tagItems, tag, handleTag }) => {
-  const handleColorValue = (tagId: string) => {
-    const selectTagItem = tagItems?.find((tagItem) => tagItem.id === tagId);
-    switch (selectTagItem?.color) {
-      case "Blue":
-        return "text-rhyth-blue";
-      case "Green":
-        return "text-rhyth-green";
-      case "Red":
-        return "text-rhyth-red";
-      case "Purple":
-        return "text-rhyth-purple";
-      case "Orange":
-        return "text-rhyth-orange";
-      case "Yellow":
-        return "text-rhyth-yellow";
-      case "LightBlue":
-        return "text-rhyth-light-blue";
-      default:
-        return "text-rhyth-dark-blue";
-    }
-  };
+  const selectedTagItem = tagItems?.find((tagItem) => tagItem.id === tag.id);
 
   return (
     <select
       name="tag-color"
       id="tag-color"
-      className={`bg-white border-2 border-rhyth-light-gray text-rhyth-dark-blue text-sm font-bold rounded-lg w-full p-2 shadow-sm ${handleColorValue(
-        tag.id,
+      className={`bg-white border-2 border-rhyth-light-gray text-rhyth-dark-blue text-sm font-bold rounded-lg w-full p-2 shadow-sm ${toRhythTextColor(
+        selectedTagItem?.color ?? "",
       )}`}
       onChange={(event) => {
         const selectedTag = tagItems?.find((tagItem) => tagItem.id === event.target.value) ?? {

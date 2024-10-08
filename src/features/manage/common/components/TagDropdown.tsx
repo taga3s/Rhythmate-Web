@@ -3,24 +3,23 @@ import type { UseFormRegister, UseFormWatch } from "react-hook-form";
 import { TagItem } from "./TagItem";
 import type { TManageValidationSchema } from "../../common/validation";
 import { useQueryTagList } from "../../../tags/hooks/useQueryTag";
-import { toSelectColorLabel } from "../../common/utils";
+import { toRhythTextColor } from "../../../common/utils";
 
 type Props = {
   register: UseFormRegister<TManageValidationSchema>;
   watch: UseFormWatch<TManageValidationSchema>;
-  tagId?: string;
 };
 
-export const TagDropdown: FC<Props> = ({ register, watch, tagId }) => {
+export const TagDropdown: FC<Props> = ({ register, watch }) => {
   const { data: tagItems } = useQueryTagList();
-  const tagIdForColorSelect = watch("tagId");
-  const selectColorLabel = toSelectColorLabel(tagItems, tagIdForColorSelect);
+  const tagId = watch("tagId");
+  const selectedTag = tagItems?.find((item) => item.id === tagId);
 
   return (
     <>
       {tagItems?.length ? (
         <select
-          className={`w-full p-2 mt-4 border-2 rounded-md bg-white ${selectColorLabel}`}
+          className={`w-full p-2 mt-4 border-2 rounded-md bg-white ${toRhythTextColor(selectedTag?.color ?? "")}`}
           id="edit-quest-description"
           defaultValue={tagId}
           {...register("tagId")}

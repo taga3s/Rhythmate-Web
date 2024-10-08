@@ -2,7 +2,7 @@ import { useState } from "react";
 import Confetti from "react-confetti";
 import useWindowSize from "react-use/lib/useWindowSize";
 import type { Quest } from "../../../api/quest/model";
-import { formatDateJP, getToday, getTodayEn, now } from "../../../utils/dayjs";
+import { formatDateJP, getToday, getTodayEn, now } from "../../common/utils";
 import { useQueryQuestList } from "../hooks/useQueryQuest";
 import { QuestBoard } from "./QuestBoard";
 import { QuestBoardNoData } from "./QuestBoardNoData";

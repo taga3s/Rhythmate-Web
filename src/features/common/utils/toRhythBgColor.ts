@@ -1,5 +1,7 @@
-const toRhythBgColor = (tagColor?: string) => {
-  switch (tagColor) {
+// type Color = "Blue" | "Green" | "Red" | "Purple" | "Orange" | "Yellow" | "LightBlue";
+
+const toRhythBgColor = (color: string): string => {
+  switch (color) {
     case "Blue":
       return "bg-rhyth-blue";
     case "Green":
