@@ -1,12 +1,12 @@
 import type { FC } from "react";
-import { calcExp } from "../calcExp";
+import { calcAccumulatedExp } from "../calcAccumulaetdExp";
 
 type Props = {
   currentLevel: number;
   exp: number;
 };
 export const ProfileExpCard: FC<Props> = ({ currentLevel, exp }) => {
-  const { expBarProportion, remainingExp, toNextLevel, level } = calcExp(currentLevel, exp);
+  const { expBarProportion, remainingExp, toNextLevel, level } = calcAccumulatedExp(currentLevel, exp);
   return (
     <div className="w-full px-4 py-3 bg-white border border-gray-200 rounded-lg shadow flex flex-col gap-1.5">
       <p className="font-bold">経験値</p>

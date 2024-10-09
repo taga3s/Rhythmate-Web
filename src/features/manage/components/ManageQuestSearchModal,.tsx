@@ -58,7 +58,7 @@ export const ManageQuestSearchModal: FC<Props> = ({
   };
 
   return (
-    <ModalBase onClickClose={onClickFn}>
+    <ModalBase onClickClose={onClickFn} onKeyDownClose={onClickFn}>
       <div className="order relative bg-white rounded-lg shadow p-4">
         <ModalHeaderCloseButton onClickClose={onClickFn} />
         <span className="block -mt-4 mb-2 font-cp-font text-rhyth-dark-blue text-xl text-center">クエスト検索</span>

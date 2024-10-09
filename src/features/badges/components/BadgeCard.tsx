@@ -21,7 +21,7 @@ export const BadgeCard: FC<Props> = (props) => {
   const { achieveBadgeMutation, pinBadgeMutation, unpinBadgeMutation } = useMutateBadge();
 
   return (
-    <div className="flex items-center gap-3 p-3 w-full min-h-[148px] bg-white border-2 border-rhyth-light-gray border-solid rounded-lg shadow">
+    <li className="flex items-center gap-3 p-3 w-full min-h-[148px] bg-white border-2 border-rhyth-light-gray border-solid rounded-lg shadow">
       <div className="w-1/3 h-[100px] flex-row">
         {obtainedAt ? <Badge imageType={imageType} frameColor={frameColor} /> : <BadgeSecret />}
       </div>
@@ -60,6 +60,6 @@ export const BadgeCard: FC<Props> = (props) => {
           )}
         </div>
       </div>
-    </div>
+    </li>
   );
 };

@@ -151,7 +151,7 @@ export const QuestBoard: FC<Props> = (props) => {
           confirmBtnText={"開始する"}
           cancelBtnText={"キャンセル"}
           btnColor={"green"}
-          actionFn={handleStartQuest}
+          onAction={handleStartQuest}
           closeModal={() => setStartConfirmModalOpen(false)}
         />
       )}
@@ -161,7 +161,7 @@ export const QuestBoard: FC<Props> = (props) => {
           confirmBtnText={"完了する"}
           cancelBtnText={"キャンセル"}
           btnColor={"blue"}
-          actionFn={handleFinishQuest}
+          onAction={handleFinishQuest}
           closeModal={() => setFinishConfirmModalOpen(false)}
         />
       )}

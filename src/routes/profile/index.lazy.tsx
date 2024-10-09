@@ -1,6 +1,6 @@
 import { createLazyFileRoute } from "@tanstack/react-router";
 import { AppLayout, Loading, LoadingContainer } from "../../features/common/components";
-import { ProfilePresenter } from "../../features/profile/components/ProfilePresenter";
+import { ProfilePresenter } from "../../features/profile/presenters/ProfilePresenter";
 import { Suspense } from "react";
 
 export const Route = createLazyFileRoute("/profile/")({

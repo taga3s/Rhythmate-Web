@@ -1,12 +1,9 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useNavigate } from "@tanstack/react-router";
-import { type FC, useState } from "react";
 import { useForm } from "react-hook-form";
 import type { Day, Difficulty } from "../../../../api/quest/types";
-import { formatDateTimeOnlyTime } from "../../../common/utils";
-import { ClockIcon, ConfirmModal, FormErrorMsg, PencilIcon, StarIcon, TagIcon } from "../../../common/components";
-import { BackButton } from "../../../common/components/BackButton";
-import { useQueryQuestList } from "../../hooks/useQueryQuest";
+import { formatDateTimeOnlyDate, formatDateTimeWithAddMinutes, isBefore, now } from "../../../common/utils";
+import { BackButton, ClockIcon, FormErrorMsg, PencilIcon, StarIcon, TagIcon } from "../../../common/components";
 import { useMutateQuest } from "../../hooks/useMutateQuest";
 import { DayOfTheWeek } from "../../common/components/DayOfTheWeek";
 import { DAYS, DIFFICULTIES } from "../../common/consts";
@@ -25,17 +22,14 @@ type NewValues = {
   description: string;
 };
 
-type Props = {
-  quest_id: string;
+export const getCurrentQuestState = (now: string, startsAt: string) => {
+  const targetDateTime = formatDateTimeWithAddMinutes(`${formatDateTimeOnlyDate(now)} ${startsAt}`, 15);
+  return isBefore(targetDateTime) ? "INACTIVE" : "ACTIVE";
 };
 
-export const EditPresenter: FC<Props> = (props) => {
-  const { quest_id } = props;
-  const { deleteQuestMutation, updateQuestMutation } = useMutateQuest();
-  const { data: questListData } = useQueryQuestList();
-
-  const targetQuest = questListData.find((v) => v.id === quest_id);
-
+export const NewPresenter = () => {
+  const navigate = useNavigate();
+  const { createQuestMutation } = useMutateQuest();
   const {
     register,
     watch,
@@ -45,41 +39,22 @@ export const EditPresenter: FC<Props> = (props) => {
     mode: "onBlur",
     resolver: zodResolver(manageValidationSchema),
     defaultValues: {
-      title: targetQuest?.title ?? "",
-      startsAt: targetQuest?.startsAt ? formatDateTimeOnlyTime(targetQuest.startsAt) : "00:00",
-      tagId: targetQuest?.tagId ?? "",
-      minutes: targetQuest?.minutes ?? 1,
-      days: targetQuest?.days ?? [],
-      difficulty: targetQuest?.difficulty ?? "EASY",
-      description: targetQuest?.description ?? "",
+      days: [],
+      tagId: "",
     },
   });
 
-  const navigate = useNavigate();
-
   const onSubmit = (data: NewValues) => {
-    updateQuestMutation
+    createQuestMutation
       .mutateAsync({
-        id: quest_id,
         title: data.title,
         description: data.description,
         starts_at: data.startsAt,
         tag_id: data.tagId,
         minutes: data.minutes,
-        difficulty: data.difficulty,
         days: data.days,
-      })
-      .then(() => {
-        navigate({ to: "/manage" });
-      });
-  };
-
-  const [openModal, setOpenModal] = useState(false);
-
-  const onClickDelete = () => {
-    deleteQuestMutation
-      .mutateAsync({
-        id: quest_id,
+        difficulty: data.difficulty,
+        state: getCurrentQuestState(now(), data.startsAt),
       })
       .then(() => {
         navigate({ to: "/manage" });
@@ -88,17 +63,17 @@ export const EditPresenter: FC<Props> = (props) => {
 
   return (
     <>
-      <BackButton onClickNavigation={() => navigate({ to: "/manage" })} />
-      <h1 className="text-xl font-cp-font text-rhyth-gray mt-4 mb-2">クエスト編集</h1>
+      <BackButton onClick={() => navigate({ to: "/manage" })} />
+      <h1 className="text-xl font-cp-font text-rhyth-gray mt-4 mb-2">クエスト作成</h1>
       <form className="bg-white px-3 py-2 rounded-lg shadow-lg" onSubmit={handleSubmit(onSubmit)}>
         <div className="mt-2 flex flex-col gap-2">
-          <label htmlFor="edit-quest-title" className="text-base font-bold text-rhyth-gray">
+          <label htmlFor="new-quest-title" className="text-base font-bold text-rhyth-gray">
             タイトル
           </label>
           <input
             type="text"
+            id="new-quest-title"
             className="w-full p-2 border-2 border-rhyth-light-gray rounded-lg"
-            id="edit-quest-title"
             placeholder="例) 朝のストレッチ"
             {...register("title")}
           />
@@ -116,7 +91,7 @@ export const EditPresenter: FC<Props> = (props) => {
               <div className="col-span-3 flex justify-end items-center">
                 <input
                   type="time"
-                  className="w-[85px] border-2 rounded p-1 mr-2 bg-white  shadow-sm"
+                  className="w-[85px] border-2 rounded p-1 mr-2 bg-white shadow-sm"
                   {...register("startsAt")}
                 />
                 <span className="font-bold text-rhyth-gray">から</span>
@@ -128,8 +103,8 @@ export const EditPresenter: FC<Props> = (props) => {
               <div className="col-span-3 flex justify-end items-center">
                 <input
                   type="number"
-                  min={1}
                   className="w-[85px] border-2 rounded p-1 mr-2 shadow-sm"
+                  min={1}
                   {...register("minutes")}
                 />
                 <p className="font-bold text-rhyth-gray">分間</p>
@@ -139,17 +114,15 @@ export const EditPresenter: FC<Props> = (props) => {
             <div className="my-2">
               <p className="block my-2 font-bold text-rhyth-gray">実施頻度</p>
               <div className="flex mt-4 gap-1">
-                {DAYS.map((day) => {
-                  return (
-                    <DayOfTheWeek
-                      key={day}
-                      day={convertEnToJPWeekday(day)}
-                      value={day}
-                      register={register}
-                      watch={watch}
-                    />
-                  );
-                })}
+                {DAYS.map((day) => (
+                  <DayOfTheWeek
+                    key={day}
+                    displayedDay={convertEnToJPWeekday(day)}
+                    selectedDays={watch("days")}
+                    day={day}
+                    register={register}
+                  />
+                ))}
               </div>
               {errors.days && <FormErrorMsg msg={errors.days.message} />}
             </div>
@@ -164,7 +137,12 @@ export const EditPresenter: FC<Props> = (props) => {
           </div>
           <div className="flex justify-center gap-4 mt-4">
             {DIFFICULTIES.map((difficulty) => (
-              <DifficultyOption key={difficulty} difficulty={difficulty} watch={watch} register={register} />
+              <DifficultyOption
+                key={difficulty}
+                difficulty={difficulty}
+                selectedDifficulty={watch("difficulty")}
+                register={register}
+              />
             ))}
           </div>
           {errors.difficulty && <FormErrorMsg msg={errors.difficulty.message} />}
@@ -174,11 +152,11 @@ export const EditPresenter: FC<Props> = (props) => {
             <div className="w-6 h-6 text-rhyth-gray">
               <TagIcon />
             </div>
-            <label htmlFor="edit-quest-tag" className="text-base font-bold text-rhyth-gray">
+            <label htmlFor="new-quest-tag" className="text-base font-bold text-rhyth-gray">
               タグ
             </label>
           </div>
-          <TagDropdown register={register} watch={watch} />
+          <TagDropdown selectedTagId={watch("tagId")} register={register} />
         </div>
         <div className="w-full gap-2 mt-6">
           <div className="flex items-center gap-2 w-24">
@@ -191,38 +169,20 @@ export const EditPresenter: FC<Props> = (props) => {
           </div>
           <input
             type="text"
-            id="edit-quest-description"
+            id="new-quest-description"
             className="w-full border-2 p-2 rounded-md mt-4"
             placeholder="例) 同じメニューを毎日欠かさず行う"
             {...register("description")}
           />
         </div>
-        <div className="flex flex-col mt-8 mb-4 gap-4">
-          <button
-            type="submit"
-            className="w-full text-white bg-rhyth-blue hover:bg-rhyth-hover-blue focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-base p-3 focus:outline-none shadow-lg"
-          >
-            クエストを更新する
-          </button>
-          <button
-            onClick={() => setOpenModal(true)}
-            type="button"
-            className="w-full text-white bg-rhyth-red hover:bg-rhyth-hover-red focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-base p-3 focus:outline-none shadow-lg"
-          >
-            クエストを削除する
-          </button>
-        </div>
+        <button
+          type="submit"
+          className="w-full mt-8 text-white bg-rhyth-blue hover:bg-rhyth-hover-blue disabled:bg-rhyth-light-gray focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-base my-4 p-3 shadow-lg focus:outline-none"
+          disabled={createQuestMutation.isPending}
+        >
+          クエストを作成する
+        </button>
       </form>
-      {openModal && (
-        <ConfirmModal
-          text={"本当に削除しますか?"}
-          confirmBtnText={"削除する"}
-          cancelBtnText={"キャンセルする"}
-          btnColor={"red"}
-          actionFn={onClickDelete}
-          closeModal={() => setOpenModal(false)}
-        />
-      )}
     </>
   );
 };

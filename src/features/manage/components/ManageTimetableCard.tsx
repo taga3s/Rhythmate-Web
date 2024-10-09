@@ -1,7 +1,7 @@
 import { useNavigate } from "@tanstack/react-router";
 import { type FC, useState } from "react";
 import type { Day, Difficulty } from "../../../api/quest/types";
-import { calcExp } from "../../common/funcs/calcExp";
+import { calcExpectedExp } from "../../common/utils/calcExpectedExp";
 import { ManageProgressBar } from "./ManageProgressBar";
 import {
   ChevronDownIcon,
@@ -142,7 +142,7 @@ export const ManageTimetableCard: FC<Props> = (props) => {
                   <HonoIcon />
                 </div>
                 <span className="text-white text-lg font-semibold text-right mr-3">
-                  {calcExp(props.difficulty, props.continuationLevel)}
+                  {calcExpectedExp(props.difficulty, props.continuationLevel)}
                 </span>
               </div>
             </div>

@@ -10,7 +10,7 @@ import { TagsColorDropdown } from "./TagsColorDropdown";
 
 type Props = {
   modalType: string;
-  closeModal: () => void;
+  handleCloseNewModal: () => void;
 };
 
 type NewValues = {
@@ -18,7 +18,7 @@ type NewValues = {
   color: string;
 };
 
-export const TagsNewModal: FC<Props> = ({ modalType, closeModal }) => {
+export const TagsNewModal: FC<Props> = ({ modalType, handleCloseNewModal }) => {
   const { createTagMutation } = useMutateTag();
 
   const {
@@ -31,23 +31,28 @@ export const TagsNewModal: FC<Props> = ({ modalType, closeModal }) => {
     resolver: zodResolver(tagValidationSchema),
   });
 
-  const onSubmit = async (data: NewValues) => {
+  const onCreateTag = handleSubmit(async (data: NewValues) => {
     await createTagMutation.mutateAsync({
       name: data.name,
       color: data.color,
     });
-    closeModal();
-  };
+  });
 
   return (
-    <ModalBase onClickClose={closeModal}>
+    <ModalBase onClickClose={handleCloseNewModal} onKeyDownClose={handleCloseNewModal}>
       <div className="order relative bg-white rounded-lg shadow">
         <div className="flex items-center justify-between p-4 md:p-4 rounded-t border-b">
           <h3 className="font-cp-font text-xl font-bold text-rhyth-dark-blue">{modalType}</h3>
-          <ModalHeaderCloseButton onClickClose={closeModal} />
+          <ModalHeaderCloseButton onClickClose={handleCloseNewModal} />
         </div>
         <div className="p-4 md:p-4">
-          <form className="space-y-3" onSubmit={handleSubmit(onSubmit)}>
+          <form
+            className="space-y-3"
+            onSubmit={() => {
+              onCreateTag();
+              handleCloseNewModal();
+            }}
+          >
             <div className="flex items-center justify-between">
               <label className="flex gap-2 mb-2 text-sm font-bold text-rhyth-dark-blue my-2" htmlFor="tag-name">
                 <div className="w-6 h-6 text-rhyth-gray">
@@ -72,7 +77,7 @@ export const TagsNewModal: FC<Props> = ({ modalType, closeModal }) => {
                 </div>
                 <span>カラー</span>
               </label>
-              <TagsColorDropdown register={register} watch={watch} />
+              <TagsColorDropdown selectedColor={watch("color")} register={register} />
             </div>
             <button
               type="submit"

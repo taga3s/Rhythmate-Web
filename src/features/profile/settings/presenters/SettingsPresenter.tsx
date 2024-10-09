@@ -8,8 +8,8 @@ import { useMutateUser } from "../../hooks/useMutateUser";
 import { useQueryLoginUser } from "../../hooks/useQueryUser";
 import { type TUserEditValidationSchema, userEditValidationSchema } from "../../validation";
 import { useGetImageUrl } from "../hooks/useGetImageUrl";
-import { SettingsImageCropModal } from "./SettingsImageCropModal";
-import { SettingsInputImage } from "./SettingsInputImage";
+import { SettingsImageCropModal } from "../components/SettingsImageCropModal";
+import { SettingsInputImage } from "../components/SettingsInputImage";
 
 export const SettingsPresenter = () => {
   const [openModal, setOpenModal] = useState(false);
@@ -66,7 +66,7 @@ export const SettingsPresenter = () => {
     <>
       <div className="flex flex-col space-y-5 w-full">
         <div className="flex justify-start gap-3">
-          <BackButton onClickNavigation={() => navigation({ to: "/profile" })} />
+          <BackButton onClick={() => navigation({ to: "/profile" })} />
         </div>
         <h1 className="flex text-2xl justify-center font-bold">ユーザー設定</h1>
         <div className="p-4 flex flex-col gap-3 bg-white rounded-lg shadow">
@@ -135,7 +135,7 @@ export const SettingsPresenter = () => {
           confirmBtnText={"削除する"}
           cancelBtnText={"キャンセルする"}
           btnColor={"red"}
-          actionFn={onSubmitDelete}
+          onAction={onSubmitDelete}
           closeModal={() => setOpenModal(false)}
         />
       )}

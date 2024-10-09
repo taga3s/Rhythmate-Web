@@ -19,7 +19,7 @@ export const ProfileLogoutModal: FC<Props> = ({ onClickFn }) => {
       confirmBtnText={"ログアウトする"}
       cancelBtnText={"キャンセルする"}
       btnColor={"red"}
-      actionFn={onSubmit}
+      onAction={onSubmit}
       closeModal={onClickFn}
     />
   );

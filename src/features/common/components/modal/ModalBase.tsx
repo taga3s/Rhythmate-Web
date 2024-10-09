@@ -3,14 +3,15 @@ import type { FC, ReactNode } from "react";
 type Props = {
   children: ReactNode;
   onClickClose: () => void;
+  onKeyDownClose: () => void;
 };
-export const ModalBase: FC<Props> = ({ children, onClickClose }) => {
+export const ModalBase: FC<Props> = ({ children, onClickClose, onKeyDownClose }) => {
   return (
     <>
       <div
         className="fixed top-0 left-0 w-full h-full bg-gray-500 bg-opacity-50 z-[60]"
         onClick={onClickClose}
-        onKeyDown={onClickClose}
+        onKeyDown={onKeyDownClose}
       />
       <div
         aria-hidden="true"
