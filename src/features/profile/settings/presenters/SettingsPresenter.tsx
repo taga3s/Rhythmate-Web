@@ -8,8 +8,8 @@ import { useMutateUser } from "../../hooks/useMutateUser";
 import { useQueryLoginUser } from "../../hooks/useQueryUser";
 import { type TUserEditValidationSchema, userEditValidationSchema } from "../../validation";
 import { useGetImageUrl } from "../hooks/useGetImageUrl";
-import { SettingsImageCropModal } from "./SettingsImageCropModal";
-import { SettingsInputImage } from "./SettingsInputImage";
+import { SettingsImageCropModal } from "../components/SettingsImageCropModal";
+import { SettingsInputImage } from "../components/SettingsInputImage";
 
 export const SettingsPresenter = () => {
   const [openModal, setOpenModal] = useState(false);

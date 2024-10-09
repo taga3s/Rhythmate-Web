@@ -1,6 +1,6 @@
 import { createLazyFileRoute } from "@tanstack/react-router";
 import { AppLayout, Loading, LoadingContainer, Menu } from "../../../features/common/components";
-import { NewPresenter } from "../../../features/manage/new/components/NewPresenter";
+import { NewPresenter } from "../../../features/manage/new/presenters/NewPresenter";
 import { Suspense } from "react";
 
 export const Route = createLazyFileRoute("/manage/new/")({

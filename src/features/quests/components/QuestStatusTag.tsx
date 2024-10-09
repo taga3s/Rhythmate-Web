@@ -3,16 +3,16 @@ import { HonoIcon } from "../../common/components";
 
 type Props = {
   status: "CLOSED" | "SUCCESS" | "FAILED";
-  calcExp: number;
+  exp: number;
 };
 
-export const QuestStatusTag: FC<Props> = ({ status, calcExp }) => {
+export const QuestStatusTag: FC<Props> = ({ status, exp }) => {
   return status === "CLOSED" ? (
     <div className="w-[70px] flex items-center justify-center bg-rhyth-red text-white tracking-widest font-bold px-2 py-1 rounded-r-md shadow-md font-cp-font">
       <div className="w-6 h-6 text-rhyth-orange">
         <HonoIcon />
       </div>
-      <span className="text-white text-md">{calcExp}</span>
+      <span className="text-white text-md">{exp}</span>
     </div>
   ) : status === "SUCCESS" ? (
     <div className="w-[70px] flex items-center justify-center bg-rhyth-green text-white tracking-widest font-bold px-2 py-1 rounded-r-md shadow-md font-cp-font">

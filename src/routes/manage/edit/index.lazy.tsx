@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { z } from "zod";
 import { AppLayout, Loading, LoadingContainer } from "../../../features/common/components";
-import { EditPresenter } from "../../../features/manage/edit/components/EditPresenter";
+import { EditPresenter } from "../../../features/manage/edit/presenters/EditPresenter";
 import { Suspense } from "react";
 
 const manageSearchSchema = z.object({

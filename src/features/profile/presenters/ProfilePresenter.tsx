@@ -1,10 +1,10 @@
 import { useState } from "react";
 import { useQueryLoginUser } from "../hooks/useQueryUser";
-import { ProfileCard } from "./ProfileCard";
-import { ProfileExpCard } from "./ProfileExpCard";
-import { ProfileLogoutModal } from "./ProfileLogoutModal";
-import { ProfileLogoutModalButton } from "./ProfileLogoutModalButton";
-import { ProfileUserSettingsModalButton } from "./ProfileUserSettingsModalButton";
+import { ProfileCard } from "../components/ProfileCard";
+import { ProfileExpCard } from "../components/ProfileExpCard";
+import { ProfileLogoutModal } from "../components/ProfileLogoutModal";
+import { ProfileLogoutModalButton } from "../components/ProfileLogoutModalButton";
+import { ProfileUserSettingsModalButton } from "../components/ProfileUserSettingsModalButton";
 
 export const ProfilePresenter = () => {
   const { data: loginUser } = useQueryLoginUser();

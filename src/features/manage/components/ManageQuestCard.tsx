@@ -2,7 +2,7 @@ import { useNavigate } from "@tanstack/react-router";
 import type { FC } from "react";
 import type { Day, Difficulty } from "../../../api/quest/types";
 import { ClockIcon } from "../../common/components/icons/ClockIcon";
-import { calcExp } from "../../common/funcs/calcExp";
+import { calcExpectedExp } from "../../common/utils/calcExpectedExp";
 import { ManageProgressBar } from "./ManageProgressBar";
 import { formatDateTimeOnlyTime } from "../../common/utils";
 import { HonoIcon, TagIcon, EditIcon, PencilIcon } from "../../common/components/icons";
@@ -108,7 +108,7 @@ export const ManageQuestCard: FC<Props> = (props) => {
                 <HonoIcon />
               </div>
               <span className="text-white text-lg font-semibold text-right mr-3">
-                {calcExp(props.difficulty, props.continuationLevel)}
+                {calcExpectedExp(props.difficulty, props.continuationLevel)}
               </span>
             </div>
           </div>
