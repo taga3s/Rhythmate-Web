@@ -66,8 +66,8 @@ export const EditPresenter: FC<Props> = (props) => {
         starts_at: data.startsAt,
         tag_id: data.tagId,
         minutes: data.minutes,
-        difficulty: data.difficulty,
         days: data.days,
+        difficulty: data.difficulty,
       })
       .then(() => {
         navigate({ to: "/manage" });
@@ -88,7 +88,7 @@ export const EditPresenter: FC<Props> = (props) => {
 
   return (
     <>
-      <BackButton onClickNavigation={() => navigate({ to: "/manage" })} />
+      <BackButton onClick={() => navigate({ to: "/manage" })} />
       <h1 className="text-xl font-cp-font text-rhyth-gray mt-4 mb-2">クエスト編集</h1>
       <form className="bg-white px-3 py-2 rounded-lg shadow-lg" onSubmit={handleSubmit(onSubmit)}>
         <div className="mt-2 flex flex-col gap-2">
@@ -143,10 +143,10 @@ export const EditPresenter: FC<Props> = (props) => {
                   return (
                     <DayOfTheWeek
                       key={day}
-                      day={convertEnToJPWeekday(day)}
-                      value={day}
+                      displayedDay={convertEnToJPWeekday(day)}
+                      selectedDays={watch("days")}
+                      day={day}
                       register={register}
-                      watch={watch}
                     />
                   );
                 })}
@@ -164,7 +164,12 @@ export const EditPresenter: FC<Props> = (props) => {
           </div>
           <div className="flex justify-center gap-4 mt-4">
             {DIFFICULTIES.map((difficulty) => (
-              <DifficultyOption key={difficulty} difficulty={difficulty} watch={watch} register={register} />
+              <DifficultyOption
+                key={difficulty}
+                difficulty={difficulty}
+                selectedDifficulty={watch("difficulty")}
+                register={register}
+              />
             ))}
           </div>
           {errors.difficulty && <FormErrorMsg msg={errors.difficulty.message} />}
@@ -178,7 +183,7 @@ export const EditPresenter: FC<Props> = (props) => {
               タグ
             </label>
           </div>
-          <TagDropdown register={register} watch={watch} />
+          <TagDropdown selectedTagId={watch("tagId")} register={register} />
         </div>
         <div className="w-full gap-2 mt-6">
           <div className="flex items-center gap-2 w-24">
@@ -219,7 +224,7 @@ export const EditPresenter: FC<Props> = (props) => {
           confirmBtnText={"削除する"}
           cancelBtnText={"キャンセルする"}
           btnColor={"red"}
-          actionFn={onClickDelete}
+          onAction={onClickDelete}
           closeModal={() => setOpenModal(false)}
         />
       )}

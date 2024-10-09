@@ -1,5 +1,5 @@
 import { createLazyFileRoute } from "@tanstack/react-router";
-import { AnalyticsPresenter } from "../../features/analytics/components/AnalyticsPresenter";
+import { AnalyticsPresenter } from "../../features/analytics/presenters/AnalyticsPresenter";
 import { AppLayout, Loading, LoadingContainer } from "../../features/common/components";
 import { Suspense } from "react";
 

@@ -39,17 +39,16 @@ export const TagsEditModal: FC<Props> = ({ modalType, closeModal, tagId }) => {
     },
   });
 
-  const onSubmit = async (data: NewValues) => {
+  const onUpdateTag = handleSubmit(async (data: NewValues) => {
     await updateTagMutation.mutateAsync({
       id: tagId,
       name: data.name,
       color: data.color,
     });
-    closeModal();
-  };
+  });
 
   return (
-    <ModalBase onClickClose={closeModal}>
+    <ModalBase onClickClose={closeModal} onKeyDownClose={closeModal}>
       <div className="order relative bg-white rounded-lg shadow">
         {/* <!-- Modal header --> */}
         <div className="flex items-center justify-between p-4 md:p-4 rounded-t border-b">
@@ -58,7 +57,13 @@ export const TagsEditModal: FC<Props> = ({ modalType, closeModal, tagId }) => {
         </div>
         {/* <!-- Modal body --> */}
         <div className="p-4 md:p-4">
-          <form className="space-y-3" onSubmit={handleSubmit(onSubmit)}>
+          <form
+            className="space-y-3"
+            onSubmit={() => {
+              onUpdateTag();
+              closeModal();
+            }}
+          >
             <div className="flex items-center justify-between">
               <label className="flex gap-2 mb-2 text-sm font-bold text-rhyth-dark-blue my-2" htmlFor="tag-name">
                 <div className="w-6 h-6 text-rhyth-gray">
@@ -84,7 +89,7 @@ export const TagsEditModal: FC<Props> = ({ modalType, closeModal, tagId }) => {
                 </div>
                 <span>カラー</span>
               </label>
-              <TagsColorDropdown register={register} watch={watch} />
+              <TagsColorDropdown selectedColor={watch("color")} register={register} />
             </div>
             {errors.color && <FormErrorMsg msg={errors.color.message} />}
             <button

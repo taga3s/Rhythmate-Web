@@ -63,7 +63,7 @@ export const NewPresenter = () => {
 
   return (
     <>
-      <BackButton onClickNavigation={() => navigate({ to: "/manage" })} />
+      <BackButton onClick={() => navigate({ to: "/manage" })} />
       <h1 className="text-xl font-cp-font text-rhyth-gray mt-4 mb-2">クエスト作成</h1>
       <form className="bg-white px-3 py-2 rounded-lg shadow-lg" onSubmit={handleSubmit(onSubmit)}>
         <div className="mt-2 flex flex-col gap-2">
@@ -117,10 +117,10 @@ export const NewPresenter = () => {
                 {DAYS.map((day) => (
                   <DayOfTheWeek
                     key={day}
-                    day={convertEnToJPWeekday(day)}
-                    value={day}
+                    displayedDay={convertEnToJPWeekday(day)}
+                    selectedDays={watch("days")}
+                    day={day}
                     register={register}
-                    watch={watch}
                   />
                 ))}
               </div>
@@ -137,7 +137,12 @@ export const NewPresenter = () => {
           </div>
           <div className="flex justify-center gap-4 mt-4">
             {DIFFICULTIES.map((difficulty) => (
-              <DifficultyOption key={difficulty} difficulty={difficulty} watch={watch} register={register} />
+              <DifficultyOption
+                key={difficulty}
+                difficulty={difficulty}
+                selectedDifficulty={watch("difficulty")}
+                register={register}
+              />
             ))}
           </div>
           {errors.difficulty && <FormErrorMsg msg={errors.difficulty.message} />}
@@ -151,7 +156,7 @@ export const NewPresenter = () => {
               タグ
             </label>
           </div>
-          <TagDropdown register={register} watch={watch} />
+          <TagDropdown selectedTagId={watch("tagId")} register={register} />
         </div>
         <div className="w-full gap-2 mt-6">
           <div className="flex items-center gap-2 w-24">

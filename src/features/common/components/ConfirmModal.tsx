@@ -7,20 +7,20 @@ type Props = {
   confirmBtnText: string;
   cancelBtnText: string;
   btnColor: "green" | "blue" | "red";
-  actionFn: () => void;
+  onAction: () => void;
   closeModal: () => void;
 };
 
 export const ConfirmModal: FC<Props> = (props) => {
-  const { text, confirmBtnText, cancelBtnText, btnColor, actionFn, closeModal } = props;
+  const { text, confirmBtnText, cancelBtnText, btnColor, onAction, closeModal } = props;
 
   const handleConfirm = () => {
-    actionFn();
+    onAction();
     closeModal();
   };
 
   return (
-    <ModalBase onClickClose={closeModal}>
+    <ModalBase onClickClose={closeModal} onKeyDownClose={closeModal}>
       <div className="order relative bg-white rounded-lg shadow p-4">
         <ModalHeaderCloseButton onClickClose={closeModal} />
         {/* <!-- Modal body --> */}

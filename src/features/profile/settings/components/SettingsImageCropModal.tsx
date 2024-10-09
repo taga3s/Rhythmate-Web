@@ -46,7 +46,7 @@ export const SettingsImageCropModal: FC<Props> = ({ imageUrl, closeModal, setPro
   };
 
   return (
-    <ModalBase onClickClose={closeModal}>
+    <ModalBase onClickClose={closeModal} onKeyDownClose={closeModal}>
       <div className="order relative bg-white rounded-lg shadow">
         <div className="flex items-center justify-between p-4 md:p-4 rounded-t border-b">
           <h3 className="font-cp-font text-xl font-bold text-rhyth-dark-blue">画像の切り取り</h3>

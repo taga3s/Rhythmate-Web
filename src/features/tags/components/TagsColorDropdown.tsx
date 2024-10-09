@@ -1,24 +1,22 @@
 import type { FC } from "react";
-import type { UseFormRegister, UseFormWatch } from "react-hook-form";
+import type { UseFormRegister } from "react-hook-form";
 import type { TTagValidationSchema } from "../validation";
-import { TagsColorItem } from "./TagsColorItem";
+import { TagsColorOption } from "./TagsColorOption";
 import { toRhythTextColor } from "../../common/utils";
 
 type Props = {
+  selectedColor: string;
   register: UseFormRegister<TTagValidationSchema>;
-  watch: UseFormWatch<TTagValidationSchema>;
 };
 
-export const TagsColorDropdown: FC<Props> = ({ register, watch }) => {
-  const color = watch("color");
-
+export const TagsColorDropdown: FC<Props> = ({ selectedColor, register }) => {
   return (
     <select
       id="tag-color"
       className={`bg-white border border-rhyth-light-gray text-rhyth-dark-blue text-sm font-bold rounded-lg w-1/2 p-2 ${toRhythTextColor(
-        color,
+        selectedColor,
       )}`}
-      value={color}
+      value={selectedColor}
       {...register("color")}
     >
       <option
@@ -29,13 +27,13 @@ export const TagsColorDropdown: FC<Props> = ({ register, watch }) => {
       >
         色を選択
       </option>
-      <TagsColorItem color="Blue" />
-      <TagsColorItem color="Green" />
-      <TagsColorItem color="Red" />
-      <TagsColorItem color="Purple" />
-      <TagsColorItem color="Orange" />
-      <TagsColorItem color="Yellow" />
-      <TagsColorItem color="LightBlue" />
+      <TagsColorOption color="Blue" />
+      <TagsColorOption color="Green" />
+      <TagsColorOption color="Red" />
+      <TagsColorOption color="Purple" />
+      <TagsColorOption color="Orange" />
+      <TagsColorOption color="Yellow" />
+      <TagsColorOption color="LightBlue" />
     </select>
   );
 };

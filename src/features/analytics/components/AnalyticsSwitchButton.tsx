@@ -4,12 +4,12 @@ import { ChevronLeftIcon, ChevronRightIcon } from "../../common/components/icons
 type Props = {
   direction: "left" | "right";
   isEdgy: boolean;
-  onClickFn: () => void;
+  onClick: () => void;
 };
 
-export const AnalyticsSwitchButton: FC<Props> = ({ onClickFn, direction, isEdgy }) => {
+export const AnalyticsSwitchButton: FC<Props> = ({ onClick, direction, isEdgy }) => {
   return (
-    <button type="button" onClick={onClickFn} disabled={isEdgy}>
+    <button type="button" onClick={onClick} disabled={isEdgy}>
       {direction === "left" ? (
         <div
           className={`w-6 h-6 text-rhyth-gray ${
