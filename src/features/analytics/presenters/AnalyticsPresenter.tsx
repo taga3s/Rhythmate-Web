@@ -2,10 +2,10 @@ import { useState } from "react";
 import { formatDateTimeJP } from "../../common/utils";
 import { useMutateWeeklyReport } from "../hooks/useMutateWeeklyReport";
 import { useQueryWeeklyReports } from "../hooks/useQueryWeeklyReport";
-import { AnalyticsAIFeedback } from "./AnalyticsAIFeedback";
-import { AnalyticsBarChart } from "./AnalyticsBarChart";
-import { AnalyticsCard } from "./AnalyticsCard";
-import { AnalyticsSwitchButton } from "./AnalyticsSwitchButton";
+import { AnalyticsAIFeedback } from "../components/AnalyticsAIFeedback";
+import { AnalyticsBarChart } from "../components/AnalyticsBarChart";
+import { AnalyticsCard } from "../components/AnalyticsCard";
+import { AnalyticsSwitchButton } from "../components/AnalyticsSwitchButton";
 
 export const AnalyticsPresenter = () => {
   const { data: weeklyReports } = useQueryWeeklyReports();
@@ -13,7 +13,7 @@ export const AnalyticsPresenter = () => {
   const currentWeeklyReportsId = weeklyReports?.length ? weeklyReports[currentIndex].id : "";
   const { generateFeedBackMutation } = useMutateWeeklyReport();
 
-  const onClickGenerateFeedback = () => {
+  const onGenerateFeedback = () => {
     generateFeedBackMutation.mutate({ weeklyReportId: currentWeeklyReportsId });
   };
 
@@ -37,14 +37,14 @@ export const AnalyticsPresenter = () => {
         <div className="flex flex-col items-center mx-auto">
           <div className="flex justify-between w-full">
             <AnalyticsSwitchButton
-              onClickFn={handleClickPrev}
+              onClick={handleClickPrev}
               direction="left"
               isEdgy={currentIndex === dateArray.length - 1}
             />
             <span className="text-xl tracking-wider mx-2 block font-cp-font text-center font-bold text-rhyth-dark-blue">
               {dateArray[currentIndex].start} ～ {dateArray[currentIndex].end}
             </span>
-            <AnalyticsSwitchButton onClickFn={handleClickNext} direction="right" isEdgy={currentIndex === 0} />
+            <AnalyticsSwitchButton onClick={handleClickNext} direction="right" isEdgy={currentIndex === 0} />
           </div>
           <h2 className="flex justify-start w-full mt-8 font-cp-font tracking-widest text-rhyth-gray text-lg font-bold ">
             クエスト達成状況
@@ -94,7 +94,7 @@ export const AnalyticsPresenter = () => {
             <AnalyticsAIFeedback
               summaryData={weeklyReports[currentIndex].feedback ?? ""}
               isLoading={generateFeedBackMutation.isPending}
-              onClick={onClickGenerateFeedback}
+              onClick={onGenerateFeedback}
             />
           </div>
         </div>

@@ -4,57 +4,58 @@ import { BackButton } from "../../common/components/BackButton";
 import { ConfirmModal } from "../../common/components/ConfirmModal";
 import { useMutateTag } from "../hooks/useMutateTag";
 import { useQueryTagList } from "../hooks/useQueryTag";
-import { TagsEditModal } from "./TagsEditModal";
-import { TagsItem } from "./TagsItem";
-import { TagsNewButton } from "./TagsNewButton";
-import { TagsNewModal } from "./TagsNewModal";
+import { TagsEditModal } from "../components/TagsEditModal";
+import { TagsItem } from "../components/TagsItem";
+import { TagsNewButton } from "../components/TagsNewButton";
+import { TagsNewModal } from "../components/TagsNewModal";
 
 export const TagsPresenter = () => {
-  const navigate = useNavigate();
+  const [isTagsNewModalOpen, setIsTagsNewModalOpen] = useState<boolean>(false);
   const [isTagsEditModalOpen, setIsTagsEditModalOpen] = useState<boolean>(false);
   const [isTagsDeleteModalOpen, setIsTagsDeleteModalOpen] = useState<boolean>(false);
-  const [isTagsNewModalOpen, setIsTagsNewModalOpen] = useState<boolean>(false);
+  const [selectedTagId, setSelectedTagId] = useState<string>("");
 
-  const [selectedTagId, setSelectedTagId] = useState<string>();
-
+  const navigate = useNavigate();
   const { data: tagItems } = useQueryTagList();
-
   const { deleteTagMutation } = useMutateTag();
 
-  const onClickDelete = async () => {
+  const onDeleteTag = async () => {
     await deleteTagMutation.mutateAsync({
-      id: selectedTagId ?? "",
+      id: selectedTagId,
     });
   };
 
-  const openTagsEditModal = (tagId: string) => {
+  const handleNavigate = () => {
+    navigate({ to: "/manage" });
+  };
+  const handleOpenNewModal = () => {
+    setIsTagsNewModalOpen(true);
+  };
+  const handleCloseNewModal = () => {
+    setIsTagsNewModalOpen(false);
+  };
+  const handleOpenEditModal = (tagId: string) => {
     setSelectedTagId(tagId);
     setIsTagsEditModalOpen(true);
   };
-  const closeTagsEditModal = () => {
+  const handleCloseEditModal = () => {
     setIsTagsEditModalOpen(false);
   };
-  const openTagsDeleteModal = (tagId: string) => {
+  const handleOpenDeleteModal = (tagId: string) => {
     setSelectedTagId(tagId);
     setIsTagsDeleteModalOpen(true);
   };
-  const closeTagsDeleteModal = () => {
+  const handleCloseDeleteModal = () => {
     setIsTagsDeleteModalOpen(false);
-  };
-  const openTagsNewModal = () => {
-    setIsTagsNewModalOpen(true);
-  };
-  const closeTagsNewModal = () => {
-    setIsTagsNewModalOpen(false);
   };
 
   return (
     <>
-      <BackButton onClickNavigation={() => navigate({ to: "/manage" })} />
+      <BackButton onClick={handleNavigate} />
       <div className="mt-4">
         <div className="flex justify-between items-center mb-2">
           <h1 className="font-cp-font font-black text-xl text-rhyth-gray tracking-widest">登録しているタグ一覧</h1>
-          <TagsNewButton onClickFn={openTagsNewModal} />
+          <TagsNewButton onClick={handleOpenNewModal} />
         </div>
         <div className="text-rhyth-dark-blue">
           {tagItems?.length ? (
@@ -62,10 +63,10 @@ export const TagsPresenter = () => {
               {tagItems.map((item) => (
                 <TagsItem
                   key={item.id}
-                  tagName={item.name}
-                  tagColor={item.color}
-                  onEditFn={() => openTagsEditModal(item.id)}
-                  onDeleteFn={() => openTagsDeleteModal(item.id)}
+                  name={item.name}
+                  color={item.color}
+                  handleOpenEditModal={() => handleOpenEditModal(item.id)}
+                  handleOpenDeleteModal={() => handleOpenDeleteModal(item.id)}
                 />
               ))}
             </ul>
@@ -78,7 +79,7 @@ export const TagsPresenter = () => {
         </div>
       </div>
       {isTagsEditModalOpen && (
-        <TagsEditModal modalType="タグ編集" closeModal={closeTagsEditModal} tagId={selectedTagId ?? ""} />
+        <TagsEditModal modalType="タグ編集" closeModal={handleCloseEditModal} tagId={selectedTagId ?? ""} />
       )}
       {isTagsDeleteModalOpen && (
         <ConfirmModal
@@ -86,11 +87,11 @@ export const TagsPresenter = () => {
           confirmBtnText="タグを削除する"
           cancelBtnText="キャンセルする"
           btnColor="red"
-          actionFn={onClickDelete}
-          closeModal={closeTagsDeleteModal}
+          onAction={onDeleteTag}
+          closeModal={handleCloseDeleteModal}
         />
       )}
-      {isTagsNewModalOpen && <TagsNewModal modalType="タグ作成" closeModal={closeTagsNewModal} />}
+      {isTagsNewModalOpen && <TagsNewModal modalType="タグ作成" handleCloseNewModal={handleCloseNewModal} />}
     </>
   );
 };

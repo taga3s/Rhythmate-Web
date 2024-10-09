@@ -1,5 +1,5 @@
 import { Image } from "@unpic/react";
-import { LoginForm } from "./LoginForm";
+import { LoginForm } from "../components/LoginForm";
 
 export const LoginPresenter = () => {
   return (

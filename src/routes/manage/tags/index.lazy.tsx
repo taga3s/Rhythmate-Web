@@ -1,7 +1,7 @@
 import { createLazyFileRoute } from "@tanstack/react-router";
 import { Loading, LoadingContainer } from "../../../features/common/components";
 import { AppLayout } from "../../../features/common/components/layouts/AppLayout";
-import { TagsPresenter } from "../../../features/tags/components/TagsPresenter";
+import { TagsPresenter } from "../../../features/tags/presenters/TagsPresenter";
 import { Suspense } from "react";
 
 export const Route = createLazyFileRoute("/manage/tags/")({

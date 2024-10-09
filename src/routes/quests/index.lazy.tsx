@@ -1,7 +1,7 @@
 import { createLazyFileRoute } from "@tanstack/react-router";
 import { AppLayout, Loading, LoadingContainer } from "../../features/common/components";
-import { QuestsPresenter } from "../../features/quests/components/QuestsPresenter";
 import { Suspense } from "react";
+import { QuestsPresenter } from "../../features/quests/presenters/QuestsPresenter";
 
 export const Route = createLazyFileRoute("/quests/")({
   component: () => <Quests />,

@@ -1,6 +1,6 @@
 import { createLazyFileRoute } from "@tanstack/react-router";
 import { AppLayout, Loading, LoadingContainer } from "../../../features/common/components";
-import { BadgesPresenter } from "../../../features/badges/components/BadgesPresenter";
+import { BadgesPresenter } from "../../../features/badges/presenters/BadgesPresenter";
 import { Suspense } from "react";
 
 export const Route = createLazyFileRoute("/profile/badges/")({

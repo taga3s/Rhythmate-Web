@@ -1,4 +1,4 @@
-import type { UseFormRegister, UseFormWatch } from "react-hook-form";
+import type { UseFormRegister } from "react-hook-form";
 import type { Difficulty } from "../../../../api/quest/types";
 import type { TManageValidationSchema } from "../../common/validation";
 import type { FC } from "react";
@@ -6,13 +6,12 @@ import { Star } from "../../common/components/Star";
 
 type Props = {
   difficulty: Difficulty;
-  watch: UseFormWatch<TManageValidationSchema>;
+  selectedDifficulty: Difficulty;
   register: UseFormRegister<TManageValidationSchema>;
 };
 
 const DifficultyOption: FC<Props> = (props) => {
-  const { difficulty, watch, register } = props;
-  const selectedDifficulty = watch("difficulty");
+  const { difficulty, selectedDifficulty, register } = props;
 
   return (
     <label

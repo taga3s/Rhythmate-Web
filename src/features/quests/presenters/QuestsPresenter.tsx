@@ -4,10 +4,10 @@ import useWindowSize from "react-use/lib/useWindowSize";
 import type { Quest } from "../../../api/quest/model";
 import { formatDateJP, getToday, getTodayEn, now } from "../../common/utils";
 import { useQueryQuestList } from "../hooks/useQueryQuest";
-import { QuestBoard } from "./QuestBoard";
-import { QuestBoardNoData } from "./QuestBoardNoData";
-import { QuestList } from "./QuestList";
-import { QuestListNoData } from "./QuestListNoData";
+import { QuestBoard } from "../components/QuestBoard";
+import { QuestBoardNoData } from "../components/QuestBoardNoData";
+import { QuestList } from "../components/QuestList";
+import { QuestListNoData } from "../components/QuestListNoData";
 
 type View = "NEXT" | "FINISHED";
 
