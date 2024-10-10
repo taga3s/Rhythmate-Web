@@ -1,20 +1,28 @@
 import type { FC } from "react";
-import { BadgeIcon, BellIcon, RankingIcon, SearchIcon, TagIcon } from "../icons/header";
+import { BadgeIcon, SearchIcon, TagIcon } from "../icons";
 
 type Icon = "Bell" | "Tag" | "Search" | "Badge" | "Ranking";
 
 const selectedIcon = (icon: Icon) => {
   switch (icon) {
-    case "Bell":
-      return <BellIcon />;
     case "Tag":
-      return <TagIcon />;
+      return (
+        <div className="w-7 h-16 text-rhyth-blue">
+          <TagIcon />
+        </div>
+      );
     case "Search":
-      return <SearchIcon />;
+      return (
+        <div className="w-7 h-16 text-rhyth-blue">
+          <SearchIcon />
+        </div>
+      );
     case "Badge":
-      return <BadgeIcon />;
-    case "Ranking":
-      return <RankingIcon />;
+      return (
+        <div className="w-7 h-16 text-rhyth-orange">
+          <BadgeIcon />
+        </div>
+      );
     default:
       return <></>;
   }

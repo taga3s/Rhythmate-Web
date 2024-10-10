@@ -1,7 +1,7 @@
 export const BellIcon = () => {
   return (
     <svg
-      className="w-7 h-16 fill-rhyth-orange"
+      className="w-full h-full"
       aria-hidden="true"
       xmlns="http://www.w3.org/2000/svg"
       width="24"
