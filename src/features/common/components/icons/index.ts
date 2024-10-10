@@ -1,4 +1,5 @@
 export * from "./AnalyticsIcon";
+export * from "./DeleteIcon";
 export * from "./ManageIcon";
 export * from "./QuestsIcon";
 export * from "./ProfileIcon";
@@ -7,6 +8,7 @@ export * from "./HonoIcon";
 export * from "./TagIcon";
 export * from "./PencilIcon";
 export * from "./EditIcon";
+export * from "./ExitIcon";
 export * from "./ChevronUpIcon";
 export * from "./ChevronDownIcon";
 export * from "./ChevronLeftIcon";
@@ -17,3 +19,4 @@ export * from "./SwitchIcon";
 export * from "./AddIcon";
 export * from "./ChatIcon";
 export * from "./ChatIcon2";
+export * from "./LoadingIcon";
