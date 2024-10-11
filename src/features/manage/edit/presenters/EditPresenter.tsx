@@ -14,6 +14,7 @@ import { convertEnToJPWeekday } from "../../common/utils";
 import { type TManageValidationSchema, manageValidationSchema } from "../../common/validation";
 import { TagDropdown } from "../../common/components/TagDropdown";
 import { DifficultyOption } from "../../common/components/DifficultyOption";
+import { getCurrentQuestState } from "../../common/utils/getCurrentState";
 
 type NewValues = {
   title: string;
@@ -57,13 +58,14 @@ export const EditPresenter: FC<Props> = (props) => {
 
   const navigate = useNavigate();
 
-  const onSubmit = (data: NewValues) => {
+  const onEditQuest = handleSubmit((data: NewValues) => {
     updateQuestMutation
       .mutateAsync({
         id: quest_id,
         title: data.title,
         description: data.description,
         starts_at: data.startsAt,
+        state: getCurrentQuestState(data.startsAt),
         tag_id: data.tagId,
         minutes: data.minutes,
         days: data.days,
@@ -72,7 +74,7 @@ export const EditPresenter: FC<Props> = (props) => {
       .then(() => {
         navigate({ to: "/manage" });
       });
-  };
+  });
 
   const [openModal, setOpenModal] = useState(false);
 
@@ -90,7 +92,7 @@ export const EditPresenter: FC<Props> = (props) => {
     <>
       <BackButton onClick={() => navigate({ to: "/manage" })} />
       <h1 className="text-xl font-cp-font text-rhyth-gray mt-4 mb-2">クエスト編集</h1>
-      <form className="bg-white px-3 py-2 rounded-lg shadow-lg" onSubmit={handleSubmit(onSubmit)}>
+      <form className="bg-white px-3 py-2 rounded-lg shadow-lg" onSubmit={onEditQuest}>
         <div className="mt-2 flex flex-col gap-2">
           <label htmlFor="edit-quest-title" className="text-base font-bold text-rhyth-gray">
             タイトル

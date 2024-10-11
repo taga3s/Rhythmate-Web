@@ -2,7 +2,6 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useNavigate } from "@tanstack/react-router";
 import { useForm } from "react-hook-form";
 import type { Day, Difficulty } from "../../../../api/quest/types";
-import { formatDateTimeOnlyDate, formatDateTimeWithAddMinutes, isBefore, now } from "../../../common/utils";
 import { BackButton, ClockIcon, FormErrorMsg, PencilIcon, StarIcon, TagIcon } from "../../../common/components";
 import { useMutateQuest } from "../../hooks/useMutateQuest";
 import { DayOfTheWeek } from "../../common/components/DayOfTheWeek";
@@ -11,6 +10,7 @@ import { convertEnToJPWeekday } from "../../common/utils";
 import { type TManageValidationSchema, manageValidationSchema } from "../../common/validation";
 import { TagDropdown } from "../../common/components/TagDropdown";
 import { DifficultyOption } from "../../common/components/DifficultyOption";
+import { getCurrentQuestState } from "../../common/utils/getCurrentState";
 
 type NewValues = {
   title: string;
@@ -20,11 +20,6 @@ type NewValues = {
   days: Day[];
   difficulty: Difficulty;
   description: string;
-};
-
-export const getCurrentQuestState = (now: string, startsAt: string) => {
-  const targetDateTime = formatDateTimeWithAddMinutes(`${formatDateTimeOnlyDate(now)} ${startsAt}`, 15);
-  return isBefore(targetDateTime) ? "INACTIVE" : "ACTIVE";
 };
 
 export const NewPresenter = () => {
@@ -54,7 +49,7 @@ export const NewPresenter = () => {
         minutes: data.minutes,
         days: data.days,
         difficulty: data.difficulty,
-        state: getCurrentQuestState(now(), data.startsAt),
+        state: getCurrentQuestState(data.startsAt),
       })
       .then(() => {
         navigate({ to: "/manage" });
