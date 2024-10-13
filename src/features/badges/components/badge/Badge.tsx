@@ -1,5 +1,5 @@
 import type { FC } from "react";
-import type { FrameColor, ImageType } from "../../../../api/badge/type";
+import type { FrameColor, ImageType } from "../../../../api/badge/types";
 import { BadgeFrame } from "./BadgeFrame";
 import { BadgeItem } from "./BadgeItem";
 import { BadgeSparkling } from "./BadgeSparkling";

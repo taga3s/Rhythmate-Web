@@ -1,4 +1,4 @@
-import type * as schemaHelper from "../../../submodules/service/src/pkg/schemaHelper";
+import type * as schemaHelper from "../../../submodules/service/src/pkg/schema/schemaHelper";
 
 export type Difficulty = "EASY" | "NORMAL" | "HARD";
 export type QuestState = "INACTIVE" | "ACTIVE";

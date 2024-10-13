@@ -1,4 +1,4 @@
-import type * as schemaHelper from "../../../submodules/service/src/pkg/schemaHelper";
+import type * as schemaHelper from "../../../submodules/service/src/pkg/schema/schemaHelper";
 
 export type AuthParams = schemaHelper.RequestData<"/users/auth", "post">;
 

@@ -7,7 +7,7 @@ import type {
   PinBadgeResponse,
   UnpinBadgeRequest,
   UnpinBadgeResponse,
-} from "./type";
+} from "./types";
 
 export interface BadgeRepository {
   list: () => Promise<ListBadgesResponse>;
