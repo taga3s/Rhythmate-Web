@@ -1,5 +1,5 @@
 import type { FC } from "react";
-import { BadgeIcon, SearchIcon, TagIcon } from "../icons";
+import { SearchIcon, TagIcon } from "../icons";
 
 type Icon = "Bell" | "Tag" | "Search" | "Badge" | "Ranking";
 
@@ -15,12 +15,6 @@ const selectedIcon = (icon: Icon) => {
       return (
         <div className="w-7 h-16 text-rhyth-blue">
           <SearchIcon />
-        </div>
-      );
-    case "Badge":
-      return (
-        <div className="w-7 h-16 text-rhyth-orange">
-          <BadgeIcon />
         </div>
       );
     default:

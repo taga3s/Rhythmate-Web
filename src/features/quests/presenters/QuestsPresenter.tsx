@@ -91,17 +91,19 @@ export const QuestsPresenter = () => {
               終了クエスト
             </button>
           </div>
-          {view === "NEXT" ? (
-            nextQuestList.slice(1)?.length ? (
-              <QuestList questList={nextQuestList.slice(1)} />
+          <div className="w-full min-h-[200px] px-3 py-4 bg-rhyth-light-blue rounded-b-md rounded-tr-md shadow-lg">
+            {view === "NEXT" ? (
+              nextQuestList.slice(1).length ? (
+                <QuestList questList={nextQuestList.slice(1)} />
+              ) : (
+                <QuestListNoData view={view} />
+              )
+            ) : finishedQuestList.length ? (
+              <QuestList questList={finishedQuestList} />
             ) : (
               <QuestListNoData view={view} />
-            )
-          ) : finishedQuestList?.length ? (
-            <QuestList questList={finishedQuestList} />
-          ) : (
-            <QuestListNoData view={view} />
-          )}
+            )}
+          </div>
         </div>
       </div>
     </>
