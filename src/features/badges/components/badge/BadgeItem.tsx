@@ -6,7 +6,7 @@ import { Gem } from "./badgeItems/Gem";
 import { Horse } from "./badgeItems/Horse";
 import { Shield } from "./badgeItems/Shield";
 import { Sword } from "./badgeItems/Sword";
-import type { ImageType } from "../../../../api/badge/type";
+import type { ImageType } from "../../../../api/badge/types";
 
 type Props = {
   imageType: ImageType;
