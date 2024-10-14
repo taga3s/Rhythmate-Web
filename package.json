@@ -17,7 +17,6 @@
     "@hookform/resolvers": "^3.3.4",
     "@tanstack/react-query": "^5.36.0",
     "@tanstack/react-router": "^1.50.0",
-    "@tanstack/router-devtools": "^1.50.0",
     "@unpic/react": "^0.1.14",
     "chart.js": "^4.4.2",
     "dayjs": "^1.11.11",
@@ -36,22 +35,20 @@
   },
   "devDependencies": {
     "@biomejs/biome": "1.7.3",
+    "@tanstack/router-devtools": "^1.50.0",
     "@tanstack/router-vite-plugin": "^1.31.18",
     "@types/lodash": "^4.17.1",
     "@types/react": "^18.3.2",
     "@types/react-dom": "^18.3.0",
-    "@typescript-eslint/eslint-plugin": "^7.8.0",
-    "@typescript-eslint/parser": "^7.8.0",
-    "@vitejs/plugin-react": "^4.2.1",
-    "@vitejs/plugin-react-swc": "^3.6.0",
+    "@vitejs/plugin-react": "^4.3.2",
+    "@vitejs/plugin-react-swc": "^3.7.1",
     "autoprefixer": "^10.4.19",
     "husky": "^9.0.11",
     "lint-staged": "^15.2.2",
     "postcss": "^8.4.38",
     "tailwindcss": "^3.4.3",
     "typescript": "^5.3.3",
-    "vite": "^5.2.14",
-    "vite-plugin-pwa": "^0.20.1"
+    "vite": "^5.4.8"
   },
   "lint-staged": {
     "*.{ts,tsx}": "biome format --write ./src"
