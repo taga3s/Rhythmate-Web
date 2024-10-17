@@ -28,17 +28,19 @@ export const QuestsPresenter = () => {
 
   const nextQuestList = sortedQuestList.filter((value) => value.state === "INACTIVE");
   const finishedQuestList = sortedQuestList.filter((value) => value.state === "ACTIVE");
-  const currentQuest = nextQuestList[0];
 
   const [view, setView] = useState<View>("NEXT");
+  const handleNextView = () => setView("NEXT");
+  const handleFinishedView = () => setView("FINISHED");
 
   const { width, height } = useWindowSize();
 
-  const [launchConfetti, setLaunchConfetti] = useState<boolean>(false);
+  const [isLaunchedConfetti, setIsLaunchedConfetti] = useState<boolean>(false);
+  const handleLaunchConfetti = () => setIsLaunchedConfetti((prev) => !prev);
 
   return (
     <>
-      {launchConfetti && (
+      {isLaunchedConfetti && (
         <Confetti
           width={width}
           height={height}
@@ -52,16 +54,15 @@ export const QuestsPresenter = () => {
         />
       )}
       <span className="font-cp-font text-rhyth-dark-blue text-2xl tracking-widest">
-        {formatDateJP(now())}
-        {`(${getToday()})`}
+        {`${formatDateJP(now())} (${getToday()})`}
       </span>
       <div>
-        {currentQuest ? (
+        {nextQuestList[0] ? (
           <div>
             <div className="flex gap-2 my-2">
-              <h1 className="font-cp-font text-rhyth-gray tracking-widest">NEXT CHALLENGE</h1>
+              <h1 className="font-cp-font text-rhyth-gray tracking-widest">NEXT QUEST</h1>
             </div>
-            <QuestBoard setLaunchConfetti={setLaunchConfetti} currentQuest={currentQuest} />
+            <QuestBoard handleLaunchConfetti={handleLaunchConfetti} currentQuest={nextQuestList[0]} />
           </div>
         ) : (
           <QuestBoardNoData />
@@ -75,7 +76,7 @@ export const QuestsPresenter = () => {
                   ? "text-white bg-rhyth-light-blue"
                   : "bg-white text-rhyth-dark-blue hover:bg-rhyth-hover-light-gray"
               }`}
-              onClick={() => setView("NEXT")}
+              onClick={handleNextView}
             >
               次のクエスト
             </button>
@@ -86,7 +87,7 @@ export const QuestsPresenter = () => {
                   ? "text-white bg-rhyth-light-blue"
                   : "bg-white text-rhyth-dark-blue hover:bg-rhyth-hover-light-gray"
               }`}
-              onClick={() => setView("FINISHED")}
+              onClick={handleFinishedView}
             >
               終了クエスト
             </button>

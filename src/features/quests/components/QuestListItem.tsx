@@ -25,7 +25,7 @@ export const QuestListItem: FC<Props> = (props) => {
   const status = getStatus(isDone, isSuccess);
 
   return (
-    <div className="w-6/7 bg-white rounded-md">
+    <li className="w-6/7 bg-white rounded-md">
       <div className="flex justify-between">
         <div className="w-[calc(100%-70px)] flex flex-col justify-center px-3">
           <div className="w-full flex gap-2 my-2">
@@ -41,6 +41,6 @@ export const QuestListItem: FC<Props> = (props) => {
         </div>
         <QuestStatusTag status={status} exp={calcExpectedExp(difficulty, continuationLevel)} />
       </div>
-    </div>
+    </li>
   );
 };
