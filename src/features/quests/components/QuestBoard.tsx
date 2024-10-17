@@ -1,7 +1,7 @@
 import { type FC, useState } from "react";
 import type { Quest } from "../../../api/quest/model";
 import { ConfirmModal } from "../../common/components";
-import useInterval from "../../common/hooks/useInterval";
+import { useTimeout } from "../../common/hooks/useTimeout";
 import { useMutateQuest } from "../hooks/useMutateQuest";
 import { CLOSED, DONE, ENGAGED, FORCE_STOP, NOT_STARTED_YET, OPEN, type QuestStatus } from "../consts";
 import { calcBaseTime, calcDiffTimeBetweenNowAndTargetTime } from "../time";
@@ -34,7 +34,7 @@ export const QuestBoard: FC<Props> = (props) => {
   const { diffHH, diffMM, diffSS } = calcDiffTimeBetweenNowAndTargetTime(baseTime);
   const [time, setTime] = useState(constructTime(diffHH, diffMM, diffSS));
 
-  useInterval(() => {
+  useTimeout(() => {
     const { baseTime, status } = calcBaseTime(
       currentQuest.startsAt,
       isStarted(currentQuest.startedAt),
