@@ -2,7 +2,9 @@ import type { FC } from "react";
 import type { UseFormRegister } from "react-hook-form";
 import type { TTagValidationSchema } from "../validation";
 import { TagsColorOption } from "./TagsColorOption";
+import { TagsEmptyOption } from "./TagsEmptyOption";
 import { toRhythTextColor } from "../../common/utils";
+import { COLORS } from "../consts";
 
 type Props = {
   selectedColor: string;
@@ -19,21 +21,10 @@ export const TagsColorDropdown: FC<Props> = ({ selectedColor, register }) => {
       value={selectedColor}
       {...register("color")}
     >
-      <option
-        value=""
-        className={
-          "w-full bg-white text-rhyth-dark-blue border border-rhyth-light-gray font-medium rounded-lg text-sm px-5 py-2.5 inline-flex"
-        }
-      >
-        色を選択
-      </option>
-      <TagsColorOption color="Blue" />
-      <TagsColorOption color="Green" />
-      <TagsColorOption color="Red" />
-      <TagsColorOption color="Purple" />
-      <TagsColorOption color="Orange" />
-      <TagsColorOption color="Yellow" />
-      <TagsColorOption color="LightBlue" />
+      <TagsEmptyOption value="" label="色を選択" />
+      {COLORS.map((color) => (
+        <TagsColorOption key={color} value={color} label={color} />
+      ))}
     </select>
   );
 };

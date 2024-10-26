@@ -2,18 +2,19 @@ import type { FC } from "react";
 import { toRhythTextColor } from "../../common/utils";
 
 type Props = {
-  color: string;
+  value: string;
+  label: string;
 };
 
-export const TagsColorOption: FC<Props> = ({ color }) => {
+export const TagsColorOption: FC<Props> = ({ value, label }) => {
   return (
     <option
       className={`border-b border-rhyth-light-gray w-full h-hull font-bold flex items-center px-4 py-2 rounded-t-lg ${toRhythTextColor(
-        color,
+        value,
       )}`}
-      value={color}
+      value={value}
     >
-      {color}
+      {label}
     </option>
   );
 };
