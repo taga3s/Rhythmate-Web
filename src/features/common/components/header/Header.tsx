@@ -2,7 +2,6 @@ import { useRouterState } from "@tanstack/react-router";
 import { HeaderManageButtonGroup } from "./HeaderManageButtonGroup";
 import { HeaderProfileButtonGroup } from "./HeaderProfileButtonGroup";
 import { HeaderQuestsButtonGroup } from "./HeaderQuestsButtonGroup";
-import { Image } from "@unpic/react";
 import type { FC } from "react";
 
 const Heading1: FC<{ title: string }> = ({ title }) => {
@@ -51,7 +50,11 @@ export const Header = () => {
     <header className="w-full shadow-md bg-rhyth-bg-gray fixed top-0 left-0 right-0 border-b-2 border-rhyth-light-gray z-50">
       <div className="flex justify-between items-center">
         <div className="px-4 py-2 flex items-center gap-2">
-          <Image src="/brand-logo.svg" alt="rhythmateのロゴ" width={48} height={48} />
+          <picture className="w-12 h-12">
+            <source srcSet="/brand-logo.webp" type="image/webp" />
+            <source srcSet="/brand-logo.png" type="image/png" />
+            <img alt="rhythmateのロゴ" />
+          </picture>
           {handlePageHeading(pathname)}
         </div>
         {handleHeaderButtonGroup(pathname)}

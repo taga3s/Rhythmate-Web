@@ -1,10 +1,12 @@
-import { Image } from "@unpic/react";
-
 export const QuestBoardNoData = () => {
   return (
     <div className="w-full min-h-[240px] p-3 shadow-lg rounded-lg flex flex-col items-center justify-center bg-white">
       <div className="relative">
-        <Image src="/icons/like.png" layout="constrained" width={80} height={80} alt="like icon" />
+        <picture className="w-20 h-20">
+          <source srcSet="/icons/like.webp" type="image/webp" />
+          <source srcSet="/icons/like.png" type="image/png" />
+          <img alt="like icon" />
+        </picture>
         <span className="font-cp-font absolute top-1 right-[-3.8rem] text-rhyth-blue tracking-widest origin-top-left rotate-[20deg]">
           Good!
         </span>
