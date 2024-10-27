@@ -17,7 +17,7 @@ export const AnalyticsPresenter = () => {
     generateFeedBackMutation.mutate({ weeklyReportId: currentWeeklyReportsId });
   };
 
-  const dateArray = weeklyReports?.length
+  const dateList = weeklyReports?.length
     ? weeklyReports.map((item) => ({
         start: formatDateTimeJP(item.start_date),
         end: formatDateTimeJP(item.end_date),
@@ -39,10 +39,10 @@ export const AnalyticsPresenter = () => {
             <AnalyticsSwitchButton
               onClick={handleClickPrev}
               direction="left"
-              isEdgy={currentIndex === dateArray.length - 1}
+              isEdgy={currentIndex === dateList.length - 1}
             />
             <span className="text-xl tracking-wider mx-2 block font-cp-font text-center font-bold text-rhyth-dark-blue">
-              {dateArray[currentIndex].start} ～ {dateArray[currentIndex].end}
+              {dateList[currentIndex].start} ～ {dateList[currentIndex].end}
             </span>
             <AnalyticsSwitchButton onClick={handleClickNext} direction="right" isEdgy={currentIndex === 0} />
           </div>
@@ -53,25 +53,25 @@ export const AnalyticsPresenter = () => {
             <AnalyticsCard
               title={"達成したクエスト数"}
               data={weeklyReports[currentIndex].completed_quests}
-              color={"#E0201B"}
+              color={"Red"}
               isRate={false}
             />
             <AnalyticsCard
               title={"失敗したクエスト数"}
               data={weeklyReports[currentIndex].failed_quests}
-              color={"#0087EE"}
+              color={"Blue"}
               isRate={false}
             />
             <AnalyticsCard
               title={"達成率"}
               data={weeklyReports[currentIndex].completed_percentage}
-              color={"#FFAA00"}
+              color={"Orange"}
               isRate={true}
             />
             <AnalyticsCard
               title={"連続ストリーク日数"}
               data={weeklyReports[currentIndex].streak_days}
-              color={"#28AC00"}
+              color={"Green"}
               isRate={false}
             />
           </div>
@@ -87,10 +87,10 @@ export const AnalyticsPresenter = () => {
           <h2 className="flex justify-start w-full mt-8 font-cp-font tracking-widest text-rhyth-gray text-lg font-bold ">
             AIフィードバック
           </h2>
-          <div className="mt-2">
-            <p className="text-sm">
+          <div className="mt-2 w-full">
+            <span className="text-sm">
               クエストの達成状況に基づいて、AIからアドバイスなどのフィードバックを受けることができます。
-            </p>
+            </span>
             <AnalyticsAIFeedback
               summaryData={weeklyReports[currentIndex].feedback ?? ""}
               isLoading={generateFeedBackMutation.isPending}
