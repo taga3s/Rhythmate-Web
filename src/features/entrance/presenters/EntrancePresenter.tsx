@@ -1,9 +1,7 @@
-import { useNavigate } from "@tanstack/react-router";
+import { Link } from "@tanstack/react-router";
 import { Image } from "@unpic/react";
 
 export const EntrancePresenter = () => {
-  const navigation = useNavigate();
-
   return (
     <div className="py-16 flex flex-col items-center">
       <div className="my-4">
@@ -37,13 +35,12 @@ export const EntrancePresenter = () => {
           </p>
         </div>
       </div>
-      <button
-        type="button"
-        onClick={() => navigation({ to: "/login" })}
+      <Link
+        to="/login"
         className="mt-10  text-center text-white bg-rhyth-blue hover:bg-rhyth-hover-blue font-medium rounded-lg px-10 py-4  shadow-lg"
       >
         今すぐ始める
-      </button>
+      </Link>
     </div>
   );
 };
