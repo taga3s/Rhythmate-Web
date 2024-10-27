@@ -1,13 +1,14 @@
-import { Image } from "@unpic/react";
 import { LoginForm } from "../components/LoginForm";
 
 export const LoginPresenter = () => {
   return (
-    <figure className="flex flex-col items-center py-16">
-      <div className="my-4">
-        <Image width={224} height={60} src="/logo-long.svg" alt="rhythmateのロゴ" />
-      </div>
+    <div className="flex flex-col items-center py-16">
+      <picture className="my-4 w-[224px] h-[60px]">
+        <source srcSet="/logo-long.webp" type="image/webp" />
+        <source srcSet="/logo-long.png" type="image/png" />
+        <img alt="rhythmateのロゴ" />
+      </picture>
       <LoginForm />
-    </figure>
+    </div>
   );
 };
