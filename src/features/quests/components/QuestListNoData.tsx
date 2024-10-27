@@ -1,4 +1,3 @@
-import { Image } from "@unpic/react";
 import type { FC } from "react";
 
 type Props = {
@@ -10,7 +9,11 @@ export const QuestListNoData: FC<Props> = ({ view }) => {
     <div className="flex flex-col justify-center items-center gap-3 w-full h-full p-3 bg-white rounded-lg shadow-md">
       {view === "NEXT" ? (
         <>
-          <Image src="/icons/analysis.png" layout="constrained" width={80} height={80} alt="analysis icon" />
+          <picture className="w-20 h-20">
+            <source srcSet="/icons/analysis.webp" type="image/webp" />
+            <source srcSet="/icons/analysis.png" type="image/png" />
+            <img alt="analysis icon" />
+          </picture>
           <span className="font-bold text-center p-2 text-rhyth-dark-blue">
             新しい習慣がどのくらい身に付いたか
             <br />
@@ -19,7 +22,11 @@ export const QuestListNoData: FC<Props> = ({ view }) => {
         </>
       ) : (
         <>
-          <Image src="/icons/shuttle.png" layout="constrained" width={80} height={80} alt="shuttle icon" />
+          <picture className="w-20 h-20">
+            <source srcSet="/icons/shuttle.webp" type="image/webp" />
+            <source srcSet="/icons/shuttle.png" type="image/png" />
+            <img alt="shuttle icon" />
+          </picture>
           <span className="font-bold text-center p-2 text-rhyth-dark-blue">
             終了したクエストはまだありません。
             <br />

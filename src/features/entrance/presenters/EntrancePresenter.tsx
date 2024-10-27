@@ -1,15 +1,20 @@
 import { Link } from "@tanstack/react-router";
-import { Image } from "@unpic/react";
 
 export const EntrancePresenter = () => {
   return (
     <div className="py-16 flex flex-col items-center">
-      <div className="my-4">
-        <Image width={224} height={60} src="/logo-long.svg" alt="rhythmateのロゴ" />
-      </div>
+      <picture className="my-4 w-[224px] h-[60px]">
+        <source srcSet="/logo-long.webp" type="image/webp" />
+        <source srcSet="/logo-long.png" type="image/png" />
+        <img alt="rhythmateのロゴ" />
+      </picture>
       <div className="flex flex-col gap-7 mt-7">
         <div className="flex gap-4 items-center">
-          <Image src="/icons/like.png" layout="constrained" width={80} height={80} alt="like icon" />
+          <picture className="w-20 h-20">
+            <source srcSet="/icons/like.webp" type="image/webp" />
+            <source srcSet="/icons/like.png" type="image/png" />
+            <img alt="like icon" />
+          </picture>
           <p className="text-sm font-bold text-rhyth-dark-blue">
             Rhythmateで
             <br />
@@ -19,7 +24,11 @@ export const EntrancePresenter = () => {
           </p>
         </div>
         <div className="flex gap-4 items-center">
-          <Image src="/icons/analysis.png" layout="constrained" width={80} height={80} alt="analysis icon" />
+          <picture className="w-20 h-20">
+            <source srcSet="/icons/analysis.webp" type="image/webp" />
+            <source srcSet="/icons/analysis.png" type="image/png" />
+            <img alt="analysis icon" />
+          </picture>
           <p className="text-sm font-bold text-rhyth-dark-blue">
             習慣を可視化して
             <br />
@@ -27,7 +36,11 @@ export const EntrancePresenter = () => {
           </p>
         </div>
         <div className="flex gap-4 items-center">
-          <Image src="/icons/shuttle.png" layout="constrained" width={80} height={80} alt="shuttle icon" />
+          <picture className="w-20 h-20">
+            <source srcSet="/icons/shuttle.webp" type="image/webp" />
+            <source srcSet="/icons/shuttle.png" type="image/png" />
+            <img alt="shuttle icon" />
+          </picture>
           <p className="text-sm font-bold text-rhyth-dark-blue">
             良い習慣を身に付けて
             <br />

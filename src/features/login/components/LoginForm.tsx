@@ -5,7 +5,6 @@ import "../../../firebase/config";
 import { notifyFailed } from "../../common/utils";
 import { Loading } from "../../common/components";
 import { useMutateUser } from "../hooks/useMutateUser";
-import { Image } from "@unpic/react";
 
 export const LoginForm = () => {
   const { authMutation } = useMutateUser();
@@ -45,7 +44,11 @@ export const LoginForm = () => {
         className="p-4 mt-10 font-bold text-rhyth-black rounded-md shadow-md border-2 border-rhyth-bg-light-gray cursor-pointer flex justify-center items-center gap-4 hover:bg-rhyth-bg-gray"
         onClick={signInWithGoogle}
       >
-        <Image src="/icons/google.png" width={20} height={20} alt="Googleのアイコン" />
+        <picture className="w-5 h-5">
+          <source srcSet="/icons/google.webp" type="image/webp" />
+          <source srcSet="/icons/google.png" type="image/png" />
+          <img alt="Googleのアイコン" />
+        </picture>
         Googleでサインイン
       </button>
       {isLoading && (
