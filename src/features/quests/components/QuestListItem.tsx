@@ -1,7 +1,7 @@
 import type { FC } from "react";
 import { ClockIcon } from "../../common/components/icons/ClockIcon";
 import { calcExpectedExp } from "../../common/utils/calcExpectedExp";
-import { QuestStatusTag } from "./QuestStatusTag";
+import { QuestStatus } from "./QuestStatus";
 import type { Difficulty } from "../../../api/quest/types";
 
 const getStatus = (isDone: boolean, isSuccess: boolean) => {
@@ -39,7 +39,7 @@ export const QuestListItem: FC<Props> = (props) => {
           <hr className="w-full h-0.5 bg-rhyth-light-gray" />
           <h2 className="text-xl font-bold text-rhyth-dark-blue py-2">{title}</h2>
         </div>
-        <QuestStatusTag status={status} exp={calcExpectedExp(difficulty, continuationLevel)} />
+        <QuestStatus status={status} exp={calcExpectedExp(difficulty, continuationLevel)} />
       </div>
     </li>
   );
