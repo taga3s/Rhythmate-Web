@@ -1,11 +1,11 @@
 import type { FC } from "react";
-import { Bow } from "./badgeItems/Bow";
-import { Cat } from "./badgeItems/Cat";
-import { Crown } from "./badgeItems/Crown";
-import { Gem } from "./badgeItems/Gem";
-import { Horse } from "./badgeItems/Horse";
-import { Shield } from "./badgeItems/Shield";
-import { Sword } from "./badgeItems/Sword";
+import { Bow } from "./assets/Bow";
+import { Cat } from "./assets/Cat";
+import { Crown } from "./assets/Crown";
+import { Gem } from "./assets/Gem";
+import { Horse } from "./assets/Horse";
+import { Shield } from "./assets/Shield";
+import { Sword } from "./assets/Sword";
 import type { ImageType } from "../../../../api/badge/types";
 
 type Props = {
