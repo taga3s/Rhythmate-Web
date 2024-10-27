@@ -1,8 +1,8 @@
 export const QuestBoardNoData = () => {
   return (
     <div className="w-full min-h-[240px] p-3 shadow-lg rounded-lg flex flex-col items-center justify-center bg-white">
-      <div className="relative">
-        <picture className="w-20 h-20">
+      <div className="relative w-20 h-20">
+        <picture className="w-full h-full">
           <source srcSet="/icons/like.webp" type="image/webp" />
           <source srcSet="/icons/like.png" type="image/png" />
           <img alt="like icon" />
