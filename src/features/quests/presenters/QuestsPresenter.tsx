@@ -16,9 +16,7 @@ const filterTodaysQuestListByDayOfTheWeek = (questList: Quest[]) => {
   return questList.filter((quest) => quest.days.some((day) => day === todaysDayOfTheWeek));
 };
 
-const sortQuestListByTime = (questList: Quest[]) => {
-  return questList.sort((a, b) => (a.startsAt > b.startsAt ? 1 : -1));
-};
+const sortQuestListByTime = (questList: Quest[]) => questList.sort((a, b) => (a.startsAt > b.startsAt ? 1 : -1));
 
 export const QuestsPresenter = () => {
   const { data: questListData } = useQueryQuestList();
@@ -28,15 +26,20 @@ export const QuestsPresenter = () => {
 
   const nextQuestList = sortedQuestList.filter((value) => value.state === "INACTIVE");
   const finishedQuestList = sortedQuestList.filter((value) => value.state === "ACTIVE");
+  const currentQuest = nextQuestList[0];
 
   const [view, setView] = useState<View>("NEXT");
   const handleNextView = () => setView("NEXT");
   const handleFinishedView = () => setView("FINISHED");
 
-  const { width, height } = useWindowSize();
-
   const [isLaunchedConfetti, setIsLaunchedConfetti] = useState<boolean>(false);
-  const handleLaunchConfetti = () => setIsLaunchedConfetti((prev) => !prev);
+  const handleLaunchConfetti = () => {
+    setIsLaunchedConfetti(true);
+    setTimeout(() => {
+      setIsLaunchedConfetti(false);
+    }, 1000 * 5);
+  };
+  const { width, height } = useWindowSize();
 
   return (
     <>
@@ -62,7 +65,7 @@ export const QuestsPresenter = () => {
             <div className="flex gap-2 my-2">
               <h1 className="font-cp-font text-rhyth-gray tracking-widest">NEXT QUEST</h1>
             </div>
-            <QuestBoard handleLaunchConfetti={handleLaunchConfetti} currentQuest={nextQuestList[0]} />
+            <QuestBoard handleLaunchConfetti={handleLaunchConfetti} currentQuest={currentQuest} />
           </div>
         ) : (
           <QuestBoardNoData />

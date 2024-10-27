@@ -1,7 +1,5 @@
 import type { FC } from "react";
-import { TagsDeleteButton } from "./TagsDeleteButton";
-import { TagsEditButton } from "./TagsEditButton";
-import { TagIcon } from "../../common/components";
+import { DeleteIcon, EditIcon, TagIcon } from "../../common/components";
 import { toRhythTextColor } from "../../common/utils";
 
 type Props = {
@@ -21,8 +19,16 @@ export const TagsItem: FC<Props> = ({ name, color, handleOpenEditModal, handleOp
         <span>{name}</span>
       </div>
       <div className="flex items-center gap-2">
-        <TagsEditButton onClick={handleOpenEditModal} />
-        <TagsDeleteButton onClick={handleOpenDeleteModal} />
+        <button type="button" onClick={handleOpenEditModal}>
+          <div className="w-6 h-6 text-rhyth-dark-blue">
+            <EditIcon />
+          </div>
+        </button>
+        <button type="button" onClick={handleOpenDeleteModal}>
+          <div className="w-5 h-5 text-rhyth-red">
+            <DeleteIcon />
+          </div>
+        </button>
       </div>
     </li>
   );

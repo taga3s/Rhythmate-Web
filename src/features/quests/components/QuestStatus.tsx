@@ -6,7 +6,7 @@ type Props = {
   exp: number;
 };
 
-export const QuestStatusTag: FC<Props> = ({ status, exp }) => {
+export const QuestStatus: FC<Props> = ({ status, exp }) => {
   return status === "CLOSED" ? (
     <div className="w-[70px] flex items-center justify-center bg-rhyth-red text-white tracking-widest font-bold px-2 py-1 rounded-r-md shadow-md font-cp-font">
       <div className="w-6 h-6 text-rhyth-orange">

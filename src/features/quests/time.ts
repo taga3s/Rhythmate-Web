@@ -1,16 +1,22 @@
 import dayjs from "dayjs";
 import { formatDate, formatDateTimeWithAddMinutes, formatDateTimeWithSubtract, now } from "../common/utils";
-import { CLOSED, DONE, ENGAGED, FORCE_STOP, OPEN, type QuestStatus } from "./consts";
+import { CLOSED, DONE, ENGAGED, FORCE_STOP, NOT_STARTED_YET, OPEN, type QuestStatus } from "./consts";
 
-export const calcBaseTime = (
-  startsAt: string,
-  isStarted: boolean,
-  minutes: number,
-  startedAt: string,
-): { baseTime: string; status: QuestStatus } => {
+const getIsStarted = (startedAt: string): boolean => startedAt !== NOT_STARTED_YET;
+
+export const calcBaseTime = ({
+  startsAt,
+  minutes,
+  startedAt,
+}: {
+  startsAt: string;
+  minutes: number;
+  startedAt: string;
+}): { baseTime: string; status: QuestStatus } => {
   const { diffHH: beforeDiffHH, diffMM: beforeDiffMM } = calcDiffTimeBetweenNowAndTargetTime(
     formatDateTimeWithSubtract(startsAt, 15),
   );
+  const isStarted = getIsStarted(startedAt);
 
   // クエスト解放前
   if (!isStarted && 0 <= beforeDiffMM) {

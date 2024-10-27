@@ -5,7 +5,6 @@ import "../../../firebase/config";
 import { notifyFailed } from "../../common/utils";
 import { Loading } from "../../common/components";
 import { useMutateUser } from "../hooks/useMutateUser";
-import { LoginBird } from "./LoginBird";
 import { Image } from "@unpic/react";
 
 export const LoginForm = () => {
@@ -18,16 +17,14 @@ export const LoginForm = () => {
   const [isLoading, setIsLoading] = useState(false);
 
   const signInWithGoogle = async () => {
+    setIsLoading(true);
     try {
       const result = await signInWithPopup(auth, provider);
-      const user = result.user;
-      if (!user) {
+      if (!result.user.emailVerified) {
         throw new Error("ログインに失敗しました。");
       }
 
-      setIsLoading(true);
-
-      const idToken = await user.getIdToken();
+      const idToken = await result.user.getIdToken();
       await authMutation.mutateAsync({
         id_token: idToken,
       });
@@ -41,9 +38,8 @@ export const LoginForm = () => {
   };
 
   return (
-    <div className="flex flex-col items-center">
-      <LoginBird />
-      <span className="text-md font-bold text-rhyth-black text-center">さぁ、Rhythmateを始めましょう！</span>
+    <div className="flex flex-col items-center py-8">
+      <span className="text-md text-rhyth-black text-center">楽しく、習慣化を始めていきましょう！</span>
       <button
         type="button"
         className="p-4 mt-10 font-bold text-rhyth-black rounded-md shadow-md border-2 border-rhyth-bg-light-gray cursor-pointer flex justify-center items-center gap-4 hover:bg-rhyth-bg-gray"
