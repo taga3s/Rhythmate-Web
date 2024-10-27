@@ -6,8 +6,8 @@ import { useMutateTag } from "../hooks/useMutateTag";
 import { useQueryTagList } from "../hooks/useQueryTag";
 import { TagsEditModal } from "../components/TagsEditModal";
 import { TagsItem } from "../components/TagsItem";
-import { TagsNewButton } from "../components/TagsNewButton";
 import { TagsNewModal } from "../components/TagsNewModal";
+import { AddIcon } from "../../common/components";
 
 export const TagsPresenter = () => {
   const [isTagsNewModalOpen, setIsTagsNewModalOpen] = useState<boolean>(false);
@@ -55,7 +55,16 @@ export const TagsPresenter = () => {
       <div className="mt-4">
         <div className="flex justify-between items-center mb-2">
           <h1 className="font-cp-font font-black text-xl text-rhyth-gray tracking-widest">登録しているタグ一覧</h1>
-          <TagsNewButton onClick={handleOpenNewModal} />
+          <button
+            type="button"
+            onClick={handleOpenNewModal}
+            className="flex justify-between items-center gap-2 bg-rhyth-blue hover:bg-rhyth-hover-blue h-14 w-auto rounded-full fixed right-8 bottom-24 shadow-lg p-4"
+          >
+            <span className="flex items-center text-white tracking-wider">タグ新規作成</span>
+            <div className="w-8 h-8">
+              <AddIcon />
+            </div>
+          </button>
         </div>
         <div className="text-rhyth-dark-blue">
           {tagItems?.length ? (
