@@ -1,6 +1,6 @@
 import type { FC } from "react";
 import { useQueryBadgeList } from "../../badges/hooks/useQueryBadge";
-import { Badge } from "../../badges/components/badge/Badge";
+import { Badge } from "../../common/components/badge/Badge";
 import { calcAccumulatedExp } from "../calcAccumulaetdExp";
 
 type Props = {
