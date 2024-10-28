@@ -49,30 +49,26 @@ export const AnalyticsPresenter = () => {
           <h2 className="flex justify-start w-full mt-8 font-cp-font tracking-widest text-rhyth-gray text-lg font-bold ">
             クエスト達成状況
           </h2>
-          <div className="grid grid-cols-2 gap-6 w-full mt-2">
+          <div className="flex flex-col gap-4 w-full mt-2">
             <AnalyticsCard
               title={"達成したクエスト数"}
-              data={weeklyReports[currentIndex].completed_quests}
+              data={`${weeklyReports[currentIndex].completed_quests}`}
               color={"Red"}
-              isRate={false}
             />
             <AnalyticsCard
               title={"失敗したクエスト数"}
-              data={weeklyReports[currentIndex].failed_quests}
+              data={`${weeklyReports[currentIndex].failed_quests}`}
               color={"Blue"}
-              isRate={false}
             />
             <AnalyticsCard
               title={"達成率"}
-              data={weeklyReports[currentIndex].completed_percentage}
+              data={`${weeklyReports[currentIndex].completed_percentage}%`}
               color={"Orange"}
-              isRate={true}
             />
             <AnalyticsCard
               title={"連続ストリーク日数"}
-              data={weeklyReports[currentIndex].streak_days}
+              data={`${weeklyReports[currentIndex].streak_days}`}
               color={"Green"}
-              isRate={false}
             />
           </div>
           <h2 className="flex justify-start w-full mt-8 font-cp-font tracking-widest text-rhyth-gray text-lg font-bold ">
