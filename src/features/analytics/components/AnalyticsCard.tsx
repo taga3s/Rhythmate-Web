@@ -3,19 +3,15 @@ import { toRhythTextColor } from "../../common/utils";
 
 type Props = {
   title: string;
-  data: number;
+  data: string;
   color: string;
-  isRate: boolean;
 };
 
-export const AnalyticsCard: FC<Props> = ({ title, data, color, isRate }) => {
+export const AnalyticsCard: FC<Props> = ({ title, data, color }) => {
   return (
-    <div className="text-lg border-2 w-full px-2 py-4 bg-white text-rhyth-dark-blue rounded-lg shadow">
-      <span className={`block text-center text-sm font-bold ${toRhythTextColor(color)}`}>{title}</span>
-      <span className="block text-center mt-4 text-4xl font-bold font-cp-font">
-        {data}
-        {isRate && <span>%</span>}
-      </span>
+    <div className="flex items-center justify-between border-2 px-10 py-3 bg-white hover:bg-gray-50 text-rhyth-dark-blue rounded-lg shadow">
+      <span className={`block text-sm font-bold ${toRhythTextColor(color)}`}>{title}</span>
+      <span className="block text-4xl font-bold font-cp-font">{data}</span>
     </div>
   );
 };
