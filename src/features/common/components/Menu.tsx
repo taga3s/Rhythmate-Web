@@ -40,12 +40,7 @@ export const Menu = () => {
           name="プロフィール"
           path="/profile"
           icon={
-            <ProfileIcon
-              color={getMenuIconColor(
-                ["/profile", "/profile/badges", "/profile/ranking", "/profile/settings"],
-                currentPath,
-              )}
-            />
+            <ProfileIcon color={getMenuIconColor(["/profile", "/profile/badges", "/profile/settings"], currentPath)} />
           }
         />
       </ul>

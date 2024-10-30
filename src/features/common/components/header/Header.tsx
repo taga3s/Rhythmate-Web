@@ -21,7 +21,6 @@ const handlePageHeading = (pathname: string) => {
       return <Heading1 title="達成状況分析" />;
     case "/profile":
     case "/profile/badges":
-    case "/profile/ranking":
     case "/profile/settings":
       return <Heading1 title="プロフィール" />;
     default:
