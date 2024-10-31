@@ -1,5 +1,4 @@
-import type { ReactNode } from "@tanstack/react-router";
-import type { FC } from "react";
+import type { FC, ReactNode } from "react";
 
 type Props = {
   children: ReactNode;

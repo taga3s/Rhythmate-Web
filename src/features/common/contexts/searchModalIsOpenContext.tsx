@@ -1,10 +1,18 @@
-import { type Dispatch, type FC, type SetStateAction, createContext, useContext, useState } from "react";
+import {
+  type Dispatch,
+  type FC,
+  type ReactNode,
+  type SetStateAction,
+  createContext,
+  useContext,
+  useState,
+} from "react";
 
 const searchModalIsOpenContext = createContext<boolean>(false);
 const setSearchModalIsOpenContext = createContext<Dispatch<SetStateAction<boolean>>>(() => undefined);
 
 type Props = {
-  children: React.ReactNode;
+  children: ReactNode;
 };
 export const SearchModalIsOpenProvider: FC<Props> = ({ children }) => {
   const [searchModalIsOpen, setSearchModalIsOpen] = useState<boolean>(false);

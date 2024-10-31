@@ -1,4 +1,3 @@
-import { useNavigate } from "@tanstack/react-router";
 import { useState } from "react";
 import { BackButton } from "../../common/components/BackButton";
 import { ConfirmModal } from "../../common/components/ConfirmModal";
@@ -15,7 +14,6 @@ export const TagsPresenter = () => {
   const [isTagsDeleteModalOpen, setIsTagsDeleteModalOpen] = useState<boolean>(false);
   const [selectedTagId, setSelectedTagId] = useState<string>("");
 
-  const navigate = useNavigate();
   const { data: tagItems } = useQueryTagList();
   const { deleteTagMutation } = useMutateTag();
 
@@ -25,9 +23,6 @@ export const TagsPresenter = () => {
     });
   };
 
-  const handleNavigate = () => {
-    navigate({ to: "/manage" });
-  };
   const handleOpenNewModal = () => {
     setIsTagsNewModalOpen(true);
   };
@@ -51,7 +46,7 @@ export const TagsPresenter = () => {
 
   return (
     <>
-      <BackButton onClick={handleNavigate} />
+      <BackButton to="/manage" />
       <div className="mt-4">
         <div className="flex justify-between items-center mb-2">
           <h1 className="font-cp-font font-black text-xl text-rhyth-gray tracking-widest">登録しているタグ一覧</h1>

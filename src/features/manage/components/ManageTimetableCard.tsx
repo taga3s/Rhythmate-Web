@@ -1,5 +1,5 @@
-import { useNavigate } from "@tanstack/react-router";
 import { type FC, useState } from "react";
+import { Link } from "@tanstack/react-router";
 import type { Day, Difficulty } from "../../../api/quest/types";
 import { calcExpectedExp } from "../../common/utils/calcExpectedExp";
 import { ManageProgressBar } from "./ManageProgressBar";
@@ -30,7 +30,6 @@ type Props = {
 
 export const ManageTimetableCard: FC<Props> = (props) => {
   const [isAccordionOpen, setIsAccordionOpen] = useState<boolean>(false);
-  const navigate = useNavigate();
 
   const handleClickAccordion = () => {
     setIsAccordionOpen((prev) => !prev);
@@ -68,23 +67,14 @@ export const ManageTimetableCard: FC<Props> = (props) => {
           <hr className="h-0.5 bg-rhyth-light-gray" />
           <div className="p-2">
             <div className="flex items-center justify-between">
-              <button
-                type="button"
-                className="p-1 ml-auto"
-                onClick={() =>
-                  navigate({
-                    to: "/manage/edit",
-                    search: { quest_id: props.id },
-                  })
-                }
-              >
+              <Link to="/manage/edit" search={{ quest_id: props.id }} className="p-1 ml-auto">
                 <div className="flex items-center justify-center gap-1 text-rhyth-dark-blue font-bold">
                   <div className="w-6 h-6">
                     <EditIcon />
                   </div>
                   編集
                 </div>
-              </button>
+              </Link>
             </div>
             <h3 className="text-md text-rhyth-dark-blue">
               <div className="flex items-center gap-2">

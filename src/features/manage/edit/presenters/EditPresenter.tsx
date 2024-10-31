@@ -90,7 +90,7 @@ export const EditPresenter: FC<Props> = (props) => {
 
   return (
     <>
-      <BackButton onClick={() => navigate({ to: "/manage" })} />
+      <BackButton to="/manage" />
       <h1 className="text-xl font-cp-font text-rhyth-gray mt-4 mb-2">クエスト編集</h1>
       <form className="bg-white px-3 py-2 rounded-lg shadow-lg" onSubmit={onEditQuest}>
         <div className="mt-2 flex flex-col gap-2">
