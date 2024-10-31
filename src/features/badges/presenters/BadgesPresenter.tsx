@@ -1,21 +1,15 @@
-import { useNavigate } from "@tanstack/react-router";
 import { BackButton } from "../../common/components/BackButton";
 import { useQueryBadgeList } from "../hooks/useQueryBadge";
 import { BadgeCard } from "../components/BadgeCard";
 
 export const BadgesPresenter = () => {
-  const navigation = useNavigate();
   const { data: badgeList } = useQueryBadgeList();
-
-  const handleNavigate = () => {
-    navigation({ to: "/profile" });
-  };
 
   return (
     <div className="flex flex-col items-center w-full">
       <div className="flex flex-col space-y-5 w-full">
         <div className="flex justify-start gap-3">
-          <BackButton onClick={handleNavigate} />
+          <BackButton to="/profile" />
         </div>
         <p className="flex text-2xl justify-center font-bold">獲得バッジ一覧</p>
       </div>

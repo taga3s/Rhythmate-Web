@@ -66,7 +66,7 @@ export const SettingsPresenter = () => {
     <>
       <div className="flex flex-col space-y-5 w-full">
         <div className="flex justify-start gap-3">
-          <BackButton onClick={() => navigation({ to: "/profile" })} />
+          <BackButton to="/profile" />
         </div>
         <h1 className="flex text-2xl justify-center font-bold">ユーザー設定</h1>
         <div className="p-4 flex flex-col gap-3 bg-white rounded-lg shadow">
