@@ -1,4 +1,4 @@
-import { useNavigate } from "@tanstack/react-router";
+import { Link } from "@tanstack/react-router";
 import type { FC } from "react";
 import type { Day, Difficulty } from "../../../api/quest/types";
 import { ClockIcon } from "../../common/components/icons/ClockIcon";
@@ -23,8 +23,6 @@ type Props = {
 };
 
 export const ManageQuestCard: FC<Props> = (props) => {
-  const navigate = useNavigate();
-
   return (
     <li className="w-full bg-white rounded-xl shadow-lg">
       <div>
@@ -32,23 +30,14 @@ export const ManageQuestCard: FC<Props> = (props) => {
           <div className="p-2 font-cp-font font-bold text-2xl text-rhyth-dark-blue">{props.title}</div>
           <hr className="h-0.5 bg-rhyth-light-gray" />
           <div className="flex items-center justify-between mt-2">
-            <button
-              type="button"
-              className="p-1 ml-auto"
-              onClick={() =>
-                navigate({
-                  to: "/manage/edit",
-                  search: { quest_id: props.id },
-                })
-              }
-            >
+            <Link to="/manage/edit" search={{ quest_id: props.id }} className="p-1 ml-auto">
               <span className="flex items-center justify-center gap-1 text-rhyth-dark-blue font-bold">
                 <div className="w-6 h-6">
                   <EditIcon />
                 </div>
                 編集
               </span>
-            </button>
+            </Link>
           </div>
           <h3 className="text-md text-rhyth-dark-blue">
             <div className="flex items-center gap-2">

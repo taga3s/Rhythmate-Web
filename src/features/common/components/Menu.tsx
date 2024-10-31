@@ -8,10 +8,7 @@ export const Menu = () => {
 
   const getMenuIconColor = (paths: string[], currentPath: string) => {
     const isActive = paths.some((path) => path === currentPath);
-    if (isActive) {
-      return "text-rhyth-orange";
-    }
-    return "text-rhyth-gray";
+    return isActive ? "text-rhyth-orange" : "text-rhyth-gray";
   };
 
   return (
