@@ -1,8 +1,8 @@
-import { tagRepository } from "./repository";
+import { TagRepository, tagRepository } from "./repository";
 import type { CreateTagParams, DeleteTagParams, UpdateTagParams } from "./type";
 
 export const createFactory = () => {
-  const repository = tagRepository;
+  const repository: TagRepository = tagRepository;
 
   return {
     listTags: async () => {
