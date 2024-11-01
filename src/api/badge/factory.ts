@@ -1,9 +1,9 @@
 import { type Badge, toBadge } from "./model";
-import { badgeRepository } from "./repository";
+import { BadgeRepository, badgeRepository } from "./repository";
 import type { AchieveBadgeParams, PinBadgeParams, UnpinBadgeParams } from "./types";
 
 export const createFactory = () => {
-  const repository = badgeRepository;
+  const repository: BadgeRepository = badgeRepository;
 
   return {
     listBadges: async () => {

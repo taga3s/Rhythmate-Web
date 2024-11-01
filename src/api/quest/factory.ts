@@ -1,5 +1,5 @@
 import { type Quest, toQuest } from "./model";
-import { questRepository } from "./repository";
+import { QuestRepository, questRepository } from "./repository";
 import type {
   CreateQuestParams,
   DeleteQuestParams,
@@ -10,7 +10,7 @@ import type {
 } from "./types";
 
 export const createFactory = () => {
-  const repository = questRepository;
+  const repository: QuestRepository = questRepository;
 
   return {
     listQuests: async () => {
